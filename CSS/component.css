@@ -29,6 +29,9 @@
     font-family: 'Noto Sans TC','Outfit', sans-serif;
 }
 
+body{
+    font-size: 16px;
+}
 
 
 /*------ h1~h6樣式 ------*/
@@ -38,7 +41,7 @@ h1,
     font-weight: 700;
     font-size: 40px;
     line-height: 120%;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.3rem;
 }
 
 h2,
@@ -46,7 +49,7 @@ h2,
     font-weight: 700;
     font-size: 32px;
     line-height: 120%;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.3rem;
 }
 
 h3,
@@ -54,7 +57,7 @@ h3,
     font-weight: 500;
     font-size: 28px;
     line-height: 120%;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.3rem;
 }
 
 h4,
@@ -64,7 +67,7 @@ h4,
     font-weight: 500;
     font-size: 26px;
     line-height: 120%;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.2rem;
 }
 
 h5,
@@ -72,7 +75,7 @@ h5,
     font-weight: 400;
     font-size: 24px;
     line-height: 120%;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.2rem;
 }
 
 h6,
@@ -80,10 +83,8 @@ h6,
     font-weight: 400;
     font-size: 22px;
     line-height: 120%;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.15rem;
 }
-
-
 
 /*------ buttonu樣式 ------*/
 /*--- 按鈕統一樣式 ---*/
