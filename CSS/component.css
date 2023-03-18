@@ -13,18 +13,20 @@
         使用CSS3變數統一 若需要使用請在class 屬性質使用var(變數名稱)
         ex:
             p{
-                color:var(--textColor)
+                color:var(--text_color)
             }
     */
-    --backgroundColor: #00092E;
-    --titleColor: #D6EEFF;
-    --mainColor: #13E5F2;
-    --textColor: #FFFFFF;
-    --secColor: #033159;
-    --thirdColor: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #0F2D3C;
-    --btnHover: #0B406D;
-    --warningText: #CB4444;
-    --fourcColor: #0FB2F2;
+    --background_color: #00092E;
+    --title_color: #D6EEFF;
+    --main_color: #13E5F2;
+    --text_color: #FFFFFF;
+    --sec_color: #033159;
+    --third_color: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #0F2D3C;
+    --btn_hover: #0B406D;
+    --warning_text: #CB4444;
+    --fourc_color: #0FB2F2;
+    /* 後台nav色彩 */
+    --b_background_color:#F1F1F1;
 
     /*------ 網站使用字體 ------*/
     font-family: 'Noto Sans TC','Outfit', sans-serif;
@@ -104,9 +106,9 @@ h6,
 .medium_button,
 .big_button
 {
-    background: var(--secColor);
-    color: var(--textColor);
-    border: 1px solid var(--secColor);
+    background: var(--sec_color);
+    color: var(--text_color);
+    border: 1px solid var(--sec_color);
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
     border-radius: 4px;
     line-height: 150%;
@@ -119,8 +121,8 @@ h6,
 .medium_button:hover,
 .big_button:hover
 {
-    background: var(--btnHover);
-    border: 1px solid var(--btnHover);
+    background: var(--btn_hover);
+    border: 1px solid var(--btn_hover);
 }
 
 /*--- disabled 樣式 ---*/
@@ -128,8 +130,8 @@ h6,
 .medium_button[disabled],
 .big_button[disabled]
 {
-    background: var(--btnHover);
-    border: 1px solid var(--btnHover);
+    background: var(--btn_hover);
+    border: 1px solid var(--btn_hover);
     opacity: 0.65;
     cursor: default;
 }
