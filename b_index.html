@@ -14,20 +14,16 @@
             margin: 0px;
             padding: 0px;
         }
-        body{
-            display: flex; 
-        }
         .b_index_left_nav{
-            width: 280px;
-            height: 100%;
+            width: 300px;
             min-height: 100vh;
             background: var(--b_background_color);
             color: var(--third_color);
             box-shadow: 5px 0px 10px hsla(240, 40%, 15%, .6);
-            flex-shrink: 0;
+            /* flex-shrink: 0; */
         }
         .b_index_login_user{
-            height: 130px;
+            height: 150px;
             border-bottom: 1px solid var(--sec_color);
             box-sizing: border-box;
         }
@@ -37,6 +33,7 @@
             border-radius: 50%;
             background: #ccc;
             overflow: hidden;
+            margin-right: 10px;
         }
         .b_index_user_pic img{
             width: 100%;
@@ -46,7 +43,7 @@
         nav a{
             display: block;
             width: 100%;
-            line-height: 50px;
+            line-height: 80px;
             text-decoration: none;
             padding-left: 40px;
             color: var(--third_color);
@@ -73,14 +70,14 @@
         }
     </style>
 </head>
-<body>
-    <div class="b_index_left_nav">
+<body class="d-flex">
+    <div class="b_index_left_nav flex-shrink-0">
         <div class="b_index_login_user d-flex flex-column justify-content-evenly">
             <div class="d-flex justify-content-center align-items-center">
-                <div class="b_index_user_pic me-1">
+                <div class="b_index_user_pic">
                     <img src="https://loremflickr.com/600/400" alt="cat"  class="b_index_user_pic"/>
                 </div>
-                <p class="paragraph">User_name</p>
+                <p class="paragraph m-0">User_name</p>
             </div>
             <div class="login d-flex justify-content-center align-items-center">
                 <button class="small_button me-3">帳號設定</button>
@@ -88,8 +85,8 @@
             </div>
         </div>
         <nav>
-            <ul class="list-unstyled">
-                <li><a href="" class="b_index_active"><i class="fa-solid fa-user fa-fw"></i>會員管理</a></li>
+            <ul class="list-unstyled text_title">
+                <li><a href=""><i class="fa-solid fa-user fa-fw"></i>會員管理</a></li>
                 <li><a href=""><i class="fa-solid fa-message fa-fw"></i>討論版管理</a></li>
                 <li><a href=""><i class="fa-solid fa-share fa-fw"></i>回報管理</a></li>
                 <li><a href=""><i class="fa-solid fa-exclamation fa-fw"></i>檢舉管理</a></li>
