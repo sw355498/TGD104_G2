@@ -1,0 +1,39 @@
+/** Background **/
+html {
+    background-image: url('./../../img/index/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/** Top Dynamic **/
+section {
+    height: 80vh;
+    padding-top: 20vh;
+}
+
+section h2 {
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text_color);
+    font-family: 'outfit';
+    font-weight: 100;
+}
+
+#banner_index_dynamicText p {
+    font-size: 120px;
+    color: var(--text_color);
+    text-shadow: 0 0 24px #21B3F4;
+    letter-spacing: 5px;
+    text-align: center;
+    margin: 0;
+    line-height: 10rem;
+}
+
+article {
+    height: 80vh;
+}
+
+article h1 {
+    color: var(--main_color);
+    text-align: center;
+}
