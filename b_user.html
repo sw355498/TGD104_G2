@@ -8,95 +8,13 @@
     <meta name="generator" content="Vue,HTML,Sass,JavaScript">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>詐知就好_後台</title>
-    <link rel="stylesheet" href="CSS/component.css">
-    
-    <!-- jsgrid 基礎樣式 CDN-->
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
-    <!-- jsgrid 主題 CDN-->
-    <link type = "text/css" rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+    <link rel="stylesheet" href="CSS/b_component.css">
+    <!-- jsgrid 基礎樣式 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css">
+    <!-- jsgrid 主題 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css">
     <style>
-        *{
-            margin: 0px;
-            padding: 0px;
-        }
-        .b_left_nav{
-            width: 300px;
-            height: 100vh;
-            background: var(--b_background_color);
-            color: var(--third_color);
-            overflow: auto;
-            position: fixed;
-        }
-        .b_login_user{
-            height: 150px;
-            border-bottom: 2px solid var(--sec_color);
-            box-sizing: border-box;
-        }
-        .b_user_pic{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #ccc;
-            overflow: hidden;
-            margin-right: 10px;
-        }
-        .b_user_pic img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        nav a{
-            display: block;
-            width: 100%;
-            line-height: 80px;
-            text-decoration: none;
-            padding-left: 40px;
-            color: var(--third_color);
-            box-sizing: border-box;
 
-        }
-        nav a:hover,
-        nav a.b_active{
-            color: var(--text_color);
-            background: var(--third_color);
-        }
-        nav .fa-solid{
-            margin-right: 10px;
-            transition: .6s;
-        }
-        nav a:hover .fa-solid,
-        nav a.b_active .fa-solid{
-            transform: scale(0);
-            width: 0;
-        }
-
-        .b_content{
-            width: 100%;
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 50px 50px 0px 350px;
-            background: var(--sec_color);
-        }
-        .b_content h2{
-            color: var(--text_color);
-        }
-        #jsGrid{
-            text-align: center;
-        }
-        #jsGrid td{
-            overflow : hidden;
-            white-space: nowrap;
-            text-overflow:ellipsis;
-        }
-        .jsgrid-pager,
-        .jsgrid-pager a{
-            text-decoration: none;
-            color: var(--text_color);
-        }
-        .jsgrid-pager-current-page{
-            text-decoration: none;
-            color: var(--main_color);
-        }
     </style>
 </head>
 <body class="d-flex">
@@ -115,7 +33,7 @@
         </div>
         <nav>
             <ul class="list-unstyled text_title">
-                <li><a href=""><i class="fa-solid fa-user fa-fw"></i>會員管理</a></li>
+                <li><a href="" class="b_active"><i class="fa-solid fa-user fa-fw"></i>會員管理</a></li>
                 <li><a href=""><i class="fa-solid fa-message fa-fw"></i>討論版管理</a></li>
                 <li><a href=""><i class="fa-solid fa-share fa-fw"></i>回報管理</a></li>
                 <li><a href=""><i class="fa-solid fa-exclamation fa-fw"></i>檢舉管理</a></li>
