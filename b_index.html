@@ -74,9 +74,13 @@
             overflow-x: hidden;
             padding-left: 300px;
         }
-
-        .jsgrid-pager{
+        #jsGrid{
             text-align: center;
+        }
+        #jsGrid td{
+            overflow : hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
         }
     </style>
 </head>
@@ -120,26 +124,26 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
     <script>
         var clients = [
-            { "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": '正常' },
-            { "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": '正常'},
-            { "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
-            { "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": '正常' },
-            { "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": '正常'},
-            { "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": '正常' },
-            { "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": '正常'},
-            { "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
-            { "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": '正常' },
-            { "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": '正常'},
-            { "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": '正常' },
-            { "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": '正常'},
-            { "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
-            { "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": '正常' },
-            { "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": '正常'},
-            { "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": '正常' },
-            { "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": '正常'},
-            { "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
-            { "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": '正常' },
-            { "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19 19:53:43', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": '正常'},
+            { "ID": 01, "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": "正常", },
+            {  "ID": 02, "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": "正常",},
+            {  "ID": 03, "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
+            {  "ID": 04, "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": "正常", },
+            {  "ID": 05, "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": "正常",},
+            {  "ID": 06, "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": "正常", },
+            {  "ID": 07, "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": "正常",},
+            {  "ID": 08, "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
+            {  "ID": 09, "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": "正常", },
+            {  "ID": 10, "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": "正常",},
+            {  "ID": 11, "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": "正常", },
+            {  "ID": 12, "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": "正常",},
+            {  "ID": 13, "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
+            {  "ID": 14, "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": "正常", },
+            {  "ID": 15, "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": "正常",},
+            {  "ID": 16, "帳號": "user_111", "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": 'user_111@test.com', "登入方式": "會員註冊", "狀態": "正常", },
+            {  "ID": 17, "帳號": "user_222", "暱稱": "Connor Johnston", "建立日期": '2023-03-19', "E-mail": 'user_222@test.com', "登入方式": "Google", "狀態": "正常",},
+            {  "ID": 18, "帳號": "user_333", "暱稱": "Lacey Hess", "建立日期": '2023-03-19', "E-mail": 'user_333@test.com', "登入方式": "會員帳號", "狀態": '封鎖中'},
+            {  "ID": 19, "帳號": "user_444", "暱稱": "Timothy Henson", "建立日期": '2023-03-19', "E-mail": 'user_444@test.com', "登入方式": "Line", "狀態": "正常", },
+            {  "ID": 20, "帳號": "user_555", "暱稱": "Ramona Benton", "建立日期": '2023-03-19', "E-mail": 'user_555@test.com', "登入方式": "會員賬號", "狀態": "正常",},
         ];
      
         $("#jsGrid").jsGrid({
@@ -166,17 +170,83 @@
 
             data: clients,
             fields: [
-                { name: "帳號", type: "text", width: 100, validate: "required" },
-                { name: "暱稱", type: "text", width: 100 },
-                { name: "建立日期", type: "text", width: 'auto'},
-                { name: "E-mail", type: "text", width: 'auto' },
-                { name: "登入方式", type: "text"},
-                { name: "狀態", type: "text"},
-                // { name: "操作", type:''}
-                // { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
-                { width:100 }
+                { 
+                    name: 'ID',
+                    css: 'd-none',
+                },
+                { 
+                    name: "帳號",
+                    type: "text", 
+                    // width: 80, 
+                    validate: "required" 
+                },
+                {   
+                    name: "暱稱", 
+                    type: "text", 
+                    width: 100,
+                    css: "d-none"
+                },
+                {   
+                    name: "建立日期", 
+                    type: "text", 
+                    width: 80
+                },
+                { 
+                    name: "E-mail", 
+                    type: "text", 
+                },
+                { 
+                    name: "登入方式", 
+                    type: "text",
+                    width: 60,
+                },
+                { 
+                    name: "狀態", 
+                    type: "text",
+                    width: 50,
+                },
+                {
+                    name: "操作",
+                    width: 150,
+                    itemTemplate:function(){
+                        let $buttonContainer = $("<div>")
+                        // Jquery 等同於 js中的 let buttonContainer = document.createElement("<div>")
+
+                        let $blockade = $("<button>").text("封鎖").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($blockade);
+
+                        let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($delete);
+
+                        let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($revise);
+                        
+                        let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($check);
+
+                        return $buttonContainer
+                    },
+                },
             ]
         });
+
+        function operate(){
+            let thisID = this.closest('tr').firstElementChild.innerHTML
+            switch (this.innerHTML){
+                case "封鎖":
+                    alert(`封鎖帳號 ${thisID}`)
+                    break
+                case "刪除":
+                    alert(`刪除帳號 ${thisID}`)
+                    break
+                case "修改":
+                    alert(`修改帳號 ${thisID}`)
+                    break
+                case "查看":
+                    alert(`查看帳號 ${thisID}`)
+                    break
+            }
+        }
     </script>
 </body>
 </html>
