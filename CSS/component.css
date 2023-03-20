@@ -155,3 +155,67 @@ h6,
     font-size: 1.375rem;
     padding: 11px 17px;
 }
+
+/* ------ header ------*/
+header{
+    max-width: 1920px;
+    width: 100%;
+    height: 100px;
+    padding: 0 50px;
+    background-color: var(--background_color);
+}
+header > nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header > nav > a{
+    color: var(--text_color);
+    text-decoration: none;
+    line-height: 100px;
+}
+header > nav > a > img{
+    width: 100%;
+    padding-bottom: 10px;
+}
+header > nav > a:hover{
+    color: var(--main_color);
+}
+
+/* ------ footer ------*/
+footer{
+    max-width: 1920px;
+    width: 100%;
+    height: 216px;
+    background-color: var(--background_color);
+    text-align: center;
+    font-size: 16px;
+    padding-top: 40px;
+}
+footer > nav > a{
+    color: var(--text_color);
+    font-size: 16px;
+    line-height: 60px;
+    text-decoration: none;
+}
+footer > nav > a:hover{
+    color: var(--main_color);
+}
+footer > nav > a::after,
+footer > nav > a:first-child::before{
+    content: "|";
+    padding: 10px;
+}
+
+/* ------ demo 四個選擇 ------ */
+.demo{
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    /* outline: 1px solid red; */
+}
+.demoBtn{
+    display: flex;
+    justify-content: space-between;
+}
