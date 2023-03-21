@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-Tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="全容君,黃資蓉,阮炫瑞,林欣妤,詹皓丞,張家恩">
+    <meta name="keywords"
+        content="詐騙,防詐騙,防詐教育,防詐騙教育,防詐騙模擬體驗,防詐討論版,防詐騙討論版,常見詐騙手段,詐騙回報,詐騙網站檢舉,詐騙親身經歷,一頁式購物詐騙,語音詐騙,簡訊詐騙,電話詐騙,交友詐騙">
+    <meta name="description"
+        content="包含親身經歷詐騙及身旁親友被騙的切深之痛，促使我們成立這個網站，相信社會互助也是防治詐騙的一環「我們希望大家理解，這些騙術在瞄準的是每一個人身上都有的一些特性，或是弱點，人人都可能不小心落入陷阱。」；【防詐教育】：防範列出各種詐騙手法供比對，並設計防詐小測驗，讓相關知識以好玩的方式傳遞給民眾；【被詐怎麼辦】，如不幸遇到詐騙提供各申訴管道，也提供客服機器人一步步引導民眾至相關頁面了解可以做些什麼">
+    <meta name="generator" content="Vue,HTML,Sass,JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>詐知就好</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="./CSS/component.css" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <link rel="stylesheet" href="CSS/pages/p02_teach.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="tabs">
+            <div v-for="(tab, tab_index) in tabs" :class="{tab: true, active: active_tab == tab_index}"
+                v-on:click="changeTab(tab_index)">
+                <div class="tab-label">{{ tab.label }}</div>
+
+            </div>
+        </div>
+        <div v-for="(tab, tab_index) in tabs" :class="{content: true, active: active_tab == tab_index}">
+            <div v-html="tab.content"></div>
+            <!-- 假投資詐騙 start -->
+            <div class="div_wrapper">
+                <div class="div_p02_teach_title">
+                    <h2>假投資詐騙</h2>
+                </div>
+                <div class="div_p02_teach_content">
+                    <div class=".div_p02_teach_contentLeft">
+                        <img src="img/p02_teach/pic01.jpg" alt="">
+                    </div>
+                    <div class="div_p02_teach_contentRight">
+
+                        <h3 class="h4_component underline"><span class="span_underline">手法與特徵</span></h3>
+                        <div class="div_p02_teach_method">
+                            <p class="div_p02_teach_step text_title">
+                                Step 1
+                            </p>
+                            <p class="div_p02_teach_stepText paragraph">
+                                網路(FB、IG、Y2B)看到投資、輕鬆賺錢貼文，或在交友網站、交友軟體(APP)認識網友，網友慫恿投資，以掌握「平臺漏洞、後臺程式」等話術，宣稱保證獲利、穩賺不賠且利潤豐厚。
+                            </p>
+                        </div>
+                        <div class="div_p02_teach_method">
+                            <p class="div_p02_teach_step text_title">
+                                Step 2
+                            </p>
+                            <p class="div_p02_teach_stepText paragraph">
+                                後續加LINE聯繫或加入LINE群組(如投資體驗群)，有自稱「老師、指導員、分析師、總監」的人教學投注(代操)，且群組內不斷有其他學員獲利貼文。
+                            </p>
+                        </div>
+                        <div class="div_p02_teach_method">
+                            <p class="div_p02_teach_step text_title">
+                                Step 3
+                            </p>
+                            <p class="div_p02_teach_stepText paragraph">
+                                初期帳面顯示獲利(小額獲利有些可以出金)，引誘您加碼投入大筆資金(甚至要您貸款投資)。
+                            </p>
+                        </div>
+                        <div class="div_p02_teach_method">
+                            <p class="div_p02_teach_step text_title">
+                                Step 4
+                            </p>
+                            <p class="div_p02_teach_stepText paragraph">
+                                當您加碼入金後，以各種理由(洗碼量不足、保證金、IP異常等)不讓你出金，或是直接凍結帳號、對方失去聯繫，就是「不出金」。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="div_p02_teach_title">
+                    <h3>防範之道</h3>
+                </div>
+            </div>
+            <!-- 假投資詐騙 end -->
+        </div>
+
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    active_tab: 0,
+                    tabs: [
+                        {
+                            label: '假投資詐騙',
+                            content: `<h2>假投資詐騙</h2>
+                            <p>content</p>`
+                        },
+                        {
+                            label: '假網購詐騙',
+                            content: 'Content 2'
+                        },
+                        {
+                            label: '解除分期詐騙',
+                            content: 'Content 3'
+                        },
+                        {
+                            label: '假冒機構',
+                            content: 'Content 4'
+                        },
+                        {
+                            label: '交友愛情詐騙',
+                            content: 'Content 5'
+                        },
+                        {
+                            label: '人頭帳戶詐騙',
+                            content: 'Content 6'
+                        },
+                    ]
+                }
+            },
+            methods: {
+                changeTab(tab_index) {
+                    this.active_tab = tab_index;
+                },
+
+            }
+
+        })
+
+
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>
