@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .text_title {
   @include fontStyle(500, 1rem, 1.5rem, 0.1rem);
 }
@@ -15,3 +16,7 @@
     $font_margin: null
   );
 }
+=======
+$fontFamily: 'Noto Sans TC', 'Outfit', sans-serif;
+$fontSize: 16px;
+>>>>>>> c7c242e8db6ab9744a426a131ed60f7eb861eed9
