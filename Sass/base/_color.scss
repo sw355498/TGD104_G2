@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*------ 網站使用色系 ------*/
 $background_color: #00092e;
 $title_color: #d6eeff;
@@ -7,25 +6,10 @@ $text_color: #ffffff;
 $sec_color: #033159;
 $four_color: #0fb2f2;
 $bannerFont_color: #21b3f4;
-$third_color: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-  linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-  linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #0f2d3c;
+$third_color: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #0f2d3c;
 $btn_hover: #0b406d;
 $warning_text: #cb4444;
+$four_color: #0FB2F2;
 
 /* 後台nav色彩 */
 $b_background_color: #f1f1f1;
-=======
-// 網站使用色系
-$background_color: #00092E;
-$title_color: #D6EEFF;
-$main_color: #13E5F2;
-$text_color: #FFFFFF;
-$sec_color: #033159;
-$third_color: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #0F2D3C;
-$btn_hover: #0B406D;
-$warning_text: #CB4444;
-$four_color: #0FB2F2;
-// 後台nav色彩
-$b_background_color: #F1F1F1;
->>>>>>> c7c242e8db6ab9744a426a131ed60f7eb861eed9

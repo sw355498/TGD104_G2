@@ -1,47 +1,48 @@
-/* * fontStyle 文字樣式設定 
- * font_fontWeight 字重
- * font_fontSize 大小,
- * lineheight 行高
- * font_letterSpacing 字距
- * magin 邊距
- * */
+/* 
+    fontStyle 文字樣式設定 
+    font_fontWeight 字重
+    font_fontSize 大小,
+    lineheight 行高
+    font_letterSpacing 字距
+    magin 邊距
+*/
 @mixin fontStyle(
-  $font_fontWeight,
-  $font_fontSize,
-  $font_lineHeight,
-  $font_letterSpacing,
-  $font_margin: null
-) {
-  font-weight: $font_fontWeight;
-  font-size: $font_fontSize;
-  line-height: $font_lineHeight;
-  letter-spacing: $font_letterSpacing;
-  margin: $font_margin;
+    $font_fontWeight,
+    $font_fontSize,
+    $font_lineHeight,
+    $font_letterSpacing,
+    $font_margin: null) 
+{
+    font-weight: $font_fontWeight;
+    font-size: $font_fontSize;
+    line-height: $font_lineHeight;
+    letter-spacing: $font_letterSpacing;
+    margin: $font_margin;
 }
 
-<<<<<<< HEAD
-/* * btnStyle 按鈕樣式 
- * btn_height 行高
- * btn_fontSize 文字大小,
- * btn_padding  padding
- * */
+/*
+    btnStyle 按鈕樣式 
+    btn_height 行高
+    btn_fontSize 文字大小,
+    btn_padding  padding
+*/
 @mixin btnStyle($btn_height, $btn_fontSize, $btn_padding) {
-  /*按鈕大小*/
-  height: $btn_height;
-  font-size: $btn_fontSize;
-  padding: $btn_padding;
+    /*按鈕大小*/
+    height: $btn_height;
+    font-size: $btn_fontSize;
+    padding: $btn_padding;
 
-  /*--- 按鈕統一樣式 ---*/
-  background: $sec_color;
-  color: $text_color;
-  border: 1px solid $sec_color;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
-  border-radius: 4px;
-  line-height: 150%;
-  cursor: pointer;
-  text-align: center;
+    /*--- 按鈕統一樣式 ---*/
+    background: $sec_color;
+    color: $text_color;
+    border: 1px solid $sec_color;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    line-height: 150%;
+    cursor: pointer;
+    text-align: center;
 
-  /*--- hover 樣式 ---*/
+    /*--- hover 樣式 ---*/
   &:hover {
     background: $btn_hover;
     border: 1px solid $btn_hover;
@@ -56,52 +57,3 @@
   }
 }
 
-/* * a_link 文字連結設定 
- * font_fontWeight 字重
- * font_fontSize 大小,
- * lineheight 行高
- * font_letterSpacing 字距
- * magin 邊距
- * */
-@mixin a_link() {
-  a {
-    color: $text_color;
-    & :active,
-    & :hover {
-      color: $text_color;
-    }
-  }
-}
-=======
-@mixin btnStyle($btn_height, $btn_fontSize, $btn_padding){
-    // 按鈕大小
-    height: $btn_height;
-    font-size: $btn_fontSize;
-    padding: $btn_padding;
-
-    // 按鈕統一樣式
-    background: $sec_color;
-    color: $text_color;
-    border: 1px solid $sec_color;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
-    border-radius: 4px;
-    line-height: 150%;
-    cursor: pointer;
-    text-align: center;
-
-        //hover 樣式
-        &:hover{
-            background: $btn_hover;
-            border: 1px solid $btn_hover;
-        }
-
-        //disabled 樣式
-        &[disabled]{
-            background: $btn_hover;
-            border: 1px solid $btn_hover;
-            opacity: 0.65;
-            cursor: default;
-        }
-}
-
->>>>>>> c7c242e8db6ab9744a426a131ed60f7eb861eed9
