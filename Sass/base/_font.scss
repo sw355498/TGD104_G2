@@ -1,7 +1,2 @@
-.text_title {
-    @include fontStyle(500, 1rem, 1.5rem, 0.1rem);
-}
-
-.paragraph {
-    @include fontStyle(300, 1rem, 1.5rem, 0.2rem);
-}
+$fontFamily: 'Noto Sans TC', 'Outfit', sans-serif;
+$fontSize: 16px;

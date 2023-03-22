@@ -1,7 +1,9 @@
 //base
 @import 'base/normalize.scss';
 @import 'base/var';
+@import 'base/font';
 @import 'base/color';
+@import 'base/aLink';
 
 //mixin
 @import 'mixin/mixin';
@@ -9,14 +11,18 @@
 // component
 @import 'component/function';
 @import 'component/btn';
+@import 'component/jsGrid';
 
 //layout
 @import 'layout/header';
 @import 'layout/login';
 @import 'layout/title';
+@import 'layout/textStyle';
 @import 'layout/demoNav';
 @import 'layout/body';
 @import 'layout/footer';
+@import 'layout/b_left_nav';
+@import 'layout/b_content';
 
 // page
 @import 'pages/index';
