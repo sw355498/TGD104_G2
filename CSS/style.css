@@ -4,38 +4,71 @@ html {
 }
 
 /** navbar **/
-.nav_index_navbar {
+.navbar_index_nav {
     display: flex;
+    flex-wrap: wrap;
     box-sizing: border-box;
     width: 100%;
     height: 100px;
     padding: 25px 30px;
 }
 
-.nav_index_logo {
-    height: 50px;
-}
-
-.nav_index_menu {
+.menu_index_nav {
     width: 95%;
 }
 
-.nav_index_menu ul {
+.menu_index_nav {
     display: flex;
     justify-content: space-around;
+    margin: 0;
 }
 
-.nav_index_menu ul li {
+.menu_index_nav li {
     list-style-type: none;
     margin: 0 10px;
+    line-height: 1rem;
+    align-self: center;
 }
 
-.nav_index_menu ul li a {
+.menu_index_nav li a {
     text-decoration: none;
     cursor: pointer;
-    /* color: var(--text_color); */
 }
 
-.btn_index_secColor {
-    background-color: var(sec_color);
+.show_index_nav {
+    display: none;
 }
+
+.menuHam_index_nav {
+    color: var(--text_color);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* member login */
+
+.loginMb_index_nav div {
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: var(--btn_hover);
+    margin-right: 10px;
+}
+
+.loginMb_index_nav div i {
+    padding-left: 3px;
+}
+
+
+/** MediaQuery **/
+/* @media screen and (max-width: 1500px) {
+    .menu_index_nav {
+        display: none;
+    }
+
+
+} */

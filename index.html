@@ -14,6 +14,11 @@
     <meta name="generator" content="Vue,HTML,Sass,JavaScript" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./img/logo.ico" type="image/x-icon"/ >
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./CSS/fontawesome.css" />
     <link rel="stylesheet" href="./CSS/component.css" />
     <link rel="stylesheet" href="./CSS/style.css" />
     <link rel="stylesheet" href="./CSS/pages/index.css" />
@@ -23,95 +28,230 @@
   <body>
     <div id="app">
       <!-- Navgation Bar -->
-      <nav class="nav_index_navbar">
+      <nav class="navbar_index_nav">
         <a href="index.html"> <img src="./img/icon/Logo.svg" alt=詐知就好"> </a>
-        <div class="nav_index_menu">
-          <ul>
-            <li>
-              <a class="h6_component" href="./p01_news.html" target="_parent"
-                >最新消息</a
-              >
-            </li>
-            <li>
-              <a class="h6_component" href="./p02_teach.html" target="_parent"
-                >防範詐騙教學</a
-              >
-            </li>
-            <li>
-              <a
-                class="h6_component"
-                href="./p03_reportURL.html"
-                target="_parent"
-                >回報可疑網站</a
-              >
-            </li>
-            <li>
-              <a class="h6_component" href="./p04_gov.html" target="_parent"
-                >政府資訊連結</a
-              >
-            </li>
-            <li>
-              <a class="h6_component" href="./p05_faq.html" target="_parent"
-                >詐騙FAQ</a
-              >
-            </li>
-            <li class="">
-              <a class="h6_component" href="./p09_team.html" target="_parent"
-                >團隊介紹</a
-              >
-            </li>
-            <li>
-              <a
-                class="h6_component big_button btn_index_nav"
-                href="./p07_demoShopping.html"
-                target="_parent"
-                >DEMO體驗</a
-              >
-            </li>
-            <li>
-              <a
-                class="h6_component big_button btn_index_nav"
-                href="./p08_user.html"
-                target="_parent"
-                >會員登入/註冊</a
-              >
-            </li>
-          </ul>
-        </div>
+        <ul class="menu_index_nav">
+          <li>
+            <a class="h6_component" href="./p01_news.html" target="_parent"
+              >最新消息</a
+            >
+          </li>
+          <li>
+            <a class="h6_component" href="./p02_teach.html" target="_parent"
+              >防範詐騙教學</a
+            >
+          </li>
+          <li>
+            <a class="h6_component" href="./p03_reportURL.html" target="_parent"
+              >回報可疑網站</a
+            >
+          </li>
+          <li>
+            <a class="h6_component" href="./p04_gov.html" target="_parent"
+              >政府資訊連結</a
+            >
+          </li>
+          <li>
+            <a class="h6_component" href="./p05_faq.html" target="_parent"
+              >詐騙FAQ</a
+            >
+          </li>
+          <li>
+            <a class="h6_component" href="./p09_team.html" target="_parent"
+              >團隊介紹</a
+            >
+          </li>
+          <li>
+            <a
+              class="h6_component big_button"
+              href="./p07_demoShopping.html"
+              target="_parent"
+              >DEMO體驗</a
+            >
+          </li>
+          <li>
+            <a
+              class="h6_component big_button"
+              href="./p08_user.html"
+              target="_parent"
+              >會員登入/註冊</a
+            >
+          </li>
+          <li class="show_index_nav">
+            <a
+              class="h6_component loginMb_index_nav"
+              href="./p08_user.html"
+              target="_parent"
+            >
+              <div>
+                <i class="fa-solid fa-user"></i>
+              </div>
+              {{ Member name}} 您好
+            </a>
+          </li>
+          <li class="menuHam_index_nav show_index_nav">
+            <i class="fa-solid fa-bars"></i>
+          </li>
+        </ul>
       </nav>
-      <canvas id="myCanvas"></canvas>
+      <hr />
       <!-- Navgation Bar end-->
+
+      <!--Top Dynamic-->
+      <header>
+        <!-- Banner -->
+        <h2>prevent</h2>
+        <div id="banner_index_dynamicText">
+          <p>不明網站</p>
+          <p>購物要當心</p>
+        </div>
+        <a
+          class="h6_component big_button"
+          href="./p07_demoShopping.html"
+          target="_parent"
+          >DEMO體驗</a
+        >
+
+        <!-- BackTop Button -->
+        <div class="backTop_index_btn">
+          <i class="fa-solid fa-angles-left"></i>
+        </div>
+
+        <!-- 機器人 -->
+        <div class="robot_index_btn">
+          <img src="./img/icon/robot.svg" alt="" />
+        </div>
+      </header>
 
       <!--Main Block -->
       <main>
-        <!--Top Dynamic-->
-        <section>
-          <h2>prevent</h2>
-          <div id="banner_index_dynamicText">
-            <p>不明網站</p>
-            <p>購物要當心</p>
-          </div>
-        </section>
-
         <!--Text Article -->
-        <article>
+        <article class="article_index_block">
           <h1>不懂科技的你也可自保</h1>
+          <div class="textArticle1_index_block">
+            <div><img src="./img/icon/mail_silent.svg" alt="" /></div>
+            <p class="fontT26_index_article">
+              不點擊不明簡訊或是 E-mail 裡的網址
+            </p>
+            <p class="paragraph fontP18_index_article">
+              避免釣魚網站詐騙，要加強的不是計算機概論，也不用成為資安專家，而是掌握一個最基本的原則
+              不管是熟人還是陌生人、不管是哪種方式傳來的訊息（簡訊、電子郵件、Line、FB、IG等），只要內容附上網址，而且點開後要求輸入帳號密碼或下載安裝程式，內心的警報器一定要大聲作響，告訴自己「這極有可能是釣魚簡訊！」
+            </p>
+          </div>
+          <div class="textArticle2_index_block">
+            <div><img src="./img/icon/search.svg" alt="" /></div>
+            <p class="fontT26_index_article">找尋正確管道且小心求證</p>
+            <p class="paragraph fontP18_index_article">
+              假使收到訊息不放心或很想知道真相，絕對不要貪圖方便而點擊訊息內的網址，應該另外打開官方APP，或是自己Google連線到官方網站。然後登入驗證。當然，登入以後就會發現根本沒有強迫重新驗證這回事
+            </p>
+          </div>
+          <a class="big_button" href="./p02_teach.html">了解更多知識</a>
         </article>
 
         <!-- News -->
-        <article>
+        <article class="news_index_block">
           <h1>最新消息</h1>
+          <hr />
+          <div class="card1_index_block">
+            <div><img src="./img/index/newPic01.jpg" alt="" /></div>
+            <div class="small_button">資安</div>
+            <p class="fontT26_index_article">
+              健保署3員工利用職務查詢、洩漏情報人員個資長達13年，承保組科長涉嫌重大10萬交保
+            </p>
+            <p class="paragraph fontP14_index_article">
+              避免釣魚網站詐騙，要加強的不是計算機概論，也不用成為資安專家，而是掌握一個最基本的原則
+              不管是熟人還是陌生人、不管是哪種方式傳來的訊息（簡訊、電子郵件、Line、FB、IG等），只要內容附上網址，而且點開後要求輸入帳號密碼或下載安裝程式，內心的警報器一定要大聲作響，告訴自己「這極有可能是釣魚簡訊！」
+            </p>
+            <p class="fontDate_index_article">Jan 23, 2023</p>
+          </div>
+          <div class="card2_index_block">
+            <div><img src="./img/index/newPic02.jpg" alt="" /></div>
+            <div class="small_button">駭客</div>
+            <p class="fontT26_index_article">
+              從戶政到健保資料外洩案看我國個資保障，唐鳳部長理當不能以一句配合偵辦輕輕帶過
+            </p>
+            <p class="paragraph fontP14_index_article">
+              我國對公務機關的個人資料、資通訊安全保護卻可能與一般民眾認知不盡相符。數位部身為主管機關，理當不能一句全力提供資安技術支援、配合偵辦即可輕輕帶過，唐鳳部長有權積極監督衛福部健保署及內政部將資通安全事件之通報、調查、處理。
+            </p>
+            <p class="fontDate_index_article">Jan 23, 2023</p>
+          </div>
+          <div class="card3_index_block">
+            <div><img src="./img/index/newPic03.jpg" alt="" /></div>
+            <div class="small_button">網購詐騙</div>
+            <p class="fontT26_index_article">
+              李貴敏《美魔女律師教你生活不犯錯》：網購收不到貨或收到假貨，只能自認倒楣嗎？
+            </p>
+            <div class="paragraph fontP14_index_article">
+              一名大學畢業生，某天在特定網站上看到比市價便宜的智慧型手機及平板，就立即下單並轉帳付款，但遲遲未收到商品，其後上網查看，才發現該網站已不存在。就此，民眾享有什麼權利？網路販售業者又應該擔負什麼法律責任呢？
+            </div>
+            <p class="fontDate_index_article">Jan 23, 2023</p>
+          </div>
         </article>
 
         <!-- YouTube -->
-        <article>
+        <article class="youtube_index_block">
           <h1>Youtuber經驗談</h1>
+          <hr />
+
+          <div class="card1_index_block">
+            <div class="vedioYT_index_block">
+              <iframe
+                src="https://www.youtube.com/embed/PAr1F5keUGw"
+                frameborder="0"
+              ></iframe>
+            </div>
+            <p class="fontT26_index_article">
+              我遇到了臉書購物詐騙，<br />
+              Facebook加油好嗎？
+            </p>
+            <p class="text_title">Youtuber 科技旅人毛巾Vincent 分享</p>
+          </div>
+          <div class="card2_index_block">
+            <div class="vedioYT_index_block">
+              <iframe
+                src="https://www.youtube.com/embed/StFKlH6pCrk"
+                frameborder="0"
+              ></iframe>
+            </div>
+            <p class="fontT26_index_article">
+              又韭了一波!<br />
+              加密貨幣錢包被釣魚網站騙走<br />
+              辛酸畫面流出
+            </p>
+            <p class="text_title">Youtuber 啾啾鞋 分享</p>
+          </div>
+          <div class="card3_index_block">
+            <div class="vedioYT_index_block">
+              <iframe
+                src="https://www.youtube.com/embed/UWFGV6lnO38"
+                frameborder="0"
+              ></iframe>
+            </div>
+            <p class="fontT26_index_article">
+              詐騙六千萬過程大公開<br />
+              不希望再有人受騙
+            </p>
+            <p class="text_title">Youtuber 尼克&ASHLY 分享</p>
+          </div>
         </article>
       </main>
       <!--Main Block end -->
 
       <!-- Footer -->
-      <footer></footer>
+      <footer w3-include-html="./footer.html">
+        <!-- <nav>
+          <a href="/p01_news.html">最新消息</a>
+          <a href="/p07_demoShopping.html">DEMO體驗</a>
+          <a href="/p02_teach.html">防範詐騙教學</a>
+          <a href="/p03_reportURL.html">回報可疑網站</a>
+          <a href="/p04_gov.html">政府資訊連結</a>
+          <a href="/p05_faq.html">詐騙FAQ</a>
+          <a href="/p06_discuss.html">討論專區</a>
+          <a href="">團隊介紹</a>
+        </nav>
+        <p>本網站為緯育TibaMe前端設計工程師班第82期第二組學員專題成果作品</p>
+        <p>本平台僅供學習、展示之用</p> -->
+      </footer>
       <!-- Footer end-->
     </div>
     <script src="./js/index.js"></script>
