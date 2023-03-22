@@ -14,7 +14,14 @@
     <!-- jsgrid 主題 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css">
     <style>
-
+        .btn_bUser_addUser{
+            background: var(--text_color);
+            color: var(--sec_color);
+        }
+        .btn_bUser_addUser:hover{
+            background: var(--title_color);
+            color: var(--sec_color); 
+        }
     </style>
 </head>
 <body class="d-flex">
@@ -47,6 +54,12 @@
     </div>
     <div class="b_content">
         <h2 class="h1_component">會員管理</h2>
+        <div class="d-flex justify-content-end my-2">
+            <button class="small_button btn_bUser_addUser">新增會員</button>
+            <div>
+                <input type="text">
+            </div>
+        </div>
         <div id="jsGrid"></div>
     </div>
 
@@ -146,7 +159,8 @@
                         let $buttonContainer = $("<div>")
                         // Jquery 等同於 js中的 let buttonContainer = document.createElement("<div>")
 
-                        let $blockade = $("<button>").text("封鎖").addClass("small_button mx-1").on("click", operate);
+                        // let $blockade = $("<button>").html(`<i class="fa-solid fa-lock"></i>封鎖`).addClass("small_button mx-1").on("click", operate);
+                        let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
                         $buttonContainer.append($blockade);
 
                         let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);

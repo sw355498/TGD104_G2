@@ -1,0 +1,26 @@
+//base
+@import 'base/normalize.scss';
+@import 'base/var';
+@import 'base/color';
+
+//mixin
+@import 'mixin/mixin';
+
+// component
+@import 'component/function';
+@import 'component/btn';
+
+//layout
+@import 'layout/header';
+@import 'layout/login';
+@import 'layout/title';
+@import 'layout/demoNav';
+@import 'layout/body';
+@import 'layout/footer';
+
+// page
+@import 'pages/index';
+@import 'pages/b_index';
+
+// plugin
+@import 'sass/plugin/all';
