@@ -1,0 +1,109 @@
+body {
+    background-color: var(--background_color);
+}
+
+#tabs {
+    display: flex;
+    justify-content: center;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    /* border: 1px solid #000; */
+    padding: 5px 20px;
+    margin-right: 3px;
+    cursor: pointer;
+    background-color: var(--sec_color);
+    color: var(--fourc_color);
+}
+
+.tab.active {
+    background-color: var(--btn_hover);
+
+    color: var(--title_color);
+}
+
+.tab-label {
+    margin-right: 5px;
+}
+
+.content {
+    display: none;
+    /* margin-top: 10px; */
+    /* border: 1px solid #000; */
+    padding: 30px;
+    color: var(--text_color);
+}
+
+.content.active {
+    display: block;
+}
+
+.div_wrapper {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.div_p02_teach_title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+
+.div_p02_teach_content {
+    display: flex;
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+.div_p02_teach_contentLeft {
+    width: 50%;
+    margin: 0 50px;
+}
+
+.div_p02_teach_contentRight {
+    width: 50%;
+    box-sizing: border-box;
+    padding:  0 25px;
+}
+
+.div_p02_teach_method {
+    display: flex;
+    justify-content: space-between;
+}
+
+.underline {
+    border-bottom: 1px solid var(--text_color);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.span_underline {
+    border-bottom: 5px solid var(--text_color);
+}
+
+.div_p02_teach_step::before {
+    content: ' ';
+    display: inline-block;
+    width: 40px;
+    border-top: 3px solid var(--text_color);
+}
+
+.div_p02_teach_step {
+    width: 20%;
+}
+
+.div_p02_teach_stepText {
+    width: 75%;
+}
+
+.div_p02_teach_content img {
+    width: 500px;
+    margin-right: 50px;
+}
+
+.div_p02_teach_prevent {}
+
+.div_p02_teach_preventBox {}
