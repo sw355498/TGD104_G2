@@ -1,0 +1,11 @@
+p {
+    color: $text_color;
+}
+
+a {
+    color: $text_color;
+    &:active,
+    &:hover{
+        color: $main_color;
+    }
+}

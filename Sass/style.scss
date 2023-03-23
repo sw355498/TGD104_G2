@@ -13,7 +13,6 @@
 @import 'base/var';
 @import 'base/font';
 @import 'base/color';
-@import 'base/aLink';
 
 //mixin
 @import 'mixin/mixin';
@@ -22,6 +21,8 @@
 @import 'component/function';
 @import 'component/btn';
 @import 'component/jsGrid';
+@import 'component/nav';
+@import 'component/componentColor';
 
 //layout
 @import 'layout/header';
@@ -37,6 +38,7 @@
 // page
 @import 'pages/index';
 @import 'pages/b_index';
+@import 'pages/b_all';
 
 // plugin
 @import 'plugin/fontawesome/fontawesome.scss'
