@@ -4,6 +4,8 @@ p {
 
 a {
     color: $text_color;
+    text-decoration: none;
+    cursor: pointer;
     &:active,
     &:hover{
         color: $main_color;

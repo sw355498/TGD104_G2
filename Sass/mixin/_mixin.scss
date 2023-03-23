@@ -57,3 +57,38 @@
   }
 }
 
+@mixin indexGrid($gridTemplateColumns){
+  display: grid;
+  grid-template-columns: repeat($gridTemplateColumns, 1fr);
+  column-gap: 16px;
+  row-gap: 50px;
+  padding: 0px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+@mixin fontT26_index_article(){
+  word-spacing: -.1rem;
+  font-size: 1.625rem;
+  color: $text_color;
+  margin: 20px 0;
+  text-align: justify;
+  line-height: 2.5rem;
+}
+
+@mixin fontP18_index_article(){
+  font-size: 1.125rem;
+  line-height: 2rem;
+  color: $text_color;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+@mixin fontP14_index_article(){
+    text-overflow: ellipsis;
+    font-size: .875rem;
+    letter-spacing: 0.0875rem;
+    line-height: 1.25rem;
+    color: $text_color;
+    text-align: justify;
+}
