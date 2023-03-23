@@ -39,7 +39,12 @@ body {
 .content.active {
     display: block;
 }
-
+/* banner */
+.banner_frame{
+    height: 250px;
+}
+.banner_title{}
+/*  */
 .div_wrapper {
     width: 1200px;
     margin: 0 auto;
@@ -48,7 +53,7 @@ body {
 .div_p02_teach_title {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    margin: 40px 0;
 }
 
 
@@ -99,11 +104,39 @@ body {
     width: 75%;
 }
 
-.div_p02_teach_content img {
+.div_p02_teach_contentImg {
     width: 500px;
+    height: 480px;
+    overflow: hidden;
     margin-right: 50px;
 }
+.div_p02_teach_contentImg img{
+    height: 100%;
+}
+/* 防範之道 */
+.div_p02_teach_prevent {
+    display: flex;
+    justify-content: center;
+}
 
-.div_p02_teach_prevent {}
-
-.div_p02_teach_preventBox {}
+.div_p02_teach_preventBox {
+    width: 20%;
+    padding: 40px;
+    background-color: var(--four_color);
+    flex-basis: 1;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+.div_p02_teach_preventBox:nth-child(2n){
+    background-color: #0F98CE;
+}
+/* 相關影音 */
+.div_p02_teach_vedio{
+    display: flex;
+    justify-content: center;
+}
+.div_p02_teach_vedioBox{
+    width: 30%;
+    height: 200px;
+    margin: 15px;
+}
