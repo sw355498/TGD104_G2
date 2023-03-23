@@ -1,0 +1,220 @@
+/** Background **/
+body {
+    background-image: url("../../img/index/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+nav+hr {
+    text-align: right;
+    height: 2px;
+    background-color: $text_color;
+    width: 85%;
+    margin-right: 0;
+    box-shadow: 0 0 12px #21B1F2;
+}
+
+/** Top Dynamic **/
+header {
+    background-color: transparent;
+    height: 90vh;
+    padding-top: 20vh;
+    text-align: center;
+}
+
+header h2 {
+    text-transform: uppercase;
+    text-align: center;
+    color: $text_color;
+    font-family: 'outfit';
+    font-weight: 100;
+}
+
+#banner_index_dynamicText p {
+    font-size: 120px;
+    color: $text_color;
+    text-shadow: 0 0 24px #21B3F4;
+    letter-spacing: 5px;
+    text-align: center;
+    margin: 0;
+    line-height: 10rem;
+}
+
+#banner_index_dynamicText+a {
+    display: inline-block;
+    margin: 100px 0;
+}
+
+
+/* BackTop Button */
+.backTop_index_btn {
+    background-color: $sec_color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $text_color;
+    width: 70px;
+    height: 70px;
+    box-shadow: 0 0 10px #fff;
+    font-size: 35px;
+    transform: rotate(90deg);
+    border-radius: 5px;
+    position: fixed;
+    bottom: 20%;
+    right: 3%;
+    opacity: .8;
+}
+
+/* BackTop Button */
+.robot_index_btn {
+    position: fixed;
+    bottom: 5%;
+    right: 1%;
+}
+
+/** Main Block **/
+main {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+article {
+    display: grid;
+    grid-template-columns: repeat(12, 85px [col-start]);
+    grid-template-rows: 100px 3px 1fr 150px;
+    gap: 30px 16px;
+}
+
+article:first-child {
+    grid-template-rows: 100px 1fr 150px;
+    gap: 50px 16px;
+}
+
+h1+hr {
+    width: 50%;
+    text-align: right;
+    height: 2px;
+    background-image: linear-gradient(to right, #ffffff00, #ffffff, #ffffff00);
+    box-shadow: 2px 4px 4px #FBD1FF40;
+    border: none;
+    position: relative;
+    grid-column: 4/10;
+}
+
+/** Text Article **/
+.article_index_block h1,
+.news_index_block h1,
+.youtube_index_block h1 {
+    color: $title_color;
+    text-align: center;
+    grid-column: 4/10;
+    align-self: center
+}
+
+.textArticle1_index_block {
+    border: 2px solid #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    grid-column: 2/7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.textArticle2_index_block {
+    border: 2px solid #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    grid-column: 7/12;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fontT26_index_article {
+    word-spacing: -.1rem;
+    font-size: 1.625rem;
+    color: $text_color;
+    margin: 20px 0;
+    text-align: justify;
+    line-height: 2.5rem;
+}
+
+.fontP18_index_article {
+    font-size: 1.125rem;
+    line-height: 2rem;
+    color: $text_color;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.textArticle2_index_block+a {
+    background-color: $title_color;
+    color: $third_color;
+    grid-column: 6/8;
+    display: inline-block;
+}
+
+/** News **/
+.card1_index_block {
+    grid-column: 1/5;
+}
+
+.card2_index_block {
+    grid-column: 5/9;
+}
+
+.card3_index_block {
+    grid-column: 9/13;
+}
+
+.card1_index_block div,
+.card2_index_block div,
+.card3_index_block div {
+    margin-top: 20px;
+}
+
+.small_button {
+    font-size: 0.875rem;
+    display: inline-block;
+    text-align: center;
+    line-height: 1.3125rem;
+}
+
+.fontP14_index_article {
+    text-overflow: ellipsis;
+    font-size: .875rem;
+    letter-spacing: 0.0875rem;
+    line-height: 1.25rem;
+    color: $text_color;
+    text-align: justify;
+}
+
+.card1_index_block p:last-child,
+.card2_index_block p:last-child,
+.card3_index_block p:last-child {
+    font-family: 'Outfit';
+    color: $text_color;
+}
+
+/** YouTube **/
+.youtube_index_block p {
+    text-align: center;
+}
+
+.vedioYT_index_block {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.vedioYT_index_block iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
