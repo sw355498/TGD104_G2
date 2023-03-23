@@ -51,3 +51,14 @@ function includeHTML() {
 }
 
 includeHTML();
+
+
+/**
+ * navbar hamburger change
+ */
+
+const hamburger = document.querySelector(".hamburger");
+const ulMobLinks = document.querySelector(".links_index_nav");
+hamburger.addEventListener("click", () => {
+  ulMobLinks.classList.toggle("active");
+});
