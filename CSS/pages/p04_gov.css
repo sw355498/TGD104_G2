@@ -1,0 +1,123 @@
+body{
+    background-image: url(../../img/p04_gov/gov_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/* ================================== 最上方標題 ==================================*/
+.div_p04_gov_TopBgShape{
+    width: 1200px;
+    height: 54px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_p04_gov_TopBgShapeLeft{
+    display: flex;
+    /* background-color: #fff; */
+    width: 40px;
+    height: 54px;
+    flex-direction: column;
+}
+
+.span_p04_gov_TopBgShapeLeft1{
+    background-color: var(--text_color);
+    width: 40px;
+    height: 27px;
+    border-radius: 50px 0 0 0;
+}
+
+.span_p04_gov_TopBgShapeLeft2{
+    background-color: var(--text_color);
+    width: 40px;
+    height: 27px;
+}
+
+.div_p04_gov_TopBgShapeRight{
+    background-color: var(--text_color);
+    width: 1160px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+}
+
+/* ================================== 政府卡片區 ==================================*/
+.div_p04_gov_container{
+    width: 1200px;
+    padding: 60px 35px;
+    margin: 0 auto;
+}
+
+.div_p04_gov_card{
+    display: flex;  
+}
+
+.div_p04_gov_card img{
+    margin-right: 10px;
+}
+
+.span_p04_gov_cardVerticalLine{
+    display: block;
+    width: 5px;
+    height: 300px;
+    background-color: var(--text_color);
+}
+
+.div_04_gov_cardRight{
+    width: 234px;
+    height: 300px;
+}
+
+.div_p04_gov_cardBgShapeRightTop{
+    display: flex;
+    width: 234px;
+    height: 50px;
+}
+
+.div_p04_gov_cardBgShapeRightTopLeft{
+    width: 210px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    background-color: var(--text_color);
+}
+
+.div_p04_gov_cardBgShapeRightTopLeft a{
+    color: var(--background_color);
+}
+
+.div_p04_gov_cardBgShapeRightTopLeft a i{
+    font-size: 24px;
+}
+
+.div_p04_gov_cardBgShapeRightTopRight{
+    width: 24px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.div_p04_gov_cardBgShapeRightTopRight1{
+    width: 24px;
+    height: 50px;
+    background-color: var(--text_color);
+    border-radius: 0 50px 0 0;
+}
+
+.div_p04_gov_cardBgShapeRightTopRight2{
+    width: 24px;
+    height: 50px;
+    background-color: var(--text_color);
+}
+
+.div_04_gov_cardRight p{
+    margin: 0;
+    padding-top: 20px;
+    padding-left: 20px;
+}

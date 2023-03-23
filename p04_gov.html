@@ -7,55 +7,85 @@
     <meta name="description" content="包含親身經歷詐騙及身旁親友被騙的切深之痛，促使我們成立這個網站，相信社會互助也是防治詐騙的一環「我們希望大家理解，這些騙術在瞄準的是每一個人身上都有的一些特性，或是弱點，人人都可能不小心落入陷阱。」；【防詐教育】：防範列出各種詐騙手法供比對，並設計防詐小測驗，讓相關知識以好玩的方式傳遞給民眾；【被詐怎麼辦】，如不幸遇到詐騙提供各申訴管道，也提供客服機器人一步步引導民眾至相關頁面了解可以做些什麼">
     <meta name="generator" content="Vue,HTML,Sass,JavaScript">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>詐知就好</title>
+    <title>政府相關連結</title>
+    <link rel="stylesheet" href="CSS/normalize.css">
     <link rel="stylesheet" href="CSS/component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" />
-    <!-- <link rel="stylesheet" href="CSS/pages/p07_demoShopping.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" /> -->
+    <link rel="stylesheet" href="CSS/pages/p04_gov.css">
+    <script src="https://kit.fontawesome.com/07e5e5e602.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3"></script>
 </head>
 <body>
-    <!-- w3c 插入 html 的 script 等之後有 vue 可以拿掉 -->
+    
+    <!-- 最上方標題 -->
+    <div class="div_p04_gov_TopBgShape">
+        <div class="div_p04_gov_TopBgShapeLeft">
+            <span class="span_p04_gov_TopBgShapeLeft1"></span>
+            <span class="span_p04_gov_TopBgShapeLeft2"></span>
+        </div>
+        <div class="div_p04_gov_TopBgShapeRight">
+            <h2><i class="fa-regular fa-lightbulb"></i> 政府相關連結</h2>
+        </div>
+    </div>
+
+    <div class="div_p04_gov_container">
+        <div id="app" class="div_p04_gov_card" v-for="item in items">
+            <img src="img/p04_gov/165_logo.jpg">
+            <span class="span_p04_gov_cardVerticalLine"></span>
+            <div class="div_04_gov_cardRight">
+                <div class="div_p04_gov_cardBgShapeRightTop">
+                    <div class="div_p04_gov_cardBgShapeRightTopLeft">
+                        <span class="text_title">{{item.cardTitle}}</span>
+                        <a href="https://www.facebook.com/sharer.php?u=https://fontawesome.com/" target="_blank"><i class="fa-solid fa-share-from-square"></i></a>
+                    </div>
+                    <div class="div_p04_gov_cardBgShapeRightTopRight">
+                        <span class="div_p04_gov_cardBgShapeRightTopRight1"></span>
+                        <span class="div_p04_gov_cardBgShapeRightTopRight2"></span>
+                    </div>
+                </div>
+                <p class="paragraph">{{item.description}}</p>
+            </div>
+        </div>
+    </div>
+
+
     <script>
-            function includeHTML() {
-                var z, i, elmnt, file, xhttp;
-                /* Loop through a collection of all HTML elements: */
-                z = document.getElementsByTagName("*");
-                for (i = 0; i < z.length; i++) {
-                    elmnt = z[i];
-                    /*search for elements with a certain atrribute:*/
-                    file = elmnt.getAttribute("w3-include-html");
-                    if (file) {
-                    /* Make an HTTP request using the attribute value as the file name: */
-                    xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4) {
-                        if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-                        if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-                        /* Remove the attribute, and call this function once more: */
-                        elmnt.removeAttribute("w3-include-html");
-                        includeHTML();
-                        }
-                    }
-                    xhttp.open("GET", file, true);
-                    xhttp.send();
-                    /* Exit the function: */
-                    return;
-                    }
-                }
+
+    Vue.createApp({
+        data(){
+            return{
+                items: [
+                    {
+                        cardTitle: "165 全民防詐騙網",
+                        description: '內政部警政署為加強預防詐欺犯罪，設立165全民防詐騙網，宣導防制詐騙並提供民眾諮詢。',
+                    },
+                    {
+                        cardTitle: '台灣事實查核中心',
+                        description: '台灣事實查核中心參考國外具代表性的事實查核機制，並輔以我國的傳播生態需求，依循專業、透明、公正的原則，執行公共事務相關訊息之事實查核。',
+                    },
+                    {
+                        cardTitle: '證交所 - 證券投資反詐騙專區',
+                        description: '全台投資詐騙猖獗，為強化防範金融投資詐騙，證交所設立「證券投資反詐騙專區」，有反詐騙宣導、影片及資訊等，提供投資大眾，面對不明電話、簡訊、網頁等，應謹慎查證，維護自身投資權益及保障財產安全。',
+                    },
+                    {
+                        cardTitle: '金管會 - 防詐騙專區',
+                        description: '金管會積極推動金融防詐騙宣導工作，整合所轄業務局及金融周邊單位重要防詐宣導內容，設置金融防詐騙宣導專區，透過案例提醒民眾。',
+                    },
+                    {
+                        cardTitle: '台哥大反詐戰警',
+                        description: '台灣大自主研發偵測偽冒網站服務，協助企業主動偵測可能危害客戶之釣魚網站。',
+                    },
+                    {
+                        cardTitle: '趨勢科技 - 防詐達人',
+                        description: '趨勢科技團隊致力於研究各種詐騙行為、新聞與犯罪模型，並與警政署165防詐騙專線合作，擁有專門防詐騙的AI聊天機器人及全台最大詐騙資料庫。',
+                    },
+                
+                ]
             }
+        },
+    }).mount('#app')
+
     </script>
-    <div w3-include-html="./header.html"></div>
-    
-    
-    <div
-    ></div>
 
-
-
-
-
-    <!-- foote -->
-    <div w3-include-html="./footer.html"></div>
-    <!-- w3c 插入 html 的 script 等之後有 vue 可以拿掉 -->
-    <script>includeHTML();</script>
 </body>
 </html>
