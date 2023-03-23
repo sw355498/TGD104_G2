@@ -81,9 +81,39 @@ main .formInput_p03_reportURL > p{
     margin: 0 0 10px;
 }
 /* ======== 已通報的可疑網站列表 ======== */
-main .surlList_p03_reportURL{
+main .urlList_p03_reportURL{
     margin: 100px auto;
     text-align: center;
-    outline: 1px solid red;
-    background-color: var(--background_color) !important;
+    /* outline: 1px solid red; */
+}
+main .urlList_p03_reportURL > h2{
+    color: var(--text_color);
+    margin: 20px 0 40px;
+}
+
+/* 手刻 */
+main .urlList_p03_reportURL > table {
+    border: 1px solid var(--text_color);
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    color: var(--text_color);
+    background-color: var(--sec_color);
+    /* box-shadow: 0px 0px 5px var(--text_color); */
+}
+main .urlList_p03_reportURL > table thead {
+    text-align: center;
+}
+main .urlList_p03_reportURL > table thead th {
+    padding: 10px;
+    border-left: 1px solid var(--text_color);
+}
+main .urlList_p03_reportURL > table tbody td {
+    border-left: 1px solid var(--text_color);
+    border-top: 1px solid var(--text_color);
+    padding: 10px;
+}
+main .urlList_p03_reportURL .pages{
+    color: var(--text_color);
+    padding: 40px 0;
 }

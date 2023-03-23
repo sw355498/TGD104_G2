@@ -15,6 +15,7 @@
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.14/js/jquery.tablesorter.min.js"></script>
     
     <link rel="stylesheet" href="CSS/pages/p03_reportURL.css">
     <!-- 之後轉scss -->
@@ -86,14 +87,84 @@
             </div>
         </form>
         <!-- ======== 已通報的可疑網站列表 ======== -->
-        <section id="jsGrid" class="surlList_p03_reportURL">
-
+        <section class="urlList_p03_reportURL">
+            <h2>已通報的可疑網站列表</h2>
+            <table class="" id="keywords">
+                <thead>
+                    <tr>
+                        <th><i class="fa-regular fa-calendar"></i><span> 日期 </span><i class="fa-solid fa-angle-down"></i></th>
+                        <th><i class="fa-solid fa-file-circle-check"></i><span> 回報狀態 </span><i class="fa-solid fa-angle-down"></i></th>
+                        <th><i class="fa-solid fa-globe"></i><span> 網站名稱 </span><i class="fa-solid fa-angle-down"></i></th>
+                        <th><i class="fa-solid fa-link"></i><span> 網址 </span><i class="fa-solid fa-angle-down"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023/01/10</td>
+                        <td>未審核</td>
+                        <td>17play娛樂城</td>
+                        <td>https://cesare.asia/6</td>
+                    </tr>
+                    <tr>
+                        <td>2023/01/09</td>
+                        <td>非詐騙網站</td>
+                        <td>19play娛樂城</td>
+                        <td>https://cesare.asia/5</td>
+                    </tr>
+                    <tr>
+                        <td>2023/02/11</td>
+                        <td>確認為詐騙網站</td>
+                        <td>18play娛樂城</td>
+                        <td>https://cesare.asia/64</td>
+                    </tr>
+                    <tr>
+                        <td>2023/02/11</td>
+                        <td>確認為詐騙網站</td>
+                        <td>18play娛樂城</td>
+                        <td>https://cesare.asia/64</td>
+                    </tr>
+                    <tr>
+                        <td>2023/02/11</td>
+                        <td>確認為詐騙網站</td>
+                        <td>18play娛樂城</td>
+                        <td>https://cesare.asia/64</td>
+                    </tr>
+                    <tr>
+                        <td>2023/02/11</td>
+                        <td>確認為詐騙網站</td>
+                        <td>18play娛樂城</td>
+                        <td>https://cesare.asia/64</td>
+                    </tr>
+                    <tr>
+                        <td>2023/02/11</td>
+                        <td>確認為詐騙網站</td>
+                        <td>18play娛樂城</td>
+                        <td>https://cesare.asia/64</td>
+                    </tr>
+                    <tr>
+                        <td>2023/02/11</td>
+                        <td>確認為詐騙網站</td>
+                        <td>18play娛樂城</td>
+                        <td>https://cesare.asia/64</td>
+                    </tr>
+                </tbody>
+              </table>
+              <div class="pages">
+                <i class="fa-solid fa-angles-left"></i>
+                <span>1 2 3 4 5 ... </span>
+                <i class="fa-solid fa-angles-right"></i>
+              </div>
+            <!-- <div id="jsGrid"></div> -->
         </section>
     </main>
     <div w3-include-html="./footer.html"></div>
+    <script>
+        $(function () {
+            $("#keywords").tablesorter();
+        });
+    </script>
     <!-- w3c 插入 html 的 script 等之後有 vue 可以拿掉 -->
     <script>includeHTML();</script>
-    
     <!-- 先給靜態 之後抓動態資料 -->
     <script>
         var website = [
@@ -127,14 +198,31 @@
             editing: false,
             sorting: true,
             paging: true,
-     
+
             data: website,
-     
             fields: [
                 { name: "日期", type: "text", width: 100, validate: "required" },
                 { name: "回報狀態", type: "select", items: countries, valueField: "Id", textField: "日期" },
                 { name: "網站名稱", type: "text", width: 100 },
                 { name: "網址", type: "text", width: 200 },
+                {
+                    type: "control",
+                    modeSwitchButton: true,
+                    editButton: false,
+                    width: 100,
+                    headerTemplate: function () {
+                        $button = $("<button>").attr("type", "button").text("Filter")
+                            .on("click", function () {
+                                $("#jsGrid").jsGrid("option", "filtering", !($("#jsGrid").jsGrid("option", "filtering")));
+                                return false;
+                            });
+                        return $("<button>").attr("type", "button").text("Add")
+                            .on("click", function () {
+                                dialog.showDetailsDialog("Add", {});
+                            });
+                       
+                    }
+                }
             ]
         });
         
