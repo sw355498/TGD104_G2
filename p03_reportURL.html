@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-Tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="全容君,黃資蓉,阮炫瑞,林欣妤,詹皓丞,張家恩">
+    <meta name="keywords" content="詐騙,防詐騙,防詐教育,防詐騙教育,防詐騙模擬體驗,防詐討論版,防詐騙討論版,常見詐騙手段,詐騙回報,詐騙網站檢舉,詐騙親身經歷,一頁式購物詐騙,語音詐騙,簡訊詐騙,電話詐騙,交友詐騙">
+    <meta name="description" content="包含親身經歷詐騙及身旁親友被騙的切深之痛，促使我們成立這個網站，相信社會互助也是防治詐騙的一環「我們希望大家理解，這些騙術在瞄準的是每一個人身上都有的一些特性，或是弱點，人人都可能不小心落入陷阱。」；【防詐教育】：防範列出各種詐騙手法供比對，並設計防詐小測驗，讓相關知識以好玩的方式傳遞給民眾；【被詐怎麼辦】，如不幸遇到詐騙提供各申訴管道，也提供客服機器人一步步引導民眾至相關頁面了解可以做些什麼">
+    <meta name="generator" content="Vue,HTML,Sass,JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>詐知就好</title>
+    <link rel="stylesheet" href="CSS/component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <!-- jsGrid & jquery -->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    
+    <link rel="stylesheet" href="CSS/pages/p03_reportURL.css">
+    <!-- 之後轉scss -->
+    <!-- <link rel="stylesheet" href="Sass/css/style.css"> -->
+</head>
+<body>
+    <!-- w3c 插入 html 的 script 等之後有 vue 可以拿掉 -->
+    <script>
+        function includeHTML() {
+            var z, i, elmnt, file, xhttp;
+            /* Loop through a collection of all HTML elements: */
+            z = document.getElementsByTagName("*");
+            for (i = 0; i < z.length; i++) {
+                elmnt = z[i];
+                /*search for elements with a certain atrribute:*/
+                file = elmnt.getAttribute("w3-include-html");
+                if (file) {
+                /* Make an HTTP request using the attribute value as the file name: */
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                    if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                    if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                    /* Remove the attribute, and call this function once more: */
+                    elmnt.removeAttribute("w3-include-html");
+                    includeHTML();
+                    }
+                }
+                xhttp.open("GET", file, true);
+                xhttp.send();
+                /* Exit the function: */
+                return;
+                }
+            }
+        }
+    </script>
+    <div w3-include-html="./header.html"></div>
+    <main>
+        <h1>回報可疑網站</h1>
+        <form method="post" action="" class="form_p03_reportURL">
+            <h6>可疑網站填寫表單</h6>
+            <p>民眾若發現可疑網站，可於本平台進行通報<br>
+                本站將由專人協助判斷是否為「偽冒網站/詐騙網站」
+            </p>
+            <!-- 會員 -->
+            <div class="user_p03_reportURL">
+                <div class="userImg">
+                    <img src="" alt="userImg">
+                </div>
+                <div class="userInfo">
+                    <span>嗨！</span>會員
+                    <p>有發現什麼可疑網站嗎</p>
+                </div>
+            </div>
+            <div class="formInput_p03_reportURL">
+                <label for="url">網站網址</label>
+                <input class="input_p03" type="text" name="url" placeholder="http://">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <p class="warning_p03">該網址已通報過囉</p>
+                <div class="active_p03_reportURL">
+                    <label for="email">通報人信箱</label>
+                    <input class="input_p03" type="email" name="email" placeholder="請輸入您的信箱">
+                </div>
+                <label for="title">網站名稱</label>
+                <input class="input_p03" type="text" name="title" placeholder="被偽冒或詐騙公司名稱">
+                <label for="notes">備註</label>
+                <textarea class="input_p03" name="notes" id="" cols="30" rows="10" placeholder="可說明該網站可疑之處..."></textarea>
+                <input class="inputSubmit_p03 small_button" type="submit" value="送出"> 
+            </div>
+        </form>
+        <!-- ======== 已通報的可疑網站列表 ======== -->
+        <section id="jsGrid" class="surlList_p03_reportURL">
+
+        </section>
+    </main>
+    <div w3-include-html="./footer.html"></div>
+    <!-- w3c 插入 html 的 script 等之後有 vue 可以拿掉 -->
+    <script>includeHTML();</script>
+    
+    <!-- 先給靜態 之後抓動態資料 -->
+    <script>
+        var website = [
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+            { "日期": "2022/11/11", "回報狀態": 1, "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+
+        ];
+     
+        var countries = [
+            { 日期: "", Id: 0 },
+            { 日期: "審核中", Id: 1 },
+            { 日期: "已確認", Id: 2 },
+        ];
+
+        $("#jsGrid").jsGrid({
+            width: "100%",
+            height: "600px",
+     
+            inserting: true,
+            editing: false,
+            sorting: true,
+            paging: true,
+     
+            data: website,
+     
+            fields: [
+                { name: "日期", type: "text", width: 100, validate: "required" },
+                { name: "回報狀態", type: "select", items: countries, valueField: "Id", textField: "日期" },
+                { name: "網站名稱", type: "text", width: 100 },
+                { name: "網址", type: "text", width: 200 },
+            ]
+        });
+        
+    </script>
+</body>
+</html>

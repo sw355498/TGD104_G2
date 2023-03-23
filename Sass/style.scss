@@ -35,10 +35,12 @@
 @import 'layout/b_left_nav';
 @import 'layout/b_content';
 
-// page
+// pages
 @import 'pages/index';
 @import 'pages/b_index';
 @import 'pages/b_all';
+@import 'pages/p03_reportURL';
+@import 'pages/p07_demoShopping';
 
 // plugin
 @import 'plugin/fontawesome/fontawesome.scss'
