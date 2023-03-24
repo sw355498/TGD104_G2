@@ -1,48 +1,26 @@
-body{
+.body_p04_gov_base{
     background-image: url(../../img/p04_gov/gov_bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
 
 /* ================================== 最上方標題 ==================================*/
-.div_p04_gov_TopBgShape{
+.div_p04_gov_topTitle{
     width: 1200px;
-    height: 54px;
+    height: 54px; 
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.div_p04_gov_TopBgShapeLeft{
-    display: flex;
-    /* background-color: #fff; */
-    width: 40px;
-    height: 54px;
-    flex-direction: column;
-}
-
-.span_p04_gov_TopBgShapeLeft1{
     background-color: var(--text_color);
-    width: 40px;
-    height: 27px;
-    border-radius: 50px 0 0 0;
-}
-
-.span_p04_gov_TopBgShapeLeft2{
-    background-color: var(--text_color);
-    width: 40px;
-    height: 27px;
-}
-
-.div_p04_gov_TopBgShapeRight{
-    background-color: var(--text_color);
-    width: 1160px;
-    height: 54px;
     display: flex;
     align-items: center;
+    border-radius: 35px 0 0 0;
+    padding-left: 30px;
+}
+
+.div_p04_gov_topTitle h3{
+    color: var(--sec_color);
 }
 
 /* ================================== 政府卡片區 ==================================*/
@@ -72,62 +50,82 @@ body{
 }
 
 .div_04_gov_cardRight{
-    width: 234px;
-    height: 300px;
+    width: 264px;
 }
 
 .div_p04_gov_cardBgShapeRightTop{
     display: flex;
     width: 234px;
     height: 50px;
-}
-
-.div_p04_gov_cardBgShapeRightTopLeft{
-    width: 210px;
-    height: 50px;
+    background-color: var(--text_color);
+    border-radius: 0 20px 0 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    /* padding-left: 20px; */
-    background-color: var(--text_color);
     text-align: center;
+    padding-left: 20px;
+    padding-right: 10px;
+    justify-content: space-around;
 }
 
-.div_p04_gov_cardBgShapeRightTopLeft span{
-    padding: 0 10px 0 14px;
-    line-height: 1.4;
+.div_p04_gov_cardBgShapeRightTop h6{
+    color: var(--sec_color);
+    font-size: 18px;
 }
 
-.div_p04_gov_cardBgShapeRightTopLeft a{
-    color: var(--background_color);
-}
-
-.div_p04_gov_cardBgShapeRightTopLeft a i{
+.div_p04_gov_cardBgShapeRightTop i{
+    color: var(--sec_color);
     font-size: 24px;
 }
 
-.div_p04_gov_cardBgShapeRightTopRight{
-    width: 24px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-}
-
-.div_p04_gov_cardBgShapeRightTopRight1{
-    width: 24px;
-    height: 50px;
-    background-color: var(--text_color);
-    border-radius: 0 50px 0 0;
-}
-
-.div_p04_gov_cardBgShapeRightTopRight2{
-    width: 24px;
-    height: 50px;
-    background-color: var(--text_color);
+.div_p04_gov_cardBgShapeRightTop i:hover{
+    color: var(--main_color);
 }
 
 .div_04_gov_cardRight p{
     margin: 0;
     padding-top: 20px;
     padding-left: 20px;
+    text-align: justify;
+}
+
+@media screen and (max-width: 428px){
+
+    /* ================================== 最上方標題 ==================================*/
+    .div_p04_gov_topTitle{
+        width: 390px;
+        height: 48px;
+    }
+
+    /* ================================== 政府卡片區 ==================================*/
+    .div_p04_gov_container{
+        width: 100%;
+        padding: 0;
+        padding-top: 20px; 
+    }
+
+    .div_p04_gov_card{
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .div_p04_gov_card img{
+        width: 218px;
+        height: 186px;
+        margin: 0;
+    }
+
+    .span_p04_gov_cardVerticalLine{
+        width: 300px;
+        height: 5px;
+    }
+
+    .div_p04_gov_cardBgShapeRightTop{
+        border-radius: 0 0 20px 20px;
+        height: 40px;
+    }
+
+    .div_04_gov_cardRight p{
+        padding-left: 0;
+    }
 }

@@ -14,33 +14,23 @@
     <script src="https://kit.fontawesome.com/07e5e5e602.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3"></script>
 </head>
-<body>
+<body class="body_p04_gov_base">
     
     <!-- 最上方標題 -->
-    <div class="div_p04_gov_TopBgShape">
-        <div class="div_p04_gov_TopBgShapeLeft">
-            <span class="span_p04_gov_TopBgShapeLeft1"></span>
-            <span class="span_p04_gov_TopBgShapeLeft2"></span>
-        </div>
-        <div class="div_p04_gov_TopBgShapeRight">
-            <h2><i class="fa-regular fa-lightbulb"></i>政府相關連結</h2>
-        </div>
+    <div class="div_p04_gov_topTitle">
+        <h3><i class="fa-regular fa-lightbulb"></i>政府相關連結</h3>
     </div>
 
+    <!-- 政府卡片區 -->
     <div id="app" class="div_p04_gov_container">
         <div class="div_p04_gov_card" v-for="(content, content_index) in contents">
             <img :src="content.image">
             <span class="span_p04_gov_cardVerticalLine"></span>
             <div class="div_04_gov_cardRight">
                 <div class="div_p04_gov_cardBgShapeRightTop">
-                    <div class="div_p04_gov_cardBgShapeRightTopLeft">
-                        <span class="text_title">{{content.cardTitle}}</span>
-                        <a :href="content.link" target="_blank"><i class="fa-solid fa-share-from-square"></i></a>
-                    </div>
-                    <div class="div_p04_gov_cardBgShapeRightTopRight">
-                        <span class="div_p04_gov_cardBgShapeRightTopRight1"></span>
-                        <span class="div_p04_gov_cardBgShapeRightTopRight2"></span>
-                    </div>
+                    <h6 class="text_title">{{content.cardTitle}}</h6>
+                    <a :href="content.link" target="_blank"><i class="fa-solid fa-share-from-square"></i></a>
+
                 </div>
                 <p class="paragraph">{{content.description}}</p>
             </div>
@@ -67,7 +57,7 @@
                         link: 'https://www.facebook.com/sharer.php?u=https://tfc-taiwan.org.tw/',
                     },
                     {
-                        cardTitle: '證交所 - 證券投資反詐騙專區',
+                        cardTitle: '證交所 - 反詐騙專區',
                         description: '全台投資詐騙猖獗，為強化防範金融投資詐騙，證交所設立「證券投資反詐騙專區」，有反詐騙宣導、影片及資訊等，提供投資大眾，面對不明電話、簡訊、網頁等，應謹慎查證，維護自身投資權益及保障財產安全。',
                         image: 'img/p04_gov/twse_logo.jpg',
                         link: 'https://www.facebook.com/sharer.php?u=https://www.twse.com.tw/anti-fraud/zh/index.html',
