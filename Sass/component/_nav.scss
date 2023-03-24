@@ -1,5 +1,5 @@
 /*** Navigation ***/
-nav {
+.menu_index_nav {
   display: flex;
   justify-content: space-between;
   padding: 15px;
@@ -14,31 +14,31 @@ nav {
   justify-content: space-between;
 }
 
-nav a {
+.menu_index_nav a {
   text-decoration: none;
   color: $text_color;
 }
 
-nav .logo_index_nav {
+.menu_index_nav .logo_index_nav {
   line-height: 50px;
   z-index: 1;
 }
 
-nav .loginMb_index_nav {
+.menu_index_nav .loginMb_index_nav {
   display: flex;
   justify-content: center;
   align-items: center;
   display: none;
 }
 
-nav .loginMb_index_nav div {
+.menu_index_nav .loginMb_index_nav div {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   background-color: $btn_hover;
 }
 
-nav .member_index_nav {
+.menu_index_nav .member_index_nav {
   border-radius: 50%;
 }
 

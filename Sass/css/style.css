@@ -132,7 +132,7 @@
 }
 
 /*** Navigation ***/
-nav {
+.menu_index_nav {
   display: flex;
   justify-content: space-between;
   padding: 15px;
@@ -147,31 +147,31 @@ nav {
   justify-content: space-between;
 }
 
-nav a {
+.menu_index_nav a {
   text-decoration: none;
   color: #ffffff;
 }
 
-nav .logo_index_nav {
+.menu_index_nav .logo_index_nav {
   line-height: 50px;
   z-index: 1;
 }
 
-nav .loginMb_index_nav {
+.menu_index_nav .loginMb_index_nav {
   display: flex;
   justify-content: center;
   align-items: center;
   display: none;
 }
 
-nav .loginMb_index_nav div {
+.menu_index_nav .loginMb_index_nav div {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   background-color: #0b406d;
 }
 
-nav .member_index_nav {
+.menu_index_nav .member_index_nav {
   border-radius: 50%;
 }
 
@@ -555,6 +555,7 @@ footer nav a::after, footer nav a:first-child::before {
 .body_index_block main .news_index_block,
 .body_index_block main .youtube_index_block {
   text-align: center;
+  margin-bottom: 100px;
 }
 .body_index_block main .article_index_block h1,
 .body_index_block main .news_index_block h1,
@@ -724,6 +725,13 @@ footer nav a::after, footer nav a:first-child::before {
 .body_index_block main .youtube_index_block a {
   background: #d6eeff;
   color: #08171E;
+}
+.body_index_block .footer_index_block {
+  background-image: url("./../../img/index/footer.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 350px;
 }
 
 .btn_bUser_addUser {
