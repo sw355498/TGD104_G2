@@ -97,7 +97,7 @@
 
     /* ================================== 最上方標題 ==================================*/
     .div_p04_gov_topTitle{
-        width: 390px;
+        width: auto;
         height: 48px;
         margin-top: 40px;
         margin-left: 20px;
