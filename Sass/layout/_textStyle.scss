@@ -6,7 +6,7 @@
     @include fontStyle(300, 1rem, 1.5rem, 0.2rem);
 }
 
-.text_title_text_color{
+.text_title{
     @include fontStyle(500, 1rem, 1.5rem, 0.1rem);
     color: $text_color;
 }
