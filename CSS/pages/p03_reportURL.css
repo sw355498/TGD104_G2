@@ -92,14 +92,14 @@ main .urlList_p03_reportURL > h2{
 }
 
 /* 手刻 */
-main .urlList_p03_reportURL > table {
+/* main .urlList_p03_reportURL > table {
     border: 1px solid var(--text_color);
     border-radius: 10px;
     box-sizing: border-box;
     width: 100%;
     color: var(--text_color);
     background-color: var(--sec_color);
-    /* box-shadow: 0px 0px 5px var(--text_color); */
+    box-shadow: 0px 0px 5px var(--text_color);
 }
 main .urlList_p03_reportURL > table thead {
     text-align: center;
@@ -116,4 +116,12 @@ main .urlList_p03_reportURL > table tbody td {
 main .urlList_p03_reportURL .pages{
     color: var(--text_color);
     padding: 40px 0;
+} */
+/* jsGrid */
+#jsGrid {
+    color: var(--text_color);
+}
+#jsGrid .jsgrid-table td,
+#jsGrid .jsgrid-table th{
+    background-color: var(--background_color);
 }
