@@ -14,88 +14,87 @@
     <meta name="generator" content="Vue,HTML,Sass,JavaScript" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./img/logo.ico" type="image/x-icon"/ >
-    <link rel="stylesheet" href="Sass/css/style.css">
+    <link rel="stylesheet" href="Sass/css/style.css" />
     <script src="https://unpkg.com/vue@next"></script>
     <title>詐知就好</title>
   </head>
   <body class="body_index_block">
     <div id="app">
-<header>
-   <!-- Navgation Bar -->
-      <nav class="menu_index_nav">
-        <div class="logo_index_nav">
-          <span
-            ><a href="#"><img src="./img/Logo.png" /></a
-          ></span>
-        </div>
-        <!-- Member Button Block -->
-        <div class="wrap_index_nav">
-          <a
-            id="unlogin_member"
-            class="h6_component big_button"
-            href="./p08_user.html"
-            target="_parent"
-            >會員登入/註冊</a
-          >
-
-          <ul class="links_index_nav">
-            <li>
-              <a class="h6_component" href="./p01_news.html" target="_parent"
-                >最新消息</a
-              >
-            </li>
-            <li>
-              <a class="h6_component" href="./p02_teach.html" target="_parent"
-                >防範詐騙教學</a
-              >
-            </li>
-            <li>
-              <a
-                class="h6_component"
-                href="./p03_reportURL.html"
-                target="_parent"
-                >回報可疑網站</a
-              >
-            </li>
-            <li>
-              <a class="h6_component" href="./p04_gov.html" target="_parent"
-                >政府資訊連結</a
-              >
-            </li>
-            <li>
-              <a class="h6_component" href="./p05_faq.html" target="_parent"
-                >詐騙FAQ</a
-              >
-            </li>
-            <li>
-              <a class="h6_component" href="./p09_team.html" target="_parent"
-                >團隊介紹</a
-              >
-            </li>
-          </ul>
-          <div class="hamburger">
-            <svg
-              class="ham hamRotate ham4"
-              viewBox="0 0 100 100"
-              width="50"
-              onclick="this.classList.toggle('active')"
-            >
-              <path
-                class="line top"
-                d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20"
-              />
-              <path class="line middle" d="m 70,50 h -40" />
-              <path
-                class="line bottom"
-                d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"
-              />
-            </svg>
+      <header>
+        <!-- Navgation Bar -->
+        <nav class="menu_index_nav">
+          <div class="logo_index_nav">
+            <span
+              ><a href="#"><img src="./img/Logo.png" /></a
+            ></span>
           </div>
-        </div>
-      </nav>
-      <!-- <hr /> -->
-      <!-- Navgation Bar end-->
-      </header> 
+          <!-- Member Button Block -->
+          <div class="wrap_index_nav">
+            <a
+              class="h6_component big_button member_index_nav"
+              href="./p08_user.html"
+              target="_parent"
+              ><i class="fa-solid fa-user"></i>
+            </a>
+
+            <ul class="links_index_nav">
+              <li>
+                <a class="h6_component" href="./p01_news.html" target="_parent"
+                  >最新消息</a
+                >
+              </li>
+              <li>
+                <a class="h6_component" href="./p02_teach.html" target="_parent"
+                  >防範詐騙教學</a
+                >
+              </li>
+              <li>
+                <a
+                  class="h6_component"
+                  href="./p03_reportURL.html"
+                  target="_parent"
+                  >回報可疑網站</a
+                >
+              </li>
+              <li>
+                <a class="h6_component" href="./p04_gov.html" target="_parent"
+                  >政府資訊連結</a
+                >
+              </li>
+              <li>
+                <a class="h6_component" href="./p05_faq.html" target="_parent"
+                  >詐騙FAQ</a
+                >
+              </li>
+              <li>
+                <a class="h6_component" href="./p09_team.html" target="_parent"
+                  >團隊介紹</a
+                >
+              </li>
+            </ul>
+            <div class="hamburger">
+              <svg
+                class="ham hamRotate ham4"
+                viewBox="0 0 100 100"
+                width="50"
+                onclick="this.classList.toggle('active')"
+              >
+                <path
+                  class="line top"
+                  d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20"
+                />
+                <path class="line middle" d="m 70,50 h -40" />
+                <path
+                  class="line bottom"
+                  d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"
+                />
+              </svg>
+            </div>
+          </div>
+        </nav>
+        <!-- <hr /> -->
+        <!-- Navgation Bar end-->
+      </header>
 
       <!--Top Dynamic-->
       <section>
@@ -127,9 +126,9 @@
       <main>
         <!--Text Article -->
         <article class="article_index_block">
-          <h1>不懂科技的你也可自保</h1>       
+          <h1>不懂科技的你也可自保</h1>
           <ul>
-            <li class="textArticle1_index_block" style="width: 100%;">
+            <li class="textArticle1_index_block" style="width: 100%">
               <div><img src="./img/icon/mail_silent.svg" alt="" /></div>
               <p class="fontT26_index_article">
                 不點擊不明簡訊或是 E-mail 裡的網址
@@ -139,7 +138,7 @@
                 不管是熟人還是陌生人、不管是哪種方式傳來的訊息（簡訊、電子郵件、Line、FB、IG等），只要內容附上網址，而且點開後要求輸入帳號密碼或下載安裝程式，內心的警報器一定要大聲作響，告訴自己「這極有可能是釣魚簡訊！」
               </p>
             </li>
-            <li class="textArticle1_index_block" style="width: 100%;">
+            <li class="textArticle1_index_block" style="width: 100%">
               <div><img src="./img/icon/search.svg" alt="" /></div>
               <p class="fontT26_index_article">找尋正確管道且小心求證</p>
               <p class="paragraph fontP18_index_article">
@@ -157,7 +156,7 @@
           <ul>
             <li class="card_index_block">
               <figure class="card_index_photo">
-                <img src="./img/index/newPic01.jpg" alt="">
+                <img src="./img/index/newPic01.jpg" alt="" />
                 <figcaption class="small_button">資安</figcaption>
               </figure>
               <div class="text-block">
@@ -173,7 +172,7 @@
             </li>
             <li class="card_index_block">
               <figure class="card_index_photo">
-                <img src="./img/index/newPic02.jpg" alt="">
+                <img src="./img/index/newPic02.jpg" alt="" />
                 <figcaption class="small_button">駭客</figcaption>
               </figure>
               <div class="text-block">
@@ -188,7 +187,7 @@
             </li>
             <li class="card_index_block">
               <figure class="card_index_photo">
-                <img src="./img/index/newPic03.jpg" alt="">
+                <img src="./img/index/newPic03.jpg" alt="" />
                 <figcaption class="small_button">網購詐騙</figcaption>
               </figure>
               <div class="text-block">
@@ -200,8 +199,6 @@
                 </p>
                 <p class="fontDate_index_article">Jan 23, 2023</p>
               </div>
-
-
             </li>
           </ul>
           <a class="big_button" href="./p01_news.html">閱讀更多文章</a>
@@ -260,7 +257,7 @@
 
       <!-- Footer -->
       <footer w3-include-html="./footer.html">
-        <!-- <nav>
+        <!-- <div>
           <a href="/p01_news.html">最新消息</a>
           <a href="/p07_demoShopping.html">DEMO體驗</a>
           <a href="/p02_teach.html">防範詐騙教學</a>
@@ -269,7 +266,7 @@
           <a href="/p05_faq.html">詐騙FAQ</a>
           <a href="/p06_discuss.html">討論專區</a>
           <a href="">團隊介紹</a>
-        </nav>
+        </div>
         <p>本網站為緯育TibaMe前端設計工程師班第82期第二組學員專題成果作品</p>
         <p>本平台僅供學習、展示之用</p> -->
       </footer>
