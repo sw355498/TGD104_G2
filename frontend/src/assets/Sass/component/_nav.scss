@@ -1,0 +1,115 @@
+/*Menu*/
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+.wrap_index_nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    text-decoration: none;
+    color: $text_color;
+}
+
+nav .logo_index_nav {
+    line-height: 50px;
+    z-index: 1;
+}
+
+nav .loginMb_index_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+nav .loginMb_index_nav div {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: $btn_hover;
+}
+
+/*Hamburger menu*/
+/*ham*/
+.ham {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.hamRotate.active {
+    transform: rotate(45deg);
+}
+
+.hamRotate180.active {
+    transform: rotate(180deg);
+}
+
+.line {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: $text_color;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+}
+
+.ham4 .top {
+    stroke-dasharray: 40 121;
+}
+
+.ham4 .bottom {
+    stroke-dasharray: 40 121;
+}
+
+.ham4.active .top {
+    stroke-dashoffset: -68px;
+}
+
+.ham4.active .bottom {
+    stroke-dashoffset: -68px;
+}
+
+/*ul menu*/
+.menu_index_nav .links_index_nav {
+    position: absolute;
+    background: $background_color;
+    height: 0;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    transition: .5s;
+    margin: 0;
+    padding: 0;
+}
+
+.menu_index_nav .links_index_nav.active {
+    height: 100vh;
+    top: 0;
+    min-height: 550px;
+}
+
+.menu_index_nav ul li {
+    margin: 30px 0;
+    font-size: 3rem;
+    text-decoration: none;
+    list-style-type: none;
+    color: $text_color;
+    text-align: center;
+}

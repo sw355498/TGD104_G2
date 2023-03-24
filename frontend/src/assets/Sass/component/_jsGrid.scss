@@ -1,0 +1,38 @@
+/*------ jsgrid ------*/
+#jsGrid{
+    text-align: center;
+
+    td{
+        overflow : hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis;
+    }
+
+    .jsgrid-pager,
+    .jsgrid-pager a{
+        text-decoration: none;
+        color: $text_color;
+    }
+
+    .jsgrid-pager-current-page{
+        text-decoration: none;
+        color: $main_color;
+    }
+    .jsgrid-header-row{
+        &>.jsgrid-header-cell{
+            background: $sec_color;
+            color: $text_color;
+        }
+    }
+    .jsgrid-row,
+    .jsgrid-alt-row{
+        &>.jsgrid-cell{
+            background: $sec_color;
+            color: $text_color;
+        }
+    }
+    .small_button{
+        background: #ffffff;
+        color: #033159;
+    }
+}
