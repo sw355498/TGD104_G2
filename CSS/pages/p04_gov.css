@@ -17,6 +17,7 @@
     align-items: center;
     border-radius: 35px 0 0 0;
     padding-left: 30px;
+    margin-top: 60px;
 }
 
 .div_p04_gov_topTitle h3{
@@ -72,6 +73,10 @@
     font-size: 18px;
 }
 
+.div_p04_gov_cardBgShapeRightTop h6:hover{
+    color: var(--main_color);
+}
+
 .div_p04_gov_cardBgShapeRightTop i{
     color: var(--sec_color);
     font-size: 24px;
@@ -94,19 +99,26 @@
     .div_p04_gov_topTitle{
         width: 390px;
         height: 48px;
+        margin-top: 40px;
+        margin-left: 20px;
     }
 
     /* ================================== 政府卡片區 ==================================*/
     .div_p04_gov_container{
         width: 100%;
         padding: 0;
-        padding-top: 20px; 
+        padding-top: 40px; 
     }
 
     .div_p04_gov_card{
         flex-direction: column;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+
+    .div_p04_gov_card:not(:last-child){
+        border-bottom: 1px dashed #ccc;
     }
 
     .div_p04_gov_card img{
@@ -127,5 +139,6 @@
 
     .div_04_gov_cardRight p{
         padding-left: 0;
+        padding-top: 10px;
     }
 }
