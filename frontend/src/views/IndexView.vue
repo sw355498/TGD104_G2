@@ -1,18 +1,19 @@
 <template>
   <div class="home">
 
-    <indexChatbot msg="Welcome to Your Vue.js App"/>
+    <h1>Welcome to Your Vue.js App</h1>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import indexChatbot from '@/components/indexChatbot.vue'
 
+// 要外掛聊天機器人
+// @ is an alias to /src
+// import indexChatbot from '@/components/indexChatbot.vue'
 export default {
   name: 'HomeView',
   components: {
-    indexChatbot
+    // indexChatbot
   }
 }
 </script>
