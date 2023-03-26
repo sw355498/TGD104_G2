@@ -1,60 +1,44 @@
 /** Background **/
-body {
-    background-image: url("../img/index/bg.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-header{
-    background: transparent;
-    nav{
-        +hr{
-            margin-left: auto;
-            height: 2px;
-            background-color: $text_color;
-            width: 85%;
-            box-shadow: 0 0 12px $bannerFont_color;
-        }
-    }
-}
+.body_index_block {
+  background-image: url("../img/index/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 
-/** Top Dynamic **/
-section {
+  /** Top Dynamic **/
+  section {
     background-color: transparent;
     height: 90vh;
     padding-top: 20vh;
     text-align: center;
 
-    h2{
-        text-transform: uppercase;
-        text-align: center;
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+      color: $text_color;
+      font-family: "outfit";
+      font-weight: 100;
+    }
+
+    #banner_index_dynamicText {
+      p {
+        font-size: 120px;
         color: $text_color;
-        font-family: 'outfit';
-        font-weight: 100;
+        text-shadow: 0 0 24px $bannerFont_color;
+        letter-spacing: 5px;
+        text-align: center;
+        margin: 0;
+        line-height: 10rem;
+      }
+
+      & + a {
+        display: inline-block;
+        margin: 100px 0;
+      }
     }
+  }
 
-    #banner_index_dynamicText{
-        p{
-            font-size: 120px;
-            color: $text_color;
-            text-shadow: 0 0 24px $bannerFont_color;
-            letter-spacing: 5px;
-            text-align: center;
-            margin: 0;
-            line-height: 10rem;
-        }
-
-        & + a{
-            display: inline-block;
-            margin: 100px 0;
-        }
-    }
-
-}
-
-
-
-/* BackTop Button */
-.backTop_index_btn {
+  /* BackTop Button */
+  .backTop_index_btn {
     background-color: $sec_color;
     display: flex;
     justify-content: center;
@@ -69,135 +53,148 @@ section {
     position: fixed;
     bottom: 20%;
     right: 3%;
-    opacity: .8;
-}
+    opacity: 0.8;
+  }
 
-/* BackTop Button */
-.robot_index_btn {
+  /* BackTop Button */
+  .robot_index_btn {
     position: fixed;
     bottom: 5%;
     right: 1%;
-}
+  }
 
-/** Main Block **/
-main {
+  /** Main Block **/
+  main {
     margin: 0 auto;
     width: 1200px;
 
     .article_index_block,
     .news_index_block,
-    .youtube_index_block{
-        text-align: center;
-        h1{
-            color: $title_color;
-        }
+    .youtube_index_block {
+      text-align: center;
+      margin-bottom: 100px;
+      h1 {
+        color: $title_color;
+      }
 
-        hr {
-            display: inline-block;
-            width: 50%;
-            margin: 0 auto;
-            height: 2px;
-            background-image: linear-gradient(to right, #ffffff00, #ffffff, #ffffff00);
-            box-shadow: 2px 4px 4px #FBD1FF40;
-            border: none;
-            position: relative;
-        }
+      hr {
+        display: inline-block;
+        width: 50%;
+        margin: 0 auto;
+        height: 2px;
+        background-image: linear-gradient(
+          to right,
+          #ffffff00,
+          #ffffff,
+          #ffffff00
+        );
+        box-shadow: 2px 4px 4px #fbd1ff40;
+        border: none;
+        position: relative;
+      }
     }
 
-    .article_index_block{
-        padding: 0 101px;
-        margin-bottom: 120px;
+    .article_index_block {
+      padding: 0 101px;
+      margin-bottom: 120px;
 
-        ul{
-            @include indexGrid(2);
-            li{
-                width: 100%;
-                border: 2px solid $text_color;
-                padding: 40px 30px;
-                border-radius: 10px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: left;
-    
-                .fontT26_index_article {
-                    @include fontT26_index_article();
-                }
-                
-                .fontP18_index_article {
-                    @include fontP18_index_article();
-                }
-            }
+      ul {
+        @include indexGrid(2);
+        li {
+          width: 100%;
+          border: 2px solid $text_color;
+          padding: 40px 30px;
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: left;
+
+          .fontT26_index_article {
+            @include fontT26_index_article();
+          }
+
+          .fontP18_index_article {
+            @include fontP18_index_article();
+          }
         }
+      }
     }
-    .news_index_block{
-        margin-bottom: 120px;
+    .news_index_block {
+      margin-bottom: 120px;
     }
     .news_index_block,
-    .youtube_index_block{
-        ul{
-            @include indexGrid(3);
+    .youtube_index_block {
+      ul {
+        @include indexGrid(3);
 
-            .card_index_block{
-                width: 100%;
-                border-radius: 10px;
-                figure{
-                    width: 100%;
-                    overflow: hidden;
-                    text-align: left;
-                    img{
-                        display: block;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 5px;
-                    }
-                    figcaption{
-                        display: inline-block;
-                        margin-top: 20px;
-                        @include btnStyle(31px, 0.875rem, 4px 8px)
+        .card_index_block {
+          width: 100%;
+          border-radius: 10px;
+          figure {
+            width: 100%;
+            overflow: hidden;
+            text-align: left;
+            img {
+              display: block;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 5px;
+            }
+            figcaption {
+              display: inline-block;
+              margin-top: 20px;
+              @include btnStyle(31px, 0.875rem, 4px 8px);
+            }
+          }
+          .text-block {
+            .fontT26_index_article {
+              @include fontT26_index_article();
+            }
 
-                    }
-                }
-                .text-block{
-                    .fontT26_index_article {
-                        @include fontT26_index_article();
-                    }
-                    
-                    .fontP14_index_article {
-                        @include fontP14_index_article();
-                    }
+            .fontP14_index_article {
+              @include fontP14_index_article();
+            }
 
-                    .fontDate_index_article{
-                        font-family: 'Outfit';
-                        color: $text_color;
-                        text-align: left;
-                    }
-                }
+            .fontDate_index_article {
+              font-family: "Outfit";
+              color: $text_color;
+              text-align: left;
             }
-            .vedioYT_index_block {
-                position: relative;
-                width: 100%;
-                height: 0;
-                padding-bottom: 56.25%;
-                
-                iframe{
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            p{  
-                margin-top: 20px;
-                text-align: center;
-            }
+          }
         }
-        a{
-            background: $title_color;
-            color: $third_color;
+        .vedioYT_index_block {
+          position: relative;
+          width: 100%;
+          height: 0;
+          padding-bottom: 56.25%;
+
+          iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
         }
+        p {
+          margin-top: 20px;
+          text-align: center;
+        }
+      }
+      a {
+        background: $title_color;
+        color: $third_color;
+      }
     }
+  }
+  .footer_index_block {
+    background-image: url("./../../img/index/footer.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+  }
 }
