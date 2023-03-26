@@ -1,35 +1,26 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-Tw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="全容君,黃資蓉,阮炫瑞,林欣妤,詹皓丞,張家恩">
-    <meta name="keywords" content="詐騙,防詐騙,防詐教育,防詐騙教育,防詐騙模擬體驗,防詐討論版,防詐騙討論版,常見詐騙手段,詐騙回報,詐騙網站檢舉,詐騙親身經歷,一頁式購物詐騙,語音詐騙,簡訊詐騙,電話詐騙,交友詐騙">
-    <meta name="description" content="包含親身經歷詐騙及身旁親友被騙的切深之痛，促使我們成立這個網站，相信社會互助也是防治詐騙的一環「我們希望大家理解，這些騙術在瞄準的是每一個人身上都有的一些特性，或是弱點，人人都可能不小心落入陷阱。」；【防詐教育】：防範列出各種詐騙手法供比對，並設計防詐小測驗，讓相關知識以好玩的方式傳遞給民眾；【被詐怎麼辦】，如不幸遇到詐騙提供各申訴管道，也提供客服機器人一步步引導民眾至相關頁面了解可以做些什麼">
-    <meta name="generator" content="Vue,HTML,Sass,JavaScript">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>詐知就好</title>
-    <link rel="stylesheet" href="../../assets/Sass/css/style.css">
-
-    <!-- jsgrid 基礎樣式 CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css">
-    <!-- jsgrid 主題 CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css">
-    <style>
-        .fa-sharp{
-            transform: translate(-50%, -50%);
-        }
-    </style>
-</head>
-<body class="d-flex">
-
-
-    <!-- BootStrap JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- JQuery 3.6.4 CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- jsgrid js CDN -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
-    <script>
+<template>
+    <div class="d-flex">
+        <LeftNav/>
+        <div class="b_content">
+            <h2 class="h1_component">會員管理</h2>
+            <div class="d-flex justify-content-end my-2">
+                <button class="small_button btn_bUser_addUser me-2">新增會員</button>
+                <div class="position-relative">
+                    <i class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"></i>
+                    <input type="text">
+                </div>
+            </div>
+            <div id="jsGrid"></div>
+        </div>
+    </div>
+</template>
+<script>
+import $ from 'jquery'
+import 'jsgrid'
+import LeftNav from '../../components/b_leftNav.vue';
+export default {
+    
+    mounted() {
         let id = 0, user = 111
         var clients = [
             { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
@@ -56,7 +47,7 @@
             { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
         ];
      
-        $("#jsGrid").jsGrid({
+        $('#jsGrid').jsGrid({
             width: "100%",
      
             inserting: false, //添加
@@ -77,8 +68,7 @@
             pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
             pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
 
-
-            data: clients,
+                        data: clients,
             fields: [
                 { 
                     name: 'ID',
@@ -140,7 +130,7 @@
                 },
             ]
         });
-
+        
         function operate(){
             let thisID = this.closest('tr').firstElementChild.innerHTML
             switch (this.innerHTML){
@@ -158,6 +148,14 @@
                     break
             }
         }
-    </script>
-</body>
-</html>
+    },
+    components: {
+        LeftNav
+    }
+}
+</script>
+<style>
+        .fa-sharp{
+            transform: translate(-50%, -50%);
+        }
+</style>

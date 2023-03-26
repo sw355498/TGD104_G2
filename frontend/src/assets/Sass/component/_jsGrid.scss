@@ -1,11 +1,14 @@
 /*------ jsgrid ------*/
 #jsGrid{
     text-align: center;
-
+    border-style: solid;
+    border-color: $text_color;
+    th,
     td{
         overflow : hidden;
         white-space: nowrap;
         text-overflow:ellipsis;
+        border: 1px solid $text_color;
     }
 
     .jsgrid-pager,
@@ -32,7 +35,11 @@
         }
     }
     .small_button{
-        background: #ffffff;
-        color: #033159;
+        background: $text_color;
+        color: $sec_color;
+
+        &:hover{
+            background: $title_color;
+        }
     }
 }
