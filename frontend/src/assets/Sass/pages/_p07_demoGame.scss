@@ -1,5 +1,4 @@
 
-
 html,body{
     background-color: var(--background_color);
     font-family: 'Noto Sans TC','Outfit', sans-serif;
@@ -8,7 +7,7 @@ html,body{
 
 
 
-/* 中間部分 */
+/* 首頁中間部分 */
 
 .logo{
     display: block;
@@ -81,9 +80,6 @@ section .start{
     height: 50px;
     position:relative;
    
-    
-    
-   
 }
 
 section .game_start {
@@ -137,9 +133,81 @@ background-size: 15% 51%;
 
 background-repeat: no-repeat;
 
+}
 
-    
+
+/* 測驗頁面 */
+
+section .quiz_background{
+
+    width: 1154px;
+    height: 835px;
+    border:5px solid var(--main_color);
+    background-color: var(--sec_color) ;
+    margin-left: 150px;
+    padding-left: 100px;
+    margin-top: 150px;
+    margin-bottom: 50px;
 
 }
 
+section .p07_demoGame_01_question_number{
+    width: 340px;
+    height: 80px;
+    margin: 65px 370px;
+    /* background-color: red; */
+    /* border:1px solid white; */
+}
+
+section .p07_demoGame_01_question_number .quiz_number_frame{
+    clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0 49%);
+    width: 340px;
+    height: 80px;
+    background-color: var(--sec_color);
+    border:5px solid var(--main_color);
+    background:linear-gradient(153deg,#033159 38px,  #13E5F2 0) bottom right,
+              linear-gradient(333deg,#033159 38px, #13E5F2 0) top left;
+
+    background-size: 25% 50%;
+    background-repeat: no-repeat;
+    border: solid 15px #13E5F2;
+    
+}
+
+section .p07_demoGame_01_question_number .quiz_question_num{
+    text-align: center;
+    line-height: 80px;
+    color:var(--text_color);
+}
+
+section .p07_demoGame_01_quiz_view{
+    border:1px solid var(--main_color);
+    width:1015px;
+    height: 480px;
+    border: 1px solid white;
+   
+}
+
+section .p07_demoGame_01_quiz_view .p07_demoGame_01_quiz_question_title{
+    width: 915px;
+    height:60px;
+    background-color:var( --background_color);
+    border: 3px solid var( --main_color);
+    margin:0 auto;
+    margin-top: 35px;
+
+}
+
+section .p07_demoGame_01_quiz_view .p07_demoGame_01_quiz_question_title p{
+    margin:0;
+    text-align:center;
+    line-height:60px;
+    font-size:30px;
+
+  
+}
+
+section .p07_demoGame_01_quiz_view img{
+    
+}
 
