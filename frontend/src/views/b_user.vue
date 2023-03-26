@@ -17,7 +17,7 @@
 <script>
 import $ from 'jquery'
 import 'jsgrid'
-import LeftNav from '../../components/b_leftNav.vue';
+import LeftNav from '../components/b_leftNav.vue';
 export default {
     
     mounted() {
