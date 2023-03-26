@@ -1,0 +1,141 @@
+<template>
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-header">
+            <slot name="header">
+              <button class="modal-default-button" @click="$emit('close')">
+                X
+              </button>
+            </slot>
+          </div>
+
+          <div class="modal-body">
+            <div class="modal-body">
+              <div id="tabs">
+                <div
+                  v-for="(tab, tab_index) in tabs"
+                  :class="{ tab: true, active: active_tab == tab_index }"
+                  @click="changeTab(tab_index)"
+                >
+                  <div class="tab-label">{{ tab.label }}</div>
+                </div>
+              </div>
+
+              <hr class="hr_p08_user_login" />
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <div
+              v-for="(tab, tab_index) in tabs"
+              :class="{ content: true, active: active_tab == tab_index }"
+            >
+              <slot name="footer">
+                <div class="div_p08_user_textCenter">【使用以下帳戶連結】</div>
+
+                <div class="div_p08_user_loginType">
+                  <button class="medium_button btn_p08_user_loginType">
+                    FB
+                  </button>
+                  <button class="medium_button btn_p08_user_loginType">
+                    LINE
+                  </button>
+                  <button class="medium_button btn_p08_user_loginType">
+                    GOOGLE
+                  </button>
+                </div>
+                <br />
+                <div class="div_p08_user_textCenter">【或註冊一個新帳號】</div>
+
+                 <p v-if="tab_index === 0">
+                  <p class="text_title">帳號/ Account <br /></p>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入E-mail作為登入帳號" v-model="accountValue">
+                  <p class="text_title">密碼/ Password <br /></p>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入6個以上字元的密碼" v-model="passwordValue">
+                  <p class="text_title">再次輸入密碼/ Password <br /></p>
+                  <input class="input_p08_user_login" type="text" placeholder="請再次輸入密碼" v-model="confirmPasswordValue">
+                  <p class="text_title">顯示名稱/ Name <br /></p>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入顯示名稱" v-model="displayNameValue">
+                  <button class="medium_button btn_p08_user_loginType" @click="handleSubmit">確定註冊 Sign up</button>
+                </p>
+                <p v-else>
+                  <p class="text_title">帳號/ Account <br /></p>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入E-mail作為登入帳號" />
+                  <p class="text_title">密碼/ Password <br /></p>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入6個以上字元的密碼" />
+                  <button class="medium_button btn_p08_user_loginType">確定登入 Log in</button>
+                </p>
+         
+              </slot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</template>
+
+<script>
+export default {
+  name: "Modal",
+  data() {
+    return {
+      active_tab: 0,
+      tabs: [
+        {
+          label: "註冊會員 | Sign up",
+          content: ``,
+          props: {
+
+            accountTitle: {
+              type: String,
+              default: "Account / 帳號",
+              validate: "required"
+            },
+            accountType: {
+              type: String,
+              default: "text",
+            },
+            passwordTitle: {
+              type: String,
+              default: "Password / 密碼",
+            },
+            displayNameTitle: {
+              type: String,
+              default: "顯示名稱",
+            },
+
+          },
+        },
+
+        {
+          label: "登入會員 | Log in", 
+        },
+      ],
+    };
+  },
+  methods: {
+    changeTab(tab_index) {
+      this.active_tab = tab_index;
+    },
+    close() {
+      this.$emit("close");
+    },
+    handleSubmit(){
+      console.log(
+      this.accountValue,
+        this.passwordValue,
+        this.confirmPasswordValue,
+        this.displayNameValue,);
+    }
+  },
+};
+</script>
+
+<style scoped>
+@import url("../assets/CSS/style.css");
+@import url("../assets/CSS/component.css");
+@import url("../assets/CSS/pages/p08_user.css");
+</style>
