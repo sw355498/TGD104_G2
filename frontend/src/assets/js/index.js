@@ -52,7 +52,6 @@ function includeHTML() {
 
 includeHTML();
 
-
 /**
  * navbar hamburger change
  */

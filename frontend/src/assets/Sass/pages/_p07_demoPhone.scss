@@ -1,0 +1,64 @@
+.body_p07_demoPhone_block {
+  background-image: url("../../img/p07_demo/p07_demoPhone/p07_demoPhone_bg.png");
+  background-color: $background_color;
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    .robot_p07_demoPhone_phone {
+      /* CSS talk bubble */
+      .talk-bubble {
+        margin: 10px;
+        display: inline-block;
+        position: relative;
+        width: 200px;
+        height: auto;
+        background-color: $text_color;
+      }
+      .round {
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+      }
+
+      .tri-right.left-in:after {
+        content: " ";
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: -20px;
+        right: auto;
+        top: 50%;
+        bottom: auto;
+        border: 12px solid;
+        border-color: $text_color $text_color transparent transparent;
+      }
+      /* talk bubble contents */
+      .talktext {
+        text-align: center;
+        padding: 1rem;
+        p {
+          text-align: left;
+          line-height: 1.7rem;
+          letter-spacing: 0.25rem;
+          font-size: $fontSize20;
+          font-weight: fontWeight500;
+          color: $sec_color;
+        }
+      }
+    }
+
+    .phoneLayout_p07_demoPhone_phone {
+      background-image: url("../../img/p07_demo/p07_demoPhone/p07_demoPhone_iPhoneSilver.png");
+      background-repeat: no-repeat;
+      padding: 20px;
+      img {
+        border-radius: 60px;
+      }
+    }
+    .volume_p07_demoPhone_phone {
+      display: flex;
+      margin: 50px;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.body_p05_faq_block {
+  background-image: url("../../img/p05_faq/bg_p05_faq.png");
+  h1 {
+    color: $text_color;
+    text-align: center;
+    letter-spacing: 2rem;
+    margin: 100px;
+  }
+  main {
+    margin: 0 auto;
+    width: $w1200;
+    label {
+      @include flex_vhCenter();
+      input {
+        height: 38px;
+        width: 50%;
+      }
+    }
+    .question_p05_faq_block {
+      ul {
+        @include indexGrid(2);
+        li {
+          list-style: none;
+          box-sizing: border-box;
+          width: 100%;
+          background-color: $title_color;
+          color: $sec_color;
+          padding: 20px;
+          border-radius: 10px;
+          margin-bottom: 10px;
+          h4 {
+            text-align: justify;
+          }
+          p {
+            color: $sec_color;
+          }
+        }
+      }
+    }
+  }
+}
