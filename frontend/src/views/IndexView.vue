@@ -3,7 +3,7 @@
     
 
     <!--Top Dynamic-->
-    <section>
+    <section >
       <!-- Banner -->
       <h2>prevent</h2>
       <div id="banner_index_dynamicText">
@@ -23,9 +23,10 @@
       </div>
 
       <!-- 機器人 -->
-      <div class="robot_index_btn">
+      <div class="robot_index_btn" >
         <!-- <img src="../assets/img/icon/robot.svg" alt="" /> -->
-        <img src="../assets/img/icon/robot.png" alt="robot">
+        <img src="../assets/img/icon/robot.png" alt="robot" @click="showComponent = true;">
+        <button  @click="closeComponent">關閉</button>
       </div>
     </section>
 
@@ -163,10 +164,10 @@
         </ul>
         <a class="big_button" href="../views/pages/p02_teach.html">查看更多</a>
       </article>
-      <!-- 聊天機器人 -->
-      <indexChatbot/>
     </main>
     <!--Main Block end -->
+    <!-- 聊天機器人 -->
+    <indexChatbot v-if="showComponent" />
 
     <!-- Footer -->
     <footer w3-include-html="./footer.html" class="footer_index_block"></footer>
@@ -176,12 +177,38 @@
 
 <script>
 // 要外掛聊天機器人
+import { ref } from 'vue'
 // @ is an alias to /src
 import indexChatbot from '@/components/indexChatbot.vue'
+
 export default {
-  name: "HomeView",
   components: {
     indexChatbot
   },
-};
+  setup() {
+    const showComponent = ref(false)
+    let clickListener
+
+    function listenClickEvent() {
+      clickListener = () => {
+        showComponent.value = false
+        document.removeEventListener('click', clickListener)
+      }
+      document.addEventListener('click', clickListener)
+    }
+
+    function closeComponent() {
+      if (showComponent.value) {
+        showComponent.value = false
+        document.removeEventListener('click', clickListener)
+      }
+    }
+
+    return {
+      showComponent,
+      listenClickEvent,
+      closeComponent
+    }
+  }
+}
 </script>
