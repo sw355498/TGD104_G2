@@ -1,5 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 const webpack = require("webpack")
+const path = require('path')
 
 module.exports = defineConfig({
     transpileDependencies: true,
@@ -14,20 +15,23 @@ module.exports = defineConfig({
         ]
     },
     chainWebpack: config => {
-        const rule = config.module.rule('svg');
+      // 先刪除預設的svg配置
+      config.module.rules.delete("svg")
+      
+      // 新增 svg-sprite-loader 設定
+      config.module
+        .rule("svg-sprite-loader") 
+        .test(/\.svg$/)
+        .include
+        .add(path.resolve(__dirname, "src/assets/icon"))
+        .end()
+        .use("svg-sprite-loader")
+        .loader("svg-sprite-loader")
+        .options({ symbolId: "[name]" })
         
-        rule.uses.clear();
-    
-        rule
-          .use('babel-loader')
-            .loader('babel-loader')
-            .end()
-          .use('vue-svg-loader')
-            .loader('vue-svg-loader')
-            .options({
-              svgo: {
-                plugins: [{ removeDimensions: true }, { removeViewBox: false }]
-              }
-            })
-      }
+      // 修改 images-loader 配置
+      config.module
+        .rule("images")
+        .exclude.add(path.resolve(__dirname, "src/assets/icon"))
+    }
 })
