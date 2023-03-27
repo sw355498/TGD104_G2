@@ -41,6 +41,7 @@
           <li class="textArticle1_index_block" style="width: 100%">
             <div>
               <!-- <img src="../assets/img/icon/mail_silent.svg" alt="" /> -->
+              <svg><use xlink:href="mail_silent" /></svg>
             </div>
             <p class="fontT26_index_article">
               不點擊不明簡訊或是 E-mail 裡的網址
@@ -52,6 +53,8 @@
           </li>
           <li class="textArticle1_index_block" style="width: 100%">
             <!-- <div><img src="../assets/img/icon/search.svg" alt="" /></div> -->
+            <svg><use xlink:href="search" /></svg>
+
             <p class="fontT26_index_article">找尋正確管道且小心求證</p>
             <p class="paragraph fontP18_index_article">
               假使收到訊息不放心或很想知道真相，絕對不要貪圖方便而點擊訊息內的網址，應該另外打開官方APP，或是自己Google連線到官方網站。然後登入驗證。當然，登入以後就會發現根本沒有強迫重新驗證這回事
