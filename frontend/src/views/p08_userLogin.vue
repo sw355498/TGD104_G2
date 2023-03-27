@@ -1,6 +1,41 @@
 <template>
-  <div class="home">
+ <div>
+    <button
+      type="button"
+      
+      @click="showModal"
+    >
+      登入/註冊會員
+    </button>
 
-    <h1>Welcome to Your Vue.js App</h1>
+    <Modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
   </div>
 </template>
+
+<script>
+import Modal from '@/components/userLogin.vue'
+
+  export default {
+    name: 'App',
+    components: {
+      Modal,
+    },
+    data() {
+      return {
+        isModalVisible: false,
+      };
+    },
+    methods: {
+      showModal() {
+        this.isModalVisible = true;
+      },
+      closeModal() {
+        this.isModalVisible = false;
+      }
+    }
+  };
+</script>
+

@@ -8,59 +8,52 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: table;
     transition: opacity 0.3s ease;
+
+    .modal-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+
+        .modal-container {
+            width: 500px;
+            margin: 0px auto;
+            padding: 20px 30px;
+            background-color: $background_color;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px $main_color;
+            transition: all 0.3s ease;
+            color: $text_color;
+            border-radius: 5px;
+
+            .userLogin_modal_body {
+                margin: 20px 0 0;
+            }
+
+            .userLogin_modal_header {
+                float: right;
+            }
+
+            .userLogin_modal_footer {
+                justify-content: flex-start;
+            }
+
+            .modal-default-button {
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                width: 30px;
+                background-color: none;
+
+            }
+        }
+
+    }
 }
 
-.modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.modal-container {
-    width: 500px;
-    margin: 0px auto;
-    padding: 20px 30px;
-    background-color: var(--background_color);
-    border-radius: 2px;
-    box-shadow: 0 2px 8px var(--main_color);
-    transition: all 0.3s ease;
-    color: var(--text_color);
-    border-radius: 5px;
-}
-
-.modal-header h3 {
-    margin-top: 0;
-}
-
-.modal-body {
-    margin: 20px 0;
-}
-
-.modal-header {
-    float: right;
-}
-
-.modal-footer{
-    justify-content: flex-start;
-}
-
-.modal-default-button {
-    /* display: flex;
-    width: 100%;
-    align-items: end;
-
-    justify-content: flex-end; */
-    cursor: pointer;
-    border: 0px;
-    /* float: right; */
-}
 
 /*
    * The following styles are auto-applied to elements with
    * transition="modal" when their visibility is toggled
    * by Vue.js.
-   *
-   * You can easily play with the modal transition by editing
-   * these styles.
    */
 
 .modal-enter-from,
@@ -75,55 +68,53 @@
 }
 
 .hr_p08_user_login {
-    border: 1px solid var(--main_color);
+    border: 1px solid $main_color;
     display: block;
     width: 100%;
     margin: 0;
 }
 
-.input_p08_user_login{
+.input_p08_user_login {
     display: block;
     width: 100%;
     margin: 5px 0 20px;
 }
 
-.div_p08_user_loginType{
-    display: inline-flex;
+.div_p08_user_loginType {
+    display: flex;
     flex-wrap: nowrap;
     width: 100%;
-    align-items: center;
+    justify-content: center;
+
+    .btn_p08_user_loginType {
+        flex-grow: 1;
+        flex-basis: 70px;
+        margin: 0 15px 10px;
+        align-items: center;
+    }
 }
 
-.btn_p08_user_loginType{
-    flex-grow: 1;
-    flex-basis: 100px;
-    margin: 0 15px 10px;
-    flex-shrink: 0;
-    align-items: center;
-}
-.btn_p08_user_tab{
 
+.btn_emphasiseColor {
+    background-color: $main_color;
+    color: $btn_hover;
 }
 
-.btn_emphasiseColor{
- background-color: var(--main_color);
- color: var(--btn_hover);
-}
-
-.div_p08_user_textCenter{
+.div_p08_user_textCenter {
     text-align: center;
     width: 100%;
     margin: 15px 0;
-    border-top: 2px dashed var(--sec_color);
-    border-bottom: 2px dashed var(--sec_color);
+    border-top: 2px dashed $sec_color;
+    border-bottom: 2px dashed $sec_color;
     font-size: 14px;
-    color: var(--title_color);
-}
-.a_p08_user_link{
-    font-size: 14px;
-    color: var(--title_color);
-}
-.lightBgm{
-    background-color: var(--btn_hover);
+    color: $title_color;
 }
 
+.a_p08_user_link {
+    font-size: 14px;
+    color: $title_color;
+}
+
+.lightBgm {
+    background-color: $btn_hover;
+}
