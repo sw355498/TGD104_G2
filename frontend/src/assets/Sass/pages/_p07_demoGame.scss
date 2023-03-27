@@ -1,213 +1,236 @@
-
-html,body{
+html, body {
     background-color: var(--background_color);
     font-family: 'Noto Sans TC','Outfit', sans-serif;
-}
-
-
-
-
-/* 首頁中間部分 */
-
-.logo{
+  }
+  
+  /* 首頁中間部分 */
+  
+  .logo {
     display: block;
     margin: 130px auto 40px;
-    
-}
-
-.quiz_index{
-    width: 1154px;
-    height: 835px;
-    border:5px solid var(--main_color);
-    background-color: var(--sec_color) ;
-    margin-left: 150px;
-    padding-left: 100px;
-    
-}
-
-.quiz_index .quiz_title{
-    color:var(--text_color);
-    line-height: 6rem;
-    margin-top: 150px;
-    font-size:65px;
-    margin-bottom: 60px;
-    letter-spacing: 1rem;
-    
-}
-
-section .quiz_summary{
-    width:1000px;
-    border: 3px solid var(--main_color);
-    height: 200px;
-
-}
-
-section .quiz_summary .m{
-    width: 100px;
-    /* border:1px solid white; */
-    height: 200px;
-    background: linear-gradient(
-        45deg,
-            rgba(19, 229, 242, 1) 25%,
-            transparent 25%,
-            transparent 75%,
-            rgba(19, 229, 242, 1) 75%,
-                rgba(19, 229, 242, 1) 100%
-        ),
-      linear-gradient(
-      45deg,
-      rgba(19, 229, 242, 1) 25%,
-      transparent 25%,
-      transparent 75%,
-      rgba(19, 229, 242, 1) 75%,
-          rgba(19, 229, 242, 1) 100%
-  );
-  background-position: 0 0, 50px 10px;
-        background-size: 20px 20px;
-
-}
-
-section .quiz_summary h2{
-    width: 800px;
-    font-size:1.3rem;
-    margin-left: 120px;
-    color:var(--text_color);
-}
-
-section .start{
-    margin: 70px 0 240px 450px;
-    width: 180px;
-    height: 50px;
-    position:relative;
-   
-}
-
-section .game_start {
-    clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
-    width: 165px;
-    height: 45px;
-    background-color: var(--main_color);
-    border: 1px solid var(--sec_color);
-    z-index:10;
-    position: absolute;
-
-    
-    
-}
-
-section .game_start a{
-    width: 180px;
-    height: 54px;
-    color:var(--sec_color);
-    overflow:hidden;
-    font-size:20px;
-    margin-left: -20px;
-    margin-bottom: -20px;
-    position:absolute;
-    left: 0;
-    top: 10px;
-    
-    
-}
-
-section .game_start a img{
-   width: 30px;
-   position: absolute;
-   left: 137px;
-   top: -1px;
-}
-
-section .start .button_frame{
-    z-index: 1;
-    width: 165px;
-    height: 45px;
-    border: solid 1px #13E5F2;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
-    background:linear-gradient(-40deg,#13E5F2 17px, #033159  0) bottom right;
-
-
-background-size: 15% 51%;
-
-background-repeat: no-repeat;
-
-}
-
-
-/* 測驗頁面 */
-
-section .quiz_background{
-
-    width: 1154px;
-    height: 835px;
-    border:5px solid var(--main_color);
-    background-color: var(--sec_color) ;
-    margin-left: 150px;
-    padding-left: 100px;
-    margin-top: 150px;
-    margin-bottom: 50px;
-
-}
-
-section .p07_demoGame_01_question_number{
-    width: 340px;
-    height: 80px;
-    margin: 65px 370px;
-    /* background-color: red; */
-    /* border:1px solid white; */
-}
-
-section .p07_demoGame_01_question_number .quiz_number_frame{
-    clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0 49%);
-    width: 340px;
-    height: 80px;
-    background-color: var(--sec_color);
-    border:5px solid var(--main_color);
-    background:linear-gradient(153deg,#033159 38px,  #13E5F2 0) bottom right,
-              linear-gradient(333deg,#033159 38px, #13E5F2 0) top left;
-
-    background-size: 25% 50%;
-    background-repeat: no-repeat;
-    border: solid 15px #13E5F2;
-    
-}
-
-section .p07_demoGame_01_question_number .quiz_question_num{
-    text-align: center;
-    line-height: 80px;
-    color:var(--text_color);
-}
-
-section .p07_demoGame_01_quiz_view{
-    border:1px solid var(--main_color);
-    width:1015px;
-    height: 480px;
-    border: 1px solid white;
-   
-}
-
-section .p07_demoGame_01_quiz_view .p07_demoGame_01_quiz_question_title{
-    width: 915px;
-    height:60px;
-    background-color:var( --background_color);
-    border: 3px solid var( --main_color);
-    margin:0 auto;
-    margin-top: 35px;
-
-}
-
-section .p07_demoGame_01_quiz_view .p07_demoGame_01_quiz_question_title p{
-    margin:0;
-    text-align:center;
-    line-height:60px;
-    font-size:30px;
-
+  }
   
-}
+  .quiz_index {
+    width: 1154px;
+    height: 835px;
+    border: 5px solid var(--main_color);
+    background-color: var(--sec_color);
+    margin-left: 150px;
+    padding-left: 100px;
+  
+    .quiz_title {
+      color: var(--text_color);
+      line-height: 6rem;
+      margin-top: 150px;
+      font-size: 65px;
+      margin-bottom: 60px;
+      letter-spacing: 1rem;
+    }
+  }
+  
+  section {
+    .quiz_summary {
+      width: 1000px;
+      border: 3px solid var(--main_color);
+      height: 200px;
+  
+      .m {
+        width: 100px;
+        /* border:1px solid white; */
+        height: 200px;
+        background: linear-gradient(45deg, rgba(19, 229, 242, 1) 25%, transparent 25%, transparent 75%, rgba(19, 229, 242, 1) 75%, rgba(19, 229, 242, 1) 100%), linear-gradient(45deg, rgba(19, 229, 242, 1) 25%, transparent 25%, transparent 75%, rgba(19, 229, 242, 1) 75%, rgba(19, 229, 242, 1) 100%);
+        background-position: 0 0, 50px 10px;
+        background-size: 20px 20px;
+      }
+  
+      h2 {
+        width: 800px;
+        font-size: 1.3rem;
+        margin-left: 120px;
+        color: var(--text_color);
+      }
+    }
+  
+    .start {
+      margin: 70px 0 240px 450px;
+      width: 180px;
+      height: 50px;
+      position: relative;
+    }
+  
+    .game_start {
+      clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
+      width: 165px;
+      height: 45px;
+      background-color: var(--main_color);
+      border: 1px solid var(--sec_color);
+      z-index: 10;
+      position: absolute;
+  
+      a {
+        width: 180px;
+        height: 54px;
+        color: var(--sec_color);
+        overflow: hidden;
+        font-size: 20px;
+        margin-left: -20px;
+        margin-bottom: -20px;
+        position: absolute;
+        left: 0;
+        top: 10px;
+  
+        img {
+          width: 30px;
+          position: absolute;
+          left: 137px;
+          top: -1px;
+        }
+      }
+    }
+  
+    .start .button_frame {
+      z-index: 1;
+      width: 165px;
+      height: 45px;
+      border: solid 1px #13E5F2;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
+      background: linear-gradient(-40deg, #13E5F2 17px, #033159 0) bottom right;
+      background-size: 15% 51%;
+      background-repeat: no-repeat;
+    }
+  
+    .quiz_background {
+      width: 1154px;
+      height: 835px;
+      border: 5px solid var(--main_color);
+      background-color: var(--sec_color);
+      margin-left: 150px;
+      padding-left: 100px;
+      margin-top: 150px;
+      margin-bottom: 50px;
+    }
+  
+    .p07_demoGame_01_question_number {
+      width: 340px;
+      height: 80px;
+      margin: 65px 370px;
+  
+      /* background-color: red; */
+      /* border:1px solid white; */
+  
+      .quiz_number_frame {
+        clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0 49%);
+        width: 340px;
+        height: 80px;
+        background-color: var(--sec_color);
+        border: 5px solid var(--main_color);
+        background: linear-gradient(153deg, #033159 38px, #13E5F2 0) bottom right, linear-gradient(333deg, #033159 38px, #13E5F2 0) top left;
+        background-size: 25% 50%;
+        background-repeat: no-repeat;
+        border: solid 15px #13E5F2;
+      }
+  
+      .quiz_question_num {
+        text-align: center;
+        line-height: 80px;
+        color: var(--text_color);
+      }
+    }
+  
+    .p07_demoGame_01_quiz_view {
+      border: 1px solid var(--main_color);
+      width: 1015px;
+      height: 480px;
+      border: 1px solid white;
+  
+      .p07_demoGame_01_quiz_question_title {
+        width: 915px;
+        height: 60px;
+        background-color: var(--background_color);
+        border: 3px solid var(--main_color);
+        margin: 0 auto;
+        margin-top: 35px;
+  
+        p {
+          margin: 0;
+          text-align: center;
+          line-height: 60px;
+          font-size: 30px;
+        }
+      }
+  
+      img {}
+    }
+  }
+  
+  /* 測驗頁面 */
 
-section .p07_demoGame_01_quiz_view img{
-    
-}
+  section {
+    .quiz_background {
+      width: 1154px;
+      height: 835px;
+      border: 5px solid var(--main_color);
+      background-color: var(--sec_color);
+      margin-left: 150px;
+      padding-left: 100px;
+      margin-top: 150px;
+      margin-bottom: 50px;
+    }
+  
+    .p07_demoGame_01_question_number {
+      width: 340px;
+      height: 80px;
+      margin: 65px 370px;
+  
+      /* background-color: red; */
+      /* border:1px solid white; */
+  
+      .quiz_number_frame {
+        clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0 49%);
+        width: 340px;
+        height: 80px;
+        background-color: var(--sec_color);
+        border: 5px solid var(--main_color);
+        background: linear-gradient(153deg, #033159 38px, #13E5F2 0) bottom right, linear-gradient(333deg, #033159 38px, #13E5F2 0) top left;
+        background-size: 25% 50%;
+        background-repeat: no-repeat;
+        border: solid 15px #13E5F2;
+      }
+  
+      .quiz_question_num {
+        text-align: center;
+        line-height: 80px;
+        color: var(--text_color);
+      }
+    }
+  
+    .p07_demoGame_01_quiz_view {
+      border: 1px solid var(--main_color);
+      width: 1015px;
+      height: 480px;
+      border: 1px solid white;
+  
+      .p07_demoGame_01_quiz_question_title {
+        width: 915px;
+        height: 60px;
+        background-color: var(--background_color);
+        border: 3px solid var(--main_color);
+        margin: 0 auto;
+        margin-top: 35px;
+  
+        p {
+          margin: 0;
+          text-align: center;
+          line-height: 60px;
+          font-size: 30px;
+        }
+      }
+  
+      img {}
+    }
+  }
+  
 
