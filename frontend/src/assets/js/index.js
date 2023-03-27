@@ -1,21 +1,5 @@
-// const navbar = Vue.createApp({
-//   data() {
-//     return {
-//       menulink: [
-//         "最新消息",
-//         "防範詐騙教學",
-//         "回報可疑網站",
-//         "政府資訊連結",
-//         "詐騙FAQ",
-//         "團隊介紹",
-//       ],
-//       menubtn: ["DEMO體驗", "會員登入/註冊"],
-//     };
-//   },
-// }).mount("#app");
-
 /**
- * Render Header Footer
+ * Render Footer
  * @returns
  */
 function includeHTML() {
@@ -58,6 +42,12 @@ includeHTML();
 
 const hamburger = document.querySelector(".hamburger");
 const ulMobLinks = document.querySelector(".links_index_nav");
+const bodyTag = document.querySelector("body");
 hamburger.addEventListener("click", () => {
+  //新增DOM增加Active;
   ulMobLinks.classList.toggle("active");
+  //控制body鎖定高度
+  bodyTag.style.cssText = ulMobLinks.classList.contains("active")
+    ? "height:100vh;overflow-y:hidden;"
+    : "";
 });

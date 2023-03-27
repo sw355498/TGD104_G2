@@ -8,7 +8,7 @@
   }
   main {
     margin: 0 auto;
-    width: $w1200;
+    max-width: $w1200;
     label {
       @include flex_vhCenter();
       input {

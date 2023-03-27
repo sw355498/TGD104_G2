@@ -47,7 +47,8 @@
     &.active {
       height: 100vh;
       top: 0;
-      min-height: 550px;
+      // min-height: 700px;
+      overflow: auto;
     }
     li {
       margin: 30px 0;
