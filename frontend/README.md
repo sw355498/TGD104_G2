@@ -18,7 +18,9 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-
+###
+vue檔案引入svg圖檔方式
+<!-- <svg><use xlink:href="#svg圖檔名稱" /></svg> -->
 
 
 # 詐知就好
