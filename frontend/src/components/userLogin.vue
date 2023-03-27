@@ -1,18 +1,18 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask">
+    <div class="modal-mask" @click="$emit('close')">
       <div class="modal-wrapper">
-        <div class="modal-container">
-          <div class="modal-header">
+        <div class="modal-container" @click.stop>
+          <div class="userLogin_modal_header">
             <slot name="header">
-              <button class="modal-default-button" @click="$emit('close')">
+              <div class="modal-default-button" @click="$emit('close')">
                 X
-              </button>
+              </div>
             </slot>
           </div>
 
-          <div class="modal-body">
-            <div class="modal-body">
+          
+            <div class="userLogin_modal_body">
               <div id="tabs">
                 <div
                   v-for="(tab, tab_index) in tabs"
@@ -25,9 +25,9 @@
 
               <hr class="hr_p08_user_login" />
             </div>
-          </div>
+          
 
-          <div class="modal-footer">
+          <div class="userLogin_modal_footer">
             <div
               v-for="(tab, tab_index) in tabs"
               :class="{ content: true, active: active_tab == tab_index }"
@@ -58,7 +58,9 @@
                   <input class="input_p08_user_login" type="text" placeholder="請再次輸入密碼" v-model="confirmPasswordValue">
                   <p class="text_title">顯示名稱/ Name <br /></p>
                   <input class="input_p08_user_login" type="text" placeholder="請輸入顯示名稱" v-model="displayNameValue">
+                  <div class="div_p08_user_loginType">
                   <button class="medium_button btn_p08_user_loginType" @click="handleSubmit">確定註冊 Sign up</button>
+                  </div>
                 </p>
                 <p v-else>
                   <p class="text_title">帳號/ Account <br /></p>
@@ -134,8 +136,5 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url("../assets/CSS/style.css");
-@import url("../assets/CSS/component.css");
-@import url("../assets/CSS/pages/p08_user.css");
+<style lang="scss" scoped>
 </style>

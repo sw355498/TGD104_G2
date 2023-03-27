@@ -6,114 +6,101 @@
   box-sizing: border-box;
   position: absolute;
   width: 100%;
+  top: 0;
   z-index: 1000;
-}
+  .wrap_index_nav {
+    display: flex;
+    justify-content: space-between;
+    .member_index_nav {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      i {
+        color: $text_color;
+      }
+    }
+  }
+  .logo_index_nav {
+    line-height: 50px;
+    z-index: 1;
+  }
+  a {
+    text-decoration: none;
+    color: $text_color;
+  }
 
-.wrap_index_nav {
-  display: flex;
-  justify-content: space-between;
-}
+  /***   各頁面選單ul menu  ****/
+  .links_index_nav {
+    position: absolute;
+    background: $background_color;
+    height: 0;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    transition: 0.5s;
+    margin: 0;
+    padding: 0;
+    &.active {
+      height: 100vh;
+      top: 0;
+      // min-height: 700px;
+      overflow: auto;
+    }
+    li {
+      margin: 30px 0;
+      font-size: 3rem;
+      text-decoration: none;
+      list-style-type: none;
+      color: $text_color;
+      text-align: center;
+    }
+  }
 
-.menu_index_nav a {
-  text-decoration: none;
-  color: $text_color;
-}
+  /*** Hamburger ****/
+  /*ham*/
+  .ham {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-.menu_index_nav .logo_index_nav {
-  line-height: 50px;
-  z-index: 1;
-}
+  .hamRotate.active {
+    transform: rotate(45deg);
+  }
 
-.menu_index_nav .loginMb_index_nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
+  .hamRotate180.active {
+    transform: rotate(180deg);
+  }
 
-.menu_index_nav .loginMb_index_nav div {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background-color: $btn_hover;
-}
+  .line {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: $text_color;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+  }
 
-.menu_index_nav .member_index_nav {
-  border-radius: 50%;
-}
+  .ham4 .top {
+    stroke-dasharray: 40 121;
+  }
 
-/*** Hamburger ****/
-/*ham*/
-.ham {
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 400ms;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+  .ham4 .bottom {
+    stroke-dasharray: 40 121;
+  }
 
-.hamRotate.active {
-  transform: rotate(45deg);
-}
+  .ham4.active .top {
+    stroke-dashoffset: -68px;
+  }
 
-.hamRotate180.active {
-  transform: rotate(180deg);
-}
-
-.line {
-  fill: none;
-  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-  stroke: $text_color;
-  stroke-width: 5.5;
-  stroke-linecap: round;
-}
-
-.ham4 .top {
-  stroke-dasharray: 40 121;
-}
-
-.ham4 .bottom {
-  stroke-dasharray: 40 121;
-}
-
-.ham4.active .top {
-  stroke-dashoffset: -68px;
-}
-
-.ham4.active .bottom {
-  stroke-dashoffset: -68px;
-}
-
-/***   各頁面選單ul menu  ****/
-.menu_index_nav .links_index_nav {
-  position: absolute;
-  background: $background_color;
-  height: 0;
-  width: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  transition: 0.5s;
-  margin: 0;
-  padding: 0;
-}
-
-.menu_index_nav .links_index_nav.active {
-  height: 100vh;
-  top: 0;
-  min-height: 550px;
-}
-
-.menu_index_nav ul li {
-  margin: 30px 0;
-  font-size: 3rem;
-  text-decoration: none;
-  list-style-type: none;
-  color: $text_color;
-  text-align: center;
+  .ham4.active .bottom {
+    stroke-dashoffset: -68px;
+  }
 }
