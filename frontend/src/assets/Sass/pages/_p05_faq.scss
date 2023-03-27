@@ -10,10 +10,30 @@
     margin: 0 auto;
     max-width: $w1200;
     label {
-      @include flex_vhCenter();
+      display: block;
+      height: 40px;
+      position: relative;
+      i {
+        color: $sec_color;
+        position: absolute;
+        font-size: 1.5rem;
+        left: 25%;
+        z-index: 2;
+        padding: 6px 8px;
+      }
       input {
-        height: 38px;
+        position: absolute;
+        left: 25%;
+        height: 40px;
         width: 50%;
+        z-index: 1;
+        padding: 10px 10px 10px 40px;
+        border-radius: 5px;
+        border: none;
+        outline: 0;
+        &focus {
+          box-shadow: 2px 2px 5px $text_color;
+        }
       }
     }
     .question_p05_faq_block {

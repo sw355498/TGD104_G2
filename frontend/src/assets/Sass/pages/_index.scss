@@ -7,10 +7,9 @@
   /** Top Dynamic **/
   section {
     background-color: transparent;
-    height: 90vh;
+    min-height: 90vh;
     padding-top: 20vh;
     text-align: center;
-
     h2 {
       text-transform: uppercase;
       text-align: center;
@@ -18,7 +17,6 @@
       font-family: "outfit";
       font-weight: 100;
     }
-
     #banner_index_dynamicText {
       p {
         font-size: 120px;
@@ -67,8 +65,7 @@
   /** Main Block **/
   main {
     margin: 0 auto;
-    width: 1200px;
-
+    width: $w1200;
     .article_index_block,
     .news_index_block,
     .youtube_index_block {
@@ -98,7 +95,6 @@
     .article_index_block {
       padding: 0 101px;
       margin-bottom: 120px;
-
       ul {
         @include indexGrid(2);
         li {
@@ -112,6 +108,9 @@
           justify-content: center;
           align-items: center;
           text-align: left;
+          svg {
+            width: 50px;
+          }
 
           .fontT26_index_article {
             @include fontT26_index_article();
@@ -130,7 +129,6 @@
     .youtube_index_block {
       ul {
         @include indexGrid(3);
-
         .card_index_block {
           width: 100%;
           border-radius: 10px;

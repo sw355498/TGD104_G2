@@ -5,13 +5,16 @@
     display: flex;
     justify-content: center;
     align-items: start;
+    svg {
+      max-width: 90px;
+    }
     .robot_p07_demoPhone_phone {
       /* CSS talk bubble */
       .talk-bubble {
         margin: 10px;
         display: inline-block;
         position: relative;
-        width: 200px;
+        max-width: 200px;
         height: auto;
         background-color: $text_color;
       }
@@ -59,6 +62,9 @@
     .volume_p07_demoPhone_phone {
       display: flex;
       margin: 50px;
+      svg {
+        max-width: 70px;
+      }
     }
   }
 }

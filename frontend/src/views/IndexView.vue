@@ -38,11 +38,8 @@
       <article class="article_index_block">
         <h1>不懂科技的你也可自保</h1>
         <ul>
-          <li class="textArticle1_index_block" style="width: 100%">
-            <div>
-              <!-- <img src="../assets/img/icon/mail_silent.svg" alt="" /> -->
-              <svg><use xlink:href="mail_silent" /></svg>
-            </div>
+          <li>
+            <svg><use xlink:href="#mail_silent" /></svg>
             <p class="fontT26_index_article">
               不點擊不明簡訊或是 E-mail 裡的網址
             </p>
@@ -51,10 +48,8 @@
               不管是熟人還是陌生人、不管是哪種方式傳來的訊息（簡訊、電子郵件、Line、FB、IG等），只要內容附上網址，而且點開後要求輸入帳號密碼或下載安裝程式，內心的警報器一定要大聲作響，告訴自己「這極有可能是釣魚簡訊！」
             </p>
           </li>
-          <li class="textArticle1_index_block" style="width: 100%">
-            <!-- <div><img src="../assets/img/icon/search.svg" alt="" /></div> -->
-            <svg><use xlink:href="search" /></svg>
-
+          <li>
+            <svg><use xlink:href="#search" /></svg>
             <p class="fontT26_index_article">找尋正確管道且小心求證</p>
             <p class="paragraph fontP18_index_article">
               假使收到訊息不放心或很想知道真相，絕對不要貪圖方便而點擊訊息內的網址，應該另外打開官方APP，或是自己Google連線到官方網站。然後登入驗證。當然，登入以後就會發現根本沒有強迫重新驗證這回事
