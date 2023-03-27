@@ -17,7 +17,7 @@
         </a>
 
         <ul class="links_index_nav">
-          <li v-for="menu in menus">
+          <li>
             <a
               class="h6_component"
               href="../views/pages/p01_news.html"
@@ -111,7 +111,6 @@ export default {
         "詐騙FAQ",
         "團隊介紹",
       ],
-      menubtn: ["DEMO體驗", "會員登入/註冊"],
     };
   },
 };
