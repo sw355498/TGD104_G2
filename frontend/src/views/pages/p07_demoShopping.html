@@ -8,14 +8,16 @@
     <meta name="generator" content="Vue,HTML,Sass,JavaScript">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>詐知就好</title>
+    <link rel="stylesheet" href="../../assets/CSS/normalize.css">
     <link rel="stylesheet" href="../../assets/CSS/component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <link rel="stylesheet" href="../../assets/CSS/pages/p07_demoShopping.css">
+    <link rel="stylesheet" href="../../assets/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     
     <!-- 之後轉scss -->
     <!-- <link rel="stylesheet" href="Sass/css/style.css"> -->
 </head>
-<body>
+<body class="body_p07_demoShopping">
     <!-- w3c 插入 html 的 script 等之後有 vue 可以拿掉 -->
     <script>
         function includeHTML() {
@@ -47,39 +49,52 @@
         }
     </script>
     <div w3-include-html="./header.html"></div>
-    <main>
+    <main class="main_p07_demoShopping">
         <!-- demo 體驗 -->
         <div w3-include-html="./demo.html"></div>
         <!-- 瀏覽器 -->
-        <section class="browser">
-            <div class="browser_top">
-                <div class="toolbar_top">
-                    <div class="circles"></div>
-                    <div class="tab">
+        <section class="browser_p07_demoShopping">
+            <div class="browser_top_demoShopping">
+                <div class="toolbar_top_demoShopping">
+                    <div class="circles_demoShopping"></div>
+                    <div class="tab_demoShopping">
                         <i class="fa-solid fa-globe"></i>
                         <span>詐騙網站</span>
                     </div>
                     <i class="fa-solid fa-plus"></i>
                 </div>
-                <div class="toolbar_down">
+                <div class="toolbar_down_demoShopping">
                     <i class="fa-solid fa-arrow-left"></i>
                     <i class="fa-solid fa-arrow-right"></i>
                     <i class="fa-solid fa-rotate-right"></i>
-                    <div class="address">
+                    <div class="address_demoShopping">
                         <i class="fa-solid fa-lock"></i>
                         <span>http://shopee.rip/te9</span>
                     </div>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
             </div>
-            <!-- 購物網站 -->
-            <div class="container">
 
-            </div>
+            <article class="scamWeb_p07_demoShopping_container">
+                
+                <!-- 購物網站 nav -->
+                <div class="scamWeb_p07_demoShopping_nav">
+                    <p class="scamWeb_p07_demoShopping_navP">新品上市，勁爆特殺！全場大放送，單件低至NT$432。2023新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
+                    <ul class="scamWeb_p07_demoShopping_navbar">                       
+                        <li><a href="#">商品列表</a></li>
+                        <li><a href="#">訂單查詢</a></li>
+                        <li><a href="#">下單須知</a></li>
+                        <li><a href="#">立即下單</a></li>
+                        <li><a href="#"><img src="../../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車"></a></li>
+                        <li><a href="#"><img src="../../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊"></a></li>
+                    </ul>
+                </div>
+
+            </article>
         </section>
     </main>
     <div w3-include-html="./footer.html"></div>
     <!-- w3c 插入 html 的 script 等之後有 vue 可以拿掉 -->
-    <script>includeHTML();</script>
+    <!-- <script>includeHTML();</script> -->
 </body>
 </html>
