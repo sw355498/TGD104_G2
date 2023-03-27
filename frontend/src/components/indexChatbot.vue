@@ -2,7 +2,8 @@
     <div class="chatbot_index">
         <div class="chatTitle">
             <figure class="robot">
-                <img src="../assets/img/icon/robot.svg" />
+                <!-- <img src="../assets/img/icon/robot.svg" /> -->
+                <img src="../assets/img/icon/robot.png" />
             </figure>
             <div class="chatTitle_text">
                 <p>專屬機器人</p>

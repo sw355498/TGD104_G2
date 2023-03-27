@@ -25,6 +25,7 @@
       <!-- 機器人 -->
       <div class="robot_index_btn">
         <!-- <img src="../assets/img/icon/robot.svg" alt="" /> -->
+        <img src="../assets/img/icon/robot.png" alt="robot">
       </div>
     </section>
 
@@ -162,6 +163,8 @@
         </ul>
         <a class="big_button" href="../views/pages/p02_teach.html">查看更多</a>
       </article>
+      <!-- 聊天機器人 -->
+      <indexChatbot/>
     </main>
     <!--Main Block end -->
 
@@ -174,11 +177,11 @@
 <script>
 // 要外掛聊天機器人
 // @ is an alias to /src
-// import indexChatbot from '@/components/indexChatbot.vue'
+import indexChatbot from '@/components/indexChatbot.vue'
 export default {
   name: "HomeView",
   components: {
-    // indexChatbot
+    indexChatbot
   },
 };
 </script>
