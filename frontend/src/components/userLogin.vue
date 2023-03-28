@@ -67,7 +67,9 @@
                   <input class="input_p08_user_login" type="text" placeholder="請輸入E-mail作為登入帳號" />
                   <p class="text_title">密碼/ Password <br /></p>
                   <input class="input_p08_user_login" type="text" placeholder="請輸入6個以上字元的密碼" />
+                  <div class="div_p08_user_loginType">
                   <button class="medium_button btn_p08_user_loginType">確定登入 Log in</button>
+                  </div>
                 </p>
          
               </slot>

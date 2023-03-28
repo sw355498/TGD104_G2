@@ -60,8 +60,8 @@
                 }
 
                 .currentTab {
-                    padding-bottom: 12px;
-                    border-bottom: 3px solid $text_color;
+                    padding-bottom: 18px;
+                    border-bottom: 5px solid $text_color;
                 }
             }
 
@@ -70,6 +70,7 @@
         .input_p01_news_searchBar {
             display: flex;
             padding: 10px 0;
+            box-sizing: border-box;
 
             input {
                 padding: 5px 10px;
