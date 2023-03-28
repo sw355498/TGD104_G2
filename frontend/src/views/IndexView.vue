@@ -162,7 +162,7 @@
     </main>
     <!--Main Block end -->
     <!-- 聊天機器人 -->
-    <div style="position:fixed; bottom: 5%; right: 1%; width:100%; height:100vh">
+    <div>
       <indexChatbot />
     </div>
   </div>
@@ -170,7 +170,6 @@
 
 <script>
 // 要外掛聊天機器人
-import { ref } from "vue";
 // @ is an alias to /src
 import indexChatbot from "@/components/indexChatbot.vue";
 
