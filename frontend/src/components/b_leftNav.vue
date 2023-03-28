@@ -38,10 +38,8 @@
         </nav>
     </div>
 </template>
-<script>
+<script setup>
     import { ref } from 'vue'
-    export default {
-        setup() {
             let id = 0
             const fontawesome = ref(' fa-solid fa-fw')
             const selectedTab = ref('')
@@ -56,17 +54,6 @@
                 {id: id++,name:'互動體驗成績管理', icon:'fa-people-pulling', clickName: 'score'},
                 {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
             ])
-
-            
-
-            return {
-                navItems,
-                fontawesome,
-                selectedTab,
-                userlevel
-            }
-        },
-    }
 </script>
 <style>
     .fa-sharp{
