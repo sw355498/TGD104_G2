@@ -74,6 +74,10 @@
       }
     },
   }
+
+  let body = document.querySelector('body');
+  body.style.backgroundColor = '#00092E';
+  
 </script>
 
 <style scoped>
