@@ -2,8 +2,8 @@
     <div class="chatbot_index">
         <div class="chatTitle">
             <figure class="robot">
-                <!-- <img src="../assets/img/icon/robot.svg" /> -->
-                <img src="../assets/img/icon/robot.png" />
+                <!-- <img src="../assets/img/icon/robot.png" /> -->
+                <svg><use xlink:href="#robot" /></svg>
             </figure>
             <div class="chatTitle_text">
                 <p>專屬機器人</p>
@@ -11,6 +11,16 @@
             </div>
         </div>
         <div class="chatWindow">
+            <!-- 一開始就有的文字 -->
+            <div class="chatWindow_message_default">
+                <div class="chat__bot-message_default">
+                    <span>你好!</span>
+                    <span>這些資訊我想你會需要</span>
+                </div>
+                <div class="chat__bot-news">
+
+                </div>
+            </div>
             <div class="chatWindow_message" v-for="(message, index) in messages" :key="index">
                 <div v-if="message.isBot" class="chat__bot-message">
                     <p>{{ message.text }}</p>
@@ -125,10 +135,10 @@ export default {
         text-align: left;
         display: flex;
         // height: 90px;
-        .robot img {
+        .robot svg {
             width: 100%;
-            width: 90px;
-            height: 90px;
+            // width: 90px;
+            // height: 90px;
             object-fit: cover;
         }
         .chatTitle_text{
@@ -154,6 +164,23 @@ export default {
         overflow-y: scroll;
         // position: relative;
         width: 100%;
+        .chatWindow_message_default{
+            margin: 10px 10px 0;
+            border-radius: 10px;
+            color: #033159;
+            display: flow-root;
+            .chat__bot-message_default span{
+                outline: 1px solid red;
+                background-color: white;
+                padding: 10px;
+                border-radius: 5px;
+                max-width: 40%;
+                width: auto;
+                word-break: break-word;
+                color: #333;
+                // float: left;
+            }
+        }
         .chatWindow_message{
             margin: 0 10px;
             border-radius: 10px;

@@ -1,0 +1,60 @@
+.body_p07_demoShopping{
+    background-color: $background_color;
+    color:  $text_color;
+    height: 100vh;
+}
+.main_p07_demoShopping{
+    background-image: url(@/assets/img/p07_demo/p07_demoShopping/demo_bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 1px 0 80px;
+}
+/* ========= 瀏覽器 ===========*/
+.browser_p07_demoShopping{
+    max-width: 1200px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 70vh;
+    margin: 20px auto;
+    background-color: white;
+}
+.browser_top_demoShopping{
+    background-color: white;
+}
+.toolbar_top_demoShopping{
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+}
+.circles_demoShopping{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+    box-shadow: 1.5rem 0 0 yellow, 3rem 0 0 green;
+    margin-right: 4rem;
+}
+.tab_demoShopping{
+    background-color: lightgray;
+    color: $background_color;
+    margin-top: 2px;
+    width: 200px;
+    border-radius: 10px 10px 0px 0px;
+}
+.toolbar_down_demoShopping{
+    background-color: lightgray;
+    display: flex;
+    padding: 5px;
+}
+.browser_p07_demoShopping i{
+    color: $background_color;
+    margin: 10px;
+}
+.address_demoShopping{
+    background-color: white;
+    border-radius: 10px;
+    flex-grow: 1;
+    color: $background_color;
+}
