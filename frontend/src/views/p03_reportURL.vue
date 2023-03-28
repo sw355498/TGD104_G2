@@ -33,7 +33,7 @@
                 <input class="inputSubmit_p03 small_button" type="submit" value="送出" @click.prevent="submitForm"> 
             </div>
         </form>
-        <!-- ======== 已通報的可疑網站列表 ======== -->
+        <!-- ======== 已通報的可疑網站列表，掛外掛要拿 ======== -->
         <section class="urlList_p03_reportURL">
             <h2>已通報的可疑網站列表</h2>
             <table class="" id="keywords">
@@ -101,6 +101,7 @@
                 <span>1 2 3 4 5 ... </span>
                 <i class="fa-solid fa-angles-right"></i>
               </div>
+              <!-- 外掛 jsGrid -->
             <div id="jsGrid"></div>
         </section>
     </div>
@@ -138,141 +139,3 @@ export default {
     },
 }
 </script>
-
-
-<!-- 之後套 style.css 刪 -->
-<style scoped lang="scss">
-.reportUrl{
-    background-image: url(../assets/img/p03_reportURL/bg.png);
-    background-repeat: no-repeat;
-    background-color: var(--background_color);
-    // background-color: $background_color;
-
-    max-width: 1080px;
-    margin: 50px auto;
-}
-.reportUrl h1{
-    color: var(--text_color);
-    // color: $title_color;
-}
-/* ======== 通報表單 ======== */
-.form_p03_reportURL{
-    outline: 1px solid red;
-    max-width: 590px;
-    margin: 40px auto;
-    border-radius: 10px;
-    text-align: center;
-    background-color: var(--background_color);
-    // background-color: $background_color;
-    color: var(--text_color);
-    // color: $text_color;
-    box-shadow: 0px 0px 10px white;
-    h6{
-        padding: 30px 0 0;
-    }
-    p{
-    line-height: 2rem;
-    }
-}
-/* 會員 */
-.user_p03_reportURL{
-    outline: 1px solid red;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    text-align: left;
-    margin: 20px 0;
-    .userImg{
-        outline: 1px solid rebeccapurple;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: var(--text_color);
-        // background-color: $text_color;
-        margin-right: 10px;
-        box-shadow: 0px 0px 5px white;
-    }
-}
-/* input */
-.formInput_p03_reportURL{
-    max-width: 450px;
-    margin: 0 auto;
-    text-align: left;
-    position: relative;
-    /* 已通報過的網址跳警告 */
-    .fa-circle-xmark{
-        position: absolute;
-        right: 10px;
-        top: 40px;
-        color: var(--warning_text);
-        // color: $warning_text;
-    }
-    p{
-        color: var(--warning_text);
-        // color: $warning_text;
-        margin: 0 0 10px;
-    }
-}
-.input_p03{
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    margin: 10px 0;
-}
-.inputSubmit_p03{
-    margin: 20px auto;
-    width: 100px;
-}
-
-/* ======== 已通報的可疑網站列表 ======== */
-.urlList_p03_reportURL{
-    margin: 100px auto;
-    text-align: center;
-    outline: 1px solid red;
-    max-width: 1000px;
-    h2{
-        color: var(--text_color);
-        // color: $text_color;
-        margin: 20px 0 40px;
-    }
-    /* 手刻 */
-    table {
-        border: 1px solid white;
-        border-radius: 10px;
-        box-sizing: border-box;
-        width: 100%;
-        color: var(--text_color);
-        // color: $text_color;
-        background-color: var(--sec_color);
-        // background-color: $sec_color;
-        box-shadow: 0px 0px 5px white;
-        thead {
-            text-align: center;
-            th {
-                padding: 10px;
-                border-left: 1px solid white;
-            }
-        }
-        tbody td {
-            border-left: 1px solid white;
-            border-top: 1px solid white;
-            padding: 10px;
-        }
-    }
-    .pages{
-        color: var(--text_color);
-        padding: 40px 0;
-    }
-}
-
-
-/* jsGrid */
-#jsGrid {
-    color: var(--text_color);
-}
-#jsGrid .jsgrid-table td,
-#jsGrid .jsgrid-table th{
-    background-color: var(--background_color);
-}
-</style>
