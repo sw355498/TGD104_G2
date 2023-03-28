@@ -1,6 +1,3 @@
 <template>
-  <div class="home">
-
-    <h1>Welcome to Your Vue.js App</h1>
-  </div>
+ <h1>jsdjfklkdjldsf</h1>
 </template>

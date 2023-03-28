@@ -1,35 +1,38 @@
 <template>
 
-  <div class="home">
+<div class="quiz_background">
 
-    <section>
+        <img class="logo" src="../assets/img/Logo.png" alt="">
 
-        <div class="quiz_background">
+        <div class="quiz_index">
 
-            <div class="p07_demoGame_01_question_number">
-                <div class="quiz_number_frame">
-                    <h1 class="quiz_question_num">第一題</h1>
+            <h1 class="quiz_title">防詐小測驗<br>
+                &emsp;&emsp;測試你對詐騙的敏銳度</h1>
+
+            <div class="quiz_summary">
+                <div class="m">
+                    <h2>近年來，詐騙事件層出不窮，隨著科技日新月異，詐騙更是不斷翻新手法，讓人防不慎防。<br>不論是身處在網路世界或現實生活中，都可能成為詐騙的受害者。詐騙對象不分年齡與性別，防詐從你我了解手法開始！讓我們一起以遊戲的方式了解近幾年的詐騙手法吧！</h2>
                 </div>
+                
+            </div>    
+
+            <div class="start">
+
+                <button class="game_start"><a href="./p07demoGamep01.vue">遊戲開始 <img src="" alt=""></a></button>
+                
+                <div class="button_frame"></div>
                 
             </div>
 
-            <div class="p07_demoGame_01_quiz_view">
-                <div class="p07_demoGame_01_quiz_question_title">
-                    <p>請問！哪一支電話號碼可能會是詐騙號碼？</p>
-                </div>
-                <img src="" alt="">
-            </div>
-            
-            <div class="anser_button">
-                <div class="anser_button_01"></div>
-                <div class="anser_button_02"></div>
-                <div class="anser_button_03"></div>
-                <div class="anser_button_04"></div>
-            </div>
+        
 
         </div>
 
-    </section>
-  </div>
+   <!-- <img class="footerimg" src="../assets/img/p07_demo/p07_demoGame/demo_bg.png" alt=""> -->
+</div>
+
+
+   
+
   
 </template>
