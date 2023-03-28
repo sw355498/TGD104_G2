@@ -1,12 +1,19 @@
 <template>
-  <div>
+  <div class="p02_teach">
+    <div class="banner_teachFrame">
+      <div class="banner_teachtitle h1">
+        防範詐騙教學
+        <div class="banner_teachtitle_en">SCAM</div>
+      </div>
+    </div>
+
     <div id="tabs">
       <div
         v-for="(tab, tab_index) in tabs"
         :class="{ tab: true, active: active_tab == tab_index }"
         @click="changeTab(tab_index)"
       >
-        <div class="tab-label">{{ tab.label }}</div>
+        <div class="tab-label h5">{{ tab.label }}</div>
       </div>
     </div>
     <div
@@ -21,7 +28,7 @@
         <div class="div_p02_teach_content">
           <div class=".div_p02_teach_contentLeft">
             <div class="div_p02_teach_contentImg">
-              <img v-for="img in tab.images" :src="img">
+              <img v-for="img in tab.images" :src="img" />
             </div>
           </div>
           <div class="div_p02_teach_contentRight">
@@ -84,17 +91,17 @@ export default {
           content: ``,
           title: `假投資詐騙`,
           images: {
-            1: require('../assets/img/p02_teach/pic01.jpg'),
+            1: require("../assets/img/p02_teach/pic01.jpg"),
           },
           steps: {
             1: "網路(FB、IG、Y2B)看到投資、輕鬆賺錢貼文，或在交友網站、交友軟體(APP)認識網友，網友慫恿投資，以掌握「平臺漏洞、後臺程式」等話術，宣稱保證獲利、穩賺不賠且利潤豐厚。",
             2: "後續加LINE聯繫或加入LINE群組(如投資體驗群)，有自稱「老師、指導員、分析師、總監」的人教學投注(代操)，且群組內不斷有其他學員獲利貼文。",
-            3: "初期帳面顯示獲利(小額獲利有些可以出金)，引誘您加碼投入大筆資金(甚至要您貸款投資)。",
+            3: "初期帳面顯示獲利(小額獲利有些可以出金)，引誘您加碼投入大筆資金(甚至要您貸款投資)。https://reurl.cc/a953KZ",
             4: "當您加碼入金後，以各種理由(洗碼量不足、保證金、IP異常等)不讓你出金，或是直接凍結帳號、對方失去聯繫，就是「不出金」。",
           },
           preventbox: {
             1: "將「趨勢科技防詐達人」加為LINE，傳送欲查證的訊息，系統將自動偵測出是否為詐騙資訊，目前可偵測「釣魚簡訊」、「詐騙購物網站」、「詐騙Line ID」、「詐騙投資網站」等。",
-            2: "165全民防騙官網及臉書粉絲專頁每週公布投資詐騙網站，並可至投信投顧公會網站(https://reurl.cc/a953KZ)查詢合法投資管道。",
+            2: "165全民防騙官網及臉書粉絲專頁每週公布投資詐騙網站，並可至投信投顧公會網站查詢合法投資管道。",
             3: "於桌上型與筆記型電腦安裝『趨勢科技防詐達人瀏覽器擴充功能』，民眾於連結詐騙網頁時便會顯示警示視窗。",
             4: "於桌上型與筆記型電腦安裝『趨勢科技防詐達人瀏覽器擴充功能』，民眾於連結詐騙網頁時便會顯示警示視窗。",
           },
@@ -109,7 +116,7 @@ export default {
           label: "假網購詐騙",
           title: `假網購詐騙`,
           images: {
-            1: require('../assets/img/p02_teach/pic02.jpg'),
+            1: require("../assets/img/p02_teach/pic02.jpg"),
           },
           steps: {
             1: "網路(只賣單一商品：網站只有一頁，只賣一種商品，沒有其他頁面超連結。)看到投資、輕鬆賺錢貼文，或在交友網站、交友軟體(APP)認識網友，網友慫恿投資，以掌握「平臺漏洞、後臺程式」等話術，宣稱保證獲利、穩賺不賠且利潤豐厚。",
@@ -134,7 +141,7 @@ export default {
           label: "解除分期詐騙",
           title: `解除分期詐騙`,
           images: {
-            1: require('../assets/img/p02_teach/pic03.jpg'),
+            1: require("../assets/img/p02_teach/pic03.jpg"),
           },
           steps: {
             1: "歹徒假冒網購商店客服人員誆稱被害人前次交易資料有誤，致經銷商、批發商造成訂單(訂購)重複訂單、扣款(分期付款)，經核對(個資、交易)資料後轉通知金融機構處理。",
@@ -156,7 +163,7 @@ export default {
           label: "假冒機構詐騙",
           title: `假冒機構詐騙`,
           images: {
-            1: require('../assets/img/p02_teach/pic04.jpg'),
+            1: require("../assets/img/p02_teach/pic04.jpg"),
           },
           steps: {
             1: "民眾接獲歹徒假冒電信局或健保局來電，告知民眾因身分證件遭盜用而申辦多支門號且電話費欠繳或稱民眾盜刷健保卡詐領保險金等(訂購)重複訂單、扣款(分期付款)，經核對(個資、交易)資料後轉通知金融機構處理。",
@@ -179,7 +186,7 @@ export default {
           label: "交友愛情詐騙",
           title: `交友愛情詐騙`,
           images: {
-            1: require('../assets/img/p02_teach/pic05.jpg'),
+            1: require("../assets/img/p02_teach/pic05.jpg"),
           },
           steps: {
             1: "歹徒透過網路FB、IG、交友軟體等管道搭訕，所使用的大頭照多為盜用網路上的帥哥、美女照片，讓被害人誤以為陷入迷惘，(訂購)重複訂單、扣款(分期付款)，經核對(個資、交易)資料後轉通知金融機構處理。",
@@ -202,7 +209,7 @@ export default {
 
           title: `人頭帳戶詐騙`,
           images: {
-            1: require('../assets/img/p02_teach/pic06.jpg'),
+            1: require("../assets/img/p02_teach/pic06.jpg"),
           },
           steps: {
             1: "詐騙集團於社群平臺張貼「徵求家庭代工」「簡單輕鬆工作」「貸款免手續費」等貼文吸引民眾洽詢，雙方加入LINE之後開始詳談。(訂購)重複訂單、扣款(分期付款)，經核對(個資、交易)資料後轉通知金融機構處理。",
@@ -233,7 +240,5 @@ export default {
 </script>
 
 <style scoped>
-@import url("../assets/CSS/style.css");
-@import url("../assets/CSS/component.css");
-@import url("../assets/CSS/pages/p02_teach.css");
+
 </style>

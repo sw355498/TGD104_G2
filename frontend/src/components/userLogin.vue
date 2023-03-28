@@ -37,13 +37,13 @@
 
                 <div class="div_p08_user_loginType">
                   <button class="medium_button btn_p08_user_loginType">
-                    FB
+                    <i class="fa-brands fa-facebook"></i> FB
                   </button>
                   <button class="medium_button btn_p08_user_loginType">
-                    LINE
+                    <i class="fa-brands fa-line"></i> LINE
                   </button>
                   <button class="medium_button btn_p08_user_loginType">
-                    GOOGLE
+                    <i class="fa-brands fa-google"></i> GOOGLE
                   </button>
                 </div>
                 <br />

@@ -2,7 +2,9 @@
   <div>
     <div class="p01_news">
       <div class="banner_frame">
-        <div class="banner_title h1">最新消息</div>
+        <div class="banner_title h1">最新消息
+          <div class="banner_title_en">NEWS</div>
+        </div>
       </div>
 
       <div class="tab_p01_newsChoose">
@@ -11,10 +13,10 @@
             所有文章
           </select>
           <div class="wide_tab">
-            <a href="#" :class="{ current: isActive }">所有文章</a>　|　<a
+            <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
               href="#"
               >網站詐騙</a
-            >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a>
+            >　|　<a href="#" >交友詐騙</a>　|　<a href="#">金融詐騙</a>
           </div>
         </div>
         <div class="input_p01_news_searchBar">
@@ -27,7 +29,8 @@
 
       <ul class="ul_p01_newsPost">
         <li v-for="value in object" class="li_p01_newsPost">
-          <a href="#"  ><div class="newsImg">
+          <a href="#"
+            ><div class="newsImg">
               <img :src="value.image" />
             </div>
 
@@ -38,7 +41,7 @@
                   <a data-href="" data-layout="button_count"
                     ><i class="fa-brands fa-facebook"></i
                   ></a>
-                  <a><i class="fa-brands fa-line"></i></a>  |  
+                  <a><i class="fa-brands fa-line"></i></a> |
                   <a><i class="fa-solid fa-bookmark"></i>收藏</a>
                 </div>
               </div>
@@ -54,7 +57,8 @@
         </li>
 
         <li v-for="value in object" class="li_p01_newsPost">
-          <a href="#"  ><div class="newsImg">
+          <a href="#"
+            ><div class="newsImg">
               <img :src="value.image" />
             </div>
 
@@ -65,7 +69,7 @@
                   <a data-href="" data-layout="button_count"
                     ><i class="fa-brands fa-facebook"></i
                   ></a>
-                  <a><i class="fa-brands fa-line"></i></a>  |  
+                  <a><i class="fa-brands fa-line"></i></a> |
                   <a><i class="fa-solid fa-bookmark"></i>收藏</a>
                 </div>
               </div>
@@ -80,12 +84,39 @@
           </a>
         </li>
       </ul>
+
+<!-- <div>
+  <pagination :current-page="currentPage" :total="120" :total-pages="11" @pagechanged="onPageChange"> </pagination>
+</div> -->
+      
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link pagination-dark" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link  pagination-dark" href="#">1</a></li>
+    <li class="page-item"><a class="page-link  pagination-dark" href="#">2</a></li>
+    <li class="page-item"><a class="page-link  pagination-dark" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link pagination-dark" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
     </div>
   </div>
 </template>
 
  <script>
+// import paging from '../components/paging.vue';
 export default {
+  // components: { paging },
+  
   data() {
     let id = 0,
       news = 85;
@@ -93,7 +124,7 @@ export default {
       isActive: true,
       object: [
         {
-          id: `${id++}`,
+          ID: `${id++}`,
           name: "NEWS TITLE",
           image: require("../assets/img/p01_news/pic05.jpg"),
           category: "類別",
@@ -102,11 +133,13 @@ export default {
             "NEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENT",
           date: "newDate",
           fblink: "https://tw.yahoo.com/",
+          
         },
       ],
     };
   },
   methods: {},
+  
 };
 </script>
 
