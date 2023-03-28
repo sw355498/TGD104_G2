@@ -14,10 +14,26 @@
         </div>
         <nav>
             <ul class="list-unstyled text_title">
-                <li v-for="item in navItems" :class="{ 'b_active': selectedTab === item.clickName}" :key="item.id">
-                    <a @click.prevent="selectedTab = item.clickName" class="link"><i :class="item.icon + fontawesome"></i>{{item.name}}</a>
+                <li v-for="item in navItems"  :key="item.id">
+                    <a 
+                        @click="selectedTab = item.clickName" 
+                        class="link" 
+                        :class="{ 'b_active': selectedTab === item.clickName}"
+                    >
+                            <i :class="item.icon + fontawesome"></i>
+                            {{item.name}}
+                    </a>
                 </li>
-                <li :class="{ 'b_active': selectedTab === 'staff' }"><a @click.prevent="selectedTab = 'staffManagement'" class="link"><i class="fa-solid fa-key fa-fw"></i>後台帳號管理</a></li>
+                <li v-if="userlevel">
+                    <a
+                        @click="selectedTab = 'staffManagement'" 
+                        class="link" 
+                        :class="{ 'b_active': selectedTab === 'staff' }"
+                    >
+                        <i class="fa-solid fa-key fa-fw"></i>
+                        後台帳號管理
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
@@ -28,6 +44,8 @@
         setup() {
             let id = 0
             const fontawesome = ref(' fa-solid fa-fw')
+            const selectedTab = ref('')
+            const userlevel = ref(true)
             const navItems = ref([
                 {id: id++,name:'會員管理', icon:'fa-user', clickName: 'user'},
                 {id: id++,name:'討論版管理', icon:'fa-message', clickName: 'message'},
@@ -39,12 +57,13 @@
                 {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
             ])
 
-            const selectedTab = ref('')
+            
 
             return {
                 navItems,
                 fontawesome,
                 selectedTab,
+                userlevel
             }
         },
     }
