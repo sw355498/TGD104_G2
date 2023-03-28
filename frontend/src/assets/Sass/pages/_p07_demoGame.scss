@@ -1,25 +1,30 @@
-html, body {
-    background-color: var(--background_color);
+.quiz_background{
+    background-color: $background_color;
     font-family: 'Noto Sans TC','Outfit', sans-serif;
-  }
+    background-image: url('../../img/p07_demo/p07_demoGame/demo_bg.png');
+    
+    
   
   /* 首頁中間部分 */
   
   .logo {
     display: block;
-    margin: 130px auto 40px;
+    margin: 0 auto 40px;
+    padding-top: 40px;
   }
   
   .quiz_index {
     width: 1154px;
     height: 835px;
-    border: 5px solid var(--main_color);
-    background-color: var(--sec_color);
+    border: 5px solid $main_color;
+    background-color: $sec_color;
     margin-left: 150px;
     padding-left: 100px;
+    margin-bottom: 30px;
+    
   
     .quiz_title {
-      color: var(--text_color);
+      color: $text_color;
       line-height: 6rem;
       margin-top: 150px;
       font-size: 65px;
@@ -28,11 +33,11 @@ html, body {
     }
   }
   
-  section {
+    
     .quiz_summary {
       width: 1000px;
-      border: 3px solid var(--main_color);
-      height: 200px;
+      border: 3px solid $main_color;
+      height: 205px;
   
       .m {
         width: 100px;
@@ -43,12 +48,13 @@ html, body {
         background-size: 20px 20px;
       }
   
-      h2 {
-        width: 800px;
-        font-size: 1.3rem;
-        margin-left: 120px;
-        color: var(--text_color);
-      }
+        h2 {
+          width: 800px;
+          font-size: 1.3rem;
+          margin-left: 120px;
+          color: $text_color;
+          padding-top: 20px;
+        }
     }
   
     .start {
@@ -62,15 +68,15 @@ html, body {
       clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
       width: 165px;
       height: 45px;
-      background-color: var(--main_color);
-      border: 1px solid var(--sec_color);
+      background-color: $main_color;
+      border: 1px solid $sec_color;
       z-index: 10;
       position: absolute;
   
       a {
         width: 180px;
         height: 54px;
-        color: var(--sec_color);
+        color: $sec_color;
         overflow: hidden;
         font-size: 20px;
         margin-left: -20px;
@@ -78,6 +84,7 @@ html, body {
         position: absolute;
         left: 0;
         top: 10px;
+        text-decoration: none;
   
         img {
           width: 30px;
@@ -105,8 +112,8 @@ html, body {
     .quiz_background {
       width: 1154px;
       height: 835px;
-      border: 5px solid var(--main_color);
-      background-color: var(--sec_color);
+      border: 5px solid $main_color;
+      background-color: $sec_color;
       margin-left: 150px;
       padding-left: 100px;
       margin-top: 150px;
@@ -125,8 +132,8 @@ html, body {
         clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0 49%);
         width: 340px;
         height: 80px;
-        background-color: var(--sec_color);
-        border: 5px solid var(--main_color);
+        background-color: $sec_color;
+        border: 5px solid $main_color;
         background: linear-gradient(153deg, #033159 38px, #13E5F2 0) bottom right, linear-gradient(333deg, #033159 38px, #13E5F2 0) top left;
         background-size: 25% 50%;
         background-repeat: no-repeat;
@@ -136,12 +143,12 @@ html, body {
       .quiz_question_num {
         text-align: center;
         line-height: 80px;
-        color: var(--text_color);
+        color: $text_color;
       }
     }
   
     .p07_demoGame_01_quiz_view {
-      border: 1px solid var(--main_color);
+      border: 1px solid $main_color;
       width: 1015px;
       height: 480px;
       border: 1px solid white;
@@ -149,8 +156,8 @@ html, body {
       .p07_demoGame_01_quiz_question_title {
         width: 915px;
         height: 60px;
-        background-color: var(--background_color);
-        border: 3px solid var(--main_color);
+        background-color: $background_color;
+        border: 3px solid $main_color;
         margin: 0 auto;
         margin-top: 35px;
   
@@ -161,76 +168,13 @@ html, body {
           font-size: 30px;
         }
       }
-  
-      img {}
     }
-  }
-  
-  /* 測驗頁面 */
 
-  section {
-    .quiz_background {
-      width: 1154px;
-      height: 835px;
-      border: 5px solid var(--main_color);
-      background-color: var(--sec_color);
-      margin-left: 150px;
-      padding-left: 100px;
-      margin-top: 150px;
-      margin-bottom: 50px;
-    }
+  // .footerimg {
+  //   height: 500px;
+  //   width: 1920px;
+  //   margin-top: -500px;
+  //   z-index: -1;
+  // }  
+}
   
-    .p07_demoGame_01_question_number {
-      width: 340px;
-      height: 80px;
-      margin: 65px 370px;
-  
-      /* background-color: red; */
-      /* border:1px solid white; */
-  
-      .quiz_number_frame {
-        clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0 49%);
-        width: 340px;
-        height: 80px;
-        background-color: var(--sec_color);
-        border: 5px solid var(--main_color);
-        background: linear-gradient(153deg, #033159 38px, #13E5F2 0) bottom right, linear-gradient(333deg, #033159 38px, #13E5F2 0) top left;
-        background-size: 25% 50%;
-        background-repeat: no-repeat;
-        border: solid 15px #13E5F2;
-      }
-  
-      .quiz_question_num {
-        text-align: center;
-        line-height: 80px;
-        color: var(--text_color);
-      }
-    }
-  
-    .p07_demoGame_01_quiz_view {
-      border: 1px solid var(--main_color);
-      width: 1015px;
-      height: 480px;
-      border: 1px solid white;
-  
-      .p07_demoGame_01_quiz_question_title {
-        width: 915px;
-        height: 60px;
-        background-color: var(--background_color);
-        border: 3px solid var(--main_color);
-        margin: 0 auto;
-        margin-top: 35px;
-  
-        p {
-          margin: 0;
-          text-align: center;
-          line-height: 60px;
-          font-size: 30px;
-        }
-      }
-  
-      img {}
-    }
-  }
-  
-
