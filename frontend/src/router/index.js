@@ -58,8 +58,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame.vue')
   },
   {
-    path: '/p07demoGame_p01',
-    name: 'p07demoGame_p01',
+    path: '/p07demoGamep01',
+    name: 'p07demoGamep01',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p01.vue')
   },
   {

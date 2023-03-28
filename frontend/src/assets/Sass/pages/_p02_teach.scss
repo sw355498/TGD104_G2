@@ -1,11 +1,32 @@
-body {
+.p02_teach{
     background-color: $background_color;
+.banner_teachFrame {
+    height: 235px;
+    background-image: url("../img/p02_teach/teachTop.jpg");
+    background-position: center bottom;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .banner_frame{
-        height: 250px;
-        .banner_title{};
+    .banner_teachtitle {
+        color: $text_color;
+        padding-bottom: 10px;
+        border-bottom: 3px solid $text_color;
+        position: relative;
+
+        .banner_teachtitle_en {
+            position: absolute;
+            font-weight: 700;
+            top: -60px;
+            left: -14%;
+            font-size: 100px;
+            color: rgba($color: #000000, $alpha: 0);
+            -webkit-text-stroke: 0.5px #efe4d1;
+            text-stroke: 0.5px #efe4d1;
+        }
     }
-
+    }
 // 以下是tab
     #tabs {
         display: flex;
@@ -22,11 +43,14 @@ body {
         color: $four_color;
     }
     .tab.active {
-        background-color: $btn_hover;
-        color: $title_color;
+        background-color: $title_color;
+        color: $sec_color;
     }
     .tab-label {
         margin-right: 5px;
+        font-weight: 700;
+        padding-top: 6px;
+        // color: $text_color;
     }
     .content {
         display: none;
@@ -87,12 +111,13 @@ body {
     
     .underline {
         border-bottom: 1px solid $text_color;
-        padding-bottom: 8px;
+        padding-bottom: 10px;
         margin-bottom: 20px;
     }
     
     .span_underline {
         border-bottom: 5px solid $text_color;
+        padding-bottom: 5px;
     }
     
   
@@ -129,6 +154,7 @@ body {
     .div_p02_teach_vedio{
         display: flex;
         justify-content: center;
+        margin-bottom: 50px;
         .div_p02_teach_vedioBox{
             width: 30%;
             height: 200px;

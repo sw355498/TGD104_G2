@@ -1,5 +1,6 @@
 <template>
-    <div class="chatbot_index">
+<div>
+    <div class="chatbot_index" v-if="showComponent">
         <div class="chatTitle">
             <figure class="robot">
                 <!-- <img src="../assets/img/icon/robot.png" /> -->
@@ -35,6 +36,10 @@
             <button type="submit" class="message-submit chat__send-button"  @click="sendMessage">➤</button>
         </div>
     </div>
+    <svg style="position:fixed;bottom: 5%; right: 1%;"><use xlink:href="#robot" @click="showComponent = true; listenClickEvent"/></svg>
+    <div class="clost-bg" v-if="showComponent" @click="closeComponent"></div>
+
+</div>
 </template>
 
 <script>
@@ -100,8 +105,29 @@ export default {
         }
         return botMsg;
         }
+    // 點擊才出現
+    const showComponent = ref(false);
+    let clickListener;
+
+    function listenClickEvent() {
+      clickListener = () => {
+        showComponent.value = false;
+        document.removeEventListener("click", clickListener);
+      };
+      document.addEventListener("click", clickListener);
+    }
+
+    function closeComponent() {
+      if (showComponent.value) {
+        showComponent.value = false;
+        document.removeEventListener("click", clickListener);
+      }
+    }
 
     return {
+      showComponent,
+      listenClickEvent,
+      closeComponent,
       messages,
       inputValue,
       sendMessage,
@@ -111,6 +137,16 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.clost-bg{
+//   position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.5);
+}
 .chatbot_index {
     position: absolute;
     top: 50%;

@@ -1,7 +1,8 @@
 <template>
   <div class="body_index_block">
+    <!-- <svg><use xlink:href="#robot" @click="showComponent = true; listenClickEvent"/></svg> -->
     <!--Top Dynamic-->
-    <section>
+    <section >
       <!-- Banner -->
       <h2>prevent</h2>
       <div id="banner_index_dynamicText">
@@ -22,11 +23,6 @@
 
       <!-- 機器人 -->
       <div class="robot_index_btn">
-        <!-- <img src="../assets/img/icon/robot.svg" alt="" /> -->
-        <svg>
-          <use xlink:href="#robot" 
-          @click="showComponent = true"/>
-        </svg>
         <button @click="closeComponent">關閉</button>
       </div>
     </section>
@@ -166,13 +162,14 @@
     </main>
     <!--Main Block end -->
     <!-- 聊天機器人 -->
-    <indexChatbot v-if="showComponent" />
+    <div>
+      <indexChatbot />
+    </div>
   </div>
 </template>
 
 <script>
 // 要外掛聊天機器人
-import { ref } from "vue";
 // @ is an alias to /src
 import indexChatbot from "@/components/indexChatbot.vue";
 
@@ -181,28 +178,7 @@ export default {
     indexChatbot,
   },
   setup() {
-    const showComponent = ref(false);
-    let clickListener;
-
-    function listenClickEvent() {
-      clickListener = () => {
-        showComponent.value = false;
-        document.removeEventListener("click", clickListener);
-      };
-      document.addEventListener("click", clickListener);
-    }
-
-    function closeComponent() {
-      if (showComponent.value) {
-        showComponent.value = false;
-        document.removeEventListener("click", clickListener);
-      }
-    }
-
     return {
-      showComponent,
-      listenClickEvent,
-      closeComponent,
     };
   },
 };
