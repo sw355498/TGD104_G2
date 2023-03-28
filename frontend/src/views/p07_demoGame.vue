@@ -2,6 +2,7 @@
 
 <div class="quiz_background">
 
+   <div class="com">
         <img class="logo" src="../assets/img/Logo.png" alt="">
 
         <div class="quiz_index">
@@ -18,7 +19,17 @@
 
             <div class="start">
 
-                <button class="game_start"><a href="./p07demoGamep01.vue">遊戲開始 <img src="" alt=""></a></button>
+                <button class="game_start">
+                    <a href="../views/p07_demoGame_p01.vue">
+                    遊戲開始 
+                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9.92871" y="8" width="10" height="10" transform="rotate(-45 9.92871 8)" fill="#033159"/>
+                    <rect x="0.928711" y="17" width="10" height="10" transform="rotate(-45 0.928711 17)" fill="#033159"/>
+                    <rect x="18.9287" y="17" width="10" height="10" transform="rotate(-45 18.9287 17)" fill="#033159"/>
+                    <rect x="9.92871" y="26" width="10" height="10" transform="rotate(-45 9.92871 26)" fill="#033159"/>
+                    </svg>
+                    <!-- <img src="@/assets/img/p07_demo/p07_demoGame/diamond-solid.svg" alt=""> -->
+                    </a></button>
                 
                 <div class="button_frame"></div>
                 
@@ -28,11 +39,18 @@
 
         </div>
 
-   <!-- <img class="footerimg" src="../assets/img/p07_demo/p07_demoGame/demo_bg.png" alt=""> -->
+    
+    </div>
+
+
 </div>
 
 
-   
 
-  
 </template>
+
+
+
+
+
+
