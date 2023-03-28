@@ -1,5 +1,5 @@
 <template>
-  <!-- <body class="body_p04_gov_base"> -->
+  <div class="body_p04_gov_base">
     <!-- 最上方標題 -->
     <div class="div_p04_gov_topTitle">
         <h3><i class="fa-regular fa-lightbulb"></i>政府相關連結</h3>
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-  <!-- </body> -->
+  </div>
 </template>
 
 <script>
@@ -77,8 +77,8 @@
 </script>
 
 <style scoped>
-@import url("../../src/assets/CSS/style.css");
+/* @import url("../../src/assets/CSS/style.css");
 @import url("../../src/assets/CSS/component.css");
 @import url("../../src/assets/CSS/normalize.css");
-@import url("../../src/assets/CSS/pages/p04_gov.css"); 
+@import url("../../src/assets/CSS/pages/p04_gov.css");  */
 </style>
