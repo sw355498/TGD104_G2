@@ -23,11 +23,10 @@
       <!-- 機器人 -->
       <div class="robot_index_btn">
         <!-- <img src="../assets/img/icon/robot.svg" alt="" /> -->
-        <img
-          src="../assets/img/icon/robot.png"
-          alt="robot"
-          @click="showComponent = true"
-        />
+        <svg>
+          <use xlink:href="#robot" 
+          @click="showComponent = true"/>
+        </svg>
         <button @click="closeComponent">關閉</button>
       </div>
     </section>
