@@ -14,19 +14,41 @@
         </div>
         <nav>
             <ul class="list-unstyled text_title">
-                <li><a href="" class="b_active"><i class="fa-solid fa-user fa-fw"></i>會員管理</a></li>
-                <li><a href=""><i class="fa-solid fa-message fa-fw"></i>討論版管理</a></li>
-                <li><a href=""><i class="fa-solid fa-share fa-fw"></i>回報管理</a></li>
-                <li><a href=""><i class="fa-solid fa-exclamation fa-fw"></i>檢舉管理</a></li>
-                <li><a href=""><i class="fa-solid fa-circle-info fa-fw"></i>最新消息管理</a></li>
-                <li><a href=""><i class="fa-solid fa-masks-theater fa-fw"></i>防騙教學介紹管理</a></li>
-                <li><a href=""><i class="fa-solid fa-people-pulling fa-fw"></i>互動體驗成績管理</a></li>
-                <li><a href=""><i class="fa-solid fa-robot fa-fw"></i>聊天機器人管理</a></li>
-                <li><a href=""><i class="fa-solid fa-key fa-fw"></i>後台帳號管理</a></li>
+                <li v-for="item in navItems" :class="{ 'b_active': selectedTab === item.clickName}" :key="item.id">
+                    <a @click.prevent="selectedTab = item.clickName" class="link"><i :class="item.icon + fontawesome"></i>{{item.name}}</a>
+                </li>
+                <li :class="{ 'b_active': selectedTab === 'staff' }"><a @click.prevent="selectedTab = 'staffManagement'" class="link"><i class="fa-solid fa-key fa-fw"></i>後台帳號管理</a></li>
             </ul>
         </nav>
     </div>
 </template>
+<script>
+    import { ref } from 'vue'
+    export default {
+        setup() {
+            let id = 0
+            const fontawesome = ref(' fa-solid fa-fw')
+            const navItems = ref([
+                {id: id++,name:'會員管理', icon:'fa-user', clickName: 'user'},
+                {id: id++,name:'討論版管理', icon:'fa-message', clickName: 'message'},
+                {id: id++,name:'回報管理', icon:'fa-share', clickName: 'share'},
+                {id: id++,name:'檢舉管理', icon:'fa-exclamation', clickName: 'reply'},
+                {id: id++,name:'最新消息管理', icon:'fa-circle-info', clickName: 'news'},
+                {id: id++,name:'防騙教學介紹管理', icon:'fa-masks-theater', clickName: 'teach'},
+                {id: id++,name:'互動體驗成績管理', icon:'fa-people-pulling', clickName: 'score'},
+                {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
+            ])
+
+            const selectedTab = ref('')
+
+            return {
+                navItems,
+                fontawesome,
+                selectedTab,
+            }
+        },
+    }
+</script>
 <style>
     .fa-sharp{
         transform: translate(-50%, -50%);
