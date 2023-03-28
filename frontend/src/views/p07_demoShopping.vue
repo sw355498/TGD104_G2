@@ -1,5 +1,6 @@
 <template>
   <div class="main_p07_demoShopping">
+    <p07_demo_nav />
     <!-- 瀏覽器 -->
     <section class="browser_p07_demoShopping">
         <div class="browser_top_demoShopping">
@@ -30,3 +31,14 @@
     </section>
   </div>
 </template>
+
+
+<script>
+import p07_demo_nav from "@/components/p07_demo_nav.vue";
+export default {
+    components: {
+    p07_demo_nav,
+
+    }
+}
+</script>
