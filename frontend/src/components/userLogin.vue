@@ -83,7 +83,7 @@
 
 <script>
 export default {
-  name: "Modal",
+
   data() {
     return {
       active_tab: 0,

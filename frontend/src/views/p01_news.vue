@@ -56,37 +56,11 @@
           </a>
         </li>
 
-        <li v-for="value in object" class="li_p01_newsPost">
-          <a href="#"
-            ><div class="newsImg">
-              <img :src="value.image" />
-            </div>
-
-            <div class="newsContent">
-              <div class="p01_news_title">
-                <div class="p01_news_titleText h5">{{ value.name }}</div>
-                <div class="p01_news_titleCollect">
-                  <a data-href="" data-layout="button_count"
-                    ><i class="fa-brands fa-facebook"></i
-                  ></a>
-                  <a><i class="fa-brands fa-line"></i></a> |
-                  <a><i class="fa-solid fa-bookmark"></i>收藏</a>
-                </div>
-              </div>
-              <div class="tag_p01_news_postDescription">
-                <div class="tag_p01_news_postCategory">
-                  {{ value.category }}
-                </div>
-                <div class="tag_p01_news_postDate">{{ value.date }}</div>
-              </div>
-              <div class="p01_news_article paragraph">{{ value.content }}</div>
-            </div>
-          </a>
-        </li>
+       
       </ul>
 
 <!-- <div>
-  <pagination :current-page="currentPage" :total="120" :total-pages="11" @pagechanged="onPageChange"> </pagination>
+  <paging :current-page="currentPage" :total="120" :total-pages="11" @pagechanged="onPageChange"> </paging>
 </div> -->
       
 <nav aria-label="Page navigation example">
@@ -126,6 +100,30 @@ export default {
         {
           ID: `${id++}`,
           name: "NEWS TITLE",
+          image: require("../assets/img/p01_news/pic05.jpg"),
+          category: "類別",
+          url: "https://tw.yahoo.com/",
+          content:
+            "NEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENT",
+          date: "newDate",
+          fblink: "https://tw.yahoo.com/",
+          
+        },
+        {
+          ID: `${id++}`,
+          name: "NEWS TITLE2",
+          image: require("../assets/img/p01_news/pic05.jpg"),
+          category: "類別",
+          url: "https://tw.yahoo.com/",
+          content:
+            "NEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENTNEWS CONTENT",
+          date: "newDate",
+          fblink: "https://tw.yahoo.com/",
+          
+        },
+        {
+          ID: `${id++}`,
+          name: "NEWS TITLE3",
           image: require("../assets/img/p01_news/pic05.jpg"),
           category: "類別",
           url: "https://tw.yahoo.com/",

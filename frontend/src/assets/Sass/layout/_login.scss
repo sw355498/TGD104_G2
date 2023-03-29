@@ -156,3 +156,11 @@
 .content.active {
     display: block;
 }
+
+/* 已登入狀態 */
+.nofity_count{
+    background-color: $warning_text;
+    padding: 0 .4rem;
+    margin-left: 5px;
+    border-radius: 1rem;
+}
