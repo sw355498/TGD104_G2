@@ -1,5 +1,5 @@
 <template>
-  <div class="body_p04_gov_base">
+  <main class="body_p04_gov_base">
     <!-- 最上方標題 -->
     <div class="div_p04_gov_topTitle">
         <h3><i class="fa-regular fa-lightbulb"></i>政府相關連結</h3>
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -75,8 +75,8 @@
     },
   }
 
-  let body = document.querySelector('body');
-  body.style.backgroundColor = '#00092E';
+  // let body = document.querySelector('body');
+  // body.style.backgroundColor = '#00092E';
   
 </script>
 

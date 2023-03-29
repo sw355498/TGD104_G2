@@ -4,8 +4,11 @@
     <p07_demo_nav />
     <section class="main_p07_demoLine">
       <!-- line 背景 -->
-      <div class="Line_p07_demoLine">
-        <img src="../assets/img/p07_demo/p07_demoLine/linebg.png" alt="Line">
+      <div class="line_p07_demoLine">
+        <div class="line_p07_demoLine_chatContainer">
+          
+        </div>
+        <!-- <img src="../assets/img/p07_demo/p07_demoLine/linebg.png" alt="Line"> -->
       </div>
       <!-- 筆 -->
       <div class="applepencil_p07_demoLine">
