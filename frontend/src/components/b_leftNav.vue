@@ -26,7 +26,7 @@
                 </li>
                 <li v-if="userlevel">
                     <a
-                        @click="selectedTab = 'staffManagement'" 
+                        @click="selectedTab = 'staff'" 
                         class="link" 
                         :class="{ 'b_active': selectedTab === 'staff' }"
                     >
@@ -38,8 +38,11 @@
         </nav>
     </div>
 </template>
-<script setup>
+<script>
     import { ref } from 'vue'
+
+    export default {
+        setup(){
             let id = 0
             const fontawesome = ref(' fa-solid fa-fw')
             const selectedTab = ref('')
@@ -54,6 +57,16 @@
                 {id: id++,name:'互動體驗成績管理', icon:'fa-people-pulling', clickName: 'score'},
                 {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
             ])
+
+            return {
+                fontawesome,
+                selectedTab,
+                userlevel,
+                navItems,
+            }
+        }
+
+    }
 </script>
 <style>
     .fa-sharp{
