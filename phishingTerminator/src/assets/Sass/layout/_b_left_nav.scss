@@ -1,0 +1,58 @@
+/*------ 後台 側選單 ------*/
+.b_left_nav{
+    width: 300px;
+    height: 100vh;
+    background: $b_background_color;
+    color: $third_color;
+    overflow: auto;
+    position: fixed;
+
+    .b_login_user{
+        height: 150px;
+        border-bottom: 2px solid $sec_color;
+        box-sizing: border-box;
+
+        .b_user_pic{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ccc;
+            overflow: hidden;
+            margin-right: 10px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    nav{
+        .link{
+            display: block;
+            width: 100%;
+            line-height: 80px;
+            text-decoration: none;
+            padding-left: 40px;
+            color: $third_color;
+            box-sizing: border-box;
+
+            &:hover,
+            &.b_active{
+                color: $text_color;
+                background: $third_color;
+            }
+
+            .fa-solid {
+                margin-right: 10px;
+                transition: 0.6s;
+            }
+          
+            &:hover .fa-solid,
+            &.b_active .fa-solid {
+                transform: scale(0);
+                width: 0;
+            }
+        }
+    }
+}

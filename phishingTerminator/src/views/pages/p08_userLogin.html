@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-Tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="全容君,黃資蓉,阮炫瑞,林欣妤,詹皓丞,張家恩">
+    <meta name="keywords"
+        content="詐騙,防詐騙,防詐教育,防詐騙教育,防詐騙模擬體驗,防詐討論版,防詐騙討論版,常見詐騙手段,詐騙回報,詐騙網站檢舉,詐騙親身經歷,一頁式購物詐騙,語音詐騙,簡訊詐騙,電話詐騙,交友詐騙">
+    <meta name="description"
+        content="包含親身經歷詐騙及身旁親友被騙的切深之痛，促使我們成立這個網站，相信社會互助也是防治詐騙的一環「我們希望大家理解，這些騙術在瞄準的是每一個人身上都有的一些特性，或是弱點，人人都可能不小心落入陷阱。」；【防詐教育】：防範列出各種詐騙手法供比對，並設計防詐小測驗，讓相關知識以好玩的方式傳遞給民眾；【被詐怎麼辦】，如不幸遇到詐騙提供各申訴管道，也提供客服機器人一步步引導民眾至相關頁面了解可以做些什麼">
+    <meta name="generator" content="Vue,HTML,Sass,JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>詐知就好</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="CSS/component.css">
+    <link rel="stylesheet" href="CSS/pages/p08_user.css">
+</head>
+
+<body>
+    <!-- template for the modal component -->
+    <script type="text/x-template" id="modal-template">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+
+          <div class="modal-header">
+            <slot name="header">
+
+                <button class="modal-default-button" @click="$emit('close')">
+                    X
+                </button>
+                
+
+            </slot>
+          </div>  
+
+          <div class="modal-body">
+            <slot name="body">
+              default body
+
+
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              default footer
+
+            </slot>
+          </div>
+        </div>
+      </div>
+    </div>
+</script>
+
+    <!-- app -->
+    <div id="app">
+        <button id="show-modal" @click="showModal = true">Show Modal</button>
+        <!-- use the modal component -->
+        <transition name="modal">
+            <modal v-if="showModal" @close="showModal = false">
+                <!--
+        you can use custom content here to overwrite
+        default content
+      -->
+                <template v-slot:body>
+                    <button @click="content='name'" class="medium_button btn_p08_user_tab"> 註冊會員 | Sign up </button>
+                    <button @click="content='date'" class="medium_button btn_p08_user_tab"> 登入會員 | Log in </button>
+                    <hr class="hr_p08_user_login">
+                </template>
+                <template v-slot:footer>
+                    <component :is="content"></component>
+
+                </template>
+
+
+
+            </modal>
+        </transition>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data: function () {
+                return {
+                    showModal: false,
+                    content: 'name',
+                }
+            },
+            methods: {
+                showsModal() {
+                    this.showModal = true;
+                },
+                closeModal() {
+                    this.showModal = false;
+                },
+                changetab(){}
+            },
+        });
+
+
+        // register modal component
+        app.component("modal", {
+            template: "#modal-template"
+        });
+        app.component('name', {
+            template: `
+            <div class="div_p08_user_textCenter">【使用以下帳戶連結】</div>
+
+            
+            <div class="div_p08_user_loginType">
+                        <button class="medium_button btn_p08_user_loginType">FB</button>
+                        <button class="medium_button btn_p08_user_loginType">LINE</button>
+                        <button class="medium_button btn_p08_user_loginType">GOOGLE</button>
+            </div>
+                    <br>
+            <div class="div_p08_user_textCenter">【或註冊一個新帳號】</div>
+             
+                    
+            <p class="text_title">
+                    帳號/ Account 
+                    <br>
+            </p>
+            <input class="input_p08_user_login" type="text" placeholder="請輸入E-mail作為登入帳號">
+
+            <p class="text_title">
+                    密碼/ Password 
+                    <br>
+            </p>
+            <input class="input_p08_user_login" type="text" placeholder="請輸入6個以上字元的密碼">
+
+            <p class="text_title">
+                    再次輸入密碼/ Password
+                    <br>
+            </p>
+            <input class="input_p08_user_login" type="text" placeholder="再次輸入密碼">
+
+            <p class="text_title">
+                    顯示名稱/ Name 
+                    <br>
+            </p>
+            <input class="input_p08_user_login" type="text" placeholder="請輸入名字做為稱呼">
+            <button class="medium_button btn_p08_user_loginType">確定註冊 Sign up</button>
+            `,
+        })
+        app.component('date', {
+            template: `
+            <div class="div_p08_user_textCenter">【使用以下帳戶登入】</div>
+
+            
+<div class="div_p08_user_loginType">
+            <button class="medium_button btn_p08_user_loginType">FB</button>
+            <button class="medium_button btn_p08_user_loginType">LINE</button>
+            <button class="medium_button btn_p08_user_loginType">GOOGLE</button>
+</div>
+        <br>
+<div class="div_p08_user_textCenter">【或輸入帳密登入】</div>
+ 
+
+            <p class="text_title">
+                    帳號/ Account 
+                    <br>
+            </p>
+            <input class="input_p08_user_login" type="text" placeholder="E-mail">
+
+            <p class="text_title">
+                    密碼/ Password 
+                    <br>
+            </p>
+            <input class="input_p08_user_login" type="text" placeholder="Password">
+            <button class="medium_button btn_p08_user_loginType">登入 Log in</button>
+            <p><a href="#" class="a_p08_user_link">忘記密碼了嗎?</a></p>
+            `,
+        })
+
+
+
+        app.mount('#app');
+        
+    </script>
+
+</body>
+
+</html>
