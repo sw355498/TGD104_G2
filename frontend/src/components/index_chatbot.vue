@@ -3,7 +3,7 @@
     <div class="chatbot_index" v-if="showComponent">
         <div class="chatTitle">
             <figure class="robot">
-                <!-- <img src="../assets/img/icon/robot.png" /> -->
+                <!-- <img src="../assets/icon/robot.svg" /> -->
                 <svg><use xlink:href="#robot" /></svg>
             </figure>
             <div class="chatTitle_text">
