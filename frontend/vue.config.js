@@ -1,9 +1,11 @@
 const { defineConfig } = require('@vue/cli-service')
 const webpack = require("webpack")
 const path = require('path')
+const { CKEditorTranslationsPlugin } = require( '@ckeditor/ckeditor5-dev-translations' );
+const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 
 module.exports = defineConfig({
-    transpileDependencies: true,
+    transpileDependencies: [/ckeditor5-[^/\\]+[/\\]src[/\\].+\.js$/],
 
     configureWebpack: {
         plugins: [
@@ -15,23 +17,61 @@ module.exports = defineConfig({
         ]
     },
     chainWebpack: config => {
-      // 先刪除預設的svg配置
-      config.module.rules.delete("svg")
+        // 先刪除預設的svg配置
+        config.module.rules.delete("svg")
       
-      // 新增 svg-sprite-loader 設定
-      config.module
-        .rule("svg-sprite-loader") 
-        .test(/\.svg$/)
-        .include
-        .add(path.resolve(__dirname, "src/assets/icon"))
-        .end()
-        .use("svg-sprite-loader")
-        .loader("svg-sprite-loader")
-        .options({ symbolId: "[name]" })
-        
-      // 修改 images-loader 配置
-      config.module
-        .rule("images")
-        .exclude.add(path.resolve(__dirname, "src/assets/icon"))
+        // 新增 svg-sprite-loader 設定
+        config.module
+            .rule("svg-sprite-loader") 
+            .test(/\.svg$/)
+            .include
+            .add(path.resolve(__dirname, "src/assets/icon"))
+            .end()
+            .use("svg-sprite-loader")
+            .loader("svg-sprite-loader")
+            .options({ symbolId: "[name]" })
+            
+        // 修改 images-loader 配置
+        config.module
+            .rule("images")
+            .exclude.add(path.resolve(__dirname, "src/assets/icon"))
+
+
+        // CKEditor設定
+        config.module
+        .rule('ckeditor')
+        .test(/\.ckeditor5\/[^/\\]+\/theme\/icons\/[^/\\]+\.svg$/)
+        .use('raw-loader')
+        .loader('raw-loader')
+        .end();
+
+        config.module
+        .rule('vue')
+        .use('vue-loader')
+        .loader('vue-loader')
+        .tap(options => {
+          options.compilerOptions = {
+            ...options.compilerOptions,
+            isCustomElement: tag => tag.startsWith('ckeditor-')
+          };
+          return options;
+        })
+        .end();
+
+        config.module
+        .rule( 'cke-css' )
+        .test( /ckeditor5-[^/\\]+[/\\].+\.css$/ )
+        .use( 'postcss-loader' )
+        .loader( 'postcss-loader' )
+        .tap( () => {
+            return {
+                postcssOptions: styles.getPostCssConfig( {
+                    themeImporter: {
+                        themePath: require.resolve( '@ckeditor/ckeditor5-theme-lark' ),
+                    },
+                    minify: true
+                } )
+            };
+        } );
     }
 })
