@@ -12,8 +12,7 @@
 /* ========= 瀏覽器 ===========*/
 .browser_p07_demoShopping{
     overflow-y: scroll;
-    overflow-x: auto;
-    // overflow: hidden;
+    overflow-x: hidden;
     max-width: 1200px;
     width: 100%;
     border: 1px solid white;
@@ -39,13 +38,16 @@
     &::-webkit-scrollbar-track {
         box-shadow: transparent;
     }
-    .browser_container{
+    i{
+        color: $background_color;
+        margin: 10px;
+    }
+    // 瀏覽器上面toolbar
+    .toolbar_demoShopping{
+        position: sticky;
+        top: 0;
         background-color: white;
-        i{
-            color: $background_color;
-            margin: 10px;
-        }
-        // 瀏覽器上面toolbar
+        z-index: 10;
         .toolbar_top_demoShopping{
             padding: 0px 20px;
             display: flex;
@@ -76,6 +78,128 @@
                 flex-grow: 1;
                 color: $background_color;
             }
+        }
+    }
+    // ========= 下單 =========
+    .cart_p07_demoShopping{
+        // outline: 10px solid red;
+        // height: 100%;
+        position: absolute;
+        max-width: 1200px;
+        width: 100%;
+        height: calc(70vh - 84px);
+        background-color: rgba(0,0,0,0.5);;
+        .cart_container_p07_demoShopping{
+            overflow-y: scroll;
+            overflow-x: hidden;
+            float: right;
+            width: 70%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.884);
+            color: black;
+            p{
+                color: black;
+            }
+        }
+        // title
+        .title{
+            outline: 1px solid;
+            display: flex;
+            padding: 20px;
+            justify-content: space-between;
+            font-size: 24px;
+        }
+        // 沒商品 ==========
+        .non_cart{
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .bagIcon{
+                margin: 0 auto;
+                width: 200px;
+                height: 200px;
+                background-color: #ff3b30;
+                border-radius: 50%;
+                i{
+                    // overflow: hidden;
+                    color: white;
+                    font-size: 100px;
+                    padding: 40px 45px;
+                }
+            }
+            button{
+                width: 200px;
+                height: 40px;
+                margin: 50px auto 0;
+                border: none;
+                border-radius: 10px;
+            }
+        }
+        // 有商品 ==========
+        .cart_list{
+            padding: 20px;
+            .products{
+                outline: 1px solid red;
+                display: flex;
+                justify-content: space-between;
+                img{
+                    max-width: 100px;
+                    width: 100%;
+                    object-fit: contain;
+                }
+                .product_details{
+                    padding: 0 20px;
+                    flex-grow: 1;
+                }
+            }
+        }
+        .total{
+            // outline: 1px solid red;
+            display: flex;
+            flex-direction: column;
+            color: gray;
+            .total_item{
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                padding-left: 120px;
+            }
+            .total_price{
+                color: #ff3b30;
+                font-size: 20px;
+            }
+        }
+        .selected{
+            padding: 20px;
+            label{
+                display: flex;
+                margin: 20px 0;
+                span{
+                    padding: 0 10px;
+                }
+            }
+            p{
+                font-size: 20px;
+                font-weight: 800;
+            }
+            button{
+                color: white;
+                font-size: 20px;
+                font-weight: 800;
+                width: 200px;
+                line-height: 40px;
+                border: none;
+                border-radius:20px;
+                background-color: #ff3b30;
+                margin: 10px 0;
+            }
+        }
+        .box{
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
         }
     }
     // ========= 假購物網站 =========
@@ -428,4 +552,5 @@
         }
 
     }
+       
 }

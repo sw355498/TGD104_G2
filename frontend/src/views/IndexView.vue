@@ -23,7 +23,6 @@
 
       <!-- 機器人 -->
       <div class="robot_index_btn">
-        <button @click="closeComponent">關閉</button>
       </div>
     </section>
 
@@ -171,7 +170,7 @@
 <script>
 // 要外掛聊天機器人
 // @ is an alias to /src
-import indexChatbot from "@/components/indexChatbot.vue";
+import indexChatbot from "@/components/index_chatbot.vue";
 
 export default {
   components: {

@@ -10,6 +10,7 @@
                 <p>專屬機器人</p>
                 <p>詐知就好</p>
             </div>
+            <i class="fa-solid fa-xmark"></i>
         </div>
         <div class="chatWindow">
             <!-- 一開始就有的文字 -->
@@ -148,7 +149,7 @@ export default {
   background:rgba(0,0,0,0.5);
 }
 .chatbot_index {
-    position: absolute;
+    position: fixed;
     top: 50%;
     right: 20%;
     transform: translate(20%, -50%);
@@ -190,6 +191,13 @@ export default {
                 font-weight: 300;
                 letter-spacing: 1px;
             }
+        }
+        .fa-xmark{
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
         }
     }
     // ============ 對話 ============
