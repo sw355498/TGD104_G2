@@ -16,6 +16,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 
 // js-grid套件引入
+import $ from 'jquery'
 import 'jsgrid/dist/jsgrid.min.css';
 import 'jsgrid/dist/jsgrid.min.js';
 

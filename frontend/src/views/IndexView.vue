@@ -22,7 +22,12 @@
       </div>
 
       <!-- 機器人 -->
-      <div class="robot_index_btn"></div>
+      <div class="robot_index_btn">
+        <svg style="position:fixed;bottom: 5%; right: 1%;"><use xlink:href="#robot" @click="showComponent = true"/></svg>
+        <!-- <indexChatbot :show="showComponent" @close="showComponent = false" /> -->
+        <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
+      
+      </div>
     </section>
 
     <!--Main Block -->
@@ -159,19 +164,17 @@
       </article>
     </main>
     <!--Main Block end -->
-    <!-- 聊天機器人 -->
     <div>
-      <indexChatbot />
+        <indexChatbot :show="showComponent" @close="showComponent = false" v-if="showComponent"/>
     </div>
   </div>
 </template>
 
-<script>
-// 要外掛聊天機器人
-// @ is an alias to /src
-import indexChatbot from "@/components/index_chatbot.vue";
-import navbar from "@/components/f_nav.vue"; 
 
+
+<script>
+import { ref } from 'vue'
+import indexChatbot from "@/components/index_chatbot.vue";
 export default {
   components: {
     indexChatbot,
@@ -179,7 +182,10 @@ export default {
   },
 
   setup() {
-    return {};
+    const showComponent = ref(false);
+    return {
+      showComponent,
+    };
   },
 };
 </script>
