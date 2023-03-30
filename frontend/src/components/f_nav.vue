@@ -1,80 +1,32 @@
 <template>
   <header>
-    <!-- Navgation Bar -->
     <nav class="menu_index_nav">
       <div class="logo_index_nav">
-        <span
-          ><a href="#"><img src="../assets/img/Logo.png" /></a
-        ></span>
+        <span>
+          <router-link to="/index">
+            <svg><use xlink:href="#Logo" /></svg>
+          </router-link>
+        </span>
       </div>
       <!-- Member Button Block -->
       <div class="wrap_index_nav">
-        <a
-          class="h6_component big_button member_index_nav"
-          href="../views/pages/p08_user.html"
-          target="_parent"
-          ><i class="fa-solid fa-user"></i>
-        </a>
+        <button class="h6_component big_button member_index_nav">
+          <i class="fa-solid fa-user"></i>
+        </button>
 
-        <ul class="links_index_nav">
-          <li>
-            <a
+        <ul class="links_index_nav" :class="{ active: isActive }">
+          <li v-for="navItem in nav" :key="navItem.id">
+            <router-link
+              to={{navItem.router}}
               class="h6_component"
-              href="../views/pages/p01_news.html"
               target="_parent"
-              >{{ menu. }}最新消息</a
             >
-          </li>
-          <li>
-            <a
-              class="h6_component"
-              href="../views/pages/p02_teach.html"
-              target="_parent"
-              >防範詐騙教學</a
-            >
-          </li>
-          <li>
-            <a
-              class="h6_component"
-              href="../views/pages/p03_reportURL.html"
-              target="_parent"
-              >回報可疑網站</a
-            >
-          </li>
-          <li>
-            <a
-              class="h6_component"
-              href="../views/pages/p04_gov.html"
-              target="_parent"
-              >政府資訊連結</a
-            >
-          </li>
-          <li>
-            <a
-              class="h6_component"
-              href="../views/pages/p05_faq.html"
-              target="_parent"
-              >詐騙FAQ</a
-            >
-          </li>
-          <li>
-            <a
-              class="h6_component"
-              href="../views/pages/p06_discuss.html"
-              target="_parent"
-              >討論專區</a
-            >
-          </li>
-          <li>
-            <a
-              class="h6_component"
-              href="../views/pages//p09_team.html"
-              target="_parent"
-              >團隊介紹</a
-            >
+              {{ navItem.Name }}
+            </router-link>
           </li>
         </ul>
-        <div class="hamburger">
+        <!-- hamburger icon -->
+        <div class="hamburger" @click="navClick">
           <svg
             class="ham hamRotate ham4"
             viewBox="0 0 100 100"
@@ -91,28 +43,76 @@
               d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"
             />
           </svg>
+          <!-- <svg><use xlink:href="#navham" /></svg> -->
         </div>
       </div>
     </nav>
     <!-- <hr /> -->
-    <!-- Navgation Bar end-->
   </header>
 </template>
+
 <script>
+import { ref, reactive } from "vue";
 export default {
-  data() {
+  name: "navbar",
+  setup() {
+    const nav = reactive([
+      {
+        id: "p01",
+        router: "/about",
+        Name: "最新消息",
+      },
+      {
+        id: "p02",
+        router: "/p02",
+        Name: "防範詐騙教學",
+      },
+      {
+        id: "p03",
+        router: "/reportUrl",
+        Name: "回報可疑網站",
+      },
+      {
+        id: "p04",
+        router: "/p04",
+        Name: "政府資訊連結",
+      },
+      {
+        id: "p05",
+        router: "/p05",
+        Name: "詐騙FAQ",
+      },
+      {
+        id: "p06",
+        router: "/p06",
+        Name: "討論專區",
+      },
+      {
+        id: "p09",
+        router: "/p09_team",
+        Name: "團隊介紹",
+      },
+    ]);
+
+    //判斷開啟ul
+    const isActive = ref(false);
+    const navClick = () => {
+      //切換狀態active狀態
+      isActive.value = !isActive.value;
+      let bodyTag = document.querySelector("body");
+      //判斷背景不可滑動
+      bodyTag.style.cssText = isActive.value
+        ? "height:100vh;overflow-y:hidden;"
+        : "";
+    };
+
     return {
-      menulink: [
-        "最新消息",
-        "防範詐騙教學",
-        "回報可疑網站",
-        "政府資訊連結",
-        "討論專區",
-        "詐騙FAQ",
-        "團隊介紹",
-      ],
+      isActive,
+      nav,
+      navClick,
     };
   },
 };
 </script>
+
 <style></style>

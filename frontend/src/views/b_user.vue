@@ -58,7 +58,7 @@ export default {
                 width: "100%",
         
                 inserting: false, //添加
-                editing: false, //編輯
+                editing: true, //編輯
                 sorting: true, //排序
 
                 /*分頁設定*/
