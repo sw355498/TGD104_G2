@@ -1,6 +1,7 @@
 <template>
 <div>
-    <div class="chatbot_index" v-if="showComponent">
+    <!-- <div class="chatbot_index" v-if="show" > -->
+    <div class="chatbot_index" >
         <div class="chatTitle">
             <figure class="robot">
                 <!-- <img src="../assets/icon/robot.svg" /> -->
@@ -10,7 +11,7 @@
                 <p>專屬機器人</p>
                 <p>詐知就好</p>
             </div>
-            <i class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
         </div>
         <div class="chatWindow">
             <!-- 一開始就有的文字 -->
@@ -37,28 +38,21 @@
             <button type="submit" class="message-submit chat__send-button"  @click="sendMessage">➤</button>
         </div>
     </div>
-    <svg style="position:fixed;bottom: 5%; right: 1%;"><use xlink:href="#robot" @click="showComponent = true; listenClickEvent"/></svg>
-    <div class="clost-bg" v-if="showComponent" @click="closeComponent"></div>
+    <!-- <svg style="position:fixed;bottom: 5%; right: 1%;"><use xlink:href="#robot" @click="showComponent = true; listenClickEvent"/></svg> -->
+    <div class="clost-bg" @click="$emit('close')"></div>
 
 </div>
 </template>
 
+
 <script>
 import { ref, reactive } from 'vue'
-
 export default {
   name: 'Chat',
   setup() {
+    // console.log(props.show);
     const messages = ref([]) // 存儲聊天記錄的數組
     const inputValue = ref('') // 存儲輸入框的值
-    const botMessages = reactive({
-      // 聊天機器人的回覆
-      hello: '你好，有什麼問題嗎？',
-      name: '我叫 ChatBot。',
-      weather: '今天天氣很好。',
-      default: '抱歉，我不明白你的問題。',
-    })
-
     function sendMessage() {
       if (inputValue.value) {
         // 將用戶輸入的訊息加入到聊天記錄數組中
@@ -105,30 +99,10 @@ export default {
             botMsg = 'Sorry, I did not understand what you said.';
         }
         return botMsg;
-        }
-    // 點擊才出現
-    const showComponent = ref(false);
-    let clickListener;
-
-    function listenClickEvent() {
-      clickListener = () => {
-        showComponent.value = false;
-        document.removeEventListener("click", clickListener);
-      };
-      document.addEventListener("click", clickListener);
     }
-
-    function closeComponent() {
-      if (showComponent.value) {
-        showComponent.value = false;
-        document.removeEventListener("click", clickListener);
-      }
-    }
+    
 
     return {
-      showComponent,
-      listenClickEvent,
-      closeComponent,
       messages,
       inputValue,
       sendMessage,
@@ -136,12 +110,12 @@ export default {
   },
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
 .clost-bg{
 //   position: absolute;
   position: fixed;
+//   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
