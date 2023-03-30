@@ -1,6 +1,6 @@
 <template>
   <div class="body_index_block">
-    <navbar />
+    <!-- <navbar /> -->
     <!--Top Dynamic-->
     <section>
       <!-- Banner -->
@@ -23,10 +23,11 @@
 
       <!-- 機器人 -->
       <div class="robot_index_btn">
-        <svg style="position:fixed;bottom: 5%; right: 1%;"><use xlink:href="#robot" @click="showComponent = true"/></svg>
+        <svg style="position: fixed; bottom: 5%; right: 1%">
+          <use xlink:href="#robot" @click="showComponent = true" />
+        </svg>
         <!-- <indexChatbot :show="showComponent" @close="showComponent = false" /> -->
         <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
-      
       </div>
     </section>
 
@@ -165,20 +166,22 @@
     </main>
     <!--Main Block end -->
     <div>
-        <indexChatbot :show="showComponent" @close="showComponent = false" v-if="showComponent"/>
+      <indexChatbot
+        :show="showComponent"
+        @close="showComponent = false"
+        v-if="showComponent"
+      />
     </div>
   </div>
 </template>
 
-
-
 <script>
-import { ref } from 'vue'
+import { ref } from "vue";
 import indexChatbot from "@/components/index_chatbot.vue";
 export default {
   components: {
     indexChatbot,
-    navbar,
+    // navbar,
   },
 
   setup() {
