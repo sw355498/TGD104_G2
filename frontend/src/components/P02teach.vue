@@ -12,6 +12,7 @@
         v-for="(tab, tab_index) in tabs"
         :class="{ tab: true, active: active_tab == tab_index }"
         @click="changeTab(tab_index)"
+        :key="tab_index"
       >
         <div class="tab-label h5">{{ tab.label }}</div>
       </div>
@@ -19,6 +20,7 @@
     <div
       v-for="(tab, tab_index) in tabs"
       :class="{ content: true, active: active_tab == tab_index }"
+      :key="tab_index"
     >
       <!-- 假投資詐騙 start -->
       <div class="div_wrapper">
@@ -28,7 +30,7 @@
         <div class="div_p02_teach_content">
           <div class=".div_p02_teach_contentLeft">
             <div class="div_p02_teach_contentImg">
-              <img v-for="img in tab.images" :src="img" />
+              <img v-for="(img,index) in tab.images" :src="img"  :key="index"/>
             </div>
           </div>
           <div class="div_p02_teach_contentRight">
@@ -36,7 +38,7 @@
               <span class="span_underline">手法與特徵</span>
             </h3>
 
-            <div v-for="(step, key) in tab.steps" :key="index">
+            <div v-for="(step, key) in tab.steps" :key="key">
               <div class="div_p02_teach_method">
                 <p class="div_p02_teach_step text_title">Tip {{ key }}</p>
                 <p class="div_p02_teach_stepText paragraph">
@@ -53,7 +55,7 @@
         <div class="div_p02_teach_prevent">
           <div
             class="div_p02_teach_preventBox paragraph"
-            v-for="item in tab.preventbox"
+            v-for="(item,index) in tab.preventbox"
             :key="index"
           >
             {{ item }}
@@ -65,7 +67,8 @@
         </div>
         <div class="div_p02_teach_vedio">
           <iframe
-            v-for="film in tab.vedio"
+            v-for="(film,index) in tab.vedio"
+            :key="index"
             :src="film"
             class="div_p02_teach_vedioBox"
             title="YouTube video player"
