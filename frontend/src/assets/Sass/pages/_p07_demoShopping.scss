@@ -464,6 +464,7 @@
         .scamWeb_p07_demoShopping_clothCardContainer{
             width: 100%;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             .scamWeb_p07_demoShopping_clothCard{
                 // flex-grow: 1;
