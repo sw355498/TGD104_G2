@@ -1,8 +1,8 @@
 <template>
   <div class="body_index_block">
-    <!-- <svg><use xlink:href="#robot" @click="showComponent = true; listenClickEvent"/></svg> -->
+    <!-- <navbar /> -->
     <!--Top Dynamic-->
-    <section >
+    <section>
       <!-- Banner -->
       <h2>prevent</h2>
       <div id="banner_index_dynamicText">
@@ -23,6 +23,11 @@
 
       <!-- 機器人 -->
       <div class="robot_index_btn">
+        <svg style="position: fixed; bottom: 5%; right: 1%">
+          <use xlink:href="#robot" @click="showComponent = true" />
+        </svg>
+        <!-- <indexChatbot :show="showComponent" @close="showComponent = false" /> -->
+        <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
       </div>
     </section>
 
@@ -160,24 +165,29 @@
       </article>
     </main>
     <!--Main Block end -->
-    <!-- 聊天機器人 -->
     <div>
-      <indexChatbot />
+      <indexChatbot
+        :show="showComponent"
+        @close="showComponent = false"
+        v-if="showComponent"
+      />
     </div>
   </div>
 </template>
 
 <script>
-// 要外掛聊天機器人
-// @ is an alias to /src
+import { ref } from "vue";
 import indexChatbot from "@/components/index_chatbot.vue";
-
 export default {
   components: {
     indexChatbot,
+    // navbar,
   },
+
   setup() {
+    const showComponent = ref(false);
     return {
+      showComponent,
     };
   },
 };

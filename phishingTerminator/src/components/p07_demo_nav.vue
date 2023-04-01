@@ -1,0 +1,12 @@
+<template>
+    <div class="demo">
+        <h1>DEMO 體驗</h1>
+        <br>
+        <div class="demoBtn">
+            <button class="big_button">詐騙網站</button>
+            <button class="big_button">詐騙知識測驗</button>
+            <button class="big_button">電話詐騙</button>
+            <button class="big_button">愛情交友詐騙</button>    
+        </div>
+    </div>
+</template>

@@ -11,38 +11,42 @@
 }
 /* ========= 瀏覽器 ===========*/
 .browser_p07_demoShopping{
-    overflow-y: scroll;
-    overflow-x: hidden;
     max-width: 1200px;
     width: 100%;
     border: 1px solid white;
     border-radius: 8px;
     height: 70vh;
     margin: 20px auto;
+    overflow: hidden;
     background-color: white;
-    &::-webkit-scrollbar {
-        width: 7px;
+    .browser_container{
+        overflow-y: scroll;
+        width: 100%;
+        height: calc(70vh - 84px);
+        &::-webkit-scrollbar {
+            width: 7px;
+        }
+        &::-webkit-scrollbar-button {
+            background: transparent;
+            border-radius: 4px;
+        }
+        &::-webkit-scrollbar-track-piece {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid slategrey;
+        }
+        &::-webkit-scrollbar-track {
+            box-shadow: transparent;
+        }
     }
-    &::-webkit-scrollbar-button {
-        background: transparent;
-        border-radius: 4px;
-    }
-    &::-webkit-scrollbar-track-piece {
-        background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-        border-radius: 4px;
-        background-color: rgba(0, 0, 0, 0.4);
-        border: 1px solid slategrey;
-    }
-    &::-webkit-scrollbar-track {
-        box-shadow: transparent;
-    }
+    // 瀏覽器上面toolbar
     i{
         color: $background_color;
         margin: 10px;
     }
-    // 瀏覽器上面toolbar
     .toolbar_demoShopping{
         position: sticky;
         top: 0;
@@ -95,23 +99,25 @@
             float: right;
             width: 70%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.884);
+            background-color: white;
             color: black;
             p{
                 color: black;
             }
         }
-        // title
+        // ========== title ==========
         .title{
-            outline: 1px solid;
+            // outline: 1px solid;
+            border-bottom: 1px solid lightgray;
             display: flex;
             padding: 20px;
             justify-content: space-between;
             font-size: 24px;
         }
-        // 沒商品 ==========
+        // ========== 沒商品 ==========
         .non_cart{
             padding: 20px;
+            margin-top: 100px;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -119,7 +125,7 @@
                 margin: 0 auto;
                 width: 200px;
                 height: 200px;
-                background-color: #ff3b30;
+                background-color: lightgray;
                 border-radius: 50%;
                 i{
                     // overflow: hidden;
@@ -133,20 +139,25 @@
                 height: 40px;
                 margin: 50px auto 0;
                 border: none;
-                border-radius: 10px;
+                border-radius: 20px;
+                background-color: #ff3b30;
+                color: white;
             }
         }
-        // 有商品 ==========
+        // ========== 有商品 ==========
         .cart_list{
-            padding: 20px;
+            padding: 40px;
             .products{
-                outline: 1px solid red;
+                // outline: 1px solid red;
                 display: flex;
                 justify-content: space-between;
+                margin: 10px 0;
                 img{
                     max-width: 100px;
                     width: 100%;
                     object-fit: contain;
+                    border-radius: 10px;
+                    overflow: hidden;
                 }
                 .product_details{
                     padding: 0 20px;
@@ -154,35 +165,29 @@
                 }
             }
         }
+        // ========== 總計價格 ==========
         .total{
             // outline: 1px solid red;
             display: flex;
             flex-direction: column;
             color: gray;
+            margin: 20px 0;
             .total_item{
                 display: flex;
                 justify-content: space-between;
                 padding: 10px 0;
-                padding-left: 120px;
+                // margin-left: 120px;
+                border-bottom: 1px solid lightgrey;
             }
             .total_price{
                 color: #ff3b30;
                 font-size: 20px;
+                font-weight: 600;
             }
         }
-        .selected{
-            padding: 20px;
-            label{
-                display: flex;
-                margin: 20px 0;
-                span{
-                    padding: 0 10px;
-                }
-            }
-            p{
-                font-size: 20px;
-                font-weight: 800;
-            }
+        // ========== 輸入 ==========
+        form{
+            // 立刻下單
             button{
                 color: white;
                 font-size: 20px;
@@ -194,17 +199,98 @@
                 background-color: #ff3b30;
                 margin: 10px 0;
             }
+
         }
+        // 單選區
+        .selected{
+            label{
+                display: flex;
+                margin: 20px;
+                span{
+                    padding: 0 10px;
+                }
+            }
+            p{
+                font-size: 20px;
+                font-weight: 800;
+            }
+        }
+        // 框
         .box{
             border: 1px solid gray;
             border-radius: 5px;
             padding: 20px;
             margin: 20px 0;
+            color: #707070;
+            p{
+                color: #ff3b30;
+            }
+        }
+        // 信用卡輸入資訊
+        .credit_card{
+            .form_container {
+                display: grid;
+                margin: 0;
+                grid-column-gap: 10px;
+                grid-template-columns: auto auto;
+                grid-template-rows: 90px 90px 90px;
+                grid-template-areas: "number number""name name""expiration security";
+                .field_container {
+                    input {
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        width: 100%;
+                        border-radius: 3px;
+                        border: 1px solid #dcdcdc;
+                        padding: 10px 15px;
+                        font-size: 14px;
+                    }
+                    #generatecard{
+                        padding: 0;
+                        cursor: pointer;
+                        float: right;
+                        font-size: 12px;
+                        color: #fff;
+                        padding: 2px 4px;
+                        background-color: #909090;
+                        border-radius: 4px;
+                    }
+                }
+                .field_container:first-of-type { grid-area: number;}
+                .field_container:nth-of-type(2) {grid-area: name;}
+                .field_container:nth-of-type(3) {grid-area: expiration;}
+                .field_container:nth-of-type(4) {grid-area: security;}
+            }
+        }
+        // 門市輸入資訊
+        .delever_stroes{
+            .form_container{
+                display: flex;
+                flex-direction: column;
+                .field_container{
+                    margin: 20px 0;
+                    input,
+                    select{
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        width: 100%;
+                        border-radius: 3px;
+                        border: 1px solid #dcdcdc;
+                        padding: 10px 15px;
+                        font-size: 14px;
+                    }
+                }
+                .store_info{
+                    display: flex;
+                }
+            }
         }
     }
     // ========= 假購物網站 =========
     .scamWeb_p07_demoShopping_container{
-        
+        max-width: 1200px;
+        width: 100%;
+        outline: 10px solid red;
         // ========= 假購物網站 nav =========
         .scamWeb_p07_demoShopping_nav{
             // width: 1200px;
@@ -365,6 +451,13 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
+            // flex-wrap: wrap;
+            img{
+                width: 100%;
+                flex-shrink:1;
+                max-width: 595px;
+                object-fit: contain;
+            }
         }
 
         // ========= 衣服卡片區 =========

@@ -1,6 +1,15 @@
 <template>
-  <div class="home">
-
-    <h1>Welcome to Your Vue.js App</h1>
-  </div>
+    <div>
+        <Textblock />
+    </div>
 </template>
+
+<script>
+    import Textblock from '@/components/CKEditor.vue'
+    
+    export default {
+        components:{
+            Textblock
+        }
+    }
+</script>

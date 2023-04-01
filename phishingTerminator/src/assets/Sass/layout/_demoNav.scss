@@ -1,0 +1,12 @@
+/* ------ demo 四個選擇 ------ */
+.demo{
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    /* outline: 1px solid red; */
+}
+.demoBtn{
+    display: flex;
+    justify-content: space-between;
+}

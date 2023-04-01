@@ -98,3 +98,27 @@
   justify-content: center;
   align-items: center;
 }
+
+
+@mixin rwd($breakpoint){
+  @each $breakpoint, $value in $breakpoints {
+      @media (min-width: $value) {
+        @content;
+      }
+  }
+}
+
+/* 使用 mixin
+  @include rwd('sm'){
+    // 手機上的樣式
+  }
+
+  @include rwd('md') {
+    // 平板上的樣式
+  }
+
+  @include rwd('lg'){
+    // 電腦上的樣式
+  }
+
+*/
