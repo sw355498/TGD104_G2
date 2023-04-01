@@ -28,9 +28,10 @@
                 </div>
                 <!-- 除了toolbar的內容區 -->
                 <div class="browser_container">
-                    <!-- 下單購物車 -->
+                    <!-- =============== 下單購物車 =============== -->
                     <div class="cart_p07_demoShopping" v-if="showComponent">
-                        <p07_demoShopping_cart/>
+                        <!-- 在元件上面加 :bind 就可以把資料傳進去 -->
+                        <p07_demoShopping_cart :cart="cart"/>
                         <div class="mask" v-if="showComponent" @click="closeComponent"></div>
                     </div>
                     <!-- 假購物網站 -->
@@ -88,16 +89,20 @@
                             <img src="../assets/img/p07_demo/p07_demoShopping/onepage-01.jpg">
                         </div>
 
-                        <!-- 衣服卡片區第一排 -->
+                        <!-- 衣服卡片區 -->
                         <div class="scamWeb_p07_demoShopping_clothCardContainer">
-                            <div class="scamWeb_p07_demoShopping_clothCard">
+                            <!-- v-for 商品列表 -->
+                            <div 
+                                v-for="(product, index) in products" :key="index"
+                                class="scamWeb_p07_demoShopping_clothCard" 
+                            >
                                 <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
+                                <img :src="product.imageUrl" :alt="product.name" />
                                 <a href="#">女裝>洋裝</a>
-                                <p class="scamWeb_p07_demoShopping_clothCardP">高端修身收腰顯瘦圖騰氣質洋裝</p>
+                                <div>{{ product.name }}</div>
                                 <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
+                                    <span>$1980</span>
+                                    <span>${{ product.price }}</span>
                                 </div>
                                 <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
                                     <li>S</li>
@@ -105,136 +110,9 @@
                                     <li>L</li>
                                     <li>XL</li>
                                 </ul>
-                                <button>加入購物車</button>
+                                <button @click.prevent="addProductToCart(product)">加入購物車</button>
                             </div>
-
-                            <!-- 以下將會改為 v-for -->
-                            <div class="scamWeb_p07_demoShopping_clothCard">
-                                <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
-                                <a href="#">女裝>洋裝</a>
-                                <p>高端修身收腰顯瘦圖騰氣質洋裝</p>
-                                <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
-                                </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                                <button>加入購物車</button>
-                            </div>
-                            <div class="scamWeb_p07_demoShopping_clothCard">
-                                <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
-                                <a href="#">女裝>洋裝</a>
-                                <p>高端修身收腰顯瘦圖騰氣質洋裝</p>
-                                <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
-                                </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                                <button>加入購物車</button>
-                            </div>
-                            <div class="scamWeb_p07_demoShopping_clothCard">
-                                <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
-                                <a href="#">女裝>洋裝</a>
-                                <p>高端修身收腰顯瘦圖騰氣質洋裝</p>
-                                <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
-                                </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                                <button>加入購物車</button>
-                            </div>
-                            <!-- 以上將會改為 v-for -->
-                        </div>
-                        <!-- 衣服卡片區第二排 -->
-                        <div class="scamWeb_p07_demoShopping_clothCardContainer">
-                            <div class="scamWeb_p07_demoShopping_clothCard">
-                                <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
-                                <a href="#">女裝>洋裝</a>
-                                <p class="scamWeb_p07_demoShopping_clothCardP">高端修身收腰顯瘦圖騰氣質洋裝</p>
-                                <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
-                                </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                                <button>加入購物車</button>
-                            </div>
-
-                            <!-- 以下將會改為 v-for -->
-                            <div class="scamWeb_p07_demoShopping_clothCard">
-                                <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
-                                <a href="#">女裝>洋裝</a>
-                                <p>高端修身收腰顯瘦圖騰氣質洋裝</p>
-                                <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
-                                </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                                <button>加入購物車</button>
-                            </div>
-                            <div class="scamWeb_p07_demoShopping_clothCard">
-                                <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
-                                <a href="#">女裝>洋裝</a>
-                                <p>高端修身收腰顯瘦圖騰氣質洋裝</p>
-                                <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
-                                </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                                <button>加入購物車</button>
-                            </div>
-                            <div class="scamWeb_p07_demoShopping_clothCard">
-                                <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
-                                <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg">
-                                <a href="#">女裝>洋裝</a>
-                                <p>高端修身收腰顯瘦圖騰氣質洋裝</p>
-                                <div class="scamWeb_p07_demoShopping_clothCardPrice">
-                                    <span>$1900.00</span>
-                                    <span>$499</span>
-                                </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                                <button>加入購物車</button>
-                            </div>
-                            <!-- 以上將會改為 v-for -->
+                            
                         </div>
 
                         <!-- 第四紅條廣告詞 -->
@@ -314,11 +192,73 @@ import p07_demoShopping_cart from "@/components/p07_demoShopping_cart.vue";
 export default {
     name: 'shoppingCart',
     components: {
-    p07_demo_nav,
-    p07_demoShopping_cart
+        p07_demo_nav,
+        p07_demoShopping_cart
     },
     setup(){
-        // 點擊才出現
+        const cart = ref([])
+        const product = ref({ name: '', price: 0 , number: 1 });
+        const products = ref([
+        {
+            name: '自制春夏修身高腰洋裝',
+            price: 499,
+            // 抓不到圖片路徑 要先用 require 包起來
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic03.jpg'),
+            number: 1
+        },
+        {
+            name: '仿亞麻復古圓領設計感洋裝',
+            price: 399,
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic04.jpg'),
+            number: 1
+        },
+        {
+            name: '高端修身收腰顯瘦圖騰氣質洋裝',
+            price: 499,
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic05.jpg'),
+            number: 1
+        },
+        {
+            name: '2023新款長袖復古中長版裙',
+            price: 499,
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic06.jpg'),
+            number: 1
+        },
+        {
+            name: '氣質白色連衣裙小個子',
+            price: 499,
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic07.jpg'),
+            number: 1
+        },
+        {
+            name: '修身收腰白色小晚禮服',
+            price: 499,
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic08.jpg'),
+            number: 1
+        },
+        {
+            name: '女神裙 設計氣質顯瘦連衣裙',
+            price: 499,
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic09.jpg'),
+            number: 1
+        },
+        {
+            name: '早春新款V領長袖法式設計洋裝',
+            price: 499,
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic10.jpg'),
+            number: 1
+        },
+        ]);
+        const addProductToCart = (product) => {
+            const index = cart.value.findIndex(item => item.name === product.name);
+            if (index >= 0) { // 如果購物車中已經有此商品，數量加 1
+                cart.value[index].number++;
+            } else { // 如果購物車中沒有此商品，新增至購物車中
+                cart.value.push({ ...product, number: 1 });
+            }
+        };
+
+        // 點擊才出現 =================================================
         const showComponent = ref(false);
         let clickListener;
 
@@ -336,11 +276,14 @@ export default {
             document.removeEventListener("click", clickListener);
         }
         }
-
         return {
-        showComponent,
-        listenClickEvent,
-        closeComponent,
+            cart,
+            product,
+            products,
+            addProductToCart,
+            showComponent,
+            listenClickEvent,
+            closeComponent,
         }
     },
 }
