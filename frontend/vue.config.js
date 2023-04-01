@@ -6,7 +6,10 @@ const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 
 module.exports = defineConfig({
     transpileDependencies: [/ckeditor5-[^/\\]+[/\\]src[/\\].+\.js$/],
-    publicPath:'./',
+    // publicPath:'./',
+    publicPath: process.env.NODE_ENV === 'production'
+    ? '/tgd104/g2/dist/'
+    : '/',
     configureWebpack: {
         plugins: [
             //jQuery 設定
