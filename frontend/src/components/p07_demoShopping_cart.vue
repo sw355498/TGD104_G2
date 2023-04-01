@@ -1,21 +1,5 @@
 <template>
     <div class="cart_container_p07_demoShopping">
-        <!-- 商品列表 -->
-        <form>
-            <label>
-                商品名稱：
-                <input type="text" v-model="product.name" />
-            </label>
-            <label>
-                商品價格：
-                <input type="number" v-model="product.price" />
-            </label>
-            <label>
-                商品數量：
-                <input type="number" v-model="product.num" />
-            </label>
-            <button @click.prevent="addProduct">加入商品</button>
-        </form>
         <!-- title -->
         <div class="title">
             <p>您的購物車</p>
@@ -29,28 +13,26 @@
             <button>目前尚未加入商品</button>
         </div>
         <!-- ========= 購物車有商品 ========= -->
-        <!-- <div class="cart_list"> -->
         <div class="cart_list" v-else>
             <!-- 商品列表 -->
-            <div class="products" v-for="(item, index) in cart" :key="index">
+            <!-- <div class="products" v-for="(item, index) in cart" :key="index"> -->
+            <div class="products" v-for="product in cart" :key="product.id">
                 <div class="product_img">
-                    <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg" alt="">
+                    <img :src="product.imageUrl" :alt="product.name" />
+                    <!-- <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg" alt=""> -->
                 </div>
                 <div class="product_details">
                     <p class="product_details_title" >
-                        早春新款V領法式洋裝小眾氣質高腰長裙
-                        {{ item.name }}
+                        {{ product.name }}
                     </p>
                     <div class="product_details_num">
                         <span> 數量
-                            <a href="javascript:void(0);" class="link-dark">
-                                <i class="fas fa-minus"></i>
-                            </a>{{ product.num }}
-                            <a href="javascript:void(0);" class="link-dark">
-                                <i class="fas fa-plus"></i>
-                            </a> x </span>
-                        <span> ${{ product.price }}</span>
+                            <i class="fas fa-minus" @click.prevent="updateProductNumber(product, -1)"></i>
+                            {{ product.number }}
+                            <i class="fas fa-plus" @click.prevent="updateProductNumber(product, 1)"></i>
+                        </span>
                     </div>
+                    <span> 單價 ${{ product.price }}</span>
                 </div>
                 <div class="product_details_price">
                     <span> ${{ totalPrice }}</span>
@@ -207,43 +189,46 @@
 import { ref, computed } from 'vue';
 
 export default {
-  name: 'ShoppingCart',
-  setup() {
-    const cart = ref([]);
-    const product = ref({ name: '', price: 0 , num: 0});
+  name: 'Cart',
+  props: {
+    cart: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  setup(props) {
+    const totalPrice = computed(() => {
+      return props.cart.reduce((acc, cur) => acc + cur.price * cur.number, 0);
+    });
+
+    const updateProductNumber = (product, amount) => {
+      product.number += amount;
+      if (product.number < 1) {
+        product.number = 1;
+      }
+    };
     const paymentMethod = ref('');
     const deleverMethod = ref('');
     const creditCardNumber = ref('');
     const expirationDate = ref('');
-    
-    const addProduct = () => {
-      cart.value.push({ ...product.value });
-      product.value = { name: '', price: 0 , num: 0};
-    };
-
     const submitPayment = () => {
-      cart.value = [];
-      paymentMethod.value = '';
-      deleverMethod.value = '';
-      creditCardNumber.value = '';
-      expirationDate.value = '';
+        cart.value = [];
+        paymentMethod.value = '';
+        deleverMethod.value = '';
+        creditCardNumber.value = '';
+        expirationDate.value = '';
     };
-
-    const totalPrice = computed(() => {
-      return cart.value.reduce((acc, item) => acc + item.price, 0);
-    });
-
     return {
-      cart,
-      product,
-      paymentMethod,
-      deleverMethod,
-      creditCardNumber,
-      expirationDate,
-      addProduct,
-      submitPayment,
-      totalPrice,
+        totalPrice,
+        updateProductNumber,
+        paymentMethod,
+        deleverMethod,
+        creditCardNumber,
+        expirationDate,
+        submitPayment,
     };
   },
 };
+
+
 </script>
