@@ -27,7 +27,7 @@
       </div>
       <!-- 筆 -->
       <div class="applepencil_p07_demoLine">
-        <img src="../assets/img/p07_demo/p07_demoLine/a_user_pic.png" alt="applepencil">
+        <img src="../assets/img/p07_demo/p07_demoLine/ApplePencil.png" alt="applepencil">
       </div>
     </section>
   </div>
