@@ -8,7 +8,7 @@
     <router-link to="/reportUrl">p03回報可疑網站</router-link> |
     <router-link to="/p04">p04_gov</router-link> |
     <router-link to="/p05">p05_faq</router-link> |
-    <router-link to="/p06">p06_discuss</router-link> |
+    <router-link to="/discuss">討論專區</router-link> |
     <router-link to="/p07demoShopping">p07_demoShopping</router-link> |
     <router-link to="/p07demoGame">p07_demoGame</router-link> |
     <router-link to="/p07demoGamep01">p07_demoGame_p01</router-link> |
