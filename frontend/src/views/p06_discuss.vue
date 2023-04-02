@@ -50,7 +50,13 @@
                             <li><i class="fa-solid fa-thumbs-up fa-fw"></i><span> {{item.thumbsNum}} </span></li>   
                             <li><i class="fa-solid fa-message fa-fw"></i><span> {{item.messageNum}} </span></li>
                             <!-- <li><i class="fa-solid fa-bookmark fa-fw"></i><span> 收藏 </span></li> -->
-                            <li><button class="viewDetails medium_button">查看詳細</button></li>
+                            <li>
+                                <router-link to="/discuss/discuss_content">
+                                    <button class="viewDetails medium_button">
+                                        查看詳細
+                                    </button>
+                                </router-link>
+                            </li>
                         </ul>
                     </div>
                     <div class="articleImage_p06_discuss">
@@ -92,6 +98,7 @@
             ])
 
             return{
+                isActive: true,
                 articleList,
             }
         }

@@ -29,18 +29,18 @@
     .tab_p01_newsChoose {
         width: 100%;
         margin: 10px auto;
+        padding-left: 2rem;
         color: $text_color;
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid $text_color;
-    
+        
         .tab_p01_news_category {
+            padding: 10px 0;
 
             select {
                 display: none;
             }
-    
-            padding: 10px 0;
     
             .wide_tab {
 
@@ -87,9 +87,12 @@
         display: block;
         margin: 0 auto;
         width: 900px;
-        padding: 50px 0 25px;
+        padding: 25px 0;
         border-bottom: 1px solid $title_color;
 
+        &:not(:first-of-type){
+            padding: 50px 0 25px;
+        }
         .topBlock_p06_discuss{
             display: flex;
             justify-content: space-between;
