@@ -1,69 +1,98 @@
 .body_p07_demoPhone_block {
   background-image: url("../img/p07_demo/p07_demoPhone/p07_demoPhone_bg.png");
   background-color: $background_color;
+  background-position-x: center;
+  background-size: cover;
+  h1 {
+    color: $title_color;
+  }
   main {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    svg {
-      max-width: 90px;
-    }
-    .robot_p07_demoPhone_phone {
-      /* CSS talk bubble */
-      .talk-bubble {
-        margin: 10px;
-        display: inline-block;
+    width: $w1200;
+    margin: 0 auto;
+    min-height: 100vh;
+    .demoPhone_p07_demoPhone_block {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+      .robot_p07_demoPhone_phone {
+        grid-area: 2/9 / last-line/last-line;
         position: relative;
-        max-width: 200px;
-        height: auto;
-        background-color: $text_color;
-      }
-      .round {
-        border-radius: 30px;
-        -webkit-border-radius: 30px;
-        -moz-border-radius: 30px;
-      }
-
-      .tri-right.left-in:after {
-        content: " ";
-        position: absolute;
-        width: 0;
-        height: 0;
-        left: -20px;
-        right: auto;
-        top: 50%;
-        bottom: auto;
-        border: 12px solid;
-        border-color: $text_color $text_color transparent transparent;
-      }
-      /* talk bubble contents */
-      .talktext {
-        text-align: center;
-        padding: 1rem;
-        p {
-          text-align: left;
-          line-height: 1.7rem;
-          letter-spacing: 0.25rem;
-          font-size: $fontSize20;
-          font-weight: fontWeight500;
-          color: $sec_color;
+        /**** talk bubble ****/
+        .talk-bubble {
+          margin: 10px;
+          display: inline-block;
+          position: relative;
+          max-width: 200px;
+          height: auto;
+          background-color: $text_color;
+        }
+        .round {
+          border-radius: 20px;
+          -webkit-border-radius: 20px;
+          -moz-border-radius: 20px;
+        }
+        .tri-right.right-in:after {
+          content: " ";
+          position: absolute;
+          width: 0;
+          height: 0;
+          left: auto;
+          right: -20px;
+          top: 38px;
+          bottom: auto;
+          border: 12px solid;
+          border-color: $text_color transparent transparent $text_color;
+        }
+        /* talk bubble contents */
+        .talktext {
+          text-align: center;
+          padding: 1rem;
+          p {
+            text-align: left;
+            line-height: 1.7rem;
+            letter-spacing: 0.25rem;
+            font-size: $fontSize20;
+            font-weight: fontWeight500;
+            color: $sec_color;
+          }
+        }
+        svg {
+          position: absolute;
+          top: -8%;
+          max-width: 100px;
         }
       }
-    }
 
-    .phoneLayout_p07_demoPhone_phone {
-      background-image: url("../img/p07_demo/p07_demoPhone/p07_demoPhone_iPhoneSilver.png");
-      background-repeat: no-repeat;
-      padding: 20px;
-      img {
-        border-radius: 60px;
+      .phoneLayout_p07_demoPhone_phone {
+        position: relative;
+        grid-area: 1/5 / last-line/9;
+        min-height: 400px;
+        img:first-child {
+          position: absolute;
+          top: 0;
+          max-width: 350px;
+          z-index: 2;
+        }
+        img:last-child {
+          position: absolute;
+          top: 1%;
+          left: 4%;
+          max-width: 320px;
+          z-index: 1;
+          border-radius: 30px;
+        }
       }
-    }
-    .volume_p07_demoPhone_phone {
-      display: flex;
-      margin: 50px;
-      svg {
-        max-width: 70px;
+
+      .volume_p07_demoPhone_phone {
+        grid-area: 1/9/2 / last-line;
+        // margin: 50px;
+        svg:first-child {
+          max-width: 120px;
+        }
+        svg:last-child {
+          max-width: 60px;
+        }
       }
     }
   }
