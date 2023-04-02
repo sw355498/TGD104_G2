@@ -20,8 +20,8 @@
             .banner_title_en {
                 position: absolute;
                 font-weight: 700;
-                top: -60px;
-                left: -80px;
+                top: -62px;
+                left: -70px;
                 font-size: 100px;
                 color: rgba($color: #000000, $alpha: 0);
                 -webkit-text-stroke: 0.5px #efe4d1;
@@ -42,11 +42,18 @@
         border-bottom: 1px solid $text_color;
 
         .tab_p01_news_category {
+           
             select {
-                display: none;
-            }
+                display: block;
 
-            padding: 10px 0;
+            }
+            @include rwd('lg') {
+                select {
+                    display: none;
+                }
+              }
+
+            padding: 20px 0;
 
             .wide_tab {
                 a {
@@ -65,25 +72,28 @@
                 }
             }
 
+
         }
 
         .input_p01_news_searchBar {
             display: flex;
-            padding: 10px 0;
-            box-sizing: border-box;
+            margin: 11px 0;
+            // box-sizing: border-box;
+            background-color: $four_color;
+            border-radius: 5px;
 
-            input {
-                padding: 5px 10px;
-                border-radius: 5px 0 0 5px;
-                border: none;
-            }
+            // input {
+            //     padding: 5px 10px;
+            //     border-radius: 5px 0 0 5px;
+            //     border: none;
+            // }
 
             .icon {
-                padding: 4px 10px 0;
+                padding: 6px 12px 0;
                 background-color: $four_color;
                 cursor: pointer;
                 // border: 1px solid $background_color;
-                border-radius: 0 5px 5px 0;
+                border-radius: 5px;
             }
         }
     }
@@ -175,7 +185,13 @@
                             }
                         }
 
-                        .p01_news_article {}
+                        .p01_news_article {
+                            text-overflow: ellipsis;
+                            -webkit-line-clamp: 4;
+                            -webkit-box-orient: vertical;
+                            white-space: normal;
+                        }
+
                     }
                 }
             

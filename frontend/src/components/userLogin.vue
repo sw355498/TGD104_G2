@@ -6,7 +6,7 @@
           <div class="userLogin_modal_header">
             <slot name="header">
               <div class="modal-default-button" @click="$emit('close')">
-                X
+                <i class="fa-solid fa-xmark h4"></i>
               </div>
             </slot>
           </div>
@@ -18,6 +18,7 @@
                   v-for="(tab, tab_index) in tabs"
                   :class="{ tab: true, active: active_tab == tab_index }"
                   @click="changeTab(tab_index)"
+                  :key="tab_index"
                 >
                   <div class="tab-label">{{ tab.label }}</div>
                 </div>
@@ -31,6 +32,7 @@
             <div
               v-for="(tab, tab_index) in tabs"
               :class="{ content: true, active: active_tab == tab_index }"
+              :key="tab_index"
             >
               <slot name="footer">
                 <div class="div_p08_user_textCenter">【使用以下帳戶連結】</div>
@@ -50,22 +52,22 @@
                 <div class="div_p08_user_textCenter">【或註冊一個新帳號】</div>
 
                  <p v-if="tab_index === 0">
-                  <p class="text_title">帳號/ Account <br /></p>
-                  <input class="input_p08_user_login" type="text" placeholder="請輸入E-mail作為登入帳號" v-model="accountValue">
-                  <p class="text_title">密碼/ Password <br /></p>
-                  <input class="input_p08_user_login" type="text" placeholder="請輸入6個以上字元的密碼" v-model="passwordValue">
-                  <p class="text_title">再次輸入密碼/ Password <br /></p>
-                  <input class="input_p08_user_login" type="text" placeholder="請再次輸入密碼" v-model="confirmPasswordValue">
-                  <p class="text_title">顯示名稱/ Name <br /></p>
-                  <input class="input_p08_user_login" type="text" placeholder="請輸入顯示名稱" v-model="displayNameValue">
+                  <label for="account" class="text_title">帳號/ Account <br /></label>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入E-mail作為登入帳號" v-model="accountValue" id="account">
+                  <label for="password" class="text_title">密碼/ Password <br /></label>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入6個以上字元的密碼" v-model="passwordValue" id="password">
+                  <label for="valid" class="text_title">再次輸入密碼/ Password <br /></label>
+                  <input class="input_p08_user_login" type="text" placeholder="請再次輸入密碼" v-model="confirmPasswordValue" id="valid">
+                  <label for="name" class="text_title">顯示名稱/ Name <br /></label>
+                  <input class="input_p08_user_login" type="text" placeholder="請輸入顯示名稱" v-model="displayNameValue" id="name">
                   <div class="div_p08_user_loginType">
                   <button class="medium_button btn_p08_user_loginType" @click="handleSubmit">確定註冊 Sign up</button>
                   </div>
                 </p>
                 <p v-else>
-                  <p class="text_title">帳號/ Account <br /></p>
+                  <label class="text_title">帳號/ Account <br /></label>
                   <input class="input_p08_user_login" type="text" placeholder="請輸入E-mail作為登入帳號" />
-                  <p class="text_title">密碼/ Password <br /></p>
+                  <label class="text_title">密碼/ Password <br /></label>
                   <input class="input_p08_user_login" type="text" placeholder="請輸入6個以上字元的密碼" />
                   <div class="div_p08_user_loginType">
                   <button class="medium_button btn_p08_user_loginType">確定登入 Log in</button>
