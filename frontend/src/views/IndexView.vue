@@ -1,7 +1,7 @@
 <template>
   <div class="body_index_block">
     <!-- navgation -->
-    <navbar />
+    <frontNavbar />
     <!--Top Dynamic-->
     <section>
       <!-- Banner -->
@@ -170,21 +170,21 @@
       />
     </div>
     <!-- footer -->
-    <footer />
+    <frontFooter />
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import indexChatbot from "@/components/index_chatbot.vue";
-import navbar from "@/components/f_nav.vue";
-import footer from "@/components/f_footer.vue";
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
 
 export default {
   components: {
     indexChatbot,
-    navbar,
-    footer,
+    frontNavbar,
+    frontFooter,
   },
 
   setup() {
@@ -199,5 +199,6 @@ export default {
 <style scoped>
 footer {
   background-image: url(../assets/img/index/footer.png);
+  background-position: center;
 }
 </style>

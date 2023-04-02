@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 
 export default {
   name: "footer",
