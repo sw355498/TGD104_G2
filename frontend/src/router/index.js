@@ -43,9 +43,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p05_faq.vue')
   },
   {
-    path: '/p06',
-    name: 'p06',
-    component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss.vue')
+    path: '/discuss',
+    name: 'discuss',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss.vue'),
+  },
+  {
+    path: '/discuss/discuss_content/:article?',
+    name: 'discuss_content',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss_content.vue')
   },
   {
     path: '/p07demoShopping',
