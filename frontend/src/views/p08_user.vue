@@ -38,8 +38,7 @@
                     <p class="text_title mb-1">狀態</p>
                     <p class="text font-size-sm">Email 驗證</p>
                     <p class="text font-size-sm">防詐小達人</p>
-                    <button class="btn btn-primary">Follow</button>
-                    <button class="btn btn-outline-primary">Message</button>
+
                   </div>
                 </div>
               </div>

@@ -28,6 +28,9 @@
         flex: 1 1 auto;
         min-height: 1px;
         padding: 1rem;
+        .jsgrid-grid-header,.jsgrid-grid-body{
+            overflow-y: hidden;
+        }
     }
     
     .gutters-sm {
