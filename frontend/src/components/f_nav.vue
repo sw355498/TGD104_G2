@@ -65,52 +65,47 @@ export default {
         id: "p01",
         router: "/p01",
         Name: "最新消息",
-        component: () => import("../views/p01_news.vue"),
       },
       {
         id: "p02",
         router: "/p02",
         Name: "防範詐騙教學",
-        component: () => import("../views/p02_teach.vue"),
       },
       {
         id: "p03",
         router: "/reportUrl",
         Name: "回報可疑網站",
-        component: () => import("../views/p03_reportURL.vue"),
       },
       {
         id: "p04",
         router: "/p04",
         Name: "政府資訊連結",
-        component: () => import("../views/p04_gov.vue"),
       },
       {
         id: "p05",
         router: "/p05",
         Name: "詐騙FAQ",
-        component: () => import("../views/p05_faq.vue"),
       },
       {
         id: "p06",
         router: "/p06",
         Name: "討論專區",
-        component: () => import("../views/p06_discuss.vue"),
       },
       {
         id: "p09",
         router: "/p09_team",
         Name: "團隊介紹",
-        component: () => import("../views/p09_team.vue"),
       },
     ]);
 
     //判斷開啟ul
     const isActive = ref(false);
+    const bodyTag = document.querySelector("body");
+    bodyTag.style.cssText = "";
+    // const
     const navClick = () => {
       //切換狀態active狀態
       isActive.value = !isActive.value;
-      let bodyTag = document.querySelector("body");
       //判斷背景不可滑動
       bodyTag.style.cssText = isActive.value
         ? "height:100vh;overflow-y:hidden;"
