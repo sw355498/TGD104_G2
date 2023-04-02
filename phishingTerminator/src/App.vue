@@ -14,6 +14,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <RouterLink to="/p07demoShopping">p07_demoShopping</RouterLink> |
     <RouterLink to="/p07demoGame">p07_demoGame</RouterLink> |
     <RouterLink to="/p07demoGamep01">p07_demoGame_p01</RouterLink> |
+    <RouterLink to="/p07demoGamep01">p07_demoGame_p02</RouterLink> |
     <RouterLink to="/p07demoLine">p07_demoLine</RouterLink> |
     <RouterLink to="/p07demoPhone">p07_demoPhone</RouterLink> |
     <RouterLink to="/p08_user">p08_user</RouterLink> |

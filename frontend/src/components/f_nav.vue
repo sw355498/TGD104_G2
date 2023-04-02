@@ -8,20 +8,24 @@
           </router-link>
         </span>
       </div>
-      <!-- Member Button Block -->
+      <!-- nav menus -->
       <div class="wrap_index_nav">
-        <button class="h6_component big_button member_index_nav">
+        <!-- Member button-->
+        <router-link
+          to="/p08_user"
+          class="h6_component big_button member_index_nav"
+        >
           <i class="fa-solid fa-user"></i>
-        </button>
-
+        </router-link>
+        <!-- hamburger content menus -->
         <ul class="links_index_nav" :class="{ active: isActive }">
           <li v-for="navItem in nav" :key="navItem.id">
             <router-link
-              to={{navItem.router}}
+              :to="{ path: navItem.router }"
               class="h6_component"
               target="_parent"
             >
-              {{ navItem.Name }}
+              {{ navItem.name }}
             </router-link>
           </li>
         </ul>
@@ -47,59 +51,62 @@
         </div>
       </div>
     </nav>
-    <!-- <hr /> -->
   </header>
 </template>
 
 <script>
 import { ref, reactive } from "vue";
+
 export default {
   name: "navbar",
   setup() {
+    //nav資料
     const nav = reactive([
       {
         id: "p01",
-        router: "/about",
-        Name: "最新消息",
+        router: "/p01",
+        name: "最新消息",
       },
       {
         id: "p02",
         router: "/p02",
-        Name: "防範詐騙教學",
+        name: "防範詐騙教學",
       },
       {
         id: "p03",
         router: "/reportUrl",
-        Name: "回報可疑網站",
+        name: "回報可疑網站",
       },
       {
         id: "p04",
         router: "/p04",
-        Name: "政府資訊連結",
+        name: "政府資訊連結",
       },
       {
         id: "p05",
         router: "/p05",
-        Name: "詐騙FAQ",
+        name: "詐騙FAQ",
       },
       {
         id: "p06",
         router: "/p06",
-        Name: "討論專區",
+        name: "討論專區",
       },
       {
         id: "p09",
         router: "/p09_team",
-        Name: "團隊介紹",
+        name: "團隊介紹",
       },
     ]);
 
     //判斷開啟ul
     const isActive = ref(false);
+    const bodyTag = document.querySelector("body");
+    bodyTag.style.cssText = "";
+    // const
     const navClick = () => {
       //切換狀態active狀態
       isActive.value = !isActive.value;
-      let bodyTag = document.querySelector("body");
       //判斷背景不可滑動
       bodyTag.style.cssText = isActive.value
         ? "height:100vh;overflow-y:hidden;"
@@ -114,5 +121,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

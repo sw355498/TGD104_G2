@@ -1,6 +1,7 @@
 <template>
   <div class="body_index_block">
-    <!-- <navbar /> -->
+    <!-- navgation -->
+    <frontNavbar />
     <!--Top Dynamic-->
     <section>
       <!-- Banner -->
@@ -9,12 +10,9 @@
         <p>不明網站</p>
         <p>購物要當心</p>
       </div>
-      <a
-        class="h6_component big_button"
-        href="../views/pages/p07_demoShopping.html"
-        target="_parent"
-        >DEMO體驗</a
-      >
+      <button class="h6_component big_button">
+        <router-link to="/p07demoShopping">DEMO體驗</router-link>
+      </button>
 
       <!-- BackTop Button -->
       <div class="backTop_index_btn">
@@ -55,7 +53,7 @@
             </p>
           </li>
         </ul>
-        <a class="big_button" href="./p02_teach.html">了解更多知識</a>
+        <router-link to="/p02" class="big_button">了解更多知識</router-link>
       </article>
 
       <!-- News -->
@@ -110,9 +108,8 @@
             </div>
           </li>
         </ul>
-        <a class="big_button" href="../../views/pages/p01_news.html"
-          >閱讀更多文章</a
-        >
+
+        <router-link to="/p01" class="big_button">閱讀更多文章</router-link>
       </article>
 
       <!-- YouTube -->
@@ -161,7 +158,7 @@
             <p class="text_title">Youtuber 尼克&ASHLY 分享</p>
           </li>
         </ul>
-        <a class="big_button" href="../views/pages/p02_teach.html">查看更多</a>
+        <router-link to="/p02" class="big_button">查看更多</router-link>
       </article>
     </main>
     <!--Main Block end -->
@@ -172,16 +169,22 @@
         v-if="showComponent"
       />
     </div>
+    <!-- footer -->
+    <frontFooter />
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import indexChatbot from "@/components/index_chatbot.vue";
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
+
 export default {
   components: {
     indexChatbot,
-    // navbar,
+    frontNavbar,
+    frontFooter,
   },
 
   setup() {
@@ -192,3 +195,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+footer {
+  background-image: url(../assets/img/index/footer.png);
+  background-position: center;
+}
+</style>

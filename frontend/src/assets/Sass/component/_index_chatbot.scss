@@ -1,0 +1,178 @@
+
+.clost-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.5);
+}
+.chatbot_index {
+    position: fixed;
+    top: 50%;
+    right: 20%;
+    transform: translate(20%, -50%);
+    max-width: 700px;
+    width: 100%;
+    height: 600px;
+    z-index: 2;
+    overflow: hidden;
+    background: #EBEBEB;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    box-shadow: 0px 0px 5px black;
+    // 上面 chatTitle
+    .chatTitle {
+        z-index: 2;
+        background: white;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        height: 90px;
+        justify-content: space-between;
+        // outline: 1px solid red;
+        img{
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+        }
+        .chatTitle_text{
+            // outline: 1px solid red;
+            flex-grow: 1;
+            p{
+                font-size: 20px;
+                font-weight: 500;
+                margin: 0px 10px;
+                color: black;
+            }
+            p:last-child {
+                font-size: 18px;
+                font-weight: 300;
+                letter-spacing: 1px;
+            }
+        }
+        .fa-xmark{
+            width: 80px;
+            height: 90px;
+            // outline: 1px solid red;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    // ============ 對話 ============
+    .chatWindow {
+        flex-grow: 1;
+        // flex-shrink: 1;
+        color: rgba(255, 255, 255, 0.5);
+        overflow-y: scroll;
+        // position: relative;
+        width: 100%;
+        .chatWindow_message_default,
+        .end-dialog{
+            margin: 20px 10px 0;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            .chatbot_message_default p,
+            .chatbot_message_end p{
+                background-color: white;
+                border-radius: 5px;
+                padding: 10px;
+                float: left;
+                max-width: 40%;
+                word-break: break-word;
+                color: $sec_color;
+            }
+            .chatbot_news_container{
+                max-width: 700px;
+                display: flex;
+                overflow-x: scroll;
+                cursor: grab;
+                .chatbot_news_item{
+                    min-width: 180px;
+                    min-height: 180px;
+                    background-color: $sec_color;
+                    margin: 20px 10px;
+                    padding: 20px;
+                    border-radius: 20px;
+                    box-shadow: 0px 1px 5px black;
+                    span{
+                        font-size: 30px;
+                        text-align: center;
+                        display: block;
+                        color: white;
+                        font-weight: 800;
+                    }
+                    p{
+                        font-weight: 100;
+                    }
+                }
+            }
+            .chatbot_news_container::-webkit-scrollbar{
+                width: 0;
+            }
+        }
+        .chatWindow_message{
+            margin: 0 10px;
+            border-radius: 10px;
+            display: flow-root;
+            .bot_message p,
+            .user_message p {
+                padding: 10px;
+                border-radius: 5px;
+                max-width: 80%;
+                word-break: break-word;
+            }
+            .bot_message p {
+                background-color: white;
+                color: $sec_color;
+                float: left;
+            }
+            .user_message p {
+                background: $sec_color;
+                color: white;
+                float: right;
+            }
+        }
+    }
+    // ============ 使用者輸入的地方 ============
+    .chatInput {
+        flex: 0 1 40px;
+        // width: 100%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .message-input {
+            background: none;
+            border: none;
+            outline: none !important;
+            resize: none;
+            color: rgba(0, 0, 0, 0.7);
+            padding-left: 20px;
+            width: 100%;
+            font-size: 16px;
+            height: 100%;
+        }
+        .message-submit {
+            color: #fff;
+            border: none;
+            background-color: #0fb2f2;
+            // background-color: $four_color;
+            font-size: 16px;
+            padding: 6px 10px;
+            margin: 10px;
+            border-radius: 10px;
+            outline: none !important;
+            &:hover{
+                // background: $sec_color;
+                background: #033159;
+                cursor: pointer;
+            }
+        }
+    }
+}

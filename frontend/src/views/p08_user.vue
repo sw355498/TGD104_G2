@@ -38,14 +38,13 @@
                     <p class="text_title mb-1">狀態</p>
                     <p class="text font-size-sm">Email 驗證</p>
                     <p class="text font-size-sm">防詐小達人</p>
-                    <button class="btn btn-primary">Follow</button>
-                    <button class="btn btn-outline-primary">Message</button>
+
                   </div>
                 </div>
               </div>
             </div>
             <!-- 等級列表 -->
-            <div class="card mt-3 order-6">
+            <div class="card mt-3 order-6 level">
               <ul class="list-group list-group-flush list-group-dark">
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
@@ -98,7 +97,7 @@
                 <h4>Hello, Karen 歡迎回來</h4>
                 <h6>karen@gmail.com</h6>
                 <p class="proile-rating">EXP : <span>50/100</span></p>
-                <div class="progress col-lg-6">
+                <div class="progress col-lg-5">
                   <div
                     class="progress-bar"
                     role="progressbar"

@@ -20,7 +20,7 @@
         <li><router-link to="/p08_user" class="dropdown-item">
         <i class="fa-solid fa-bell"></i> 通知<span class="nofity_count">2</span></router-link></li>
         <li><router-link to="/p08_user" class="dropdown-item">我的主頁</router-link></li>
-        <li><a class="dropdown-item" href="#">編輯會員資料</a></li>
+        <li><router-link to="/p08_userEdit" class="dropdown-item">編輯會員資料</router-link></li>
         <li><a class="dropdown-item" href="#">修改密碼</a></li>
         <li><a class="dropdown-item" href="#">登出</a></li>
         

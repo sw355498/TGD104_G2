@@ -1,15 +1,106 @@
 <template>
-    <div>
-        <Textblock />
+    <div class="wrapper_p06_discuss">
+        <ul class="breadcrumb-list text_title">
+            <li>首頁</li>
+            <li>討論專區</li>
+        </ul>
+        <div class="titleBlock">
+            <h2>所有文章</h2>
+            <button class="medium_button">發表新文章</button>
+        </div>
+        <div class="tab_p01_newsChoose">
+            <div class="tab_p01_news_category">
+                <select name="" id="">
+                    所有文章
+                </select>
+            <div class="wide_tab">
+                <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
+                href="#"
+                >網站詐騙</a
+                >　|　<a href="#" >交友詐騙</a>　|　<a href="#">金融詐騙</a>
+            </div>
+            </div>
+            <div class="input_p01_news_searchBar">
+            <input type="text" placeholder="搜尋文章" />
+            <div class="icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            </div>
+        </div>
+        <section v-for="item in articleList" :kye="item.id">
+                <div class="topBlock_p06_discuss">
+                    <div class="author">
+                        <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
+                        <span class="paragraph">{{item.author}}</span>
+                    </div>
+                    <button class="ellipsisBtn" @click="ellipsisBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+                <div class="articleBlock_p06_discuss">
+                    <div class="articleText_p06_discuss">
+                        <h3>{{item.title}}</h3>
+                        <div class="articleInformation_p06_discuss text_title">
+                            <span class="tag">#{{item.tag}}</span>
+                            <span>・</span>
+                            <span>{{item.time}}</span>
+                        </div>
+                        <div class="articleContent h6_component">
+                            {{item.content}}
+                        </div>
+                        <ul class="articleInteractive text_title">
+                            <li><i class="fa-solid fa-thumbs-up fa-fw"></i><span> {{item.thumbsNum}} </span></li>   
+                            <li><i class="fa-solid fa-message fa-fw"></i><span> {{item.messageNum}} </span></li>
+                            <!-- <li><i class="fa-solid fa-bookmark fa-fw"></i><span> 收藏 </span></li> -->
+                            <li>
+                                <router-link to="/discuss/discuss_content">
+                                    <button class="viewDetails medium_button">
+                                        查看詳細
+                                    </button>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="articleImage_p06_discuss">
+                        <img src="https://picsum.photos/200/300" alt="">
+                    </div>
+                </div>
+        </section>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                <a class="page-link pagination-dark" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+                <li class="page-item"><a class="page-link  pagination-dark" href="#">1</a></li>
+                <li class="page-item"><a class="page-link  pagination-dark" href="#">2</a></li>
+                <li class="page-item"><a class="page-link  pagination-dark" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link pagination-dark" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </template>
 
 <script>
-    import Textblock from '@/components/CKEditor.vue'
-    
+    import { ref } from 'vue'
     export default {
-        components:{
-            Textblock
+        setup(){
+            let id = 0
+            const articleList = ref([
+                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+            ])
+
+            return{
+                isActive: true,
+                articleList,
+            }
         }
     }
 </script>
