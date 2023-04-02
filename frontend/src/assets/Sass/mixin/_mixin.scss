@@ -100,25 +100,29 @@
 }
 
 
-@mixin rwd($breakpoint){
-  @each $breakpoint, $value in $breakpoints {
-      @media (min-width: $value) {
-        @content;
-      }
+
+@mixin rwd($breakpoint) {
+  $value: map-get($breakpoints, $breakpoint);
+  @media screen and (max-width: #{$value}) {
+    @content;
   }
 }
 
-/* 使用 mixin
-  @include rwd('sm'){
-    // 手機上的樣式
-  }
 
-  @include rwd('md') {
-    // 平板上的樣式
-  }
+/* 使用 mixin
+.box{
+  //默認樣式
 
   @include rwd('lg'){
     // 電腦上的樣式
   }
-
+  
+  @include rwd('md') {
+    // 平板上的樣式
+  }
+  
+  @include rwd('sm'){
+    // 手機上的樣式
+  }
+}
 */
