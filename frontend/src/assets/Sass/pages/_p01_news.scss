@@ -42,16 +42,17 @@
         border-bottom: 1px solid $text_color;
 
         .tab_p01_news_category {
+            display: block;     
+            @include rwd(md){
+                display: none;
+            }
            
             select {
-                display: block;
-
-            }
-            @include rwd('lg') {
-                select {
-                    display: none;
+                display: none;     
+                @include rwd(md){
+                    display: block;
                 }
-              }
+            }
 
             padding: 20px 0;
 
