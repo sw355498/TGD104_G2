@@ -8,15 +8,16 @@
           </router-link>
         </span>
       </div>
-      <!-- Member Button Block -->
+      <!-- nav menus -->
       <div class="wrap_index_nav">
+        <!-- Member button-->
         <router-link
           to="/p08_user"
           class="h6_component big_button member_index_nav"
         >
           <i class="fa-solid fa-user"></i>
         </router-link>
-
+        <!-- hamburger content menus -->
         <ul class="links_index_nav" :class="{ active: isActive }">
           <li v-for="navItem in nav" :key="navItem.id">
             <router-link
@@ -24,7 +25,7 @@
               class="h6_component"
               target="_parent"
             >
-              {{ navItem.Name }}
+              {{ navItem.name }}
             </router-link>
           </li>
         </ul>
@@ -64,37 +65,37 @@ export default {
       {
         id: "p01",
         router: "/p01",
-        Name: "最新消息",
+        name: "最新消息",
       },
       {
         id: "p02",
         router: "/p02",
-        Name: "防範詐騙教學",
+        name: "防範詐騙教學",
       },
       {
         id: "p03",
         router: "/reportUrl",
-        Name: "回報可疑網站",
+        name: "回報可疑網站",
       },
       {
         id: "p04",
         router: "/p04",
-        Name: "政府資訊連結",
+        name: "政府資訊連結",
       },
       {
         id: "p05",
         router: "/p05",
-        Name: "詐騙FAQ",
+        name: "詐騙FAQ",
       },
       {
         id: "p06",
         router: "/p06",
-        Name: "討論專區",
+        name: "討論專區",
       },
       {
         id: "p09",
         router: "/p09_team",
-        Name: "團隊介紹",
+        name: "團隊介紹",
       },
     ]);
 
@@ -120,5 +121,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

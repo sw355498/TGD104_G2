@@ -1,5 +1,6 @@
 <template>
   <div class="body_index_block">
+    <!-- navgation -->
     <navbar />
     <!--Top Dynamic-->
     <section>
@@ -168,6 +169,8 @@
         v-if="showComponent"
       />
     </div>
+    <!-- footer -->
+    <footer />
   </div>
 </template>
 
@@ -175,10 +178,13 @@
 import { ref } from "vue";
 import indexChatbot from "@/components/index_chatbot.vue";
 import navbar from "@/components/f_nav.vue";
+import footer from "@/components/f_footer.vue";
+
 export default {
   components: {
     indexChatbot,
     navbar,
+    footer,
   },
 
   setup() {
@@ -189,3 +195,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+footer {
+  background-image: url(../assets/img/index/footer.png);
+}
+</style>
