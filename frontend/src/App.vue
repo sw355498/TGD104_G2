@@ -12,6 +12,7 @@
     <router-link to="/p07demoShopping">p07_demoShopping</router-link> |
     <router-link to="/p07demoGame">p07_demoGame</router-link> |
     <router-link to="/p07demoGamep01">p07_demoGame_p01</router-link> |
+    <router-link to="/p07demoGamep01">p07_demoGame_p02</router-link> |
     <router-link to="/p07demoLine">p07_demoLine</router-link> |
     <router-link to="/p07demoPhone">p07_demoPhone</router-link> |
     <router-link to="/p08_user">p08_user</router-link> |

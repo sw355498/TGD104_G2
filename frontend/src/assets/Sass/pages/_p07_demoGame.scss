@@ -5,28 +5,27 @@
     background-repeat: no-repeat;
     height: 1200px;
     
-  .com{
-    width: 1154px;
-    margin: 0 auto;
-  
+  .game_index{
+    margin: 0 auto ;
+    width: 900px;
+    height: 90%;
+    background: transparent;
+    padding-top: 50px;
     
     
   
       /* 首頁中間部分 */
       
-      .logo {
-        display: block;
-        margin: 0 auto 40px;
-        padding-top: 40px;
-      }
+      
       
       .quiz_index {
-        width: 1154px;
+        width: 900px;
         height: 835px;
         border: 5px solid $main_color;
         background-color: $sec_color;
         // margin-left: 150px;
-        padding-left: 80px;
+        padding-left: 50px;
+        margin-top: 20px;
         
 
         
@@ -34,8 +33,7 @@
         .quiz_title {
           color: $text_color;
           line-height: 6rem;
-          margin-top: 150px;
-          font-size: 65px;
+          margin-top: 80px;
           margin-bottom: 60px;
           letter-spacing: 1rem;
         }
@@ -43,7 +41,7 @@
       
         
         .quiz_summary {
-          width: 1000px;
+          width: 760px;
           border: 3px solid $main_color;
           height: 205px;
       
@@ -56,9 +54,8 @@
             background-size: 20px 20px;
           }
       
-            h2 {
-              width: 800px;
-              font-size: 1.3rem;
+            p {
+              width: 600px;
               margin-left: 120px;
               color: $text_color;
               padding-top: 15px;
@@ -67,7 +64,7 @@
         }
       
         .start {
-          margin: 70px 0 240px 400px;
+          margin: 70px 0 240px 270px;
           width: 180px;
           height: 50px;
           position: relative;
