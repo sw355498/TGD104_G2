@@ -10,14 +10,17 @@
       </div>
       <!-- Member Button Block -->
       <div class="wrap_index_nav">
-        <button class="h6_component big_button member_index_nav">
+        <router-link
+          to="/p08_user"
+          class="h6_component big_button member_index_nav"
+        >
           <i class="fa-solid fa-user"></i>
-        </button>
+        </router-link>
 
         <ul class="links_index_nav" :class="{ active: isActive }">
           <li v-for="navItem in nav" :key="navItem.id">
             <router-link
-              to={{navItem.router}}
+              :to="{ path: navItem.router }"
               class="h6_component"
               target="_parent"
             >
@@ -47,50 +50,58 @@
         </div>
       </div>
     </nav>
-    <!-- <hr /> -->
   </header>
 </template>
 
 <script>
 import { ref, reactive } from "vue";
+
 export default {
   name: "navbar",
   setup() {
+    //nav資料
     const nav = reactive([
       {
         id: "p01",
-        router: "/about",
+        router: "/p01",
         Name: "最新消息",
+        component: () => import("../views/p01_news.vue"),
       },
       {
         id: "p02",
         router: "/p02",
         Name: "防範詐騙教學",
+        component: () => import("../views/p02_teach.vue"),
       },
       {
         id: "p03",
         router: "/reportUrl",
         Name: "回報可疑網站",
+        component: () => import("../views/p03_reportURL.vue"),
       },
       {
         id: "p04",
         router: "/p04",
         Name: "政府資訊連結",
+        component: () => import("../views/p04_gov.vue"),
       },
       {
         id: "p05",
         router: "/p05",
         Name: "詐騙FAQ",
+        component: () => import("../views/p05_faq.vue"),
       },
       {
         id: "p06",
         router: "/p06",
         Name: "討論專區",
+        component: () => import("../views/p06_discuss.vue"),
       },
       {
         id: "p09",
         router: "/p09_team",
         Name: "團隊介紹",
+        component: () => import("../views/p09_team.vue"),
       },
     ]);
 
