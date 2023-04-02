@@ -10,12 +10,18 @@
     min-height: 90vh;
     padding-top: 20vh;
     text-align: center;
+    @include rwd(sm) {
+      padding-top: 0;
+    }
     h2 {
       text-transform: uppercase;
       text-align: center;
       color: $text_color;
       font-family: "outfit";
       font-weight: 100;
+      @include rwd(md) {
+        margin-bottom: 50px;
+      }
     }
     #banner_index_dynamicText {
       p {
@@ -26,12 +32,26 @@
         text-align: center;
         margin: 0;
         line-height: 10rem;
+        @include rwd(md) {
+          font-size: 80px;
+          line-height: 4rem;
+          margin-bottom: 50px;
+        }
+        @include rwd(sm) {
+          font-size: 50px;
+          line-height: 2rem;
+          margin-bottom: 50px;
+        }
       }
-
-      & + a {
-        display: inline-block;
-        margin: 100px 0;
-        box-sizing: border-box;
+      @include rwd(lg) {
+        margin-bottom: 100px;
+      }
+      @include rwd(md) {
+        min-height: 300px;
+      }
+      @include rwd(sm) {
+        min-height: 100px;
+        margin-bottom: 100px;
       }
     }
   }
@@ -53,11 +73,16 @@
     bottom: 20%;
     right: 3%;
     opacity: 0.8;
+    @include rwd(sm) {
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+    }
   }
   /** Main Block **/
   main {
     margin: 0 auto;
-    width: $w1200;
+    max-width: $w1200;
     .article_index_block,
     .news_index_block,
     .youtube_index_block {
@@ -65,6 +90,9 @@
       margin-bottom: 100px;
       h1 {
         color: $title_color;
+        @include rwd(lg) {
+          line-height: 1.5;
+        }
       }
 
       hr {
@@ -85,10 +113,22 @@
     }
 
     .article_index_block {
-      padding: 0 101px;
+      padding: 0 100px;
+      @include rwd(lg) {
+        padding: 0 50px;
+      }
+      @include rwd(sm) {
+        padding: 0 10px;
+      }
       margin-bottom: 120px;
       ul {
         @include indexGrid(2);
+        @include rwd(md) {
+          @include indexGrid(1);
+        }
+        @include rwd(sm) {
+          padding: 0 10px;
+        }
         li {
           box-sizing: border-box;
           width: 100%;
@@ -119,8 +159,15 @@
     }
     .news_index_block,
     .youtube_index_block {
+      padding: 0 50px;
+      @include rwd(sm) {
+        padding: 0 10px;
+      }
       ul {
         @include indexGrid(3);
+        @include rwd(md) {
+          @include indexGrid(1);
+        }
         .card_index_block {
           width: 100%;
           border-radius: 10px;
