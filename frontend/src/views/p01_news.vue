@@ -32,8 +32,9 @@
 
       <ul class="ul_p01_newsPost">
         <li v-for="(value,index) in object" class="li_p01_newsPost" :key="index">
-          <a href="#"
-            ><div class="newsImg">
+          <router-link to="/p01/p01_newsArticle"> 
+                              
+            <div class="newsImg">
               <img :src="value.image" />
             </div>
 
@@ -56,7 +57,7 @@
               </div>
               <div class="p01_news_article paragraph">{{ value.content }}</div>
             </div>
-          </a>
+            </router-link>
         </li>
 
        
