@@ -1,5 +1,8 @@
 <template>
   <main class="body_p04_gov_base">
+    <!-- navgation -->
+    <frontNavbar />
+
     <!-- 最上方標題 -->
     <div class="div_p04_gov_topTitle">
         <h3><i class="fa-regular fa-lightbulb"></i>政府相關連結</h3>
@@ -9,24 +12,33 @@
     <div class="div_p04_gov_container">
         <div class="div_p04_gov_card" v-for="content in contents">
             <a :href="content.link" target="_blank"><img :src="content.image"></a>
-            <span class="span_p04_gov_cardVerticalLine"></span>
+            <!-- <span class="span_p04_gov_cardVerticalLine"></span> -->
             <div class="div_04_gov_cardRight">
                 <div class="div_p04_gov_cardBgShapeRightTop">
-                    <a :href="content.link" target="_blank"><h6 class="text_title">{{content.cardTitle}}</h6></a>
-                    <a :href="content.shareLink" target="_blank"><i class="fa-solid fa-share-from-square"></i></a>
-  
+                  <a :href="content.link" target="_blank"><h6 class="text_title">{{content.cardTitle}}</h6></a>
+                  <a :href="content.shareLink" target="_blank"><i class="fa-solid fa-share-from-square"></i></a>
                 </div>
                 <p class="paragraph">{{content.description}}</p>
+              </div>
             </div>
-        </div>
-    </div>
-  </main>
-</template>
+          </div>
+          <!-- footer -->
+          <frontFooter />
+        </main>
+      </template>
 
 <script>
+  import frontNavbar from "@/components/f_nav.vue";
+  import frontFooter from "@/components/f_footer.vue";
+  
+  
   export default{
     data(){
       return{
+        components: {
+          frontNavbar,
+          frontFooter,
+        },
         contents: [
           {
               cardTitle: '165 全民防詐騙網',
