@@ -3,9 +3,10 @@
         <div class="main_p07_demoShopping">
             <!-- demo nav -->
             <p07_demo_nav />
+            
             <!-- 瀏覽器 -->
             <div class="browser_p07_demoShopping">
-                <!-- 上面tool -->
+                <!-- 電腦版瀏覽器 上面tool -->
                 <div class="toolbar_demoShopping">
                     <!-- 手機板的 toolbar_top -->
                     <div class="toolbar_mbtop_demoShopping">
@@ -34,12 +35,25 @@
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                 </div>
+                <!-- 手機瀏覽器 -->
+                <div class="phoneBrowswer_p07_demoShopping">
+                    <div class="top_icons">
+                        <span >3:30</span>
+                        <i class="fa-solid fa-signal"></i>
+                        <i class="fa-solid fa-wifi"></i>
+                        <i class="fa-solid fa-battery-full"></i>
+                    </div>
+                    <div class="address_demoShopping">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>http://shopee.rip/te9</span>
+                    </div>
+                </div>
                 <!-- 除了toolbar的內容區 -->
                 <div class="browser_container">
-                    <!-- =============== 下單購物車 =============== -->
+                    <!-- =============== component 下單購物車 =============== -->
                     <div class="cart_p07_demoShopping" v-if="showComponent">
                         <!-- 在元件上面加 :bind 就可以把資料傳進去 -->
-                        <p07_demoShopping_cart :cart="cart"/>
+                        <p07_demoShopping_cart :cart="cart" @close="showComponent = false"/>
                         <div class="mask" v-if="showComponent" @click="closeComponent"></div>
                     </div>
                     <!-- 假購物網站 -->
@@ -185,6 +199,18 @@
                             </div>
                         </div>
                     </article>
+                </div>
+
+                <!-- 手機板瀏覽器下面 -->
+                <div class="phonetoolbar_down_demoShopping">
+                    <div class="icons">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        <i class="fa-solid fa-book-open"></i>
+                        <i class="fa-regular fa-square"></i>
+                    </div>
+                    <div class="line"></div>
                 </div>
             </div>
         </div>

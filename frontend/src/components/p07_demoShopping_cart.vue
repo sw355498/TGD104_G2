@@ -10,7 +10,7 @@
             <div class="bagIcon">
                 <i class="fa-solid fa-bag-shopping"></i>
             </div>
-            <button>目前尚未加入商品</button>
+            <button @click="$emit('close')">尚未加入商品 點我購物</button>
         </div>
         <!-- ========= 購物車有商品 ========= -->
         <div class="cart_list" v-else>
