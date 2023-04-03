@@ -9,8 +9,11 @@
 
       <div class="tab_p01_newsChoose">
         <div class="tab_p01_news_category">
-          <select name="" id="">
-            所有文章
+          <select name="" id="" class="form-select form-select-md">
+            <option selected>所有文章</option>
+            <option value="">網站詐騙</option>
+            <option value="">交友詐騙</option>
+            <option value="">金融詐騙</option>
           </select>
           <div class="wide_tab">
             <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a

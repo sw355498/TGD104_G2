@@ -17,13 +17,12 @@
       </a>
 
       <ul class="dropdown-menu dropdown-menu-dark">
-        <li><router-link to="/p08_user" class="dropdown-item">
+        <li><router-link to="/p08_userNotify" class="dropdown-item">
         <i class="fa-solid fa-bell"></i> 通知<span class="nofity_count">2</span></router-link></li>
         <li><router-link to="/p08_user" class="dropdown-item">我的主頁</router-link></li>
         <li><router-link to="/p08_userEdit" class="dropdown-item">編輯會員資料</router-link></li>
-        <li><a class="dropdown-item" href="#">修改密碼</a></li>
+        <li><router-link to="/p08_userEditPwd" class="dropdown-item">修改密碼</router-link></li>
         <li><a class="dropdown-item" href="#">登出</a></li>
-        
       </ul>
     </div>
   </div>

@@ -6,10 +6,10 @@
         <nav aria-label="breadcrumb" class="main-breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-            <!-- <li class="breadcrumb-item">
-              <a href="javascript:void(0)">會員</a>
-            </li> -->
-            <li class="breadcrumb-item active" aria-current="page">會員中心</li>
+             <li class="breadcrumb-item">
+              <router-link to="/p08_user">會員中心</router-link>
+            </li> 
+            <li class="breadcrumb-item active" aria-current="page">通知中心</li>
           </ol>
         </nav>
         <!-- /Breadcrumb -->
@@ -154,63 +154,7 @@
               <div class="col">
                 <div class="card h-100">
                   <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="col-md-3">
-                        <select
-                          class="form-select form-select-sm"
-                          aria-label=".form-select-sm example"
-                        >
-                          <option selected>主題分類</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
-                      </div>
 
-                      <div class="col-md-3">
-                        <select
-                          class="form-select form-select-sm"
-                          aria-label=".form-select-sm example"
-                        >
-                          <option selected>排序方式</option>
-                          <option value="1">日期新到舊</option>
-                          <option value="2">回應多到少</option>
-                          <option value="3">讚數多到少</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- PO文清單 -->
-
-                    <!-- tab -->
-                    <!-- <div id="tabs">
-                      <div
-                        v-for="(tab, tab_index) in tabs"
-                        :class="{ tab: true, active: active_tab == tab_index }"
-                        @click="changeTab(tab_index)"
-                      >
-                        <div class="tab-label h5">{{ tab.label }}</div>
-                      </div>
-                    </div>
-                    <div
-                      v-for="(tab, tab_index) in tabs"
-                      :class="{
-                        content: true,
-                        active: active_tab == tab_index,
-                      }"
-                    ></div> -->
-
-                    <ul class="nav nav-tabs mt-10" role="tablist">
-                      <li class="nav-item" v-for="(tab, tab_index) in tabs" :key="tab_index">
-                        <a
-                          :class="{
-                            'nav-link': true,
-                            active: active_tab == tab_index,
-                          }"
-                          @click="changeTab(tab_index)"
-                          >{{ tab.label }}</a
-                        >
-                      </li>
-                    </ul>
                     <!-- tab -->
                     <component :is="tabs[active_tab].component"></component>
 
@@ -229,17 +173,11 @@
 <script>
 import postList from "@/components/userPost.vue";
 import replyList from "@/components/userReply.vue";
-import collectList from "@/components/userCollect.vue";
-import reportList from "@/components/userReport.vue";
-import urlList from "@/components/userURL.vue";
 
 export default {
   components: {
     postList,
     replyList,
-    collectList,
-    reportList,
-    urlList,
   },
   data() {
     return {
@@ -255,15 +193,15 @@ export default {
         },
         {
           label: "可疑網站回報",
-          component: urlList,
+          content: "Content 3",
         },
         {
           label: "收藏列表",
-          component: collectList,
+          content: "Content 3",
         },
         {
           label: "我的檢舉",
-          component: reportList,
+          content: "Content 3",
         },
       ],
     };

@@ -88,6 +88,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_user.vue')
   },
   {
+    path: '/p08_userNotify',
+    name: 'p08_userNotify',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p08_userNotify.vue')
+  },
+  {
+    path: '/p08_userEditPwd',
+    name: 'p08_userEditPwd',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p08_userEditPwd.vue')
+  },
+  {
     path: '/p08_userEdit',
     name: 'p08_userEdit',
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_userEdit.vue')

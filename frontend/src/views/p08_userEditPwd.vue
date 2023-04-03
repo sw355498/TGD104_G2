@@ -45,18 +45,18 @@
            
           </div>
           <div class="col-md-8 order-2 profile-head">
-            <h4>修改會員資料</h4>
+            <h4>修改密碼</h4>
             <h6>karen@gmail.com</h6>
 
             <div class="row mt-4">
               <div class="col-8 margin-10">
-                <label for="">顯示名稱</label>
+                <label for="">輸入舊密碼</label>
                 <input type="text" class="input_p08_user_login" />
 
-                <label for="">電話</label>
+                <label for="">修改密碼</label>
                 <input type="text" class="input_p08_user_login" />
                 
-                <label for="">生日</label>
+                <label for="">再次確認密碼</label>
                 <input type="text" class="input_p08_user_login" />
                 <button class="btn btn-primary">儲存</button>
                 <button class="btn">取消</button>
