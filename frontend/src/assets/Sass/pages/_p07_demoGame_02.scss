@@ -1,0 +1,218 @@
+ /* 測驗結果頁面 */
+
+ .p07_resultbg {
+    background-color: $background_color;
+    font-family: 'Noto Sans TC','Outfit', sans-serif;
+    background-image: url('../img/p07_demo/p07_demoGame/demo_bg.png');
+    padding-top: 100px;
+    // background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 50px;
+  
+    
+    //  題目整體背板
+  
+      .result_background {
+        margin: 0 auto;
+        width: 900px;
+        height: 90%;
+        border: 5px solid $main_color;
+        background: transparent;
+        padding-top: 50px;
+        position: relative;
+  
+  
+        //  彈跳視窗
+        
+        .p07game_login_alert{
+          width: 400px;
+          height: 200px;
+          // border:1px solid white;
+          background-color: $main_color;
+          position:fixed;
+          z-index: 20;
+          border-radius: 5px;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          margin: auto;
+  
+          .alert_cross{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            cursor: pointer;
+            
+          }
+  
+          
+        
+          .login_panel{
+            width: 400px;
+            height: 180px;
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 30px;
+            // border:1px solid white;
+            background-color: $sec_color;
+            border-bottom-right-radius:5px;
+            border-bottom-left-radius:5px;
+  
+            p{
+              padding-top: 20px;
+              padding-bottom: 20px;
+            }
+  
+            .gamebutton{
+              width: 100px;
+              height: 40px;
+              margin-right: 25px;
+              border-radius: 5px;
+              background-color: $main_color;
+              color:$sec_color;
+              border:0;
+            }
+  
+              a{
+                color:$sec_color;
+              }
+            
+          }
+        
+        }
+      
+        // 測驗計分標題
+    
+        .p07_gameend_result {
+          width: 300px;
+          height: 80px;
+          margin: 20px auto 30px;
+          
+      
+         
+      
+          .result_frame {
+            clip-path: polygon(20% 0%, 100% 0, 100% 56%, 80% 100%, 0 100%, 0 48%);
+            width: 300px;
+            height: 80px;
+            background-color: $sec_color;
+            border: 5px solid $main_color;
+            background: linear-gradient(153deg, $background_color 38px, #13E5F2 0) bottom right, linear-gradient(333deg, $background_color 38px, #13E5F2 0) top left;
+            background-size: 27% 50%;
+            background-repeat: no-repeat;
+            border: solid 15px #13E5F2;
+          }
+      
+          .result_title {
+            text-align: center;
+            line-height: 45px;
+            color: $text_color;
+            font-size:2.0rem;
+          }
+        }
+  
+        //結果螢幕顯示
+  
+          .result_view {
+            border: 1px solid $main_color;
+            width: 700px;
+            border: 10px solid $main_color;
+            margin: 0 auto;
+        
+            p {
+                margin-top:120px;
+                margin-bottom: 120px;
+                text-align: center;
+                line-height: 30px;
+                font-size: 40px;
+              }
+  
+            .result_percent{
+              font-size: 100px;
+            }  
+            
+        
+          }
+  
+          .view1{
+            margin-bottom: 100px;
+          }
+  
+          .view2{
+            text-align: center;
+            padding-top:35px;
+  
+            p{
+              font-size: 50px;
+            }
+          }
+  
+  
+          //再玩一次按鈕以及回首頁按鈕
+  
+          .again,.index {
+            margin: 70px 0 50px 330px;
+            width: 180px;
+            height: 50px;
+            position: relative;
+          }
+        
+          .again_quiz_botton,.index_botton {
+            clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
+            width: 165px;
+            height: 45px;
+            background-color: $main_color;
+            border: 1px solid $sec_color;
+            z-index: 10;
+            position: absolute;
+            
+        
+            a {
+              width: 180px;
+              height: 54px;
+              color: $sec_color;
+              overflow: hidden;
+              font-size: 20px;
+              margin-left: -20px;
+              margin-bottom: -20px;
+              position: absolute;
+              left: 0;
+              top: 6px;
+              text-decoration: none;
+        
+              svg {
+                width: 100px;
+                height: 30px;
+                position: absolute;
+                left: 90px;
+                top: 0px;
+              }
+            }
+          }
+        
+          .again .again_quiz_frame,.index_frame {
+            z-index: 1;
+            width: 165px;
+            height: 45px;
+            border: solid 1px #13E5F2;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            clip-path: polygon(0 0, 100% 0, 100% 56%, 86% 100%, 0 100%);
+            background: linear-gradient(-40deg, #13E5F2 15px, #0B3361 0) bottom right;
+            background-size: 15% 51%;
+            background-repeat: no-repeat;
+          }
+  
+        
+  
+  
+      }
+  
+  }
+    
+  
+  
