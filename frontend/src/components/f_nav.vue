@@ -89,7 +89,7 @@ export default {
       },
       {
         id: "p06",
-        router: "/p06",
+        router: "/discuss",
         name: "討論專區",
       },
       {
@@ -101,7 +101,7 @@ export default {
 
     //判斷開啟ul
     const isActive = ref(false);
-    const bodyTag = document.querySelector("body");
+    const bodyTag = document.body;
     bodyTag.style.cssText = "";
     // const
     const navClick = () => {

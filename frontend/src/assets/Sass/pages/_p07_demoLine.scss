@@ -9,67 +9,119 @@
 
         // ============= line 背景 ============= 
         .line_p07_demoLine{
-            outline: 1px solid red;
             max-width: 1000px;
             height: 1302px;
             margin: 0 auto;
             background-image: url('../img/p07_demo/p07_demoLine/linebg.png');
             background-size: cover;
             padding-top: 125px;
+            position: relative;
+            display: flex;
 
-             // ============= line 聊天框框 ============= 
+             // ============= 遮罩 ============= 
+            .line_p07_demoLine_chatCover{
+                width: 346px;
+                height: 889px;
+                background-color: rgba(128, 128, 128, .8);
+                margin-top: 240px;
+                margin-left: 45px;
+            }
+             // ============= line 聊天區 ============= 
             .line_p07_demoLine_chatContainer{
                 width: 563.8px;
                 height: 1077px;
-                margin-left: 392px;
+                // margin-left: 392px;
                 padding-top: 20px;
                 padding-left: 20px;
-                background-color: #93AAD4;
-             
-                // ============= line 聊天框框 ============= 
-                .line_p07_demoLine_chatMessage{
-                    display: flex;
+                background-color: #93AAD4;           
+                
+                // ============= 聊天框框 (左) ============= 
+                .line_p07_demoLine_chatMessageLeft{
+                    margin-top: 10px;
+                    
+                    // ============= 聊天區的大頭貼 =============                     
                     img{
                         width: 50px;
                         height: 50px;
+                        position: absolute;
                     }
-                    .line_p07_demoLine_chatMessages{
-                        .line_p07_demoLine_chatMessagesName{
-                            line-height: 1;
-                            margin-bottom: 0;
-                            font-size: 12px;
-                            color: $third_color;
-                        }     
-                        .line_p07_demoLine_chatMessagesContent{
+
+                    // ============= 對話內容 ============= 
+
+                    .line_p07_demoLine_chatMessagesContentLeft{
+                        display: inline-flex;
+                        align-items: flex-end;
+                        max-width: 450px;
+                        margin-left: 50px;
+                        margin-top: 10px;
+                        
+                        // ============= 對話文字 ============= 
+                        .line_p07_demoLine_chatMessagesText{
+                            color: $background_color;
                             background-color: $text_color;
-                            padding: 8px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 30px;
-                            .line_p07_demoLine_chatMessagesContents{
-                                color: $background_color;
-                                margin-bottom: 0;
-                            }
-                            &::before{
-                                content: '';
-                                display: block;
-                                background-color: $text_color;
-                                border-right: 7px solid transparent;
-                            }
-                        }                 
+                            padding: 8px 16px;
+                            margin-bottom: 0;
+                            margin-left: 10px;
+                            border-radius: 20px;
+                        }
+                        
+                        // ============= 時間 ============= 
+                        .line_p07_demoLine_chatMessageTimestamp{
+                            font-size: 12px;
+                            margin-left: 10px;  
+                            flex-shrink: 0;  
+                        }
+
+                    }
+                    
+                }    
+                
+                // ============= 聊天框框 (右) ============= 
+                .line_p07_demoLine_chatMessageRight{
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: flex-end;
+                    margin-right: 20px;
+                    margin-top: 10px;
+                    
+                    .line_p07_demoLine_chatMessageTimestamp{
+                        font-size: 12px;
+                        margin-right: 10px;
+                    }
+                    .line_p07_demoLine_chatMessagesText{
+                        color: $background_color;
+                        background-color: $text_color;
+                        padding: 8px 16px;
+                        margin-bottom: 0;
+                        border-radius: 20px;
+
                     }
                 }
+
+                // ============= Demo 按鈕 ============= 
+                .line_p07_demoLine_chatMessageButton{
+                    color: #6A2498;
+                    background-color: $text_color;
+                    border: 2px solid #6A2498;
+                    display: block;
+                    width: 290px;
+                    height: 50px;
+                    font-size: 22px;
+                    margin: 0 auto;
+                    border-radius: 12.8px;
+                    margin-top: 50px;
+                }
+
+                
             }
-        }
-        // ============= 筆 ============= 
-        .applepencil_p07_demoLine{
-            position: absolute;
-            right: 1vw;
-            top: 50vh;
-            img{
-                width: 100%;
-                object-fit: contain;
+            // ============= 筆 ============= 
+            .applepencil_p07_demoLine{
+                position: absolute;
+                right: -13vw;
+                top: 20vh;
+                img{
+                    width: 100%;
+                }
             }
         }
     }

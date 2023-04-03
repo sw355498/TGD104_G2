@@ -2,8 +2,8 @@
 
 <div class="quiz_background">
 
-   <div class="com">
-        <img class="logo" src="../assets/img/Logo.png" alt="">
+   <div class="game_index">
+        <!-- <img class="logo" src="../assets/img/Logo.png" alt=""> -->
 
         <div class="quiz_index">
 
@@ -12,7 +12,7 @@
 
             <div class="quiz_summary">
                 <div class="m">
-                    <h2>近年來，詐騙事件層出不窮，隨著科技日新月異，詐騙更是不斷翻新手法，讓人防不慎防。<br>不論是身處在網路世界或現實生活中，都可能成為詐騙的受害者。詐騙對象不分年齡與性別，防詐從你我了解手法開始！讓我們一起以遊戲的方式了解近幾年的詐騙手法吧！</h2>
+                    <p>近年來，詐騙事件層出不窮，隨著科技日新月異，詐騙更是不斷翻新手法，讓人防不慎防。<br>不論是身處在網路世界或現實生活中，都可能成為詐騙的受害者。詐騙對象不分年齡與性別，防詐從你我了解手法開始！讓我們一起以遊戲的方式了解近幾年的詐騙手法吧！</p>
                 </div>
                 
             </div>    

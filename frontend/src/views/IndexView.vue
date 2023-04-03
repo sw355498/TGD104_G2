@@ -10,14 +10,14 @@
         <p>不明網站</p>
         <p>購物要當心</p>
       </div>
-      <button class="h6_component big_button">
-        <router-link to="/p07demoShopping">DEMO體驗</router-link>
-      </button>
+      <router-link to="/p07demoShopping" class="h6_component big_button">
+        DEMO體驗
+      </router-link>
 
       <!-- BackTop Button -->
-      <div class="backTop_index_btn">
+      <button class="backTop_index_btn">
         <i class="fa-solid fa-angles-left"></i>
-      </div>
+      </button>
 
       <!-- 機器人 -->
       <div class="robot_index_btn">
@@ -63,7 +63,7 @@
         <ul>
           <li class="card_index_block">
             <figure class="card_index_photo">
-              <img src="../assets/img/index/newPic01.jpg" alt="" />
+              <img src="../assets/img/index/newPic01.jpg" alt="資安" />
               <figcaption class="small_button">資安</figcaption>
             </figure>
             <div class="text-block">
@@ -79,7 +79,7 @@
           </li>
           <li class="card_index_block">
             <figure class="card_index_photo">
-              <img src="../assets/img/index/newPic02.jpg" alt="" />
+              <img src="../assets/img/index/newPic02.jpg" alt="駭客" />
               <figcaption class="small_button">駭客</figcaption>
             </figure>
             <div class="text-block">
@@ -94,7 +94,7 @@
           </li>
           <li class="card_index_block">
             <figure class="card_index_photo">
-              <img src="../assets/img/index/newPic03.jpg" alt="" />
+              <img src="../assets/img/index/newPic03.jpg" alt="網購詐騙" />
               <figcaption class="small_button">網購詐騙</figcaption>
             </figure>
             <div class="text-block">
@@ -189,6 +189,7 @@ export default {
 
   setup() {
     const showComponent = ref(false);
+
     return {
       showComponent,
     };

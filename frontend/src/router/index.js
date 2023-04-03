@@ -68,6 +68,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p01.vue')
   },
   {
+    path: '/p07demoGamep02',
+    name: 'p07demoGamep02',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p02.vue')
+  },
+  {
     path: '/p07demoPhone',
     name: 'p07demoPhone',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoPhone.vue')
@@ -81,6 +86,11 @@ const routes = [
     path: '/p08_user',
     name: 'p08_user',
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_user.vue')
+  },
+  {
+    path: '/p08_userEdit',
+    name: 'p08_userEdit',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p08_userEdit.vue')
   },
   {
     path: '/p08_userLogin',
