@@ -70,7 +70,7 @@ const routes = [
   {
     path: '/p07demoGamep02',
     name: 'p07demoGamep02',
-    component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p01.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p02.vue')
   },
   {
     path: '/p07demoPhone',
