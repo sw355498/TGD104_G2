@@ -14,4 +14,10 @@
     @include btnStyle(55px, 1.375rem, 11px 17px)
 }
 
-
+/* icon hover樣式 */
+.iconHover{
+    cursor: pointer;
+    &:hover{
+        color: $main_color;
+    }
+}
