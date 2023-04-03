@@ -8,6 +8,7 @@
     width: 100%;
     height: calc(70vh - 84px);
     background-color: rgba(0,0,0,0.5);
+    z-index: 100;
     @include rwd('lg'){
         // 電腦上的樣式 1200px
         max-width: 1000px;
@@ -22,217 +23,287 @@
         max-width: 350px;
     }
     .cart_container_p07_demoShopping{
-        overflow-y: scroll;
-        overflow-x: hidden;
-        float: right;
-        width: 70%;
-        height: 100%;
-        background-color: white;
-        color: black;
-        p{
-            color: black;
-        }
-        @include rwd('sm'){
-            width: 100%;
-            height: calc(70vh);
-        }
-    }
-    // ========== title ==========
-    .title{
-        // outline: 1px solid;
-        border-bottom: 1px solid lightgray;
-        display: flex;
-        padding: 20px;
-        justify-content: space-between;
-        font-size: 24px;
-    }
-    // ========== 沒商品 ==========
-    .non_cart{
-        padding: 20px;
-        margin-top: 100px;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        .bagIcon{
-            margin: 0 auto;
-            width: 200px;
-            height: 200px;
-            background-color: lightgray;
-            border-radius: 50%;
-            i{
-                // overflow: hidden;
-                color: white;
-                font-size: 100px;
-                padding: 40px 45px;
+        height: 100%;
+        // ========== 購物車下單 ==========
+        .cart_item_p07_demoShopping{
+            overflow-y: scroll;
+            overflow-x: hidden;
+            float: right;
+            width: 70%;
+            height: 100%;
+            background-color: white;
+            color: black;
+            p{
+                color: black;
             }
-        }
-        button{
-            width: 200px;
-            height: 40px;
-            margin: 50px auto 0;
-            border: none;
-            border-radius: 20px;
-            background-color: #ff3b30;
-            color: white;
-        }
-    }
-    // ========== 有商品 ==========
-    .cart_list{
-        padding: 40px;
-        .products{
-            // outline: 1px solid red;
-            display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            img{
+            @include rwd('sm'){
                 width: 100%;
-                width: 100px;
-                object-fit: contain;
-                border-radius: 10px;
-                overflow: hidden;
-            }
-            .product_details{
-                padding: 0 20px;
-                flex-grow: 1;
-                .product_details_title{
-                    margin: 0;
-                }
+                height: calc(70vh);
             }
         }
-        @include rwd('sm'){
-            // 手機上的樣式 428px
+        // ========== title ==========
+        .title{
+            // outline: 1px solid;
+            border-bottom: 1px solid lightgray;
+            display: flex;
             padding: 20px;
-            .product_details_title{
-                margin: 0;
-                width: 120px;
-                overflow:hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-        }
-    }
-    // ========== 總計價格 ==========
-    .total{
-        // outline: 1px solid red;
-        display: flex;
-        flex-direction: column;
-        color: gray;
-        margin: 20px 0;
-        .total_item{
-            display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            // margin-left: 120px;
-            border-bottom: 1px solid lightgrey;
+            font-size: 24px;
         }
-        .total_price{
-            color: #ff3b30;
-            font-size: 20px;
-            font-weight: 600;
-        }
-    }
-    // ========== 輸入 ==========
-    form{
-        // 立刻下單
-        button{
-            color: white;
-            font-size: 20px;
-            font-weight: 800;
-            width: 200px;
-            line-height: 40px;
-            border: none;
-            border-radius:20px;
-            background-color: #ff3b30;
-            margin: 10px 0;
-        }
-
-    }
-    // 單選區
-    .selected{
-        label{
-            display: flex;
-            margin: 20px;
-            span{
-                padding: 0 10px;
-            }
-        }
-        input{
-            width: auto;
-            height: auto;
-        }
-        p{
-            font-size: 20px;
-            font-weight: 800;
-        }
-    }
-    // 框
-    .box{
-        border: 1px solid gray;
-        border-radius: 5px;
-        padding: 20px;
-        margin: 20px 0;
-        color: #707070;
-        p{
-            color: #ff3b30;
-        }
-    }
-    // 信用卡輸入資訊
-    .credit_card{
-        .form_container {
-            display: grid;
-            margin: 0;
-            grid-column-gap: 10px;
-            grid-template-columns: auto auto;
-            grid-template-rows: 90px 90px 90px;
-            grid-template-areas: "number number""name name""expiration security";
-            .field_container {
-                input {
-                    -webkit-box-sizing: border-box;
-                    box-sizing: border-box;
-                    width: 100%;
-                    border-radius: 3px;
-                    border: 1px solid #dcdcdc;
-                    padding: 10px 15px;
-                    font-size: 14px;
-                }
-                #generatecard{
-                    padding: 0;
-                    cursor: pointer;
-                    float: right;
-                    font-size: 12px;
-                    color: #fff;
-                    padding: 2px 4px;
-                    background-color: #909090;
-                    border-radius: 4px;
-                }
-            }
-            .field_container:first-of-type { grid-area: number;}
-            .field_container:nth-of-type(2) {grid-area: name;}
-            .field_container:nth-of-type(3) {grid-area: expiration;}
-            .field_container:nth-of-type(4) {grid-area: security;}
-        }
-    }
-    // 門市輸入資訊
-    .delever_stroes{
-        .form_container{
+        // ========== 沒商品 ==========
+        .non_cart{
+            padding: 20px;
+            margin-top: 100px;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            .field_container{
-                margin: 20px 0;
-                input,
-                select{
-                    -webkit-box-sizing: border-box;
-                    box-sizing: border-box;
-                    width: 100%;
-                    border-radius: 3px;
-                    border: 1px solid #dcdcdc;
-                    padding: 10px 15px;
-                    font-size: 14px;
+            .bagIcon{
+                margin: 0 auto;
+                width: 200px;
+                height: 200px;
+                background-color: lightgray;
+                border-radius: 50%;
+                i{
+                    // overflow: hidden;
+                    color: white;
+                    font-size: 100px;
+                    padding: 40px 45px;
                 }
             }
-            .store_info{
+            button{
+                width: 200px;
+                height: 40px;
+                margin: 50px auto 0;
+                border: none;
+                border-radius: 20px;
+                background-color: #ff3b30;
+                color: white;
+            }
+        }
+        // ========== 有商品 ==========
+        .cart_list{
+            padding: 40px;
+            .products{
+                // outline: 1px solid red;
                 display: flex;
+                justify-content: space-between;
+                margin: 15px 0;
+                img{
+                    width: 100%;
+                    width: 100px;
+                    object-fit: contain;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+                .product_details{
+                    padding: 0 20px;
+                    flex-grow: 1;
+                    .product_details_title{
+                        margin: 0;
+                    }
+                }
+            }
+            @include rwd('sm'){
+                // 手機上的樣式 428px
+                padding: 20px;
+                .product_details_title{
+                    margin: 0;
+                    width: 120px;
+                    overflow:hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+        // ========== 總計價格 ==========
+        .total{
+            // outline: 1px solid red;
+            display: flex;
+            flex-direction: column;
+            color: gray;
+            margin: 20px 0;
+            .total_item{
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                // margin-left: 120px;
+                border-bottom: 1px solid lightgrey;
+            }
+            .total_price{
+                color: #ff3b30;
+                font-size: 20px;
+                font-weight: 600;
+            }
+        }
+        // ========== 輸入 ==========
+        form{
+            // 立刻下單
+            button{
+                color: white;
+                font-size: 20px;
+                font-weight: 800;
+                width: 200px;
+                line-height: 40px;
+                border: none;
+                border-radius:20px;
+                background-color: #ff3b30;
+                margin: 10px 0;
+            }
+    
+        }
+        // 單選區
+        .selected{
+            label{
+                display: flex;
+                margin: 20px;
+                span{
+                    padding: 0 10px;
+                }
+            }
+            input{
+                width: auto;
+                height: auto;
+            }
+            p{
+                font-size: 20px;
+                font-weight: 800;
+            }
+        }
+        // 框
+        .box{
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #707070;
+            p{
+                color: #ff3b30;
+            }
+        }
+        // 信用卡輸入資訊
+        .credit_card{
+            .form_container {
+                display: grid;
+                margin: 0;
+                grid-column-gap: 10px;
+                grid-template-columns: auto auto;
+                grid-template-rows: 90px 90px 90px;
+                grid-template-areas: "number number""name name""expiration security";
+                .field_container {
+                    input {
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        width: 100%;
+                        border-radius: 3px;
+                        border: 1px solid #dcdcdc;
+                        padding: 10px 15px;
+                        font-size: 14px;
+                    }
+                    #generatecard{
+                        padding: 0;
+                        cursor: pointer;
+                        float: right;
+                        font-size: 12px;
+                        color: #fff;
+                        padding: 2px 4px;
+                        background-color: #909090;
+                        border-radius: 4px;
+                    }
+                }
+                .field_container:first-of-type { grid-area: number;}
+                .field_container:nth-of-type(2) {grid-area: name;}
+                .field_container:nth-of-type(3) {grid-area: expiration;}
+                .field_container:nth-of-type(4) {grid-area: security;}
+            }
+        }
+        // 門市輸入資訊
+        .delever_stroes{
+            .form_container{
+                display: flex;
+                flex-direction: column;
+                .field_container{
+                    margin: 20px 0;
+                    input,
+                    select{
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        width: 100%;
+                        border-radius: 3px;
+                        border: 1px solid #dcdcdc;
+                        padding: 10px 15px;
+                        font-size: 14px;
+                    }
+                }
+                .store_info{
+                    display: flex;
+                }
+            }
+        }
+        
+    }
+    // ============ 下單成功畫面============
+    .orderChecked{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 640px;
+        height: 350px;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        box-shadow: 0 0 2px black;
+    }
+    .orderChecked_container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        .top{
+            width: 100%;
+            background-color: #909090;
+            font-size: 20px;
+            text-align: right;
+            i{
+                position: relative;
+                right: 0;
+            }
+        }
+        .mid{
+            p{
+                color: black;
+                line-height: 30px;
+            }
+            .success{
+                font-size: 36px;
+                padding-top: 10px;
+            }
+            .text{
+                // padding: 10px 30px 0;
+                font-size: 24px;
+            }
+            .fa-check{
+                font-size: 30px;
+                background-color: #ff3b30;
+                color: white;
+                width: 50px;
+                line-height: 50px;
+                margin: 0 auto;
+                border-radius: 50%;
+            }
+        }
+        .bottom{
+            width: 100%;
+            height: 50px;
+            background-color: #d8d8d8;
+            button{
+                width: 250px;
+                line-height: 26px;
+                border: 1px solid;
+                border-radius: 10px;
+                margin-top: 10px;
             }
         }
     }
+    
 }

@@ -31,7 +31,7 @@
                         <div class="address_demoShopping">
                             <i class="fa-solid fa-lock"></i>
                             <span>http://shopee.rip/te9</span>
-                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                            <!-- <i class="fa-solid fa-arrow-up-from-bracket"></i> -->
                         </div>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="cart_p07_demoShopping" v-if="showComponent">
                         <!-- 在元件上面加 :bind 就可以把資料傳進去 -->
                         <p07_demoShopping_cart :cart="cart" @close="showComponent = false"/>
-                        <div class="mask" v-if="showComponent" @click="closeComponent"></div>
+                        <!-- <div class="mask" v-if="showComponent" @click="closeComponent"></div> -->
                     </div>
                     <!-- 假購物網站 -->
                     <article class="scamWeb_p07_demoShopping_container">
@@ -68,7 +68,12 @@
                                 <li><a href="#">訂單查詢</a></li>
                                 <li><a href="#">下單須知</a></li>
                                 <li><a href="#">立即下單</a></li>
-                                <li><a href="#"><img src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" @click="showComponent = true; listenClickEvent"></a></li>
+                                <li>
+                                    <a href="#">
+                                        <span class="cart_length"> {{cart.length}} </span>
+                                        <img src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" @click="showComponent = true; listenClickEvent">
+                                    </a>
+                                </li>
                                 <li><a href="#"><img src="../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊"></a></li>
                             </ul>
                         </div>
@@ -323,11 +328,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-    .mask{
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.3);;
-    }
-</style>

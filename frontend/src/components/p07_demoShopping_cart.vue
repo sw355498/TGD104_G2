@@ -1,7 +1,8 @@
 <template>
-    <div class="cart_container_p07_demoShopping">
+<div class="cart_container_p07_demoShopping">
+    <div class="cart_item_p07_demoShopping">
         <!-- title -->
-        <div class="title">
+        <div class="title" >
             <p>您的購物車</p>
             <p>( {{cart.length}} )</p>
         </div>
@@ -180,55 +181,97 @@
                         </div>
                     </div>
                 </div>
-                <button @click.prevent="submitPayment">立刻下單</button>
+                <!-- <button @click.prevent="submitPayment">立刻下單</button> -->
+                <button @click.prevent="show = true; listenClickEvent">立刻下單</button>
             </form>
         </div>
     </div>
+    <!-- 下單成功彈窗 -->
+    <div class="orderChecked" v-if="show">
+        <div class="orderChecked_container">
+            <div class="top">
+                <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
+            </div>
+            <div class="mid">
+                <p class="success">下單成功</p>
+                <p class="text">幽靈包裹 約3-5個工作天送到<br>
+                新北市八里區中華路二段290號292號296號<br>
+                親愛的 Karen 請準備好錢 領取詐騙包裹</p>
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="bottom">
+                <button @click="$emit('close')">點我繼續體驗詐騙網站購物</button>
+            </div>
+        </div>
+    </div>
+    <div class="mask" @click="$emit('close')"></div>
+</div>
 </template>
 <script>
 import { ref, computed } from 'vue';
 
 export default {
-  name: 'Cart',
-  props: {
-    cart: {
-      type: Array,
-      default: () => [],
+    name: 'Cart',
+    components: {
     },
-  },
-  setup(props) {
-    const totalPrice = computed(() => {
-      return props.cart.reduce((acc, cur) => acc + cur.price * cur.number, 0);
-    });
+    props: {
+        cart: {
+        type: Array,
+        default: () => [],
+        },
+    },
+    setup(props) {
+        const totalPrice = computed(() => {
+        return props.cart.reduce((acc, cur) => acc + cur.price * cur.number, 0);
+        });
 
-    const updateProductNumber = (product, amount) => {
-      product.number += amount;
-      if (product.number < 1) {
-        product.number = 1;
-      }
-    };
-    const paymentMethod = ref('');
-    const deleverMethod = ref('');
-    const creditCardNumber = ref('');
-    const expirationDate = ref('');
-    const submitPayment = () => {
-        cart.value = [];
-        paymentMethod.value = '';
-        deleverMethod.value = '';
-        creditCardNumber.value = '';
-        expirationDate.value = '';
-    };
-    return {
-        totalPrice,
-        updateProductNumber,
-        paymentMethod,
-        deleverMethod,
-        creditCardNumber,
-        expirationDate,
-        submitPayment,
-    };
-  },
+        const updateProductNumber = (product, amount) => {
+        product.number += amount;
+        if (product.number < 1) {
+            product.number = 1;
+        }
+        };
+        const paymentMethod = ref('');
+        const deleverMethod = ref('');
+        const creditCardNumber = ref('');
+        const expirationDate = ref('');
+        const show = ref(false);
+        function listenClickEvent() {
+        clickListener = () => {
+            show.value = false;
+            document.removeEventListener("click", clickListener);
+        };
+        document.addEventListener("click", clickListener);
+        }
+        const submitPayment = () => {
+            cart.value = [];
+            paymentMethod.value = '';
+            deleverMethod.value = '';
+            creditCardNumber.value = '';
+            expirationDate.value = '';
+            checked.value = '';
+        };
+        return {
+            totalPrice,
+            updateProductNumber,
+            paymentMethod,
+            deleverMethod,
+            creditCardNumber,
+            expirationDate,
+            submitPayment,
+            show,
+            listenClickEvent,
+        };
+    },
 };
 
 
 </script>
+
+<style scoped>
+    .mask{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3);;
+    }
+</style>
