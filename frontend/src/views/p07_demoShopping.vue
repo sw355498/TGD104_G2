@@ -9,12 +9,13 @@
                 <!-- 電腦版瀏覽器 上面tool -->
                 <div class="toolbar_demoShopping">
                     <!-- 手機板的 toolbar_top -->
-                    <div class="toolbar_mbtop_demoShopping">
+                    <!-- 先註解掉 用下面的手機瀏覽器 -->
+                    <!-- <div class="toolbar_mbtop_demoShopping">
                         <span>3:30</span>
                         <i class="fa-solid fa-signal"></i>
                         <i class="fa-solid fa-wifi"></i>
                         <i class="fa-solid fa-battery-three-quarters"></i>
-                    </div>
+                    </div> -->
                     <div class="toolbar_top_demoShopping">
                         <div class="circles_demoShopping"></div>
                         <div class="tab_demoShopping">
