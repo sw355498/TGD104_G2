@@ -199,6 +199,7 @@ export default {
 
 <style scoped>
 footer {
+  height: 600px;
   background-image: url(../assets/img/index/footer.png);
   background-position: center;
 }

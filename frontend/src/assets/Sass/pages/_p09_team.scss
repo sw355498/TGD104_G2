@@ -34,4 +34,112 @@
       }
     }
   }
+  main {
+    max-width: $w1200;
+    padding-top: 100px;
+    margin: 0 auto;
+    .intro_p09_team_block {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .card1_p09_team_block,
+      .card2_p09_team_block {
+        width: 350px;
+        height: 350px;
+        margin: 0 10px 10px 0;
+        overflow: hidden;
+        position: relative;
+        p {
+          position: absolute;
+          bottom: 5px;
+          left: 0;
+          right: 0;
+          // color: $sec_color;
+          color: $text_color;
+          letter-spacing: 0.3rem;
+          text-align: center;
+        }
+        .pic {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 350px;
+          height: 350px;
+          background-size: 100% 100%;
+          filter: grayscale(100%);
+        }
+
+        #karen {
+          background-image: url("../img/p09_team/karen.jpg");
+        }
+        #shsinyu {
+          background-image: url("../img/p09_team/shsinyu.jpg");
+        }
+        #bbn {
+          background-image: url("../img/p09_team/bbn.jpg");
+        }
+        #lucyruan {
+          background-image: url("../img/p09_team/lucyruan.jpg");
+        }
+        #sw {
+          background-image: url("../img/p09_team/sw.jpg");
+        }
+        #candybomb {
+          background-image: url("../img/p09_team/candybomb.jpg");
+        }
+        .work_p09_team_block {
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 350px;
+          height: 350px;
+          background-image: linear-gradient(180deg, #08202d00, #08202d99);
+          ul {
+            @include fontStyle(300, 1.2rem, 1.5rem, 0.2rem, 5px);
+            color: $text_color;
+            position: absolute;
+            bottom: 0;
+            padding-left: 0;
+            margin: 10px;
+            text-align: justify;
+            li {
+              @include fontStyle(300, 1rem, 1.5rem, 0rem, 5px);
+              list-style: none;
+              display: inline-block;
+            }
+          }
+        }
+        button {
+          position: absolute;
+          right: 14px;
+          bottom: 14px;
+          width: 30px;
+          height: 30px;
+          background-color: $title_color;
+          border-radius: 30px;
+          border: none;
+          outline: none;
+          opacity: 0.5;
+          transition: all 0.3s ease;
+        }
+        &:hover button {
+          transform: scale(1.5);
+          opacity: 1;
+        }
+        &:hover .pic {
+          filter: grayscale(0);
+        }
+
+        &:hover .work_p09_team_block {
+          opacity: 1;
+        }
+      }
+      .card2_p09_team_block {
+        display: flex;
+        background-color: $title_color;
+        @include flex_vhCenter();
+      }
+    }
+  }
 }

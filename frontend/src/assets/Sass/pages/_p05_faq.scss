@@ -38,21 +38,61 @@
     }
     .question_p05_faq_block {
       ul {
+        margin: 0 auto;
         @include indexGrid(2);
+        row-gap: 10px;
+        @include rwd(lg) {
+          @include indexGrid(1);
+          padding: 0 50px;
+        }
+        @include rwd(md) {
+          // @include indexGrid(1);
+          display: block;
+          padding: 0 30px;
+        }
+        @include rwd(sm) {
+          // @include indexGrid(1);
+          display: block;
+          padding: 0 10px;
+        }
         li {
           list-style: none;
           box-sizing: border-box;
-          width: 100%;
           background-color: $title_color;
           color: $sec_color;
           padding: 20px;
           border-radius: 10px;
           margin-bottom: 10px;
-          h4 {
-            text-align: justify;
+          @include rwd(md) {
           }
-          p {
+          h4 {
+            display: flex;
+            justify-content: space-between;
+            @include rwd(md) {
+              @include fontT26_index_article();
+              color: $sec_color;
+              margin: 0;
+              letter-spacing: 0;
+            }
+            @include rwd(sm) {
+              @include fontP18_index_article();
+              letter-spacing: 0;
+            }
+          }
+          div {
             color: $sec_color;
+            div {
+              text-align: justify;
+              a {
+                color: $sec_color;
+              }
+              @include rwd(md) {
+                color: $sec_color;
+              }
+              @include rwd(sm) {
+                color: $sec_color;
+              }
+            }
           }
         }
       }
