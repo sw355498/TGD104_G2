@@ -1,0 +1,165 @@
+.wrapper_p06_discuss_content{
+    width: $w1200;
+    margin: 50px auto;
+    box-sizing: border-box;
+    color: $text_color;
+    .fa-solid{
+
+        margin-right: 5px;
+    }
+    .breadcrumb-list{
+        display: flex;
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        
+        li{
+            color: $main_color;
+
+            &:not(:last-child)::after{
+                content: '/';
+                margin: 0 10px;
+            }
+
+            &:last-child{
+                color: #ccc;
+            }
+        }
+    }
+
+    .articleBlock_p06_discuss_content{
+        border: 1px solid $text_color;
+        margin-top: 50px;
+        padding: 50px 100px;
+
+        .topBlock_p06_discuss{
+            display: flex;
+            justify-content: space-between;
+
+            .pic_p06_discuss{
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 5px;
+            }
+
+            .ellipsisBtn{
+                width: 32px;
+                height: 32px;
+                background: transparent;
+                border: none;
+                outline: none;
+                color: $text_color;
+
+                &:hover{
+                    color: $main_color;
+                }
+            }
+        }
+
+        h2{
+            margin-top: 50px;
+            color: $title_color;
+        }
+
+        .articleInformation_p06_discuss{
+            margin-top: 10px;
+            color: #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .tag{
+                color: $title_color;
+            }
+            button{
+                &:not(:last-of-type){
+                    margin-right: 25px;
+                }
+            }
+        }
+
+        .articleContent_p06_discuss{
+            margin-top: 50px;
+        }
+    }
+
+    .articleMessage_p06_discuss{
+        margin-top: 80px;
+        .topBlock_p06_discuss{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid $text_color;
+
+            h3{
+                color: $title_color;
+            }
+        }
+        .messageMain{
+            margin-top: 25px;
+            padding: 0 80px;
+            ul{
+                list-style: none;
+                padding: 0px;
+                display: flex;
+
+                li{
+                    margin-right: 25px;
+                }
+            }
+        }
+        .messageList{
+            margin: 0px 5rem;
+            padding: 25px 50px 15px;
+            border-bottom: 1px solid $text_color;
+            img{
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 5px;
+            }
+            .topBlock{
+                display: flex;
+                align-items: center;
+                .action{
+                    list-style: none;
+                    margin: 0px;
+                    margin-left: auto;
+                    padding: 0px;
+                    display: flex;
+                    align-items: center;
+                    li{
+                        padding: 10px;
+                        &:not(:last-of-type){
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+            .reply{
+                padding: 10px 0px 25px 80px;
+                .switch{
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+
+                    .solidLine{
+                        width: 100px;
+                        height: 1px;
+                        background: $text_color;
+                        margin-right: 15px;
+                    }
+                }
+                .messageItems{
+                    list-style: none;
+                    padding: 0px;
+                    margin: 0px;
+                    padding-top: 25px;
+                }
+            }
+        }
+    }
+}

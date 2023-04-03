@@ -1,7 +1,7 @@
 <template>
-    <div class="wrapper_p06_discuss">
+    <main class="wrapper_p06_discuss">
         <ul class="breadcrumb-list text_title">
-            <li>首頁</li>
+            <li><router-link to="/index">首頁</router-link></li>
             <li>討論專區</li>
         </ul>
         <div class="titleBlock">
@@ -10,15 +10,12 @@
         </div>
         <div class="tab_p01_newsChoose">
             <div class="tab_p01_news_category">
-                <select name="" id="">
-                    所有文章
-                </select>
-            <div class="wide_tab">
-                <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
-                href="#"
-                >網站詐騙</a
-                >　|　<a href="#" >交友詐騙</a>　|　<a href="#">金融詐騙</a>
-            </div>
+                <div class="wide_tab">
+                    <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
+                    href="#"
+                    >網站詐騙</a
+                    >　|　<a href="#" >交友詐騙</a>　|　<a href="#">金融詐騙</a>
+                </div>
             </div>
             <div class="input_p01_news_searchBar">
             <input type="text" placeholder="搜尋文章" />
@@ -81,7 +78,7 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </main>
 </template>
 
 <script>

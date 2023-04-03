@@ -9,8 +9,13 @@
         margin: 0px;
         
         li{
-            &::after{
+            &:not(:last-child)::after{
                 content: '/';
+                margin: 0 10px;
+            }
+
+            &:last-child{
+                color: #ccc;
             }
         }
     }
@@ -155,6 +160,7 @@
                     list-style: none;
                     padding: 0px;
                     margin: 20px 0px 0px;
+                    align-items: center;
 
                     li{
                         margin-right: 40px;
