@@ -7,6 +7,13 @@
             <div class="browser_p07_demoShopping">
                 <!-- 上面tool -->
                 <div class="toolbar_demoShopping">
+                    <!-- 手機板的 toolbar_top -->
+                    <div class="toolbar_mbtop_demoShopping">
+                        <span>3:30</span>
+                        <i class="fa-solid fa-signal"></i>
+                        <i class="fa-solid fa-wifi"></i>
+                        <i class="fa-solid fa-battery-three-quarters"></i>
+                    </div>
                     <div class="toolbar_top_demoShopping">
                         <div class="circles_demoShopping"></div>
                         <div class="tab_demoShopping">
@@ -22,6 +29,7 @@
                         <div class="address_demoShopping">
                             <i class="fa-solid fa-lock"></i>
                             <span>http://shopee.rip/te9</span>
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
                         </div>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
@@ -79,8 +87,8 @@
                         <img class="scamWeb_p07_demoShopping_banner2" src="../assets/img/p07_demo/p07_demoShopping/pic02.jpg">
                         
                         <!-- 第三紅條廣告詞 -->
-                        <div class="scamWeb_p07_demoShopping_bannerRed">
-                            <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，2020新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
+                        <div class="scamWeb_p07_demoShopping_bannerRed scrollBar">
+                            <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至 NT$432，2020 新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                         </div>
 
                         <!-- 貨運廣告 banner -->
@@ -99,7 +107,7 @@
                                 <span class="scamWeb_p07_demoShopping_clothCardSpecial">限時特價</span>
                                 <img :src="product.imageUrl" :alt="product.name" />
                                 <a href="#">女裝>洋裝</a>
-                                <div>{{ product.name }}</div>
+                                <p>{{ product.name }}</p>
                                 <div class="scamWeb_p07_demoShopping_clothCardPrice">
                                     <span>$1980</span>
                                     <span>${{ product.price }}</span>
@@ -117,7 +125,7 @@
 
                         <!-- 第四紅條廣告詞 -->
                         <div class="scamWeb_p07_demoShopping_bannerRed scamWeb_p07_demoShopping_bannerRed4">
-                            <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
+                            <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！</p>
                         </div>
 
                         <!-- 四張信用卡 -->
@@ -143,8 +151,8 @@
                             <!-- 以上會用 v-for 並使用向上輪播動畫 -->
                         </ul>
 
-                        <!-- 第五紅條廣告詞 -->
-                        <div class="scamWeb_p07_demoShopping_bannerRed scamWeb_p07_demoShopping_bannerRed4 scamWeb_p07_demoShopping_bannerRed5">
+                        <!-- 第六紅條廣告詞 -->
+                        <div class="scamWeb_p07_demoShopping_bannerRed scamWeb_p07_demoShopping_bannerRed4 scamWeb_p07_demoShopping_bannerRed6">
                             <p class="scamWeb_p07_demoShopping_bannerRedP2">立刻下單 免運包郵</p>
                         </div>
 
