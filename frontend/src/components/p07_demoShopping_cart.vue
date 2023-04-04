@@ -27,7 +27,6 @@
                         {{ item.name }}
                     </p>
                     <div class="product_details_num">
-                        <button @click.prevent="removeProduct(index)">刪除</button>
                         <span> 數量
                             <i class="fas fa-minus" @click="updateProductNumber(item, -1)"></i>
                             {{ item.number }}
@@ -37,7 +36,8 @@
                     <span> 單價 ${{ item.price }}</span>
                 </div>
                 <div class="product_details_price">
-                    <span> ${{ item.price * item.number }}</span>
+                    <span> 金額 ${{ item.price * item.number }}</span>
+                    <button @click.prevent="removeProduct(index)">刪除</button>
                 </div>
             </div>
             <!-- ======== 總計 ======== -->
@@ -117,34 +117,39 @@
                     <div class="form_container">
                         <!-- 地址資訊 -->
                         <div class="field_container">
-                            <label for="seven_store_city">地址資訊</label>
+                            <label for="home_city">地址資訊</label>
                             <div class="store_info">
-                                <select name="seven_store_city">
+                                <select name="seven_store_city" v-model="receiverCity">
                                     <option value="">縣市</option>
-                                    <option value="taipei">台北市</option>
-                                    <option value="newTaipei">新北市</option>
+                                    <option value="台北市">台北市</option>
+                                    <option value="新北市">新北市</option>
                                 </select>
-                                <select name="seven_store_district">
+                                <select name="seven_store_district" v-model="receiverDistrict">
                                     <option value="">區</option>
-                                    <option value="shulin">樹林區</option>
-                                    <option value="banqiao">板橋區</option>
-                                </select>
-                                <select name="seven_store_name">
-                                    <option value="">門市</option>
-                                    <option value="store0001">大台</option>
-                                    <option value="store0002">大信</option>
+                                    <option value="樹林區">樹林區</option>
+                                    <option value="板橋區">板橋區</option>
                                 </select>
                             </div>
                         </div>
                         <!-- 地址 -->
                         <div class="field_container">
                             <label for="delver_address">詳細地址</label>
-                            <input id="delver_address" maxlength="50" type="text" v-model="receiverAddress">
+                            <input 
+                                id="delver_address"
+                                maxlength="50" type="text" 
+                                v-model="receiverAddress"
+                                placeholder="請輸入詳細地址以便包裹寄送"
+                            >
                         </div>
                         <!-- 收件人 -->
                         <div class="field_container">
                             <label for="delver_name">收件人姓名</label>
-                            <input id="delver_name" type="text" v-model="receiverName">
+                            <input 
+                                id="delver_name" type="text" 
+                                v-model="receiverName"
+                                placeholder="請輸入您的真實姓名"
+                            >
+                            <p class="needName">請輸入收件人姓名</p>
                         </div>
                     </div>
                 </div>
@@ -156,27 +161,30 @@
                         <div class="field_container">
                             <label for="seven_store_city">門市資訊</label>
                             <div class="store_info">
-                                <select name="seven_store_city">
+                                <select name="seven_store_city" v-model="receiverCity">
                                     <option value="">縣市</option>
-                                    <option value="taipei">台北市</option>
-                                    <option value="newTaipei">新北市</option>
+                                    <option value="台北市">台北市</option>
+                                    <option value="新北市">新北市</option>
                                 </select>
-                                <select name="seven_store_district">
+                                <select name="seven_store_district" v-model="receiverDistrict">
                                     <option value="">區</option>
-                                    <option value="shulin">樹林區</option>
-                                    <option value="banqiao">板橋區</option>
+                                    <option value="樹林區">樹林區</option>
+                                    <option value="板橋區">板橋區</option>
                                 </select>
-                                <select name="seven_store_name">
+                                <select name="seven_store_name" v-model="receiverStoreName">
                                     <option value="">門市</option>
-                                    <option value="store0001">大台</option>
-                                    <option value="store0002">大信</option>
+                                    <option value="大台">大台</option>
+                                    <option value="大信">大信</option>
                                 </select>
                             </div>
                         </div>
                         <!-- 地址 -->
                         <div class="field_container">
                             <label for="delver_address">詳細地址</label>
-                            <input id="delver_address" maxlength="50" type="text" v-model="receiverAddress">
+                            <input id="delver_address" maxlength="50" type="text" 
+                                v-model="receiverAddress"
+                                readonly="readonly"
+                            >
                         </div>
                         <!-- 收件人 -->
                         <div class="field_container">
@@ -192,27 +200,30 @@
                         <div class="field_container">
                             <label for="seven_store_city">門市資訊</label>
                             <div class="store_info">
-                                <select name="seven_store_city">
+                                <select name="seven_store_city" v-model="receiverCity">
                                     <option value="">縣市</option>
-                                    <option value="taipei">台北市</option>
-                                    <option value="newTaipei">新北市</option>
+                                    <option value="台北市">台北市</option>
+                                    <option value="新北市">新北市</option>
                                 </select>
-                                <select name="seven_store_district">
+                                <select name="seven_store_district" v-model="receiverDistrict">
                                     <option value="">區</option>
-                                    <option value="shulin">樹林區</option>
-                                    <option value="banqiao">板橋區</option>
+                                    <option value="樹林區">樹林區</option>
+                                    <option value="板橋區">板橋區</option>
                                 </select>
-                                <select name="seven_store_name">
+                                <select name="seven_store_name" v-model="receiverStoreName">
                                     <option value="">門市</option>
-                                    <option value="store0001">大台</option>
-                                    <option value="store0002">大信</option>
+                                    <option value="大台">大台</option>
+                                    <option value="大信">大信</option>
                                 </select>
                             </div>
                         </div>
                         <!-- 地址 -->
                         <div class="field_container">
                             <label for="delver_address">詳細地址</label>
-                            <input id="delver_address" maxlength="50" type="text" v-model="receiverAddress">
+                            <input id="delver_address" maxlength="50" type="text" 
+                                v-model="receiverAddress"
+                                readonly="readonly"
+                            >
                         </div>
                         <!-- 收件人 -->
                         <div class="field_container">
@@ -249,7 +260,7 @@
 </div>
 </template>
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 export default {
     name: 'Cart',
@@ -273,13 +284,25 @@ export default {
         }
         };
         const removeProduct = (index) => {
-        props.cart.splice(index, 1);
+            props.cart.splice(index, 1);
         };
         const paymentMethod = ref('');
         const deleverMethod = ref('');
         const creditCardNumber = ref('');
         const expirationDate = ref('');
         const show = ref(false);
+        // 地址
+        const receiverCity = ref('');
+        const receiverDistrict = ref('');
+        const receiverStoreName = ref('');
+        const receiverAddress = ref('');
+        // 監聽地址資訊的變化，動態更新詳細地址的值
+        watch(
+            [receiverCity, receiverDistrict, receiverStoreName], 
+            ([city, district, storeName]) => {
+                receiverAddress.value = `${city}${district}${storeName}`;
+            }
+        );
         const submitPayment = () => {
             cart.value = [];
             paymentMethod.value = '';
@@ -294,6 +317,11 @@ export default {
             removeProduct,
             paymentMethod,
             deleverMethod,
+            // 地址
+            receiverCity,
+            receiverDistrict,
+            receiverStoreName,
+            receiverAddress,
             creditCardNumber,
             expirationDate,
             submitPayment,

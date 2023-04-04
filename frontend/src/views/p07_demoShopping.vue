@@ -263,7 +263,7 @@ export default {
         },
         {
             name: '高端修身收腰顯瘦圖騰氣質洋裝',
-            price: 499,
+            price: 299,
             imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic05.jpg'),
             number: 1
         },
@@ -275,13 +275,13 @@ export default {
         },
         {
             name: '氣質白色連衣裙小個子',
-            price: 499,
+            price: 399,
             imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic07.jpg'),
             number: 1
         },
         {
             name: '修身收腰白色小晚禮服',
-            price: 499,
+            price: 199,
             imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic08.jpg'),
             number: 1
         },
@@ -293,7 +293,7 @@ export default {
         },
         {
             name: '早春新款V領長袖法式設計洋裝',
-            price: 499,
+            price: 299,
             imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic10.jpg'),
             number: 1
         },
@@ -309,30 +309,12 @@ export default {
 
         // 點擊才出現 =================================================
         const showComponent = ref(false);
-        let clickListener;
-
-        function listenClickEvent() {
-            clickListener = () => {
-                showComponent.value = false;
-                document.removeEventListener("click", clickListener);
-            };
-            document.addEventListener("click", clickListener);
-        }
-
-        function closeComponent() {
-            if (showComponent.value) {
-                showComponent.value = false;
-                document.removeEventListener("click", clickListener);
-            }
-        }
         return {
             cart,
             product,
             products,
             addProductToCart,
             showComponent,
-            listenClickEvent,
-            closeComponent,
         }
     },
 }
