@@ -1,6 +1,6 @@
 <template>
 <div class="cart_container_p07_demoShopping">
-    <div class="cart_item_p07_demoShopping">
+    <div class="cart_item_p07_demoShopping" v-if="!show">
         <!-- title -->
         <div class="title" >
             <p>您的購物車</p>
@@ -14,29 +14,30 @@
             <button @click="$emit('close')">尚未加入商品 點我購物</button>
         </div>
         <!-- ========= 購物車有商品 ========= -->
-        <div class="cart_list" v-else>
+        <div class="cart_list" v-if="cart.length != 0">
             <!-- 商品列表 -->
-            <!-- <div class="products" v-for="(item, index) in cart" :key="index"> -->
-            <div class="products" v-for="product in cart" :key="product.id">
+            <div class="products" v-for="(item, index) in cart" :key="index">
+            <!-- <div class="products" v-for="item in cart" :key="item.id"> -->
                 <div class="product_img">
-                    <img :src="product.imageUrl" :alt="product.name" />
+                    <img :src="item.imageUrl" :alt="item.name" />
                     <!-- <img src="../assets/img/p07_demo/p07_demoShopping/pic03.jpg" alt=""> -->
                 </div>
                 <div class="product_details">
                     <p class="product_details_title" >
-                        {{ product.name }}
+                        {{ item.name }}
                     </p>
                     <div class="product_details_num">
+                        <button @click.prevent="removeProduct(index)">刪除</button>
                         <span> 數量
-                            <i class="fas fa-minus" @click.prevent="updateProductNumber(product, -1)"></i>
-                            {{ product.number }}
-                            <i class="fas fa-plus" @click.prevent="updateProductNumber(product, 1)"></i>
+                            <i class="fas fa-minus" @click="updateProductNumber(item, -1)"></i>
+                            {{ item.number }}
+                            <i class="fas fa-plus" @click="updateProductNumber(item, 1)"></i>
                         </span>
                     </div>
-                    <span> 單價 ${{ product.price }}</span>
+                    <span> 單價 ${{ item.price }}</span>
                 </div>
                 <div class="product_details_price">
-                    <span> ${{ totalPrice }}</span>
+                    <span> ${{ item.price * item.number }}</span>
                 </div>
             </div>
             <!-- ======== 總計 ======== -->
@@ -75,20 +76,22 @@
                     <div class="form_container">
                         <div class="field_container">
                             <label for="cardnumber">信用卡卡號</label>
-                            <span id="generatecard">隨機產生</span>
-                            <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
+                            <!-- <span id="generatecard">隨機產生</span> -->
+                            <input id="cardnumber" type="text" pattern="[0-9]*" 
+                            inputmode="numeric" value="4000 0566 5566 5556">
                         </div>
                         <div class="field_container">
                             <label for="card_name">姓名</label>
-                            <input id="card_name" maxlength="20" type="text">
+                            <input id="card_name" maxlength="20" type="text" value="王曉明">
                         </div>
                         <div class="field_container">
                             <label for="expirationdate">到期 (月份/年份)</label>
-                            <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+                            <input id="expirationdate" type="text" pattern="[0-9]*" 
+                            inputmode="numeric" value="06 29">
                         </div>
                         <div class="field_container">
                             <label for="securitycode">安全碼</label>
-                            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
+                            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" value="123">
                         </div>
                     </div>
                 </div>
@@ -107,6 +110,43 @@
                         <input type="radio" value="family" v-model="deleverMethod"/>
                         <span>全家</span>
                     </label>
+                </div>
+                <div v-if="deleverMethod === ''|| deleverMethod ==='home'" class="seven delever_stroes box">
+                <!-- <div class="seven box"> -->
+                    <p>請輸入地址</p>
+                    <div class="form_container">
+                        <!-- 地址資訊 -->
+                        <div class="field_container">
+                            <label for="seven_store_city">地址資訊</label>
+                            <div class="store_info">
+                                <select name="seven_store_city">
+                                    <option value="">縣市</option>
+                                    <option value="taipei">台北市</option>
+                                    <option value="newTaipei">新北市</option>
+                                </select>
+                                <select name="seven_store_district">
+                                    <option value="">區</option>
+                                    <option value="shulin">樹林區</option>
+                                    <option value="banqiao">板橋區</option>
+                                </select>
+                                <select name="seven_store_name">
+                                    <option value="">門市</option>
+                                    <option value="store0001">大台</option>
+                                    <option value="store0002">大信</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 地址 -->
+                        <div class="field_container">
+                            <label for="delver_address">詳細地址</label>
+                            <input id="delver_address" maxlength="50" type="text" v-model="receiverAddress">
+                        </div>
+                        <!-- 收件人 -->
+                        <div class="field_container">
+                            <label for="delver_name">收件人姓名</label>
+                            <input id="delver_name" type="text" v-model="receiverName">
+                        </div>
+                    </div>
                 </div>
                 <div v-if="deleverMethod === 'seven'" class="seven delever_stroes box">
                 <!-- <div class="seven box"> -->
@@ -136,12 +176,12 @@
                         <!-- 地址 -->
                         <div class="field_container">
                             <label for="delver_address">詳細地址</label>
-                            <input id="delver_address" maxlength="20" type="text">
+                            <input id="delver_address" maxlength="50" type="text" v-model="receiverAddress">
                         </div>
                         <!-- 收件人 -->
                         <div class="field_container">
                             <label for="delver_name">收件人姓名</label>
-                            <input id="delver_name" type="text">
+                            <input id="delver_name" type="text" v-model="receiverName">
                         </div>
                     </div>
                 </div>
@@ -172,17 +212,17 @@
                         <!-- 地址 -->
                         <div class="field_container">
                             <label for="delver_address">詳細地址</label>
-                            <input id="delver_address" maxlength="20" type="text">
+                            <input id="delver_address" maxlength="50" type="text" v-model="receiverAddress">
                         </div>
                         <!-- 收件人 -->
                         <div class="field_container">
                             <label for="delver_name">收件人姓名</label>
-                            <input id="delver_name" type="text">
+                            <input id="delver_name" type="text" v-model="receiverName">
                         </div>
                     </div>
                 </div>
                 <!-- <button @click.prevent="submitPayment">立刻下單</button> -->
-                <button @click.prevent="show = true; listenClickEvent">立刻下單</button>
+                <button @click.prevent="show = true">立刻下單</button>
             </form>
         </div>
     </div>
@@ -195,8 +235,9 @@
             <div class="mid">
                 <p class="success">下單成功</p>
                 <p class="text">幽靈包裹 約3-5個工作天送到<br>
-                新北市八里區中華路二段290號292號296號<br>
-                親愛的 Karen 請準備好錢 領取詐騙包裹</p>
+                <!-- 新北市八里區中華路二段290號292號296號<br> -->
+                {{ receiverAddress }}<br>
+                親愛的 {{ receiverName }} <br>請準備領取詐騙包裹</p>
                 <i class="fa-solid fa-check"></i>
             </div>
             <div class="bottom">
@@ -225,24 +266,20 @@ export default {
         return props.cart.reduce((acc, cur) => acc + cur.price * cur.number, 0);
         });
 
-        const updateProductNumber = (product, amount) => {
-        product.number += amount;
-        if (product.number < 1) {
-            product.number = 1;
+        const updateProductNumber = (item, amount) => {
+        item.number += amount;
+        if (item.number < 1) {
+            item.number = 1;
         }
+        };
+        const removeProduct = (index) => {
+        props.cart.splice(index, 1);
         };
         const paymentMethod = ref('');
         const deleverMethod = ref('');
         const creditCardNumber = ref('');
         const expirationDate = ref('');
         const show = ref(false);
-        function listenClickEvent() {
-        clickListener = () => {
-            show.value = false;
-            document.removeEventListener("click", clickListener);
-        };
-        document.addEventListener("click", clickListener);
-        }
         const submitPayment = () => {
             cart.value = [];
             paymentMethod.value = '';
@@ -254,13 +291,13 @@ export default {
         return {
             totalPrice,
             updateProductNumber,
+            removeProduct,
             paymentMethod,
             deleverMethod,
             creditCardNumber,
             expirationDate,
             submitPayment,
             show,
-            listenClickEvent,
         };
     },
 };
