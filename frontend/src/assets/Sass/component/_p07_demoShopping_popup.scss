@@ -1,0 +1,148 @@
+
+.popup_p07_demoShopping{
+    position: absolute;
+    width: 100%;
+    height: 82vh;
+    left: 0;
+    // outline: 1px solid red;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+}
+.popup_p07_demoShopping_arrow{
+    position: absolute;
+    margin: 0 auto;
+    top: -80%;
+    left: -10%;
+    // transform: translate(-50%, 0%);
+    // outline: 1px solid red;
+    // z-index: -1;
+    @include rwd('lg'){
+    // 電腦上的樣式 lg: 1200px
+    }
+      
+    @include rwd('md') {
+    // 平板上的樣式md: 768px
+    }
+    
+    @include rwd('sm'){
+    // 手機上的樣式sm: 428px
+    }
+    .fa-arrow-up{
+        font-size: 200px;
+        rotate: -45deg;
+        color: #08171E;
+        text-shadow: 0px 0px 10px white;
+    }
+}
+.popup_p07_demoShopping_container{
+    width: 530px;
+    // height: 250px;
+    background-color: #08171E;
+    box-shadow: 0px 0px 10px white;
+    padding: 10px;
+    margin: 200px auto;
+
+    @include rwd('md') {
+        // 平板上的樣式md: 768px
+        width: 330px;
+        padding: 0px;
+        h2{
+            font-size: 24px;
+        }
+    }
+    @include rwd('sm'){
+        // 手機上的樣式sm: 428px
+        width: 250px;
+        h2{
+            font-size: 20px;
+        }
+    }
+    .popup_p07_demoShopping_textArea{
+        padding: 20px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @include rwd('sm'){
+            // 手機上的樣式sm: 428px
+            padding: 8px 18px 15px;
+        }
+        .fa-xmark{
+            position: absolute;
+            right: 20px;
+            font-size: 20px;
+            @include rwd('md') {
+                // 平板上的樣式md: 768px
+                right: 20px;
+                @include rwd('sm'){
+                    // 手機上的樣式sm: 428px
+                    right: 10px;
+                    top: 10px;
+                }
+            }
+        }
+        .top{
+            flex-grow: 1;
+            padding: 0 20px;
+            // outline: 1px solid red;
+            @include rwd('md') {
+                // 平板上的樣式md: 768px
+                padding: 0 10px ;
+                @include rwd('sm'){
+                    // 手機上的樣式sm: 428px
+                    padding: 0px ;
+                }
+            }
+            p{
+                font-size: 26px;
+                @include rwd('md') {
+                // 平板上的樣式md: 768px
+                font-size: 18px;
+            
+                }
+                @include rwd('sm'){
+                // 手機上的樣式sm: 428px
+                font-size: 16px;
+                }
+            }
+        }
+        .down{
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 10px 20px 0;
+            @include rwd('md') {
+                // 平板上的樣式md: 768px
+                padding: 10px ;
+                @include rwd('sm'){
+                    // 手機上的樣式sm: 428px
+                    padding: 0px ;
+                }
+            }
+            span{
+                font-size: 20px;
+                @include rwd('md') {
+                    // 平板上的樣式md: 768px
+                    font-size: 16px;
+                }
+            }
+            button{
+                width: 120px;
+                line-height: 40px;
+                border-radius: 10px;
+                @include rwd('md') {
+                // 平板上的樣式md: 768px
+                    width: 80px;
+                    line-height: 30px;
+                    font-size: 15px;
+                }
+                @include rwd('sm'){
+                // 手機上的樣式sm: 428px
+                    width: 70px;
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+}
