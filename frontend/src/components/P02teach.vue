@@ -6,7 +6,17 @@
         <div class="banner_teachtitle_en">SCAM</div>
       </div>
     </div>
-
+    <select name="" id="" class="form-select form-select-md">
+      <option
+        v-for="(tab, tab_index) in tabs"
+        :class="{ tab: true, active: active_tab == tab_index }"
+        
+        :key="tab_index"
+        @value="changeTab(tab_index)"
+      >
+        {{ tab.title }}
+      </option>
+    </select>
     <div id="tabs">
       <div
         v-for="(tab, tab_index) in tabs"
@@ -28,12 +38,12 @@
           <h2>{{ tab.title }}</h2>
         </div>
         <div class="div_p02_teach_content">
-          <div class=".div_p02_teach_contentLeft">
+          <div class=".div_p02_teach_contentLeft col-md-6">
             <div class="div_p02_teach_contentImg">
-              <img v-for="(img,index) in tab.images" :src="img"  :key="index"/>
+              <img v-for="(img, index) in tab.images" :src="img" :key="index" />
             </div>
           </div>
-          <div class="div_p02_teach_contentRight">
+          <div class="div_p02_teach_contentRight col-md-6">
             <h3 class="h4_component underline">
               <span class="span_underline">手法與特徵</span>
             </h3>
@@ -52,10 +62,10 @@
         <div class="div_p02_teach_title">
           <h3>防範之道</h3>
         </div>
-        <div class="div_p02_teach_prevent">
+        <div class="div_p02_teach_prevent row">
           <div
-            class="div_p02_teach_preventBox paragraph"
-            v-for="(item,index) in tab.preventbox"
+            class="div_p02_teach_preventBox paragraph col-md-6 col-lg-3"
+            v-for="(item, index) in tab.preventbox"
             :key="index"
           >
             {{ item }}
@@ -65,12 +75,12 @@
         <div class="div_p02_teach_title">
           <h3>相關影音</h3>
         </div>
-        <div class="div_p02_teach_vedio">
+        <div class="div_p02_teach_vedio row">
           <iframe
-            v-for="(film,index) in tab.vedio"
+            v-for="(film, index) in tab.vedio"
             :key="index"
             :src="film"
-            class="div_p02_teach_vedioBox"
+            class="div_p02_teach_vedioBox col-lg-4 col-md-6"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -99,7 +109,7 @@ export default {
           steps: {
             1: "網路(FB、IG、Y2B)看到投資、輕鬆賺錢貼文，或在交友網站、交友軟體(APP)認識網友，網友慫恿投資，以掌握「平臺漏洞、後臺程式」等話術，宣稱保證獲利、穩賺不賠且利潤豐厚。",
             2: "後續加LINE聯繫或加入LINE群組(如投資體驗群)，有自稱「老師、指導員、分析師、總監」的人教學投注(代操)，且群組內不斷有其他學員獲利貼文。",
-            3: "初期帳面顯示獲利(小額獲利有些可以出金)，引誘您加碼投入大筆資金(甚至要您貸款投資)。https://reurl.cc/a953KZ",
+            3: "初期帳面顯示獲利(小額獲利有些可以出金)，引誘您加碼投入大筆資金(甚至要您貸款投資)。",
             4: "當您加碼入金後，以各種理由(洗碼量不足、保證金、IP異常等)不讓你出金，或是直接凍結帳號、對方失去聯繫，就是「不出金」。",
           },
           preventbox: {
@@ -243,5 +253,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
