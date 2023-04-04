@@ -1,3 +1,16 @@
+@mixin pad{
+  @media(max-width:768px){
+    @content;
+  }
+}
+@mixin mobile{
+  @media(max-width:428px){
+    @content;
+  }
+}
+
+
+
 /* 測驗頁面 */
 
 .p07_demoGame_p01bg {
@@ -8,6 +21,14 @@
     // background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 50px;
+    @include pad{
+      width: 768px;
+      margin: 0 auto;
+    }
+    @include mobile{
+      width: 428px;
+    }
+
   
     
     //  題目整體背板
@@ -19,6 +40,14 @@
         border: 5px solid $main_color;
         background: transparent;
         padding-top: 50px;
+        @include pad{
+          width: 720px;
+          margin: 0 auto;
+        }
+        @include mobile{
+          width: 428px;
+          
+        }
         
         
       
@@ -28,6 +57,10 @@
           width: 300px;
           height: 80px;
           margin: 20px auto 30px;
+          @include mobile{
+            width: 200px;
+            // border:1px solid white;
+          }
           
       
           /* background-color: red; */
@@ -43,6 +76,14 @@
             background-size: 27% 50%;
             background-repeat: no-repeat;
             border: solid 15px #13E5F2;
+
+            @include mobile{
+              width: 200px;
+            background: linear-gradient(140deg, $background_color 38px, #13E5F2 0) bottom right, linear-gradient(314deg, $background_color 38px, #13E5F2 0) top left;
+            background-size: 27% 50%;
+            background-repeat: no-repeat;
+            border: solid 15px #13E5F2;
+            }
           }
       
           .quiz_question_num {
@@ -60,6 +101,12 @@
           width: 700px;
           border: 10px solid $main_color;
           margin: 0 auto;
+          @include pad{
+            width: 650px;
+          }
+          @include mobile{
+            width: 390px;
+          }
       
           .p07_demoGame_01_quiz_question_title {
             width: 600px;
@@ -67,6 +114,9 @@
             border: 3px solid $main_color;
             margin: 35px auto 50px;
             padding:10px;
+            @include mobile{
+              width: 320px;
+            }
             
       
             p {
@@ -74,6 +124,9 @@
               text-align: center;
               line-height: 30px;
               font-size: 20px;
+              @include mobile{
+                font-size:18px;
+              }
             }
           }
       
@@ -83,7 +136,11 @@
             display:block;
             margin: 0 auto 50px;
             line-height: 320px;
-  
+            @include mobile{
+              width: 215px;
+              height: 135px;
+              
+            }
            
           }
         }
@@ -99,7 +156,17 @@
           height: 250px;
           // border:1px solid white;
           margin: 0 auto 20px;
-        //  border:1px solid white;
+
+          @include pad{
+            width: 650px;
+          }
+
+          @include mobile{
+            width: 428px;
+            margin: 0 auto 20px;
+          }
+
+        
   
           .answer{
             width: 347px;
@@ -117,6 +184,20 @@
               background-image: url("@/assets/img/p07_demo/p07_demoGame/answer_360x100.png");
               
             }
+
+            @include pad{
+              width: 320px;
+              height: 100px;
+              background-repeat: no-repeat;
+            }
+
+            @include mobile{
+            width: 347px;
+            height: 100px;
+              
+            }
+
+            
   
           
             //  img{
@@ -141,33 +222,64 @@
   
                &:hover{
                 color:$sec_color;
-                
                }
+               @include pad{
+                width: 210px;
+              }  
+
               }
-                
+
+             
   
             }
   
   
           .answer.answer_button_01{
             left: 40px;
-            // background-image: url("@/assets/img/p07_demo/p07_demoGame/question_360x100.png");
-            // background-size: 360px 200px;
+            @include pad{
+              left:0;
+            }
+            @include mobile{
+              left:40px;
+                
+              }
            
           }
   
           .answer.answer_button_02{
            right: 50px;
+           @include pad{
+            right:0;
+          }
+           @include mobile{
+            left:40px;
+            top:120px;
+            } 
+
           }
   
           .answer.answer_button_03{
             left: 40px;
             top: 120px;
+            @include pad{
+              left:0;
+            }
+            @include mobile{
+              left:40px;
+              top:240px;
+              }
            
           }
           .answer.answer_button_04{
             right: 50px;
             top: 120px;
+            @include pad{
+              right:0;
+            }
+            @include mobile{
+              left:40px;
+              top:360px;
+              }
   
             // p{
   
@@ -194,6 +306,10 @@
         top: 27%;
         border-radius: 10px;
         transform:rotate(-10deg);
+        @include mobile{
+            left:20%;
+            top:75%;
+          }
   
   
         p{
@@ -218,6 +334,14 @@
       margin: 50px auto 0;
       background: $main_color;
       margin-bottom: 50px;
+      @include pad{
+        width: 650px;
+      }
+      @include mobile{
+        margin-top: 280px;
+        width: 380px;
+        
+      }
       
   
       .answer_board{
@@ -227,16 +351,33 @@
         border:1px solid $main_color;
         background: $sec_color;
         clip-path: polygon(64% 0, 70% 10%, 100% 10%, 100% 100%, 0 100%, 0 0);
+        @include pad{
+          width: 650px;
+          padding-bottom: 80px;
+        }
+        @include mobile{
+          width: 380px;
+         
+         
+        }
   
         h2{
-          
           color:$text_color;
           padding: 30px 0 30px 30px;
         }
   
         p{
-          padding: 0 30px 30px 30px;
-          height: 220px;
+          padding: 0 30px 0px 30px;
+          
+        }
+
+        @include pad{
+
+        }
+
+        @include mobile{
+          padding: 0 15px 0px 15px;
+          
         }
       }
     }  
@@ -248,6 +389,13 @@
       width: 180px;
       height: 50px;
       position: relative;
+      @include pad{
+        margin-left: 280px;
+      }
+      @include mobile{
+        border:1px solid white;
+        margin-left: 120px;
+      }
     }
   
     .next_quiz_botton {
