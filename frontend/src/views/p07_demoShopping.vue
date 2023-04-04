@@ -1,6 +1,10 @@
 <template>
-    <body class="body_p07_demoShopping">
+    <main class="body_p07_demoShopping">
         <div class="main_p07_demoShopping">
+
+            <!-- header -->
+            <frontNavbar />
+
             <!-- demo nav -->
             <p07_demo_nav />
             
@@ -69,12 +73,12 @@
                                 <li><a href="#">下單須知</a></li>
                                 <li><a href="#">立即下單</a></li>
                                 <li>
-                                    <a href="#">
-                                        <span class="cart_length"> {{cart.length}} </span>
-                                        <img src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" @click="showComponent = true; listenClickEvent">
-                                    </a>
+                                    <span>
+                                       <span class="cart_length"> {{cart.length}} </span>
+                                       <img src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" @click="showComponent = true, listenClickEvent">
+                                    </span>
                                 </li>
-                                <li><a href="#"><img src="../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊"></a></li>
+                                <li><img src="../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊"></li>
                             </ul>
                         </div>
 
@@ -220,18 +224,23 @@
                 </div>
             </div>
         </div>
-    </body>
+        <frontFooter />
+    </main>
 </template>
 
 
 <script>
 import { ref } from 'vue';
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
 import p07_demoShopping_cart from "@/components/p07_demoShopping_cart.vue";
 
 export default {
     name: 'shoppingCart',
     components: {
+        frontNavbar,
+        frontFooter,
         p07_demo_nav,
         p07_demoShopping_cart
     },
@@ -303,18 +312,18 @@ export default {
         let clickListener;
 
         function listenClickEvent() {
-        clickListener = () => {
-            showComponent.value = false;
-            document.removeEventListener("click", clickListener);
-        };
-        document.addEventListener("click", clickListener);
+            clickListener = () => {
+                showComponent.value = false;
+                document.removeEventListener("click", clickListener);
+            };
+            document.addEventListener("click", clickListener);
         }
 
         function closeComponent() {
-        if (showComponent.value) {
-            showComponent.value = false;
-            document.removeEventListener("click", clickListener);
-        }
+            if (showComponent.value) {
+                showComponent.value = false;
+                document.removeEventListener("click", clickListener);
+            }
         }
         return {
             cart,

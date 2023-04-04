@@ -10,3 +10,33 @@
     display: flex;
     justify-content: space-between;
 }
+
+@include rwd(md){
+    .deno{
+        width: 100%;
+    }
+    .demoBtn{
+        justify-content: space-evenly;
+        button{
+            font-size: 16px;
+            height: auto;
+            padding: 10px 15px;
+            line-height: 1;
+        }
+    }
+}
+
+@include rwd(sm){
+    .demo{
+        margin: 0 auto;
+    }
+    .demoBtn{
+        width: 250px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        button{
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+    }
+}
