@@ -13,7 +13,7 @@
 
             <div class="p07_demoGame_01_quiz_view">
                 <div class="p07_demoGame_01_quiz_question_title">
-                    <p>在疫情期間，政府為體恤人民困苦，有發放補助金之行為，然而有不肖詐騙集團以政府發放補助金為名義，利用簡訊方式詐騙人民個資，請問哪一個網址才是正確連結政府網站的網址？</p>
+                    <p>在疫情期間，政府為體恤人民困苦，有發放補助金之行</p>
                 </div>
                 <img src="../assets/img/p07_demo/p07_demoGame/quiz1.jpg" alt="">
             </div>
@@ -37,9 +37,9 @@
 
             <!-- 印章部分 -->
 
-            <!-- <div class="seal">
+            <div class="seal">
                 <p>正確</p>
-            </div> -->
+            </div>
 
 
             </div>

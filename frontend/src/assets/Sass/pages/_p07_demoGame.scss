@@ -1,9 +1,27 @@
+@mixin pad{
+  @media(max-width:768px){
+    @content;
+  }
+}
+@mixin mobile{
+  @media(max-width:428px){
+    @content;
+  }
+}
+
+
+
 .quiz_background{
     background-color: $background_color;
     font-family: 'Noto Sans TC','Outfit', sans-serif;
     background-image: url('../img/p07_demo/p07_demoGame/demo_bg.png');
     background-repeat: no-repeat;
-    height: 1200px;
+    @include mobile {
+      width:400px;
+    }
+    
+
+    
     
   .game_index{
     margin: 0 auto ;
@@ -11,6 +29,15 @@
     height: 90%;
     background: transparent;
     padding-top: 50px;
+    padding-bottom: 50px;
+
+    @include pad {
+      width:768px;
+    }
+    @include mobile {
+      width:390px;
+      margin: 0 auto;
+    }
     
     
   
@@ -26,6 +53,17 @@
         // margin-left: 150px;
         padding-left: 50px;
         margin-top: 20px;
+        @include pad {
+          width:680px; 
+          margin: 0 auto ;
+        }
+        @include mobile {
+          width:390px;
+          margin: 0 auto;
+          padding-left: 30px;
+          
+        }
+        
         
 
         
@@ -36,6 +74,35 @@
           margin-top: 80px;
           margin-bottom: 60px;
           letter-spacing: 1rem;
+          @include pad {
+            font-size: 2rem;
+          }
+          @include mobile {
+            width:390px;
+            margin: 0 auto;
+            font-size:50px;
+            display: none;
+          }
+
+        }
+
+        .quiz_title428{
+          display: none;
+          @include pad {
+            font-size: 2rem;
+          }
+          @include mobile {
+            display:block;
+            width:428px;
+            margin: 0 auto;
+            font-size:40px;
+            color: $text_color;
+            line-height: 6rem;
+            margin-top: 80px;
+            margin-bottom: 60px;
+            letter-spacing: 1rem;
+            
+          }  
         }
       }
       
@@ -44,6 +111,13 @@
           width: 760px;
           border: 3px solid $main_color;
           height: 205px;
+          @include pad {
+            width:580px;
+          }
+          @include mobile{
+           width: 320px;
+           height: 290px;
+          }
       
           .m {
             width: 100px;
@@ -52,6 +126,13 @@
             background: linear-gradient(45deg, rgba(19, 229, 242, 1) 25%, transparent 25%, transparent 75%, rgba(19, 229, 242, 1) 75%, rgba(19, 229, 242, 1) 100%), linear-gradient(45deg, rgba(19, 229, 242, 1) 25%, transparent 25%, transparent 75%, rgba(19, 229, 242, 1) 75%, rgba(19, 229, 242, 1) 100%);
             background-position: 0 0, 50px 10px;
             background-size: 20px 20px;
+            @include mobile{
+              width: 0;
+              height: 0;
+            }
+
+
+
           }
       
             p {
@@ -60,6 +141,18 @@
               color: $text_color;
               padding-top: 15px;
               line-height: 2.0rem;
+              @include pad {
+                font-size: 1rem;
+                width:420px;
+                padding-top: 10px;
+              }
+              @include mobile{
+                width: 280px;
+                margin-left: 0;
+                font-size: 1rem;
+                margin-left: 20px;
+                
+              }
             }
         }
       
@@ -68,6 +161,15 @@
           width: 180px;
           height: 50px;
           position: relative;
+          @include pad {
+            font-size: 1rem;
+            width:420px;
+            margin-left: 200px;
+          }
+          @include mobile{
+           margin-left: 60px;
+           margin-top: 30px;
+          }
         }
       
         .game_start {
@@ -78,6 +180,9 @@
           border: 1px solid $sec_color;
           z-index: 10;
           position: absolute;
+          @include mobile{
+           
+          }
       
           a {
             width: 180px;
@@ -115,70 +220,11 @@
           background-repeat: no-repeat;
         }
       
-        // .quiz_background {
-        //   width: 1154px;
-        //   height: 835px;
-        //   border: 5px solid $main_color;
-        //   background-color: $sec_color;
-        //   margin-left: 150px;
-        //   padding-left: 100px;
-        //   margin-top: 150px;
-        //   margin-bottom: 50px;
-        // }
-      
-        // .p07_demoGame_01_question_number {
-        //   width: 340px;
-        //   height: 80px;
-        //   margin: 65px 370px;
-      
-        //   /* background-color: red; */
-        //   /* border:1px solid white; */
-      
-        //   .quiz_number_frame {
-        //     clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0 49%);
-        //     width: 340px;
-        //     height: 80px;
-        //     background-color: $sec_color;
-        //     border: 5px solid $main_color;
-        //     background: linear-gradient(153deg, #033159 38px, #13E5F2 0) bottom right, linear-gradient(333deg, #033159 38px, #13E5F2 0) top left;
-        //     background-size: 25% 50%;
-        //     background-repeat: no-repeat;
-        //     border: solid 15px #13E5F2;
-        //   }
-      
-        //   .quiz_question_num {
-        //     text-align: center;
-        //     line-height: 80px;
-        //     color: $text_color;
-        //   }
-        // }
-      
-        // .p07_demoGame_01_quiz_view {
-        //   border: 1px solid $main_color;
-        //   width: 1015px;
-        //   height: 480px;
-        //   border: 1px solid white;
-      
-        //   .p07_demoGame_01_quiz_question_title {
-        //     width: 915px;
-        //     height: 60px;
-        //     background-color: $background_color;
-        //     border: 3px solid $main_color;
-        //     margin: 0 auto;
-        //     margin-top: 35px;
-      
-        //     p {
-        //       margin: 0;
-        //       text-align: center;
-        //       line-height: 60px;
-        //       font-size: 30px;
-        //     }
-        //   }
-        // }
-
+        
   }
   
 }
+
 
 
 
