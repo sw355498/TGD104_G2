@@ -33,12 +33,12 @@
   
   
   export default{
+    components: {
+      frontNavbar,
+      frontFooter,
+    },
     data(){
       return{
-        components: {
-          frontNavbar,
-          frontFooter,
-        },
         contents: [
           {
               cardTitle: '165 全民防詐騙網',
