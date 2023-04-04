@@ -27,10 +27,28 @@
         }
     }
     }
+    // 以下是選單
+    select{
+        display: none;
+        @include rwd('md') {
+            display: none;
+            height: 42px;
+            width: 100%;
+        }
+
+        @include rwd('sm') {
+            width: 100%;
+            flex-wrap: wrap;
+        }
+    }
 // 以下是tab
     #tabs {
         display: flex;
         justify-content: center;
+        
+        @include rwd('md') {
+            flex-wrap: wrap;
+        }
     }
     .tab {
         display: flex;
@@ -41,6 +59,18 @@
         cursor: pointer;
         background-color: $sec_color;
         color: $four_color;
+
+        @include rwd('md') {
+            flex-basis: 1;
+            flex-shrink: 0;
+            width: 30%;
+            font-size: 1rem;
+            margin-top: 5px;
+            justify-content: center;
+        }
+        @include rwd('sm') {
+            width: 45%;
+        }
     }
     .tab.active {
         background-color: $title_color;
@@ -51,6 +81,9 @@
         font-weight: 700;
         padding-top: 6px;
         // color: $text_color;
+        @include rwd('md') {
+            font-size: 1rem;
+        }
     }
     .content {
         display: none;
@@ -64,8 +97,11 @@
     }
 // 以下是內容
     .div_wrapper {
-        width: 1200px;
+        max-width: 1200px;
         margin: 0 auto;
+        @include rwd('md') {
+        width: 100%;
+        }
     }
     .div_p02_teach_title {
         display: flex;
@@ -75,19 +111,30 @@
     
     .div_p02_teach_content {
         display: flex;
-        width: 100%;
+
         margin-bottom: 70px;
+        @include rwd('md') {
+            flex-wrap: wrap;
+            width: 100%;
+            }
     }
     
     .div_p02_teach_contentLeft {
-        width: 50%;
+
         margin: 0 50px;
+        @include rwd('md') {
+            width: 100%;
+            }
+        
     }
     
     .div_p02_teach_contentRight {
-        width: 50%;
+
         box-sizing: border-box;
         padding:  0 25px;
+        @include rwd('md') {
+            width: 100%;
+            }
     }
     
     .div_p02_teach_method {
@@ -123,26 +170,37 @@
   
     
     .div_p02_teach_contentImg {
-        width: 500px;
-        height: 480px;
         overflow: hidden;
         margin-right: 50px;
+        @include rwd('md') {
+            margin-right: 0 ;
+            height: auto;
+            }
         img{
-            height: 100%;
+            width: 100%;
         }
+
     }
 
     /* 防範之道 */
     .div_p02_teach_prevent {
         display: flex;
         justify-content: center;
+        @include rwd('md') {
+            flex-direction: column;
+            }
         .div_p02_teach_preventBox {
-            width: 20%;
+            // width: 20%;
             padding: 40px;
             background-color: $four_color;
             flex-basis: 1;
             flex-grow: 0;
             flex-shrink: 1;
+            @include rwd('md') {
+                width: 90%;
+                margin: 0 auto;
+                height: auto;
+                }
         }
         .div_p02_teach_preventBox:nth-child(2n){
             background-color: #0F98CE;
@@ -155,10 +213,25 @@
         display: flex;
         justify-content: center;
         margin-bottom: 50px;
+        flex-wrap: wrap;
+        @include rwd('md') {
+            justify-content: flex-start;}
         .div_p02_teach_vedioBox{
-            width: 30%;
+            // width: 30%;
             height: 200px;
-            margin: 15px;
+            margin: 15px 0;
+            @include rwd('md') {
+                flex-basis: 1;
+                flex-shrink: 0;
+                // width: 80%;
+                height: 250px;
+                font-size: 1rem;
+                margin: px auto 0;
+                justify-content: center;
+            }
+            @include rwd('sm') {
+                // width: 100%;
+            }
         }
     }
 
