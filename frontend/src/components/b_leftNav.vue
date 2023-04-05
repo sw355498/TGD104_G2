@@ -45,7 +45,7 @@
         setup(){
             let id = 0
             const fontawesome = ref(' fa-solid fa-fw')
-            const selectedTab = ref('')
+            const selectedTab = ref('user')
             const userlevel = ref(true)
             const navItems = ref([
                 {id: id++,name:'會員管理', icon:'fa-user', clickName: 'user'},

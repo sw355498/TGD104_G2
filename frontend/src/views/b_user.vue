@@ -3,8 +3,8 @@
         <LeftNav/>
         <div class="b_content">
             <h2 class="h1_component">會員管理</h2>
-            <div class="d-flex justify-content-end my-2">
-                <button class="small_button btn_bUser_addUser me-2">新增會員</button>
+            <div class="d-flex justify-content-end align-items-center my-2">
+                <button class="medium_button btn_bUser_addUser me-2">新增會員</button>
                 <div class="position-relative">
                     <i class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"></i>
                     <input type="text">

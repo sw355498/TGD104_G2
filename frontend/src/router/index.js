@@ -123,9 +123,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p09_team.vue')
   },
   {
-    path: '/b_user',
-    name: 'b_user',
-    component: () => import(/* webpackChunkName: "about" */ '../views/b_user.vue')
+    path: '/b_index',
+    name: 'b_index',
+    component: () => import(/* webpackChunkName: "about" */ '../views/b_index.vue')
   },
 ]
 
