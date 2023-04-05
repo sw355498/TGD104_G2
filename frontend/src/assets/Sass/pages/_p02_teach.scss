@@ -18,8 +18,9 @@
         .banner_teachtitle_en {
             position: absolute;
             font-weight: 700;
-            top: -62px;
-            left: -9%;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%, -77%);
             font-size: 100px;
             color: rgba($color: #000000, $alpha: 0);
             -webkit-text-stroke: 0.5px #efe4d1;
@@ -45,6 +46,7 @@
     #tabs {
         display: flex;
         justify-content: center;
+        text-align: center;
         
         @include rwd('md') {
             flex-wrap: wrap;
@@ -129,11 +131,12 @@
     }
     
     .div_p02_teach_contentRight {
-
         box-sizing: border-box;
         padding:  0 25px;
         @include rwd('md') {
             width: 100%;
+            padding: 0;
+            margin-top: 15px;
             }
     }
     
@@ -145,10 +148,12 @@
             display: inline-block;
             width: 40px;
             border-top: 3px solid $text_color;
+
         }
         
         .div_p02_teach_step {
             width: 20%;
+            font-size: 1.2rem;
         }
         
         .div_p02_teach_stepText {
@@ -167,14 +172,13 @@
         padding-bottom: 5px;
     }
     
-  
-    
     .div_p02_teach_contentImg {
         overflow: hidden;
         margin-right: 50px;
         @include rwd('md') {
             margin-right: 0 ;
             height: auto;
+            width: 100%;
             }
         img{
             width: 100%;
@@ -190,16 +194,17 @@
             flex-direction: column;
             }
         .div_p02_teach_preventBox {
-            // width: 20%;
             padding: 40px;
             background-color: $four_color;
             flex-basis: 1;
             flex-grow: 0;
             flex-shrink: 1;
+            // border-bottom: 1px solid $text_color;
             @include rwd('md') {
-                width: 90%;
+                width: 95%;
                 margin: 0 auto;
                 height: auto;
+                
                 }
         }
         .div_p02_teach_preventBox:nth-child(2n){
@@ -212,7 +217,6 @@
     .div_p02_teach_vedio{
         display: flex;
         justify-content: center;
-        margin-bottom: 50px;
         flex-wrap: wrap;
         @include rwd('md') {
             justify-content: flex-start;}
@@ -226,7 +230,6 @@
                 // width: 80%;
                 height: 250px;
                 font-size: 1rem;
-                margin: px auto 0;
                 justify-content: center;
             }
             @include rwd('sm') {
