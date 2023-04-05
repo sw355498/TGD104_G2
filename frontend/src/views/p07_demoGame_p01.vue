@@ -13,7 +13,7 @@
 
             <div class="p07_demoGame_01_quiz_view">
                 <div class="p07_demoGame_01_quiz_question_title">
-                    <p>在疫情期間，政府為體恤人民困苦，有發放補助金之行</p>
+                    <p>在疫情期間，政府為體恤人民困苦，有發放補助金之行在疫情期間，政府為體恤人民困苦，有發放補助金之行在疫情期間，政府為體恤人民困苦，有發放補助金之行在疫情期間，政府為體恤人民困苦，有發放補助金之行</p>
                 </div>
                 <img src="../assets/img/p07_demo/p07_demoGame/quiz1.jpg" alt="">
             </div>
