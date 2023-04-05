@@ -1,10 +1,10 @@
 <template>
     <div class="d-flex">
-        <LeftNav/>
+        <LeftNav @response="(msg) => selectedTab = msg"/>
         <div class="b_content">
-            <h2 class="h1_component">會員管理</h2>
+            <h2 class="h1_component">{{ h2Title }}</h2>
             <div class="d-flex justify-content-end align-items-center my-2">
-                <button class="medium_button b_add_btn me-2">新增會員</button>
+                <button v-if="addbutton" class="medium_button b_add_btn me-2">{{ btnName }}</button>
                 <div class="position-relative">
                     <i class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"></i>
                     <input type="text">
@@ -19,7 +19,64 @@ import $ from 'jquery'
 import 'jsgrid'
 import LeftNav from '../components/b_leftNav.vue';
 export default {
-    
+    components: {
+        LeftNav
+    },
+    data(){
+        return {
+            selectedTab : 'user',
+            h2Title: '會員管理',
+            addbutton: true,
+            btnName: '新增會員',
+        }
+    },
+    watch:{
+        selectedTab(){
+            switch (this.selectedTab){
+                case 'user':
+                    this.h2Title = '會員管理';
+                    this.addbutton = true;
+                    this.btnName = '新增會員';
+                    break;
+                case 'message':
+                    this.h2Title = '討論版管理';
+                    this.addbutton = false;
+                    break;
+                case 'share':
+                    this.h2Title = '回報管理';
+                    this.addbutton = false;
+                    break;
+                case 'reply':
+                    this.h2Title = '檢舉管理';
+                    this.addbutton = false;
+                    break;
+                case 'news':
+                    this.h2Title = '最新消息管理';
+                    this.addbutton = true;
+                    this.btnName = '新增消息';
+                    break;
+                case 'teach':
+                    this.h2Title = '防騙教學介紹管理';
+                    this.addbutton = true;
+                    this.btnName = '新增教學';
+                    break;
+                case 'score':
+                    this.h2Title = '互動體驗成績管理';
+                    this.addbutton = false;
+                    break;
+                case 'chatbot':
+                    this.h2Title = '聊天機器人管理';
+                    this.addbutton = true;
+                    this.btnName = '新增機器人回答內容';
+                    break;
+                case 'staff':
+                    this.h2Title = '後台帳好管理';
+                    this.addbutton = true;
+                    this.btnName = '新增管理員帳號';
+                    break;
+            }
+        }
+    },
     mounted() {
         let id = 0, user = 111
         var clients = [
@@ -142,9 +199,6 @@ export default {
                     break
             }
         }
-    },
-    components: {
-        LeftNav
     }
 }
 </script>

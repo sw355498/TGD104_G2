@@ -16,7 +16,7 @@
             <ul class="list-unstyled text_title">
                 <li v-for="item in navItems"  :key="item.id">
                     <a 
-                        @click="selectedTab = item.clickName" 
+                        @click.prevent="selectedTab = item.clickName" 
                         class="link" 
                         :class="{ 'b_active': selectedTab === item.clickName}"
                     >
@@ -38,35 +38,28 @@
         </nav>
     </div>
 </template>
-<script>
-    import { ref } from 'vue'
+<script setup>
+    import { ref, defineEmits } from 'vue'
 
-    export default {
-        setup(){
-            let id = 0
-            const fontawesome = ref(' fa-solid fa-fw')
-            const selectedTab = ref('user')
-            const userlevel = ref(true)
-            const navItems = ref([
-                {id: id++,name:'會員管理', icon:'fa-user', clickName: 'user'},
-                {id: id++,name:'討論版管理', icon:'fa-message', clickName: 'message'},
-                {id: id++,name:'回報管理', icon:'fa-share', clickName: 'share'},
-                {id: id++,name:'檢舉管理', icon:'fa-exclamation', clickName: 'reply'},
-                {id: id++,name:'最新消息管理', icon:'fa-circle-info', clickName: 'news'},
-                {id: id++,name:'防騙教學介紹管理', icon:'fa-masks-theater', clickName: 'teach'},
-                {id: id++,name:'互動體驗成績管理', icon:'fa-people-pulling', clickName: 'score'},
-                {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
-            ])
 
-            return {
-                fontawesome,
-                selectedTab,
-                userlevel,
-                navItems,
-            }
-        }
+    let id = 0
+    const fontawesome = ref(' fa-solid fa-fw')
+    const selectedTab = ref('user')
+    const userlevel = ref(true)
+    const navItems = ref([
+        {id: id++,name:'會員管理', icon:'fa-user', clickName: 'user'},
+        {id: id++,name:'討論版管理', icon:'fa-message', clickName: 'message'},
+        {id: id++,name:'回報管理', icon:'fa-share', clickName: 'share'},
+        {id: id++,name:'檢舉管理', icon:'fa-exclamation', clickName: 'reply'},
+        {id: id++,name:'最新消息管理', icon:'fa-circle-info', clickName: 'news'},
+        {id: id++,name:'防騙教學介紹管理', icon:'fa-masks-theater', clickName: 'teach'},
+        {id: id++,name:'互動體驗成績管理', icon:'fa-people-pulling', clickName: 'score'},
+        {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
+    ])
 
-    }
+    const emit = defineEmits(['response'])
+
+    emit('response', selectedTab)
 </script>
 <style>
     .fa-sharp{
