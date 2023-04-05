@@ -1,14 +1,14 @@
-@mixin pad{
-  @media(max-width:768px){
-    @content;
-  }
+@include rwd('lg'){
+  // 電腦上的樣式
 }
-@mixin mobile{
-  @media(max-width:428px){
-    @content;
-  }
-} 
- 
+
+@include rwd('md') {
+  // 平板上的樣式
+}
+
+@include rwd('sm'){
+  // 手機上的樣式
+}
  
  
  /* 測驗結果頁面 */
@@ -21,12 +21,7 @@
     // background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 50px;
-    @include pad{
-      width: 768px;
-    }
-    @include mobile{
-      width: 428px;
-    }
+    
   
     
     //  題目整體背板
@@ -39,11 +34,15 @@
         background: transparent;
         padding-top: 50px;
         position: relative;
-        @include pad{
-          width: 750px;
+        @include rwd('lg'){
+          width: 90%;
         }
-        @include mobile{
-          width: 428px;
+    
+        @include rwd('md'){
+          width: 90%;
+        }
+        @include rwd('sm'){
+          width: 90%;
         }
 
   
@@ -63,6 +62,12 @@
           bottom: 0;
           left: 0;
           margin: auto;
+
+          @include rwd('sm'){
+            width: 300px;
+          }
+
+
           
   
           .alert_cross{
@@ -87,10 +92,21 @@
             background-color: $sec_color;
             border-bottom-right-radius:5px;
             border-bottom-left-radius:5px;
+            @include rwd('sm'){
+              width: 300px;
+              height: 180px;
+              
+            }
   
             p{
               padding-top: 20px;
               padding-bottom: 20px;
+              @include rwd('sm'){
+                padding-top:10px;
+                width: 200px;
+                margin-left: 15%;
+                
+              }
             }
   
             .gamebutton{
@@ -117,10 +133,10 @@
           width: 300px;
           height: 80px;
           margin: 20px auto 30px;
-          @include pad{
+          @include rwd('md'){
             margin: 20px auto 30px;
           }
-          @include mobile{
+          @include rwd('sm'){
             width: 220px;
           }
           
@@ -137,12 +153,12 @@
             background-size: 27% 50%;
             background-repeat: no-repeat;
             border: solid 15px #13E5F2;
-            @include mobile{
+            @include rwd('sm'){
               width: 220px;
               background: linear-gradient(145deg, $background_color 38px, #13E5F2 0) bottom right, linear-gradient(320deg, $background_color 38px, #13E5F2 0) top left;
-            background-size: 27% 50%;
-            background-repeat: no-repeat;
-            border: solid 15px #13E5F2;
+              background-size: 27% 50%;
+              background-repeat: no-repeat;
+              border: solid 15px #13E5F2;
             }
           }
       
@@ -161,11 +177,11 @@
             width: 700px;
             border: 10px solid $main_color;
             margin: 0 auto;
-            @include pad{
-              width: 680px;
+            @include rwd('md'){
+              width: 400px;
             }
-            @include mobile{
-              width:400px;
+            @include rwd('sm'){
+              width:90%;
             }
             
             
@@ -176,14 +192,19 @@
                 text-align: center;
                 line-height: 30px;
                 font-size: 40px;
-                @include mobile{
+                @include rwd('md'){
+                  line-height: 50px;
+                }
+
+                @include rwd('sm'){
                   font-size:26px;
+                  line-height: 30px;
                 }
               }
   
             .result_percent{
               font-size: 100px;
-              @include mobile{
+              @include rwd('sm'){
                 font-size:50px;
               }
             }  
@@ -201,7 +222,7 @@
   
             p{
               font-size: 50px;
-              @include mobile{
+              @include rwd('sm'){
                 font-size:26px;
               }
             }
@@ -215,11 +236,11 @@
             width: 180px;
             height: 50px;
             position: relative;
-            @include pad{
-              margin-left: 280px;
+            @include rwd('md'){
+              margin-left: 35%;
             }
-            @include mobile{
-              margin-left: 120px;
+            @include rwd('sm'){
+              margin-left: 25%;
             }
           }
         

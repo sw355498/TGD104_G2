@@ -1,235 +1,249 @@
-@mixin pad{
-  @media(max-width:768px){
-    @content;
-  }
-}
-@mixin mobile{
-  @media(max-width:428px){
-    @content;
-  }
+@include rwd('lg'){
+  // 電腦上的樣式
 }
 
+@include rwd('md') {
+  // 平板上的樣式
+}
 
+@include rwd('sm'){
+  // 手機上的樣式
+}
+ 
+ 
+ 
+ /* 測驗結果頁面 */
 
-.quiz_background{
+ .game_index {
     background-color: $background_color;
     font-family: 'Noto Sans TC','Outfit', sans-serif;
     background-image: url('../img/p07_demo/p07_demoGame/demo_bg.png');
-    background-repeat: no-repeat;
-    @include mobile {
-      width:400px;
-    }
-    
-
-    
-    
-  .game_index{
-    margin: 0 auto ;
-    width: 900px;
-    height: 90%;
-    background: transparent;
-    padding-top: 50px;
+    padding-top: 100px;
+    // background-repeat: no-repeat;
+    background-size: cover;
     padding-bottom: 50px;
-
-    @include pad {
-      width:768px;
-    }
-    @include mobile {
-      width:390px;
-      margin: 0 auto;
-    }
-    
-    
+   
   
-      /* 首頁中間部分 */
-      
-      
-      
+    
+    //  題目整體背板
+  
       .quiz_index {
+        margin: 0 auto;
         width: 900px;
-        height: 835px;
+        // height: 90%;
         border: 5px solid $main_color;
-        background-color: $sec_color;
-        // margin-left: 150px;
-        padding-left: 50px;
-        margin-top: 20px;
-        @include pad {
-          width:680px; 
-          margin: 0 auto ;
-        }
-        @include mobile {
-          width:390px;
+        background: transparent;
+        padding-top: 50px;
+        position: relative;
+        padding-left: 60px;
+
+        @include rwd('lg'){
+          width:90%;
           margin: 0 auto;
+          border: 5px solid $main_color;
+          background: transparent;
+          padding-top: 50px;
+          position: relative;
+          padding-left: 60px;
+         
+        }
+
+        @include rwd('md'){
+          width: 90%;
           padding-left: 30px;
-          
         }
-        
-        
-
-        
-      
-        .quiz_title {
-          color: $text_color;
-          line-height: 6rem;
-          margin-top: 80px;
-          margin-bottom: 60px;
-          letter-spacing: 1rem;
-          @include pad {
-            font-size: 2rem;
-          }
-          @include mobile {
-            width:390px;
-            margin: 0 auto;
-            font-size:50px;
-            display: none;
-          }
-
+        @include rwd('sm'){
+          width: 90%;
+          padding-left:20px;
         }
 
-        .quiz_title428{
-          display: none;
-          @include pad {
-            font-size: 2rem;
-          }
-          @include mobile {
-            display:block;
-            width:428px;
-            margin: 0 auto;
-            font-size:40px;
-            color: $text_color;
-            line-height: 6rem;
-            margin-top: 80px;
-            margin-bottom: 60px;
-            letter-spacing: 1rem;
+  
+  
+        
+  
+        //標題
+  
+          .index_title {
+            // border: 10px solid $main_color;
             
-          }  
-        }
-      }
-      
+            
+            
         
-        .quiz_summary {
-          width: 760px;
+            h1 {
+                color:$text_color;
+                margin-top:60px;
+                margin-bottom: 60px;
+                line-height: 50px;
+                font-size: 60px;
+                @include rwd('md'){
+                  font-size:50px;
+                  line-height: 60px;
+                  margin-top: 0px;
+                  margin-bottom: 20px;
+                }
+                @include rwd('sm'){
+                  margin-top: 0px;
+                  font-size:30px;
+                  margin-bottom: 30px;
+                }
+              }
+  
+        
+          }
+
+          .index_quiz_summary{
+            
+          margin-right: 50px;
           border: 3px solid $main_color;
           height: 205px;
-          @include pad {
-            width:580px;
+          @include rwd('lg'){
+            max-width: 90%;
+            margin-right: 50px;
+            border: 3px solid $main_color;
+            
           }
-          @include mobile{
-           width: 320px;
-           height: 290px;
+          @include rwd('md') {
+            width:90%;
+            height: 300px;
           }
-      
-          .m {
+          @include rwd('sm'){
+           width: 90%;
+           height: 420px;
+           
+          }
+
+          .m{
             width: 100px;
             /* border:1px solid white; */
             height: 200px;
             background: linear-gradient(45deg, rgba(19, 229, 242, 1) 25%, transparent 25%, transparent 75%, rgba(19, 229, 242, 1) 75%, rgba(19, 229, 242, 1) 100%), linear-gradient(45deg, rgba(19, 229, 242, 1) 25%, transparent 25%, transparent 75%, rgba(19, 229, 242, 1) 75%, rgba(19, 229, 242, 1) 100%);
             background-position: 0 0, 50px 10px;
             background-size: 20px 20px;
-            @include mobile{
-              width: 0;
-              height: 0;
+
+            @include rwd('md') {
+            width: 0;
+            height: 0;
+            }
+            @include rwd('sm'){
+             width: 0;
+             height: 0;
             }
 
-
-
           }
-      
-            p {
-              width: 600px;
+
+          p{
+            
+            margin-right: 20px;
+            margin-left: 120px;
+            color:$text_color;
+            // padding-top: 5px;
+            line-height: 2.0rem;
+            margin-top: -190px;
+            padding-bottom: 50px;
+           
+            
+            @include rwd('lg'){
+              max-width: 550px;
               margin-left: 120px;
               color: $text_color;
               padding-top: 15px;
               line-height: 2.0rem;
-              @include pad {
-                font-size: 1rem;
-                width:420px;
-                padding-top: 10px;
-              }
-              @include mobile{
-                width: 280px;
-                margin-left: 0;
-                font-size: 1rem;
-                margin-left: 20px;
-                
-              }
+              margin-top: -190px;
             }
-        }
-      
-        .start {
-          margin: 70px 0 240px 270px;
-          width: 180px;
-          height: 50px;
-          position: relative;
-          @include pad {
-            font-size: 1rem;
-            width:420px;
-            margin-left: 200px;
-          }
-          @include mobile{
-           margin-left: 60px;
-           margin-top: 30px;
-          }
-        }
-      
-        .game_start {
-          clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
-          width: 165px;
-          height: 45px;
-          background-color: $main_color;
-          border: 1px solid $sec_color;
-          z-index: 10;
-          position: absolute;
-          @include mobile{
-           
-          }
-      
-          a {
-            width: 180px;
-            height: 54px;
-            color: $sec_color;
-            overflow: hidden;
-            font-size: 20px;
-            margin-left: -20px;
-            margin-bottom: -20px;
-            position: absolute;
-            left: 0;
-            top: 6px;
-            text-decoration: none;
-      
-            svg {
-              width: 30px;
-              position: absolute;
-              left: 137px;
-              top: -1px;
+
+            @include rwd('md') {
+              margin-top: 10px;
+              font-size: 1rem;
+              margin-left: 20px;
+              padding-top: 10px;
+            }
+            @include rwd('sm'){
+             
+              margin-left: 0;
+              font-size: 1rem;
+              margin-left: 20px;
             }
           }
-        }
-      
-        .start .button_frame {
-          z-index: 1;
-          width: 165px;
-          height: 45px;
-          border: solid 1px #13E5F2;
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          clip-path: polygon(0 0, 100% 0, 100% 56%, 86% 100%, 0 100%);
-          background: linear-gradient(-40deg, #13E5F2 15px, #033159 0) bottom right;
-          background-size: 15% 51%;
-          background-repeat: no-repeat;
-        }
-      
-        
-  }
+
+          }
   
-}
-
-
-
-
-
-
-
-
-
+          
+  
+          
+  
+  
+          //再玩一次按鈕以及回首頁按鈕
+  
+          .star {
+            margin: 70px 0 50px 300px;
+            width: 180px;
+            height: 50px;
+            position: relative;
+            @include rwd('lg'){
+              margin-left:250px ;
+            }
+            @include rwd('md'){
+              margin-left:120px ;
+            }
+            @include rwd('sm'){
+              margin-left:60px ;
+            }
+          }
+        
+          .game_start_botton {
+            clip-path: polygon(0 0, 100% 0, 100% 53%, 84% 100%, 0 100%);
+            width: 165px;
+            height: 45px;
+            background-color: $main_color;
+            border: 1px solid $sec_color;
+            z-index: 10;
+            position: absolute;
+            
+        
+            a {
+              width: 180px;
+              height: 54px;
+              color: $sec_color;
+              overflow: hidden;
+              font-size: 20px;
+              margin-left: -20px;
+              margin-bottom: -20px;
+              position: absolute;
+              left: 0;
+              top: 6px;
+              text-decoration: none;
+        
+              svg {
+                width: 100px;
+                height: 30px;
+                position: absolute;
+                left: 90px;
+                top: 0px;
+              }
+            }
+          }
+        
+          .button_frame {
+            z-index: 1;
+            width: 165px;
+            height: 45px;
+            border: solid 1px #13E5F2;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            clip-path: polygon(0 0, 100% 0, 100% 56%, 86% 100%, 0 100%);
+            background: linear-gradient(-40deg, #13E5F2 15px, #0b3361 0) bottom right;
+            background-size: 15% 51%;
+            background-repeat: no-repeat;
+            
+          }
+  
+        
+  
+  
+      }
+  
+  }
+    
+  
+  
