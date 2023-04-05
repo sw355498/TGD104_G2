@@ -30,7 +30,6 @@
                 color: #ccc;
             }
         }
-
         @include rwd('lg'){
             padding: 0 15px;
         }
@@ -119,6 +118,9 @@
 
     .articleMessage_p06_discuss{
         margin-top: 80px;
+        @include rwd('lg'){
+            padding: 0 15px;
+        }
         .topBlock_p06_discuss{
             display: flex;
             justify-content: space-between;
@@ -128,11 +130,15 @@
 
             h3{
                 color: $title_color;
+                @include fontStyle(400, 1.375rem, 1.65rem, 0.2rem, 0px);
             }
         }
         .messageMain{
             margin-top: 25px;
             padding: 0 80px;
+            @include rwd('md'){
+                padding: 0 15px;
+            }
             ul{
                 list-style: none;
                 padding: 0px;
@@ -144,9 +150,13 @@
             }
         }
         .messageList{
-            margin: 0px 5rem;
-            padding: 25px 50px 15px;
+            margin: 0 auto;
+            width: 80%;
+            padding: 15px 0px;
             border-bottom: 1px solid $text_color;
+            @include rwd('md'){
+                width: 90%;
+            }
             img{
                 width: 32px;
                 height: 32px;
@@ -166,14 +176,17 @@
                     align-items: center;
                     li{
                         padding: 10px;
-                        &:not(:last-of-type){
-                            margin-right: 10px;
+                        @include rwd('sm'){
+                            padding: 5px;
                         }
                     }
                 }
             }
             .reply{
                 padding: 10px 0px 25px 80px;
+                @include rwd('sm'){
+                    padding: 10px 0px 15px 22px;
+                }
                 .switch{
                     display: flex;
                     align-items: center;
