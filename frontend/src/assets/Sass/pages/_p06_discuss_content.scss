@@ -77,6 +77,12 @@
         h2{
             margin-top: 50px;
             color: $title_color;
+
+            @include rwd('sm'){
+                @include fontStyle(400, 1.375rem, 1.65rem, 0.2rem, 0px);
+                text-align: center;
+                margin-top: 20px;
+            }
         }
 
         .articleInformation_p06_discuss{
@@ -85,6 +91,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            @include rwd('sm'){
+                flex-wrap: wrap;
+                justify-content: center;
+                row-gap: 10px;
+                column-gap: 20px;
+            }
+
             .tag{
                 color: $title_color;
             }
@@ -97,6 +111,9 @@
 
         .articleContent_p06_discuss{
             margin-top: 50px;
+            @include rwd('sm'){
+                margin-top: 20px;
+            }
         }
     }
 
