@@ -49,7 +49,7 @@
                 <p>真的嚇死我 不然今天要被帶去酒店做到2點欸</p>  
             </div>
         </section>
-        <article class="articleMessage_p06_discuss">
+        <!-- <article class="articleMessage_p06_discuss">
             <div class="topBlock_p06_discuss">
                 <h3>共<span>2</span>則 留言</h3>
                 <button class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        </article>
+        </article> -->
     </main>
 </template>
 
