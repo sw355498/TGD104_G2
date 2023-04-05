@@ -22,6 +22,7 @@
 @import 'component/componentColor';
 @import 'component/p07_demo_nav';
 @import 'component/p07_demoShopping_cart';
+@import 'component/p07_demoShopping_popup';
 @import 'component/index_chatbot';
 
 
@@ -45,6 +46,7 @@
 @import 'pages/p04_gov';
 @import 'pages/p05_faq';
 @import 'pages/p06_discuss';
+@import 'pages/p06_discuss_new_content';
 @import 'pages/p06_discuss_content';
 @import 'pages/p07_demoShopping';
 @import 'pages/p07_demoGame';
@@ -55,7 +57,6 @@
 @import 'pages/p08_user';
 @import 'pages/p09_team';
 @import 'pages/b_index';
-@import 'pages/b_all';
 
 // plugin
 @import 'plugin/fontawesome/fontawesome.scss'

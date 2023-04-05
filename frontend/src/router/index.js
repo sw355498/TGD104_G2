@@ -53,6 +53,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss.vue'),
   },
   {
+    path: '/discuss_new_content',
+    name: 'discuss_new_content',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss_new_content.vue'),
+  },
+  {
     path: '/discuss/discuss_content/:article?',
     name: 'discuss_content',
     component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss_content.vue')
@@ -118,9 +123,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p09_team.vue')
   },
   {
-    path: '/b_user',
-    name: 'b_user',
-    component: () => import(/* webpackChunkName: "about" */ '../views/b_user.vue')
+    path: '/b_index',
+    name: 'b_index',
+    component: () => import(/* webpackChunkName: "about" */ '../views/b_index.vue')
   },
 ]
 

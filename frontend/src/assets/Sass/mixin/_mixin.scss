@@ -41,6 +41,7 @@
   line-height: 150%;
   cursor: pointer;
   text-align: center;
+  white-space: nowrap;
 
   /*--- hover 樣式 ---*/
   &:hover {
@@ -99,7 +100,21 @@
   align-items: center;
 }
 
+/* 文字單行省略 */
+@mixin text_overflow_one(){
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
+/* 文字多行省略 */
+@mixin text_overflow_many($lineNum: 3){
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: $lineNum; //決定超過幾行開始做省略，目前預設超過3行做省略
+}
 
 @mixin rwd($breakpoint) {
   $value: map-get($breakpoints, $breakpoint);

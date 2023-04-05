@@ -18,7 +18,7 @@
     <router-link to="/p08_user">p08_user</router-link> |
     <router-link to="/p08_userLogin">p08_userLogin</router-link> |
     <router-link to="/p09_team">p09_team</router-link> |
-    <router-link to="/b_user">會員管理</router-link> ｜
+    <router-link to="/b_index">後台管理</router-link> ｜
   </nav>
   <router-view></router-view>
 </template>

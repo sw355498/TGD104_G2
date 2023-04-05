@@ -13,9 +13,18 @@
                 editor: ClassicEditor,
                 editorData: '<p>Content of the editor.</p>',
                 editorConfig: {
-                    // The configuration of the editor.
+                    // toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ]
                 }
             };
         }
     }
 </script>
+
+<style>
+    .ck-content{
+        min-height: 200px;
+    }
+    .ck-content p{
+        color: #08171E;
+    }
+</style>

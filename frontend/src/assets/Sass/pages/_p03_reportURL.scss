@@ -23,10 +23,7 @@
         h1{
             margin: 50px auto;
             color: $title_color;
-            @include pad{
-                // 平板上的樣式 768px,
-                text-align: center;
-            }
+            text-align: center;
             @include mobile{
                 // 手機上的樣式 sm: 428px,
                 font-size: 30px;

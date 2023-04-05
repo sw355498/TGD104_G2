@@ -1,4 +1,7 @@
 <template>
+  <div>
+     <!-- navgation -->
+ <frontNavbar />
   <div class="p08_user">
     <div class="container">
       <div class="main-body">
@@ -9,13 +12,13 @@
             <li class="breadcrumb-item">
               <router-link to="/p08_user">會員中心</router-link>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">修改密碼</li>
+            <li class="breadcrumb-item active" aria-current="page">編輯會員資料</li>
           </ol>
         </nav>
         <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
-          <div class="col-md-4 mb-3">
+          <div class="col-md-6 mb-3 col-lg-4">
             <div class="card order-1">
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
@@ -26,7 +29,7 @@
                     width="150"
                   />
                   <div class="file btn btn-lg btn-primary">
-                    Change Photo
+                    上傳照片
                     <input type="file" name="file" />
                   </div>
                   <div class="mt-3">
@@ -44,12 +47,12 @@
             </div>
            
           </div>
-          <div class="col-md-8 order-2 profile-head">
-            <h4>修改會員資料</h4>
+          <div class="col-md-6 col-lg-8 order-2 profile-head">
+            <h4>編輯會員資料</h4>
             <h6>karen@gmail.com</h6>
 
             <div class="row mt-4">
-              <div class="col-8 margin-10">
+              <div class="col-lg-6 margin-10 col-sm-12">
                 <label for="">顯示名稱</label>
                 <input type="text" class="input_p08_user_login" />
 
@@ -67,43 +70,19 @@
       </div>
     </div>
   </div>
+  <!-- footer -->
+   <frontFooter />
+</div>
 </template>
 
 <script>
-import postList from "@/components/userPost.vue";
-import replyList from "@/components/userReply.vue";
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
 
 export default {
   components: {
-    postList,
-    replyList,
+    frontNavbar,
+    frontFooter,
   },
-  data() {
-    return {
-      active_tab: 0,
-      tabs: [
-        {
-          label: "發文清單",
-          component: postList,
-        },
-        {
-          label: "留言清單",
-          component: replyList,
-        },
-        {
-          label: "可疑網站回報",
-          content: "Content 3",
-        },
-        {
-          label: "收藏列表",
-          content: "Content 3",
-        },
-        {
-          label: "我的檢舉",
-          content: "Content 3",
-        },
-      ],
-    };
-  },
-};
+}
 </script>

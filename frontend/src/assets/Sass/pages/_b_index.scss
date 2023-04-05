@@ -1,0 +1,9 @@
+.b_add_btn{
+    background: $text_color;
+    color: $sec_color;
+
+    &:hover{
+        background: $title_color;
+        color: $sec_color; 
+    }
+}

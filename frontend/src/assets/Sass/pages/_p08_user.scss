@@ -37,6 +37,10 @@
         flex: 1 1 auto;
         min-height: 1px;
         padding: 1rem;
+        text-align: center;
+        .crown{
+            color: $main_color;
+        }
 
         .jsgrid-grid-header,
         .jsgrid-grid-body {
@@ -105,6 +109,9 @@
 
     .profile-head {
         padding: 15px;
+        .progress-bar{
+            background-color: $four_color;
+        }
 
         h4 {
             font-weight: 700;
@@ -135,10 +142,11 @@
             font-weight: 600;
         }
 
-        .progress {}
-
+     
     }
-
+    .nav-link{
+        color: $four_color;
+    }
     .counter {
         margin-right: 15px;
     }
@@ -146,4 +154,10 @@
     .btn{
         color: $text_color;
     }
+}
+
+// 會員通知頁面
+
+.bg_notify{
+background-color: $sec_color;
 }

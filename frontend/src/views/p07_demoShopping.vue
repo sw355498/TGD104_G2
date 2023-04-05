@@ -8,6 +8,10 @@
             <!-- demo nav -->
             <p07_demo_nav />
             
+            <!-- popup -->
+            <div v-if="showModal">
+                <p07_demoShopping_popup :show="showModal" @close="showModal = false"/>
+            </div>
             <!-- 瀏覽器 -->
             <div class="browser_p07_demoShopping">
                 <!-- 電腦版瀏覽器 上面tool -->
@@ -75,7 +79,10 @@
                                 <li>
                                     <span>
                                        <span class="cart_length"> {{cart.length}} </span>
-                                       <img src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" @click="showComponent = true, listenClickEvent">
+                                       <img 
+                                        src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" 
+                                        @click="showComponent = true"
+                                       >
                                     </span>
                                 </li>
                                 <li><img src="../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊"></li>
@@ -83,7 +90,7 @@
                         </div>
 
                         <!-- 購物網站第一 banner -->
-                        <div class="scamWeb_p07_demoShopping_banner1">
+                        <div class="scamWeb_p07_demoShopping_banner1" id="tour5">
                             <p class="scamWeb_p07_demoShopping_banner1P">現實下殺</p>
                             <span class="scamWeb_p07_demoShopping_banner1Countdown">01:18:29</span>
                         </div>
@@ -98,12 +105,12 @@
                         </div>
 
                         <!-- 第一灰條廣告詞 -->
-                        <div class="scamWeb_p07_demoShopping_bannerGray">
+                        <div class="scamWeb_p07_demoShopping_bannerGray" id="tour4">
                             <p>新品上市，勁爆特殺！全場大放送，單件低至NT$432，2020新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                         </div>
 
                         <!-- 第二紅條廣告詞 -->
-                        <div class="scamWeb_p07_demoShopping_bannerRed">
+                        <div class="scamWeb_p07_demoShopping_bannerRed"  id="tour6">
                             <p class="scamWeb_p07_demoShopping_bannerRedP1">現在下單免運包郵</p>
                         </div>
 
@@ -116,13 +123,14 @@
                         </div>
 
                         <!-- 貨運廣告 banner -->
-                        <div class="scamWeb_p07_demoShopping_deliveryAdvertisement">
+                        <div class="scamWeb_p07_demoShopping_deliveryAdvertisement" id="tour7">
                             <img src="../assets/img/p07_demo/p07_demoShopping/onepage-02.jpg">
                             <img src="../assets/img/p07_demo/p07_demoShopping/onepage-01.jpg">
                         </div>
 
                         <!-- 衣服卡片區 -->
-                        <div class="scamWeb_p07_demoShopping_clothCardContainer">
+                        <!-- <div class="scamWeb_p07_demoShopping_clothCardContainer" id="clothCardContainer"> -->
+                        <div class="scamWeb_p07_demoShopping_clothCardContainer" id="tour2">
                             <!-- v-for 商品列表 -->
                             <div 
                                 v-for="(product, index) in products" :key="index"
@@ -181,7 +189,7 @@
                         </div>
 
                         <!-- 購物網站 footer -->
-                        <div class="scamWeb_p07_demoShopping_footer">
+                        <div class="scamWeb_p07_demoShopping_footer" id="tour3">
                             <p>正品保證</p>
                             <p>如果您未收到商品全額退款！</p>
                             <p>如果您購買的商品與描述不符，全額或部分退款！</p>
@@ -235,6 +243,7 @@ import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
 import p07_demoShopping_cart from "@/components/p07_demoShopping_cart.vue";
+import p07_demoShopping_popup from "@/components/p07demoShopping_popup.vue";
 
 export default {
     name: 'shoppingCart',
@@ -242,7 +251,8 @@ export default {
         frontNavbar,
         frontFooter,
         p07_demo_nav,
-        p07_demoShopping_cart
+        p07_demoShopping_cart,
+        p07_demoShopping_popup
     },
     setup(){
         const cart = ref([])
@@ -309,12 +319,14 @@ export default {
 
         // 點擊才出現 =================================================
         const showComponent = ref(false);
+        const showModal = ref(true);
         return {
             cart,
             product,
             products,
             addProductToCart,
             showComponent,
+            showModal,
         }
     },
 }

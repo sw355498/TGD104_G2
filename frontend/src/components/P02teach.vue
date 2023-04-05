@@ -1,4 +1,8 @@
 <template>
+  <div>
+        <!-- navgation -->
+        <frontNavbar />
+        <!-- 內文 -->
   <div class="p02_teach">
     <div class="banner_teachFrame">
       <div class="banner_teachtitle h1">
@@ -64,7 +68,7 @@
         </div>
         <div class="div_p02_teach_prevent row">
           <div
-            class="div_p02_teach_preventBox paragraph col-md-6 col-lg-3"
+            class="div_p02_teach_preventBox paragraph col-md-3"
             v-for="(item, index) in tab.preventbox"
             :key="index"
           >
@@ -91,10 +95,20 @@
       <!-- 假投資詐騙 end -->
     </div>
   </div>
+      <!-- footer -->
+      <frontFooter />
+</div>
 </template>
 
 <script>
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
+
 export default {
+  components: {
+    frontNavbar,
+    frontFooter,
+  },
   data() {
     return {
       active_tab: 0,
