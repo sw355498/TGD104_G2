@@ -1,5 +1,7 @@
 <template>
   <div class="body_p07_demoLine">
+    <!-- navgation -->
+    <frontNavbar />
 
     <!-- demo 體驗的 nav -->
     <p07_demo_nav />
@@ -23,7 +25,7 @@
             <!-- 對話內容 (由程式產生對話的位置)-->
             <div class="line_p07_demoLine_chatMessagesContentLeft">
               <!-- 對話文字 -->
-              <p class="line_p07_demoLine_chatMessagesText">早安，親愛的，昨晚睡得好嗎？</p>
+              <p class="line_p07_demoLine_chatMessagesText">早安，親愛的，昨晚睡得還好嗎？</p>
               <!-- 時間 -->
               <span class="line_p07_demoLine_chatMessageTimestamp">上午 11:12</span>
             </div>
@@ -99,17 +101,26 @@
         <div class="applepencil_p07_demoLine">
           <img src="../assets/img/p07_demo/p07_demoLine/ApplePencil.png" alt="applepencil">
         </div>
+
       </div>
     </section>
+      <!-- footer -->
+      <frontFooter />
   </div>
 </template>
 
 
 <script>
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
+
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
+
 export default {
   components: {
-  p07_demo_nav
+    p07_demo_nav,
+    frontNavbar,
+    frontFooter,
   }
 }
 </script>
