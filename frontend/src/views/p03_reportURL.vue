@@ -135,6 +135,7 @@ export default {
             inserting: false,
             editing: false,
             sorting: true,
+            
             /*分頁設定*/
             paging: true,
             pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
