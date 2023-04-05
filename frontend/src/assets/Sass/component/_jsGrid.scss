@@ -5,9 +5,10 @@
     border-color: $text_color;
     th,
     td{
-        overflow : hidden;
-        white-space: nowrap;
-        text-overflow:ellipsis;
+        // overflow : hidden;
+        // white-space: nowrap;
+        // text-overflow:ellipsis;
+        @include text_overflow_one();
         border: 1px solid $text_color;
     }
 

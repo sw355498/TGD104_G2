@@ -231,11 +231,12 @@
 
                 h3{
                     color: $title_color;
-                    // 文字溢出設定
-                    display: block;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
+
+                    // display: block;
+                    // overflow: hidden;
+                    // white-space: nowrap;
+                    // text-overflow: ellipsis;
+                    @include text_overflow_one();
 
                     @include rwd('sm'){
                         @include fontStyle(400, 1.375rem, 1.65rem, 0.2rem, 0px);
@@ -254,10 +255,7 @@
 
                 .articleContent{
                     margin-top: 20px;
-                    overflow : hidden;
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp:2;
+                    @include text_overflow_many(2);
 
 
                 }
