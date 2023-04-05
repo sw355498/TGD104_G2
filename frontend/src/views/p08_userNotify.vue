@@ -1,4 +1,8 @@
 <template>
+  <div>
+      <!-- navgation -->
+      <frontNavbar />
+ 
   <div class="p08_user">
     <div class="container">
       <div class="main-body">
@@ -25,10 +29,10 @@
                     class="rounded-circle"
                     width="150"
                   />
-                  <div class="file btn btn-lg btn-primary">
+                  <!-- <div class="file btn btn-lg btn-primary">
                     Change Photo
                     <input type="file" name="file" />
-                  </div>
+                  </div> -->
                   <div class="mt-3">
                     <h4 class="">Karen</h4>
                     <p class="text_title mb-1">LV.2</p>
@@ -43,52 +47,7 @@
                 </div>
               </div>
             </div>
-            <!-- 等級列表 -->
-            <div class="card mt-3 order-6 level">
-              <ul class="list-group list-group-flush list-group-dark">
-                <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-                  <h5>會員等級列表</h5>
-                </li>
-                <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-                  <h6>LV.0 防詐初學者</h6>
-                  <span class="text-secondary">exp 0-10</span>
-                  <p class="block">討論區發文間隔2小時</p>
-                </li>
-                <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-                  <h6>LV.1 防詐小尖兵</h6>
-                  <span class="text-secondary">exp 11-50</span>
-                  <p class="block">可換個人大頭貼</p>
-                </li>
-                <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-                  <h6>LV.2 防詐達人</h6>
-                  <span class="text-secondary">exp 51-100</span>
-                  <p class="block">發文無間隔限制</p>
-                </li>
-                <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-                  <h6>LV.3 防詐大師</h6>
-                  <span class="text-secondary">exp 101-200</span>
-                  <p class="block">可收藏文章</p>
-                </li>
-                <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                >
-                  <h6>LV.4 防詐神人</h6>
-                  <span class="text-secondary">exp 201-</span>
-                  <p class="block">可檢舉文章</p>
-                </li>
-              </ul>
-            </div>
-            <!--  -->
+           
           </div>
           <div class="col-md-8 order-2">
             <div class="card mb-3">
@@ -156,7 +115,9 @@
                   <div class="card-body">
 
                     <!-- tab -->
-                    <component :is="tabs[active_tab].component"></component>
+
+   
+                    <div id="jsGrid"></div>
 
                     <!-- PO文清單END -->
                   </div>
@@ -168,49 +129,154 @@
       </div>
     </div>
   </div>
+         <!-- footer -->
+         <frontFooter />
+  </div>
 </template>
 
 <script>
-import postList from "@/components/userPost.vue";
-import replyList from "@/components/userReply.vue";
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
 
 export default {
   components: {
-    postList,
-    replyList,
+    frontNavbar,
+    frontFooter,
   },
-  data() {
-    return {
-      active_tab: 0,
-      tabs: [
+  mounted() {
+    let id = 0,
+      notify = 1;
+    var memberPost = [
+      {
+        ID: `${id++}`,
+        日期: "2023-03-19",
+        通知內容: `${notify++}`,
+      },
+      {
+        ID: `${id++}`,
+        日期: "2023-03-19",
+        通知內容: `${notify++}`,
+      },
+      {
+        ID: `${id++}`,
+        日期: "2023-03-19",
+        通知內容: `${notify++}`,
+      },
+      {
+        ID: `${id++}`,
+        日期: "2023-03-19",
+        通知內容: `${notify++}`,
+      },
+      {
+        ID: `${id++}`,
+        日期: "2023-03-19",
+        通知內容: `${notify++}`,
+      },
+      {
+        ID: `${id++}`,
+        日期: "2023-03-19",
+        通知內容: `${notify++}`,
+      },
+
+      
+    ];
+
+    $("#jsGrid").jsGrid({
+      width: "100%",
+
+      inserting: false, //添加
+      editing: false, //編輯
+      sorting: true, //排序
+
+      /*分頁設定*/
+      paging: true,
+      pagerContainer: null, //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
+      pageIndex: 1, //當前頁面數
+      pageSize: 10, //頁面的數據量
+      pageButtonCount: 2, //最大數量的頁面按鈕
+      pagerFormat:
+        "{first} {pages} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}", //占位符來指定分頁欄格式
+      //pageNextText: "Next",   //下一頁
+      //pagePrevText: "Prev",   //上一頁
+      pageFirstText: "首頁", //首頁
+      pageLastText: "最後一頁", //尾頁
+      pageNavigatorNextText: "...", //最大數量頁面按鈕超出時右邊顯示
+      pageNavigatorPrevText: "...", //最大數量頁面按鈕超出時右邊顯示
+
+      data: memberPost,
+      fields: [
         {
-          label: "發文清單",
-          component: postList,
+          name: "ID",
+          css: "d-none",
+          validate: "required",
         },
         {
-          label: "留言清單",
-          component: replyList,
+          name: "日期",
+          type: "text",
+          width: 30,
         },
         {
-          label: "可疑網站回報",
-          content: "Content 3",
+          name: "通知內容",
+          type: "text",
+          width: 120,
         },
+
+
         {
-          label: "收藏列表",
-          content: "Content 3",
-        },
-        {
-          label: "我的檢舉",
-          content: "Content 3",
+          name: "編輯/修改",
+          width: 40,
+          itemTemplate: function () {
+            let $buttonContainer = $("<div>");
+            // Jquery 等同於 js中的 let buttonContainer = document.createElement("<div>")
+
+            // let $blockade = $("<button>").html(`<i class="fa-solid fa-lock"></i>封鎖`).addClass("small_button mx-1").on("click", operate);
+            // let $blockade = $("<button>")
+            //   .text(`封鎖`)
+            //   .addClass("small_button mx-1")
+            //   .on("click", operate);
+            // $buttonContainer.append($blockade);
+
+            let $delete = $("<button>")
+              .text("刪除")
+              .addClass("small_button mx-1")
+              .on("click", operate);
+            $buttonContainer.append($delete);
+
+            // let $revise = $("<button>")
+            //   .text("修改")
+            //   .addClass("small_button mx-1")
+            //   .on("click", operate);
+            // $buttonContainer.append($revise);
+
+            let $check = $("<button>")
+              .text("查看")
+              .addClass("small_button mx-1")
+              .on("click", operate);
+            $buttonContainer.append($check);
+
+            return $buttonContainer;
+          },
         },
       ],
-    };
-  },
+    });
 
-  methods: {
-    changeTab(tab_index) {
-      this.active_tab = tab_index;
-    },
+    function operate() {
+      let thisID = this.closest("tr").firstElementChild.innerHTML;
+      switch (this.innerHTML) {
+        // case "封鎖":
+        //   alert(`封鎖帳號 ${thisID}`);
+        //   break;
+        case "刪除":
+          alert(`刪除帳號 ${thisID}`);
+          break;
+        case "修改":
+          alert(`修改帳號 ${thisID}`);
+          break;
+        // case "查看":
+        //   alert(`查看帳號 ${thisID}`);
+        //   break;
+      }
+    }
   },
 };
 </script>

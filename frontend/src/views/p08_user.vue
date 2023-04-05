@@ -188,6 +188,8 @@
       </div>
     </div>
   </div>
+       <!-- footer -->
+       <frontFooter />
 </div>
 </template>
 
