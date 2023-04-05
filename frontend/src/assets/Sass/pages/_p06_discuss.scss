@@ -1,9 +1,8 @@
 .wrapper_p06_discuss{
-
+    width: $w1200;
     margin: 25px auto 0;
     box-sizing: border-box;
 
-    width: $w1200;
     @include rwd('lg'){
         width: 100%;
     }
@@ -12,9 +11,7 @@
         list-style: none;
         padding: 0px;
         margin: 0px;
-        @include rwd('lg'){
-            padding: 0 15px;
-        }
+
         li{
             &:not(:last-child)::after{
                 content: '/';
@@ -25,6 +22,10 @@
                 color: #ccc;
             }
         }
+
+        @include rwd('lg'){
+            padding: 0 15px;
+        }
         @include rwd('sm'){
             display: none;
         }
@@ -33,22 +34,20 @@
         display: flex;
         margin-top: 50px;
         white-space: nowrap;
-        @include rwd('lg'){
-            padding: 0 15px;
-        }
         h2{
             color: $text_color;
         }
-
+        
         button{
             margin-left: auto;
         }
-        @include rwd('md'){
-            padding: 0 20px 0 0;
+        @include rwd('lg'){
+            padding: 0 20px;
         }
         @include rwd('sm'){
             flex-wrap: wrap;
             align-items: center;
+            padding: 0px;
             h2{
                 width: 100%;
                 text-align: center;
@@ -182,11 +181,11 @@
 
         @include rwd('sm'){
             position: relative;
-            padding: 25px 2rem 75px;
+            padding: 25px 10px 75px;
             width: 100%;
-
+            // background: $sec_color;
             &:not(:first-of-type){
-                padding: 50px 2rem 75px;
+                padding: 50px 10px 75px;
             }
         }
         .topBlock_p06_discuss{
@@ -290,7 +289,7 @@
                         transform: translate(-50%, -50%);
                         white-space: nowrap;
                         li{
-                            margin-right: 5px;
+                            margin-right: 15px;
                         }
                     }
                 }
@@ -319,9 +318,7 @@
 
         .pagination-dark{
             background-color: $background_color;
-            // border: none;
             color: $text_color;
-            // margin-bottom: 50px;
         }
     }
 }
