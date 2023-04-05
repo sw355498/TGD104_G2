@@ -10,13 +10,32 @@
       </div>
       <!-- nav menus -->
       <div class="wrap_index_nav">
+        <!-- login btn -->
+        <button type="button" @click="showModal" class="h6_component big_button member_index_nav">註</button>
+
+        <Modal v-show="isModalVisible" @close="closeModal" />
         <!-- Member button-->
-        <router-link
-          to="/p08_user"
-          class="h6_component big_button member_index_nav"
+        <a
+        href="#"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+      <div
+          class="h6_component big_button member_index_nav dropdown"
         >
-          <i class="fa-solid fa-user"></i>
-        </router-link>
+      <i class="fa-solid fa-user"></i>
+      </div>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <li><router-link to="/p08_userNotify" class="dropdown-item">
+        <i class="fa-solid fa-bell"></i> 通知<span class="nofity_count">2</span></router-link></li>
+        <li><router-link to="/p08_user" class="dropdown-item">我的主頁</router-link></li>
+        <li><router-link to="/p08_userEdit" class="dropdown-item">編輯會員資料</router-link></li>
+        <li><router-link to="/p08_userEditPwd" class="dropdown-item">修改密碼</router-link></li>
+        <li><a class="dropdown-item" href="#">登出</a></li>
+      </ul>
+
         <!-- hamburger content menus -->
         <ul class="links_index_nav" :class="{ active: isActive }">
           <li v-for="navItem in nav" :key="navItem.id">
@@ -56,6 +75,7 @@
 
 <script>
 import { ref, reactive } from "vue";
+import Modal from "@/components/userLogin.vue";
 
 export default {
   name: "navbar",
@@ -118,6 +138,24 @@ export default {
       nav,
       navClick,
     };
+  },
+  // 註冊按鈕
+  name: "App",
+  components: {
+    Modal,
+  },
+  data() {
+    return {
+      isModalVisible: false,
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
 };
 </script>
