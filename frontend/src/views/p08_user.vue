@@ -1,4 +1,7 @@
 <template>
+  <div>
+          <!-- navgation -->
+          <frontNavbar />
   <div class="p08_user">
     <div class="container">
       <div class="main-body">
@@ -18,6 +21,7 @@
           <div class="col-md-4 mb-3">
             <div class="card order-1">
               <div class="card-body">
+                 <p class="crown"><i class="fa-solid fa-crown"></i></p>
                 <div class="d-flex flex-column align-items-center text-center">
                   <img
                     src="../assets/img/p08_user/user.jpg"
@@ -25,10 +29,10 @@
                     class="rounded-circle"
                     width="150"
                   />
-                  <div class="file btn btn-lg btn-primary">
+                  <!-- <div class="file btn btn-lg btn-primary">
                     Change Photo
                     <input type="file" name="file" />
-                  </div>
+                  </div> -->
                   <div class="mt-3">
                     <h4 class="">Karen</h4>
                     <p class="text_title mb-1">LV.2</p>
@@ -155,49 +159,9 @@
                 <div class="card h-100">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
-                      <div class="col-md-3">
-                        <select
-                          class="form-select form-select-sm"
-                          aria-label=".form-select-sm example"
-                        >
-                          <option selected>主題分類</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </select>
-                      </div>
 
-                      <div class="col-md-3">
-                        <select
-                          class="form-select form-select-sm"
-                          aria-label=".form-select-sm example"
-                        >
-                          <option selected>排序方式</option>
-                          <option value="1">日期新到舊</option>
-                          <option value="2">回應多到少</option>
-                          <option value="3">讚數多到少</option>
-                        </select>
-                      </div>
                     </div>
                     <!-- PO文清單 -->
-
-                    <!-- tab -->
-                    <!-- <div id="tabs">
-                      <div
-                        v-for="(tab, tab_index) in tabs"
-                        :class="{ tab: true, active: active_tab == tab_index }"
-                        @click="changeTab(tab_index)"
-                      >
-                        <div class="tab-label h5">{{ tab.label }}</div>
-                      </div>
-                    </div>
-                    <div
-                      v-for="(tab, tab_index) in tabs"
-                      :class="{
-                        content: true,
-                        active: active_tab == tab_index,
-                      }"
-                    ></div> -->
 
                     <ul class="nav nav-tabs mt-10" role="tablist">
                       <li class="nav-item" v-for="(tab, tab_index) in tabs" :key="tab_index">
@@ -224,6 +188,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -232,6 +197,9 @@ import replyList from "@/components/userReply.vue";
 import collectList from "@/components/userCollect.vue";
 import reportList from "@/components/userReport.vue";
 import urlList from "@/components/userURL.vue";
+// header與footer
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
 
 export default {
   components: {
@@ -240,6 +208,8 @@ export default {
     collectList,
     reportList,
     urlList,
+    frontNavbar,
+    frontFooter,
   },
   data() {
     return {
