@@ -7,8 +7,8 @@
         background-size: cover;
         padding: 1px 0 80px;
         // width: 1080px;
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
         overflow: scroll;
         scroll-behavior: smooth;
         direction: rtl;
@@ -20,13 +20,14 @@
             padding-right: 30px;
         }
         @include rwd(md){
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
             padding-bottom: 0;
         }
         @include rwd(sm){
-            // padding-left: 8px;
-            // padding-right: 8px;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-top: 10px;
         }
         
         // ============= line 背景 ============= 
@@ -62,7 +63,7 @@
                 @include rwd(md){
                     width: 277.5px;
                     margin-top: 167px;
-                    margin-left: 36px;
+                    margin-left: 35px;
                     height: 710px;
                 }
                 @include rwd(sm){
@@ -87,7 +88,7 @@
                     padding-left: 10px;
                 }
                 @include rwd(sm){
-                    width: 338px;
+                    width: 337px;
                     height: 640px;
                     padding-top: 20px;
                 }

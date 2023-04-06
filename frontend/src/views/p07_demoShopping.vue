@@ -57,7 +57,8 @@
                         <span>http://shopee.rip/te9</span>
                     </div>
                 </div>
-                <!-- 除了toolbar的內容區 -->
+
+                <!-- 內容區 -->
                 <div class="browser_container">
                     <!-- =============== component 下單購物車 =============== -->
                     <div class="cart_p07_demoShopping" v-if="showComponent">
