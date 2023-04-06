@@ -19,12 +19,14 @@
       </router-link>
 
       <!-- BackTop Button -->
-      <backTopBtn />
+      <backTopBtn/>
+      
 
       <!-- 機器人 -->
-      <div class="robot_index_btn">
-        <svg style="position: fixed; bottom: 5%; right: 1%">
-          <use xlink:href="#robot" @click="showComponent = true" />
+      <div class="indexChatbot" style="">
+        <!-- <svg style=" width: 80px; height: 80px;"> -->
+        <svg width="80" height="80px" style="">
+          <use xlink:href="#robot" @click="showComponent = true" width="80"/>
         </svg>
         <!-- <indexChatbot :show="showComponent" @close="showComponent = false" /> -->
         <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>

@@ -143,7 +143,6 @@
 */
 
 
-// 下面是欣新增的 我不會用上面ㄉ寫法:((
 @mixin pad{
   @media(max-width:768px){
     @content;

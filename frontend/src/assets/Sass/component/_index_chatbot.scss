@@ -1,4 +1,23 @@
-
+.indexChatbot{
+    position: fixed; bottom: 7%; right: 2%; 
+    svg{
+        // outline: 1px solid red;
+    }
+    @include rwd('lg'){
+        // 電腦上的樣式
+        right: 1.5%;
+    }
+    
+    @include rwd('md') {
+        // 平板上的樣式
+        right: 1%;
+    }
+    
+    @include rwd('sm'){
+        // 手機上的樣式
+        right: -1%;
+    }
+}
 .clost-bg{
     position: fixed;
     top: 0;
