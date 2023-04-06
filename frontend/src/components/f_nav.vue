@@ -129,6 +129,16 @@ export default {
         name: "討論專區",
       },
       {
+        id: "p07",
+        router: "/p07demoShopping",
+        name: "Demo體驗",
+      },
+      {
+        id: "p08",
+        router: "/p08_user",
+        name: "會員中心",
+      },
+      {
         id: "p09",
         router: "/p09_team",
         name: "團隊介紹",

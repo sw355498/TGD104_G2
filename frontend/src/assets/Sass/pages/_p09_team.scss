@@ -24,13 +24,15 @@
     }
     div {
       position: absolute;
+      max-width: 500px;
       right: 5%;
       bottom: 10%;
       background-color: #ffffffcc;
       padding: 25px;
-      max-width: 100%;
+      max-width: 50%;
       border-radius: 5px;
       @include rwd(md) {
+        max-width: 100%;
         position: inherit;
         margin: 0 auto;
         font-size: 0.8rem;

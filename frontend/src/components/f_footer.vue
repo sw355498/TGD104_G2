@@ -74,7 +74,7 @@ export default {
       {
         id: "p08",
         router: "/p08_user",
-        name: "會員登入",
+        name: "會員中心",
       },
       {
         id: "p09",
