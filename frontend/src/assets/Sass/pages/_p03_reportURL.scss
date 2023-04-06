@@ -18,6 +18,7 @@
     .sectionTop_p03_reportUrl{
         max-width: 1000px;
         margin: 0px auto;
+        padding: 20px 20px 0;
         padding-top: 20px;
         text-align: left;
         h1{
@@ -145,8 +146,8 @@
     margin: 100px auto;
     text-align: center;
     // outline: 1px solid red;
-    padding: 10px;
-    padding-bottom: 200px;
+    padding: 0 30px;
+    padding-bottom: 100px;
     max-width: 1000px;
     h2{
         color: $text_color;
