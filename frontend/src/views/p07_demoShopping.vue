@@ -115,7 +115,7 @@
                         </div>
 
                         <!-- 購物網站第二 banner -->
-                        <img class="scamWeb_p07_demoShopping_banner2" src="../assets/img/p07_demo/p07_demoShopping/pic02.jpg">
+                        <img class="scamWeb_p07_demoShopping_banner2" src="../assets/img/p07_demo/p07_demoShopping/demoShoppingPic02.jpg">
                         
                         <!-- 第三紅條廣告詞 -->
                         <div class="scamWeb_p07_demoShopping_bannerRed scrollBar">
@@ -262,49 +262,49 @@ export default {
             name: '自制春夏修身高腰洋裝',
             price: 499,
             // 抓不到圖片路徑 要先用 require 包起來
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic03.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic03.jpg'),
             number: 1
         },
         {
             name: '仿亞麻復古圓領設計感洋裝',
             price: 399,
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic04.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic04.jpg'),
             number: 1
         },
         {
             name: '高端修身收腰顯瘦圖騰氣質洋裝',
             price: 299,
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic05.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic05.jpg'),
             number: 1
         },
         {
             name: '2023新款長袖復古中長版裙',
             price: 499,
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic06.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic06.jpg'),
             number: 1
         },
         {
             name: '氣質白色連衣裙小個子',
             price: 399,
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic07.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic07.jpg'),
             number: 1
         },
         {
             name: '修身收腰白色小晚禮服',
             price: 199,
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic08.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic08.jpg'),
             number: 1
         },
         {
             name: '女神裙 設計氣質顯瘦連衣裙',
             price: 499,
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic09.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic09.jpg'),
             number: 1
         },
         {
             name: '早春新款V領長袖法式設計洋裝',
             price: 299,
-            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/pic10.jpg'),
+            imageUrl: require('@/assets/img/p07_demo/p07_demoShopping/demoShoppingPic10.jpg'),
             number: 1
         },
         ]);

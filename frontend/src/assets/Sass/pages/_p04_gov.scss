@@ -65,7 +65,7 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            &:not(:last-child){
+            &:not(:nth-last-child(1)):not(:nth-last-child(2)){
                 border-bottom: 1px dashed #ccc;
             }
         }

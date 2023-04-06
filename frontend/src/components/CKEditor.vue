@@ -24,7 +24,7 @@
     .ck-content{
         min-height: 200px;
     }
-    .ck-content p{
+    .ck-content *{
         color: #08171E;
     }
 </style>
