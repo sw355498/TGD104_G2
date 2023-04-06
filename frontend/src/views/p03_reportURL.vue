@@ -1,5 +1,7 @@
 <template>
-    <div class="p03_reportUrl">
+    <main class="p03_reportUrl">
+         <!-- header -->
+        <frontNavbar />
         <section class="sectionTop_p03_reportUrl">
             <h1>回報可疑網站</h1>
             <!-- <p>回報可疑網站</p> -->
@@ -103,13 +105,21 @@
             <!-- ======== 外掛 jsGrid ========= -->
             <div id="jsGrid"></div>
         </section>
-    </div>
+        <frontFooter />
+    </main>
 </template>
 
 <script>
 import{ ref} from "vue";
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
+
 export default {
     name: 'Form',
+    components: {
+        frontNavbar,
+        frontFooter,
+    },
     mounted() {
         var website = [
             { "回報日期": "2023-03-19", "回報狀態": "待審核", "網站名稱": "-", "網址": "https://cesare.asia/6",  },
