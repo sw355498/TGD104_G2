@@ -2,7 +2,7 @@
   background-image: url("../img/p05_faq/bg_p05_faq.png");
   h1 {
     color: $text_color;
-    // text-align: center;
+    text-align: center;
     letter-spacing: 2rem;
     padding: 100px;
     @include rwd(sm) {

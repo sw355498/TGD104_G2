@@ -37,7 +37,7 @@
           <h4>專案策劃</h4>
         </div>
         <div class="card1_p09_team_block">
-          <p>林欣妤Shinyu Lin</p>
+          <p>林欣妤hsinyu Lin</p>
           <div class="pic" id="shsinyu"></div>
           <div class="work_p09_team_block">
             <ul>
@@ -125,9 +125,7 @@
         </div>
       </div>
 
-      <div class="contact_p09_team_from">
-        
-      </div>
+      <div class="contact_p09_team_from"></div>
     </main>
   </div>
 
