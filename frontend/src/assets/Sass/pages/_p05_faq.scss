@@ -11,7 +11,7 @@
     max-width: $w1200;
     label {
       display: block;
-      height: 40px;
+      height: 42px;
       position: relative;
       i {
         color: $sec_color;
@@ -19,12 +19,15 @@
         font-size: 1.5rem;
         left: 25%;
         z-index: 2;
-        padding: 6px 8px;
+        padding: 8px;
+        @include rwd(sm) {
+          left: 5%;
+        }
       }
       input {
         position: absolute;
         left: 25%;
-        height: 40px;
+        height: 42px;
         width: 50%;
         z-index: 1;
         padding: 10px 10px 10px 40px;
@@ -33,6 +36,10 @@
         outline: 0;
         &focus {
           box-shadow: 2px 2px 5px $text_color;
+        }
+        @include rwd(sm) {
+          width: 90%;
+          left: 5%;
         }
       }
     }
@@ -64,20 +71,12 @@
           border-radius: 10px;
           margin-bottom: 10px;
           @include rwd(md) {
+            padding: 15px;
+            border-radius: 5px;
           }
-          h4 {
+          h6 {
             display: flex;
             justify-content: space-between;
-            @include rwd(md) {
-              @include fontT26_index_article();
-              color: $sec_color;
-              margin: 0;
-              letter-spacing: 0;
-            }
-            @include rwd(sm) {
-              @include fontP18_index_article();
-              letter-spacing: 0;
-            }
           }
           div {
             color: $sec_color;

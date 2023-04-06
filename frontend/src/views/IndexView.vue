@@ -10,14 +10,16 @@
         <p>不明網站</p>
         <p>購物要當心</p>
       </div>
-      <router-link to="/p07demoShopping" class="h6_component big_button">
+      <router-link to="/p07demoShopping" class="demolink_index_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
         DEMO體驗
       </router-link>
 
       <!-- BackTop Button -->
-      <button class="backTop_index_btn">
-        <i class="fa-solid fa-angles-left"></i>
-      </button>
+      <backTopBtn />
 
       <!-- 機器人 -->
       <div class="robot_index_btn">
@@ -179,12 +181,14 @@ import { ref } from "vue";
 import indexChatbot from "@/components/index_chatbot.vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
+import backTopBtn from "@/components/backTopBtn.vue";
 
 export default {
   components: {
     indexChatbot,
     frontNavbar,
     frontFooter,
+    backTopBtn,
   },
 
   setup() {

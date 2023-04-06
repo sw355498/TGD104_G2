@@ -13,10 +13,10 @@
       <div class="question_p05_faq_block">
         <ul>
           <li v-for="item in faq" :key="item.id">
-            <h4>
+            <h6>
               {{ item.title }}
               <i class="fa-solid fa-minus"></i>
-            </h4>
+            </h6>
             <div>
               <div>
                 {{ item.content }}
@@ -29,10 +29,10 @@
             </div>
           </li>
           <li v-for="item in faq2" :key="item.id">
-            <h4>
+            <h6>
               {{ item.title }}
               <i class="fa-solid fa-plus"></i>
-            </h4>
+            </h6>
           </li>
         </ul>
       </div>
