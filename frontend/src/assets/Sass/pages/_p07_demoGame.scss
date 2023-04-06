@@ -10,9 +10,13 @@
   // 手機上的樣式
 }
  
+
+.demo h1{
+  color:white;
+}
  
  
- /* 測驗結果頁面 */
+ /* 測驗首頁頁面 */
 
  .game_index {
     background-color: $background_color;
@@ -22,6 +26,7 @@
     // background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 50px;
+    
    
   
     
