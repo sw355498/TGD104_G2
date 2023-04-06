@@ -55,7 +55,7 @@
              <div class="again">
 
                 <button class="again_quiz_botton">
-                   <router-link to='/p07demoGamep01'>
+                   <router-link to='/p07demoGame'>
                     再玩一次&emsp;  
                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="9.92871" y="8" width="10" height="10" transform="rotate(-45 9.92871 8)" fill="#033159"/>
@@ -75,7 +75,7 @@
              <div class="index">
 
                 <button class="index_botton">
-                   <router-link to='/p07demoGame'>
+                   <router-link to='/index'>
                     回首頁&emsp;  
                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="9.92871" y="8" width="10" height="10" transform="rotate(-45 9.92871 8)" fill="#033159"/>
