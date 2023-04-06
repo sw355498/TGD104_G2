@@ -3,6 +3,11 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
+router.afterEach((to, from, next) => {
+	window.scrollTo(0, 0);
+});
+
+
 // BootStrap5.2.3套件引入
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
