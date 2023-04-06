@@ -1,6 +1,14 @@
 <template>
- 
+
+    <!-- navgation -->
+    <frontNavbar />
+
     <section class="game_index">
+
+        <!-- demo 體驗的 nav -->
+        <p07_demo_nav />
+
+        
 
         <div class="quiz_index">
 
@@ -43,49 +51,33 @@
                 
             </div>
 
-
-             
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             
-
-
-
 
         </div>
 
+        
+
     </section>
+
+    <!-- footer -->
+    <frontFooter />
    
 </template>
+
+
+<script>
+import p07_demo_nav from "@/components/p07_demo_nav.vue";
+
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
+
+export default {
+  components: {
+    p07_demo_nav,
+    frontNavbar,
+    frontFooter
+  }
+}
+</script>
+
+<style scoped></style>
