@@ -8,31 +8,32 @@
                 <li>討論專區</li>
             </ul>
             <div class="titleBlock">
-                <h2>所有文章</h2>
-                <button class="medium_button"><router-link to="/discuss_new_content">發表新文章</router-link></button>
-            </div>
-            <div class="tab_p01_newsChoose">
-                <div class="tab_p01_news_category">
-                    <select name="" id="" class="form-select form-select-md">
-                        <option selected>所有文章</option>
-                        <option value="">網站詐騙</option>
-                        <option value="">交友詐騙</option>
-                        <option value="">金融詐騙</option>
-                    </select>
-                    <div class="wide_tab">
-                        <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
-                        href="#"
-                        >網站詐騙</a
-                        >　|　<a href="#" >交友詐騙</a>　|　<a href="#">金融詐騙</a>
-                    </div>
+                    <h2>所有文章</h2>
+                    <button class="medium_button"><router-link to="/discuss_new_content">發表新文章</router-link></button>
                 </div>
-                <div class="input_p01_news_searchBar">
-                    <input type="text" placeholder="搜尋文章" />
-                    <div class="icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                </div>
+                <div class="tab_p01_newsChoose">
+            <div class="tab_p01_news_category">
+            <select name="" id="" class="form-select form-select-md">
+                <option selected>所有文章</option>
+                <option value="">網站詐騙</option>
+                <option value="">交友詐騙</option>
+                <option value="">金融詐騙</option>
+            </select>
+            <div class="wide_tab">
+                <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
+                href="#"
+                >網站詐騙</a
+                >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a>
             </div>
+            </div>
+
+            <div class="position-relative input_p01_news_searchBar">
+            <i
+                class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
+            ></i>
+            <input type="text" placeholder="搜尋文章" />
+            </div>
+        </div>
             <section v-for="item in articleList" :kye="item.id">
                     <div class="topBlock_p06_discuss">
                         <div class="author">
