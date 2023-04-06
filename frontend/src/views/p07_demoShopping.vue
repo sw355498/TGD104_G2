@@ -243,7 +243,7 @@ import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
 import p07_demoShopping_cart from "@/components/p07_demoShopping_cart.vue";
-import p07_demoShopping_popup from "@/components/p07demoShopping_popup.vue";
+import p07_demoShopping_popup from "@/components/p07_demoShopping_popup.vue";
 
 export default {
     name: 'shoppingCart',
