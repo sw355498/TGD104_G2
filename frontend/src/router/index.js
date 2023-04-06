@@ -68,9 +68,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p01.vue')
   },
   {
-    path: '/p07demoGamep02',
-    name: 'p07demoGamep02',
-    component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p02.vue')
+    path: '/p07demoGameresult',
+    name: 'p07demoGameresult',
+    component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_result.vue')
   },
   {
     path: '/p07demoPhone',
