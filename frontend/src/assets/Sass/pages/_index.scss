@@ -157,6 +157,20 @@
         }
       }
     }
+
+    .fixed_index_btn {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      div {
+        position: relative;
+        button {
+          position: absolute;
+          right: 30px;
+          bottom: 40px;
+        }
+      }
+    }
   }
 
   /** Main Block **/
@@ -172,6 +186,9 @@
         color: $title_color;
         @include rwd(lg) {
           line-height: 1.5;
+        }
+        @include rwd(md) {
+          font-size: 2rem;
         }
       }
 
@@ -271,6 +288,9 @@
           .text-block {
             .fontT26_index_article {
               @include fontT26_index_article();
+              @include rwd(md) {
+                font-size: 1.3rem;
+              }
             }
 
             .fontP14_index_article {
@@ -307,6 +327,9 @@
       a {
         background: $title_color;
         color: $third_color;
+        @include rwd(md) {
+          font-size: 1rem;
+        }
       }
     }
   }

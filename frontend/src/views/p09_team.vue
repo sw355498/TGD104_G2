@@ -1,7 +1,6 @@
 <template>
-  <frontNavbar />
-  <backTopBtn />
   <div class="body_p09_team_block">
+    <frontNavbar />
     <h2>our team</h2>
     <section>
       <img src="../assets/img/p09_team/p09_team_crews2.png" alt="teamMember" />
@@ -135,13 +134,11 @@
 <script>
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
-import backTopBtn from "@/components/backTopBtn.vue";
 
 export default {
   components: {
     frontNavbar,
     frontFooter,
-    backTopBtn,
   },
 };
 </script>
