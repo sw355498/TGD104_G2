@@ -1,6 +1,5 @@
 <template>
   <div class="body_p05_faq_block">
-    <!-- header  -->
     <!-- navgation -->
     <frontNavbar />
     <!--Main Block -->

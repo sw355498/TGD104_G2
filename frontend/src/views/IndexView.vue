@@ -18,17 +18,21 @@
         DEMO體驗
       </router-link>
 
-      <!-- BackTop Button -->
-      <backTopBtn />
-
-      <!-- 機器人 -->
-      <div class="indexChatbot" style="">
+      <!-- 固定按鈕 -->
+      <div class="fixed_index_btn">
+        <!-- BackTop Button -->
+        <div>
+          <backTopBtn />
+        </div>
+        <!-- 機器人 -->
+        <!-- <div class="indexChatbot" style=""> -->
         <!-- <svg style=" width: 80px; height: 80px;"> -->
         <svg width="110" height="90px" style="">
           <use xlink:href="#robot" @click="showComponent = true" width="110" />
         </svg>
         <!-- <indexChatbot :show="showComponent" @close="showComponent = false" /> -->
         <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
+        <!-- </div> -->
       </div>
     </section>
 

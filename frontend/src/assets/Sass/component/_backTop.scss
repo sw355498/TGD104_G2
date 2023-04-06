@@ -11,9 +11,9 @@
   font-size: 1.125rem;
   transform: rotate(90deg);
   border-radius: 5px;
-  position: fixed;
-  bottom: 20%;
-  right: 4%;
+  // position: fixed;
+  // bottom: 20%;
+  // right: 4%;
   opacity: 0.8;
   z-index: 500;
   @include rwd(sm) {
