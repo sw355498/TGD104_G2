@@ -7,8 +7,8 @@
     <h1>FAQ</h1>
     <main>
       <label for="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="search" placeholder="請輸入關鍵字" />
+        <i class="fa-solid fa-magnifying-glass"></i>
       </label>
       <div class="question_p05_faq_block">
         <ul>

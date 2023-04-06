@@ -1,8 +1,10 @@
 <template>
+  <frontNavbar />
+  <backTopBtn />
   <div class="body_p09_team_block">
     <h2>our team</h2>
     <section>
-      <img src="../assets/img/p09_team/p09_team_crews.png" alt="" />
+      <img src="../assets/img/p09_team/p09_team_crews2.png" alt="teamMember" />
       <div>
         <p>
           我們是一群對軟體開發保持熱情的團隊，並同時關心著網路使用者們安全所創立的團隊，我們專注於前端應用軟體開發，以網頁設計及RWD為此教學網站核心服務。
@@ -12,6 +14,7 @@
     </section>
 
     <main>
+      <h3>crew member</h3>
       <div class="intro_p09_team_block">
         <div class="card1_p09_team_block">
           <p>全容君KarenChuan</p>
@@ -121,6 +124,26 @@
           <button><i class="fa-solid fa-info"></i></button>
         </div>
       </div>
+
+      <div class="contact_p09_team_from">
+        
+      </div>
     </main>
   </div>
+
+  <frontFooter />
 </template>
+
+<script>
+import frontNavbar from "@/components/f_nav.vue";
+import frontFooter from "@/components/f_footer.vue";
+import backTopBtn from "@/components/backTopBtn.vue";
+
+export default {
+  components: {
+    frontNavbar,
+    frontFooter,
+    backTopBtn,
+  },
+};
+</script>

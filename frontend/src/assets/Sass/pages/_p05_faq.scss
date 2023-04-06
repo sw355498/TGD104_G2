@@ -2,9 +2,12 @@
   background-image: url("../img/p05_faq/bg_p05_faq.png");
   h1 {
     color: $text_color;
-    text-align: center;
+    // text-align: center;
     letter-spacing: 2rem;
     padding: 100px;
+    @include rwd(sm) {
+      padding: 50px 10px;
+    }
   }
   main {
     margin: 0 auto;
@@ -17,11 +20,11 @@
         color: $sec_color;
         position: absolute;
         font-size: 1.5rem;
-        left: 25%;
+        right: 25%;
         z-index: 2;
         padding: 8px;
         @include rwd(sm) {
-          left: 5%;
+          right: 5%;
         }
       }
       input {
@@ -30,7 +33,7 @@
         height: 42px;
         width: 50%;
         z-index: 1;
-        padding: 10px 10px 10px 40px;
+        padding: 10px;
         border-radius: 5px;
         border: none;
         outline: 0;
