@@ -24,6 +24,7 @@
       }
     }
     #banner_index_dynamicText {
+      margin-bottom: 50px;
       p {
         font-size: 120px;
         color: $text_color;
@@ -43,14 +44,10 @@
           margin-bottom: 50px;
         }
       }
-      @include rwd(lg) {
-        margin-bottom: 100px;
-      }
       @include rwd(md) {
-        min-height: 300px;
+        min-height: 150px;
       }
       @include rwd(sm) {
-        min-height: 100px;
         margin-bottom: 100px;
       }
     }
