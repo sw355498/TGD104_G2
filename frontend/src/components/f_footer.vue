@@ -63,7 +63,7 @@ export default {
       },
       {
         id: "p06",
-        router: "/p06",
+        router: "/discuss",
         name: "討論專區",
       },
       {

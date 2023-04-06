@@ -62,7 +62,7 @@
             <div class="next">
 
                 <button class="next_quiz_botton">
-                   <router-link to='/p07demoGamep02' class="botton_p">
+                   <router-link to='/p07demoGameresult' class="botton_p">
                     下一題 
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.84655 1.74029C0.925074 1.2852 0.950356 2.64625 1.20318 3.38365L5.12195 7.68167L1.20318 12.0429C0.343585 13.9138 1.94059 14.0023 2.84655 13.8127L7.77663 8.75618C8.38341 7.9977 8.02945 7.2603 7.77663 6.9864L2.84655 1.74029Z" fill="#033159" stroke="black"/>

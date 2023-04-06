@@ -70,7 +70,7 @@ export default {
                     this.btnName = '新增機器人回答內容';
                     break;
                 case 'staff':
-                    this.h2Title = '後台帳好管理';
+                    this.h2Title = '後台帳號管理';
                     this.addbutton = true;
                     this.btnName = '新增管理員帳號';
                     break;

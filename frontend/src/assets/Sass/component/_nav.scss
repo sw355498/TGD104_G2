@@ -17,17 +17,12 @@
       border-radius: 50%;
       width: 50px;
       height: 50px;
-      font-size: 1rem; //todo 串接完註冊彈跳視窗事件需拔掉
+      font-size: 1rem;
       padding: 5px;
+      @include flex_vhCenter();
       @include rwd(sm) {
         width: 40px;
         height: 40px;
-      }
-      i {
-        color: $text_color;
-        position: absolute;
-        left: calc(50% - 7px);
-        top: calc(50% - 8px);
       }
     }
   }

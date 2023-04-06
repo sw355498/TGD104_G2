@@ -24,10 +24,10 @@
             margin: 50px auto;
             color: $title_color;
             text-align: center;
-            @include mobile{
+            @include rwd('sm'){
                 // 手機上的樣式 sm: 428px,
                 font-size: 30px;
-            }
+              }
         }
     }
     /* ======== 輸入form表單 ======== */
@@ -51,12 +51,12 @@
         .phonesizeText{
             display: none;
         }
-        @include pad{
+        @include rwd('md'){
             // 平板上的樣式 768px,
             max-width: 500px;
             
         }
-        @include mobile{
+        @include  rwd('sm'){
             // 手機上的樣式 428px,
             max-width: 350px;
             .websizeText{
@@ -66,6 +66,7 @@
                 display: block;
             }
         }
+      
         /* ======== 有登入才顯示會員 ======== */
         .user_p03_reportURL{
             // outline: 1px solid red;
@@ -126,11 +127,11 @@
                 margin: 20px auto;
                 width: 100%;
             }
-            @include pad{
+            @include  rwd('md'){
                 // 平板上的樣式 768px,
                 max-width: 400px;
             }
-            @include mobile{
+            @include rwd('sm'){
                 // 手機上的樣式 428px,
                 max-width: 300px;
             }
@@ -150,7 +151,7 @@
     h2{
         color: $text_color;
         margin: 20px 0 40px;
-        @include mobile{
+        @include  rwd('sm'){
             // 手機上的樣式 428px,
             font-size: 22px;
             letter-spacing: 0.3rem;
@@ -161,11 +162,11 @@
     #jsGrid{
         border:0px
     }
-    @include pad{
+    @include  rwd('md'){
         // 平板上的樣式 768px,
         padding: 20px;
     }
-    @include mobile{
+    @include  rwd('sm'){
         // 手機上的樣式 428px,
         #jsGrid{
             // max-width: 350px;
