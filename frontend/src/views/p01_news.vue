@@ -33,12 +33,6 @@
           ></i>
           <input type="text" placeholder="搜尋文章" />
         </div>
-        <!-- <div class="input_p01_news_searchBar">
-          <input type="text" placeholder="搜尋文章" />
-          <div class="icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </div>
-        </div> -->
       </div>
 
       <ul class="ul_p01_newsPost">

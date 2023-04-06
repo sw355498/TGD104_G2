@@ -24,7 +24,10 @@
         }
 
         @include rwd('lg'){
-            padding: 0 15px;
+            padding: 0 30px;
+        }
+        @include rwd('md'){
+            padding: 0 20px;
         }
         @include rwd('sm'){
             display: none;
@@ -32,7 +35,6 @@
     }
     .titleBlock{
         display: flex;
-        margin-top: 50px;
         white-space: nowrap;
         h2{
             color: $text_color;
@@ -40,6 +42,9 @@
         
         button{
             margin-left: auto;
+        }
+        @include rwd('lg'){
+            padding: 0 30px;
         }
         @include rwd('lg'){
             padding: 0 20px;
@@ -65,7 +70,7 @@
     .tab_p01_newsChoose {
         max-width: 1200px;
         margin: 10px auto;
-        padding-left: 2rem;
+        padding-left: 15px;
         color: $text_color;
         display: flex;
         justify-content: space-between;
@@ -73,7 +78,7 @@
 
         @include rwd('sm') {
             flex-wrap: wrap;
-
+            border-bottom:0;
         }
 
         .tab_p01_news_category {
@@ -132,11 +137,13 @@
         }
 
         .input_p01_news_searchBar {
-            display: flex;
-            margin: 11px 0;
+            margin: 11px 15px 11px 0;
             // box-sizing: border-box;
-            background-color: $four_color;
+            // background-color: $four_color;
             border-radius: 5px;
+            i{
+                color: $sec_color;
+            }
 
             @include rwd('md') {
                 margin-right: 20px;
@@ -179,18 +186,24 @@
             padding: 50px 0 25px;
         }
 
-        @include rwd('sm'){
-            position: relative;
-            padding: 25px 10px 75px;
-            width: 100%;
-            // background: $sec_color;
+        @include rwd('md'){
+            width: calc(100% - 40px);
+            padding: 30px 0px;
             &:not(:first-of-type){
-                padding: 50px 10px 75px;
+                padding: 30px 0px;
+            }
+        }
+        @include rwd('sm'){
+            width: calc(100% - 30px);
+            padding: 20px 0px;
+            &:not(:first-of-type){
+                padding: 20px 0px;
             }
         }
         .topBlock_p06_discuss{
             display: flex;
             justify-content: space-between;
+            align-items: center;
 
             .pic_p06_discuss{
                 width: 32px;
@@ -219,12 +232,17 @@
             grid-template-columns: 5fr 1fr;
             column-gap: 50px;
             justify-content: space-between;
+            align-items: center;
             margin-top: 25px;
 
+
+            @include rwd('md'){
+                grid-template-columns:3fr 1fr;
+                column-gap: 30px;
+            }
             @include rwd('sm'){
-                grid-template-columns: 1fr;
-                justify-content: center;
-                align-items: center;
+                grid-template-columns:2fr 1fr;
+                column-gap: 15px;
             }
             .articleText_p06_discuss{
                 overflow: hidden;
@@ -232,14 +250,14 @@
                 h3{
                     color: $title_color;
 
-                    // display: block;
-                    // overflow: hidden;
-                    // white-space: nowrap;
-                    // text-overflow: ellipsis;
                     @include text_overflow_one();
 
-                    @include rwd('sm'){
+                    @include rwd('md'){
                         @include fontStyle(400, 1.375rem, 1.65rem, 0.2rem, 0px);
+                    }
+
+                    @include rwd('sm'){
+                        @include fontStyle(300, 1rem, 1.5rem, 0.2rem);
                     }
                 }
 
@@ -247,16 +265,29 @@
                     margin-top: 10px;
                     color: #ccc;
 
-
                     .tag{
                         color: $title_color;
+                    }
+                    @include rwd('md'){
+                        margin-top: 10px;
+                        span{
+                            font-size: 0.9rem ; 
+                        }
+                    }
+                    @include rwd('sm'){
+                        margin-top: 5px;
+                        span{
+                            font-size: 0.8rem ; 
+                        }
                     }
                 }
 
                 .articleContent{
                     margin-top: 20px;
                     @include text_overflow_many(2);
-
+                    @include rwd('md'){
+                        display: none;
+                    }
 
                 }
 
@@ -268,26 +299,24 @@
                     align-items: center;
                     li{
                         margin-right: 40px;
-
+                        @include rwd('md'){
+                            text-align: center;
+                            margin-right: 20px;
+                        }
+                        @include rwd('sm'){
+                            margin-right: 5px;
+                        }
                         i{
                             font-size: 16px;
                         }
-
                         &:last-child{
                             margin-left: auto;
                             margin-right: 0px;
                         }
                     }
-
-                    @include rwd('sm'){
-                        margin: 0;
-                        position: absolute;
-                        left: 50%;
-                        bottom: 0;
-                        transform: translate(-50%, -50%);
-                        white-space: nowrap;
-                        li{
-                            margin-right: 15px;
+                    span {
+                        @include rwd('sm'){
+                            font-size: 14px;
                         }
                     }
                 }
@@ -300,7 +329,7 @@
                 align-self: center;
 
                 @include rwd('sm'){
-                    margin: 15px auto 0;
+                    width: 100%;
                 }
 
                 img{
@@ -313,7 +342,7 @@
     }
     .pagination{
         margin-top: 25px;
-
+        margin-bottom: 0px;
         .pagination-dark{
             background-color: $background_color;
             color: $text_color;
