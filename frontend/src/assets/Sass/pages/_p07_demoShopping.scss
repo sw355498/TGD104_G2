@@ -16,7 +16,7 @@
     // border: 1px solid white;
     box-shadow: -3px 3px 5px $text_color;
     border-radius: 10px;
-    height: 70vh;
+    height: 80vh;
     margin: 20px auto;
     overflow: hidden;
     background-color: white;
@@ -138,7 +138,7 @@
     .browser_container{
         overflow-y: scroll;
         width: 100%;
-        height: calc(70vh - 84px);
+        height: calc(80vh - 84px);
         &::-webkit-scrollbar {
             width: 7px;
         }
@@ -230,7 +230,7 @@
         overflow-y: scroll;
         overflow-x: hidden;
         width: 100%;
-        height: calc(70vh - 84px);
+        height: calc(80vh - 84px);
         &::-webkit-scrollbar {
             width: 7px;
         }
@@ -262,7 +262,7 @@
             // 手機上的樣式 428px
             max-width: 350px;
             // 高度扣掉上下的tool區
-            height: calc(70vh - 88px - 86px);
+            height: calc(80vh - 88px - 86px);
         }
     }
 
