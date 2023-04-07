@@ -115,7 +115,7 @@
               </div>
               <!-- 會員資訊end -->
               <!-- 會員活躍度 -->
-              <div class="counter col-lg-6 align-self-end">
+              <div class="counter col-lg-7 align-self-lg-end align-self-md-center">
                 <div class="row">
                   <div class="col-6 col-lg-3">
                     <div class="count-data text-center">
@@ -171,7 +171,7 @@
                             active: active_tab == tab_index,
                           }"
                           @click="changeTab(tab_index)"
-                          >{{ tab.label }}</a
+                          ><span class="disIcon"><i :class="tab.icon"></i></span><span class="disText">{{ tab.label }}</span></a
                         >
                       </li>
                     </ul>
@@ -220,22 +220,27 @@ export default {
         {
           label: "發文清單",
           component: postList,
+          icon: "fa-regular fa-newspaper",
         },
         {
           label: "留言清單",
           component: replyList,
+          icon: "fa-regular fa-message",
         },
         {
           label: "可疑網站回報",
           component: urlList,
+          icon: "fa-solid fa-bullhorn",
         },
         {
           label: "收藏列表",
           component: collectList,
+          icon: "fa-regular fa-bookmark",
         },
         {
           label: "我的檢舉",
           component: reportList,
+          icon: "fa-solid fa-circle-exclamation",
         },
       ],
     };
