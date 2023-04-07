@@ -20,7 +20,9 @@
             z-index: 1001;
             position: absolute;
             width: 500px;
-            left: 25%;
+            left: 0;
+            right: 0;
+            margin: auto;
             top: 50%;
             padding: 20px 30px;
             background-color: $background_color;
@@ -31,13 +33,11 @@
             border-radius: 5px;
             @include rwd('md'){
                 width: 80%;
-                left: 10%;
               }
             @include rwd('sm'){
                 width: 90%;
                 margin: 0 auto;
                 padding: 20px 10px;
-                left: 5%;
               }
             .userLogin_modal_body {
                 margin: 20px 0 0;
