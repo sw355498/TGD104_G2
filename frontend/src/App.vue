@@ -16,7 +16,7 @@
         </div>
       </nav>
       <router-view></router-view>
-      <div id="particles-js"></div>
+      <div id="particles-js" v-if="$route.path === '/'"></div>
 </template>
 <script>
 import particlesJs from "particles.js";
