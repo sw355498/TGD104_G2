@@ -105,8 +105,8 @@
             <!-- ======== 外掛 jsGrid ========= -->
             <div id="jsGrid"></div>
         </section>
-        <frontFooter />
     </main>
+    <frontFooter />
 </template>
 
 <script>

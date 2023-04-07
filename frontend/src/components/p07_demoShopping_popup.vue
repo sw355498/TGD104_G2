@@ -10,7 +10,7 @@
                 <div class="down">
                     <button @click="$emit('close')">無情跳過</button>
                     <span>0 / 7</span>
-                    <button @click="showNextStep();">開始導覽</button>
+                    <button @click="showNextStep();" style="background-color: #13e5f2;">開始導覽</button>
                 </div>
                 <div class="clost-bg" @click="$emit('close')" style="z-index: -100;"></div>
             </div>
@@ -123,7 +123,7 @@ export default {
     const disableBackgroundScroll = () => {
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
-        document.body.style.top = '-10vh';
+        document.body.style.top = '-20vh';
         document.body.style.width = '100%';
     }
     const ableBackgroundScroll = () => {

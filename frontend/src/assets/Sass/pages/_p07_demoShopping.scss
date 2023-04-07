@@ -259,7 +259,7 @@
         }
         @include rwd('sm'){
             // 手機上的樣式 428px
-            max-width: 350px;
+            // max-width: 350px;
             // 高度扣掉上下的tool區
             height: calc(80vh - 88px - 86px);
         }
