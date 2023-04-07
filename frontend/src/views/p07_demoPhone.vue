@@ -12,13 +12,13 @@
         <div class="robot_p07_demoPhone_phone">
           <!-- 機器人svg -->
           <div class="talk-bubble tri-right round right-in">
+            <!-- 機器人 talk bubble -->
             <div class="talktext">
               <p class="">準備開始進入惡意的詐騙集團來電話體驗</p>
               <button class="small_button">我已準備好</button>
             </div>
           </div>
           <svg><use xlink:href="#robot" /></svg>
-          <!-- 機器人 talk bubble -->
         </div>
         <!-- 電話顯示區 -->
         <div class="phoneLayout_p07_demoPhone_phone">

@@ -64,6 +64,7 @@
           bottom: auto;
           border: 12px solid;
           border-color: $text_color transparent transparent $text_color;
+          display: none;
         }
         /* talk bubble contents */
         .talktext {
@@ -84,20 +85,19 @@
         svg {
           position: absolute;
           top: -8%;
-          max-width: 100px;
+          right: 10%;
+          max-width: 90px;
           @include rwd(sm) {
-            max-width: 90px;
             top: 0%;
             left: 85%;
             max-width: 90px;
-            height: 90px;
           }
         }
       }
 
       .phoneLayout_p07_demoPhone_phone {
         position: relative;
-        grid-area: 1/5 / last-line/9;
+        grid-area: 1/4 / last-line/9;
         min-height: 400px;
         @include rwd(md) {
           grid-area: 2/4/4/10;
@@ -123,8 +123,8 @@
           z-index: 1;
           border-radius: 30px;
           @include rwd(sm) {
-            max-width: 270px;
-            top: 3.5%;
+            max-width: 271px;
+            top: 3%;
             left: 12%;
           }
         }
@@ -137,8 +137,8 @@
           justify-self: start;
         }
         @include rwd(sm) {
-          display: none;
-          // grid-area: 2/3/3/5;
+          // display: none;
+          grid-area: 2/2/3/5;
         }
         svg:first-child {
           max-width: 100px;
