@@ -10,12 +10,10 @@
 }
 .popup_p07_demoShopping_arrow{
     position: absolute;
-    margin: 0 auto;
-    top: -80%;
-    left: -10%;
+    // margin: 0 auto;
+    // top: -22vh;
+    // left: 20vw;
     // transform: translate(-50%, 0%);
-    // outline: 1px solid red;
-    // z-index: -1;
     @include rwd('lg'){
     // 電腦上的樣式 lg: 1200px
     }
@@ -28,8 +26,8 @@
     // 手機上的樣式sm: 428px
     }
     .fa-arrow-up{
-        font-size: 200px;
-        rotate: -45deg;
+        font-size: 130px;
+        // rotate: -45deg;
         color: #08171E;
         text-shadow: 0px 0px 10px white;
     }
@@ -41,7 +39,6 @@
     box-shadow: 0px 0px 10px white;
     padding: 10px;
     margin: 200px auto;
-
     @include rwd('md') {
         // 平板上的樣式md: 768px
         width: 330px;

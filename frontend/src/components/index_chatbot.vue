@@ -20,24 +20,31 @@
                     <p>你好！</p>
                 </div>
                 <div class="chatbot_message_default">
-                    <p>趕快來看看有哪些最新消息吧</p>
+                    <p>趕快來看看政府公告哪些最新消息吧！</p>
                 </div>
                 <div class="chatbot_news_container">
                     <a class="chatbot_news_item" href="">
-                        <span>最新消息</span>
-                        <p>請注意近期詐騙集團假冒CACO客服解除分期付款詐騙</p>
+                        <!-- <span>新聞快訊</span> -->
+                        <p>故意輸入錯誤密碼3次可救回自己的錢?-這是網路謠言，請勿相信</p>
+                        <span style="display: block; font-size: 14px;">2023-03-20</span>
+                        <span>警政署</span>
                     </a>
                     <a class="chatbot_news_item" href="">
-                        <span>最新消息</span>
+                        <!-- <span>最新消息</span> -->
                         <p>假冒銀行信用貸款簡訊</p>
+                        <span style="display: block;font-size: 14px;">2023-03-20</span>
+                        <span>警政署</span>
                     </a>
                     <a class="chatbot_news_item" href="">
-                        <span>最新消息</span>
+                        <!-- <span>最新消息</span> -->
                         <p>請注意近期詐騙集團假冒「民宿、旅店、露營區」客服解除分期付款詐騙</p>
+                        <span style="display: block;font-size: 14px;">2023-03-20</span>
+                        <span>警政署</span>
                     </a>
                     <a class="chatbot_news_item" href="">
-                        <span>最新消息</span>
                         <p>假冒銀行信用貸款簡訊</p>
+                        <span style="display: block;font-size: 14px;">2023-03-20</span>
+                        <span>警政署</span>
                     </a>
                 </div>
             </div>

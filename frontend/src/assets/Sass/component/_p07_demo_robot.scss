@@ -3,16 +3,17 @@
     position: relative;
     position: absolute;
     bottom: -18vh;
+    // bottom: -30vh;
     right: 20px;
     // width: 100%;
     direction: rtl;
     // outline: 1px solid red;
+    z-index: 200;
 }
 .demoRobot_message{
     direction: ltr;
     width: 200px;
-    // display: inline-block;
-    background-color: white;
+    // background-color: white;
     background-color: #d6eeff;
     box-shadow: 0 0 5px $background_color;
     // height: 187px;

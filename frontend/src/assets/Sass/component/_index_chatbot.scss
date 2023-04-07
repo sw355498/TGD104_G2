@@ -93,21 +93,24 @@
         cursor: grab;
         .chatbot_news_item {
           min-width: 180px;
-          min-height: 180px;
-          background-color: $sec_color;
+          min-height: 150px;
+          // background-color: $sec_color;
+          background-image: linear-gradient(to top, #033159 0%, #216bac 100%);
           margin: 20px 10px;
           padding: 20px;
           border-radius: 20px;
           box-shadow: 0px 1px 5px black;
           span {
-            font-size: 30px;
-            text-align: center;
-            display: block;
             color: white;
-            font-weight: 800;
+            font-size: 12px; 
+            text-align: left; 
+            font-weight: 100;
           }
           p {
-            font-weight: 100;
+            font-weight: 500;
+            font-size: 18px;
+            min-height: 80px;
+            @include text_overflow_many(3);
           }
         }
       }

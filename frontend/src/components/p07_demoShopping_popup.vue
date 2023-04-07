@@ -17,9 +17,12 @@
             <!-- step 1 -->
             <div v-if="showStep === 1" class="popup_p07_demoShopping_textArea">
                 <!-- 箭頭 -->
-                <!-- <div class="popup_p07_demoShopping_arrow">
+                <div class="popup_p07_demoShopping_arrow"
+                    style="top: -135px; left: 30%;"
+                >
                     <i class="fa-solid fa-arrow-up"></i>
-                </div> -->
+                </div>
+                <!-- 框 -->
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
                     <h2>詐騙網站特徵</h2>

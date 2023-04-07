@@ -33,6 +33,7 @@
     box-shadow: -3px 3px 5px $text_color;
     border-radius: 10px;
     height: 80vh;
+    height: 700px;
     margin: 20px auto;
     overflow: hidden;
     background-color: white;
@@ -138,6 +139,7 @@
         overflow-y: scroll;
         width: 100%;
         height: calc(80vh - 84px);
+        height: calc(700px - 84px);
         &::-webkit-scrollbar {
             width: 7px;
         }
@@ -231,6 +233,7 @@
         overflow-x: hidden;
         width: 100%;
         height: calc(80vh - 84px);
+        height: calc(700px - 84px);
         &::-webkit-scrollbar {
             width: 7px;
         }
@@ -262,6 +265,7 @@
             // max-width: 350px;
             // 高度扣掉上下的tool區
             height: calc(80vh - 88px - 86px);
+            height: calc(700px - 88px - 86px);
         }
     }
 
