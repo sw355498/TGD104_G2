@@ -23,14 +23,13 @@
         border-radius: .5rem;
     }
 
-    .level{
-        display: block;        
-        @include rwd(md){
+    .level {
+        display: block;
+
+        @include rwd('md') {
             display: none;
         }
-        @include rwd(sm){
-            display: block;
-        }
+
     }
 
     .card-body {
@@ -38,7 +37,8 @@
         min-height: 1px;
         padding: 1rem;
         text-align: center;
-        .crown{
+
+        .crown {
             color: $main_color;
         }
 
@@ -48,7 +48,39 @@
         }
 
         .nav {
-            padding-top: 15px;
+            @include rwd('sm') {
+                --bs-nav-link-padding-x: 0;
+                }
+            .nav-item{
+                @include rwd('sm') {
+                    flex-shrink: 1;
+                    min-width: 40px;
+                }
+                a{
+                    @include rwd('sm'){
+                    padding: auto;
+                    margin: auto;
+                }
+                }
+                
+            }
+            
+            .disIcon {
+                margin-right: 5px;
+                @include rwd('lg') {
+                    margin: auto;
+                }
+
+            }
+    
+            @include rwd('lg') {
+                flex-wrap: nowrap;
+    
+                .disText {
+                    display: none;
+                }
+            }
+    
         }
 
     }
@@ -109,7 +141,8 @@
 
     .profile-head {
         padding: 15px;
-        .progress-bar{
+
+        .progress-bar {
             background-color: $four_color;
         }
 
@@ -142,22 +175,27 @@
             font-weight: 600;
         }
 
-     
+
     }
-    .nav-link{
+
+    .nav-link {
         color: $four_color;
+
     }
+
+
+
     .counter {
         margin-right: 15px;
     }
 
-    .btn{
+    .btn {
         color: $text_color;
     }
 }
 
 // 會員通知頁面
 
-.bg_notify{
-background-color: $sec_color;
+.bg_notify {
+    background-color: $sec_color;
 }
