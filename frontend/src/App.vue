@@ -71,17 +71,17 @@ export default {
   font-size: 3rem;
   letter-spacing: 0.5rem;
   color: #fff;
-  animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: neon 1.5s ease-in-out infinite alternate;
   // padding: 50px;
 }
-@keyframes neon2 {
+@keyframes neon {
   from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228dff,
-      0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #13e5f2,
+      0 0 70px #13e5f2, 0 0 80px #13e5f2, 0 0 100px #13e5f2, 0 0 150px #13e5f2;
   }
   to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff,
-      0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #13e5f2,
+      0 0 35px #13e5f2, 0 0 40px #13e5f2, 0 0 50px #13e5f2, 0 0 75px #13e5f2;
   }
 }
 </style>
