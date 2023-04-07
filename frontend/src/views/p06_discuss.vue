@@ -29,7 +29,7 @@
 
             <div class="position-relative input_p01_news_searchBar">
             <i
-                class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
+                class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
             ></i>
             <input type="text" placeholder="搜尋文章" />
             </div>
