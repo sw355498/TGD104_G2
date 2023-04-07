@@ -1,0 +1,35 @@
+
+.demoRobot_container{
+    position: relative;
+    position: absolute;
+    bottom: -18vh;
+    right: 10px;
+    // width: 100%;
+    direction: rtl;
+    // outline: 1px solid red;
+}
+.demoRobot_message{
+    direction: ltr;
+    width: 200px;
+    // display: inline-block;
+    background-color: white;
+    background-color: #d6eeff;
+    box-shadow: 0 0 5px $background_color;
+    // height: 187px;
+    border-radius: 10px;
+    padding: 15px;
+    color: $background_color;
+    &::before{
+        content: "";
+        border: 0px solid transparent;
+        border-right: 19px solid #d6eeff;
+        // outline: 1px solid red;
+        position: absolute;
+        bottom: 81px;
+        right: 70px;
+        border-radius: 30px 0px;
+        width: 60px;
+        height: 25px;
+        transform: rotateY( 180deg);
+    }
+}

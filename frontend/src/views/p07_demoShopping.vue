@@ -232,6 +232,7 @@
                     <div class="line"></div>
                 </div>
             </div>
+            <p07_demo_robot/>
         </div>
         <frontFooter />
     </main>
@@ -245,6 +246,7 @@ import frontFooter from "@/components/f_footer.vue";
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
 import p07_demoShopping_cart from "@/components/p07_demoShopping_cart.vue";
 import p07_demoShopping_popup from "@/components/p07_demoShopping_popup.vue";
+import p07_demo_robot from "@/components/p07_robot.vue";
 
 export default {
     name: 'shoppingCart',
@@ -253,7 +255,8 @@ export default {
         frontFooter,
         p07_demo_nav,
         p07_demoShopping_cart,
-        p07_demoShopping_popup
+        p07_demoShopping_popup,
+        p07_demo_robot
     },
     setup(){
         const cart = ref([])

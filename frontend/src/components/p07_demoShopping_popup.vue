@@ -4,22 +4,22 @@
             <div class="beforeTour popup_p07_demoShopping_textArea" v-if="showStep === 0">
                 <i class="fa-solid fa-xmark" @click="$emit('close')" style="z-index: 1;"></i>
                 <div class="top">
-                    <h2>詐騙網站7特點</h2>
+                    <h2>詐騙網站7特徵</h2>
                     <p>快來看看詐騙購物網站通常哪那些特徵吧！</p>
                 </div>
                 <div class="down">
                     <button @click="$emit('close')">無情跳過</button>
                     <span>0 / 7</span>
-                    <button @click="showNextStep(); scrollToStep2()">開始導覽</button>
+                    <button @click="showNextStep();">開始導覽</button>
                 </div>
                 <div class="clost-bg" @click="$emit('close')" style="z-index: -100;"></div>
             </div>
             <!-- step 1 -->
             <div v-if="showStep === 1" class="popup_p07_demoShopping_textArea">
                 <!-- 箭頭 -->
-                <div class="popup_p07_demoShopping_arrow">
+                <!-- <div class="popup_p07_demoShopping_arrow">
                     <i class="fa-solid fa-arrow-up"></i>
-                </div>
+                </div> -->
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
                     <h2>詐騙網站特徵</h2>
@@ -121,7 +121,7 @@ export default {
     const show = ref(false);
     // 禁止背景滾動
     const disableBackgroundScroll = () => {
-        // document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
         document.body.style.top = '-10vh';
         document.body.style.width = '100%';
@@ -130,7 +130,7 @@ export default {
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.top = '';
-        // document.body.style.width = '100%';
+        document.body.style.width = '100%';
     }
     function scrollToStep2() {
       const element = document.getElementById('tour2');
