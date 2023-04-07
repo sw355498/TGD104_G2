@@ -14,12 +14,25 @@
     background-image: url("../img/p03_reportURL/bg.png");
     background-repeat: no-repeat;
     background-size: cover;
+       
+    @include rwd('lg'){
+        // 電腦上的樣式lg: 1200px
+        padding: 0 30px;
+    }
+    
+    @include rwd('md') {
+        padding: 0 20px;
+
+    }
+    @include rwd('sm'){
+        padding: 0 15px;
+
+    }
     // 上面的區塊
     .sectionTop_p03_reportUrl{
         max-width: 1000px;
         margin: 0px auto;
-        padding: 20px 20px 0;
-        padding-top: 20px;
+        // padding: 20px 30px 0;
         text-align: left;
         h1{
             margin: 50px auto;
@@ -146,7 +159,7 @@
     margin: 100px auto;
     text-align: center;
     // outline: 1px solid red;
-    padding: 0 30px;
+    // padding: 0 30px;
     padding-bottom: 100px;
     max-width: 1000px;
     h2{
@@ -162,10 +175,6 @@
     // js grid
     #jsGrid{
         border:0px
-    }
-    @include  rwd('md'){
-        // 平板上的樣式 768px,
-        padding: 20px;
     }
     @include  rwd('sm'){
         // 手機上的樣式 428px,

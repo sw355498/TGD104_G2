@@ -53,17 +53,17 @@
         row-gap: 10px;
         @include rwd(lg) {
           @include indexGrid(1);
-          padding: 0 50px;
+          padding: 0 30px;
         }
         @include rwd(md) {
           // @include indexGrid(1);
           display: block;
-          padding: 0 30px;
+          padding: 0 20px;
         }
         @include rwd(sm) {
           // @include indexGrid(1);
           display: block;
-          padding: 0 10px;
+          padding: 0 15px;
         }
         li {
           list-style: none;
