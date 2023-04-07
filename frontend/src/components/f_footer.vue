@@ -24,11 +24,12 @@ export default {
     const datas = reactive([
       {
         id: `footer_text1`,
-        content: `<p>本網站為緯育TibaMe前端設計工程師班第82期第二組學員專題成果作品</p>`,
+        content: `<p>本網站為緯育TibaMe前端設計工程師班第82期第二組學員專題成果作品，本平台僅供學習、展示之用</p>`,
       },
       {
         id: `footer_text2`,
-        content: `<p>本平台僅供學習、展示之用</p>`,
+        content: `<p>若有抵觸有關著作權，或有第三人主張侵害智慧財產權等情事，均由學員負法律上責任，緯育公司概不負責。</br>
+          若有侵權疑慮，請私訊<a href="https://www.facebook.com/TibaMe" target="_blank"><u> 緯育 TibaMe </u></a>，後續會由專人協助處理。</p>`,
       },
       {
         id: `footer_text3`,
