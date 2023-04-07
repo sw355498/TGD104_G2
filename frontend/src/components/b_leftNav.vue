@@ -39,7 +39,7 @@
     </div>
 </template>
 <script setup>
-    import { ref, defineEmits } from 'vue'
+    import { ref } from 'vue'
 
 
     let id = 0
