@@ -4,6 +4,7 @@
         <frontNavbar />
         <!-- 內文 -->
   <div class="p02_teach">
+    <div class="banner_background"></div>
     <div class="banner_teachFrame">
       <div class="banner_teachtitle h1">
         防範詐騙教學

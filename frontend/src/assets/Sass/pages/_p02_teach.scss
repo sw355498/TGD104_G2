@@ -1,9 +1,15 @@
 .p02_teach{
     background-color: $background_color;
+    .banner_background{
+        height: 315px;
+        background-image: url("../img/p02_teach/teachTop.jpg");
+        background-position: center top;
+        width: 100%;
+        position: absolute;
+        top: 0;
+    }
 .banner_teachFrame {
     height: 235px;
-    background-image: url("../img/p02_teach/teachTop.jpg");
-    background-position: center bottom;
     width: 100%;
     display: flex;
     justify-content: center;
