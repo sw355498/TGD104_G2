@@ -37,6 +37,10 @@ export default {
 };
 </script>
 <style lang="scss">
+  #particles-js{
+    width: 100vw;
+    height: 100vh;
+  }
   .router_block{
     display: flex;
     justify-content: center;
