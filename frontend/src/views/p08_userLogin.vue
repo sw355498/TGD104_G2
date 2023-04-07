@@ -47,8 +47,10 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    },
   },
-};
+}};
 </script>
+
+<style scoped>
+</style>
 

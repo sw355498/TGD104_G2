@@ -1,9 +1,10 @@
 <template>
   <div>
     <!-- navgation -->
-    <frontNavbar />
+    <frontNavbar/>
 
     <div class="p01_news">
+      <div class="banner_background"></div>
       <div class="banner_frame">
         <div class="banner_title h1">
           最新消息
@@ -29,7 +30,7 @@
 
         <div class="position-relative input_p01_news_searchBar">
           <i
-            class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
+            class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
           ></i>
           <input type="text" placeholder="搜尋文章" />
         </div>

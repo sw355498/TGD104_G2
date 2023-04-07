@@ -22,9 +22,10 @@
               </div>
             </div>
           </div>
-          <!-- footer -->
-          <frontFooter />
         </main>
+        
+        <!-- footer -->
+        <frontFooter />
       </template>
 
 <script>

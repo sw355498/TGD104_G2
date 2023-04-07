@@ -1,6 +1,6 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask" @click="$emit('close')">
+    <div>
       <div class="modal-wrapper">
         <div class="modal-container" @click.stop>
           <div class="userLogin_modal_header">
@@ -78,7 +78,9 @@
             </div>
           </div>
         </div>
+        
       </div>
+      <div class="modal-mask" @click="$emit('close')"></div>
     </div>
   </transition>
 </template>
@@ -129,15 +131,17 @@ export default {
     close() {
       this.$emit("close");
     },
-    handleSubmit(){
-      console.log(
-      this.accountValue,
-        this.passwordValue,
-        this.confirmPasswordValue,
-        this.displayNameValue,);
-    }
-  },
+    // handleSubmit(){
+    //   console.log(
+    //   this.accountValue,
+    //     this.passwordValue,
+    //     this.confirmPasswordValue,
+    //     this.displayNameValue,);
+    // },
+
+}
 };
+
 </script>
 
 <style lang="scss" scoped>

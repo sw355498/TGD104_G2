@@ -1,10 +1,19 @@
+.bgi{
+    background-color: $background_color;
+    border: 1px solid red;
+}
 .p01_news {
     background-color: $background_color;
-
+.banner_background{
+    height: 315px;
+    background-image: url("../img/p01_news/newsTop.jpg");
+    background-position: center top;
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
     .banner_frame {
         height: 235px;
-        background-image: url("../img/p01_news/newsTop.jpg");
-        background-position: center bottom;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -27,9 +36,9 @@
                 -webkit-text-stroke: 0.5px #efe4d1;
                 text-stroke: 0.5px #efe4d1;
             }
-        }
+   
 
-        ;
+    }
     }
 
     .tab_p01_newsChoose {
