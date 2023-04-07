@@ -1,6 +1,6 @@
 <template>
     <main class="body_p07_demoShopping">
-        <div class="main_p07_demoShopping">
+        <div class="main_p07_demoShopping" >
 
             <!-- header -->
             <frontNavbar />
@@ -111,7 +111,7 @@
                         </div>
 
                         <!-- 第二紅條廣告詞 -->
-                        <div class="scamWeb_p07_demoShopping_bannerRed"  id="tour6">
+                        <div class="scamWeb_p07_demoShopping_bannerRed" >
                             <p class="scamWeb_p07_demoShopping_bannerRedP1">現在下單免運包郵</p>
                         </div>
 
@@ -185,8 +185,8 @@
                         </ul>
 
                         <!-- 第六紅條廣告詞 -->
-                        <div class="scamWeb_p07_demoShopping_bannerRed scamWeb_p07_demoShopping_bannerRed4 scamWeb_p07_demoShopping_bannerRed6">
-                            <p class="scamWeb_p07_demoShopping_bannerRedP2">立刻下單 免運包郵</p>
+                        <div class="scamWeb_p07_demoShopping_bannerRed scamWeb_p07_demoShopping_bannerRed4 scamWeb_p07_demoShopping_bannerRed6"  id="tour6">
+                            <p class="scamWeb_p07_demoShopping_bannerRedP2">立刻下單 免運包郵 貨到付款 最有保障</p>
                         </div>
 
                         <!-- 購物網站 footer -->
@@ -317,7 +317,7 @@ export default {
                 cart.value.push({ ...product, number: 1 });
             }
         };
-
+        
         // 點擊才出現 =================================================
         const showComponent = ref(false);
         const showModal = ref(true);

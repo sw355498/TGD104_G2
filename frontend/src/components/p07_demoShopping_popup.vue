@@ -1,7 +1,22 @@
 <template>
-    <div class="popup_p07_demoShopping">
+    <div class="popup_p07_demoShopping" v-show="show = true">
         <div class="popup_p07_demoShopping_container">
+            <div class="beforeTour popup_p07_demoShopping_textArea" v-if="showStep === 0">
+                <i class="fa-solid fa-xmark" @click="$emit('close')" style="z-index: 1;"></i>
+                <div class="top">
+                    <h2>詐騙網站7特點</h2>
+                    <p>快來看看詐騙購物網站通常哪那些特徵吧！</p>
+                </div>
+                <div class="down">
+                    <button @click="$emit('close')">無情跳過</button>
+                    <span>0 / 7</span>
+                    <button @click="showNextStep(); scrollToStep2()">開始導覽</button>
+                </div>
+                <div class="clost-bg" @click="$emit('close')" style="z-index: -100;"></div>
+            </div>
+            <!-- step 1 -->
             <div v-if="showStep === 1" class="popup_p07_demoShopping_textArea">
+                <!-- 箭頭 -->
                 <div class="popup_p07_demoShopping_arrow">
                     <i class="fa-solid fa-arrow-up"></i>
                 </div>
@@ -16,6 +31,7 @@
                     <button @click="showNextStep(); scrollToStep2()">{{ steps[0].btnNext }}</button>
                 </div>
             </div>
+            <!-- step 2 -->
             <div v-else-if="showStep === 2" class="popup_p07_demoShopping_textArea">
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
@@ -28,6 +44,7 @@
                     <button @click="showNextStep(); scrollToStep3()">{{ steps[1].btnNext }}</button>
                 </div>
             </div>
+            <!-- step 3 -->
             <div v-else-if="showStep === 3" class="popup_p07_demoShopping_textArea">
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
@@ -40,6 +57,7 @@
                     <button  @click="showNextStep(); scrollToStep4()">{{ steps[2].btnNext }}</button>
                 </div>
             </div>
+            <!-- step 4 -->
             <div v-else-if="showStep === 4" class="popup_p07_demoShopping_textArea">
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
@@ -52,6 +70,7 @@
                     <button  @click="showNextStep(); scrollToStep5()">{{ steps[3].btnNext }}</button>
                 </div>
             </div>
+            <!-- step 5 -->
             <div v-else-if="showStep === 5" class="popup_p07_demoShopping_textArea">
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
@@ -64,6 +83,7 @@
                     <button  @click="showNextStep(); scrollToStep6()">{{ steps[4].btnNext }}</button>
                 </div>
             </div>
+            <!-- step 6 -->
             <div v-else-if="showStep === 6" class="popup_p07_demoShopping_textArea">
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
@@ -76,6 +96,7 @@
                     <button  @click="showNextStep(); scrollToStep7()">{{ steps[5].btnNext }}</button>
                 </div>
             </div>
+            <!-- step 7 -->
             <div v-else-if="showStep === 7" class="popup_p07_demoShopping_textArea">
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
                 <div class="top">
@@ -93,15 +114,31 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref , onMounted,onUnmounted } from 'vue';
 
 export default {
   setup() {
     const show = ref(false);
+    // 禁止背景滾動
+    const disableBackgroundScroll = () => {
+        // document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-10vh';
+        document.body.style.width = '100%';
+    }
+    const ableBackgroundScroll = () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        // document.body.style.width = '100%';
+    }
     function scrollToStep2() {
       const element = document.getElementById('tour2');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+        // document.body.style.position = 'fixed';
+        // document.body.style.top = '-100px';
+        // document.body.style.width = '100%';
       }
     }
     function scrollToStep3() {
@@ -178,7 +215,7 @@ export default {
             btnNext: '結束導覽',
         },
     ])
-    const showStep = ref(1);
+    const showStep = ref(0);
 
     function showNextStep() {
     showStep.value += 1;
@@ -187,7 +224,13 @@ export default {
     function showPrevStep() {
     showStep.value -= 1;
     }
-
+    // 開啟 Modal 時禁止背景滾動
+    onMounted(() => {
+        disableBackgroundScroll()
+    })
+    onUnmounted(() => {
+        ableBackgroundScroll()
+    })
     return {
         scrollToStep2,
         scrollToStep3,
