@@ -1,23 +1,37 @@
-.bgi{
-    background-color: $background_color;
-    border: 1px solid red;
-}
 .p01_news {
     background-color: $background_color;
-.banner_background{
-    height: 315px;
-    background-image: url("../img/p01_news/newsTop.jpg");
-    background-position: center top;
-    width: 100%;
-    position: absolute;
-    top: 0;
-}
+    box-sizing: border-box;
+
+    @include rwd('lg') {
+        // 電腦上的樣式lg: 1200px
+        padding: 0 30px;
+    }
+
+    @include rwd('md') {
+        padding: 0 20px;
+
+    }
+
+    @include rwd('sm') {
+        padding: 0 15px;
+
+    }
+
     .banner_frame {
         height: 235px;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        .banner_background {
+            height: 315px;
+            background-image: url("../img/p01_news/newsTop.jpg");
+            background-position: center top;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
 
         .banner_title {
             color: $text_color;
@@ -28,7 +42,7 @@
             .banner_title_en {
                 position: absolute;
                 font-weight: 700;
-                top:50%;
+                top: 50%;
                 left: 50%;
                 transform: translate(-50%, -77%);
                 font-size: 100px;
@@ -36,32 +50,35 @@
                 -webkit-text-stroke: 0.5px #efe4d1;
                 text-stroke: 0.5px #efe4d1;
             }
-   
 
-    }
+
+        }
     }
 
     .tab_p01_newsChoose {
         max-width: 1200px;
         margin: 10px auto;
-        padding-left: 15px;
+        // padding-left: 15px;
         color: $text_color;
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid $text_color;
+        @include rwd('md'){
+            flex-direction: column;
+        }
 
         @include rwd('sm') {
             flex-wrap: wrap;
-            border-bottom:0;
         }
 
         .tab_p01_news_category {
             display: flex;
             padding: 20px 0;
-
+            
             @include rwd('md') {
-                padding: 0 20px 0 0;
+                // padding: 0 20px 0 0;
                 order: 2;
+                
             }
 
             @include rwd('sm') {
@@ -75,7 +92,7 @@
                     display: flex;
                     height: 42px;
                     margin-top: 11px;
-                    width: 4 00px;
+                    // width: 4 00px;
                 }
 
                 @include rwd('sm') {
@@ -85,14 +102,20 @@
             }
 
             .wide_tab {
-                display: block;
-
-                @include rwd('md') {
-                    display: none;
+                flex-basis: 550px;
+                // @include rwd('md') {
+                //     display: none;
+                // }
+                @include rwd('sm') {
+                    width: max-content;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    overflow-x: auto;
                 }
 
                 a {
                     padding: 0 5px;
+                    box-sizing: border-box;
                     text-decoration: none;
                     color: $text_color;
 
@@ -111,17 +134,19 @@
         }
 
         .input_p01_news_searchBar {
-            margin: 11px 15px 11px 0;
+            margin: 11px 0;
             // box-sizing: border-box;
             // background-color: $four_color;
             border-radius: 5px;
-            i{
+
+            i {
                 color: $sec_color;
             }
 
             @include rwd('md') {
-                margin-right: 20px;
+                margin: auto 0;
                 box-sizing: border-box;
+                
             }
 
             @include rwd('sm') {
@@ -149,7 +174,7 @@
     .ul_p01_newsPost {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 15px 50px;
+        padding: 0 0 50px;
 
         .li_p01_newsPost {
             border-bottom: 1px solid $text_color;
@@ -170,10 +195,12 @@
                     overflow: hidden;
                     flex-grow: 1;
                     flex-shrink: 0;
+
                     @include rwd('md') {
                         width: 75%;
                         height: 250px;
                     }
+
                     @include rwd('sm') {
                         height: auto;
                     }
@@ -196,6 +223,7 @@
                     padding-left: 15px;
                     color: $text_color;
                     width: 100%;
+
                     @include rwd('md') {
                         padding-left: 0;
                         margin-top: 20px;
@@ -219,14 +247,13 @@
                             display: flex;
                             flex-basis: 135px;
                             flex-shrink: 0;
+
                             @include rwd('md') {
                                 display: none;
                             }
-                
-                            @include rwd('sm') {
 
-                            }
-                           
+                            @include rwd('sm') {}
+
                             a {
                                 padding: 0 6px;
                                 text-decoration: none;
@@ -265,7 +292,8 @@
                         -webkit-box-orient: vertical;
                         white-space: normal;
                         font-weight: 200;
-                        &:after{
+
+                        &:after {
                             content: 'more';
                             margin: 7px 15px;
                             display: block;
@@ -275,7 +303,8 @@
                             opacity: .5;
                             letter-spacing: 0;
                         }
-                        &:hover:after{
+
+                        &:hover:after {
                             content: 'more⇀';
                             margin: 7px 0;
                             display: block;
@@ -285,7 +314,7 @@
                             letter-spacing: 2px;
                         }
                     }
-                    
+
 
                 }
             }
@@ -308,6 +337,7 @@
     margin: 0 auto;
     color: $text_color;
     padding-top: 50px;
+
     @include rwd('md') {
         width: 90%;
     }

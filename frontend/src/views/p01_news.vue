@@ -4,8 +4,9 @@
     <frontNavbar/>
 
     <div class="p01_news">
-      <div class="banner_background"></div>
+      
       <div class="banner_frame">
+        <div class="banner_background"></div>
         <div class="banner_title h1">
           最新消息
           <div class="banner_title_en">NEWS</div>
@@ -14,12 +15,12 @@
 
       <div class="tab_p01_newsChoose">
         <div class="tab_p01_news_category">
-          <select name="" id="" class="form-select form-select-md">
+          <!-- <select name="" id="" class="form-select form-select-md">
             <option selected>所有文章</option>
             <option value="">網站詐騙</option>
             <option value="">交友詐騙</option>
             <option value="">金融詐騙</option>
-          </select>
+          </select> -->
           <div class="wide_tab">
             <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
               href="#"
