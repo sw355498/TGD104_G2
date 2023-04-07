@@ -9,13 +9,19 @@
     display: table;
     transition: opacity 0.3s ease;
 
+}
+
     .modal-wrapper {
         display: table-cell;
         vertical-align: middle;
-
+        // position: relative;
+        
         .modal-container {
+            z-index: 1001;
+            position: absolute;
             width: 500px;
-            margin: 0px auto;
+            left: 25%;
+            top: 50%;
             padding: 20px 30px;
             background-color: $background_color;
             border-radius: 2px;
@@ -23,7 +29,16 @@
             transition: all 0.3s ease;
             color: $text_color;
             border-radius: 5px;
-
+            @include rwd('md'){
+                width: 80%;
+                left: 10%;
+              }
+            @include rwd('sm'){
+                width: 90%;
+                margin: 0 auto;
+                padding: 20px 10px;
+                left: 5%;
+              }
             .userLogin_modal_body {
                 margin: 20px 0 0;
             }
@@ -44,10 +59,12 @@
                 background-color: none;
 
             }
+
         }
 
     }
-}
+
+
 
 
 /*
@@ -65,6 +82,7 @@
 .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+
 }
 
 .hr_p08_user_login {
