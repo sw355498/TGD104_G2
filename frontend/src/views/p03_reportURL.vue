@@ -121,6 +121,8 @@ export default {
         frontFooter,
     },
     mounted() {
+         // 需要过滤的列
+        var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
         var website = [
             { "回報日期": "2023-03-19", "回報狀態": "待審核", "網站名稱": "-", "網址": "https://cesare.asia/6",  },
             { "回報日期": "2023-03-19", "回報狀態": "非詐騙網站", "網站名稱": "google", "網址": "https://www.google.com.tw/?hl=zh_TW",  },
@@ -138,14 +140,26 @@ export default {
             { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
 
         ];
+         // set数组
+        var arr = []
+        for (var i = 0; i < filterColumn.length; i++) {
+            arr[i] = new Set()
+            // 下拉框的默认值为" "
+            arr[i].add(" ")
+        };
+        // set用来去重，即找出所有可能出现的筛选条件
+        for (var i = 0; i < website.length; i++) {
+            arr[0].add(website[i].Name)
+            arr[1].add(website[i].Country)
+        };
+
         $("#jsGrid").jsGrid({
             width: "100%",
-            // height: "600px",
-            // filtering: true,
+            filtering: true,
             inserting: false,
             editing: false,
             sorting: true,
-            
+
             /*分頁設定*/
             paging: true,
             pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
@@ -159,7 +173,7 @@ export default {
             pageLastText: "最後一頁",   //尾頁
             pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
             pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
-
+            
             data: website,
             fields: [
                 { name: "ID", css: "d-none", validate: "required",},
@@ -167,10 +181,35 @@ export default {
                 { name: "回報狀態", type: "text",   width: 100, },
                 { name: "網站名稱", type: "text", width: 100 },
                 { name: "網址", type: "text", width: 200 },
-                
             ],
+            // 過濾 filtering
+            controller: {
+                data: website,
+                loadData: function (filter) {
+                    return this.data.filter(function (item) {
+                        // 声明返回数组的长度
+                        var flags = new Array(filterColumn.length)
+                        // 三个筛选条件（true,true,true）
+                        flags.fill(true)
+                        for (var i = 0; i < filterColumn.length; i++) {
+                            var key = filterColumn[i]
+                            // 过滤掉默认值" "
+                            if (filter[key] !== " ") {
+                                /*
+                                (item[key].indexOf(filter[key]) > -1)表示只要包含某一部分字段，就为true
+                                例如目标列为：911-5143 Luctus Ave
+                                输入：911
+                                也可以找到这一行
+                                 */
+                                flags[i] = (item[key].indexOf(filter[key]) > -1)
+                            }
+                        }
+                        // 返回的数组里面的元素必须都为true
+                        return flags.indexOf(false) === -1
+                    });
+                },
+            }
         });
-
-  },
+    },
 };
 </script>
