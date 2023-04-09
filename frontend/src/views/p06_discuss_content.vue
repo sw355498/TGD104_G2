@@ -2,7 +2,22 @@
     <div>
         <!-- navgation -->
         <frontNavbar />
-             
+        <Teleport to="body">
+            <modal :show="showModal" @close="showModal = false">
+            <template #header>
+                <div v-html="modalContent"></div>
+            </template>
+            <template #body>
+                <textarea rows="" cols=""></textarea>
+            </template>
+            <template>
+                <button
+                    class="modal-default-button"
+                    @click="$emit('close')"
+                >送出</button>    
+            </template>
+            </modal>
+        </Teleport>
         <main class="wrapper_p06_discuss_content">
             <ul class="breadcrumb-list text_title">
                 <li><router-link to="/index">首頁</router-link></li>
@@ -56,7 +71,7 @@
             <article class="articleMessage_p06_discuss">
                 <div class="topBlock_p06_discuss">
                     <h3>共<span>2</span>則 留言</h3>
-                    <button class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
+                    <button id="show-modal" @click="showModal = true, modalContent = '<h3>我要留言</h3>' " class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
                 </div>
                 <div class="messageList" v-for="(message, index) in messages" :key="index">
                     <div v-for="(item, index) in message" :key="index">
@@ -80,7 +95,7 @@
                                         <i class="fa-solid fa-clock fa-fw"></i>
                                         <span>{{item.time}}</span>
                                     </li>
-                                    <li class="iconHover">
+                                    <li id="show-modal" @click="showModal = true, modalContent = '<h3>回覆</h3>'" class="iconHover">
                                         <i class="fa-solid fa-reply fa-solid"></i>
                                         <span>回覆</span>
                                     </li>
@@ -147,12 +162,16 @@
     import { ref } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
+    import Modal from '@/components/modal.vue'
     export default {
         components: {
             frontNavbar,
             frontFooter,
+            Modal,
         },
         setup(){
+            const modalContent = ref('')
+            const showModal = ref(false)
             const messages = ref([
                 [
                     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
@@ -164,8 +183,10 @@
             ])
             return{
                 messages,
+                showModal,
                 frontNavbar,
                 frontFooter,
+                Modal,
             }
         }
     }

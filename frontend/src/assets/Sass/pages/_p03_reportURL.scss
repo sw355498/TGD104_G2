@@ -174,7 +174,11 @@
    
     // js grid
     #jsGrid{
-        border:0px
+        border:0px;
+        .jsgrid-grid-header,
+        .jsgrid-grid-body {
+            overflow-y: hidden;
+        }
     }
     @include  rwd('sm'){
         // 手機上的樣式 428px,

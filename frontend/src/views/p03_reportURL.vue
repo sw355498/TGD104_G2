@@ -121,6 +121,8 @@ export default {
         frontFooter,
     },
     mounted() {
+         // 需要 filtering 的欄位
+        var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
         var website = [
             { "回報日期": "2023-03-19", "回報狀態": "待審核", "網站名稱": "-", "網址": "https://cesare.asia/6",  },
             { "回報日期": "2023-03-19", "回報狀態": "非詐騙網站", "網站名稱": "google", "網址": "https://www.google.com.tw/?hl=zh_TW",  },
@@ -138,39 +140,83 @@ export default {
             { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
 
         ];
-        $("#jsGrid").jsGrid({
-            width: "100%",
-            // height: "600px",
-            // filtering: true,
-            inserting: false,
-            editing: false,
-            sorting: true,
-            
-            /*分頁設定*/
-            paging: true,
-            pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
-            pageIndex: 1,   //當前頁面數
-            pageSize: 10,   //頁面的數據量
-            pageButtonCount: 3,    //最大數量的頁面按鈕
-            pagerFormat: "{first} {pages} {last} &nbsp;&nbsp; ", //占位符來指定分頁欄格式
-            //pageNextText: "Next",   //下一頁
-            //pagePrevText: "Prev",   //上一頁
-            pageFirstText: "首頁", //首頁
-            pageLastText: "最後一頁",   //尾頁
-            pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
-            pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
+        // filtering 下拉框 =============
+        var arr = []
+        for (var i = 0; i < filterColumn.length ; i++) {
+            arr[i] = new Set()
+            // 下拉框的預設為空" "
+            arr[i].add(" ")
+        };
+        for (var i = 0; i < website.length; i++) {
+            arr[0].add(website[i].回報狀態)
+        };
+        var statusURL = []
+        for (var i of arr[0]) {
+            statusURL.push({
+                回報狀態: i
+            })
+        }
+        function setGrid() {
+            $("#jsGrid").jsGrid({
+                width: "100%",
+                filtering: true,
+                inserting: false,
+                editing: false,
+                sorting: true,
 
-            data: website,
-            fields: [
-                { name: "ID", css: "d-none", validate: "required",},
-                { name: "回報日期", type: "text", width: 100, validate: "required" },
-                { name: "回報狀態", type: "text",   width: 100, },
-                { name: "網站名稱", type: "text", width: 100 },
-                { name: "網址", type: "text", width: 200 },
+                /*分頁設定*/
+                paging: true,
+                pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
+                pageIndex: 1,   //當前頁面數
+                pageSize: 10,   //頁面的數據量
+                pageButtonCount: 3,    //最大數量的頁面按鈕
+                pagerFormat: "{first} {pages} {last} &nbsp;&nbsp; ", //占位符來指定分頁欄格式
+                //pageNextText: "Next",   //下一頁
+                //pagePrevText: "Prev",   //上一頁
+                pageFirstText: "首頁", //首頁
+                pageLastText: "最後一頁",   //尾頁
+                pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
+                pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
                 
-            ],
-        });
-
-  },
+                loadMessage: "全速載入中，感謝耐心等候...",
+                data: website,
+                fields: [
+                    { name: "ID", css: "d-none", validate: "required",},
+                    { name: "回報日期", type: "text", width: 100, validate: "required" },
+                    // { name: "回報狀態", type: "text",   width: 100, },
+                    { name: "回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
+                    { name: "網站名稱", type: "text", width: 100 },
+                    { name: "網址", type: "text", width: 200 },
+                ],
+                // 過濾 filtering
+                controller: {
+                    data: website,
+                    loadData: function (filter) {
+                        return this.data.filter(function (item) {
+                            var flags = new Array(filterColumn.length)
+                            // 篩選欄位都給（true）
+                            flags.fill(true)
+                            for (var i = 0; i < filterColumn.length; i++) {
+                                var key = filterColumn[i]
+                                // 過濾掉下拉選單的預設值 空" "
+                                if (filter[key] !== " ") {
+                                    /*
+                                    (item[key].indexOf(filter[key]) > -1)表示只要包含某一部分字段，就为true
+                                    例如目标列为：911-5143 Luctus Ave
+                                    输入：911
+                                    也可以找到这一行
+                                    */
+                                    flags[i] = (item[key].indexOf(filter[key]) > -1)
+                                }
+                            }
+                            // 返回的数组里面的元素必须都为true
+                            return flags.indexOf(false) === -1
+                        });
+                    },
+                }
+            });
+        }
+        setGrid();
+    },
 };
 </script>
