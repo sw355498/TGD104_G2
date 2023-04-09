@@ -3,7 +3,7 @@ node_modules
 /dist
 src/assets/Sass/css/
 package-lock.json
-/src/api/getConn.php
+/src/api/getConn_nopush.php
 
 
 # local env files
