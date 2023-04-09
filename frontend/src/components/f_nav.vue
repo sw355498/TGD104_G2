@@ -178,10 +178,12 @@ export default {
   methods: {
     showModal() {
       this.isModalVisible = true;
+      document.body.classList.add("modal-open");
     },
     closeModal() {
       this.isModalVisible = false;
-    },
+      document.body.classList.remove("modal-open");
+  },
   },
 };
 </script>
