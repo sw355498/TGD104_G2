@@ -10,6 +10,12 @@
             <template #body>
                 <textarea rows="" cols=""></textarea>
             </template>
+            <template>
+                <button
+                    class="modal-default-button"
+                    @click="$emit('close')"
+                >送出</button>    
+            </template>
             </modal>
         </Teleport>
         <main class="wrapper_p06_discuss_content">

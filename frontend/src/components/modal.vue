@@ -15,10 +15,7 @@
         </div>
 
         <div class="modal-footer">
-            <button
-              class="modal-default-button"
-              @click="$emit('close')"
-          >送出</button>
+        
         </div>
       </div>
     </div>
