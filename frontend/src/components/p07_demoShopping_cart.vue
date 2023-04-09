@@ -2,7 +2,7 @@
 <div class="cart_container_p07_demoShopping">
     <div class="cart_item_p07_demoShopping" v-if="!show">
         <!-- title -->
-        <div class="title" >
+        <div class="title_p07_demoShopping" >
             <p>您的購物車</p>
             <p>( {{cart.length}} )</p>
         </div>
