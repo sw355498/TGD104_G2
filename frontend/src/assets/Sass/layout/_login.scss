@@ -1,3 +1,6 @@
+body.modal-open {
+    overflow: hidden;
+  }
 .modal-mask {
     position: fixed;
     z-index: 1000;
@@ -15,7 +18,8 @@
         display: table-cell;
         vertical-align: middle;
         // position: relative;
-        
+        // overflow-y: initial;
+        overflow: hidden;
         .modal-container {
             z-index: 1001;
             position: absolute;
@@ -31,6 +35,14 @@
             transition: all 0.3s ease;
             color: $text_color;
             border-radius: 5px;
+            max-height: 90vh;
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+            overflow-y: scroll;
+            &::-webkit-scrollbar { 
+                display: none;  /* Safari and Chrome */
+            }
+            
             @include rwd('md'){
                 width: 80%;
               }
@@ -63,9 +75,6 @@
         }
 
     }
-
-
-
 
 /*
    * The following styles are auto-applied to elements with
