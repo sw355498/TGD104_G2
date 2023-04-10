@@ -263,3 +263,12 @@
         }
     }
 }
+.modal_textarea_p06{
+    width: 100%;
+    height: 200px;
+    padding:10px;
+    resize:none;
+    @include rwd('sm'){
+        height: 100px;
+    }
+}

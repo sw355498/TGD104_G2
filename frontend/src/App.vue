@@ -1,13 +1,15 @@
 <template>
   <nav v-if="$route.path === '/'">
-    <div class="title">詐知就好</div>
-    <div class="router_block">
-      <router-link to="/index" class="router_item">
-        <div>進入前台</div>
-      </router-link>
-      <router-link to="/b_index" class="router_item">
-        <div>進入後台</div>
-      </router-link>
+    <div class="app_content_block">
+      <div class="title">詐知就好</div>
+      <div class="router_block">
+        <router-link to="/index" class="router_item">
+          <div>進入前台</div>
+        </router-link>
+        <router-link to="/b_index" class="router_item">
+          <div>進入後台</div>
+        </router-link>
+      </div>
     </div>
   </nav>
   <router-view></router-view>
@@ -32,48 +34,54 @@ export default {
 };
 </script>
 <style lang="scss">
-#particles-js {
-  width: 100vw;
-  height: 100vh;
-}
-.router_block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 25px;
-  row-gap: 25px;
-  flex-wrap: wrap;
+.app_content_block{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.router_item {
-  padding: 80px;
-  background: rgba($color: #13e5f2, $alpha: 0.5);
-  color: #fff;
-  font-size: 2rem;
-
-  &hover {
-    background: rgba($color: #13e5f2, $alpha: 1);
-  }
-  div {
-    width: 130px;
+  
+  .title {
     text-align: center;
+    margin-bottom: 20px;
+    font-size: 3rem;
+    letter-spacing: 0.5rem;
+    color: #fff;
+    animation: neon 1.5s ease-in-out infinite alternate;
+  }
+  
+  .router_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 25px;
+    row-gap: 25px;
+    flex-wrap: wrap;
+  
+    .router_item {
+      padding: 80px;
+      background: rgba($color: #13e5f2, $alpha: 0.5);
+      color: #fff;
+      font-size: 2rem;
+  
+      &hover {
+        background: rgba($color: #13e5f2, $alpha: 1);
+          
+        div {
+          width: 130px;
+          text-align: center;
+        }
+      }
+    }
   }
 }
-
-.title {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  letter-spacing: 0.5rem;
-  color: #fff;
-  animation: neon 1.5s ease-in-out infinite alternate;
-  // padding: 50px;
+#particles-js {
+  width: 100vw;
+  height: 100vh;
 }
+
+
+
+
 @keyframes neon {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #13e5f2,
