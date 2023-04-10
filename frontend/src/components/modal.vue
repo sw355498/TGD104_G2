@@ -1,6 +1,6 @@
 <template>
   <Transition name="modal">
-    <div v-if="show" class="modal-mask">
+    <div v-if="show" class="layout-modal-mask">
       <div class="modal-container">
         <div class="modal-header">
           <slot name="header">default header</slot>
