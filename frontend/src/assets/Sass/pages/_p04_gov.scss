@@ -141,12 +141,6 @@
                     padding-right: 40px;
                 }
                 a{
-                    &:last-child{
-                        position: absolute;
-                        right: 0%;
-                        top: 50%;
-                        transform: translate(-50%, -50%);                          
-                    }
                     h6{
                         color: $sec_color;
                         font-size: 18px;
@@ -157,6 +151,12 @@
                             line-height: 40px;
                         }
                     }
+                }
+                .div_p04_gov_openShareButton{
+                    position: absolute;
+                    right: 0%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
                     i{
                         color: $sec_color;
                         font-size: 24px;
@@ -164,6 +164,36 @@
                             color: $main_color;
                         }
                     }
+                }
+                .div_p04_gov_shareButton{
+                    // display: flex;
+                    // justify-content: center;
+                    // height: 20px;
+                    // width: 120px;
+                    position: absolute;
+                    top: -32px;
+                    right: 0px;
+                    // opacity: 0;
+                    // transition: all .3s ease-in-out;
+                    .fadeInOut{
+                        margin: 0 -2px;
+                        opacity: 0;
+                        transition: all .3s ease-in-out;
+                        i{
+                            color: $text_color;
+                            font-size: 28px;
+                            &:hover{
+                                color: $main_color;
+                            }
+                        }
+                    }
+                    .hover{
+                        opacity: 1;
+                        margin: 0 8px;
+                        // transition: opacity .3s ease-in-out;
+                        // display: flex;
+                        // justify-content: space-between;
+                    }                     
                 }
             }
             p{
