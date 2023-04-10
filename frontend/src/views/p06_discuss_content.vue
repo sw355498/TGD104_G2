@@ -8,13 +8,10 @@
                 <div v-html="modalContent"></div>
             </template>
             <template #body>
-                <textarea rows="" cols=""></textarea>
+                <textarea style="width: 100%; height: 200px; padding:10px; resize:none;" ></textarea>
             </template>
-            <template>
-                <button
-                    class="modal-default-button"
-                    @click="$emit('close')"
-                >送出</button>    
+            <template #footer>
+                <button class="medium_button">送出</button>
             </template>
             </modal>
         </Teleport>
