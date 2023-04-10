@@ -38,7 +38,6 @@
   import frontNavbar from "@/components/f_nav.vue";
   import frontFooter from "@/components/f_footer.vue";
   
-  
   export default{
     components: {
       frontNavbar,
@@ -90,118 +89,151 @@
           facebookShareLink: 'https://www.facebook.com/sharer.php?u=https://getdr.com/',
           link: 'https://getdr.com/',
         },
-
       ])
 
-      const shareButton_1 = ref([])
-      const shareButton_2 = ref([])
-      const shareButton_3 = ref([])
-      const shareButton_4 = ref([])
-      const shareButton_5 = ref([])
-      const shareButton_6 = ref([])
+      // const shareButton_1 = ref([])
+      // const shareButton_2 = ref([])
+      // const shareButton_3 = ref([])
+      // const shareButton_4 = ref([])
+      // const shareButton_5 = ref([])
+      // const shareButton_6 = ref([])
 
-      const shareBtn_1 = ref([])
-      const shareBtn_2 = ref([])
-      const shareBtn_3 = ref([])
-      const shareBtn_4 = ref([])
-      const shareBtn_5 = ref([])
-      const shareBtn_6 = ref([])
+      // const shareBtn_1 = ref([])
+      // const shareBtn_2 = ref([])
+      // const shareBtn_3 = ref([])
+      // const shareBtn_4 = ref([])
+      // const shareBtn_5 = ref([])
+      // const shareBtn_6 = ref([])
 
-      const fadeInOut = ref()
+      // const fadeInOut = ref()
+
+      // const openShareButton = () => {
+      //   shareButton_1.value.addEventListener('click', (e) => {
+      //     e.preventDefault();
+      //     if(shareBtn_1.value.classList.contains('hover')){
+      //       shareBtn_1.value.classList.remove('hover')
+      //     }else{
+      //       shareBtn_1.value.classList.add('hover')
+      //     }
+      //   })
+      //   shareButton_2.value.addEventListener('click', (e) => {
+      //     e.preventDefault();
+      //     if(shareBtn_2.value.classList.contains('hover')){
+      //       shareBtn_2.value.classList.remove('hover')
+      //     }else{
+      //       shareBtn_2.value.classList.add('hover')
+      //     }
+      //   })
+      //   shareButton_3.value.addEventListener('click', (e) => {
+      //     e.preventDefault();
+      //     if(shareBtn_3.value.classList.contains('hover')){
+      //       shareBtn_3.value.classList.remove('hover')
+      //     }else{
+      //       shareBtn_3.value.classList.add('hover')
+      //     }
+      //   })
+      //   shareButton_4.value.addEventListener('click', (e) => {
+      //     e.preventDefault();
+      //     if(shareBtn_4.value.classList.contains('hover')){
+      //       shareBtn_4.value.classList.remove('hover')
+      //     }else{
+      //       shareBtn_4.value.classList.add('hover')
+      //     }
+      //   })
+      //   shareButton_5.value.addEventListener('click', (e) => {
+      //     e.preventDefault();
+      //     if(shareBtn_5.value.classList.contains('hover')){
+      //       shareBtn_5.value.classList.remove('hover')
+      //     }else{
+      //       shareBtn_5.value.classList.add('hover')
+      //     }
+      //   })
+      //   shareButton_6.value.addEventListener('click', (e) => {
+      //     e.preventDefault();
+      //     if(shareBtn_6.value.classList.contains('hover')){
+      //       shareBtn_6.value.classList.remove('hover')
+      //     }else{
+      //       shareBtn_6.value.classList.add('hover')
+      //     }
+      //   })
+      // }
+
+      // function openShareWindow(link){
+      //   window.open(link, 'mywindow', 'width=700, height=400');
+      // }
+  
+      // onMounted(() => {
+      //   shareButton_1.value = document.querySelector('.classButton-0')
+      //   shareButton_2.value = document.querySelector('.classButton-1')
+      //   shareButton_3.value = document.querySelector('.classButton-2')
+      //   shareButton_4.value = document.querySelector('.classButton-3')
+      //   shareButton_5.value = document.querySelector('.classButton-4')
+      //   shareButton_6.value = document.querySelector('.classButton-5')
+      //   shareBtn_1.value = document.querySelector('.classBtn-0')
+      //   shareBtn_2.value = document.querySelector('.classBtn-1')
+      //   shareBtn_3.value = document.querySelector('.classBtn-2')
+      //   shareBtn_4.value = document.querySelector('.classBtn-3')
+      //   shareBtn_5.value = document.querySelector('.classBtn-4')
+      //   shareBtn_6.value = document.querySelector('.classBtn-5')
+      //   fadeInOut.value = document.querySelectorAll('.fadeInOut')
+      //   openShareButton()
+      // })
+
+      // return {
+      //   contents,
+      //   shareButton_1,
+      //   shareButton_2,
+      //   shareButton_3,
+      //   shareButton_4,
+      //   shareButton_5,
+      //   shareButton_6,
+      //   shareBtn_1,
+      //   shareBtn_2,
+      //   shareBtn_3,
+      //   shareBtn_4,
+      //   shareBtn_5,
+      //   shareBtn_6,
+      //   openShareWindow,
+      //   fadeInOut
+      // }
+
+    const shareButton = [];
+    const shareBtn = [];
+
+    for (let i = 0; i < 6; i++) {
+      shareButton[i] = ref();
+      shareBtn[i] = ref();
 
       const openShareButton = () => {
-        shareButton_1.value.addEventListener('click', (e) => {
+        shareButton[i].value.addEventListener('click', (e) => {
           e.preventDefault();
-          if(shareBtn_1.value.classList.contains('hover')){
-            shareBtn_1.value.classList.remove('hover')
-          }else{
-            shareBtn_1.value.classList.add('hover')
+          if (shareBtn[i].value.classList.contains('hover')) {
+            shareBtn[i].value.classList.remove('hover');
+          } else {
+            shareBtn[i].value.classList.add('hover');
           }
-        })
-        shareButton_2.value.addEventListener('click', (e) => {
-          e.preventDefault();
-          if(shareBtn_2.value.classList.contains('hover')){
-            shareBtn_2.value.classList.remove('hover')
-          }else{
-            shareBtn_2.value.classList.add('hover')
-          }
-        })
-        shareButton_3.value.addEventListener('click', (e) => {
-          e.preventDefault();
-          if(shareBtn_3.value.classList.contains('hover')){
-            shareBtn_3.value.classList.remove('hover')
-          }else{
-            shareBtn_3.value.classList.add('hover')
-          }
-        })
-        shareButton_4.value.addEventListener('click', (e) => {
-          e.preventDefault();
-          if(shareBtn_4.value.classList.contains('hover')){
-            shareBtn_4.value.classList.remove('hover')
-          }else{
-            shareBtn_4.value.classList.add('hover')
-          }
-        })
-        shareButton_5.value.addEventListener('click', (e) => {
-          e.preventDefault();
-          if(shareBtn_5.value.classList.contains('hover')){
-            shareBtn_5.value.classList.remove('hover')
-          }else{
-            shareBtn_5.value.classList.add('hover')
-          }
-        })
-        shareButton_6.value.addEventListener('click', (e) => {
-          e.preventDefault();
-          if(shareBtn_6.value.classList.contains('hover')){
-            shareBtn_6.value.classList.remove('hover')
-          }else{
-            shareBtn_6.value.classList.add('hover')
-          }
-        })
-      }
+        });
+      };
 
-      function openShareWindow(link){
-        window.open(link, 'mywindow', 'width=700, height=400');
-      }
-  
       onMounted(() => {
-        shareButton_1.value = document.querySelector('.classButton-0')
-        shareButton_2.value = document.querySelector('.classButton-1')
-        shareButton_3.value = document.querySelector('.classButton-2')
-        shareButton_4.value = document.querySelector('.classButton-3')
-        shareButton_5.value = document.querySelector('.classButton-4')
-        shareButton_6.value = document.querySelector('.classButton-5')
-        shareBtn_1.value = document.querySelector('.classBtn-0')
-        shareBtn_2.value = document.querySelector('.classBtn-1')
-        shareBtn_3.value = document.querySelector('.classBtn-2')
-        shareBtn_4.value = document.querySelector('.classBtn-3')
-        shareBtn_5.value = document.querySelector('.classBtn-4')
-        shareBtn_6.value = document.querySelector('.classBtn-5')
-        fadeInOut.value = document.querySelectorAll('.fadeInOut')
-        openShareButton()
-      })
+        shareButton[i].value = document.querySelector(`.classButton-${i}`);
+        shareBtn[i].value = document.querySelector(`.classBtn-${i}`);
+        openShareButton();
+      });
+    }
 
-      return {
-        contents,
-        // showText,
-        openShareWindow,
-        shareButton_1,
-        shareButton_2,
-        shareButton_3,
-        shareButton_4,
-        shareButton_5,
-        shareButton_6,
-        shareBtn_1,
-        shareBtn_2,
-        shareBtn_3,
-        shareBtn_4,
-        shareBtn_5,
-        shareBtn_6,
-        fadeInOut
-      }
-    },
+    function openShareWindow(link) {
+      window.open(link, 'mywindow', 'width=700, height=400');
+    }
 
-  }
+    return {
+      contents,
+      shareButton,
+      shareBtn,
+      openShareWindow,
+    };
+  },
+};
   
 </script>
 
