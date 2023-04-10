@@ -10,14 +10,14 @@
   
     <!-- 政府卡片區 -->
     <div class="div_p04_gov_container">
-      <div class="div_p04_gov_card" v-for="content in contents">
+      <div class="div_p04_gov_card" v-for="(content, index) in contents">
           <a :href="content.link" target="_blank"><img :src="content.image"></a>
           <!-- <span class="span_p04_gov_cardVerticalLine"></span> -->
           <div class="div_04_gov_cardRight">
               <div class="div_p04_gov_cardBgShapeRightTop">
                 <a :href="content.link" target="_blank"><h6 class="text_title">{{content.cardTitle}}</h6></a>
-                <a href="#" class="div_p04_gov_openShareButton"><i class="fa-solid fa-share-nodes"></i></a>
-                <div class="div_p04_gov_shareButton">
+                <a href="#" class="div_p04_gov_openShareButton" :class="'classButton-' + index"><i class="fa-solid fa-share-nodes"></i></a>
+                <div class="div_p04_gov_shareButton" :class="'classBtn-' + index">
                   <a href="#" class="fadeInOut" target="_blank" @click="openShareWindow(content.facebookShareLink);"><i class="fa-brands fa-square-facebook"></i></a>
                   <a href="#" class="fadeInOut" target="_blank" @click="openShareWindow(content.lineShareLink);"><i class="fa-brands fa-line"></i></a>
                   <a href="#" class="fadeInOut" target="_blank" @click="openShareWindow(content.twitterShareLink);"><i class="fa-brands fa-square-twitter"></i></a>
@@ -93,23 +93,71 @@
 
       ])
 
-      const shareButton = ref([])
+      const shareButton_1 = ref([])
+      const shareButton_2 = ref([])
+      const shareButton_3 = ref([])
+      const shareButton_4 = ref([])
+      const shareButton_5 = ref([])
+      const shareButton_6 = ref([])
+
+      const shareBtn_1 = ref([])
+      const shareBtn_2 = ref([])
+      const shareBtn_3 = ref([])
+      const shareBtn_4 = ref([])
+      const shareBtn_5 = ref([])
+      const shareBtn_6 = ref([])
+
       const fadeInOut = ref()
+
       const openShareButton = () => {
-        for(let i = 0; i < shareButton.value.length; i++){
-          shareButton.value[i].addEventListener('click', () => {
-            fadeInOut.value.forEach(a => {
-              if(a.classList.contains('hover')){
-                a.classList.remove('hover')
-                console.log('ok');
-              }else{
-                a.classList.add('hover')
-                console.log('no');
-              }
-              
-            })
-          })
-        }
+        shareButton_1.value.addEventListener('click', (e) => {
+          e.preventDefault();
+          if(shareBtn_1.value.classList.contains('hover')){
+            shareBtn_1.value.classList.remove('hover')
+          }else{
+            shareBtn_1.value.classList.add('hover')
+          }
+        })
+        shareButton_2.value.addEventListener('click', (e) => {
+          e.preventDefault();
+          if(shareBtn_2.value.classList.contains('hover')){
+            shareBtn_2.value.classList.remove('hover')
+          }else{
+            shareBtn_2.value.classList.add('hover')
+          }
+        })
+        shareButton_3.value.addEventListener('click', (e) => {
+          e.preventDefault();
+          if(shareBtn_3.value.classList.contains('hover')){
+            shareBtn_3.value.classList.remove('hover')
+          }else{
+            shareBtn_3.value.classList.add('hover')
+          }
+        })
+        shareButton_4.value.addEventListener('click', (e) => {
+          e.preventDefault();
+          if(shareBtn_4.value.classList.contains('hover')){
+            shareBtn_4.value.classList.remove('hover')
+          }else{
+            shareBtn_4.value.classList.add('hover')
+          }
+        })
+        shareButton_5.value.addEventListener('click', (e) => {
+          e.preventDefault();
+          if(shareBtn_5.value.classList.contains('hover')){
+            shareBtn_5.value.classList.remove('hover')
+          }else{
+            shareBtn_5.value.classList.add('hover')
+          }
+        })
+        shareButton_6.value.addEventListener('click', (e) => {
+          e.preventDefault();
+          if(shareBtn_6.value.classList.contains('hover')){
+            shareBtn_6.value.classList.remove('hover')
+          }else{
+            shareBtn_6.value.classList.add('hover')
+          }
+        })
       }
 
       function openShareWindow(link){
@@ -117,7 +165,18 @@
       }
   
       onMounted(() => {
-        shareButton.value = document.querySelectorAll('.div_p04_gov_openShareButton')
+        shareButton_1.value = document.querySelector('.classButton-0')
+        shareButton_2.value = document.querySelector('.classButton-1')
+        shareButton_3.value = document.querySelector('.classButton-2')
+        shareButton_4.value = document.querySelector('.classButton-3')
+        shareButton_5.value = document.querySelector('.classButton-4')
+        shareButton_6.value = document.querySelector('.classButton-5')
+        shareBtn_1.value = document.querySelector('.classBtn-0')
+        shareBtn_2.value = document.querySelector('.classBtn-1')
+        shareBtn_3.value = document.querySelector('.classBtn-2')
+        shareBtn_4.value = document.querySelector('.classBtn-3')
+        shareBtn_5.value = document.querySelector('.classBtn-4')
+        shareBtn_6.value = document.querySelector('.classBtn-5')
         fadeInOut.value = document.querySelectorAll('.fadeInOut')
         openShareButton()
       })
@@ -126,7 +185,18 @@
         contents,
         // showText,
         openShareWindow,
-        shareButton,
+        shareButton_1,
+        shareButton_2,
+        shareButton_3,
+        shareButton_4,
+        shareButton_5,
+        shareButton_6,
+        shareBtn_1,
+        shareBtn_2,
+        shareBtn_3,
+        shareBtn_4,
+        shareBtn_5,
+        shareBtn_6,
         fadeInOut
       }
     },

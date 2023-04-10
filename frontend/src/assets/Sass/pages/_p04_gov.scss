@@ -166,34 +166,67 @@
                     }
                 }
                 .div_p04_gov_shareButton{
-                    // display: flex;
-                    // justify-content: center;
-                    // height: 20px;
-                    // width: 120px;
                     position: absolute;
-                    top: -32px;
-                    right: 0px;
-                    // opacity: 0;
-                    // transition: all .3s ease-in-out;
+                    top: -44px;
+                    right: 0;
+                    display: flex;
+                    align-items: center;;
+                    @include rwd(lg){
+                        top: -5px;
+                        right: -40px;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    @include rwd(sm){
+                        top: -5px;
+                        right: -35px;
+                        display: flex;
+                        flex-direction: column;
+                    }
                     .fadeInOut{
                         margin: 0 -2px;
                         opacity: 0;
                         transition: all .3s ease-in-out;
+                        @include rwd(lg){
+                            margin: -2px 0;
+                        }
+                        @include rwd(sm){
+                            margin: -2px 0;
+                        }
                         i{
                             color: $text_color;
-                            font-size: 28px;
+                            font-size: 40px;
                             &:hover{
                                 color: $main_color;
                             }
+                            @include rwd(lg){
+                                font-size: 36px;
+                            }
+                        }
+                        &:nth-child(2){
+                            i{
+                                font-size: 35px;
+                                @include rwd(lg){
+                                    font-size: 31.5px;
+                                }
+                            }
                         }
                     }
-                    .hover{
+                }
+                .hover{
+                    .fadeInOut{
                         opacity: 1;
-                        margin: 0 8px;
-                        // transition: opacity .3s ease-in-out;
-                        // display: flex;
-                        // justify-content: space-between;
-                    }                     
+                        margin: 0 5px;
+                        @include rwd(lg){
+                            margin: 4px 0;
+                        }
+                        @include rwd(sm){
+                            margin: 5px 0;
+                        }
+                        i{
+                            border-radius: 50px;
+                        }
+                    }
                 }
             }
             p{
