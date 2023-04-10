@@ -8,7 +8,7 @@
                 <div v-html="modalContent"></div>
             </template>
             <template #body>
-                <textarea style="width: 100%; height: 200px; padding:10px; resize:none;" ></textarea>
+                <textarea class="modal_textarea_p06"></textarea>
             </template>
             <template #footer>
                 <button class="medium_button">送出</button>
@@ -68,7 +68,7 @@
             <article class="articleMessage_p06_discuss">
                 <div class="topBlock_p06_discuss">
                     <h3>共<span>2</span>則 留言</h3>
-                    <button id="show-modal" @click="showModal = true, modalContent = '<h3>我要留言</h3>' " class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
+                    <button id="show-modal" @click="showModal = true, modalContent = '<h4>我要留言</h4>' " class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
                 </div>
                 <div class="messageList" v-for="(message, index) in messages" :key="index">
                     <div v-for="(item, index) in message" :key="index">
@@ -92,7 +92,7 @@
                                         <i class="fa-solid fa-clock fa-fw"></i>
                                         <span>{{item.time}}</span>
                                     </li>
-                                    <li id="show-modal" @click="showModal = true, modalContent = '<h3>回覆</h3>'" class="iconHover">
+                                    <li id="show-modal" @click="showModal = true, modalContent = '<h4>回覆</h4>'" class="iconHover">
                                         <i class="fa-solid fa-reply fa-solid"></i>
                                         <span>回覆</span>
                                     </li>
