@@ -16,7 +16,7 @@
           <div class="div_04_gov_cardRight">
               <div class="div_p04_gov_cardBgShapeRightTop">
                 <a :href="content.link" target="_blank"><h6 class="text_title">{{content.cardTitle}}</h6></a>
-                <a href="#" class="div_p04_gov_openShareButton" :class="'classButton-' + index"><i class="fa-solid fa-share-nodes"></i></a>
+                <a href="#" class="div_p04_gov_openShareButton" :class="'classButton-' + index" @click="openShareButton(index)"><i class="fa-solid fa-share-nodes"></i></a>
                 <div class="div_p04_gov_shareButton" :class="'classBtn-' + index">
                   <a href="#" class="fadeInOut" target="_blank" @click="openShareWindow(content.facebookShareLink);"><i class="fa-brands fa-square-facebook"></i></a>
                   <a href="#" class="fadeInOut" target="_blank" @click="openShareWindow(content.lineShareLink);"><i class="fa-brands fa-line"></i></a>
@@ -91,13 +91,14 @@
         },
       ])
 
+      // 第一種方法
       // const shareButton_1 = ref([])
       // const shareButton_2 = ref([])
       // const shareButton_3 = ref([])
       // const shareButton_4 = ref([])
       // const shareButton_5 = ref([])
       // const shareButton_6 = ref([])
-
+      
       // const shareBtn_1 = ref([])
       // const shareBtn_2 = ref([])
       // const shareBtn_3 = ref([])
@@ -106,14 +107,14 @@
       // const shareBtn_6 = ref([])
 
       // const fadeInOut = ref()
-
+      
       // const openShareButton = () => {
       //   shareButton_1.value.addEventListener('click', (e) => {
       //     e.preventDefault();
       //     if(shareBtn_1.value.classList.contains('hover')){
       //       shareBtn_1.value.classList.remove('hover')
       //     }else{
-      //       shareBtn_1.value.classList.add('hover')
+      //         shareBtn_1.value.classList.add('hover')
       //     }
       //   })
       //   shareButton_2.value.addEventListener('click', (e) => {
@@ -121,48 +122,48 @@
       //     if(shareBtn_2.value.classList.contains('hover')){
       //       shareBtn_2.value.classList.remove('hover')
       //     }else{
-      //       shareBtn_2.value.classList.add('hover')
-      //     }
-      //   })
-      //   shareButton_3.value.addEventListener('click', (e) => {
-      //     e.preventDefault();
+      //         shareBtn_2.value.classList.add('hover')
+      //       }
+      //     })
+      //     shareButton_3.value.addEventListener('click', (e) => {
+      //         e.preventDefault();
       //     if(shareBtn_3.value.classList.contains('hover')){
       //       shareBtn_3.value.classList.remove('hover')
       //     }else{
-      //       shareBtn_3.value.classList.add('hover')
-      //     }
-      //   })
-      //   shareButton_4.value.addEventListener('click', (e) => {
-      //     e.preventDefault();
-      //     if(shareBtn_4.value.classList.contains('hover')){
-      //       shareBtn_4.value.classList.remove('hover')
-      //     }else{
-      //       shareBtn_4.value.classList.add('hover')
-      //     }
-      //   })
-      //   shareButton_5.value.addEventListener('click', (e) => {
-      //     e.preventDefault();
-      //     if(shareBtn_5.value.classList.contains('hover')){
-      //       shareBtn_5.value.classList.remove('hover')
-      //     }else{
-      //       shareBtn_5.value.classList.add('hover')
+      //         shareBtn_3.value.classList.add('hover')
+      //       }
+      //     })
+      //     shareButton_4.value.addEventListener('click', (e) => {
+      //         e.preventDefault();
+      //         if(shareBtn_4.value.classList.contains('hover')){
+      //             shareBtn_4.value.classList.remove('hover')
+      //           }else{
+      //               shareBtn_4.value.classList.add('hover')
+      //             }
+      //           })
+      //           shareButton_5.value.addEventListener('click', (e) => {
+      //               e.preventDefault();
+      //               if(shareBtn_5.value.classList.contains('hover')){
+      //                   shareBtn_5.value.classList.remove('hover')
+      //                 }else{
+      //                     shareBtn_5.value.classList.add('hover')
       //     }
       //   })
       //   shareButton_6.value.addEventListener('click', (e) => {
-      //     e.preventDefault();
-      //     if(shareBtn_6.value.classList.contains('hover')){
-      //       shareBtn_6.value.classList.remove('hover')
+      //       e.preventDefault();
+      //       if(shareBtn_6.value.classList.contains('hover')){
+      //           shareBtn_6.value.classList.remove('hover')
       //     }else{
       //       shareBtn_6.value.classList.add('hover')
       //     }
       //   })
       // }
-
+      
       // function openShareWindow(link){
-      //   window.open(link, 'mywindow', 'width=700, height=400');
-      // }
-  
-      // onMounted(() => {
+      //     window.open(link, 'mywindow', 'width=700, height=400');
+      //   }
+        
+      //   onMounted(() => {
       //   shareButton_1.value = document.querySelector('.classButton-0')
       //   shareButton_2.value = document.querySelector('.classButton-1')
       //   shareButton_3.value = document.querySelector('.classButton-2')
@@ -180,60 +181,77 @@
       // })
 
       // return {
-      //   contents,
-      //   shareButton_1,
-      //   shareButton_2,
-      //   shareButton_3,
-      //   shareButton_4,
-      //   shareButton_5,
-      //   shareButton_6,
-      //   shareBtn_1,
-      //   shareBtn_2,
-      //   shareBtn_3,
-      //   shareBtn_4,
-      //   shareBtn_5,
-      //   shareBtn_6,
-      //   openShareWindow,
-      //   fadeInOut
+      //     contents,
+      //     shareButton_1,
+      //     shareButton_2,
+      //     shareButton_3,
+      //     shareButton_4,
+      //     shareButton_5,
+      //     shareButton_6,
+      //     shareBtn_1,
+      //     shareBtn_2,
+      //     shareBtn_3,
+      //     shareBtn_4,
+      //     shareBtn_5,
+      //     shareBtn_6,
+      //     openShareWindow,
+      //     fadeInOut
+      //   }
+      
+      
+        
+      const shareButton = [];
+      const shareBtn = [];
+      
+      // 第二種方法
+      // for (let i = 0; i < 6; i++) {
+      //   shareButton[i] = ref();
+      //   shareBtn[i] = ref();
+        
+      //   const openShareButton = () => {
+      //     shareButton[i].value.addEventListener('click', (e) => {
+      //         e.preventDefault();
+      //         if (shareBtn[i].value.classList.contains('hover')) {
+      //         shareBtn[i].value.classList.remove('hover');
+      //       } else {
+      //         shareBtn[i].value.classList.add('hover');
+      //       }
+      //     });
+      //   };
+      
+      //   onMounted(() => {
+      //     shareButton[i].value = document.querySelector(`.classButton-${i}`);
+      //     shareBtn[i].value = document.querySelector(`.classBtn-${i}`);
+      //     openShareButton();
+      //   });
       // }
 
-    const shareButton = [];
-    const shareBtn = [];
-
-    for (let i = 0; i < 6; i++) {
-      shareButton[i] = ref();
-      shareBtn[i] = ref();
-
-      const openShareButton = () => {
-        shareButton[i].value.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (shareBtn[i].value.classList.contains('hover')) {
-            shareBtn[i].value.classList.remove('hover');
-          } else {
-            shareBtn[i].value.classList.add('hover');
-          }
-        });
-      };
+      // 第三種方法
+      function openShareButton(index){
+        if (shareBtn.value[index].classList.contains('hover')) {
+          shareBtn.value[index].classList.remove('hover');
+        } else {
+          shareBtn.value[index].classList.add('hover');
+        }
+      }
 
       onMounted(() => {
-        shareButton[i].value = document.querySelector(`.classButton-${i}`);
-        shareBtn[i].value = document.querySelector(`.classBtn-${i}`);
-        openShareButton();
-      });
-    }
+        shareBtn.value = document.querySelectorAll('.div_p04_gov_shareButton')
+      })
+      
+      function openShareWindow(link) {
+        window.open(link, 'mywindow', 'width=700, height=400');
+      }
 
-    function openShareWindow(link) {
-      window.open(link, 'mywindow', 'width=700, height=400');
-    }
-
-    return {
-      contents,
-      shareButton,
-      shareBtn,
-      openShareWindow,
-    };
-  },
-};
+      return {
+        contents,
+        shareButton,
+        shareBtn,
+        openShareWindow,
+        openShareButton
+      };
+    },
+  };
   
 </script>
 
