@@ -4,9 +4,6 @@
     <div class="chatbot_index" >
         <div class="chatTitle">
             <img src="../assets/img/icon/robot.png" />
-            <!-- <figure class="robot">
-                <svg><use xlink:href="#robot" /></svg>
-            </figure> -->
             <div class="chatTitle_text">
                 <p>專屬機器人</p>
                 <p>詐知就好</p>
@@ -51,11 +48,30 @@
             <div class="chatWindow_message" v-for="(message, index) in messages" :key="index">
                 <div v-if="message.isBot" class="bot_message">
                     <p v-html="message.text"></p>
+
                     <!-- <p>{{ message.text }}</p> -->
                 </div>
                 <div v-else class="user_message">
                     <p>{{ message.text }}</p>
                 </div>
+                <!-- <template v-if="message.error_text">
+                    <div>我猜你應該想知道<br>
+                        <ul class="chat-buttons">
+                            <li class="chat-button" @click="sendMessage('Z;7DADAD')">防範詐騙教學</li>
+                            <li class="chat-button">回報可疑網站</li>
+                            <li class="chat-button">詐騙FAQ</li><br>
+                            <li class="chat-button">政府相關連結</li>
+                            <li class="chat-button">討論專區</li>
+                            <li class="chat-button">DEMO體驗</li>
+                        </ul>
+                    </div>
+                </template> -->
+
+
+                <!-- <div>{{message.message }}</div> -->
+                <!-- <div>{{message.message }}</div> -->
+                <!-- <router-link  :to="message.link"></router-link> -->
+                
             </div>
         </div>
         <div class="chatInput">
@@ -76,10 +92,10 @@ export default {
   name: 'Chat',
   setup() {
     // console.log(props.show);
-    const messages = ref([]) // 存儲聊天記錄的數組
-    const inputValue = ref('') // 存儲輸入框的值
+    const messages = ref([]) // 存儲聊天記錄的陣列
+    const inputValue = ref('') // 存儲使用者輸入框的值
     const goodbyeTimer = ref(null) // 存儲setTimeout返回的計時器ID
-    const messagesDiv = ref(null) //
+    const messagesDiv = ref(null) // 取得聊天對話框 為了下滑到對話位置
     async function sendMessage() {
         // 取消計時器
         clearTimeout(goodbyeTimer.value)
@@ -91,7 +107,7 @@ export default {
             })
             // 獲取聊天機器人的回覆
             const botMessage = getBotMessage(inputValue.value)
-            // 將聊天機器人的回覆加入到聊天記錄數組中
+            // 將聊天機器人的回覆加入到聊天記錄陣列中
             messages.value.push({
                 text: botMessage,
                 isBot: true,
@@ -103,78 +119,132 @@ export default {
             messagesDiv.value.scrollTop = messagesDiv.value.scrollHeight;
         }
     }
+
+    // const robotAnswes =[
+    //     {
+    //         message:'hi',
+    //         keyword:'h1'
+    //     },
+    //     {
+    //         message:'防範詐騙教學',
+    //         keyword:'防範詐騙教學'
+    //     },
+    // ]
+
+    // robotAnswer.h1.message
+    // robotAnswer['h1'].message
+
+
+    // if(robotAnswer.hasOwnproperty(input.toLowerCase().trim())){
+
+    // }
+    const robotAnswer = {
+        
+        'hi':{
+            message:'hi',
+        },
+        '防範詐騙教學':{
+            message:'以下是防範詐騙教學的相關資訊',
+            link:'/p02'
+        },
+        '回報可疑網站':{
+            message:'以下是回報可疑網站的相關資訊',
+            link:'/reportUrl'
+        },
+        '詐騙FAQ':{
+            message:'以下是詐騙FAQ的相關資訊',
+            link:'/p04'
+        },
+        '政府資訊連結':{
+            message:'以下是政府資訊連結的相關資訊',
+            link:'/p05'
+        },
+        '討論專區':{
+            message:'以下是討論專區的相關資訊',
+            link:'/p06'
+        },
+        'Demo體驗':{
+            message:'以下是討論專區的相關資訊',
+            link:'/p07'
+        },
+        'other':{
+            messages: '我猜你應該想知道',
+        },
+    }
     function getBotMessage(input) {
         // 根據用戶的輸入獲取聊天機器人的回覆
         let botMsg = ``;
-        // 去掉空白、轉小寫
-        switch (input.toLowerCase().trim()) {
-            case 'hi':
-            case 'hello':
-            case '你好':
-            botMsg = '你好！我是詐知就好專屬機器人';
-            break;
-            case '防範詐騙教學':
-            botMsg =  `以下是防範詐騙教學的相關資訊<br>
-                <a href="#" style="color:black">
-                    點我看更多
-                </a>
-            `;
-            break;
-            case '回報可疑網站':
-            botMsg = `以下是回報可疑網站的相關資訊<br>
-                <a href="#" style="color:black">
-                    點我看更多
-                </a>
-            `;
-            break;
-            case '詐騙FAQ':
-            botMsg = `以下是詐騙FAQ的相關資訊<br>
-                <a href="#" style="color:black">
-                    點我看更多
-                </a>
-            `;
-            break;
-            case '政府資訊連結':
-            botMsg = `以下是政府資訊連結的相關資訊<br>
-                <a href="#" style="color:black">
-                    點我看更多
-                </a>
-            `;
-            break;
-            case '討論專區':
-            botMsg = `以下是討論專區的相關資訊<br>
-                <a href="#" style="color:black">
-                    點我看更多
-                </a>
-            `;
-            break;
-            default:
-            botMsg = `我猜你應該想知道<br>
-            1.防範詐騙教學<br>
-            2.回報可疑網站<br>
-            3.詐騙FAQ<br>
-            4.政府相關資訊連結<br>
-            5.討論專區<br>
-            6.DEMO體驗<br>
-            `;
+        console.log(robotAnswer)
+        const input_lowercase = input.trim() 
+        console.log(input_lowercase);
+        if ( input_lowercase && robotAnswer.hasOwnProperty(input_lowercase)) {
+            botMsg = robotAnswer[input_lowercase].message
+        }else{
+            botMsg = `robotAnswer.message`
         }
+        // 去掉空白、轉小寫
+        // switch (input.toLowerCase().trim()) {
+        //     case 'hi':
+        //     case 'hello':
+        //     case '你好':
+        //     botMsg = '你好！我是詐知就好專屬機器人';
+        //     break;
+        //     case '防範詐騙教學':
+        //     botMsg =  `以下是防範詐騙教學的相關資訊<br>
+        //         <a href="#" style="color:black">
+        //             點我看更多
+        //         </a>
+        //     `;
+        //     break;
+        //     case '回報可疑網站':
+        //     botMsg = `以下是回報可疑網站的相關資訊<br>
+        //     `;
+        //     break;
+        //     case '詐騙FAQ':
+        //     botMsg = `以下是詐騙FAQ的相關資訊<br>
+        //     `;
+        //     break;
+        //     case '政府資訊連結':
+        //     botMsg = `以下是政府資訊連結的相關資訊<br>
+        //     `;
+        //     break;
+        //     case '討論專區':
+        //     botMsg = `以下是討論專區的相關資訊<br>
+        //     `;
+        //     break;
+        //     default:
+        //     botMsg = `我猜你應該想知道<br>
+        //     <ul class="chat-buttons">
+        //         <li class="chat-button">防範詐騙教學</li>
+        //         <li class="chat-button">回報可疑網站</li>
+        //         <li class="chat-button">詐騙FAQ</li><br>
+        //         <li class="chat-button">政府相關連結</li>
+        //         <li class="chat-button">討論專區</li>
+        //         <li class="chat-button">DEMO體驗</li>
+        //     </ul>
+        //     `;
+        // //     const all = document.querySelectorAll('.chat-button')
+        // // for (let index = 0; index < all.length; index++) {
+        // //     const element = all[index];
+        // //     const text = element.innerText
+        // //     element.addEventListener('click',()=>{
+        // //         text
+
+        // //     })
+            
+        // // }
+        // }
         // 啟動計時器，30秒後顯示再見的消息
         goodbyeTimer.value = setTimeout(async() => {
             messages.value.push({
-                text: `已經超過30秒沒有輸入文字囉，要不要看看下面的內容啊<br>
-                1.防範詐騙教學<br>
-                2.回報可疑網站<br>
-                3.詐騙FAQ<br>
-                4.政府相關資訊連結<br>
-                5.討論專區<br>
-                6.DEMO體驗<br>
+                text: `感謝使用哦！<br>期待下次再見~
             `,
                 isBot: true,
             })
             // 下滑視窗
             await nextTick();
             messagesDiv.value.scrollTop = messagesDiv.value.scrollHeight;
-        }, 3000)
+        }, 60000)
         return botMsg;
     }
     
