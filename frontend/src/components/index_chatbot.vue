@@ -13,7 +13,7 @@
             </div>
             <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
         </div>
-        <div class="chatWindow">
+        <div class="chatWindow" ref="messagesDiv">
             <!-- 一開始就有的文字 -->
             <div class="chatWindow_message_default">
                 <div class="chatbot_message_default">
@@ -71,7 +71,7 @@
 
 
 <script>
-import { ref } from 'vue'
+import { ref , nextTick} from 'vue'
 export default {
   name: 'Chat',
   setup() {
@@ -79,7 +79,8 @@ export default {
     const messages = ref([]) // 存儲聊天記錄的數組
     const inputValue = ref('') // 存儲輸入框的值
     const goodbyeTimer = ref(null) // 存儲setTimeout返回的計時器ID
-    function sendMessage() {
+    const messagesDiv = ref(null) //
+    async function sendMessage() {
         // 取消計時器
         clearTimeout(goodbyeTimer.value)
         if (inputValue.value) {
@@ -97,16 +98,20 @@ export default {
             })
             // 清空輸入框
             inputValue.value = ''
+            // 下滑視窗
+            await nextTick();
+            messagesDiv.value.scrollTop = messagesDiv.value.scrollHeight;
         }
     }
     function getBotMessage(input) {
         // 根據用戶的輸入獲取聊天機器人的回覆
         let botMsg = ``;
-        switch (input.toLowerCase()) {
+        // 去掉空白、轉小寫
+        switch (input.toLowerCase().trim()) {
             case 'hi':
             case 'hello':
             case '你好':
-            botMsg = 'Hello there!';
+            botMsg = '你好！我是詐知就好專屬機器人';
             break;
             case '防範詐騙教學':
             botMsg =  `以下是防範詐騙教學的相關資訊<br>
@@ -154,7 +159,7 @@ export default {
             `;
         }
         // 啟動計時器，30秒後顯示再見的消息
-        goodbyeTimer.value = setTimeout(() => {
+        goodbyeTimer.value = setTimeout(async() => {
             messages.value.push({
                 text: `已經超過30秒沒有輸入文字囉，要不要看看下面的內容啊<br>
                 1.防範詐騙教學<br>
@@ -166,6 +171,9 @@ export default {
             `,
                 isBot: true,
             })
+            // 下滑視窗
+            await nextTick();
+            messagesDiv.value.scrollTop = messagesDiv.value.scrollHeight;
         }, 3000)
         return botMsg;
     }
@@ -174,6 +182,7 @@ export default {
       messages,
       inputValue,
       sendMessage,
+      messagesDiv,
     }
   },
 }
