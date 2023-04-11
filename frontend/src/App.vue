@@ -1,29 +1,41 @@
 <template>
-  <nav v-if="$route.path === '/'">
-    <div class="app_content_block">
-      <div class="title">詐知就好</div>
-      <div class="router_block">
-        <router-link to="/index" class="router_item">
-          <div>進入前台</div>
-        </router-link>
-        <router-link to="/b_index" class="router_item">
-          <div>進入後台</div>
-        </router-link>
+  <div v-if="loading">  
+    <Loading v-show="loading" />
+  </div>
+  <div v-else>
+    <nav v-if="$route.path === '/'">
+      <div class="app_content_block">
+        <div class="title">詐知就好</div>
+        <div class="router_block">
+          <router-link to="/index" class="router_item">
+            <div>進入前台</div>
+          </router-link>
+          <router-link to="/b_index" class="router_item">
+            <div>進入後台</div>
+          </router-link>
+        </div>
       </div>
-    </div>
-  </nav>
-  <router-view></router-view>
+    </nav>
+    <router-view />
+  </div>
   <div id="particles-js" v-if="$route.path === '/'"></div>
 </template>
 <script>
 import particlesJs from "particles.js";
 import particlesConfig from "@/assets/particles.json";
+import Loading from '@/components/loading.vue'
 export default {
   data() {
-    return {};
+    return {
+      loading: true
+    }
   },
   mounted() {
     this.init();
+
+    setTimeout(() => {
+          this.loading = false;
+    }, 2500);
   },
   methods: {
     init() {
@@ -31,6 +43,9 @@ export default {
       document.body.style.overflow = "hidden";
     },
   },
+  components: {
+    Loading
+  }
 };
 </script>
 <style lang="scss">
@@ -63,13 +78,12 @@ export default {
       color: #fff;
       font-size: 2rem;
   
-      &hover {
+      &:hover {
         background: rgba($color: #13e5f2, $alpha: 1);
-          
-        div {
-          width: 130px;
-          text-align: center;
-        }
+      }
+      div {
+        width: 130px;
+        text-align: center;
       }
     }
   }
@@ -78,9 +92,6 @@ export default {
   width: 100vw;
   height: 100vh;
 }
-
-
-
 
 @keyframes neon {
   from {
