@@ -10,37 +10,37 @@
             <div class="titleBlock">
                     <h2>所有文章</h2>
                     <button class="medium_button"><router-link to="/discuss_new_content">發表新文章</router-link></button>
+            </div>
+            <div class="tab_p01_newsChoose">
+                <div class="tab_p01_news_category">
+                <select name="" id="" class="form-select form-select-md">
+                    <option selected>所有文章</option>
+                    <option value="">網站詐騙</option>
+                    <option value="">交友詐騙</option>
+                    <option value="">金融詐騙</option>
+                </select>
+                    <div class="wide_tab">
+                        <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
+                        href="#"
+                        >網站詐騙</a
+                        >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a>
+                    </div>
                 </div>
-                <div class="tab_p01_newsChoose">
-            <div class="tab_p01_news_category">
-            <select name="" id="" class="form-select form-select-md">
-                <option selected>所有文章</option>
-                <option value="">網站詐騙</option>
-                <option value="">交友詐騙</option>
-                <option value="">金融詐騙</option>
-            </select>
-            <div class="wide_tab">
-                <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
-                href="#"
-                >網站詐騙</a
-                >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a>
-            </div>
-            </div>
 
-            <div class="position-relative input_p01_news_searchBar">
-            <i
-                class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
-            ></i>
-            <input type="text" placeholder="搜尋文章" />
+                <div class="position-relative input_p01_news_searchBar">
+                <i
+                    class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
+                ></i>
+                <input type="text" placeholder="搜尋文章" />
+                </div>
             </div>
-        </div>
-            <section v-for="item in articleList" :kye="item.id">
+            <section v-for="(item, index) in articleList" :kye="item.id">
                     <div class="topBlock_p06_discuss">
                         <div class="author">
                             <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
                             <span class="paragraph">{{item.author}}</span>
                         </div>
-                        <button class="ellipsisBtn" @click="ellipsisBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                     </div>
                     <div class="articleBlock_p06_discuss">
                         <div class="articleText_p06_discuss">
@@ -56,7 +56,6 @@
                             <ul class="articleInteractive text_title">
                                 <li><i class="fa-solid fa-thumbs-up fa-fw"></i><span> {{item.thumbsNum}} </span></li>   
                                 <li><i class="fa-solid fa-message fa-fw"></i><span> {{item.messageNum}} </span></li>
-                                <!-- <li><i class="fa-solid fa-bookmark fa-fw"></i><span> 收藏 </span></li> -->
                                 <li>
                                     <router-link to="/discuss/discuss_content">
                                         <button class="viewDetails medium_button">
@@ -105,6 +104,9 @@
             frontFooter,
         },
         setup(){
+            function ellipsisBtn(index) {
+                console.log(index)
+            }
             let id = 0
             const articleList = ref([
                 {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
@@ -114,11 +116,14 @@
                 {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
             ])
 
+
+
             return{
                 isActive: true,
                 articleList,
                 frontNavbar,
                 frontFooter,
+                ellipsisBtn,
             }
         }
     }

@@ -79,7 +79,7 @@
       .chatbot_message_default p,
       .chatbot_message_end p {
         background-color: white;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 10px;
         float: left;
         max-width: 40%;
@@ -125,7 +125,7 @@
       .bot_message p,
       .user_message p {
         padding: 10px;
-        border-radius: 5px;
+        border-radius: 10px;
         max-width: 80%;
         word-break: break-word;
       }
@@ -138,6 +138,28 @@
         background: $sec_color;
         color: white;
         float: right;
+      }
+      .chat-buttons{
+        position: relative;
+        padding: 0;
+        font-size: 14px;
+        list-style: none;
+        clear: both;
+        margin: 10px 0;
+        text-align: center;
+        .chat-button{
+          display: inline-block;
+          transition: all .3s ease;
+          cursor: pointer;
+          margin: 3px;
+          background-color: $sec_color;
+          border: 1px solid #fff;
+          padding: 5px 10px;
+          letter-spacing: normal;
+          border-radius: 30px;
+          border-color: $sec_color;
+          color: white;
+        }
       }
     }
   }
@@ -163,16 +185,14 @@
     .message-submit {
       color: #fff;
       border: none;
-      background-color: #0fb2f2;
-      // background-color: $four_color;
+      background-color: $four_color;
       font-size: 16px;
       padding: 6px 10px;
       margin: 10px;
       border-radius: 10px;
       outline: none !important;
       &:hover {
-        // background: $sec_color;
-        background: #033159;
+        background: $sec_color;
         cursor: pointer;
       }
     }
