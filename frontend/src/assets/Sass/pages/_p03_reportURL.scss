@@ -179,7 +179,18 @@
         .jsgrid-grid-body {
             overflow-y: hidden;
         }
+        // 三角形位置
+        .jsgrid-header-sortable::before{
+            top: 10px;
+            left: 20px;
+            @include rwd('md'){
+                // 平板上的樣式 768px,
+                top: 10px;
+                left: 5px;
+            }
+        }
     }
+    
     @include  rwd('sm'){
         // 手機上的樣式 428px,
         #jsGrid{
