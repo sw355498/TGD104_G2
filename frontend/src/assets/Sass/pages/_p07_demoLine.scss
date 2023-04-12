@@ -76,9 +76,13 @@
                 .userClicked{
                     position: absolute;
                     width: 345.5px;
+                    transition: all .1s ease-in-out;
                     cursor: pointer;
+                    &:hover{
+                        transform: scale(1.05);
+                        transition: all .1s ease-in-out;
+                    }
                     &:first-child{
-                        z-index: 1;
                         top: -190px;
                     }
                     &:last-child{
@@ -151,6 +155,7 @@
                         max-width: 85%;
                         margin-left: 50px;
                         margin-top: 10px;
+                        opacity: 0;
                         @include rwd(md){
                             margin-left: 40px;
                             margin-top: 8px;
@@ -355,4 +360,37 @@
         }
     }
     
+}
+
+// ============= 只有該頁會使用的 @mixin ============= 
+@mixin fade-in-from-left($duration){
+    opacity: 0;
+    transform: translateX(-50%);
+    animation: fade-in-from-left $duration ease-out forwards;
+
+    @keyframes fade-in-from-left {
+        100%{
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}
+@mixin fade-in-from-right($duration){
+    opacity: 0;
+    transform: translateX(50%);
+    animation: fade-in-from-right $duration ease-out forwards;
+
+    @keyframes fade-in-from-right {
+        100%{
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}
+
+.fadeInFromLeft{
+    @include fade-in-from-left(1s);
+}
+.fadeInFromRight{
+    @include fade-in-from-right(1s);
 }
