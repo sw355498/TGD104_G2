@@ -19,7 +19,7 @@
 
         <!-- line 聊天區 -->
         <div class="line_p07_demoLine_chatContainer">
-          <component :is="currentRole"></component>
+          <component :is="currentRole" style="color: #00092E; margin-top: 60px; margin-bottom: 0px;">&lt--- 請選擇男網友或女網友</component>
         </div>
 
                 
@@ -36,44 +36,21 @@
 </template>
 
 
-<script>
-import { ref, onMounted } from 'vue'
-import p07_demoLineRoleA from '@/components/p07_demoLineRoleA.vue'
-import p07_demoLineRoleB from '@/components/p07_demoLineRoleB.vue'
-import p07_demo_nav from "@/components/p07_demo_nav.vue"
-import frontNavbar from "@/components/f_nav.vue"
-import frontFooter from "@/components/f_footer.vue"
+<script setup>
+  import { ref } from 'vue'
+  import p07_demoLineRoleA from '@/components/p07_demoLineRoleA.vue'
+  import p07_demoLineRoleB from '@/components/p07_demoLineRoleB.vue'
+  import p07_demo_nav from "@/components/p07_demo_nav.vue"
+  import frontNavbar from "@/components/f_nav.vue"
+  import frontFooter from "@/components/f_footer.vue"
 
-export default {
-  components: {
-    p07_demo_nav,
-    frontNavbar,
-    frontFooter,
-    p07_demoLineRoleA,
-    p07_demoLineRoleB
-  },
-  setup() {
-    const currentRole = ref('p07_demoLineRoleA')
-    const switchRoleA = () => {
-      if(currentRole.value === 'p07_demoLineRoleB'){
-        currentRole.value = 'p07_demoLineRoleA'
-      }
-    }
-    const switchRoleB = () => {
-      if(currentRole.value === 'p07_demoLineRoleA'){
-        currentRole.value = 'p07_demoLineRoleB'
-      }
-    }
-    onMounted(() => {
-      
-    })
-    return{
-      currentRole,
-      switchRoleA,
-      switchRoleB
-    }
-  },
-}
+  const currentRole = ref('h2')
+  const switchRoleA = () => {
+    currentRole.value = p07_demoLineRoleA
+  }
+  const switchRoleB = () => {
+    currentRole.value = p07_demoLineRoleB
+  }
 
 </script>
 

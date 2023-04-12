@@ -153,3 +153,53 @@
     @content;
   }
 }
+
+@mixin newsTickerX($duration){
+  animation: newsTickerX infinite $duration linear;
+  @keyframes newsTickerX {
+      0% {
+          transform: translateX(0);
+      }
+      100% {
+          transform: translateX(-100%);
+      }
+  }
+}
+
+@mixin newsTickerY($duration){
+  animation: newsTickerY infinite $duration linear;
+  @keyframes newsTickerY {
+      0% {
+          transform: translateY(0);
+      }
+      100% {
+          transform: translateY(-200%);
+      }
+  }
+}
+
+@mixin fade-in-from-right($duration){
+  opacity: 0;
+  transform: translateX(50%);
+  animation: fade-in-from-right $duration ease-out forwards;
+
+  @keyframes fade-in-from-right {
+      100%{
+          opacity: 1;
+          transform: translateX(0);
+      }
+  }
+}
+
+@mixin fade-in-from-left($duration){
+  opacity: 0;
+  transform: translateX(-50%);
+  animation: fade-in-from-left $duration ease-out forwards;
+
+  @keyframes fade-in-from-left {
+      100%{
+          opacity: 1;
+          transform: translateX(0);
+      }
+  }
+}
