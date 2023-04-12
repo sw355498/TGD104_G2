@@ -35,7 +35,7 @@ export default {
 
     setTimeout(() => {
       this.loading = false;
-    }, 2500);
+    }, 100);
   },
   methods: {
     init() {

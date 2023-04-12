@@ -171,38 +171,24 @@ export default {
       }
     )
 
-    let user = ref()
-    let chatArea = ref()
     let chatMessageLeft = ref()
     let chatMessageRight = ref()
     let demoBtn = ref()
+    let chatMessagesContentLeft = ref()
 
     // 抓取 HTML DOM
     onMounted(() => {
-      // 左側人員
-      user = document.querySelectorAll('.userClicked')
-
-      // Line 聊天區
-      chatArea = document.querySelector('.line_p07_demoLine_chatContainer')
-
       // Demo 按鈕
       demoBtn = document.querySelectorAll('.line_p07_demoLine_chatMessageButton')
       
       // 左對話框
       chatMessageLeft = document.querySelectorAll('.line_p07_demoLine_chatMessageLeft')
+      chatMessagesContentLeft = document.querySelectorAll('.line_p07_demoLine_chatMessagesContentLeft')
       
       // 右對話框
       chatMessageRight = document.querySelectorAll('.line_p07_demoLine_chatMessageRight')
       
       // 開始撰寫程式
-      user[0].addEventListener('click', () => {
-        chatArea.style.display = 'block'
-      })
-
-      user[1].addEventListener('click', () => {
-        chatArea.style.display = 'none'
-      })
-
       demoBtn[0].addEventListener('click', () => {
         demoBtn[0].style.display = 'none'
         chatMessageRight[0].style.display = 'flex'
@@ -226,6 +212,20 @@ export default {
         demoBtn[3].style.display = 'none'
         chatMessageRight[4].style.display = 'flex'
       })
+
+      chatMessagesContentLeft.forEach((messages, index) => {
+        setTimeout(() => {
+          messages.classList.add('fadeInFromLeft')
+        }, index)
+      })
+
+      chatMessageRight.forEach((messages, index) => {
+        setTimeout(() => {
+          messages.classList.add('fadeInFromRight')
+        }, index)
+      })
+
+
     })
 
     return {
@@ -236,10 +236,7 @@ export default {
       chatMessageLeft_3,
       chatMessageRight_3,
       chatMessageLeft_4,
-      chatMessageRight_4,
-      demoBtn,
-      chatMessageLeft,
-      chatMessageRight
+      chatMessageRight_4
     }
   },
 }
