@@ -7,52 +7,42 @@
 
     <!-- main block -->
     <main>
-      <div class="container">
-        <div class="row position-relative justify-content-center">
-          <!-- 音量區塊 -->
-          <div
-            class="volume_p07_demoPhone_phone position-absolute col-12 d-flex"
-          >
-            <!-- 音量按鈕 svg -->
-            <svg><use xlink:href="#volume" /></svg>
-            <!-- 喇叭svg -->
-            <svg><use xlink:href="#speaker" /></svg>
-          </div>
-          <!-- 電話顯示區 -->
-          <div class="phoneLayout_p07_demoPhone_phone position-relative">
-            <img
-              class="position-absolute"
-              src="../assets/img/p07_demo/p07_demoPhone/p07_demoPhone_iPhoneSilver.png"
-              alt=""
-            />
-            <img
-              class="position-absolute"
-              src="../assets/img/p07_demo/p07_demoPhone/p07_demoPhone_widgets.png"
-              alt=""
-            />
-          </div>
-          <!-- 教學機器人 -->
-          <div
-            class="robot_p07_demoPhone_phone position-absolute col-lg-5 col-12"
-          >
-            <!-- 機器人svg -->
-            <div class="talkbox">
-              <div class="talk-bubble tri-right round right-in">
-                <!-- 機器人 talk bubble -->
-                <div class="talktext">
-                  <p>
-                    ＢＢＱ啦！！ 真的就被惡意的詐騙集團詐騙錢了！
-                    請注意對方還會再次要你輸入一次說要將錢匯回來千萬！千萬！千萬記得「不要再次上當」
-                  </p>
-                  <button class="small_button">我已準備好</button>
-                </div>
-              </div>
-            </div>
-            <svg class="position-absolute">
-              <use xlink:href="#robot" />
-            </svg>
+      <!-- 音量區塊 -->
+      <div class="volume_p07_demoPhone_phone d-inline-block">
+        <!-- 音量按鈕 svg -->
+        <svg><use xlink:href="#volume" /></svg>
+        <!-- 喇叭svg -->
+        <svg><use xlink:href="#speaker" /></svg>
+      </div>
+      <!-- 電話顯示區 -->
+      <div class="phoneLayout_p07_demoPhone_phone position-relative">
+        <img
+          class="position-absolute"
+          src="../assets/img/p07_demo/p07_demoPhone/p07_demoPhone_iPhoneSilver.png"
+          alt=""
+        />
+        <img
+          class="position-absolute"
+          src="../assets/img/p07_demo/p07_demoPhone/p07_demoPhone_widgets.png"
+          alt=""
+        />
+      </div>
+      <!-- 教學機器人 -->
+      <div class="robot_p07_demoPhone_phone d-inline-block">
+        <!-- 機器人 talk bubble -->
+        <div class="talk-bubble">
+          <div class="talktext">
+            <p>
+              ＢＢＱ啦！！ 真的就被惡意的詐騙集團詐騙錢了！
+              請注意對方還會再次要你輸入一次說要將錢匯回來千萬！千萬！千萬記得「不要再次上當」
+            </p>
+            <button class="small_button">我已準備好</button>
           </div>
         </div>
+        <!-- 機器人svg -->
+        <svg class="">
+          <use xlink:href="#robot" />
+        </svg>
       </div>
     </main>
     <!--Main Block end -->
