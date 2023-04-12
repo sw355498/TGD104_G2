@@ -169,13 +169,15 @@
         
         .answer_button{
           width: 800px;
-          // margin-left: 55px;
-          // margin-top: 120px;
-          // margin-bottom: 20px;
-          position:relative;
           height: 250px;
-          // border:1px solid white;
           margin: 0 auto 20px;
+          justify-content: space-between;
+          display: flex;
+          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+          gap: 20px;
 
           @include rwd('lg'){
 
@@ -193,21 +195,36 @@
         
   
           .answer{
+            color:white;
             width: 347px;
             height: 100px;
-            position:absolute;
             cursor: pointer;
             margin-top: 30px;
             // border:1px solid white;
             background-image: url("@/assets/img/p07_demo/p07_demoGame/question_360x100.png");
             background-size: contain;
             
-            
-  
+
             &:hover{
               background-image: url("@/assets/img/p07_demo/p07_demoGame/answer_360x100.png");
-              
             }
+            
+  
+            .selected{
+            width: 373px;
+            height: 100px;
+            margin-left: 6px;
+            background-image: url("@/assets/img/p07_demo/p07_demoGame/answer_360x100.png");
+            background-repeat: no-repeat;
+            background-size: 335px,50px;
+            color:black;
+            padding-left:64px;
+            padding-top: 15px;
+            border:1px solid red;
+            padding-right: 98px;
+            
+            }
+           
 
             @include rwd('md'){
               width: 347px;
@@ -221,16 +238,23 @@
               
             }
 
+            
+
   
              p{
               // font-size:14px;
-               position: absolute;
-               width: 230px;
-               height: 120px;
-               left: 52%;
-               top: 73%;
-               transform: translate(-50%,-50%);
-              //  border: 1px solid red;
+               width: 220px;
+               height: 100px;
+              //  border:1px solid white;
+               margin-left: 70px;
+               padding-top: 15px;
+               font-size:16px;
+               border:1px solid white;
+
+               .selected{
+                width: 200px;
+                height: 100px;
+               }
                
   
                &:hover{
@@ -244,72 +268,12 @@
                 font-size: 0.8rem;
                } 
 
-              }
-
-             
+              } 
   
             }
   
   
-          .answer.answer_button_01{
-            left: 40px;
-            @include rwd('md'){
-              left:15%;
-            }
-            @include rwd('sm'){
-              left:5%;
-                
-              }
-           
-          }
-  
-          .answer.answer_button_02{
-           right: 50px;
-           @include rwd('md'){
-            left:15%;
-            top:120px;
-          }
-           @include rwd('sm'){
-            left:5%;
-            top:120px;
-            } 
-
-          }
-  
-          .answer.answer_button_03{
-            left: 40px;
-            top: 120px;
-            @include rwd('md'){
-              left:15%;
-              top:240px;
-            }
-            @include rwd('sm'){
-              left:5%;
-              top:240px;
-              }
-           
-          }
-          .answer.answer_button_04{
-            right: 50px;
-            top: 120px;
-            @include rwd('md'){
-              left:15%;
-              top:360px;
-            }
-            @include rwd('sm'){
-              left:5%;
-              top:360px;
-              }
-  
-            // p{
-  
-            //   &:hover{
-            //     color : $sec_color; 
-            //   }
-            // }
-            
-            
-          }
+         
         }
   
   
@@ -347,6 +311,9 @@
           left: 58%;
           top: 50%;
           transform: translate(-50%,-50%);
+          
+         
+          
               
           
         }
