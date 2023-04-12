@@ -7,52 +7,41 @@
     color: $title_color;
   }
   main {
+    position: relative;
     margin: 0 auto;
     padding: 0 30px;
+
     @include rwd(md) {
       padding: 0 20px;
+      min-height: 1000px;
     }
     @include rwd(sm) {
       padding: 0 15px;
     }
     .robot_p07_demoPhone_phone {
-      min-height: 100px;
-      bottom: 0;
-      right: 0;
-      @include rwd(boostrap_lg) {
+      position: absolute;
+      bottom: 5%;
+      left: calc(50% + 175px);
+      @include rwd(md) {
         top: 10%;
-        left: 50%;
-        transform: translate(-50%, 0);
+        left: calc(50% - 150px);
       }
-      .talkbox {
-        /**** talk bubble ****/
-        min-height: 300px;
-        max-width: 60%;
-        margin-left: 20%;
+      .talk-bubble {
+        margin: 10px;
+        background-color: $text_color;
         position: relative;
-        right: 0;
-        z-index: 3;
-        @include rwd(boostrap_lg) {
-          max-width: 75%;
-          margin-left: 0;
-        }
-        .talk-bubble {
-          margin: 10px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        max-width: 300px;
+        // transform: rotateX(90deg);
+        &::after {
+          content: "";
+          border-color: $text_color $text_color transparent transparent;
+          border-style: solid;
+          border-width: 15px 10px;
           position: absolute;
-          background-color: $text_color;
-          border-radius: 15px;
+          left: 15px;
         }
-        .tri-right.right-in:after {
-          content: " ";
-          position: absolute;
-          left: auto;
-          right: -20px;
-          top: 40px;
-          bottom: auto;
-          border: 12px solid;
-          border-color: $text_color transparent transparent $text_color;
-        }
-        /* talk bubble contents */
         .talktext {
           text-align: center;
           padding: 10px;
@@ -70,25 +59,15 @@
         }
       }
       svg {
-        top: 0;
-        right: 0;
+        margin-left: 30px;
         max-width: 90px;
         max-height: 90px;
-        @include rwd(boostrap_lg) {
-          right: 10%;
-        }
-        @include rwd(md) {
-          right: 5%;
-        }
-        @include rwd(sm) {
-          right: 0;
-        }
       }
     }
     .phoneLayout_p07_demoPhone_phone {
       min-height: 800px;
-      @include rwd(boostrap_lg) {
-        min-height: 900px;
+      @include rwd(md) {
+        min-height: 750px;
       }
       img:first-child {
         max-width: 350px;
@@ -96,8 +75,8 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 2;
-        @include rwd(boostrap_lg) {
-          top: 65%;
+        @include rwd(md) {
+          transform: translate(-50%, 0);
           max-width: 300px;
         }
       }
@@ -108,18 +87,21 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
-        @include rwd(boostrap_lg) {
-          top: 65%;
+        @include rwd(md) {
+          transform: translate(-50%, 2.5%);
           border-radius: 2rem;
           max-width: 270px;
         }
       }
     }
     .volume_p07_demoPhone_phone {
+      position: absolute;
+      top: 0;
+      left: calc(50% + 200px);
       max-height: 100px;
-      justify-content: end;
-      @include rwd(boostrap_lg) {
-        justify-content: center;
+      max-width: 170px;
+      @include rwd(md) {
+        left: calc(50% - 85px);
       }
       svg:first-child {
         max-width: 120px;
