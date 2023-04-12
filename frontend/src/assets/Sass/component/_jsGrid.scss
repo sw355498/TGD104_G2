@@ -42,4 +42,25 @@
             background: $title_color;
         }
     }
+    // sorting 的三角形
+    .jsgrid-header-sort::before {
+        content: " ";
+        display: block;
+        float: left;
+        position: relative;
+        top: 10px;
+        left: 20px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+    }
+    .jsgrid-header-sort-asc::before {
+        border-width: 0 7px 7px 7px;
+        border-color: transparent transparent white transparent;
+    }
+    .jsgrid-header-sort-desc::before {
+        border-width: 7px 7px 0 7px;
+        border-color: white transparent transparent transparent;
+    }
+
 }
