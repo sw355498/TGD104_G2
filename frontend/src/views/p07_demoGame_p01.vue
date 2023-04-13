@@ -21,16 +21,25 @@
             <div class="answer_button">
                 <div class="answer" 
                 v-for="(answer,key) in  questions[(questionNumber-1)].answers" :key="key"
-                @click="toggleClass($event.target)" >
-                <p id="btnp">{{ answer }}</p></div>
+                @click="toggleClass($event.target, answer)" 
+                :class="{ disabled: selectedAnswer !== null && selectedAnswer !== answer }">
+                <p>{{ answer }}</p></div>
 
             </div>
+
+             <!-- 印章部分 -->
+
+            <div class="stamp" v-if="isAnswered">
+                <p v-if = "isCorrect">正確</p>
+                <p v-else>錯誤</p>
+            </div>
+
 
 
             <!-- 解答部分 -->
 
 
-            <!-- <div class="answer_zone">
+            <div class="answer_zone">
                 <div class="answer_board">
                     <h2>破解</h2>
                     <p>網路交友陷阱多，尤其一旦陷入戀愛更容易沖昏頭，網戀注意以下幾點，讓你遠離詐騙爛桃花<br>1.永遠不要把感情與錢放在一起，真要放一起，就要當作這筆錢已經丟了<br>2.認識一周以內，就會叫你老公、老婆的人，絕對不能相信<br>3.認識一周以後，叫妳老公、老婆的人，談到投資，只能他給你錢，絕對不要給他錢<br>4.伴侶或朋友有錢，不關你的事，祝福他就好，請不要投資他<br>5.年投資報酬率超過20%，風險可能超過200%。低風險、高報酬，得想想為什麼會是自己<br>6.匯款的時候，請跟銀行行員老實交代原因，他們都受過訓練，會幫你分辨真假，但是如果你騙他們，那就愛莫能助了<br>7.錢不要匯到國外！那會追不回來，連人頭帳戶都無法追查</p>
@@ -38,7 +47,7 @@
                     </div> 
 
 
-            </div> -->
+            </div>
 
 
             <div class="next">
@@ -75,11 +84,16 @@
 export default {
     data(){
         return{
-            questionNumber:1,
+
+            //標題第幾題
+            questionNumber:1, 
+
+            //題目選項跟答案
             questions:[{
                 text:'1請問哪一支電話號碼會是詐騙號碼？',
                 image: "@/assets/img/p07_demo/p07_demoGame/quiz1.jpg",
                 answers:["A.165","B.+886227652122"," C.0800700365","D.以上皆是"],
+                correctAnswer: "D.以上皆是",
             },
             {
                 text:"2請參考下列圖片，這是屬於哪一方面的詐騙？",
@@ -127,6 +141,9 @@ export default {
                 answers:["A.提款","B.轉帳","C.解除分期付款或退款","D.餘額查詢"]
             },
             ],
+            selectedAnswer:null,
+            isCorrect: false,
+            isAnswered: false
 
 
           
@@ -159,12 +176,21 @@ export default {
         const chineseNums = ["一","二","三","四","五","六","七","八","九","十"];
         return chineseNums[num - 1];
         },
-        toggleClass(element){
-            element.classList.toggle('selected');
-            
-            
-          
-        },
+
+        toggleClass(element, answer) {
+      if (!this.isAnswered) {
+        element.classList.toggle('selected');
+        this.selectedAnswer = answer
+        this.isAnswered = true
+        if (this.selectedAnswer === this.questions[this.questionNumber - 1].correctAnswer) {
+          this.isCorrect = true
+        } else {
+          this.isCorrect = false
+        }
+      }
+    },
+
+        
         
         
     },
@@ -180,4 +206,6 @@ export default {
 
 
 </script>
+
+
 
