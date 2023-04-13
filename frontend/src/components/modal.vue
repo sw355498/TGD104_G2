@@ -5,9 +5,11 @@
         <div class="modal-header">
           <slot name="header">default header</slot>
           <button
-              class="modal-default-button small_button"
-              @click="$emit('close')"
-          >Ｘ</button>
+            class="modal-default-button small_button"
+            @click="$emit('close')"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
 
         <div class="modal-body">
@@ -23,23 +25,23 @@
 </template>
 
 <script setup>
-    import { watch } from 'vue'
-    const props = defineProps({
+import { watch } from "vue";
+const props = defineProps({
         show: Boolean
     })
     let bodyBlock = document.querySelector('body')
     if(props.show){
         bodyBlock.style.cssText = 'height: 100vh; overflow-y: hidden;'
-      } else {
+} else {
         bodyBlock.style.cssText = ''
-    }
-    watch(props, (value) => {
+}
+watch(props, (value) => {
 
       if(value.show){
         bodyBlock.style.cssText = 'height: 100vh; overflow-y: hidden;'
-      } else {
+  } else {
         bodyBlock.style.cssText = ''
-      }
+  }
 
     })
 </script>
