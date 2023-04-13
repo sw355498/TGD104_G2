@@ -5,8 +5,8 @@
             <div v-html="modalContent"></div>
         </template>
         <template #body>
-            帳號：<input type="text">
-            密碼：<input type="text" class="mt-2">
+            帳號：<input type="text" style="margin-bottom: 20px;">
+            密碼：<input type="text">
         </template>
         <template #footer>
             <button class="medium_button">送出</button>
@@ -162,7 +162,7 @@
                 paging: true,
                 pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
                 pageIndex: 1,   //當前頁面數
-                pageSize: 10,   //頁面的數據量
+                pageSize: 8,   //頁面的數據量
                 pageButtonCount: 2,    //最大數量的頁面按鈕
                 pagerFormat: "{first} {pages} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}", //占位符來指定分頁欄格式
                 //pageNextText: "Next",   //下一頁
@@ -197,8 +197,14 @@
     }
 </script>
 
-<style>
-        .fa-sharp{
-            transform: translate(-50%, -50%);
+<style lang="scss">
+    .fa-sharp{
+        transform: translate(-50%, -50%);
+    }
+    #jsGrid{
+        .jsgrid-header-sortable::before{
+            top: 10px;
+            left: 0px;
         }
+    }
 </style>

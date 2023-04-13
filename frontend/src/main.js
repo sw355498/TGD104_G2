@@ -36,4 +36,9 @@ import * as Vue from "vue"; // in Vue 3
 import axios from "axios";
 import VueAxios from "vue-axios";
 
-createApp(App).use(router).use(CKEditor).use(VueAxios, axios).mount("#app");
+const app = createApp(App);
+
+app.config.globalProperties.$apiUrl =
+  process.env.VUE_APP_API_URL || "http://localhost/frontend/src/api/";
+
+app.use(router).use(CKEditor).use(VueAxios, axios).mount("#app");
