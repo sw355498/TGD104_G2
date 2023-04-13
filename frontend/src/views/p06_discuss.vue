@@ -107,17 +107,22 @@
                 </ul>
             </nav>
         </main>
+        <form> 
+            <input v-model="inputText" @keyup="doQuery" />
+        </form>
+        <p>結果: <br>
+        <span id="result"></span></p> 
         <!-- footer -->
         <frontFooter />
     </div>
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { ref, inject } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue';
-
+    import { API_URL } from '@/config'
     let id = 0
     const modalContent = ref('')
     const showModal = ref(false)
@@ -132,6 +137,35 @@
     function ellipsisBtn(index) {
         console.log(index)
     }
+    const inputText = ref('')
+    const apiUrl = inject('$apiUrl')
+    function doQuery(){
+        $.ajax({            
+            method: "POST",
+            // url: "http://localhost/TGD104_G2/frontend/src/api/get_b_user_select.php",
+            url: `${API_URL}get_b_user_select.php`,
+            data:{ 
+                account: inputText.value
+            },            
+            dataType: "json",
+            success: function (response) {
+                //更新html內容前先清空原有資料
+                $("#result").html("");
+                // 更新html內容(透過jQuery跑迴圈取值)
+                if(response.length === 0){
+                    $('#result').append('查無資料!!!')
+                } else {
+                    $.each(response, function(index, row) {
+                        $("#result").append(row.Account + "/" + row.PWD +  "/" + row.CreateDate + "<br/>");
+                    });
+                }
+            },
+            error: function(exception) {
+                alert("發生錯誤: " + exception.status);
+            }
+        });
+}
+
 
 </script>
 <style lang="scss">

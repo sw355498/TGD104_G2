@@ -31,9 +31,12 @@ const requireAll = (requireContext) =>
 const req = require.context("@/assets/icon/", true, /\.svg$/);
 requireAll(req);
 
+
+
 //axios
 import * as Vue from "vue"; // in Vue 3
 import axios from "axios";
 import VueAxios from "vue-axios";
+
 
 createApp(App).use(router).use(CKEditor).use(VueAxios, axios).mount("#app");
