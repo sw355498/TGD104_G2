@@ -11,10 +11,18 @@
       </label>
       <div class="question_p05_faq_block">
         <ul>
-          <li v-for="item in faq" :key="item.id">
-            <div class="title_p05_faq_qusetion">{{ item.title }}</div>
+          <li
+            v-for="item in faq.data"
+            :class="{ open: boolean }"
+            :data-target="bar"
+            :key="item.ID"
+          >
+            <div class="title_p05_faq_qusetion" @click="dropDown">
+              {{ item.QUESTION }}
+              <i class="fa-solid fa-angle-up"></i>
+            </div>
             <div class="content_p05_faq_qusetion">
-              <p>{{ item.content }}</p>
+              <p>{{ item.ANSWER }}</p>
               <span>{{ item.source }}</span>
             </div>
           </li>
@@ -26,40 +34,34 @@
     <frontFooter />
   </div>
 </template>
-<script>
-import { ref } from "vue";
+
+<script setup>
+import { ref, reactive, onMounted } from "vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
+import axios from "axios";
 
-export default {
-  components: {
-    frontNavbar,
-    frontFooter,
-  },
-  setup() {
-    const faq = ref([
-      {
-        id: "q01",
-        title: "常見詐騙手法及防範方法",
-        content: `若您發現個人姓名、頭像遭詐騙集團冒用時，該如何向Google公司即時反映?
-                165反詐騙諮詢專線繪製步驟教學圖文，不論是【不當影片、頻道和其他內容】或【廣告】，都能於第一時間提出檢舉，除了利用軟體本身的檢舉機制外，請同步填具檢舉表單，避免更多民眾誤信受害!
-                官方訊息`,
-        source: "165反詐騙諮詢",
-      },
-      {
-        id: "q02",
-        title: "常見詐騙手法及防範方法",
-        content: `若您發現個人姓名、頭像遭詐騙集團冒用時，該如何向Google公司即時反映?
-                165反詐騙諮詢專線繪製步驟教學圖文，不論是【不當影片、頻道和其他內容】或【廣告】，都能於第一時間提出檢舉，除了利用軟體本身的檢舉機制外，請同步填具檢舉表單，避免更多民眾誤信受害!
-                官方訊息`,
-        source: "165反詐騙諮詢",
-      },
-    ]);
+// data存放
+const faq = reactive({
+  data: "",
+});
+// QA開闔
+const boolean = ref(false);
+const toggleClass = document.querySelectorAll("[data-toggle-class]");
 
-    return {
-      faq,
-    };
-  },
+onMounted(() => {
+  axios
+    .get("http://localhost/TGD104_G2/frontend/src/api/getFaq.php")
+    // .get(`${this.$apiUrl}getFaq.php`)
+    .then((response) => {
+      faq.data = response.data;
+    })
+    .catch((error) => console.log(error));
+});
+
+// QA content開闔
+const dropDown = () => {
+  boolean.value = !boolean.value;
 };
 </script>
-<style></style>
+<style scoped></style>
