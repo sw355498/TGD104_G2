@@ -311,6 +311,7 @@
                         .tag_p01_news_postCategory {
                             &:after {
                                 content: ' | ';
+                                padding: 0 5px;
                             }
                         }
 

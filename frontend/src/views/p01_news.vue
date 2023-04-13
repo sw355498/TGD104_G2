@@ -50,7 +50,7 @@
           <i
             class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
           ></i>
-          <input v-model="text" @keyup="doQuery()" placeholder="搜尋文章" />
+          <input v-model="searchKeyword" @keyup="doQuery()" placeholder="搜尋文章" />
         </div>
       </div>
       <!-- 列表 -->
@@ -60,7 +60,7 @@
           class="li_p01_newsPost"
           :key="value.ID"
         >
-          <router-link to="/p01/p01_newsArticle">
+        <router-link :to="'/p01/p01_newsArticle/' + value.ID">
             <div class="newsImg">
               <img :src="value.NEWS_PIC" />
             </div>
@@ -136,8 +136,6 @@ export default {
     frontFooter,
   },
   data() {
-    // let id = 0,
-    //   news = 85;
     return {
       isActive: true,
       datas: [], //初始資料
@@ -146,6 +144,7 @@ export default {
       currentPage: 1,
       filteredData: [], //分類後的資料
       categorySelected: {}, // 每個分類是否被選中的狀態
+      searchKeyword: ''//搜尋預設空字串
       // object: [
       //   {
       //     ID: `${id++}`,
@@ -169,20 +168,7 @@ export default {
         this.datas = response.data;
         this.currentPage = 1; // 初始化當前頁數
         console.log(response.data);
-        // 以下為限制內文顯示字數
-        // this.$nextTick(() => {
-        //   var len = 120;
-        //   $(".p01_news_article").each(function (i) {
-        //     if ($(this).text().length > len) {
-        //       $(this).attr("title", $(this).text());
-        //       var text =
-        //         $(this)
-        //           .text()
-        //           .substring(0, len - 1) + "...";
-        //       $(this).text(text);
-        //     }
-        //   });
-        // });
+    
       })
       .catch((error) => {
         console.error(error);
@@ -246,6 +232,12 @@ export default {
         this.categorySelected[category] = true;
       }
     },
+    // 搜尋沒有成功
+    doQuery() {
+    this.filteredItems = this.datas.filter(item => {
+      return item.NEWS_TITLE.includes(this.searchKeyword);
+    });
+  },
 
     // 分頁
     setPage(page) {
