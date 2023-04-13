@@ -27,10 +27,14 @@
     const props = defineProps({
         show: Boolean
     })
-
-
+    let bodyBlock = document.querySelector('body')
+    if(props.show){
+        bodyBlock.style.cssText = 'height: 100vh; overflow-y: hidden;'
+      } else {
+        bodyBlock.style.cssText = ''
+    }
     watch(props, (value) => {
-      let bodyBlock = document.querySelector('body')
+
       if(value.show){
         bodyBlock.style.cssText = 'height: 100vh; overflow-y: hidden;'
       } else {
