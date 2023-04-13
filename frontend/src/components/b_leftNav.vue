@@ -16,7 +16,7 @@
             <ul class="list-unstyled text_title">
                 <li v-for="item in navItems"  :key="item.id">
                     <a 
-                        @click.prevent="selectedTab = item.clickName" 
+                        @click="changeTab(item.clickName)" 
                         class="link" 
                         :class="{ 'b_active': selectedTab === item.clickName}"
                     >
@@ -26,7 +26,7 @@
                 </li>
                 <li v-if="userlevel">
                     <a
-                        @click="selectedTab = 'staff'" 
+                        @click="changeTab('staff')"  
                         class="link" 
                         :class="{ 'b_active': selectedTab === 'staff' }"
                     >
@@ -57,9 +57,13 @@
         {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
     ])
 
+    //子元件傳值父元件
     const emit = defineEmits(['response'])
-
-    emit('response', selectedTab)
+    emit('response', selectedTab.value)
+    function changeTab(newTab){
+        selectedTab.value = newTab
+        emit('response', selectedTab.value)
+    }
 </script>
 <style>
     .fa-sharp{

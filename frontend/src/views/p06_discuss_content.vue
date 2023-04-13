@@ -155,36 +155,20 @@
     </div>
 </template>
 
-<script>
+<script setup>
     import { ref } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue'
-    export default {
-        components: {
-            frontNavbar,
-            frontFooter,
-            Modal,
-        },
-        setup(){
-            const modalContent = ref('')
-            const showModal = ref(false)
-            const messages = ref([
-                [
-                    {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
-                ],
-                [
-                    {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日'},
-                    {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
-                ],
-            ])
-            return{
-                messages,
-                showModal,
-                frontNavbar,
-                frontFooter,
-                Modal,
-            }
-        }
-    }
+    const modalContent = ref('')
+    const showModal = ref(false)
+    const messages = ref([
+        [
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
+        ],
+        [
+            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日'},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
+        ],
+    ])
 </script>

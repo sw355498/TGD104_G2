@@ -2,6 +2,19 @@
     <div>
         <!-- navgation -->
         <frontNavbar />
+        <Teleport to="body">
+            <modal :show="showModal" @close="showModal = false">
+            <template #header>
+                <div v-html="modalContent"></div>
+            </template>
+            <template #body>
+                <textarea class="modal_textarea_p06"></textarea>
+            </template>
+            <template #footer>
+                <button class="medium_button">送出</button>
+            </template>
+            </modal>
+        </Teleport>
         <main class="wrapper_p06_discuss">
             <ul class="breadcrumb-list text_title">
                 <li><router-link to="/index">首頁</router-link></li>
@@ -41,6 +54,12 @@
                             <span class="paragraph">{{item.author}}</span>
                         </div>
                         <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <div class="ellipsisList">
+                            <ul>
+                                <li id="show-modal" @click="showModal = true, modalContent = '<h4>檢舉</h4>'">檢舉</li>
+                                <li>分享</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="articleBlock_p06_discuss">
                         <div class="articleText_p06_discuss">
@@ -93,38 +112,45 @@
     </div>
 </template>
 
-<script>
+<script setup>
     import { ref } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
+    import Modal from '@/components/modal.vue';
 
-    export default {
-        components: {
-            frontNavbar,
-            frontFooter,
-        },
-        setup(){
-            function ellipsisBtn(index) {
-                console.log(index)
-            }
-            let id = 0
-            const articleList = ref([
-                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-                {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-            ])
+    let id = 0
+    const modalContent = ref('')
+    const showModal = ref(false)
+    const articleList = ref([
+        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+    ])
 
+    function ellipsisBtn(index) {
+        console.log(index)
+    }
 
+</script>
+<style lang="scss">
+.ellipsisList{
+    position: absolute;
+    right: 0;
+    top:30px;
+    background: #fff;
 
-            return{
-                isActive: true,
-                articleList,
-                frontNavbar,
-                frontFooter,
-                ellipsisBtn,
-            }
+    color: black;
+
+    ul{
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        li{
+            padding: 15px 20px;
+            cursor: pointer;
         }
     }
-</script>
+}
+</style>
