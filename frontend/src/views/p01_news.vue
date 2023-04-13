@@ -20,11 +20,29 @@
             <option value="">交友詐騙</option>
             <option value="">金融詐騙</option>
           </select> -->
+
           <div class="wide_tab">
-            <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
+            <div class="newsTab">
+              <a
+                href="#"
+                @click.prevent="selectCategory(null)"
+                :class="{ currentTab: selectedCategory === null }"
+                >所有文章</a
+              >
+            </div>
+            <!-- 分類項目根據資料庫 -->
+            <div class="newsTab" v-for="category in categories" :key="category">
+              <a
+                :class="{ currentTab: categorySelected[category] }"
+                href="#"
+                @click.prevent="selectCategory(category)"
+                >{{ category }}</a
+              >
+            </div>
+            <!-- <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
               href="#"
               >網站詐騙</a
-            >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a>
+            >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a> -->
           </div>
         </div>
 
@@ -35,12 +53,16 @@
           <input v-model="text" @keyup="doQuery()" placeholder="搜尋文章" />
         </div>
       </div>
-<!-- 列表 -->
+      <!-- 列表 -->
       <ul class="ul_p01_newsPost">
-        <li v-for="value in datas.slice(pageStart, pageEnd)" class="li_p01_newsPost" :key="value.ID">
+        <li
+          v-for="value in filteredItems.slice(pageStart, pageEnd)"
+          class="li_p01_newsPost"
+          :key="value.ID"
+        >
           <router-link to="/p01/p01_newsArticle">
             <div class="newsImg">
-              <img :src="value.image" />
+              <img :src="value.NEWS_PIC" />
             </div>
 
             <div class="newsContent">
@@ -54,17 +76,19 @@
                   <a><i class="fa-solid fa-bookmark"></i>收藏</a>
                 </div>
               </div>
-
-              <div class="tag_p01_news_postDescription">
-                <div class="tag_p01_news_postCategory">
-                  {{ value.category }}
+              <div class="read">
+                <div class="tag_p01_news_postDescription">
+                  <div class="tag_p01_news_postCategory">
+                    {{ value.NEWS_CATEGORY }}
+                  </div>
+                  <div class="tag_p01_news_postDate">
+                    {{ value.CREATE_DATE }}
+                  </div>
                 </div>
-                <div class="tag_p01_news_postDate">{{ value.CREATE_DATE }}</div>
+                <div class="p01_news_article paragraph">
+                  {{ value.NEWS_CONTENT }}
+                </div>
               </div>
-              <div class="p01_news_article paragraph">
-                {{ value.NEWS_CONTENT }}
-              </div>
-              <!-- <div class="read">more</div> -->
             </div>
           </router-link>
         </li>
@@ -73,7 +97,7 @@
       <!-- 分頁bar -->
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item" @click.prevent="setPage(currentPage-1)">
+          <li class="page-item" @click.prevent="setPage(currentPage - 1)">
             <a class="page-link pagination-dark" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
@@ -88,7 +112,7 @@
             <a class="page-link pagination-dark" href="#">{{ n }}</a>
           </li>
 
-          <li class="page-item" @click.prevent="setPage(currentPage+1)">
+          <li class="page-item" @click.prevent="setPage(currentPage + 1)">
             <a class="page-link pagination-dark" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
@@ -116,9 +140,12 @@ export default {
     //   news = 85;
     return {
       isActive: true,
-      datas: [],
+      datas: [], //初始資料
+      selectedCategory: null,
       perpage: 10, //一頁的資料數
       currentPage: 1,
+      filteredData: [], //分類後的資料
+      categorySelected: {}, // 每個分類是否被選中的狀態
       // object: [
       //   {
       //     ID: `${id++}`,
@@ -131,94 +158,70 @@ export default {
       //     date: "2023/1/5",
       //     fblink: "https://tw.yahoo.com/",
       //   },
-      //   {
-      //     ID: `${id++}`,
-      //     name: "請注意近期詐騙集團假冒CACO客服解除分期付款詐騙",
-      //     image: require("../assets/img/p01_news/pic02.jpg"),
-      //     category: "網站詐騙",
-      //     url: "https://tw.yahoo.com/",
-      //     content:
-      //       "該假冒的客服人員會先透露曾經購買的衣服等交易個資取得信任後再誆稱因客服人員操作錯誤，誤『升級高級會員』、『分期付款』或『訂單錯誤』等理由需多次扣款，或是要求先匯款驗證等等....而要求操作『ATM』、『網路銀行APP』、『購買遊戲點數』或『提供個人帳戶資料、信用卡資料、簡訊驗證碼』來『解除』相關錯誤請勿聽信，因為這一定是詐騙。",
-      //     date: "2022/6/17",
-      //     fblink: "https://tw.yahoo.com/",
-      //   },
-      //   {
-      //     ID: `${id++}`,
-      //     name: "請注意近期詐騙集團假冒紓困調查騙取個資",
-      //     image: require("../assets/img/p01_news/pic03.jpg"),
-      //     category: "網站詐騙",
-      //     url: "https://tw.yahoo.com/",
-      //     content:
-      //       "請各位鄉親朋友注意：近日衛生福利部社會及家庭署發現，民眾於網路查詢該署長官個人資訊時，卻被導向假冒紓困調查要求登錄個資請勿聽信，這一定是詐騙，勿隨意點選進入來路不明網站！如仍有疑問請撥打165反詐騙諮詢專線查證",
-      //     date: "2022/6/1",
-      //     fblink: "https://tw.yahoo.com/",
-      //   },
-      //   {
-      //     ID: `${id++}`,
-      //     name: "請注意近期詐騙集團假冒「民宿、旅店、露營區」客服解除分期付款詐騙",
-      //     image: require("../assets/img/p01_news/pic04.jpg"),
-      //     category: "網站詐騙",
-      //     url: "https://tw.yahoo.com/",
-      //     content:
-      //       "近日詐騙集團開始假冒『各民宿、旅館、露營區』訂房客服稱您之前訂購的『某某民宿、旅店、露營』因為工作人員操作錯誤要求您操作『ATM』、『網路轉帳』及『購買遊戲點數』等方式來「協助您」解除分期付款設定接到此來電，請不要相信，掛斷電話，並立即聯繫訂房業者或撥打165反詐騙諮詢專線查證。",
-      //     date: "2022/5/9",
-      //     fblink: "https://tw.yahoo.com/",
-      //   },
-      //   {
-      //     ID: `${id++}`,
-      //     name: "請注意近期詐騙集團假冒衛生福利部人員來電",
-      //     image: require("../assets/img/p01_news/pic11.jpg"),
-      //     category: "網站詐騙",
-      //     url: "https://tw.yahoo.com/",
-      //     content:
-      //       "請各位鄉親朋友注意：近日如有接獲詐騙集團假冒「衛生福利部」人員來電通知紓困專案10萬元已核撥至您帳戶請勿聽信，這一定是詐騙110年因應疫情擴大急難紓困實施計畫已於110年6月30日截止，現無與疫情相關紓困措施，且衛生福利部不會以電話主動通知民眾申請紓困金等核定結果，或向民眾詢問有關銀行帳號、身分證字號等個人資訊要求匯款或保管帳戶等情形如有接獲來電透露上述內容謹記1聽、2掛、3查證請聯繫衛生福利部(02)8590-6666或撥打165反詐騙諮詢專線查證",
-      //     date: "2022/4/27",
-      //     fblink: "https://tw.yahoo.com/",
-      //   },
-      //   {
-      //     ID: `${id++}`,
-      //     name: "請注意近期詐騙集團假冒博客來書局客服解除分期付款詐騙",
-      //     image: require("../assets/img/p01_news/pic10.jpg"),
-      //     category: "網站詐騙",
-      //     url: "https://tw.yahoo.com/",
-      //     content:
-      //       "近日如有接獲詐騙集團假冒「博客來書局」客服人員來電該假冒的客服人員會先透露曾經所購買書籍等交易個資取得信任後再誆稱因客服人員操作錯誤誤『升級高級會員、經銷商』、『分期付款』、『訂單錯誤』等理由需多次扣款而要求操作『ATM』、『網路銀行APP』或『購買遊戲點數』來『解除』相關錯誤請勿聽信，這一定是詐騙如有接獲『+886』來電並電話中透露上述內容謹記1聽、2掛、3查證請聯繫博客來書局客服人員或撥打165反詐騙諮詢專線查證",
-      //     date: "2022/4/11",
-      //     fblink: "https://tw.yahoo.com/",
-      //   },
+
       // ],
     };
   },
   mounted() {
-    // console.log("ddd");
     axios
       .get("http://localhost/TGD104_G2/frontend/src/api/getNews.php")
       .then((response) => {
         this.datas = response.data;
+        this.currentPage = 1; // 初始化當前頁數
         console.log(response.data);
         // 以下為限制內文顯示字數
-        this.$nextTick(() => {
-          var len = 120;
-          $(".p01_news_article").each(function (i) {
-            if ($(this).text().length > len) {
-              $(this).attr("title", $(this).text());
-              var text =
-                $(this)
-                  .text()
-                  .substring(0, len - 1) + "...";
-              $(this).text(text);
-            }
-          });
-        });
+        // this.$nextTick(() => {
+        //   var len = 120;
+        //   $(".p01_news_article").each(function (i) {
+        //     if ($(this).text().length > len) {
+        //       $(this).attr("title", $(this).text());
+        //       var text =
+        //         $(this)
+        //           .text()
+        //           .substring(0, len - 1) + "...";
+        //       $(this).text(text);
+        //     }
+        //   });
+        // });
       })
       .catch((error) => {
         console.error(error);
       });
   },
   computed: {
+    categories() {
+      return Array.from(
+        new Set(this.datas.map((item) => item.NEWS_CATEGORY))
+      ).filter((category) => category); // 資料庫的分類內容只回傳非空值
+    },
+    filteredItems() {
+      if (this.selectedCategory) {
+        return this.datas.filter(
+          (item) => item.NEWS_CATEGORY === this.selectedCategory
+        );
+      }
+      return this.datas;
+    },
+    // 感恩嘉宏大大提供的分類再分頁程式
+    // data() {
+    //   return {
+    //     selectedCategory: null
+    //   }
+    // filtered_list() {
+    // const filteredItems = this.items.filter(item => item.tr_category === this.current);
+    // const start = (this.currentPage - 1) * this.perpage;
+    // const end = this.currentPage * this.perpage;
+    // const sortedItems = filteredItems
+    //     .map(item => ({...item, tr_cost: new Date(item.tr_cost)})) // 將日期字串轉換為 Date 物件
+    //     .sort((a, b) => a.tr_cost - b.tr_cost); // 進行日期排序
+    // return sortedItems
+    //     .slice(start, end)
+    //     .map(item => ({...item, tr_cost: item.tr_cost.toLocaleDateString()})); // 將日期轉換為指定格式的字串
+    // },
+
     // 分頁計算
     totalPage() {
-      return Math.ceil(this.datas.length / this.perpage);
+      return Math.ceil(this.filteredData.length / this.perpage);
       //Math.ceil()取最小整數
     },
     pageStart() {
@@ -232,40 +235,37 @@ export default {
   },
 
   methods: {
-    // getData() {
-    //         fetch(`../../../api/getNews.php`)
-    //             .then((res) => res.json())
-    //             .then((json) => {
-    //                 this.newsAll = json;
-    //             });
-    //     },
-    
+    selectCategory(category) {
+      this.selectedCategory = category;
+      this.currentPage = 1; // 重新設定當前頁數
+      this.categorySelected = {}; // 每次選擇分類時重置分類的選擇狀態
+
+      if (category === null) {
+        this.categorySelected.all = true;
+      } else {
+        this.categorySelected[category] = true;
+      }
+    },
+
     // 分頁
     setPage(page) {
       if (page <= 0 || page > this.totalPage) {
         return;
       }
       this.currentPage = page;
-      // 分頁
-      this.$nextTick(() => {
-          var len = 120;
-          $(".p01_news_article").each(function (i) {
-            if ($(this).text().length > len) {
-              $(this).attr("title", $(this).text());
-              var text =
-                $(this)
-                  .text()
-                  .substring(0, len - 1) + "...";
-              $(this).text(text);
-            }
-          });
-        });
-
+      this.selectedCategory = null;
+    },
+  },
+  watch: {
+    filteredItems() {
+      this.filteredData = [...this.filteredItems];
+    },
+    selectedCategory() {
+      this.filteredData = [...this.filteredItems];
     },
   },
 };
 </script>
 
  <style lang="scss" scoped>
-
 </style>
