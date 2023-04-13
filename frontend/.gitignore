@@ -10,6 +10,7 @@ package-lock.json
 .env.local
 .env.*.local
 .evn
+.env
 
 # Log files
 npm-debug.log*
