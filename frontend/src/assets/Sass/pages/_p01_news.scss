@@ -63,7 +63,8 @@
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid $text_color;
-        @include rwd('md'){
+
+        @include rwd('md') {
             flex-direction: column;
         }
 
@@ -73,12 +74,12 @@
 
         .tab_p01_news_category {
             display: flex;
-            padding: 20px 0;
-            
+            padding-top: 20px;
+
             @include rwd('md') {
                 // padding: 0 20px 0 0;
                 order: 2;
-                
+
             }
 
             @include rwd('sm') {
@@ -103,6 +104,7 @@
 
             .wide_tab {
                 flex-basis: 550px;
+
                 // @include rwd('md') {
                 //     display: none;
                 // }
@@ -113,14 +115,24 @@
                     overflow-x: auto;
                 }
 
-                a {
-                    padding: 0 5px;
+                .newsTab {
+                    padding: 0 5px 0 0;
+                    display: inline-flex;
                     box-sizing: border-box;
                     text-decoration: none;
                     color: $text_color;
 
-                    &:not(.current):hover {
-                        color: $main_color;
+                    &::after {
+                        content: '|';
+                        padding-left: 10px;
+                    }
+
+                    a {
+                        padding: 0 8px 15px 10px;
+                        &:not(.current):hover {
+                            color: $main_color;
+                        }
+
                     }
                 }
 
@@ -146,7 +158,7 @@
             @include rwd('md') {
                 margin: auto 0;
                 box-sizing: border-box;
-                
+
             }
 
             @include rwd('sm') {
@@ -269,6 +281,29 @@
 
                     }
 
+                    .read {
+                        &:after {
+                            content: 'more';
+                            margin: 2px 15px;
+                            display: block;
+                            line-height: 25px;
+                            float: right;
+                            transition: all 0.3s ease;
+                            opacity: .5;
+                            letter-spacing: 0;
+                        }
+
+                        &:hover:after {
+                            content: 'more⇀';
+                            margin: 2px 0;
+                            display: block;
+                            line-height: 25px;
+                            opacity: 1;
+                            color: $four_color;
+                            letter-spacing: 2px;
+                        }
+                    }
+
                     .tag_p01_news_postDescription {
                         display: flex;
                         padding-bottom: 10px;
@@ -287,32 +322,14 @@
                     }
 
                     .p01_news_article {
+                        overflow: hidden;
+                        display: -webkit-box;
                         text-overflow: ellipsis;
                         -webkit-line-clamp: 3;
                         -webkit-box-orient: vertical;
                         white-space: normal;
                         font-weight: 200;
 
-                        &:after {
-                            content: 'more';
-                            margin: 7px 15px;
-                            display: block;
-                            line-height: 25px;
-                            float: right;
-                            transition: all 0.3s ease;
-                            opacity: .5;
-                            letter-spacing: 0;
-                        }
-
-                        &:hover:after {
-                            content: 'more⇀';
-                            margin: 7px 0;
-                            display: block;
-                            line-height: 25px;
-                            opacity: 1;
-                            color: $four_color;
-                            letter-spacing: 2px;
-                        }
                     }
 
 

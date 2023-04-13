@@ -477,6 +477,9 @@
             width: 100%;
             height: 80px;
             background-color: #ff3b30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             @include rwd(lg){
                 height: 60px;
             }
@@ -489,6 +492,8 @@
             ul{
                 list-style: none;
                 display: flex;
+                align-items: center;
+                justify-content: flex-start!important;
                 margin-bottom: 0;
                 padding-left: 20px;
                 position: relative;
@@ -579,11 +584,13 @@
             // ========= 第三四紅條廣告詞 =========
             .scamWeb_p07_demoShopping_bannerRedP2{
                 font-weight: bold;
-                font-size: 20px;
+                font-size: 28px;
                 margin-bottom: 0;
                 padding: 7px 20px;
+                white-space: nowrap;
+                @include newsTickerX(20s);
                 @include rwd(lg){
-                    font-size: 16px;
+                    font-size: 20px;
                     line-height: 1.2;
                 }
                 @include rwd(md){
@@ -596,8 +603,11 @@
                 }
             }
         }
+        .scamWeb_p07_demoShopping_bannerRed1{
+            display: block;
+        }
         .scrollBar{
-            overflow: scroll;
+            overflow: hidden;
             &::-webkit-scrollbar{
                 display: none;
             }
@@ -605,14 +615,12 @@
         
         // ========= 第四紅條廣告詞 =========
         .scamWeb_p07_demoShopping_bannerRed4{
-            height: 50px;
+            // height: 50px;
             .scamWeb_p07_demoShopping_bannerRedP2{
                 text-align: center;
                 line-height: 50px;
                 padding: 0;
-                @include rwd(md){
-
-                }
+                @include newsTickerX(13s);
             }
         }
 
@@ -620,15 +628,17 @@
         .scamWeb_p07_demoShopping_bannerRed5{
             margin-top: 40px;
             .scamWeb_p07_demoShopping_bannerRedP2{
+                animation: none;
                 @include rwd(lg){
                     font-size: 22px;
                 }
             }
         }
         
-        // ========= 第五紅條廣告詞 =========
+        // ========= 第六紅條廣告詞 =========
         .scamWeb_p07_demoShopping_bannerRed6{
             .scamWeb_p07_demoShopping_bannerRedP2{
+                animation: none;
                 @include rwd(lg){
                     font-size: 22px;
                 }
@@ -642,7 +652,11 @@
         .scamWeb_p07_demoShopping_bannerGray{
             background-color: #D9D9D9;
             padding: 7px 20px;
-            overflow: scroll;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
             &::-webkit-scrollbar{
                 display: none;
             }
@@ -658,13 +672,14 @@
             p{
                 color: $background_color;
                 font-weight: bold;
-                font-size: 20px;
+                font-size: 28px;
                 margin-bottom: 0;
+                @include newsTickerX(20s);
                 @include rwd(lg){
-                    font-size: 16px;
+                    font-size: 20px;
                 }
                 @include rwd(sm){
-                    font-size: 12px;
+                    font-size: 16px;
                 }
             }
         }
@@ -852,36 +867,40 @@
         .scamWeb_p07_demoShopping_discussion{
             display: flex;
             flex-direction: column;
-            height: 430px;
+            height: 200px;
             list-style: none;
             padding-left: 0;
             margin-bottom: 0;
-            overflow: scroll;
+            overflow: hidden;
             li{
                 flex-grow: 1;
                 font-size: 20px;
                 font-weight: 800;
                 line-height: 1.2;
-                color: $background_color;
                 display: flex;
                 align-items: center;
-                padding: 0 25px;
+                padding: 10px 25px;
+                @include newsTickerY(10s);
                 @include rwd(md){
                     font-size: 16px;
                 }
                 @include rwd(sm){
                     font-size: 12px;
                 }
+                p{
+                    color: $background_color;
+                    margin-bottom: 0;
+                }
                 &:nth-child(2n){
                     background-color: $text_color;
-                    border: 1px solid #000;
+                    outline: 1px solid #000;
                     @include rwd(lg){
-                        border: none;
+                        outline: none;
                     }
                 }
                 &:nth-child(2n-1){
                     background-color: #9D9EA2;
-                    border: none;
+                    outline: none;
                 }
             }
         }
@@ -972,3 +991,4 @@
     }
        
 }
+

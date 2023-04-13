@@ -46,7 +46,11 @@
         .jsgrid-grid-body {
             overflow-y: hidden;
         }
-
+        // 三角形位置
+        #jsGrid .jsgrid-header-sortable::before{
+            top: 10px;
+            left: 0px;
+        }
         .nav {
             @include rwd('sm') {
                 --bs-nav-link-padding-x: 0;

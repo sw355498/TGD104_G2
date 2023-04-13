@@ -1,11 +1,11 @@
 <template>
-  <div v-if="loading">  
+  <div v-if="loading">
     <Loading v-show="loading" />
   </div>
   <div v-else>
     <nav v-if="$route.path === '/'">
       <div class="app_content_block">
-        <div class="title">詐知就好</div>
+        <div class="app_title">詐知就好</div>
         <div class="router_block">
           <router-link to="/index" class="router_item">
             <div>進入前台</div>
@@ -23,19 +23,19 @@
 <script>
 import particlesJs from "particles.js";
 import particlesConfig from "@/assets/particles.json";
-import Loading from '@/components/loading.vue'
+import Loading from "@/components/loading.vue";
 export default {
   data() {
     return {
-      loading: true
-    }
+      loading: true,
+    };
   },
   mounted() {
     this.init();
 
     setTimeout(() => {
-          this.loading = false;
-    }, 2500);
+      this.loading = false;
+    }, 500);
   },
   methods: {
     init() {
@@ -44,18 +44,18 @@ export default {
     },
   },
   components: {
-    Loading
-  }
+    Loading,
+  },
 };
 </script>
-<style lang="scss">
-.app_content_block{
+<style lang="scss" scoped>
+.app_content_block {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
-  .title {
+
+  .app_title {
     text-align: center;
     margin-bottom: 20px;
     font-size: 3rem;
@@ -63,7 +63,7 @@ export default {
     color: #fff;
     animation: neon 1.5s ease-in-out infinite alternate;
   }
-  
+
   .router_block {
     display: flex;
     justify-content: center;
@@ -71,13 +71,13 @@ export default {
     column-gap: 25px;
     row-gap: 25px;
     flex-wrap: wrap;
-  
+
     .router_item {
       padding: 80px;
       background: rgba($color: #13e5f2, $alpha: 0.5);
       color: #fff;
       font-size: 2rem;
-  
+
       &:hover {
         background: rgba($color: #13e5f2, $alpha: 1);
       }
