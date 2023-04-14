@@ -20,10 +20,13 @@
     "jsgrid": "^1.5.3",
     "mysql": "^2.18.1",
     "particles.js": "^2.0.0",
+    "typed.js": "^2.0.15",
+    "typeit": "^8.7.1",
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.0.3",
-    "vue-template-compiler": "^2.7.14"
+    "vue-template-compiler": "^2.7.14",
+    "vue-typed-js": "^0.1.2"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-dev-translations": "^36.0.0",
