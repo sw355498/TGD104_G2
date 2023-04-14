@@ -50,7 +50,11 @@
           <i
             class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
           ></i>
-          <input v-model.trim="searchKeyword" @keyup="doQuery()" placeholder="搜尋文章" />
+          <input
+            v-model.trim="searchKeyword"
+            @keyup="doQuery()"
+            placeholder="請輸入標題或內文關鍵字"
+          />
         </div>
       </div>
       <!-- 列表 -->
@@ -61,7 +65,7 @@
           class="li_p01_newsPost"
           :key="value.ID"
         >
-        <router-link :to="'/p01/p01_newsArticle/' + value.ID">
+          <router-link :to="'/p01/p01_newsArticle/' + value.ID">
             <div class="newsImg">
               <img :src="value.NEWS_PIC" />
             </div>
@@ -130,7 +134,7 @@
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from "axios";
-import VueAxios from "vue-axios";
+import { API_URL, reactive } from "@/config";
 export default {
   components: {
     frontNavbar,
@@ -145,7 +149,7 @@ export default {
       currentPage: 1,
       filteredData: [], //分類後的資料
       categorySelected: {}, // 每個分類是否被選中的狀態
-      searchKeyword: ''//搜尋預設空字串
+      searchKeyword: "", //搜尋預設空字串
       // object: [
       //   {
       //     ID: `${id++}`,
@@ -164,15 +168,14 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/TGD104_G2/frontend/src/api/getNews.php")
+      .get(`${API_URL}getNews.php`)
       .then((response) => {
         this.datas = response.data;
         // this.currentPage = 1; // 初始化當前頁數
-        console.log(response.data);
-    
+        // console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
       });
   },
   computed: {
@@ -181,30 +184,29 @@ export default {
         new Set(this.datas.map((item) => item.NEWS_CATEGORY))
       ).filter((category) => category); // 資料庫的分類內容只回傳非空值
     },
+    // filteredItems() {
+    //   if (this.selectedCategory) {
+    //     return this.datas.filter(
+    //       (item) => item.NEWS_CATEGORY === this.selectedCategory
+    //     );
+    //   }
+    //   return this.datas;
+    // },
     filteredItems() {
+      let filtered = this.datas;
       if (this.selectedCategory) {
-        return this.datas.filter(
+        filtered = filtered.filter(
           (item) => item.NEWS_CATEGORY === this.selectedCategory
         );
       }
-      return this.datas;
+      if (this.searchKeyword) {
+        filtered = filtered.filter((item) =>
+        item.NEWS_TITLE.includes(this.searchKeyword) ||
+        item.NEWS_CONTENT.includes(this.searchKeyword)
+        );
+      }
+      return filtered;
     },
-    // 感恩嘉宏大大提供的分類再分頁程式
-    // data() {
-    //   return {
-    //     selectedCategory: null
-    //   }
-    // filtered_list() {
-    // const filteredItems = this.items.filter(item => item.tr_category === this.current);
-    // const start = (this.currentPage - 1) * this.perpage;
-    // const end = this.currentPage * this.perpage;
-    // const sortedItems = filteredItems
-    //     .map(item => ({...item, tr_cost: new Date(item.tr_cost)})) // 將日期字串轉換為 Date 物件
-    //     .sort((a, b) => a.tr_cost - b.tr_cost); // 進行日期排序
-    // return sortedItems
-    //     .slice(start, end)
-    //     .map(item => ({...item, tr_cost: item.tr_cost.toLocaleDateString()})); // 將日期轉換為指定格式的字串
-    // },
 
     // 分頁計算
     totalPage() {
@@ -233,12 +235,12 @@ export default {
         this.categorySelected[category] = true;
       }
     },
-    // 搜尋沒有成功
+    // 搜尋文章
     doQuery() {
-    this.filteredItems = this.datas.filter(item => {
-      return item.NEWS_TITLE.includes(this.searchKeyword);
-    });
-  },
+      this.filteredItems = this.datas.filter((item) => {
+        return item.NEWS_TITLE.includes(this.searchKeyword);
+      });
+    },
 
     // 分頁
     setPage(page) {
@@ -247,8 +249,8 @@ export default {
       }
       this.currentPage = page;
       if (!this.selectedCategory) {
-    this.selectedCategory = null;
-  }
+        this.selectedCategory = null;
+      }
     },
   },
   watch: {
