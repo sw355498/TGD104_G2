@@ -373,61 +373,109 @@
   
   
       // 解答區
+
+
+
     
-    .answer_zone{
-      border:1px solid $main_color;
+  .answer_zone{
+    border:1px solid $main_color;
+    width: 750px;
+    margin: 110px auto 0;
+    background: $main_color;
+    margin-bottom: 50px;
+
+    
+
+
+    @include rwd('md'){
+      margin-top: 250px;
+      width: 380px;
+    }
+    @include rwd('sm'){
+      margin-top: 250px;
+      width: 300px;
+      
+    }
+
+
+    .answer_zone_button{
+      margin: 0px auto;
       width: 750px;
-      margin: 110px auto 0;
-      background: $main_color;
-      margin-bottom: 50px;
+      height: 50px;
+      background-color: none;
+      border: 0;
+      background: none;
+      font-size: 25px;
+      padding-top: 10px;
+      padding-bottom:40px;
+      
+      
       @include rwd('md'){
-        margin-top: 380px;
         width: 380px;
+        padding-bottom: 80px;
       }
       @include rwd('sm'){
-        margin-top: 380px;
         width: 300px;
-        
       }
-      
-  
-      .answer_board{
-        
-        width: 750px;
-        margin: 30px auto 0;
-        border:1px solid $main_color;
-        background: $sec_color;
-        clip-path: polygon(64% 0, 70% 10%, 100% 10%, 100% 100%, 0 100%, 0 0);
-        @include rwd('md'){
-          width: 380px;
-          padding-bottom: 80px;
-        }
-        @include rwd('sm'){
-          width: 300px;
-         
-         
-        }
-  
-        h2{
-          color:$text_color;
-          padding: 30px 0 30px 30px;
-        }
-  
-        p{
-          padding: 0 30px 0px 30px;
-          
-        }
 
-        @include pad{
-
-        }
-
-        @include rwd('sm'){
-          padding: 0 15px 0px 15px;
-          
-        }
-      }
     }  
+    
+
+    .answer_board{
+      
+      width: 750px;
+      margin: 30px auto 0;
+      border:1px solid $main_color;
+      background: $sec_color;
+      clip-path: polygon(64% 0, 70% 10%, 100% 10%, 100% 100%, 0 100%, 0 0);
+      
+
+      
+      @include rwd('md'){
+        width: 380px;
+        padding-bottom: 80px;
+      }
+      @include rwd('sm'){
+        width: 300px;
+       
+       
+      }
+
+      h2{
+        color:$text_color;
+        padding: 30px 0 30px 30px;
+      }
+
+      p{
+        padding: 0 30px 0px 30px;
+        
+      }
+
+      @include rwd('sm'){
+        padding: 0 15px 0px 15px;
+        
+      }
+    }
+  }
+
+  .slide-enter-active,
+  .slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+  .slide-enter,
+  .slide-leave-to {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+    
+    //分數
+
+    .score{
+      color:white;
+    }
   
     //下一題按鈕
   
