@@ -47,17 +47,16 @@
             </div>
             <div class="chatWindow_message" v-for="(message, index) in messages" :key="index">
                 <div v-if="message.isBot" class="bot_message">
-                    <p v-html="message.text"></p>
-
-                    <!-- <p>{{ message.text }}</p> -->
+                    <!-- <p v-html="message.text"></p> -->
+                    <p>{{ message.text }}</p>
                 </div>
                 <div v-else class="user_message">
                     <p>{{ message.text }}</p>
                 </div>
-                <!-- <template v-if="message.error_text">
-                    <div>我猜你應該想知道<br>
+                <template v-if="message.isOther">
+                    <div>
                         <ul class="chat-buttons">
-                            <li class="chat-button" @click="sendMessage('Z;7DADAD')">防範詐騙教學</li>
+                            <li class="chat-button" @click="sendMessage('防範詐騙教學')">防範詐騙教學</li>
                             <li class="chat-button">回報可疑網站</li>
                             <li class="chat-button">詐騙FAQ</li><br>
                             <li class="chat-button">政府相關連結</li>
@@ -65,7 +64,7 @@
                             <li class="chat-button">DEMO體驗</li>
                         </ul>
                     </div>
-                </template> -->
+                </template>
 
 
                 <!-- <div>{{message.message }}</div> -->
@@ -96,7 +95,7 @@ export default {
     const inputValue = ref('') // 存儲使用者輸入框的值
     const goodbyeTimer = ref(null) // 存儲setTimeout返回的計時器ID
     const messagesDiv = ref(null) // 取得聊天對話框 為了下滑到對話位置
-    async function sendMessage() {
+    async function sendMessage(e) {
         // 取消計時器
         clearTimeout(goodbyeTimer.value)
         if (inputValue.value) {
@@ -120,28 +119,9 @@ export default {
         }
     }
 
-    // const robotAnswes =[
-    //     {
-    //         message:'hi',
-    //         keyword:'h1'
-    //     },
-    //     {
-    //         message:'防範詐騙教學',
-    //         keyword:'防範詐騙教學'
-    //     },
-    // ]
-
-    // robotAnswer.h1.message
-    // robotAnswer['h1'].message
-
-
-    // if(robotAnswer.hasOwnproperty(input.toLowerCase().trim())){
-
-    // }
     const robotAnswer = {
-        
         'hi':{
-            message:'hi',
+            message:'你好',
         },
         '防範詐騙教學':{
             message:'以下是防範詐騙教學的相關資訊',
@@ -175,12 +155,16 @@ export default {
         // 根據用戶的輸入獲取聊天機器人的回覆
         let botMsg = ``;
         console.log(robotAnswer)
-        const input_lowercase = input.trim() 
-        console.log(input_lowercase);
-        if ( input_lowercase && robotAnswer.hasOwnProperty(input_lowercase)) {
-            botMsg = robotAnswer[input_lowercase].message
+        const input_trim = input.trim() 
+        console.log(input_trim);
+        if ( input_trim && robotAnswer.hasOwnProperty(input_trim)) {
+            botMsg = robotAnswer[input_trim].message
         }else{
-            botMsg = `robotAnswer.message`
+            messages.value.push({
+                text: '我猜你應該想知道',
+                isBot: true,
+                isOther: true,
+            })
         }
         // 去掉空白、轉小寫
         // switch (input.toLowerCase().trim()) {
@@ -237,7 +221,7 @@ export default {
         // 啟動計時器，30秒後顯示再見的消息
         goodbyeTimer.value = setTimeout(async() => {
             messages.value.push({
-                text: `感謝使用哦！<br>期待下次再見~
+                text: `感謝使用哦！期待下次再見~
             `,
                 isBot: true,
             })

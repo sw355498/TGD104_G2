@@ -59,7 +59,14 @@
                     <input 
                         class="inputSubmit_p03 small_button" 
                         type="submit" value="送出"
-                        > 
+                        @click="sweetAlert"
+                    > 
+                    <button
+                        class="inputSubmit_p03" 
+                        :disabled="!isFormValid"
+                        type="submit" value="送出"
+                        @click="sweetAlert"
+                    >送出</button>
                 </div>
             </form>
         </section>    
@@ -80,7 +87,7 @@ import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
 import { API_URL } from '@/config'
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 export default {
     name: 'Form',
     components: {
@@ -88,11 +95,18 @@ export default {
         frontFooter,
     },
     setup(){
+        const sweetAlert=(bank)=>{
+            Swal.fire({
+                title: '成功送出',
+                text: '將由專人為您審核',
+                icon: 'success',
+                confirmButtonText: '確認'
+            })
+        }
         const url = ref('')
         const email = ref('')
         const title = ref('')
         const notes = ref('')
-
         const submitForm = async () => {
         try {
             const response = await axios.post(`${API_URL}reportURL.php`, {
@@ -118,7 +132,8 @@ export default {
             title,
             notes,
             isFormValid,
-            submitForm
+            submitForm,
+            sweetAlert
         }
     },
    

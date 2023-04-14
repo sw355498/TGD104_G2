@@ -141,6 +141,7 @@
                 margin: 20px auto;
                 width: 100%;
             }
+
             @include  rwd('md'){
                 // 平板上的樣式 768px,
                 max-width: 400px;

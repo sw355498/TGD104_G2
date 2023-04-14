@@ -17,6 +17,9 @@ import "@/assets/Sass/style.scss";
 // fontawesome套件引入
 import "@fortawesome/fontawesome-free/css/all.css";
 
+// sweetalert2套件引入(composition api 建議用 sweetalert2 不要用vue-sweetalert2)
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 // js-grid套件引入
 import $ from "jquery";
 import "jsgrid/dist/jsgrid.min.css";

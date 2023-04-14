@@ -20,6 +20,7 @@
     "jsgrid": "^1.5.3",
     "mysql": "^2.18.1",
     "particles.js": "^2.0.0",
+    "sweetalert2": "^11.7.3",
     "twzipcode-vue": "^2.2.2",
     "typed.js": "^2.0.15",
     "typeit": "^8.7.1",

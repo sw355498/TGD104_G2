@@ -118,21 +118,16 @@
                         <!-- 地址資訊 -->
                         <div class="field_container">
                             <!-- 外掛台灣地區 -->
-                            <!-- <div class="twzipcode">
-                                <select data-role="county" ></select>
-                                <select data-role="district"></select>
-                                <input type="hidden" data-role="zipcode" />
-                            </div> -->
-                            <twzipcode-county id="twzipcode__county"
-                                    v-model="myCounty"></twzipcode-county>
-
-                            <twzipcode-zipcode id="twzipcode__zipcode"
-                                    v-model="myZipcode"
-                                    :filter-by-county="myCounty"></twzipcode-zipcode>
-                                    
-                            <!-- 自己寫的 -->
                             <label for="home_city">地址資訊</label>
                             <div class="store_info">
+                                <twzipcode-county 
+                                    id="twzipcode__county"
+                                    v-model="myCounty">
+                                </twzipcode-county>
+                                <twzipcode-zipcode id="twzipcode__zipcode"
+                                    v-model="myZipcode"
+                                    :filter-by-county="myCounty">
+                                </twzipcode-zipcode>
                                 <select name="seven_store_city" v-model="receiverCity">
                                     <option value="">縣市</option>
                                     <option value="台北市">台北市</option>
@@ -277,7 +272,6 @@
 import { ref, computed, watch } from 'vue';
 import axios from 'axios';
 import { API_URL } from '@/config'
-import Vue from 'vue'
 import { Zipcode, County} from 'twzipcode-vue'
 export default {
     name: 'Cart',
@@ -292,12 +286,9 @@ export default {
         },
     },
     setup(props) {
-        const myCounty =  ref('臺中市')
+        // twzipcode-vue
+        const myCounty = ref('')
         const myZipcode = ref ('')
-        const zipcodeIntoDistrict = ref(true)
-        const css = ref(["city form-control", "town form-control"])
-        const countyName = ref('city')
-        const districtName = 'town'
         
         // 拿超商資料
         axios
