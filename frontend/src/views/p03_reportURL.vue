@@ -67,15 +67,6 @@ export default {
         frontFooter,
     },
     mounted() {
-        axios
-            .get('http://localhost/frontend/src/api/getWebURL.php')
-            .then((response) => {
-                this.datas = response.data;
-                console.log(response.data);
-            })
-            .catch(function (error) { // 请求失败处理
-                console.log(error);
-            });
 
          // 需要 filtering 的欄位
         var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
@@ -136,27 +127,48 @@ export default {
                 loadMessage: "全速載入中，感謝耐心等候...",
                 loadIndication: false,
                 // data: website,
+                // fields: [
+                //     { name: "DATE", title:"回報日期", type: "text", width: 100, validate: "required" },
+                //     { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
+                //     { name: "TITLE", title:"網站名稱", type: "text", width: 100 },
+                //     { name: "URL", title:"網址", type: "text", width: 200 },
+                // ],
                 fields: [
-                    { name: "DATE", title:"回報日期", type: "text", width: 100, validate: "required" },
-                    { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
-                    { name: "TITLE", title:"網站名稱", type: "text", width: 100 },
-                    { name: "URL", title:"網址", type: "text", width: 200 },
+                    { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, validate: "required" },
+                    { name: "STATUS_NAME", title:"回報狀態",type: "text",itemTemplate:function(value){
+                        let status = value  ? value : '確認為詐騙網站';
+                        return status;
+                    } },
+                    { name: "WEBSITE_NM", title:"網站名稱", type: "text", width: 100 },
+                    { name: "WEBURL", title:"網址", type: "text", width: 200 },
+
                 ],
+                // {WEBSITE_NM: 'ANTI', WEBURL: 'anti178.com', CNT: '6', STA_SDATE: '2022/07/18', STA_EDATE: '2022/07/24'}
                 controller: {
                     loadData: function () {
                         var d = $.Deferred();
-                        $.ajax({
-                            type: "GET",
-                            url: "http://localhost/frontend/src/api/getWebURL.php",
-                            data: "[]",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json"
-                        }).done(function (response) {
-                          console.log("loadAgain");
-                            d.resolve(response);
-                        });
-                        return d.promise();
-                    },
+                        axios
+                            .get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+                            .then((response) => {
+                                let myArray = response.data.result.records;
+                                myArray.splice(0, 1);  // 刪除政府預設第一欄
+                                axios
+                                    .get('http://localhost/TGD104_G2/frontend/src/api/getWebURL.php')
+                                    .then((response) => {
+                                        let myArray2 = response.data;
+                                        const mergeData = myArray.concat(myArray2)
+                                        d.resolve(mergeData);
+                                        console.log(mergeData);
+                                    })
+                            })
+                            .catch(function (error) { // 请求失败处理
+                                console.log(error);
+                            });
+                            return d.promise();
+                        }
+
+
+
                     // function (filter) {
                     //     return this.data.filter(function (item) {
                     //         var flags = new Array(filterColumn.length)
@@ -198,14 +210,7 @@ export default {
                 // }
             });
         }
-        // let star = setInterval(function () { $("#jsGrid").jsGrid("loadData"); }, 1000);
-        let intervalId = setInterval(function() {
-        $("#jsGrid").jsGrid("loadData", function(data) {
-            if (data.length > 0) {
-            clearInterval(intervalId);
-            }
-        });
-        }, 1000);
+        setTimeout(function () { $("#jsGrid").jsGrid("loadData"); }, 1000);
         // $("#jsGrid").jsGrid("loadData")
         setGrid();
     },

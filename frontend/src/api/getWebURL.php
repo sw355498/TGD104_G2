@@ -4,7 +4,7 @@
     $data = [];
     //建立SQL語法
     // $sql = "select * from URL";
-    $sql = "select u.TITLE, u.URL, DATE(U.DATE), us.STATUS_NAME
+    $sql = "select u.TITLE, u.URL, SUBSTRING(u.DATE, 1, 11) as DATE, us.STATUS_NAME
     from
      URL as u
      join URL_STATUS as us
