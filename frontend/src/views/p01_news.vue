@@ -173,6 +173,20 @@ export default {
         this.datas = response.data;
         // this.currentPage = 1; // 初始化當前頁數
         // console.log(response.data);
+        // 限制內文字數
+        this.$nextTick(() => {
+          var len = 120;
+          $(".p01_news_article").each(function (i) {
+            if ($(this).text().length > len) {
+              $(this).attr("title", $(this).text());
+              var text =
+                $(this)
+                  .text()
+                  .substring(0, len - 1) + "...";
+              $(this).text(text);
+            }
+          });
+        });
       })
       .catch((error) => {
         // console.error(error);
@@ -200,9 +214,10 @@ export default {
         );
       }
       if (this.searchKeyword) {
-        filtered = filtered.filter((item) =>
-        item.NEWS_TITLE.includes(this.searchKeyword) ||
-        item.NEWS_CONTENT.includes(this.searchKeyword)
+        filtered = filtered.filter(
+          (item) =>
+            item.NEWS_TITLE.includes(this.searchKeyword) ||
+            item.NEWS_CONTENT.includes(this.searchKeyword)
         );
       }
       return filtered;

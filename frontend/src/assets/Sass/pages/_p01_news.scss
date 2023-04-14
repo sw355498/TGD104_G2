@@ -340,7 +340,14 @@
         }
 
     }
-
+    .pagination{
+        @include rwd('sm') {
+            // width: max-content;
+            white-space: nowrap;
+            overflow: hidden;
+            overflow-x: auto;
+        }
+    }
     .pagination-dark {
         background-color: $background_color;
         // border: none;
