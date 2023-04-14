@@ -39,10 +39,6 @@
                 >{{ category }}</a
               >
             </div>
-            <!-- <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
-              href="#"
-              >網站詐騙</a
-            >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a> -->
           </div>
         </div>
 
@@ -67,7 +63,8 @@
         >
           <router-link :to="'/p01/p01_newsArticle/' + value.ID">
             <div class="newsImg">
-              <img :src="value.NEWS_PIC" />
+              <img :src="value.NEWS_PIC ? require('@/assets/img/p01_news/' + value.NEWS_PIC) :  require('@/assets/img/p01_news/no_image.jpg')" />
+              <!-- <img :src="require('@/assets/img/p01_news/' + value.NEWS_PIC)" /> -->
             </div>
 
             <div class="newsContent">
@@ -214,10 +211,9 @@ export default {
         );
       }
       if (this.searchKeyword) {
-        filtered = filtered.filter(
-          (item) =>
-            item.NEWS_TITLE.includes(this.searchKeyword) ||
-            item.NEWS_CONTENT.includes(this.searchKeyword)
+        filtered = filtered.filter((item) =>
+        item.NEWS_TITLE.includes(this.searchKeyword) ||
+        item.NEWS_CONTENT.includes(this.searchKeyword)
         );
       }
       return filtered;
@@ -275,6 +271,12 @@ export default {
     selectedCategory() {
       this.filteredData = [...this.filteredItems];
     },
+    // key in的時候取消分類
+    searchKeyword() {
+    this.selectedCategory = null;
+    this.categorySelected = {};
+  }
+
   },
 };
 </script>
