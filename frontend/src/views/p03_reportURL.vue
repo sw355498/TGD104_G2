@@ -67,15 +67,15 @@ export default {
         frontFooter,
     },
     mounted() {
-        axios
-            .get('http://localhost/frontend/src/api/getWebURL.php')
-            .then((response) => {
-                this.datas = response.data;
-                console.log(response.data);
-            })
-            .catch(function (error) { // 请求失败处理
-                console.log(error);
-            });
+        // axios
+        //     .get('http://localhost/frontend/src/api/getWebURL.php')
+        //     .then((response) => {
+        //         this.datas = response.data;
+        //         console.log(response.data);
+        //     })
+        //     .catch(function (error) { // 请求失败处理
+        //         console.log(error);
+        //     });
 
          // 需要 filtering 的欄位
         var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
@@ -137,7 +137,7 @@ export default {
                 loadIndication: false,
                 // data: website,
                 fields: [
-                    { name: "DATE", title:"回報日期", type: "text", width: 100, validate: "required" },
+                    { name: "DATE(U.DATE)", title:"回報日期", type: "text", width: 100, validate: "required" },
                     { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
                     { name: "TITLE", title:"網站名稱", type: "text", width: 100 },
                     { name: "URL", title:"網址", type: "text", width: 200 },
@@ -147,7 +147,7 @@ export default {
                         var d = $.Deferred();
                         $.ajax({
                             type: "GET",
-                            url: "http://localhost/frontend/src/api/getWebURL.php",
+                            url: "http://localhost/TGD104_G2/frontend/src/api/getWebURL.php",
                             data: "[]",
                             contentType: "application/json; charset=utf-8",
                             dataType: "json"
