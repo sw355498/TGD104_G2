@@ -85,51 +85,51 @@ export default {
         frontNavbar,
         frontFooter,
     },
-    setup(){
-        const form = reactive({
-        url: '',
-        email: '',
-        title: '',
-        notes: '',
-    })
+    // setup(){
+    //     const form = reactive({
+    //     url: '',
+    //     email: '',
+    //     title: '',
+    //     notes: '',
+    // })
+    // const submitForm = async () => {
+    //   try {
+    //     const response = await axios.post(`${API_URL}reportURL.php`, form)
+    //     console.log(response.data)
+    //   } catch (error) {
+    //     console.error(error)
+    //   }
+    // }
 
-    const submitForm = async () => {
-      try {
-        const response = await axios.post(`${API_URL}reportURL.php`, form)
-        console.log(response.data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    return {
-      form,
-      submitForm
-    }
-    },
+    // return {
+    //   form,
+    //   submitForm
+    // }
+    // },
+   
     mounted() {
-        axios
-            // 要先 proxy
-            // .get(`https://od.moi.gov.tw/api/v1/rest/datastore/A01010000C-002150-013`)
-            .get(`/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013`)
-            // .get(`${API_URL}getWebURL.php`)
-            .then((response) => {
-                // this.datas = response.data.result.records;
-                // let govURL = response.data.result;
-                // let govWebTitle = [];
-                // let govWebURL = [];
-                // let govWebDate = [];
-                // for (let i = 0; i < govURL.records.length; i++) {
-                //     govWebTitle += govURL.records[i].WEBSITE_NM;
-                //     govWebURL +=  govURL.records[i].WEBURL;
-                //     govWebDate += govURL.records[i].STA_EDATE;
-                //     console.log(govWebTitle, govWebURL, govWebDate);
-                // };
-                // return{govWebTitle, govWebURL, govWebDate}
-            })
-            .catch(function (error) { // 请求失败处理
-                console.log(error);
-            });
+        // axios
+        //     // 要先 proxy
+        //     // .get(`https://od.moi.gov.tw/api/v1/rest/datastore/A01010000C-002150-013`)
+        //     .get(`/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013`)
+        //     // .get(`${API_URL}getWebURL.php`)
+        //     .then((response) => {
+        //         // this.datas = response.data.result.records;
+        //         // let govURL = response.data.result;
+        //         // let govWebTitle = [];
+        //         // let govWebURL = [];
+        //         // let govWebDate = [];
+        //         // for (let i = 0; i < govURL.records.length; i++) {
+        //         //     govWebTitle += govURL.records[i].WEBSITE_NM;
+        //         //     govWebURL +=  govURL.records[i].WEBURL;
+        //         //     govWebDate += govURL.records[i].STA_EDATE;
+        //         //     console.log(govWebTitle, govWebURL, govWebDate);
+        //         // };
+        //         // return{govWebTitle, govWebURL, govWebDate}
+        //     })
+        //     .catch(function (error) { // 请求失败处理
+        //         console.log(error);
+        //     });
         // console.log(govWebTitle);
         // 需要 filtering 的欄位
         var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
@@ -190,29 +190,49 @@ export default {
                 loadMessage: "全速載入中，感謝耐心等候...",
                 loadIndication: false,
                 // data: website,
+                // fields: [
+                //     { name: "DATE", title:"回報日期", type: "text", width: 100, validate: "required" },
+                //     { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
+                //     { name: "TITLE", title:"網站名稱", type: "text", width: 100 },
+                //     { name: "URL", title:"網址", type: "text", width: 200 },
+                // ],
                 fields: [
-                    { name: "DATE", title:"回報日期", type: "text", width: 100, validate: "required" },
-                    { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
-                    { name: "TITLE", title:"網站名稱", type: "text", width: 100 },
-                    { name: "URL", title:"網址", type: "text", width: 200 },
+                    { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, validate: "required" },
+                    // { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
+                    { name: "STATUS_NAME", title:"回報狀態",type: "text",itemTemplate:function(value){
+                        let status = value  ? value : '確認為詐騙網站';
+                        return status;
+                    } },
+                    { name: "WEBSITE_NM", title:"網站名稱", type: "text", width: 100 },
+                    { name: "WEBURL", title:"網址", type: "text", width: 200 },
+
                 ],
+                // {WEBSITE_NM: 'ANTI', WEBURL: 'anti178.com', CNT: '6', STA_SDATE: '2022/07/18', STA_EDATE: '2022/07/24'}
                 controller: {
                     loadData: function () {
                         var d = $.Deferred();
-                        $.ajax({
-                            type: "GET",
-                            // url: "http://localhost/TGD104_G2/frontend/src/api/getWebURL.php",
-                            url: `${API_URL}getWebURL.php`,
-                            data: "[]",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json"
-                        }).done(function (response) {
-                            console.log(d.resolve(response));
-                            console.log("hiiiiiiiiiiiiiii");
-                            d.resolve(response);
-                        });
-                        return d.promise();
-                    },
+                        axios
+                            .get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+                            .then((response) => {
+                                let myArray = response.data.result.records;
+                                myArray.splice(0, 1);  // 刪除政府預設第一欄
+                                axios
+                                    .get(`${API_URL}getWebURL.php`)
+                                    .then((response) => {
+                                        let myArray2 = response.data;
+                                        const mergeData = myArray.concat(myArray2)
+                                        d.resolve(mergeData);
+                                        console.log(mergeData);
+                                    })
+                            })
+                            .catch(function (error) { // 请求失败处理
+                                console.log(error);
+                            });
+                            return d.promise();
+                        }
+
+
+
                     // function (filter) {
                     //     return this.data.filter(function (item) {
                     //         var flags = new Array(filterColumn.length)

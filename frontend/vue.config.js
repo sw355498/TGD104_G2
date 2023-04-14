@@ -3,6 +3,7 @@ const webpack = require("webpack")
 const path = require('path')
 const { CKEditorTranslationsPlugin } = require( '@ckeditor/ckeditor5-dev-translations' );
 const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
+const { proxy } = require('jquery');
 
 module.exports = defineConfig({
     transpileDependencies: [/ckeditor5-[^/\\]+[/\\]src[/\\].+\.js$/],
