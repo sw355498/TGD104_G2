@@ -4,8 +4,7 @@
     $data = [];
     //建立SQL語法
     // $sql = "select * from URL";
-    // $sql = "select u.TITLE, u.URL, DATE_FORMAT(u.DATE, '%Y-%m-%d') AS DATE, us.STATUS_NAME
-    $sql = "select u.TITLE, u.URL, SUBSTRING(u.DATE, 1, 11) as DATE, us.STATUS_NAME
+    $sql = "select u.TITLE as WEBSITE_NM, u.URL as WEBURL, DATE_FORMAT(u.DATE, '%Y/%m/%d') as STA_EDATE, us.STATUS_NAME
     from
      URL as u
      left join URL_STATUS as us

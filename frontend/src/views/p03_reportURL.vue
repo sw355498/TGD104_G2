@@ -178,7 +178,7 @@ export default {
                 pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
                 pageIndex: 1,   //當前頁面數
                 pageSize: 10,   //頁面的數據量
-                pageButtonCount: 3,    //最大數量的頁面按鈕
+                pageButtonCount: 5,    //最大數量的頁面按鈕
                 pagerFormat: "{first} {pages} {last} &nbsp;&nbsp; ", //占位符來指定分頁欄格式
                 // pageNextText: "Next",   //下一頁
                 // pagePrevText: "Prev",   //上一頁
@@ -188,18 +188,12 @@ export default {
                 pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
                 
                 loadMessage: "全速載入中，感謝耐心等候...",
-                loadIndication: false,
+                loadIndication: true,
                 // data: website,
-                // fields: [
-                //     { name: "DATE", title:"回報日期", type: "text", width: 100, validate: "required" },
-                //     { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
-                //     { name: "TITLE", title:"網站名稱", type: "text", width: 100 },
-                //     { name: "URL", title:"網址", type: "text", width: 200 },
-                // ],
                 fields: [
-                    { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, validate: "required" },
-                    // { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
-                    { name: "STATUS_NAME", title:"回報狀態",type: "text",itemTemplate:function(value){
+                    { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, },
+                    // { name: "STATUS_NAME", title:"回報狀態",type: "text",itemTemplate:function(value){
+                    { name: "STATUS_NAME", title:"回報狀態",type: "select",itemTemplate:function(value){
                         let status = value  ? value : '確認為詐騙網站';
                         return status;
                     } },
@@ -207,7 +201,6 @@ export default {
                     { name: "WEBURL", title:"網址", type: "text", width: 200 },
 
                 ],
-                // {WEBSITE_NM: 'ANTI', WEBURL: 'anti178.com', CNT: '6', STA_SDATE: '2022/07/18', STA_EDATE: '2022/07/24'}
                 controller: {
                     loadData: function () {
                         var d = $.Deferred();
@@ -229,49 +222,23 @@ export default {
                                 console.log(error);
                             });
                             return d.promise();
-                        }
-
-
-
-                    // function (filter) {
-                    //     return this.data.filter(function (item) {
-                    //         var flags = new Array(filterColumn.length)
-                    //         flags.fill(true)
-                    //         for (var i = 0; i < filterColumn.length; i++) {
-                    //             var key = filterColumn[i]
-                    //             // 過濾掉下拉選單的預設值 空" "
-                    //             if (filter[key] !== " ") {
-                    //                flags[i] = (item[key].indexOf(filter[key]) > -1)
-                    //             }
-                    //         }
-                    //         // 返回的数组里面的元素必须都为true
-                    //         return flags.indexOf(false) === -1
-                    //     });
-                    // },
+                    },
+                    function (filter) {
+                        return myArray.filter(function (item) {
+                            var flags = new Array(filterColumn.length)
+                            flags.fill(true)
+                            for (var i = 0; i < filterColumn.length; i++) {
+                                var key = filterColumn[i]
+                                // 過濾掉下拉選單的預設值 空" "
+                                if (filter[key] !== " ") {
+                                   flags[i] = (item[key].indexOf(filter[key]) > -1)
+                                }
+                            }
+                            // 返回的数组里面的元素必须都为true
+                            return flags.indexOf(false) === -1
+                        });
+                    },
                 },
-                
-                // 過濾 filtering
-                // controller: {
-                //     data: website,
-                //     loadData: function (filter) {
-                //         return this.data.filter(function (item) {
-                //             var flags = new Array(filterColumn.length)
-                //             // 篩選欄位都給（true）
-                //             flags.fill(true)
-                //             for (var i = 0; i < filterColumn.length; i++) {
-                //                 var key = filterColumn[i]
-                //                 // 過濾掉下拉選單的預設值 空" "
-                //                 if (filter[key] !== " ") {
-                //                     // (item[key].indexOf(filter[key]) > -1)只要包含某一部分字段，就为true
-                //                     // 例如目标列为：911-5143 Luctus Ave 输入：911也可以找到这一行
-                //                     flags[i] = (item[key].indexOf(filter[key]) > -1)
-                //                 }
-                //             }
-                //             // 返回的数组里面的元素必须都为true
-                //             return flags.indexOf(false) === -1
-                //         });
-                //     },
-                // }
             });
         }
         setTimeout(function () { $("#jsGrid").jsGrid("loadData"); }, 1000);
