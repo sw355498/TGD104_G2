@@ -50,11 +50,12 @@
           <i
             class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
           ></i>
-          <input v-model="searchKeyword" @keyup="doQuery()" placeholder="搜尋文章" />
+          <input v-model.trim="searchKeyword" @keyup="doQuery()" placeholder="搜尋文章" />
         </div>
       </div>
       <!-- 列表 -->
       <ul class="ul_p01_newsPost">
+        <!-- <img src="@/assets/img/p01_news/pic01.jpg" alt=""> -->
         <li
           v-for="value in filteredItems.slice(pageStart, pageEnd)"
           class="li_p01_newsPost"
@@ -166,7 +167,7 @@ export default {
       .get("http://localhost/TGD104_G2/frontend/src/api/getNews.php")
       .then((response) => {
         this.datas = response.data;
-        this.currentPage = 1; // 初始化當前頁數
+        // this.currentPage = 1; // 初始化當前頁數
         console.log(response.data);
     
       })
@@ -245,7 +246,9 @@ export default {
         return;
       }
       this.currentPage = page;
-      this.selectedCategory = null;
+      if (!this.selectedCategory) {
+    this.selectedCategory = null;
+  }
     },
   },
   watch: {

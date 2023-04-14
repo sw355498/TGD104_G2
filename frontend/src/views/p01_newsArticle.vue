@@ -68,7 +68,7 @@ export default {
     const id = this.$route.params.id;
 
     axios
-      .get(`http://localhost/TGD104_G2/frontend/src/api/getNews.php?id=${id}`)
+      .get(`http://localhost/TGD104_G2/frontend/src/api/getNews.php`)
       .then((response) => {
         // 從回傳的 response 中找到對應的新聞資料並賦值到 data 中的 news 物件
         const data = response.data;
