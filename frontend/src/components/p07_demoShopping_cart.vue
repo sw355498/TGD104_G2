@@ -117,6 +117,20 @@
                     <div class="form_container">
                         <!-- 地址資訊 -->
                         <div class="field_container">
+                            <!-- 外掛台灣地區 -->
+                            <!-- <div class="twzipcode">
+                                <select data-role="county" ></select>
+                                <select data-role="district"></select>
+                                <input type="hidden" data-role="zipcode" />
+                            </div> -->
+                            <twzipcode-county id="twzipcode__county"
+                                    v-model="myCounty"></twzipcode-county>
+
+                            <twzipcode-zipcode id="twzipcode__zipcode"
+                                    v-model="myZipcode"
+                                    :filter-by-county="myCounty"></twzipcode-zipcode>
+                                    
+                            <!-- 自己寫的 -->
                             <label for="home_city">地址資訊</label>
                             <div class="store_info">
                                 <select name="seven_store_city" v-model="receiverCity">
@@ -261,10 +275,15 @@
 </template>
 <script>
 import { ref, computed, watch } from 'vue';
-
+import axios from 'axios';
+import { API_URL } from '@/config'
+import Vue from 'vue'
+import { Zipcode, County} from 'twzipcode-vue'
 export default {
     name: 'Cart',
     components: {
+        TwzipcodeZipcode: Zipcode,
+        TwzipcodeCounty: County
     },
     props: {
         cart: {
@@ -273,6 +292,24 @@ export default {
         },
     },
     setup(props) {
+        const myCounty =  ref('臺中市')
+        const myZipcode = ref ('')
+        const zipcodeIntoDistrict = ref(true)
+        const css = ref(["city form-control", "town form-control"])
+        const countyName = ref('city')
+        const districtName = 'town'
+        
+        // 拿超商資料
+        axios
+            // .get(`${API_URL}getWebURL.php`)
+            .get(`${API_URL}getStores.php`)
+            .then((response) => {
+                let storesArray = response.data;
+                console.log(storesArray);
+            })
+            .catch(function (error) { 
+                console.log(error);
+            });
         const totalPrice = computed(() => {
         return props.cart.reduce((acc, cur) => acc + cur.price * cur.number, 0);
         });
@@ -326,6 +363,9 @@ export default {
             expirationDate,
             submitPayment,
             show,
+            // 外掛縣市
+            myCounty,
+            myZipcode
         };
     },
 };

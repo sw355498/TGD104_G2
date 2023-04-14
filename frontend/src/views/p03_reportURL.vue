@@ -5,6 +5,7 @@
         <section class="sectionTop_p03_reportUrl">
             <h1>回報可疑網站</h1>
             <!-- <p>回報可疑網站</p> -->
+                <!-- 綁定了 @click.prevent 事件來防止默認提交行為 -->
             <form class="form_p03_reportURL" action=""  @submit.prevent="submitForm">
                 <h6>我要回報填寫表單</h6>
                 <p class="websizeText">民眾若發現可疑網站，可於本平台進行通報<br>
@@ -55,10 +56,10 @@
                         class="input_p03" name="notes" 
                         placeholder="可說明該網站可疑之處...">
                     </textarea>
-                    <!-- 綁定了 @click.prevent 事件來防止默認提交行為 -->
                     <input 
                         class="inputSubmit_p03 small_button" 
-                        type="submit" value="送出" @click.prevent="submitForm"> 
+                        type="submit" value="送出"
+                        > 
                 </div>
             </form>
         </section>    
@@ -74,10 +75,11 @@
 </template>
 
 <script>
+import { ref, computed } from 'vue';
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
-import { API_URL, reactive } from '@/config'
+import { API_URL } from '@/config'
 
 export default {
     name: 'Form',
@@ -85,90 +87,72 @@ export default {
         frontNavbar,
         frontFooter,
     },
-    // setup(){
-    //     const form = reactive({
-    //     url: '',
-    //     email: '',
-    //     title: '',
-    //     notes: '',
-    // })
-    // const submitForm = async () => {
-    //   try {
-    //     const response = await axios.post(`${API_URL}reportURL.php`, form)
-    //     console.log(response.data)
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // }
+    setup(){
+        const url = ref('')
+        const email = ref('')
+        const title = ref('')
+        const notes = ref('')
 
-    // return {
-    //   form,
-    //   submitForm
-    // }
-    // },
+        const submitForm = async () => {
+        try {
+            const response = await axios.post(`${API_URL}reportURL.php`, {
+                url: url.value,
+                email: email.value,
+                title: title.value,
+                notes: notes.value
+            })
+            // 提交成功後的處理
+            console.log('成功送出:', response.data)
+        } catch (error) {
+            // 提交失敗的處理
+            console.error('Submit failed:', error)
+        }
+        }
+        // 檢查表單是否有效
+        const isFormValid = computed(() => {
+            return url.value !== ''
+        })
+        return {
+            url,
+            email,
+            title,
+            notes,
+            isFormValid,
+            submitForm
+        }
+    },
    
     mounted() {
-        // axios
-        //     // 要先 proxy
-        //     // .get(`https://od.moi.gov.tw/api/v1/rest/datastore/A01010000C-002150-013`)
-        //     .get(`/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013`)
-        //     // .get(`${API_URL}getWebURL.php`)
-        //     .then((response) => {
-        //         // this.datas = response.data.result.records;
-        //         // let govURL = response.data.result;
-        //         // let govWebTitle = [];
-        //         // let govWebURL = [];
-        //         // let govWebDate = [];
-        //         // for (let i = 0; i < govURL.records.length; i++) {
-        //         //     govWebTitle += govURL.records[i].WEBSITE_NM;
-        //         //     govWebURL +=  govURL.records[i].WEBURL;
-        //         //     govWebDate += govURL.records[i].STA_EDATE;
-        //         //     console.log(govWebTitle, govWebURL, govWebDate);
-        //         // };
-        //         // return{govWebTitle, govWebURL, govWebDate}
-        //     })
-        //     .catch(function (error) { // 请求失败处理
-        //         console.log(error);
-        //     });
-        // console.log(govWebTitle);
         // 需要 filtering 的欄位
-        var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
-        var website = [
-            { "回報日期": "2023-03-19", "回報狀態": "待審核", "網站名稱": "-", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "非詐騙網站", "網站名稱": "google", "網址": "https://www.google.com.tw/?hl=zh_TW",  },
-            { "回報日期": "2023-03-19", "回報狀態": "非詐騙網站", "網站名稱": "google", "網址": "https://www.google.com.tw/?hl=zh_TW",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-11", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-11", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-            { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
-        ];
-        // filtering 下拉框 要改成 撈的資料=============
-        var arr = []
-        for (var i = 0; i < filterColumn.length ; i++) {
-            arr[i] = new Set()
-            // 下拉框的預設為空" "
-            arr[i].add(" ")
-        };
-        for (var i = 0; i < website.length; i++) {
-            arr[0].add(website[i].回報狀態)
-        };
-        var statusURL = []
-        for (var i of arr[0]) {
-            statusURL.push({
-                回報狀態: i
-            })
-        }
+        // var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
+        // var website = [
+        //     { "回報日期": "2023-03-19", "回報狀態": "待審核", "網站名稱": "-", "網址": "https://cesare.asia/6",  },
+        //     { "回報日期": "2023-03-19", "回報狀態": "非詐騙網站", "網站名稱": "google", "網址": "https://www.google.com.tw/?hl=zh_TW",  },
+        //     { "回報日期": "2023-03-19", "回報狀態": "非詐騙網站", "網站名稱": "google", "網址": "https://www.google.com.tw/?hl=zh_TW",  },
+        //     { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+        //     { "回報日期": "2023-03-19", "回報狀態": "確認為詐騙網站", "網站名稱": "17play 娛樂城", "網址": "https://cesare.asia/6",  },
+        //   ];
+        // // filtering 下拉框 要改成 撈的資料=============
+        // var arr = []
+        // for (var i = 0; i < filterColumn.length ; i++) {
+        //     arr[i] = new Set()
+        //     // 下拉框的預設為空" "
+        //     arr[i].add(" ")
+        // };
+        // for (var i = 0; i < website.length; i++) {
+        //     arr[0].add(website[i].回報狀態)
+        // };
+        // var statusURL = []
+        // for (var i of arr[0]) {
+        //     statusURL.push({
+        //         回報狀態: i
+        //     })
+        // }
         function setGrid() {
             $("#jsGrid").jsGrid({
                 width: "100%",
-                filtering: true,
+                // filtering: true,
+                filtering: false,
                 inserting: false,
                 editing: false,
                 sorting: true,
@@ -187,8 +171,8 @@ export default {
                 pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
                 pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
                 
-                loadMessage: "全速載入中，感謝耐心等候...",
-                loadIndication: true,
+                // loadMessage: "全速載入中，感謝耐心等候...",
+                loadIndication: false,
                 // data: website,
                 fields: [
                     { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, },
@@ -205,6 +189,7 @@ export default {
                     loadData: function () {
                         var d = $.Deferred();
                         axios
+                            // 要先 proxy
                             .get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
                             .then((response) => {
                                 let myArray = response.data.result.records;
@@ -218,26 +203,26 @@ export default {
                                         console.log(mergeData);
                                     })
                             })
-                            .catch(function (error) { // 请求失败处理
+                            .catch(function (error) { 
                                 console.log(error);
                             });
                             return d.promise();
                     },
-                    function (filter) {
-                        return myArray.filter(function (item) {
-                            var flags = new Array(filterColumn.length)
-                            flags.fill(true)
-                            for (var i = 0; i < filterColumn.length; i++) {
-                                var key = filterColumn[i]
-                                // 過濾掉下拉選單的預設值 空" "
-                                if (filter[key] !== " ") {
-                                   flags[i] = (item[key].indexOf(filter[key]) > -1)
-                                }
-                            }
-                            // 返回的数组里面的元素必须都为true
-                            return flags.indexOf(false) === -1
-                        });
-                    },
+                    // function (filter) {
+                    //     return d.filter(function (item) {
+                    //         var flags = new Array(filterColumn.length)
+                    //         flags.fill(true)
+                    //         for (var i = 0; i < filterColumn.length; i++) {
+                    //             var key = filterColumn[i]
+                    //             // 過濾掉下拉選單的預設值 空" "
+                    //             if (filter[key] !== " ") {
+                    //                flags[i] = (item[key].indexOf(filter[key]) > -1)
+                    //             }
+                    //         }
+                    //         // 返回的数组里面的元素必须都为true
+                    //         return flags.indexOf(false) === -1
+                    //     });
+                    // },
                 },
             });
         }
