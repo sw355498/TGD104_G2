@@ -5,7 +5,7 @@
         <section class="sectionTop_p03_reportUrl">
             <h1>回報可疑網站</h1>
             <!-- <p>回報可疑網站</p> -->
-            <form class="form_p03_reportURL" action="" >
+            <form class="form_p03_reportURL" action=""  @submit.prevent="submitForm">
                 <h6>我要回報填寫表單</h6>
                 <p class="websizeText">民眾若發現可疑網站，可於本平台進行通報<br>
                     本站將由專人協助判斷是否為「偽冒網站/詐騙網站」
@@ -25,21 +25,40 @@
                 </div>
                 <!-- 輸入資料 -->
                 <div class="formInput_p03_reportURL">
+                    <!-- url -->
                     <label for="url">網站網址</label>
-                    <input class="input_p03" type="text" name="url" placeholder="http://">
+                    <input 
+                        v-model.trim="url"
+                        class="input_p03" type="text" name="url" 
+                        placeholder="http://" required>
                     <i class="fa-solid fa-circle-xmark"></i>
                     <p class="warning_p03">該網址已通報過囉</p>
+                    <!-- email -->
                     <div class="active_p03_reportURL">
                         <label for="email">通報人信箱</label>
-                        <input class="input_p03" type="email" name="email" placeholder="請輸入您的信箱">
+                        <input 
+                            v-model.trim="email"
+                            class="input_p03" type="email" name="email" 
+                            laceholder="請輸入您的信箱">
                         <p class="warning_p03">請輸入信箱</p>
                     </div>
+                    <!-- title -->
                     <label for="title">網站名稱</label>
-                    <input class="input_p03" type="text" name="title" placeholder="被偽冒或詐騙公司名稱">
+                    <input 
+                        v-model="title"
+                        class="input_p03" type="text" name="title" 
+                        placeholder="被偽冒或詐騙公司名稱">
+                    <!-- note -->
                     <label for="notes">備註</label>
-                    <textarea class="input_p03" name="notes" placeholder="可說明該網站可疑之處..."></textarea>
+                    <textarea 
+                        v-model.trim="notes"
+                        class="input_p03" name="notes" 
+                        placeholder="可說明該網站可疑之處...">
+                    </textarea>
                     <!-- 綁定了 @click.prevent 事件來防止默認提交行為 -->
-                    <input class="inputSubmit_p03 small_button" type="submit" value="送出" @click.prevent="submitForm"> 
+                    <input 
+                        class="inputSubmit_p03 small_button" 
+                        type="submit" value="送出" @click.prevent="submitForm"> 
                 </div>
             </form>
         </section>    
@@ -55,10 +74,10 @@
 </template>
 
 <script>
-import{ ref} from "vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
+import { API_URL, reactive } from '@/config'
 
 export default {
     name: 'Form',
@@ -66,18 +85,53 @@ export default {
         frontNavbar,
         frontFooter,
     },
-    mounted() {
-        // axios
-        //     .get('http://localhost/frontend/src/api/getWebURL.php')
-        //     .then((response) => {
-        //         this.datas = response.data;
-        //         console.log(response.data);
-        //     })
-        //     .catch(function (error) { // 请求失败处理
-        //         console.log(error);
-        //     });
+    setup(){
+        const form = reactive({
+        url: '',
+        email: '',
+        title: '',
+        notes: '',
+    })
 
-         // 需要 filtering 的欄位
+    const submitForm = async () => {
+      try {
+        const response = await axios.post(`${API_URL}reportURL.php`, form)
+        console.log(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    return {
+      form,
+      submitForm
+    }
+    },
+    mounted() {
+        axios
+            // 要先 proxy
+            // .get(`https://od.moi.gov.tw/api/v1/rest/datastore/A01010000C-002150-013`)
+            .get(`/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013`)
+            // .get(`${API_URL}getWebURL.php`)
+            .then((response) => {
+                // this.datas = response.data.result.records;
+                // let govURL = response.data.result;
+                // let govWebTitle = [];
+                // let govWebURL = [];
+                // let govWebDate = [];
+                // for (let i = 0; i < govURL.records.length; i++) {
+                //     govWebTitle += govURL.records[i].WEBSITE_NM;
+                //     govWebURL +=  govURL.records[i].WEBURL;
+                //     govWebDate += govURL.records[i].STA_EDATE;
+                //     console.log(govWebTitle, govWebURL, govWebDate);
+                // };
+                // return{govWebTitle, govWebURL, govWebDate}
+            })
+            .catch(function (error) { // 请求失败处理
+                console.log(error);
+            });
+        // console.log(govWebTitle);
+        // 需要 filtering 的欄位
         var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
         var website = [
             { "回報日期": "2023-03-19", "回報狀態": "待審核", "網站名稱": "-", "網址": "https://cesare.asia/6",  },
@@ -137,7 +191,7 @@ export default {
                 loadIndication: false,
                 // data: website,
                 fields: [
-                    { name: "DATE(U.DATE)", title:"回報日期", type: "text", width: 100, validate: "required" },
+                    { name: "DATE", title:"回報日期", type: "text", width: 100, validate: "required" },
                     { name: "STATUS_NAME", title:"回報狀態", type: "select", items: statusURL, valueField: "回報狀態", textField: "回報狀態" },
                     { name: "TITLE", title:"網站名稱", type: "text", width: 100 },
                     { name: "URL", title:"網址", type: "text", width: 200 },
@@ -147,12 +201,14 @@ export default {
                         var d = $.Deferred();
                         $.ajax({
                             type: "GET",
-                            url: "http://localhost/TGD104_G2/frontend/src/api/getWebURL.php",
+                            // url: "http://localhost/TGD104_G2/frontend/src/api/getWebURL.php",
+                            url: `${API_URL}getWebURL.php`,
                             data: "[]",
                             contentType: "application/json; charset=utf-8",
                             dataType: "json"
                         }).done(function (response) {
-                          console.log("loadAgain");
+                            console.log(d.resolve(response));
+                            console.log("hiiiiiiiiiiiiiii");
                             d.resolve(response);
                         });
                         return d.promise();
@@ -198,14 +254,7 @@ export default {
                 // }
             });
         }
-        // let star = setInterval(function () { $("#jsGrid").jsGrid("loadData"); }, 1000);
-        let intervalId = setInterval(function() {
-        $("#jsGrid").jsGrid("loadData", function(data) {
-            if (data.length > 0) {
-            clearInterval(intervalId);
-            }
-        });
-        }, 1000);
+        setTimeout(function () { $("#jsGrid").jsGrid("loadData"); }, 1000);
         // $("#jsGrid").jsGrid("loadData")
         setGrid();
     },
