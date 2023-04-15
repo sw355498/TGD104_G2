@@ -2,14 +2,15 @@
     <Teleport to="body">
         <modal :show="showModal" @close="showModal = false">
         <template #header>
-            <div v-html="modalContent"></div>
+            <h4>{{btnName}}</h4>`
         </template>
-        <template #body>
-            帳號：<input type="text" style="margin-bottom: 20px;">
-            密碼：<input type="text">
+        <template #body>    
+                帳號：<input v-model="account" type="text" style="margin-bottom: 20px;">
+                密碼：<input v-model="password" type="text" style="margin-bottom: 20px;">
+                顯示名稱：：<input v-model="nickname" type="text">
         </template>
         <template #footer>
-            <button class="medium_button">送出</button>
+            <button class="medium_button" @click="handleSubmit">送出</button>
         </template>
         </modal>
     </Teleport>
@@ -18,7 +19,7 @@
         <div class="b_content">
             <h2 class="h1_component">{{ h2Title }}</h2>
             <div class="d-flex justify-content-end align-items-center my-2">
-                <button v-if="addbutton" class="medium_button b_add_btn me-2" @click="showModal = true, modalContent=`<h4>${btnName}</h4>`">{{ btnName }}</button>
+                <button v-if="addbutton" class="medium_button b_add_btn me-2" @click="showModal = true">{{ btnName }}</button>
                 <div class="position-relative">
                     <i class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"></i>
                     <input type="text">
@@ -34,13 +35,13 @@
     import 'jsgrid'
     import LeftNav from '../components/b_leftNav.vue';
     import Modal from '@/components/modal.vue';
-
+    import { API_URL } from '@/config';
+    import axios from 'axios';
+    
     const selectedTab = ref('user')
     const h2Title = ref('會員管理')
     const addbutton = ref(true)
     const btnName = ref('新增會員')
-    const modalContent = ref('')
-    const showModal = ref(false)
 
 
     //監控子元件傳來的值
@@ -104,26 +105,6 @@
     clients.value = [
         { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
         { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Google", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Google", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Google", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Google", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Line", "狀態": "正常", },
     ];
     
     fields.value = [
@@ -193,6 +174,32 @@
             case "查看":
                 alert(`查看帳號 ${thisID}`)
                 break
+        }
+    }
+
+    //彈窗設定
+    const showModal = ref(false)
+    const account = ref('')
+    const password = ref('')
+    const nickname = ref('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await axios.post(`${API_URL}add_user.php`, {
+                account: account.value,
+                password: password.value,
+                nickname: nickname.value,
+            })
+            
+            console.log(response)
+
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message)
+            } else {
+                console.log(e.message)
+            }
         }
     }
 </script>
