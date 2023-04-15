@@ -12,7 +12,7 @@
     $password = isset($data['password']) ? htmlspecialchars($data['password']) : '';
     $nickname = isset($data['nickname']) ? htmlspecialchars($data['nickname']) : '';
 
-    if(trim($account) && trim($password)){
+    if(!empty(trim($account)) && !empty(trim($password))){
         //建立SQL語法
         $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT";
         $statement = $pdo->prepare($sql);
@@ -25,6 +25,9 @@
             // 建立SQL
             $sql = "INSERT INTO USER (ACCOUNT, PASSWORD, NICKNAME, LOGIN_TYPE_ID, ACCOUNT_TYPE_ID, CREATE_TIME) VALUES (:ACCOUNT, :PWD, :NICKNAME, 1, 1, NOW())
             ";
+
+            //密碼加密
+            $password = password_hash($password, PASSWORD_BCRYPT);
 
             // 執行
             $statement = $pdo->prepare($sql);
@@ -42,9 +45,17 @@
             echo '此帳號已被註冊';
         }
     } else {
-        echo '欄位尚未輸入';
+        if (empty($account) && empty($password)) {
+            echo '帳號與密碼尚未輸入';
+        }
+        if (empty($account) && !empty($password)) {
+            echo '帳號尚未輸入';
+        }
+        if (!empty($account) && empty($password)) {
+            echo '密碼尚未輸入';
+        }
     }
-    
+
     /*
         筆記區域
     
@@ -66,6 +77,14 @@
     
         trim() 
         trim() 函式用於刪除字串開頭和結尾的空格或其他指定字符。
+
+        empty() 
+        PHP 內建的函數，用於判斷一個變數是否為空或者為 0
+
+        password_hash()
+        密碼雜湊函式，用於將原始的明文密碼轉換成一個不可逆的加密值。
+        使用 password_hash 函式時，會自動生成一個隨機的 salt（鹽值），並將 salt 與明文密碼結合後進行雜湊，最終得到一個加密後的雜湊值。在驗證使用者輸入的密碼時，只需將使用者輸入的明文密碼與資料庫中存儲的雜湊值進行比較即可。因為每次生成的 salt 都不同，即使同一個密碼被多次雜湊，其結果也會不同，這樣可以提高密碼的安全性。
+        *備註：存取的資料庫長度不得小於255並且建議使用"utf8mb4_unicode_ci" 編碼
     
         -> 符號
         在php中 -> 符號 相當於JavaScrip 中的 . 

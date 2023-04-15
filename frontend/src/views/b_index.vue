@@ -4,13 +4,46 @@
         <template #header>
             <h4>{{btnName}}</h4>`
         </template>
-        <template #body>    
-                帳號：<input v-model="account" type="text" style="margin-bottom: 20px;">
-                密碼：<input v-model="password" type="text" style="margin-bottom: 20px;">
-                顯示名稱：：<input v-model="nickname" type="text">
-        </template>
-        <template #footer>
-            <button class="medium_button" @click="handleSubmit">送出</button>
+        <template #body>
+        <form @submit="handleSubmit">
+            <label for="account">
+                帳號<span class="text-danger">*<small>必填</small></span>
+            </label>
+            <div class="d-none text-danger" id="accountErrorText"></div>
+            <input
+                v-model="account" 
+                type="text" 
+                style="margin-bottom: 20px;" 
+                id="account" 
+                @focus="handleFocus('account')"
+                required
+            >
+
+            <label for="password">
+                密碼<span class="text-danger">*<small>必填</small></span>
+            </label>
+            <div class="text-danger" id="passwordErrorText"></div>
+            <input 
+                v-model="password"
+                type="password"
+                style="margin-bottom: 20px;"
+                id="password"
+                @focus="handleFocus('password')"
+                required
+            >
+            
+            <label for="nickname">
+                顯示名稱
+            </label>
+            <input 
+                v-model="nickname"
+                type="text"
+                style="margin-bottom: 20px;"
+                id="nickname"
+            >
+
+            <button class="medium_button submitBtn" >送出</button>
+        </form>  
         </template>
         </modal>
     </Teleport>
@@ -182,7 +215,6 @@
     const account = ref('')
     const password = ref('')
     const nickname = ref('')
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -191,8 +223,28 @@
                 password: password.value,
                 nickname: nickname.value,
             })
-            
-            console.log(response)
+            if(response.data === "帳號註冊成功"){
+                // 清除表單
+                account.value = ''
+                password.value = ''
+                nickname.value = ''
+                // 清除可能存在的error
+                removeError('account')
+                removeError('password')
+                // 關閉彈窗
+                showModal.value = false
+            } else if(response.data === "此帳號已被註冊") {
+                addError('account', '此帳號已被註冊')
+            } else if (response.data === "帳號與密碼尚未輸入"){
+                addError('account', '帳號尚未輸入')
+                addError('password', '密碼尚未輸入')
+            } else if (response.data === "帳號尚未輸入"){
+                addError('account', '帳號尚未輸入')
+            } else if (response.data === "密碼尚未輸入"){
+                addError('password', '密碼尚未輸入')
+            } else {
+                console.log(response.data)
+            }
 
         } catch (e) {
             if (e.response) {
@@ -200,6 +252,29 @@
             } else {
                 console.log(e.message)
             }
+        }
+    }
+
+    const handleFocus = (theInputID) => {
+        removeError(theInputID)
+    }
+
+    // 新增錯誤訊息
+    const addError = (InputID, ErrorText) => {
+        let theInputDOM = document.querySelector(`#${InputID}`)
+        let theErrorText = document.querySelector(`#${InputID}ErrorText`)
+        theInputDOM.classList.add('error')
+        theErrorText.classList.remove('d-none')
+        theErrorText.innerText = ErrorText
+    }
+
+    //刪除錯誤訊息
+    const removeError= (InputID) => {
+        let theInputDOM = document.querySelector(`#${InputID}`)
+        if(theInputDOM.classList.contains('error')){
+            let theErrorText = document.querySelector(`#${InputID}ErrorText`)
+            theInputDOM.classList.remove('error');
+            theErrorText.classList.add('d-none')
         }
     }
 </script>
@@ -213,5 +288,16 @@
             top: 10px;
             left: 0px;
         }
+    }
+    .submitBtn{
+        float: right;
+        &::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+    .error{
+        outline: 3px solid red;
     }
 </style>
