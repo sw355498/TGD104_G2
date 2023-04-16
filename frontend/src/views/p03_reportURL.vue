@@ -33,15 +33,26 @@
                         class="input_p03" type="text" name="url" 
                         placeholder="http://" required>
                     <i class="fa-solid fa-circle-xmark"></i>
-                    <p class="warning_p03">該網址已通報過囉</p>
+                    <p 
+                        v-show="url === ''"
+                        class="warning_p03">請輸入您覺得可疑的網址</p>
+                    <p 
+                        
+                        class="warning_p03">該網址已通報過囉</p>
                     <!-- email -->
                     <div class="active_p03_reportURL">
                         <label for="email">通報人信箱</label>
                         <input 
                             v-model.trim="email"
                             class="input_p03" type="email" name="email" 
-                            laceholder="請輸入您的信箱">
-                        <p class="warning_p03">請輸入信箱</p>
+                            placeholder="請輸入您的信箱">
+                        <p 
+                            class="warning_p03"
+                        >{{ emailError }}123</p>
+                        <p 
+                            v-show="email === ''"
+                            class="warning_p03">請輸入信箱</p>
+                        
                     </div>
                     <!-- title -->
                     <label for="title">網站名稱</label>
@@ -63,7 +74,7 @@
                     > 
                     <button
                         class="inputSubmit_p03" 
-                        :disabled="!isFormValid"
+                        :disabled="!isFormValid & !validateEmail"
                         type="submit" value="送出"
                         @click="sweetAlert"
                     >送出</button>
@@ -81,33 +92,31 @@
     <frontFooter />
 </template>
 
-<script>
-import { ref, computed } from 'vue';
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
 import { API_URL } from '@/config'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-export default {
-    name: 'Form',
-    components: {
-        frontNavbar,
-        frontFooter,
-    },
-    setup(){
-        const sweetAlert=(bank)=>{
-            Swal.fire({
-                title: '成功送出',
-                text: '將由專人為您審核',
-                icon: 'success',
-                confirmButtonText: '確認'
-            })
+
+    const sweetAlert=(bank)=>{
+        Swal.fire({
+            title: '成功送出',
+            text: '將由專人為您審核',
+            icon: 'success',
+            confirmButtonText: '確認'
+        })
+    }
+    const a =ref('')
+    const url = ref('')
+    const email = ref('')
+    const title = ref('')
+    const notes = ref('')
+    const submitForm = async () => {
+        if (emailError.value) {
+            return
         }
-        const url = ref('')
-        const email = ref('')
-        const title = ref('')
-        const notes = ref('')
-        const submitForm = async () => {
         try {
             const response = await axios.post(`${API_URL}reportURL.php`, {
                 url: url.value,
@@ -121,23 +130,45 @@ export default {
             // 提交失敗的處理
             console.error('Submit failed:', error)
         }
+    }
+    const isFormValid = computed(() => {
+        return url.value !== ''
+    })
+    const emailError = ref('')
+    const validateEmail = () => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailPattern.test(email.value)) {
+            emailError.value = 'Email格式錯誤'
+        } else {
+            emailError.value = ''
         }
-        // 檢查表單是否有效
-        const isFormValid = computed(() => {
-            return url.value !== ''
-        })
-        return {
-            url,
-            email,
-            title,
-            notes,
-            isFormValid,
-            submitForm,
-            sweetAlert
-        }
-    },
-   
-    mounted() {
+    }
+    onMounted(async()=> {
+            const allURL = ref([])
+            try {
+                await axios
+                // 要先 proxy
+                .get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+                .then((response) => {
+                    let myArray = response.data.result.records;
+                    myArray.splice(0, 1);  // 刪除政府預設第一欄
+                    axios
+                        .get(`${API_URL}getWebURL.php`)
+                        .then((response) => {
+                            let myArray2 = response.data;
+                            const mergeData = myArray.concat(myArray2)
+                            // 判斷 dataList 中是否有名稱為 'url' 的資料
+                            
+                            allURL.value = mergeData
+                        })
+                })
+                .catch(function (error) { 
+                    console.log(error);
+                });
+            } catch (error) {
+                console.log(error);
+            }
+            
         // 需要 filtering 的欄位
         // var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
         // var website = [
@@ -163,7 +194,9 @@ export default {
         //         回報狀態: i
         //     })
         // }
-        function setGrid() {
+        // function setGrid() {
+            
+        import('jsgrid').then((jsGrid)=> {
             $("#jsGrid").jsGrid({
                 width: "100%",
                 // filtering: true,
@@ -188,7 +221,7 @@ export default {
                 
                 // loadMessage: "全速載入中，感謝耐心等候...",
                 loadIndication: false,
-                // data: website,
+                data: allURL.value,
                 fields: [
                     { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, },
                     // { name: "STATUS_NAME", title:"回報狀態",type: "text",itemTemplate:function(value){
@@ -200,50 +233,54 @@ export default {
                     { name: "WEBURL", title:"網址", type: "text", width: 200 },
 
                 ],
-                controller: {
-                    loadData: function () {
-                        var d = $.Deferred();
-                        axios
-                            // 要先 proxy
-                            .get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
-                            .then((response) => {
-                                let myArray = response.data.result.records;
-                                myArray.splice(0, 1);  // 刪除政府預設第一欄
-                                axios
-                                    .get(`${API_URL}getWebURL.php`)
-                                    .then((response) => {
-                                        let myArray2 = response.data;
-                                        const mergeData = myArray.concat(myArray2)
-                                        d.resolve(mergeData);
-                                        console.log(mergeData);
-                                    })
-                            })
-                            .catch(function (error) { 
-                                console.log(error);
-                            });
-                            return d.promise();
-                    },
-                    // function (filter) {
-                    //     return d.filter(function (item) {
-                    //         var flags = new Array(filterColumn.length)
-                    //         flags.fill(true)
-                    //         for (var i = 0; i < filterColumn.length; i++) {
-                    //             var key = filterColumn[i]
-                    //             // 過濾掉下拉選單的預設值 空" "
-                    //             if (filter[key] !== " ") {
-                    //                flags[i] = (item[key].indexOf(filter[key]) > -1)
-                    //             }
-                    //         }
-                    //         // 返回的数组里面的元素必须都为true
-                    //         return flags.indexOf(false) === -1
-                    //     });
-                    // },
-                },
-            });
-        }
-        setTimeout(function () { $("#jsGrid").jsGrid("loadData"); }, 1000);
+                // controller: {
+                //     loadData: 
+                //     function callData() {
+                //         var d = $.Deferred();
+                //         axios
+                //             // 要先 proxy
+                //             .get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+                //             .then((response) => {
+                //                 let myArray = response.data.result.records;
+                //                 myArray.splice(0, 1);  // 刪除政府預設第一欄
+                //                 axios
+                //                     .get(`${API_URL}getWebURL.php`)
+                //                     .then((response) => {
+                //                         let myArray2 = response.data;
+                //                         const mergeData = myArray.concat(myArray2)
+                //                         // 判斷 dataList 中是否有名稱為 'url' 的資料
+                //                         const hasURL = mergeData.some((item) => item === 'url');
+                //                         console.log(hasURL); // true
+                //                         console.log(mergeData); // true
+                //                         d.resolve(mergeData);
+                //                     })
+                //             })
+                //             .catch(function (error) { 
+                //                 console.log(error);
+                //             });
+                //             return d.promise();
+                //     },
+                //     // function (filter) {
+                //     //     return d.filter(function (item) {
+                //     //         var flags = new Array(filterColumn.length)
+                //     //         flags.fill(true)
+                //     //         for (var i = 0; i < filterColumn.length; i++) {
+                //     //             var key = filterColumn[i]
+                //     //             // 過濾掉下拉選單的預設值 空" "
+                //     //             if (filter[key] !== " ") {
+                //     //                flags[i] = (item[key].indexOf(filter[key]) > -1)
+                //     //             }
+                //     //         }
+                //     //         // 返回的数组里面的元素必须都为true
+                //     //         return flags.indexOf(false) === -1
+                //     //     });
+                //     // },
+                // },
+            // });
+        });
+        // setTimeout(function callData() { $("#jsGrid").jsGrid("loadData"); }, 100);
         // $("#jsGrid").jsGrid("loadData")
-        setGrid();
-    },
-};
+      // setGrid();
+    })
+});
 </script>
