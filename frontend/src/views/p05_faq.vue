@@ -5,12 +5,13 @@
     <!--Main Block -->
     <h1>FAQ</h1>
     <main>
-      <!-- <div> -->
-      <div id="myElement" style="color: #ffffff">{{ content.value }}</div>
-      <!-- <button @click="updateContent">Update Content</button> -->
-      <!-- </div> -->
       <label for="search">
-        <input type="text" id="search" placeholder="請輸入關鍵字" />
+        <input
+          type="search"
+          id="search"
+          placeholder="請輸入關鍵字"
+          v-model.lazy.trim="search"
+        />
         <i class="fa-solid fa-magnifying-glass"></i>
       </label>
       <div class="question_p05_faq_block">
@@ -21,7 +22,10 @@
               <i class="fa-solid fa-angle-up"></i>
             </div>
             <div class="content_p05_faq_qusetion">
-              <p>{{ item.ANSWER }}</p>
+              <p>
+                {{ item.ANSWER }} <br />
+                <span>【資料來源：{{ item.STATUS }}】</span>
+              </p>
             </div>
           </li>
         </ul>
@@ -34,9 +38,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
+import { API_URL } from "@/config";
 import axios from "axios";
 import TypeIt from "typeit";
 
@@ -44,13 +49,13 @@ import TypeIt from "typeit";
 const faq = reactive({
   data: "",
 });
-const content = ref("");
 
 // 取QA資料
 onMounted(() => {
   axios
-    .get("http://localhost/TGD104_G2/frontend/src/api/getFaq.php")
+    .get(`${API_URL}getFaq.php`)
     .then((response) => {
+      console.log(response.data);
       faq.data = response.data;
     })
     .catch((error) => console.log(error));
@@ -60,11 +65,18 @@ const dropDown = (e) => {
   e.target.parentNode.classList.toggle("open");
   if (e.target.parentNode.classList.contains("open")) {
     let instance = new TypeIt(e.target.nextElementSibling.querySelector("p"), {
-      speed: 5,
+      speed: 20,
       startDelay: 400,
       loop: false,
     }).go();
   }
+};
+
+//Search Bar
+const filteredList = () => {
+  return faq.data.value.filter((post) => {
+    return post.title.toLowerCase().includes(this.search.toLowerCase());
+  });
 };
 </script>
 <style scoped></style>

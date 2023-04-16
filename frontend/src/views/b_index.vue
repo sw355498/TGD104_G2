@@ -76,15 +76,26 @@
     const addbutton = ref(true)
     const btnName = ref('新增會員')
 
+    const clients = ref([])
+    const fields = ref([])
 
     //監控子元件傳來的值
-    watch(selectedTab, (newTab) => {
-        console.log(newTab)
+    watch(selectedTab, async (newTab) => {
         switch (newTab){
             case 'user':
                 h2Title.value = '會員管理';
                 addbutton.value = true;
                 btnName.value = '新增會員';
+                // try {
+                // const response = await axios.post(`${API_URL}select_user.php`);           
+                //     clients.value = response.data
+                // } catch (e) {
+                //     if (e.response) {
+                //     console.log(e.response.data.message);
+                //     } else {
+                //         console.log(e.message);
+                //     }
+                // }
                 break;
             case 'message':
                 h2Title.value = '討論版管理';
@@ -125,27 +136,13 @@
         }
     })
 
-    const clients = ref([])
-    const fields = ref([])
 
-    const countries = [
-    { Name: "", Id: 0 },
-    { Name: "United States", Id: 1 },
-    { Name: "Canada", Id: 2 },
-    { Name: "United Kingdom", Id: 3 }
-    ]
-    let id = 0, user = 111
-    clients.value = [
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "會員註冊", "狀態": "正常", },
-        { "ID": `${id++}`, "帳號": `user_${user}`, "暱稱": "Otto Clay", "建立日期": '2023-03-19', "E-mail": `user_${user++}@test.com`, "登入方式": "Google", "狀態": "正常", },
-    ];
-    
     fields.value = [
         { name: 'ID', css: 'd-none'},
         { name: "帳號", type: "text", validate: "required" },
         { name: "暱稱", type: "text", width: 100, css: "d-none" },
         { name: "建立日期", type: "text", width: 80 },
-        { name: "E-mail", type: "text"},
+
         { name: "登入方式", type: "text", width: 60},
         { name: "狀態", type: "text", width: 50},
         { name: "操作", width: 150, itemTemplate:function(){
@@ -164,7 +161,21 @@
         }},
     ];
 
-    onMounted(() => {
+    onMounted(async () => {
+        const clients = ref([])
+
+        try {
+            const response = await axios.post(`${API_URL}select_user.php`);           
+            clients.value = response.data
+        } catch (e) {
+            if (e.response) {
+            console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
+        }
+  
+
         // 因為 jsGrid 模組是動態載入的，所以必須使用 import('jsgrid') 並且在其回傳的 Promise resolved 之後才能使用 $('#jsGrid').jsGrid() 方法。
         import('jsgrid').then((jsGrid) => {
             $('#jsGrid').jsGrid({
@@ -210,30 +221,35 @@
         }
     }
 
+    //畫面渲染
+
+
     //彈窗設定
     const showModal = ref(false)
     const account = ref('')
     const password = ref('')
     const nickname = ref('')
+    const accountTypeID = ref('')
     const handleSubmit = async (e) => {
-        console.log(btnName.value)
+        if(btnName.value === '新增會員'){
+            accountTypeID.value =  1
+        } else if(btnName.value === '新增管理員帳號'){
+            accountTypeID.value =  2
+        }
+
         e.preventDefault()
         try {
             if(btnName.value === '新增會員'){
-                const response = await axios.post(`${API_URL}add_user.php`, {
-                    account: account.value,
-                    password: password.value,
-                    nickname: nickname.value,
-                    accountTypeID: 1,
-                })
+            accountTypeID.value =  1
             } else if(btnName.value === '新增管理員帳號'){
-                const response = await axios.post(`${API_URL}add_user.php`, {
-                    account: account.value,
-                    password: password.value,
-                    nickname: nickname.value,
-                    accountTypeID: 2,
-                })
+                accountTypeID.value =  2
             }
+            const response = await axios.post(`${API_URL}add_user.php`, {
+                account: account.value,
+                password: password.value,
+                nickname: nickname.value,
+                accountTypeID: accountTypeID.value,
+            })
             if(response.data === "帳號註冊成功"){
                 // 清除表單
                 account.value = ''
