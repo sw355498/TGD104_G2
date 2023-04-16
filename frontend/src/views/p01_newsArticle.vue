@@ -52,6 +52,7 @@
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from "axios";
+import { API_URL, reactive } from "@/config";
 
 export default {
   components: {
@@ -68,7 +69,7 @@ export default {
     const id = this.$route.params.id;
 
     axios
-      .get(`http://localhost/TGD104_G2/frontend/src/api/getNews.php`)
+      .get(`${API_URL}getNews.php`)
       .then((response) => {
         // 從回傳的 response 中找到對應的新聞資料並賦值到 data 中的 news 物件
         const data = response.data;
