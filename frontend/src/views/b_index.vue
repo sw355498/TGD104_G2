@@ -16,7 +16,7 @@
                 style="margin-bottom: 20px;" 
                 id="account" 
                 @focus="handleFocus('account')"
-                required
+                
             >
 
             <label for="password">
@@ -29,7 +29,7 @@
                 style="margin-bottom: 20px;"
                 id="password"
                 @focus="handleFocus('password')"
-                required
+                
             >
             
             <label for="nickname">
@@ -216,13 +216,24 @@
     const password = ref('')
     const nickname = ref('')
     const handleSubmit = async (e) => {
+        console.log(btnName.value)
         e.preventDefault()
         try {
-            const response = await axios.post(`${API_URL}add_user.php`, {
-                account: account.value,
-                password: password.value,
-                nickname: nickname.value,
-            })
+            if(btnName.value === '新增會員'){
+                const response = await axios.post(`${API_URL}add_user.php`, {
+                    account: account.value,
+                    password: password.value,
+                    nickname: nickname.value,
+                    accountTypeID: 1,
+                })
+            } else if(btnName.value === '新增管理員帳號'){
+                const response = await axios.post(`${API_URL}add_user.php`, {
+                    account: account.value,
+                    password: password.value,
+                    nickname: nickname.value,
+                    accountTypeID: 2,
+                })
+            }
             if(response.data === "帳號註冊成功"){
                 // 清除表單
                 account.value = ''

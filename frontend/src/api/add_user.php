@@ -11,6 +11,7 @@
     $account = isset($data['account']) ? htmlspecialchars($data['account']) : '';
     $password = isset($data['password']) ? htmlspecialchars($data['password']) : '';
     $nickname = isset($data['nickname']) ? htmlspecialchars($data['nickname']) : '';
+    $accountTypeID = isset($data['accountTypeID']) ? htmlspecialchars($data['accountTypeID']) : '';
 
     if(!empty(trim($account)) && !empty(trim($password))){
         //建立SQL語法
@@ -23,7 +24,7 @@
 
         if(count($data) === 0){
             // 建立SQL
-            $sql = "INSERT INTO USER (ACCOUNT, PASSWORD, NICKNAME, LOGIN_TYPE_ID, ACCOUNT_TYPE_ID, CREATE_TIME) VALUES (:ACCOUNT, :PWD, :NICKNAME, 1, 1, NOW())
+            $sql = "INSERT INTO USER (ACCOUNT, PASSWORD, NICKNAME, LOGIN_TYPE_ID, ACCOUNT_TYPE_ID, CREATE_TIME) VALUES (:ACCOUNT, :PWD, :NICKNAME, 1, :ACCOUNT_TYPE_ID, NOW())
             ";
 
             //密碼加密
@@ -36,7 +37,7 @@
             $statement ->bindValue(":ACCOUNT", $account);
             $statement ->bindValue(":PWD", $password);
             $statement ->bindValue(":NICKNAME", $nickname);
-
+            $statement ->bindValue(":ACCOUNT_TYPE_ID", $accountTypeID);
             //執行sql語法
             $statement->execute();
 
