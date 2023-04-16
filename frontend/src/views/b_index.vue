@@ -167,6 +167,7 @@
         try {
             const response = await axios.post(`${API_URL}select_user.php`);           
             clients.value = response.data
+            console.log(clients.value)
         } catch (e) {
             if (e.response) {
             console.log(e.response.data.message);

@@ -86,7 +86,10 @@
         <section class="urlList_p03_reportURL">
             <h2>已通報的可疑網站列表</h2>
             <!-- ======== 外掛 jsGrid ========= -->
-            <div id="jsGrid"></div>
+            <div v-if="!isJsgrid">
+                <p style="color:red;">全速載入中，感謝耐心等候...</p>
+            </div>
+            <div v-show="isJsgrid" id="jsGrid"></div>
         </section>
     </main>
     <frontFooter />
@@ -108,7 +111,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             confirmButtonText: '確認'
         })
     }
-    const a =ref('')
+    const isJsgrid = ref(false)
     const url = ref('')
     const email = ref('')
     const title = ref('')
@@ -117,7 +120,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
         if (emailError.value) {
             return
         }
-        try {
+        try { 
             const response = await axios.post(`${API_URL}reportURL.php`, {
                 url: url.value,
                 email: email.value,
@@ -143,32 +146,39 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             emailError.value = ''
         }
     }
+    setTimeout(() => {
+        isJsgrid.value = true;
+    }, 2400);
     onMounted(async()=> {
             const allURL = ref([])
+            const a =ref([])
             try {
-                await axios
-                // 要先 proxy
-                .get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
-                .then((response) => {
-                    let myArray = response.data.result.records;
-                    myArray.splice(0, 1);  // 刪除政府預設第一欄
-                    axios
-                        .get(`${API_URL}getWebURL.php`)
-                        .then((response) => {
-                            let myArray2 = response.data;
-                            const mergeData = myArray.concat(myArray2)
-                            // 判斷 dataList 中是否有名稱為 'url' 的資料
-                            
-                            allURL.value = mergeData
-                        })
-                })
-                .catch(function (error) { 
-                    console.log(error);
-                });
+                const response = await axios.get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+                let myArray = response.data.result.records;
+                myArray.splice(0, 1);  // 刪除政府預設第一欄
+
+                    const responseServer = await axios.get(`${API_URL}getWebURL.php`)
+                    let myArray2 = responseServer.data;
+                    let mergeData = myArray.concat(myArray2)
+                    allURL.value = mergeData;
+                            console.log(allURL.value);
+
             } catch (error) {
                 console.log(error);
             }
-            
+            console.log(allURL.value)
+        //     try {
+        //     const response = await axios.post(`${API_URL}select_user.php`);           
+        //     clients.value = response.data
+        //     console.log(clients.value)
+        // } catch (e) {
+        //     if (e.response) {
+        //     console.log(e.response.data.message);
+        //     } else {
+        //         console.log(e.message);
+        //     }
+        // }
+
         // 需要 filtering 的欄位
         // var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
         // var website = [
@@ -195,7 +205,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
         //     })
         // }
         // function setGrid() {
-            
+    
         import('jsgrid').then((jsGrid)=> {
             $("#jsGrid").jsGrid({
                 width: "100%",
@@ -220,7 +230,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
                 pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
                 
                 // loadMessage: "全速載入中，感謝耐心等候...",
-                loadIndication: false,
+                // loadIndication: true,
                 data: allURL.value,
                 fields: [
                     { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, },
