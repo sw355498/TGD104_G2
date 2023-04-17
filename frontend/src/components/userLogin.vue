@@ -36,15 +36,12 @@
                 <div class="div_p08_user_textCenter">【使用以下帳戶連結】</div>
 
                 <div class="div_p08_user_loginType">
-                  <button class="medium_button btn_p08_user_loginType">
-                    <i class="fa-brands fa-facebook"></i> FB
-                  </button>
-                  <button class="medium_button btn_p08_user_loginType">
-                    <i class="fa-brands fa-line"></i> LINE
-                  </button>
-                  <button class="medium_button btn_p08_user_loginType">
-                    <i class="fa-brands fa-google"></i> GOOGLE
-                  </button>
+                  <!-- FB註冊元件 -->
+                  <userFacebookSignup />
+                  <!-- LINE註冊元件 -->
+                  <userLineSignup />
+                  <!-- Google註冊元件 -->
+                  <userGoogleSignup />
                 </div>
                 <br />
                 <div class="div_p08_user_textCenter">【或註冊一個新帳號】</div>
@@ -81,10 +78,12 @@
                     placeholder="請再次輸入密碼"
                     v-model.trim="confirmPassword"
                     id="valid"
+                    @blur="checkPasswordsMatch"
                     required
                   />
+                  <!-- 密碼不正確顯示 -->
                   <div v-if="passwordsMatch" class="error_message">
-                    密碼不匹配
+                    密碼不正確
                   </div>
                   <label for="name" class="text_title"
                     >顯示名稱/ Name <br
@@ -105,6 +104,8 @@
                       確定註冊 Sign up
                     </button>
                   </div>
+                  <!-- 註冊失敗顯示 -->
+                  <div v-if="signupFailed" class="error_signup">註冊失敗</div>
                 </form>
                 <form v-else @submit.prevent="handleLogin">
                   <label class="text_title">帳號/ Account <br /></label>
@@ -143,13 +144,24 @@
 <script>
 import axios from "axios";
 import { API_URL, reactive } from "@/config";
+// 第三方註冊元件
+import userLineSignup from "./userSignupLine.vue";
+import userFacebookSignup from "./userSignupFacebook.vue";
+import userGoogleSignup from "./userSignupGoogle.vue";
 
 export default {
+  components: {
+    userLineSignup,
+    userFacebookSignup,
+    userGoogleSignup,
+  },
   data() {
     return {
       account: "",
       password: "",
       displayName: "",
+      passwordsMatch: false,
+      signupFailed: false,
 
       active_tab: 0,
       tabs: [
@@ -173,12 +185,14 @@ export default {
     },
 
     // 註冊
-    handleSubmit() {
+    checkPasswordsMatch() {
       if (this.password !== this.confirmPassword) {
-        alert("密碼不匹配");
+        // alert("密碼不正確");
+        this.passwordsMatch = true;
         return;
       }
-
+    },
+    handleSubmit() {
       // 將使用者資料放到物件中
       const data = {
         account: this.account,
@@ -189,32 +203,47 @@ export default {
       axios
         .post(`${API_URL}/signup.php`, data)
         .then((response) => {
-          // 註冊成功要幹嘛
           console.log(response.data);
+          // 在這裡發送另一個請求以使用剛剛註冊的帳戶登入
+          axios
+            .post(`${API_URL}/login.php`, {
+              email: data.email,
+              password: data.password,
+            })
+            .then((response) => {
+              console.log(response.data);
+              // 登入成功後，關閉視窗。
+              this.$emit("close");
+            })
+            .catch((error) => {
+              console.log(error);
+              alert("登入失敗");
+            });
         })
         .catch((error) => {
-          // 註冊錯誤要幹嘛
-          console.error(error);
+          console.log(error);
+          // alert("註冊失敗");
+          this.signupFailed = true;
         });
     },
     // 登入
     handleLogin() {
-    const data = {
-      account: this.accountLogin,
-      password: this.passwordLogin,
-    };
+      const data = {
+        account: this.accountLogin,
+        password: this.passwordLogin,
+      };
 
-    axios
-      .post(`${API_URL}/login.php`, data)
-      .then((response) => {
-        console.log(response.data);
-        // 在這裡處理登入成功要幹嘛
-      })
-      .catch((error) => {
-        console.error(error);
-        // 在這裡處理登入失敗要幹嘛
-      });
-  },
+      axios
+        .post(`${API_URL}/login.php`, data)
+        .then((response) => {
+          // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
+          this.$emit("close");
+        })
+        .catch((error) => {
+          console.error(error);
+          // 在這裡處理登入失敗要幹嘛
+        });
+    },
   },
   computed: {},
 };

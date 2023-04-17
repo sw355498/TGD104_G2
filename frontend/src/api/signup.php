@@ -15,7 +15,7 @@
 
     if(!empty(trim($account)) && !empty(trim($password))){
         //建立SQL語法
-        $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT";
+        $sql = "SELECT * FROM USER_REGISTER WHERE ACCOUNT = :ACCOUNT";
         $statement = $pdo->prepare($sql);
         $statement ->bindValue(":ACCOUNT", $account);
         $statement->execute();
@@ -44,7 +44,9 @@
 
             echo '帳號註冊成功';
         } else {
+            http_response_code(400);//回傳失敗訊息給前端
             echo '此帳號已被註冊';
+            exit();
         }
     } else {
         if (empty($account) && empty($password)) {
