@@ -70,11 +70,16 @@
     import Modal from '@/components/modal.vue';
     import { API_URL } from '@/config';
     import axios from 'axios';
+    import Swal from 'sweetalert2/dist/sweetalert2.js'
     
     const selectedTab = ref('user')  //側選單的變數
     const h2Title = ref('會員管理')   //內容區塊的標題
     const addbutton = ref(true)     //內容區塊的按鈕顯示設定
     const btnName = ref('新增會員')  //按鈕的名稱
+
+    //Swal套件的變數
+    const swalTitle = ref('')
+    const sealSuccess = ref('success')
 
     //jsgrid套件所需要的變數
     const clients = ref([])         //後端撈取的data
@@ -89,17 +94,17 @@
     const nickname = ref('')        //暱稱input
     const accountTypeID = ref('')   //帳號的區分 1會員 2管理員 3主管(暫時只有會員與管理員)
     const whereVariable = ref('[]') //select時所需要的參數
-
+    const userID =ref()             //資料update 與 delect 時所需要的參數
+    const userStatusId = ref()      //資料update 與 delect 時所需要的參數(使用帳號狀態)
     //jsgrid套件的欄位設定
     fields.value = [
         { name: 'ID', css: 'd-none'},
         { name: "帳號", type: "text", validate: "required" },
         { name: "暱稱", type: "text", width: 100, css: "d-none" },
         { name: "建立日期", type: "text", width: 80 },
-
         { name: "登入方式", type: "text", width: 60},
         { name: "狀態", type: "text", width: 50},
-        { name: "操作", width: 150, itemTemplate:function(){
+        { name: "操作", width: 150, itemTemplate:function (value, item){
             let $buttonContainer = $("<div>")
 
             let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
@@ -111,6 +116,15 @@
             
             let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
             $buttonContainer.append($check);
+            
+            // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
+            // 判斷狀態為 "封鎖中" 時，將 $blockade 的文字改為 "解鎖"
+            if(item["狀態"] === "封鎖"){
+                    $blockade.text("解封鎖");
+                } else {
+                    $blockade.text("封鎖");
+            }
+            
             return $buttonContainer
         }},
     ];
@@ -123,7 +137,6 @@
                 addbutton.value = true;
                 btnName.value = '新增會員';
                 clients.value = await selectUser('user')
-                console.log(clients.value)
                 break;
             case 'message':
                 h2Title.value = '討論版管理';
@@ -161,7 +174,6 @@
                 addbutton.value = true;
                 btnName.value = '新增管理員帳號';
                 clients.value = await selectUser('staff')
-                console.log(clients.value)
                 break;
         }
     })
@@ -211,13 +223,26 @@
 
     // jsGrid內的自製按鈕事件
     function operate(){
-        let thisID = this.closest('tr').firstElementChild.innerHTML
+        let itemID = this.closest('tr').firstElementChild.innerHTML
+        userID.value = Number(itemID)
         switch (this.innerHTML){
             case "封鎖":
-                alert(`封鎖帳號 ${thisID}`)
+                userStatusId.value = 2 // 2為我們預設的帳號封鎖代碼
+                swalTitle.value = '帳號封鎖成功'
+                sealSuccess.value = 'success'
+                blockadeUser()
+                break
+            case "解封鎖":
+                userStatusId.value = 1 // 1為我們預設的帳號正常代碼
+                swalTitle.value = '帳號解鎖成功'
+                sealSuccess.value = 'success'
+                blockadeUser()
                 break
             case "刪除":
-                alert(`刪除帳號 ${thisID}`)
+                userStatusId.value = 3 // 3為我們預設的帳號正常代碼
+                swalTitle.value = '帳號已刪除'
+                sealSuccess.value = 'warning'
+                blockadeUser()
                 break
             case "修改":
                 alert(`修改帳號 ${thisID}`)
@@ -260,6 +285,12 @@
                 removeError('password')
                 // 關閉彈窗
                 showModal.value = false
+                Swal.fire({
+                    title: '新增成功',
+                    // text: '歡迎加入詐知就好！',
+                    icon: 'success',
+                    confirmButtonText: '確認'
+                })
             } else if(response.data === "此帳號已被註冊") {
                 addError('account', '此帳號已被註冊')
             } else if (response.data === "帳號與密碼尚未輸入"){
@@ -271,6 +302,35 @@
                 addError('password', '密碼尚未輸入')
             } else {
                 console.log(response.data)
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message)
+            } else {
+                console.log(e.message)
+            }
+        }
+    }
+
+    async function blockadeUser(){
+        try {
+            const response = await axios.post(`${API_URL}blockade_user.php`,{
+                userStatusId: userStatusId.value,
+                userID: userID.value
+            });
+
+            if(response.data === "資料更新成功"){
+                // 將Client資料更新
+                clients.value = await selectUser()
+                // 重新渲染 jsGrid
+                reloadJsGrid()
+                Swal.fire({
+                    title: swalTitle.value,
+                    icon: sealSuccess.value,
+                    confirmButtonText: '確認'
+                })
+            } else {
+                console.log(response.data) 
             }
 
         } catch (e) {
