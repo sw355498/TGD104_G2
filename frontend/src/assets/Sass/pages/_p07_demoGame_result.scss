@@ -186,7 +186,7 @@
             
             
         
-            p {
+            p,span {
                 margin-top:120px;
                 margin-bottom: 120px;
                 text-align: center;
@@ -203,6 +203,8 @@
               }
   
             .result_percent{
+              display:block;
+              color:white;
               font-size: 100px;
               @include rwd('sm'){
                 font-size:50px;
@@ -221,6 +223,7 @@
             padding-top:35px;
   
             p{
+              line-height: 60px;
               font-size: 50px;
               @include rwd('sm'){
                 font-size:26px;

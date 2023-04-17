@@ -70,7 +70,9 @@ const routes = [
   {
     path: '/p07demoGameresult',
     name: 'p07demoGameresult',
-    component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_result.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_result.vue'),
+    //props: (route) => ({ score: route.params.score })
+    
   },
   {
     path: '/p07demoPhone',
