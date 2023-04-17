@@ -9,6 +9,9 @@
     //從 $data 中取得 whereVariable 變數的值
     $whereVariable = $data['whereVariable'];
 
+    // 將陣列轉換為字串，並用逗號分隔每個值
+    $inClause = implode(',', $whereVariable);
+
     //建立SQL語法
     $sql = "SELECT u.ID, u.ACCOUNT as '帳號', u.NICKNAME as '暱稱', u.CREATE_TIME as '建立日期', us.USER_STATUS_NAME as '狀態', l.LOGIN_TYPE as '登入方式'
         FROM USER as u
@@ -16,11 +19,12 @@
                 on u.USER_STATUS_ID = us.ID
                     join LOGIN_TYPE as l
                         on u.LOGIN_TYPE_ID = l.ID
-                            WHERE u.ACCOUNT_TYPE_ID = :whereVariable;";
+                            WHERE u.ACCOUNT_TYPE_ID in ( $inClause );";
 
     //執行並查詢，會回傳查詢結果的物件，必須使用fetch、fetchAll...等方式取得資料
     $statement = $pdo->prepare($sql);
-    $statement->bindValue(':whereVariable', $whereVariable);
+
+
     $statement->execute();
 
     //抓出全部且依照順序封裝成一個二維陣列
