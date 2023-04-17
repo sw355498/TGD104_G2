@@ -16,7 +16,7 @@
                 style="margin-bottom: 20px;" 
                 id="account" 
                 @focus="handleFocus('account')"
-                
+                required
             >
 
             <label for="password">
@@ -29,7 +29,7 @@
                 style="margin-bottom: 20px;"
                 id="password"
                 @focus="handleFocus('password')"
-                
+                required
             >
             
             <label for="nickname">
@@ -71,13 +71,49 @@
     import { API_URL } from '@/config';
     import axios from 'axios';
     
-    const selectedTab = ref('user')
-    const h2Title = ref('會員管理')
-    const addbutton = ref(true)
-    const btnName = ref('新增會員')
+    const selectedTab = ref('user')  //側選單的變數
+    const h2Title = ref('會員管理')   //內容區塊的標題
+    const addbutton = ref(true)     //內容區塊的按鈕顯示設定
+    const btnName = ref('新增會員')  //按鈕的名稱
 
-    const clients = ref([])
-    const fields = ref([])
+    //jsgrid套件所需要的變數
+    const clients = ref([])         //後端撈取的data
+    const fields = ref([])          //jsgrid的欄位設定
+
+    //彈窗設定
+    const showModal = ref(false)    //彈窗顯示設定
+
+    //資料庫USER所需要的變數
+    const account = ref('')         //帳號input
+    const password = ref('')        //密碼input
+    const nickname = ref('')        //暱稱input
+    const accountTypeID = ref('')   //帳號的區分 1會員 2管理員 3主管(暫時只有會員與管理員)
+    const whereVariable = ref('[]') //select時所需要的參數
+
+    //jsgrid套件的欄位設定
+    fields.value = [
+        { name: 'ID', css: 'd-none'},
+        { name: "帳號", type: "text", validate: "required" },
+        { name: "暱稱", type: "text", width: 100, css: "d-none" },
+        { name: "建立日期", type: "text", width: 80 },
+
+        { name: "登入方式", type: "text", width: 60},
+        { name: "狀態", type: "text", width: 50},
+        { name: "操作", width: 150, itemTemplate:function(){
+            let $buttonContainer = $("<div>")
+
+            let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
+            $buttonContainer.append($blockade);
+            let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
+            $buttonContainer.append($delete);
+            let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
+            $buttonContainer.append($revise);
+            
+            let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
+            $buttonContainer.append($check);
+            return $buttonContainer
+        }},
+    ];
 
     //監控子元件傳來的值
     watch(selectedTab, async (newTab) => {
@@ -86,16 +122,8 @@
                 h2Title.value = '會員管理';
                 addbutton.value = true;
                 btnName.value = '新增會員';
-                // try {
-                // const response = await axios.post(`${API_URL}select_user.php`);           
-                //     clients.value = response.data
-                // } catch (e) {
-                //     if (e.response) {
-                //     console.log(e.response.data.message);
-                //     } else {
-                //         console.log(e.message);
-                //     }
-                // }
+                clients.value = await selectUser('user')
+                console.log(clients.value)
                 break;
             case 'message':
                 h2Title.value = '討論版管理';
@@ -132,76 +160,54 @@
                 h2Title.value = '後台帳號管理';
                 addbutton.value = true;
                 btnName.value = '新增管理員帳號';
+                clients.value = await selectUser('staff')
+                console.log(clients.value)
                 break;
         }
     })
 
-
-    fields.value = [
-        { name: 'ID', css: 'd-none'},
-        { name: "帳號", type: "text", validate: "required" },
-        { name: "暱稱", type: "text", width: 100, css: "d-none" },
-        { name: "建立日期", type: "text", width: 80 },
-
-        { name: "登入方式", type: "text", width: 60},
-        { name: "狀態", type: "text", width: 50},
-        { name: "操作", width: 150, itemTemplate:function(){
-            let $buttonContainer = $("<div>")
-
-            let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($blockade);
-            let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($delete);
-            let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($revise);
-            
-            let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($check);
-            return $buttonContainer
-        }},
-    ];
-
     onMounted(async () => {
-        const clients = ref([])
+        //撈取資料庫的資料
+        clients.value = await selectUser()
 
-        try {
-            const response = await axios.post(`${API_URL}select_user.php`);           
-            clients.value = response.data
-            console.log(clients.value)
-        } catch (e) {
-            if (e.response) {
-            console.log(e.response.data.message);
-            } else {
-                console.log(e.message);
-            }
-        }
-  
+        /* 
+        因為 jsGrid 模組是動態載入的，
+        所以必須使用 await import('jsgrid') 來等待 Promise resolved，
+        這樣就可以在後續的程式碼中直接使用載入的模組了
+        */
+        const jsgrid = await import('jsgrid')
+        reloadJsGrid()
 
-        // 因為 jsGrid 模組是動態載入的，所以必須使用 import('jsgrid') 並且在其回傳的 Promise resolved 之後才能使用 $('#jsGrid').jsGrid() 方法。
-        import('jsgrid').then((jsGrid) => {
-            $('#jsGrid').jsGrid({
-                width: "100%",
-                inserting: false, //添加
-                editing: false, //編輯
-                sorting: true, //排序
-                /*分頁設定*/
-                paging: true,
-                pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
-                pageIndex: 1,   //當前頁面數
-                pageSize: 8,   //頁面的數據量
-                pageButtonCount: 2,    //最大數量的頁面按鈕
-                pagerFormat: "{first} {pages} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}", //占位符來指定分頁欄格式
-                //pageNextText: "Next",   //下一頁
-                //pagePrevText: "Prev",   //上一頁
-                pageFirstText: "首頁", //首頁
-                pageLastText: "最後一頁",   //尾頁
-                pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
-                pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
-                data: clients.value,
-                fields: fields.value
-            });
+        //clients的資料如有更動，重新呼叫jsgrid套件更新渲染的資料
+        watch(clients, () => {
+            reloadJsGrid()
         });
     });
+
+    //jsgrid套件
+    const reloadJsGrid = () => {
+        $('#jsGrid').jsGrid({
+            width: "100%",
+            inserting: false, //添加
+            editing: false, //編輯
+            sorting: true, //排序
+            /*分頁設定*/
+            paging: true,
+            pagerContainer: null,   //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
+            pageIndex: 1,   //當前頁面數
+            pageSize: 8,   //頁面的數據量
+            pageButtonCount: 2,    //最大數量的頁面按鈕
+            pagerFormat: "{first} {pages} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}", //占位符來指定分頁欄格式
+            //pageNextText: "Next",   //下一頁
+            //pagePrevText: "Prev",   //上一頁
+            pageFirstText: "首頁", //首頁
+            pageLastText: "最後一頁",   //尾頁
+            pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
+            pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
+            data: clients.value,
+            fields: fields.value
+        });
+    }
 
     // jsGrid內的自製按鈕事件
     function operate(){
@@ -222,15 +228,8 @@
         }
     }
 
-    //畫面渲染
 
-
-    //彈窗設定
-    const showModal = ref(false)
-    const account = ref('')
-    const password = ref('')
-    const nickname = ref('')
-    const accountTypeID = ref('')
+    //表單送出事件
     const handleSubmit = async (e) => {
         if(btnName.value === '新增會員'){
             accountTypeID.value =  1
@@ -283,6 +282,32 @@
         }
     }
 
+    //資料庫查詢
+    async function selectUser(selectedTab = 'user'){
+        // USER表
+        if(selectedTab){
+
+            if(selectedTab === 'user'){
+                whereVariable.value =  [1]
+            } else if(selectedTab === 'staff'){
+                whereVariable.value =  [2, 3]
+            }
+            try {
+                const response = await axios.post(`${API_URL}select_user.php`,{
+                    whereVariable: whereVariable.value
+                });           
+                return  response.data.data
+            } catch (e) {
+                if (e.response) {
+                console.log(e.response.data.message);
+                } else {
+                    console.log(e.message);
+                }
+            }
+        }
+    }
+
+    //input的focus事件 
     const handleFocus = (theInputID) => {
         removeError(theInputID)
     }
