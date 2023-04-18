@@ -94,7 +94,7 @@
                     placeholder="請輸入顯示名稱"
                     v-model.trim="displayName"
                     id="name"
-                    required
+                    
                   />
                   <div class="div_p08_user_loginType">
                     <button
@@ -160,6 +160,7 @@ export default {
       account: "",
       password: "",
       displayName: "",
+      // accountTypeID:"",
       passwordsMatch: false,
       signupFailed: false,
 
@@ -198,10 +199,11 @@ export default {
         account: this.account,
         password: this.password,
         displayName: this.displayName,
+        accountTypeID:  1,
       };
 
       axios
-        .post(`${API_URL}/signup.php`, data)
+        .post(`${API_URL}/add_user.php`, data)
         .then((response) => {
           console.log(response.data);
           // 在這裡發送另一個請求以使用剛剛註冊的帳戶登入
@@ -238,6 +240,8 @@ export default {
         .then((response) => {
           // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
           this.$emit("close");
+          localStorage.setItem('token', 'ImLogin')
+          alert("登入成功");
         })
         .catch((error) => {
           console.error(error);
