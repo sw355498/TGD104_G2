@@ -92,7 +92,7 @@
                     { name: "狀態", type: "text", width: 50},
                     { name: "操作", width: 150, itemTemplate:function (value, item){
                         let $buttonContainer = $("<div>")
-            
+   
                         let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
                         $buttonContainer.append($blockade);
                         let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
@@ -125,12 +125,9 @@
     const whereVariable = ref('[]') //select時所需要的參數
     const userID =ref()             //資料update 與 delect 時所需要的參數
     const userStatusId = ref()      //資料update 與 delect 時所需要的參數(使用帳號狀態)
+    const selectTable = ref('')
     //jsgrid套件的欄位設定
-    if(selectedTab.value === 'user' || selectedTab.value === 'staff'){
 
-    } else if(selectedTab.value === 'message') {
-        
-    }
 
     //監控子元件傳來的值
     watch(selectedTab, async (newTab) => {
@@ -169,25 +166,27 @@
                         return $buttonContainer
                     }},
                 ];
-                clients.value = await selectUser('user');
+                clients.value = await selectUser(selectedTab.value);
+                reloadJsGrid()
                 break;
-            case 'message':
+            case 'discuss':
                 h2Title.value = '討論版管理';
                 addbutton.value = false;
                 fields.value = [
                     { name: 'ID', css: 'd-none'},
-                    { name: '文章標題', type: "text", validate: "required"},
+                    { name: '文章標題', type: "text"},
+                    { name: '文章分類', type: "text"},
                     { name: "作者", type: "text", validate: "required" },
                     { name: "建立日期", type: "text", width: 80 },
                     { name: "狀態", type: "text", width: 50},
                     { name: "操作", width: 150, itemTemplate:function (value, item){
                         let $buttonContainer = $("<div>")
             
+                        let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($blockade);
+
                         let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
                         $buttonContainer.append($delete);
-
-                        let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
-                        $buttonContainer.append($revise);
                         
                         let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
                         $buttonContainer.append($check);
@@ -202,6 +201,8 @@
                         return $buttonContainer
                     }},
                 ];
+                clients.value = await selectUser(selectedTab.value);
+                reloadJsGrid()
                 break;
             case 'share':
                 h2Title.value = '回報管理';
@@ -233,7 +234,7 @@
                     { name: "狀態", type: "text", width: 50},
                     { name: "操作", width: 150, itemTemplate:function (value, item){
                         let $buttonContainer = $("<div>")
-            
+    
                         let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
                         $buttonContainer.append($blockade);
                         let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
@@ -254,14 +255,15 @@
                         return $buttonContainer
                     }},
                 ];
-                clients.value = await selectUser('staff')
+                clients.value = await selectUser(selectedTab.value)
+                reloadJsGrid()
                 break;
         }
     })
 
     onMounted(async () => {
         //撈取資料庫的資料
-        clients.value = await selectUser()
+        clients.value = await selectUser(selectedTab.value)
 
         /* 
         因為 jsGrid 模組是動態載入的，
@@ -374,7 +376,7 @@
                 })
 
                 // 將Client資料更新
-                clients.value = await selectUser()
+                clients.value = await selectUser(selectedTab.value)
                 // 重新渲染 jsGrid
                 reloadJsGrid()
             } else if(response.data === "此帳號已被註冊") {
@@ -398,6 +400,8 @@
         }
     }
 
+
+    //資料庫資料修改
     async function blockadeUser(){
         try {
             const response = await axios.post(`${API_URL}blockade_user.php`,{
@@ -407,7 +411,7 @@
 
             if(response.data === "資料更新成功"){
                 // 將Client資料更新
-                clients.value = await selectUser()
+                clients.value = await selectUser(selectedTab.value)
                 // 重新渲染 jsGrid
                 reloadJsGrid()
                 Swal.fire({
@@ -429,28 +433,34 @@
     }
 
     //資料庫查詢
-    async function selectUser(selectedTab = 'user'){
-        // USER表
-        if(selectedTab){
-
-            if(selectedTab === 'user'){
-                whereVariable.value =  [1]
-            } else if(selectedTab === 'staff'){
-                whereVariable.value =  [2, 3]
-            }
-            try {
-                const response = await axios.post(`${API_URL}select_user.php`,{
-                    whereVariable: whereVariable.value
-                });           
-                return  response.data.data
-            } catch (e) {
-                if (e.response) {
-                console.log(e.response.data.message);
-                } else {
-                    console.log(e.message);
-                }
+    async function selectUser(nowTab){
+        if(nowTab === 'user'){
+            //User資料表中的會員
+            selectTable.value = 'select_user.php'
+            whereVariable.value = [1]
+        } else if(nowTab === 'staff'){
+            //User資料表中的管理員與主管
+            selectTable.value = 'select_user.php'
+            whereVariable.value = [2, 3]
+        } else if(nowTab === 'discuss'){
+            //discuss資料表
+            selectTable.value = 'select_discuss.php'
+            whereVariable.value = []
+        }
+        try {
+            console.log(selectTable.value)
+            const response = await axios.post(`${API_URL}${selectTable.value}`,{
+                whereVariable: whereVariable.value
+            });           
+            return  response.data.data
+        } catch (e) {
+            if (e.response) {
+            console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
             }
         }
+        
     }
 
     //input的focus事件 
