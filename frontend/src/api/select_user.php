@@ -19,7 +19,8 @@
                 on u.USER_STATUS_ID = us.ID
                     join LOGIN_TYPE as l
                         on u.LOGIN_TYPE_ID = l.ID
-                            WHERE u.ACCOUNT_TYPE_ID in ( $inClause ) AND u.USER_STATUS_ID != 3;";
+                            WHERE u.ACCOUNT_TYPE_ID in ( $inClause ) AND u.USER_STATUS_ID != 3
+                                ORDER BY u.ID DESC;";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
