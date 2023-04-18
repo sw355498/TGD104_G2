@@ -52,9 +52,7 @@
         {id: id++,name:'回報管理', icon:'fa-share', clickName: 'share'},
         {id: id++,name:'檢舉管理', icon:'fa-exclamation', clickName: 'reply'},
         {id: id++,name:'最新消息管理', icon:'fa-circle-info', clickName: 'news'},
-        {id: id++,name:'防騙教學介紹管理', icon:'fa-masks-theater', clickName: 'teach'},
-        {id: id++,name:'互動體驗成績管理', icon:'fa-people-pulling', clickName: 'score'},
-        {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},
+        {id: id++,name:'詐騙知識測驗管理', icon:'fa-people-pulling', clickName: 'FraudKnowledge'},
     ])
 
     //子元件傳值父元件

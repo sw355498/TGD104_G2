@@ -83,7 +83,36 @@
 
     //jsgrid套件所需要的變數
     const clients = ref([])         //後端撈取的data
-    const fields = ref([])          //jsgrid的欄位設定
+    const fields = ref([
+                    { name: 'ID', css: 'd-none'},
+                    { name: "帳號", type: "text", validate: "required" },
+                    { name: "暱稱", type: "text", width: 100, css: "d-none" },
+                    { name: "建立日期", type: "text", width: 80 },
+                    { name: "登入方式", type: "text", width: 60},
+                    { name: "狀態", type: "text", width: 50},
+                    { name: "操作", width: 150, itemTemplate:function (value, item){
+                        let $buttonContainer = $("<div>")
+            
+                        let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($blockade);
+                        let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($delete);
+                        let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($revise);
+                        
+                        let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($check);
+                        
+                        // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
+                        // 判斷狀態為 "封鎖中" 時，將 $blockade 的文字改為 "解鎖"
+                        if(item["狀態"] === "封鎖"){
+                                $blockade.text("解封鎖");
+                            } else {
+                                $blockade.text("封鎖");
+                        }
+                        return $buttonContainer
+                    }},
+    ])                              //jsgrid的欄位設定
 
     //彈窗設定
     const showModal = ref(false)    //彈窗顯示設定
@@ -97,37 +126,11 @@
     const userID =ref()             //資料update 與 delect 時所需要的參數
     const userStatusId = ref()      //資料update 與 delect 時所需要的參數(使用帳號狀態)
     //jsgrid套件的欄位設定
-    fields.value = [
-        { name: 'ID', css: 'd-none'},
-        { name: "帳號", type: "text", validate: "required" },
-        { name: "暱稱", type: "text", width: 100, css: "d-none" },
-        { name: "建立日期", type: "text", width: 80 },
-        { name: "登入方式", type: "text", width: 60},
-        { name: "狀態", type: "text", width: 50},
-        { name: "操作", width: 150, itemTemplate:function (value, item){
-            let $buttonContainer = $("<div>")
+    if(selectedTab.value === 'user' || selectedTab.value === 'staff'){
 
-            let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($blockade);
-            let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($delete);
-            let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($revise);
-            
-            let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
-            $buttonContainer.append($check);
-            
-            // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
-            // 判斷狀態為 "封鎖中" 時，將 $blockade 的文字改為 "解鎖"
-            if(item["狀態"] === "封鎖"){
-                    $blockade.text("解封鎖");
-                } else {
-                    $blockade.text("封鎖");
-            }
-            
-            return $buttonContainer
-        }},
-    ];
+    } else if(selectedTab.value === 'message') {
+        
+    }
 
     //監控子元件傳來的值
     watch(selectedTab, async (newTab) => {
@@ -136,11 +139,69 @@
                 h2Title.value = '會員管理';
                 addbutton.value = true;
                 btnName.value = '新增會員';
-                clients.value = await selectUser('user')
+                fields.value = [
+                    { name: 'ID', css: 'd-none'},
+                    { name: "帳號", type: "text", validate: "required" },
+                    { name: "暱稱", type: "text", width: 100, css: "d-none" },
+                    { name: "建立日期", type: "text", width: 80 },
+                    { name: "登入方式", type: "text", width: 60},
+                    { name: "狀態", type: "text", width: 50},
+                    { name: "操作", width: 150, itemTemplate:function (value, item){
+                        let $buttonContainer = $("<div>")
+            
+                        let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($blockade);
+                        let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($delete);
+                        let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($revise);
+                        
+                        let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($check);
+                        
+                        // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
+                        // 判斷狀態為 "封鎖中" 時，將 $blockade 的文字改為 "解鎖"
+                        if(item["狀態"] === "封鎖"){
+                                $blockade.text("解封鎖");
+                            } else {
+                                $blockade.text("封鎖");
+                        }
+                        return $buttonContainer
+                    }},
+                ];
+                clients.value = await selectUser('user');
                 break;
             case 'message':
                 h2Title.value = '討論版管理';
                 addbutton.value = false;
+                fields.value = [
+                    { name: 'ID', css: 'd-none'},
+                    { name: '文章標題', type: "text", validate: "required"},
+                    { name: "作者", type: "text", validate: "required" },
+                    { name: "建立日期", type: "text", width: 80 },
+                    { name: "狀態", type: "text", width: 50},
+                    { name: "操作", width: 150, itemTemplate:function (value, item){
+                        let $buttonContainer = $("<div>")
+            
+                        let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($delete);
+
+                        let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($revise);
+                        
+                        let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($check);
+                        
+                        // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
+                        // 判斷狀態為 "封鎖中" 時，將 $blockade 的文字改為 "解鎖"
+                        if(item["狀態"] === "封鎖"){
+                                $blockade.text("解封鎖");
+                            } else {
+                                $blockade.text("封鎖");
+                        }
+                        return $buttonContainer
+                    }},
+                ];
                 break;
             case 'share':
                 h2Title.value = '回報管理';
@@ -155,24 +216,44 @@
                 addbutton.value = true;
                 btnName.value = '新增消息';
                 break;
-            case 'teach':
-                h2Title.value = '防騙教學介紹管理';
-                addbutton.value = true;
-                btnName.value = '新增教學';
-                break;
-            case 'score':
-                h2Title.value = '互動體驗成績管理';
+            case 'FraudKnowledge':
+                h2Title.value = '詐騙知識測驗管理';
                 addbutton.value = false;
-                break;
-            case 'chatbot':
-                h2Title.value = '聊天機器人管理';
-                addbutton.value = true;
-                btnName.value = '新增機器人回答內容';
                 break;
             case 'staff':
                 h2Title.value = '後台帳號管理';
                 addbutton.value = true;
                 btnName.value = '新增管理員帳號';
+                fields.value = [
+                    { name: 'ID', css: 'd-none'},
+                    { name: "帳號", type: "text", validate: "required" },
+                    { name: "暱稱", type: "text", width: 100, css: "d-none" },
+                    { name: "建立日期", type: "text", width: 80 },
+                    { name: "登入方式", type: "text", width: 60},
+                    { name: "狀態", type: "text", width: 50},
+                    { name: "操作", width: 150, itemTemplate:function (value, item){
+                        let $buttonContainer = $("<div>")
+            
+                        let $blockade = $("<button>").text(`封鎖`).addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($blockade);
+                        let $delete = $("<button>").text("刪除").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($delete);
+                        let $revise = $("<button>").text("修改").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($revise);
+                        
+                        let $check = $("<button>").text("查看").addClass("small_button mx-1").on("click", operate);
+                        $buttonContainer.append($check);
+                        
+                        // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
+                        // 判斷狀態為 "封鎖中" 時，將 $blockade 的文字改為 "解鎖"
+                        if(item["狀態"] === "封鎖"){
+                                $blockade.text("解封鎖");
+                            } else {
+                                $blockade.text("封鎖");
+                        }
+                        return $buttonContainer
+                    }},
+                ];
                 clients.value = await selectUser('staff')
                 break;
         }
@@ -245,10 +326,10 @@
                 blockadeUser()
                 break
             case "修改":
-                alert(`修改帳號 ${thisID}`)
+                alert(`修改帳號 ${userID.value}`)
                 break
             case "查看":
-                alert(`查看帳號 ${thisID}`)
+                alert(`查看帳號 ${userID.value}`)
                 break
         }
     }
@@ -291,6 +372,11 @@
                     icon: 'success',
                     confirmButtonText: '確認'
                 })
+
+                // 將Client資料更新
+                clients.value = await selectUser()
+                // 重新渲染 jsGrid
+                reloadJsGrid()
             } else if(response.data === "此帳號已被註冊") {
                 addError('account', '此帳號已被註冊')
             } else if (response.data === "帳號與密碼尚未輸入"){
