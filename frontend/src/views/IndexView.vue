@@ -4,28 +4,7 @@
     <frontNavbar />
     <!--Top Dynamic-->
     <section>
-      <!-- Banner -->
-      <h2>prevent</h2>
-      <div id="banner_index_dynamicText">
-        <div class="text-animation">不</div>
-        <div class="text-animation">明</div>
-        <div class="text-animation">網</div>
-        <div class="text-animation">站</div>
-        <br />
-        <div class="text-animation">購</div>
-        <div class="text-animation">物</div>
-        <div class="text-animation">要</div>
-        <div class="text-animation">當</div>
-        <div class="text-animation">心</div>
-      </div>
-      <router-link to="/p07demoShopping" class="demolink_index_btn">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        DEMO體驗
-      </router-link>
-
+      <banner />
       <!-- 固定按鈕 -->
       <div class="fixed_index_btn">
         <!-- BackTop Button -->
@@ -195,6 +174,7 @@ import indexChatbot from "@/components/index_chatbot.vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import backTopBtn from "@/components/backTopBtn.vue";
+import banner from "@/components/banner.vue";
 
 export default {
   components: {
@@ -202,6 +182,7 @@ export default {
     frontNavbar,
     frontFooter,
     backTopBtn,
+    banner,
   },
 
   setup() {
