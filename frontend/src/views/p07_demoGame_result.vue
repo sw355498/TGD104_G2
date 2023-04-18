@@ -40,13 +40,13 @@
                 <p ref="item" v-for="(text,index) in texts" :key="index">
                     {{ text }}
                 </p>
-               <span ref="scorep" class="result_percent">...{{score}}%</span>
+               <span ref="scorep" class="result_percent">...{{ score !== null ? score + '%' : '' }}</span>
             </div>
 
             <!-- 測驗視窗2 -->
 
             <div class="result_view view2">
-               <p>{{ text2 }}</p>
+               <p>{{ scoreText }}</p>
               
             </div>
 
@@ -92,22 +92,6 @@
                 
             </div>
 
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
 
@@ -120,77 +104,97 @@
 <script>
 
 
-import {ref, onMounted, watch, reactive} from 'vue';
-
 export default {
 
     data(){
       return{
-          texts:["測驗結果，你的防詐指數...."],
-          text2:"哇！你是正港的防詐達人！",
-          // score:30,
+        texts:["測驗結果，你的防詐指數...."],
+        score:null,
       }
     },
 
-    setup(props){
-        const scorep = ref(null);
-        let x = 0;
+    
 
-        onMounted(() => {
-            setTimeout(() => {
-                function countSecond(){
-                    if(x <= props.score){
-                        scorep.value.innerHTML = x++;
-                        setTimeout(countSecond, 300);
-                    }
-                }
-                countSecond();
-            }, 5000)
-        });
+    
+       
 
-        const state = reactive({
-            showLoginAlert: true
-        });
+    // setup(props){
+    //     const scorep = ref(null);
+    //     let x = 0;
 
-        const closeLoginAlert = () => {
-            state.showLoginAlert = false;
-        };
+    //     onMounted(() => {
+    //         setTimeout(() => {
+    //             function countSecond(){
+    //                 if(x <= props.score){
+    //                     scorep.value.innerHTML = x++;
+    //                     setTimeout(countSecond, 300);
+    //                 }
+    //             }
+    //             countSecond();
+    //         }, 5000)
+    //     });
 
+    //     // const state = reactive({
+    //     //     showLoginAlert: true
+    //     // });
 
+    //     // const closeLoginAlert = () => {
+    //     //     state.showLoginAlert = false;
+    //     // };
 
-        watch(() => props.score, (newValue) => {
-            if(newValue >= 80){
-                this.text2 = "哇！你是正港的防詐達人！"
-            }else if (newValue >= 50){
-                this.text2 = " 加油！還差一點！"
-            }else{
-                this.text2 = "唉呀！是不是該去再重新補補防詐課程啦？"
-            }
-        })
-
-
-        return{
-            scorep,
-            state,
-            closeLoginAlert
-        };
-    },
-
-  name: 'p07demoGameresult',
-  props: {
-    score: {
-      type: Number,
-      required: true
-    }
-  },
+    //     return{
+    //         scorep,
+    //         state,
+    //         closeLoginAlert
+    //     };
+    // },
 
 
-  mounted() {// 亂碼效果的部分
-    this.$refs.item.forEach((el) => {
+
+  
+
+  mounted() {
+
+    setTimeout(() =>{
+        this.score = localStorage.getItem('score');
+      },2500);
+
+
+    this.$refs.item.forEach((el) => {// 亂碼效果的部分
         el.style.width = el.getBoundingClientRect().width + 5 + "px";
         this.scramble(el);
       });
+
+      
+
+    // this.score = this.$route.params.score;   // 從路由器中獲取分數數據
+    // let scorep = null; 
+    // let x = 0;
+
+    
+    
+    // const state = reactive({
+    //         // showLoginAlert: true
+    //     });
+
+    // const closeLoginAlert = () => {
+    //         state.showLoginAlert = false;
+    //     };
+
+
+    // setTimeout(() => {
+    //     function countSecond(){
+    //         if(x <= 50){
+    //             scorep.value.innerHTML = x++;
+    //             setTimeout(countSecond, 300);
+    //                 }
+    //             }
+    //             countSecond();
+    //         }, 5000);   
+       
   },
+
+  
 
 
   methods:{  //亂碼效果
@@ -230,46 +234,22 @@ export default {
         },
 
     },
+
+    computed:{
+        scoreText(){
+            if(this.score >= 80){
+                return "哇！你是正港的防詐達人！";
+            }else if (this.score >= 50){
+                return " 加油！還差一點！"
+            }else{
+                return "唉呀！是不是該去再重新補補防詐課程啦？"
+            }
+        },
+        
+    },
     
 
-
-
-
-
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
