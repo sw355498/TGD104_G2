@@ -240,7 +240,7 @@ export default {
         .then((response) => {
           // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
           this.$emit("close");
-          localStorage.setItem('token', 'ImLogin')
+          localStorage.setItem('token', 'loginStatus')
           alert("登入成功");
         })
         .catch((error) => {
