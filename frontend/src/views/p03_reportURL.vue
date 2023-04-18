@@ -31,6 +31,7 @@
                     <input 
                         v-model.trim="url"
                         class="input_p03" type="text" name="url" 
+                        @focus="urlExist = false"
                         placeholder="http://" required>
                     <i 
                         v-show="urlExist"
