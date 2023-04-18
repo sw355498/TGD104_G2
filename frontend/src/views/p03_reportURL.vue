@@ -34,7 +34,7 @@
                         placeholder="http://" required>
                     <i class="fa-solid fa-circle-xmark"></i>
                     <p 
-                        v-show="url === ''"
+                        v-if="!url && showTip"
                         >請輸入可疑的網站網址</p>
                     <p 
                         
@@ -47,8 +47,8 @@
                             class="input_p03"
                             type="email" name="email"
                             placeholder="請輸入您的信箱"
-                            @focus="showEmailTip = true">
-                            <p v-if="!email && showEmailTip">請輸入信箱</p>
+                            @focus="showTip = true">
+                            <p v-if="!email && showTip">請輸入信箱</p>
                         <p v-show="email !== '' && !emailRegex.test(email)">請輸入正確的信箱格式</p>
                                         
                     </div>
@@ -68,13 +68,13 @@
                     <input 
                         class="inputSubmit_p03 small_button" 
                         type="submit" value="送出"
-                        @click="showEmailTip = true"
+                        @click="showTip = true"
                     > 
                     <button
                         class="inputSubmit_p03" 
                         :disabled="!isFormValid "
                         type="submit" value="送出"
-                        @click="sweetAlert(),loadJsGrid()"
+                        @click="showTip = true"
                     >送出</button>
                 </div>
             </form>
@@ -102,7 +102,7 @@ import axios from 'axios';
 import { API_URL } from '@/config'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
     // sweetalert
-    const sweetAlert=()=>{
+    const sweetAlert = ()=>{
         Swal.fire({
             title: '成功送出',
             text: '將由專人為您審核',
@@ -117,7 +117,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const notes = ref('')
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     // 提示文字
-    const showEmailTip = ref(false)
+    const showTip = ref(false)
     // 傳送表單到資料庫
     const submitForm = async () => {
         try { 
@@ -129,7 +129,10 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             })
             // 提交成功後的處理
             console.log('成功送出:', response.data);
-            // allData();
+            // 刷新jsgrid資料
+            allURL.value = await allData();
+            loadJsGrid();
+            sweetAlert();
         } catch (error) {
             // 提交失敗的處理
             console.error('Submit failed:', error)
