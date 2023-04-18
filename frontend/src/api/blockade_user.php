@@ -7,18 +7,20 @@
     //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
     $data = json_decode($postData, true);
 
-    $userStatusId = $data['userStatusId'];
-    $userID = $data['userID'];
+    $updateTable = $data['updateTable'];
+    $updateStatusID = $data['updateStatusID'];
+    $updateID = $data['updateID'];
 
 
     //建立SQL語法
-    $sql = "UPDATE USER SET USER_STATUS_ID = :userStatusId WHERE ID = :userID";
+    $sql = "UPDATE :updateTable SET USER_STATUS_ID = :updateStatusID WHERE ID = :updateID";
 
     $statement = $pdo->prepare($sql);
 
     //綁定變數
-    $statement ->bindValue(":userStatusId", $userStatusId);
-    $statement ->bindValue(":userID", $userID);
+    $statement ->bindValue(":updateTable", $updateTable);
+    $statement ->bindValue(":updateStatusID", $updateStatusID);
+    $statement ->bindValue(":updateID", $updateID);
 
     $statement->execute();
 

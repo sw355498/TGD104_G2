@@ -13,14 +13,9 @@
     $inClause = implode(',', $whereVariable);
 
     //建立SQL語法
-    $sql = "SELECT u.ID, u.ACCOUNT as '帳號', u.NICKNAME as '暱稱', u.CREATE_TIME as '建立日期', us.USER_STATUS_NAME as '狀態', l.LOGIN_TYPE as '登入方式'
-        FROM USER as u
-            join USER_STATUS as us
-                on u.USER_STATUS_ID = us.ID
-                    join LOGIN_TYPE as l
-                        on u.LOGIN_TYPE_ID = l.ID
-                            WHERE u.ACCOUNT_TYPE_ID in ( $inClause ) AND u.USER_STATUS_ID != 3
-                                ORDER BY u.ID DESC;";
+    $sql = "SELECT ID, NEWS_TITLE as '標題', NEWS_CATEGORY as '分類', NEWS_CONTENT as '內容', DATE_FORMAT(CREATE_DATE, '%Y/%m/%d') as '建立日期' 
+    from NEWS
+    ORDER BY ID DESC;";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();

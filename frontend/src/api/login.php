@@ -12,7 +12,7 @@
 
     if(!empty(trim($account)) && !empty(trim($password))){
         // 建立SQL語法(備忘:這裡要接收USER還是USER_REGISTER)
-        $sql = "SELECT * FROM USER_REGISTER WHERE ACCOUNT = :ACCOUNT";
+        $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT";
         $statement = $pdo->prepare($sql);
         $statement ->bindValue(":ACCOUNT", $account);
         $statement->execute();

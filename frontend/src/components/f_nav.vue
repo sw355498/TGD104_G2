@@ -49,7 +49,7 @@
               >修改密碼</router-link
             >
           </li>
-          <li><a class="dropdown-item" href="#">登出</a></li>
+          <li @click="logout"><a class="dropdown-item">登出</a></li>
         </ul>
 
         <!-- hamburger content menus -->
@@ -184,6 +184,9 @@ export default {
       this.isModalVisible = false;
       document.body.classList.remove("modal-open");
   },
+  logout(){
+    localStorage.removeItem('token');
+  }
   },
 };
 </script>
