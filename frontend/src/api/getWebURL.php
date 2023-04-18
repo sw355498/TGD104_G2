@@ -9,8 +9,12 @@
         u.TITLE as WEBSITE_NM, u.URL as WEBURL, DATE_FORMAT(u.DATE, '%Y/%m/%d') as STA_EDATE, us.STATUS_NAME
     from
         URL as u
-        left join URL_STATUS as us
-        on u.URL_STATUS = us.id" ; 
+        join URL_STATUS as us
+        on u.URL_STATUS = us.id 
+    order by
+        STA_EDATE desc
+    "
+        ; 
     $statement = $pdo->prepare($sql);
     $statement-> execute();
     // PDO::FETCH_ASSOC 回傳一個index值是column name 的陣列
