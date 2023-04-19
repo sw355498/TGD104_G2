@@ -71,7 +71,7 @@ const routes = [
     path: '/p07demoGameresult',
     name: 'p07demoGameresult',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_result.vue'),
-    //props: (route) => ({ score: route.params.score })
+    // props: (route) => ({ score: route.params.score })
     
   },
   {

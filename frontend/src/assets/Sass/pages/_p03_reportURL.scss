@@ -140,8 +140,12 @@
             .inputSubmit_p03{
                 margin: 20px auto;
                 width: 100%;
+                &:disabled{
+                    background-color: lightgray;
+                    cursor: not-allowed;
+                    color: gray;
+                }
             }
-
             @include  rwd('md'){
                 // 平板上的樣式 768px,
                 max-width: 400px;

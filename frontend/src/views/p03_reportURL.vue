@@ -31,13 +31,14 @@
                     <input 
                         v-model.trim="url"
                         class="input_p03" type="text" name="url" 
+                        @focus="urlExist = false"
                         placeholder="http://" required>
-                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i 
+                        v-show="urlExist"
+                        class="fa-solid fa-circle-xmark"></i>
+                    <p v-show="url == ''">請輸入可疑的網站網址</p>
                     <p 
-                        v-if="!url && showTip"
-                        >請輸入可疑的網站網址</p>
-                    <p 
-                        
+                        v-show="urlExist"
                         class="warning_p03">該網址已通報過囉</p>
                     <!-- email -->
                     <div class="active_p03_reportURL">
@@ -46,10 +47,10 @@
                             v-model.trim="email"
                             class="input_p03"
                             type="email" name="email"
-                            placeholder="請輸入您的信箱"
-                            @focus="showTip = true">
-                            <p v-if="!email && showTip">請輸入信箱</p>
-                        <p v-show="email !== '' && !emailRegex.test(email)">請輸入正確的信箱格式</p>
+                            placeholder="請輸入您的信箱">
+                            <p v-show="email == ''">請輸入信箱</p>
+                        <p v-show="email !== '' && !emailRegex.test(email)">
+                            請輸入正確的信箱格式</p>
                                         
                     </div>
                     <!-- title -->
@@ -68,14 +69,8 @@
                     <input 
                         class="inputSubmit_p03 small_button" 
                         type="submit" value="送出"
-                        @click="showTip = true"
-                    > 
-                    <button
-                        class="inputSubmit_p03" 
                         :disabled="!isFormValid "
-                        type="submit" value="送出"
-                        @click="showTip = true"
-                    >送出</button>
+                    > 
                 </div>
             </form>
         </section>    
@@ -88,7 +83,6 @@
                 <p style="color:red;">全速載入中，感謝耐心等候...</p>
             </div>
             <div v-else id="jsGrid"></div>
-            <!-- <div v-show="isJsgrid" id="jsGrid"></div> -->
         </section>
     </main>
     <frontFooter />
@@ -99,7 +93,7 @@ import { ref, computed, onMounted,watch } from 'vue';
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
-import { API_URL } from '@/config'
+import { API_URL } from '@/config' // 統一 api 路徑變數
 import Swal from 'sweetalert2/dist/sweetalert2.js'
     // sweetalert
     const sweetAlert = ()=>{
@@ -116,11 +110,28 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const title = ref('')
     const notes = ref('')
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    // 提示文字
-    const showTip = ref(false)
+    // 驗證表單url不等於空、email正確格式才可以送出
+    const isFormValid = computed(() => {
+        return (
+            url.value !== '' &&
+            emailRegex.test(email.value)
+        )
+    })
+    const urlExist = ref('')
     // 傳送表單到資料庫
     const submitForm = async () => {
+        console.log(allURL.value);
         try { 
+            // 判断url是否已存在于allURL.value中
+            const urlExists = allURL.value.some(word =>word.WEBURL ===  url.value);
+            if (urlExists) {
+                console.log('網址已經有了');
+                urlExist.value = true;
+                console.log(urlExist.value);
+            return urlExist.value, isFormValid.value;
+            }else{
+                urlExist.value = false;
+            }
             const response = await axios.post(`${API_URL}reportURL.php`, {
                 url: url.value,
                 email: email.value,
@@ -129,49 +140,30 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             })
             // 提交成功後的處理
             console.log('成功送出:', response.data);
+            sweetAlert();
             // 刷新jsgrid資料
             allURL.value = await allData();
             loadJsGrid();
-            sweetAlert();
         } catch (error) {
             // 提交失敗的處理
             console.error('Submit failed:', error)
         }
     }
-    // 驗證表單url不等於空、email正確格式才可以送出
-    const isFormValid = computed(() => {
-    return (
-        url.value !== '' &&
-        emailRegex.test(email.value)
-    )
-    })
     // 全速載入中感謝等候
     const isJsgrid = ref(false);
-    setTimeout(() => {
-        isJsgrid.value = true;
-    }, 2200);
-
     // allURL 資料庫需要的變數
-    const allURL = ref([])
-    onMounted(async () => {
+    const allURL = ref([]);
+    onMounted(
+    async () => {
         //撈取 opendata 跟資料庫的資料
-        allURL.value = await allData()
-        /* 
-        因為 jsGrid 模組是動態載入的，
-        所以必須使用 await import('jsgrid') 來等待 Promise resolved，
-        這樣就可以在後續的程式碼中直接使用載入的模組了
-        */
-        const jsgrid = await import('jsgrid')
-        loadJsGrid()
-
-        //allURL的資料如有更動，重新呼叫jsgrid套件更新渲染的資料
-        watch(allURL, () => {
-            loadJsGrid()
-        });
+        allURL.value = await allData();
+        const jsgrid = await import('jsgrid');
+        loadJsGrid();
     });
-    // opendata 跟 後臺資料庫 api
+    // 撈政府 opendata 跟 後臺資料庫 api
     async function allData(){
         try {
+            isJsgrid.value = false;
             const response = await axios.get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
             let myArray = response.data.result.records;
             myArray.splice(0, 1);  // 刪除政府預設第一欄
@@ -180,13 +172,14 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
                 let mergeData = myArray.concat(myArray2)
                 // 對合併的陣列排序
                 mergeData.sort((b, a) => new Date(a.STA_EDATE) - new Date(b.STA_EDATE)); 
+            isJsgrid.value= true;
             return mergeData
         } catch (error) {
             console.log(error);
         }
         console.log(allURL.value)
-    }
-    // // 需要 filtering 的欄位
+    };
+    // 需要 filtering 的欄位
     // var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
     // // filtering 下拉框 要改成 撈的資料=============
     // var arr = []
@@ -204,6 +197,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     //         回報狀態: i
     //     })
     // }
+    
     // jsgrid 套件設定
     const loadJsGrid = () => {
         $("#jsGrid").jsGrid({
@@ -248,12 +242,12 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             //     data: allURL.value,
             //     loadData: function (filter) {
             //         return this.data.filter(function (item) {
-            //             // 声明返回数组的长度
-            //             var flags = new Array(filterColumn.length)
+            // // 声明返回数组的长度
+            // const flags = new Array(filterColumn.length)
             //             // 三个筛选条件（true,true,true）
             //             flags.fill(true)
             //             for (var i = 0; i < filterColumn.length; i++) {
-            //                 var key = filterColumn[i]
+            //                 const key = filterColumn[i]
             //                 // 过滤掉默认值" "
             //                 if (filter[key] !== " ") {
             //                     /*

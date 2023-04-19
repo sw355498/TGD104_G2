@@ -166,59 +166,7 @@ export default {
                 isOther: true,
             })
         }
-        // 去掉空白、轉小寫
-        // switch (input.toLowerCase().trim()) {
-        //     case 'hi':
-        //     case 'hello':
-        //     case '你好':
-        //     botMsg = '你好！我是詐知就好專屬機器人';
-        //     break;
-        //     case '防範詐騙教學':
-        //     botMsg =  `以下是防範詐騙教學的相關資訊<br>
-        //         <a href="#" style="color:black">
-        //             點我看更多
-        //         </a>
-        //     `;
-        //     break;
-        //     case '回報可疑網站':
-        //     botMsg = `以下是回報可疑網站的相關資訊<br>
-        //     `;
-        //     break;
-        //     case '詐騙FAQ':
-        //     botMsg = `以下是詐騙FAQ的相關資訊<br>
-        //     `;
-        //     break;
-        //     case '政府資訊連結':
-        //     botMsg = `以下是政府資訊連結的相關資訊<br>
-        //     `;
-        //     break;
-        //     case '討論專區':
-        //     botMsg = `以下是討論專區的相關資訊<br>
-        //     `;
-        //     break;
-        //     default:
-        //     botMsg = `我猜你應該想知道<br>
-        //     <ul class="chat-buttons">
-        //         <li class="chat-button">防範詐騙教學</li>
-        //         <li class="chat-button">回報可疑網站</li>
-        //         <li class="chat-button">詐騙FAQ</li><br>
-        //         <li class="chat-button">政府相關連結</li>
-        //         <li class="chat-button">討論專區</li>
-        //         <li class="chat-button">DEMO體驗</li>
-        //     </ul>
-        //     `;
-        // //     const all = document.querySelectorAll('.chat-button')
-        // // for (let index = 0; index < all.length; index++) {
-        // //     const element = all[index];
-        // //     const text = element.innerText
-        // //     element.addEventListener('click',()=>{
-        // //         text
-
-        // //     })
-            
-        // // }
-        // }
-        // 啟動計時器，30秒後顯示再見的消息
+        // 啟動計時器，1分鐘後顯示再見的消息
         goodbyeTimer.value = setTimeout(async() => {
             messages.value.push({
                 text: `感謝使用哦！期待下次再見~
