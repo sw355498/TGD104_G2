@@ -4,7 +4,16 @@
     <frontNavbar />
     <!--Top Dynamic-->
     <section>
+      <!-- banner動態 -->
       <banner />
+      <div class="banner_index_partial">
+        <div
+          class="circle-container"
+          v-for="index in 50"
+          :key="index"
+          v-html="partial"
+        ></div>
+      </div>
       <!-- 固定按鈕 -->
       <div class="fixed_index_btn">
         <!-- BackTop Button -->
@@ -12,14 +21,10 @@
           <backTopBtn />
         </div>
         <!-- 機器人 -->
-        <!-- <div class="indexChatbot" style=""> -->
-        <!-- <svg style=" width: 80px; height: 80px;"> -->
         <svg width="110" height="90px" style="">
           <use xlink:href="#robot" @click="showComponent = true" width="110" />
         </svg>
-        <!-- <indexChatbot :show="showComponent" @close="showComponent = false" /> -->
         <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
-        <!-- </div> -->
       </div>
     </section>
 
@@ -168,7 +173,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import indexChatbot from "@/components/index_chatbot.vue";
 import frontNavbar from "@/components/f_nav.vue";
@@ -176,23 +181,23 @@ import frontFooter from "@/components/f_footer.vue";
 import backTopBtn from "@/components/backTopBtn.vue";
 import banner from "@/components/banner.vue";
 
-export default {
-  components: {
-    indexChatbot,
-    frontNavbar,
-    frontFooter,
-    backTopBtn,
-    banner,
-  },
+// export default {
+//   components: {
+//     indexChatbot,
+//     frontNavbar,
+//     frontFooter,
+//     backTopBtn,
+//     banner,
+//   },
+// };
+// setup() {
+const showComponent = ref(false);
+const partial = ref(`<div class="circle"></div>`);
 
-  setup() {
-    const showComponent = ref(false);
-
-    return {
-      showComponent,
-    };
-  },
-};
+// return {
+// showComponent,
+// };
+// },
 </script>
 
 <style scoped>
