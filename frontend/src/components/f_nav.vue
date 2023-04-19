@@ -58,10 +58,25 @@
             <router-link
               :to="{ path: navItem.router }"
               class="h6_component"
-              target="_parent"
+              v-if="navItem.router"
             >
-              {{ navItem.name }}
+              {{ navItem.title }}
             </router-link>
+            <ul
+              v-if="navItem.secMenu"
+              class="h6_component"
+              @click.self="nav2Click"
+            >
+              {{
+                navItem.title
+              }}
+              <i class="fa-solid fa-caret-up"></i>
+              <li v-for="navItem2 in navItem.secMenu" v-show="isOpen">
+                <router-link :to="{ path: navItem2.router }"
+                  >{{ navItem2.title }}
+                </router-link>
+              </li>
+            </ul>
           </li>
         </ul>
         <!-- hamburger icon -->
@@ -89,104 +104,128 @@
   </header>
 </template>
 
-<script>
-import { ref, reactive } from "vue";
+<script setup>
+import { ref, reactive, onUnmounted } from "vue";
 import Modal from "@/components/userLogin.vue";
 
-export default {
-  name: "navbar",
-  setup() {
-    //nav資料
-    const nav = reactive([
+/**
+ * navgation menu data & function
+ */
+
+//選單資料
+const nav = reactive([
+  {
+    id: "p01",
+    router: "/p01",
+    title: "最新消息",
+  },
+  {
+    id: "p02",
+    router: "/p02",
+    title: "防範詐騙教學",
+  },
+  {
+    id: "p03",
+    router: "/reportUrl",
+    title: "回報可疑網站",
+  },
+  {
+    id: "p04",
+    router: "/p04",
+    title: "政府資訊連結",
+  },
+  {
+    id: "p05",
+    router: "/p05",
+    title: "詐騙FAQ",
+  },
+  {
+    id: "p06",
+    router: "/discuss",
+    title: "討論專區",
+  },
+  {
+    id: "p07",
+    title: "Demo體驗",
+    secMenu: [
       {
-        id: "p01",
-        router: "/p01",
-        name: "最新消息",
-      },
-      {
-        id: "p02",
-        router: "/p02",
-        name: "防範詐騙教學",
-      },
-      {
-        id: "p03",
-        router: "/reportUrl",
-        name: "回報可疑網站",
-      },
-      {
-        id: "p04",
-        router: "/p04",
-        name: "政府資訊連結",
-      },
-      {
-        id: "p05",
-        router: "/p05",
-        name: "詐騙FAQ",
-      },
-      {
-        id: "p06",
-        router: "/discuss",
-        name: "討論專區",
-      },
-      {
-        id: "p07",
+        id: "p07demoShopping",
         router: "/p07demoShopping",
-        name: "Demo體驗",
+        title: "購物詐騙",
       },
       {
-        id: "p08",
-        router: "/p08_user",
-        name: "會員中心",
+        id: "p07demoGame",
+        router: "/p07demoGame",
+        title: "詐騙知識測驗",
       },
       {
-        id: "p09",
-        router: "/p09_team",
-        name: "團隊介紹",
+        id: "p07demoPhone",
+        router: "/p07demoPhone",
+        title: "電話詐騙",
       },
-    ]);
+      {
+        id: "p07demoLine",
+        router: "/p07demoLine",
+        title: "愛情交友詐騙",
+      },
+    ],
+  },
+  {
+    id: "p08",
+    router: "/p08_user",
+    title: "會員中心",
+  },
+  {
+    id: "p09",
+    router: "/p09_team",
+    title: "團隊介紹",
+  },
+]);
 
-    //判斷開啟ul
-    const isActive = ref(false);
-    const bodyTag = document.body;
-    bodyTag.style.cssText = "";
-    // const
-    const navClick = () => {
-      //切換狀態active狀態
-      isActive.value = !isActive.value;
-      //判斷背景不可滑動
-      bodyTag.style.cssText = isActive.value
-        ? "height:100vh;overflow-y:hidden;"
-        : "";
-    };
-
-    return {
-      isActive,
-      nav,
-      navClick,
-    };
-  },
-  // 註冊按鈕
-  name: "App",
-  components: {
-    Modal,
-  },
-  data() {
-    return {
-      isModalVisible: false,
-    };
-  },
-  methods: {
-    showModal() {
-      this.isModalVisible = true;
-      document.body.classList.add("modal-open");
-    },
-    closeModal() {
-      this.isModalVisible = false;
-      document.body.classList.remove("modal-open");
-  },
-  logout(){
-    localStorage.removeItem('token');
-  }
-  },
+//主選單開關
+const isActive = ref(false);
+const bodyTag = document.body;
+// bodyTag.style.cssText = "";
+//開啟漢堡選單時背景固定
+const navClick = () => {
+  //切換狀態active狀態
+  isActive.value = !isActive.value;
+  //判斷背景不可滑動
+  bodyTag.style.cssText = isActive.value
+    ? "height:100vh;overflow-y:hidden;"
+    : "";
 };
+
+//子選單開關
+const isOpen = ref(false); //fa-minus
+const nav2Click = (e) => {
+  console.log("nav2Click");
+  isOpen.value = !isOpen.value;
+  e.target.children[0].style.transform = isOpen.value ? "rotate(180deg)" : "";
+  console.log(e.target.children[0]);
+};
+
+/**
+ * Login data & function
+ */
+
+// 註冊按鈕
+const isModalVisible = ref(false);
+
+const showModa = () => {
+  isModalVisible.value = true;
+  document.body.classList.add("modal-open");
+};
+const closeModal = () => {
+  isModalVisible.value = false;
+  document.body.classList.remove("modal-open");
+};
+const logout = () => {
+  localStorage.removeItem("token");
+};
+
+onUnmounted(() => {
+  //跳頁時解除背景固定
+  bodyTag.style.cssText = "";
+});
 </script>
