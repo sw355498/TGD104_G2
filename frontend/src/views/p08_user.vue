@@ -34,10 +34,10 @@
                     <input type="file" name="file" />
                   </div> -->
                   <div class="mt-3">
-                    <h4 class="">Karen</h4>
+                    <h4 class="">{{member.NICKNAME}}</h4>
                     <p class="text_title mb-1">LV.2</p>
                     <p class="text font-size-sm">防詐小尖兵</p>
-                    <p class="text font-size-sm">加入時間:yyyy/mm</p>
+                    <p class="text font-size-sm">加入時間:{{member.CREATE_TIME}}</p>
 
                     <p class="text_title mb-1">狀態</p>
                     <p class="text font-size-sm">Email 驗證</p>
@@ -98,16 +98,16 @@
             <div class="card mb-3">
               <!-- 會員資訊 -->
               <div class="profile-head">
-                <h4>Hello, Karen 歡迎回來</h4>
-                <h6>karen@gmail.com</h6>
-                <p class="proile-rating">EXP : <span>50/100</span></p>
+                <h4>Hello, {{ member.name }} 歡迎回來</h4>
+                <h6>{{ member.ACCOUNT }}</h6>
+                <p class="proile-rating">EXP : <span>{{member.EXP}}/100</span></p>
                 <div class="progress col-lg-5">
                   <div
                     class="progress-bar"
                     role="progressbar"
                     aria-label="Basic example"
-                    style="width: 50%"
-                    aria-valuenow="50"
+                    :style="{ width: member.EXP + '%'}"
+                    :aria-valuenow="member.EXP"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
@@ -202,6 +202,9 @@ import urlList from "@/components/userURL.vue";
 // header與footer
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
+// 抓會員資料用套件
+import axios from "axios";
+import { API_URL, reactive } from "@/config";
 
 export default {
   components: {
@@ -216,6 +219,8 @@ export default {
   data() {
     return {
       active_tab: 0,
+      member: {},
+      expValue: 50,
       tabs: [
         {
           label: "發文清單",
@@ -243,13 +248,50 @@ export default {
           icon: "fa-solid fa-circle-exclamation",
         },
       ],
+      
     };
   },
-
+  
   methods: {
     changeTab(tab_index) {
       this.active_tab = tab_index;
     },
+    
   },
+  mounted() {
+  const token = localStorage.getItem("token");
+  if (token) {
+    axios
+      .get(`${API_URL}/member_getData.php?token=${token}`)
+      .then((response) => {
+        // 假設 API 回傳的資料格式如下：
+        // {
+        //   "id": "會員ID",
+        //   "name": "會員姓名",
+        //   "email": "會員信箱"
+        // }
+        this.member = response.data;
+        this.expValue = response.data.exp;
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+},
+created() {
+  // 檢查localStorage中是否有token
+  if (!localStorage.getItem('token')) {
+    this.$router.push('/index');
+  }
+
+  // 監控localStorage中token的變化
+  window.addEventListener('storage', () => {
+    if (!localStorage.getItem('token')) {
+      this.$router.push('/index');
+    }
+  });
+}
+  
 };
 </script>
