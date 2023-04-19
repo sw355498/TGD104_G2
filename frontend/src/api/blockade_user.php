@@ -11,14 +11,48 @@
     $updateStatusID = $data['updateStatusID'];
     $updateID = $data['updateID'];
 
-
     //建立SQL語法
-    $sql = "UPDATE :updateTable SET USER_STATUS_ID = :updateStatusID WHERE ID = :updateID";
+    switch ($updateTable) {
+        case 'USER':
+            $sql = "UPDATE USER SET USER_STATUS_ID = :updateStatusID WHERE ID = :updateID";
+            break;
+
+        case 'DISCUSS':
+            $sql = "UPDATE DISCUSS SET DISCUSS_STATUS_ID = :updateStatusID WHERE ID = :updateID";
+            break;
+
+        case 'URL':
+            $sql = "UPDATE URL SET URL_STATUS = :updateStatusID WHERE ID = :updateID";
+            break;
+
+        case 'REPLY_REPORT':
+            $sql = "UPDATE REPLY_REPORT REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
+            break;
+
+        case 'DISCUSS_REPORT':
+            $sql = "UPDATE DISCUSS_REPORT REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
+            break;
+
+        case 'MESSAGE_REPORT':
+            $sql = "UPDATE MESSAGE_REPORT REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
+            break;
+        
+        case 'NEWS':
+            $sql = "UPDATE NEWS NEWS_STATUS = :updateStatusID WHERE ID = :updateID";
+            break; 
+
+        case 'GAME':
+            $sql = "UPDATE GAME GAME_STATUS = :updateStatusID WHERE ID = :updateID";
+            break;
+
+        default:
+            echo "資料有誤";
+            break;
+    };
 
     $statement = $pdo->prepare($sql);
 
     //綁定變數
-    $statement ->bindValue(":updateTable", $updateTable);
     $statement ->bindValue(":updateStatusID", $updateStatusID);
     $statement ->bindValue(":updateID", $updateID);
 

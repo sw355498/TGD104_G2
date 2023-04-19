@@ -21,10 +21,17 @@
 
         if($data && password_verify($password, $data['PASSWORD'])){
             // 登入成功
-            echo '登入成功';
+            $response = array(
+                "success" => true,
+                "message" => "登入成功",
+                "id" => $data['ID']
+            );
+            echo json_encode($response);
         } else {
             // 登入失敗
+            http_response_code(400);//回傳失敗訊息給前端
             echo '帳號或密碼錯誤';
+            exit();
         }
     } else {
         // 資料不完整
