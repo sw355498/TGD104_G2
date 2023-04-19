@@ -61,7 +61,7 @@
             v-if="leftNavTag === 'reply'"
             v-model="replySelect"
             id="inputState"
-            class="form-select w-25 me-2"
+            class="form-select w-25 me-2 text-center"
             >
                 <option value="1">文章的檢舉</option>
                 <option value="2">留言的檢舉</option>
@@ -92,7 +92,7 @@ const leftNavTag = ref("user"); //側選單的變數
 const h2Title = ref("會員管理"); //內容區塊的標題
 const addbutton = ref(true); //內容區塊的按鈕顯示設定
 const btnName = ref("新增會員"); //按鈕的名稱
-const replySelect = ref("discuss"); //檢舉的下拉式選單
+const replySelect = ref('1'); //檢舉的下拉式選單
 
 //Swal套件的變數
 const swalTitle = ref("");
@@ -272,26 +272,60 @@ watch(leftNavTag, async (newTab) => {
         h2Title.value = "回報管理";
         addbutton.value = false;
         updateTable.value = "URL";
+        selectTable.value = "select_url.php";
+        whereVariable.value = [];
+        fields.value = [
+            { name: "ID", css: "d-none" },
+            { name: "網站名稱", type: "text" },
+            { name: "網址", type: "text" },
+            { name: "回報人", type: "text" },
+            { name: "回報日期", type: "text", width: 80 },
+            { name: "回報狀態", type: "text"},
+            { name: "操作", width: 100, itemTemplate: function (value, item) {
+                let $buttonContainer = $("<div>");
+
+                let $delete = $("<button>")
+                .text("刪除")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($delete);
+
+                let $check = $("<button>")
+                .text("審核")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($check);
+                return $buttonContainer;
+            }},
+        ];
         break;
     case "reply":
-        h2Title.value = "檢舉管理";
+        h2Title.value = "文章檢舉管理";
         addbutton.value = false;
-        watch(replySelect, (newValue) => {
-            switch (newValue) {
-                case 1:
-                content.value = '請選擇檢舉類型'
-                break
-                case 2:
-                content.value = '請選擇檢舉類型'
-                break
-                case 3:
-                content.value = '請選擇檢舉類型'
-                break
-            }
-        })
-    //   updateTable.value = "REPLY_REPORT";
-    //   updateTable.value = "DISCUSS_REPORT";
-    //   updateTable.value = "MESSAGE_REPORT";
+        updateTable.value = "REPLY_REPORT";
+        selectTable.value = "select_report.php";
+        whereVariable.value = 1;
+        fields.value = [
+            { name: "ID", css: "d-none" },
+            { name: "檢舉對象", type: "text" },
+            { name: "檢舉原因", type: "text" },
+            { name: "檢舉人", type: "text" },
+            { name: "檢舉日期", type: "text", width: 80 },
+            { name: "審核狀況", type: "text"},
+            { name: "操作", width: 80, itemTemplate: function (value, item) {
+                let $buttonContainer = $("<div>");
+
+                let $check = $("<button>")
+                .text("審核")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($check);
+                return $buttonContainer;
+            }},
+        ];
       break;
     case "news":
         h2Title.value = "最新消息管理";
@@ -306,7 +340,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "分類", type: "text" },
             { name: "內容", type: "text" },
             { name: "建立日期", type: "text", width: 80 },
-            { name: "操作", width: 150, itemTemplate: function (value, item) {
+            { name: "操作", width: 80, itemTemplate: function (value, item) {
                 let $buttonContainer = $("<div>");
 
                 let $delete = $("<button>")
@@ -330,6 +364,40 @@ watch(leftNavTag, async (newTab) => {
         h2Title.value = "詐騙知識測驗管理";
         addbutton.value = false;
         updateTable.value = "GAME";
+        selectTable.value = "select_game.php";
+        whereVariable.value = [];
+        fields.value = [
+            { name: "ID", css: "d-none" },
+            { name: "問題", type: "text" },
+            { name: "答案", type: "text" },
+            { name: "操作", width: 80, itemTemplate: function (value, item) {
+                // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
+                let $buttonContainer = $("<div>");
+
+                let $delete = $("<button>")
+                .text("刪除")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($delete);
+
+                let $check = $("<button>")
+                .text("查看")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($check);
+
+                let $revise = $("<button>")
+                .text("修改")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($revise);
+
+                return $buttonContainer;
+            }},
+        ];
         break;
     case "staff":
         h2Title.value = "後台帳號管理";
@@ -361,8 +429,8 @@ watch(leftNavTag, async (newTab) => {
                 .addClass("small_button mx-1")
                 .attr("data-id", item["ID"])
                 .on("click", operate);
-
                 $buttonContainer.append($delete);
+
                 let $revise = $("<button>")
                 .text("修改")
                 .addClass("small_button mx-1")
@@ -392,6 +460,27 @@ watch(leftNavTag, async (newTab) => {
   clients.value = await selectUser();
   reloadJsGrid();
 });
+
+// 監聽檢舉頁面的下拉式選單
+watch(replySelect, async (newValue) => {
+    switch (newValue) {
+        case "1":
+            whereVariable.value = 1;
+            h2Title.value = "文章檢舉管理";
+        break
+        case "2":
+            whereVariable.value = 2;
+            h2Title.value = "留言檢舉管理";
+        break
+        case "3":
+            whereVariable.value = 3;
+            h2Title.value = "回覆檢舉管理";
+        break
+    }
+    clients.value = await selectUser();
+    reloadJsGrid();
+})
+
 
 onMounted(async () => {
     //撈取資料庫的資料
@@ -459,6 +548,7 @@ function operate(e) {
                 blockadeUser();
                 break;
             case "修改":
+            case "審核":
                 alert(`修改帳號 ${updateID.value}`);
                 break;
             case "查看":

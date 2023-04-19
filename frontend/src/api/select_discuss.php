@@ -9,11 +9,11 @@
 
 
     //建立SQL語法
-    $sql = "SELECT d.ID, d.TITLE as '文章標題',  dt.CATEGORY as '文章分類', u.ACCOUNT as '作者', d.CREATE_TIME as '建立日期', ds.STATUS_NAME as '狀態'
-        FROM DISCUSS as d
-        join USER as u on d.USER_ID = u.ID
-        join DISCUSS_TYPE as dt on d.DISCUSS_TYPE_ID = dt.ID
-        join DISCUSS_STATUS as ds on d.DISCUSS_STATUS_ID = ds.ID
+    $sql = "SELECT d.ID, d.TITLE AS '文章標題',  dt.CATEGORY AS '文章分類', u.ACCOUNT AS '作者', d.CREATE_TIME AS '建立日期', ds.STATUS_NAME AS '狀態'
+        FROM DISCUSS AS d
+        JOIN USER AS u ON d.USER_ID = u.ID
+        JOIN DISCUSS_TYPE AS dt ON d.DISCUSS_TYPE_ID = dt.ID
+        JOIN DISCUSS_STATUS AS ds ON d.DISCUSS_STATUS_ID = ds.ID
         WHERE d.DISCUSS_STATUS_ID NOT IN (2 ,4) 
         ORDER BY d.ID DESC;";
 

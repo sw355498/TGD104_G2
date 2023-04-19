@@ -9,10 +9,7 @@
 
 
     //建立SQL語法
-    $sql = "SELECT ID, NEWS_TITLE AS '標題', NEWS_CATEGORY AS '分類', NEWS_CONTENT AS '內容', DATE_FORMAT(CREATE_DATE, '%Y/%m/%d') AS '建立日期' 
-    FROM NEWS
-    WHERE NEWS_STATUS = 1
-    ORDER BY ID DESC;";
+    $sql = "SELECT ID, QUESTION AS '問題', ANSWER AS '答案' FROM GAME;";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
