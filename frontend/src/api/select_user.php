@@ -13,13 +13,13 @@
     $inClause = implode(',', $whereVariable);
 
     //建立SQL語法
-    $sql = "SELECT u.ID, u.ACCOUNT as '帳號', u.NICKNAME as '暱稱', u.CREATE_TIME as '建立日期', us.USER_STATUS_NAME as '狀態', l.LOGIN_TYPE as '登入方式'
-        FROM USER as u
-            join USER_STATUS as us
-                on u.USER_STATUS_ID = us.ID
-                    join LOGIN_TYPE as l
-                        on u.LOGIN_TYPE_ID = l.ID
-                            WHERE u.ACCOUNT_TYPE_ID in ( $inClause ) AND u.USER_STATUS_ID != 3
+    $sql = "SELECT u.ID, u.ACCOUNT AS '帳號', u.NICKNAME AS '暱稱', u.CREATE_TIME AS '建立日期', us.USER_STATUS_NAME AS '狀態', l.LOGIN_TYPE AS '登入方式'
+        FROM USER AS u
+            JOIN USER_STATUS AS us
+            ON u.USER_STATUS_ID = us.ID
+                    JOIN LOGIN_TYPE AS l
+                        ON u.LOGIN_TYPE_ID = l.ID
+                            WHERE u.ACCOUNT_TYPE_ID IN ( $inClause ) AND u.USER_STATUS_ID != 3
                                 ORDER BY u.ID DESC;";
 
     $statement = $pdo->prepare($sql);

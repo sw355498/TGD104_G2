@@ -9,10 +9,11 @@
 
 
     //建立SQL語法
-    $sql = "SELECT ID, NEWS_TITLE AS '標題', NEWS_CATEGORY AS '分類', NEWS_CONTENT AS '內容', DATE_FORMAT(CREATE_DATE, '%Y/%m/%d') AS '建立日期' 
-    FROM NEWS
-    WHERE NEWS_STATUS = 1
-    ORDER BY ID DESC;";
+    $sql = "SELECT ur.TITLE AS '網站名稱', ur.URL AS '網址', u.ACCOUNT AS '回報人', DATE_FORMAT(ur.DATE, '%Y/%m/%d') AS '回報日期', us.STATUS_NAME AS '回報狀態'
+        FROM URL AS ur
+        JOIN USER AS u ON ur.USER_ID = u.ID
+        JOIN URL_STATUS AS us ON ur.URL_STATUS = us.ID
+        ORDER BY u.ID DESC;";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();

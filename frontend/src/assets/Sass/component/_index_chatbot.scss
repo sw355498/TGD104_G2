@@ -68,8 +68,9 @@
     // flex-shrink: 1;
     color: rgba(255, 255, 255, 0.5);
     overflow-y: scroll;
-    // position: relative;
+    padding: 0 5px;
     width: 100%;
+    // 一開始就在上面的
     .chatWindow_message_default,
     .end-dialog {
       margin: 20px 10px 0;
@@ -79,27 +80,27 @@
       .chatbot_message_default p,
       .chatbot_message_end p {
         background-color: white;
+        color: $sec_color;
         border-radius: 10px;
         padding: 10px;
         float: left;
         max-width: 40%;
-        word-break: break-word;
-        color: $sec_color;
+        font-weight: 400;
       }
       .chatbot_news_container {
         max-width: 700px;
         display: flex;
         overflow-x: scroll;
-        cursor: grab;
+        margin-bottom: 10px;
         .chatbot_news_item {
           min-width: 180px;
           min-height: 150px;
           // background-color: $sec_color;
           background-image: linear-gradient(to top, #033159 0%, #216bac 100%);
-          margin: 20px 10px;
+          margin: 10px 5px;
           padding: 20px;
           border-radius: 20px;
-          box-shadow: 0px 1px 5px black;
+          // box-shadow: 0px 0px 3px black;
           span {
             color: white;
             font-size: 12px; 
@@ -112,12 +113,16 @@
             min-height: 80px;
             @include text_overflow_many(3);
           }
+          &:hover{
+            cursor: pointer;
+            background:$btn_hover;
+          }
         }
       }
       .chatbot_news_container::-webkit-scrollbar {
-        width: 0;
       }
     }
+    // 使用者與機器人對話
     .chatWindow_message {
       margin: 0 10px;
       border-radius: 10px;
@@ -135,10 +140,11 @@
         float: left;
       }
       .user_message p {
-        background: $sec_color;
-        color: white;
+        background-color: white;
+        color: $four_color;
         float: right;
       }
+      // 選項
       .chat-buttons{
         position: relative;
         padding: 0;
@@ -146,19 +152,46 @@
         list-style: none;
         clear: both;
         margin: 10px 0;
-        text-align: center;
+        text-align: left;
         .chat-button{
           display: inline-block;
-          transition: all .3s ease;
           cursor: pointer;
           margin: 3px;
           background-color: $sec_color;
-          border: 1px solid #fff;
-          padding: 5px 10px;
-          letter-spacing: normal;
-          border-radius: 30px;
+          padding: 10px;
+          letter-spacing: 1px;
+          border-radius: 10px;
           border-color: $sec_color;
           color: white;
+          &:hover{
+            background-color: $btn_hover;
+          }
+        }
+      }
+      // 各頁介紹
+      .eachSection{
+        padding: 10px 20px;
+        // transition: .5s ease;
+        font-size: 14px;
+        list-style: none;
+        margin: 10px 0;
+        clear: both;
+        text-align: center;
+        background-image: linear-gradient(to top, #033159 0%, #216bac 100%);
+        border-radius: 20px;
+        max-width: 360px;
+        color: white;
+        .eachSection-title{
+          font-size: 32px;
+          font-weight: 700;
+        }
+        .eachSection-p{
+          padding: 10px 10px 0;
+          text-align: left;
+        }
+        &:hover{
+          cursor: pointer;
+          background:$btn_hover;
         }
       }
     }

@@ -1,14 +1,16 @@
+@import "../component/partial";
 /** Background **/
 .body_index_block {
   background-image: url("../img/index/bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 
   /** Top Dynamic **/
   section {
     background-color: transparent;
     min-height: 90vh;
-    padding-top: 20vh;
+    padding-top: 10vh;
     text-align: center;
     @include rwd(sm) {
       padding-top: 0;
@@ -23,7 +25,6 @@
         margin-bottom: 50px;
       }
     }
-    
     .demolink_index_btn {
       position: relative;
       display: inline-block;

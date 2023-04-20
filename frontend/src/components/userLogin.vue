@@ -94,7 +94,6 @@
                     placeholder="請輸入顯示名稱"
                     v-model.trim="displayName"
                     id="name"
-                    
                   />
                   <div class="div_p08_user_loginType">
                     <button
@@ -199,7 +198,7 @@ export default {
         account: this.account,
         password: this.password,
         displayName: this.displayName,
-        accountTypeID:  1,
+        accountTypeID: 1,
       };
 
       axios
@@ -207,20 +206,38 @@ export default {
         .then((response) => {
           console.log(response.data);
           // 在這裡發送另一個請求以使用剛剛註冊的帳戶登入
-          axios
-            .post(`${API_URL}/login.php`, {
-              email: data.email,
-              password: data.password,
-            })
-            .then((response) => {
-              console.log(response.data);
-              // 登入成功後，關閉視窗。
-              this.$emit("close");
-            })
-            .catch((error) => {
-              console.log(error);
-              alert("登入失敗");
-            });
+          if (response.data === "帳號註冊成功") {
+            this.signupFailed = false;
+            this.$emit("close");
+            alert("註冊成功");
+            // 登入
+            const loginData = {
+              account: this.account,
+              password: this.password,
+              id: "",
+            };
+            axios
+              .post(`${API_URL}/login.php`, loginData)
+              .then((response) => {
+                // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
+                this.$emit("close");
+                localStorage.setItem("token", response.data.id);
+                console.log(response);
+                alert("登入成功");
+              })
+              .catch((error) => {
+                console.log(error.response);
+                // 在這裡處理登入失敗要幹嘛
+              });
+
+            // 清空欄位
+            this.account = "";
+            this.password = "";
+            this.displayName = "";
+            this.confirmPassword = "";
+          } else {
+            this.signupFailed = true;
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -233,6 +250,7 @@ export default {
       const data = {
         account: this.accountLogin,
         password: this.passwordLogin,
+        id: "",
       };
 
       axios
@@ -240,11 +258,12 @@ export default {
         .then((response) => {
           // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
           this.$emit("close");
-          localStorage.setItem('token', 'loginStatus')
+          localStorage.setItem("token", response.data.id); //抓會員ID
+          console.log(response);
           alert("登入成功");
         })
         .catch((error) => {
-          console.error(error);
+          console.log(error.response);
           // 在這裡處理登入失敗要幹嘛
         });
     },
