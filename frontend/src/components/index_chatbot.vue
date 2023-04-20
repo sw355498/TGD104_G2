@@ -59,12 +59,32 @@
                         <li class="chat-button" @click="sendMessage('防範詐騙教學')">防範詐騙教學</li>
                         <li class="chat-button" @click="sendMessage('回報可疑網站')">回報可疑網站</li>
                         <li class="chat-button" @click="sendMessage('詐騙FAQ')">詐騙FAQ</li><br>
-                        <li class="chat-button" @click="sendMessage('政府相關連結')">政府相關連結</li>
+                        <li class="chat-button" @click="sendMessage('相關資訊連結')">相關資訊連結</li>
                         <li class="chat-button" @click="sendMessage('討論專區')">討論專區</li>
                         <li class="chat-button" @click="sendMessage('DEMO體驗')">DEMO體驗</li>
                     </ul>
                 </div>
                 <div class="eachSection" v-if="message.text === '防範詐騙教學'">
+                    <span class="eachSection-title">{{message.text}}</span>
+                    <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。</p>
+                </div>
+                <div class="eachSection" v-if="message.text === '回報可疑網站'">
+                    <span class="eachSection-title">{{message.text}}</span>
+                    <p class="eachSection-p">可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。<br>也可查詢已通報的詐騙網站。</p>
+                </div>
+                <div class="eachSection" v-if="message.text === '詐騙FAQ'">
+                    <span class="eachSection-title">{{message.text}}</span>
+                    <p class="eachSection-p">介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等</p>
+                </div>
+                <div class="eachSection" v-if="message.text === '相關資訊連結'">
+                    <span class="eachSection-title">{{message.text}}</span>
+                    <p class="eachSection-p">介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。</p>
+                </div>
+                <div class="eachSection" v-if="message.text === '討論專區'">
+                    <span class="eachSection-title">{{message.text}}</span>
+                    <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構、交友愛情詐騙、人頭帳戶詐騙。</p>
+                </div>
+                <div class="eachSection" v-if="message.text === 'DEMO體驗'">
                     <span class="eachSection-title">{{message.text}}</span>
                     <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構、交友愛情詐騙、人頭帳戶詐騙。</p>
                 </div>
@@ -130,13 +150,12 @@ export default {
                 text: e,
                 isBot: false,
             });
-            // 獲取聊天機器人的回覆
-            const botMessage = getBotMessage(e);
             // 將聊天機器人的回覆加入到聊天記錄陣列中
             messages.value.push({
-                text: botMessage,
+                text: '還想知道什麼嗎，請點選以下分類獲取更多資訊哦！',
                 isBot: true,
-            });
+                isOther: true,
+            })
         }
         // 清空輸入框
         inputValue.value = ''
@@ -161,8 +180,8 @@ export default {
             message:'以下是詐騙FAQ的相關資訊',
             link:'/p04'
         },
-        '政府相關連結':{
-            message:'以下是政府資訊連結的相關資訊',
+        '相關資訊連結':{
+            message:'以下是相關資訊的連結',
             link:'/p05'
         },
         '討論專區':{

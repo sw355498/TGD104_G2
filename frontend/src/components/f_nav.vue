@@ -132,7 +132,7 @@ const nav = reactive([
   {
     id: "p04",
     router: "/p04",
-    title: "政府資訊連結",
+    title: "相關資訊連結",
   },
   {
     id: "p05",

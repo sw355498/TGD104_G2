@@ -5,7 +5,7 @@
 
     <!-- 最上方標題 -->
     <div class="div_p04_gov_topTitle">
-        <h3><i class="fa-regular fa-lightbulb"></i>政府相關連結</h3>
+        <h3><i class="fa-regular fa-lightbulb"></i>相關資訊連結</h3>
     </div>
   
     <!-- 政府卡片區 -->
