@@ -21,20 +21,25 @@
                 </div>
                 <div class="chatbot_news_container">
                     <!-- 接最新消息資料庫5筆 -->
-                    <a class="chatbot_news_item" href="">
-                        <!-- <span>新聞快訊</span> -->
+                    <ul v-for="news in news" :key="news">
+                        <li class="chatbot_news_item" >
+                            <p>{{ news.NEWS_TITLE }}</p>
+                            <span style="display: block; font-size: 14px;">2023-03-20</span>
+                            <span>{{ news.NEWS_CATEGORY}}</span>
+                        </li>
+                    </ul>
+                    <!-- <a class="chatbot_news_item" href="">
+                        <span>新聞快訊</span>
                         <p>故意輸入錯誤密碼3次可救回自己的錢?-這是網路謠言，請勿相信</p>
                         <span style="display: block; font-size: 14px;">2023-03-20</span>
                         <span>警政署</span>
                     </a>
                     <a class="chatbot_news_item" href="">
-                        <!-- <span>最新消息</span> -->
                         <p>假冒銀行信用貸款簡訊</p>
                         <span style="display: block;font-size: 14px;">2023-03-20</span>
                         <span>警政署</span>
                     </a>
                     <a class="chatbot_news_item" href="">
-                        <!-- <span>最新消息</span> -->
                         <p>請注意近期詐騙集團假冒「民宿、旅店、露營區」客服解除分期付款詐騙</p>
                         <span style="display: block;font-size: 14px;">2023-03-20</span>
                         <span>警政署</span>
@@ -43,7 +48,7 @@
                         <p>假冒銀行信用貸款簡訊</p>
                         <span style="display: block;font-size: 14px;">2023-03-20</span>
                         <span>警政署</span>
-                    </a>
+                    </a> -->
                 </div>
             </div>
             <div class="chatWindow_message" v-for="(message, index) in messages" :key="index">
@@ -70,7 +75,7 @@
                 </div>
                 <div class="eachSection" v-if="message.text === '回報可疑網站'">
                     <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。<br>也可查詢已通報的詐騙網站。</p>
+                    <p class="eachSection-p">可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。<br>亦可查詢已通報的詐騙網站。</p>
                 </div>
                 <div class="eachSection" v-if="message.text === '詐騙FAQ'">
                     <span class="eachSection-title">{{message.text}}</span>
@@ -82,11 +87,11 @@
                 </div>
                 <div class="eachSection" v-if="message.text === '討論專區'">
                     <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構、交友愛情詐騙、人頭帳戶詐騙。</p>
+                    <p class="eachSection-p">可分享遭遇詐騙的經驗，並且探討如何避免詐騙、如何應對詐騙。互相提供建議和協助，提醒大家警惕詐騙，更加警覺詐騙行為，提高自我防範能力，避免自己和家人遭受詐騙的損失。</p>
                 </div>
                 <div class="eachSection" v-if="message.text === 'DEMO體驗'">
                     <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構、交友愛情詐騙、人頭帳戶詐騙。</p>
+                    <p class="eachSection-p">透過體驗四種互動更了解詐騙手法：購物詐騙、詐騙知識測驗、電話詐騙、愛情交友詐騙。</p>
                 </div>
                 <!-- <router-link  :to="message.link"></router-link> -->
             </div>
@@ -110,11 +115,10 @@
 </template>
 
 
-<script>
-import { ref , nextTick} from 'vue'
-export default {
-  name: 'Chat',
-  setup() {
+<script setup>
+import axios from 'axios';
+import { API_URL } from '@/config' // 統一 api 路徑變數
+import { ref , nextTick, onMounted} from 'vue'
     const messages = ref([]) // 存儲聊天記錄的陣列
     const inputValue = ref('') // 存儲使用者輸入框的值
     const goodbyeTimer = ref(null) // 存儲setTimeout返回的計時器ID
@@ -223,13 +227,24 @@ export default {
         }, 60000)
         return botMsg;
     }
-    
-    return {
-      messages,
-      inputValue,
-      sendMessage,
-      messagesDiv,
+    // 抓最新消息
+    const news = ref([]);
+    async function allData(){
+        try { 
+            const response = await axios.get(`${API_URL}getNews.php`);
+            const news = response.data.slice(0, 5);
+            console.log(news);
+            return news
+        } catch (error) {
+            // 提交失敗的處理
+            console.error('failed', error)
+        }
     }
-  },
-}
+    onMounted(
+        async () => {
+        //撈取資料庫的資料
+        news.value = await allData();
+        console.log(news.value);
+        }
+    );
 </script>
