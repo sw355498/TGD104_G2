@@ -202,7 +202,7 @@ export default {
       };
 
       axios
-        .post(`${API_URL}/add_user.php`, data)
+        .post(`${API_URL}add_user.php`, data)
         .then((response) => {
           console.log(response.data);
           // 在這裡發送另一個請求以使用剛剛註冊的帳戶登入
