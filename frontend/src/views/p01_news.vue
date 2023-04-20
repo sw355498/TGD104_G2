@@ -71,10 +71,9 @@
               <div class="p01_news_title">
                 <div class="p01_news_titleText h5">{{ value.NEWS_TITLE }}</div>
                 <div class="p01_news_titleCollect">
-                  <a data-href="" data-layout="button_count"
-                    ><i class="fa-brands fa-facebook"></i
+                  <a><i class="fa-brands fa-facebook" @click="openShareWindow('https://www.facebook.com/sharer.php?u='+'/p01/p01_newsArticle/' + value.ID);"></i
                   ></a>
-                  <a><i class="fa-brands fa-line"></i></a> |
+                  <a><i class="fa-brands fa-line" @click="openShareWindow('https://social-plugins.line.me/lineit/share?url='+'/p01/p01_newsArticle/' + value.ID);"></i></a> |
                   <a><i class="fa-solid fa-bookmark"></i>收藏</a>
                 </div>
               </div>
@@ -188,6 +187,7 @@ export default {
       .catch((error) => {
         // console.error(error);
       });
+
   },
   computed: {
     categories() {
@@ -252,6 +252,11 @@ export default {
         return item.NEWS_TITLE.includes(this.searchKeyword);
       });
     },
+            // 分享
+  openShareWindow(link) {
+    event.preventDefault();
+    window.open(link, 'mywindow', 'width=700, height=400');
+  },
 
     // 分頁
     setPage(page) {
@@ -278,7 +283,9 @@ export default {
   }
 
   },
+
 };
+
 </script>
 
  <style lang="scss" scoped>

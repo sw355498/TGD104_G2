@@ -259,8 +259,25 @@ export default {
           // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
           this.$emit("close");
           localStorage.setItem("token", response.data.id); //抓會員ID
-          console.log(response);
+          // 設定 token 過期時間為 3 小時
+          const expireTime = new Date().getTime() + 3 * 60 * 60 * 1000; // 2 小時後的時間戳記
+          localStorage.setItem("tokenExpireTime", expireTime);
+
+          // 檢查 token 是否過期
+          const currentTime = new Date().getTime(); // 現在的時間戳記
+          const tokenExpireTime = localStorage.getItem("tokenExpireTime");
+          if (currentTime > tokenExpireTime) {
+            // token 已過期，執行登出流程並清除 localStorage 中的 token 資訊
+            localStorage.removeItem("token");
+            localStorage.removeItem("tokenExpireTime");
+            // 執行登出流程...
+          } else {
+            // token 仍在有效期內，可以進行 API 呼叫等操作
+            console.log(response);
           alert("登入成功");
+          }
+
+
         })
         .catch((error) => {
           console.log(error.response);
