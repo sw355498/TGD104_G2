@@ -45,7 +45,7 @@
 
             <!-- 測驗視窗2 -->
 
-            <div class="result_view view2">
+            <div class="result_view view2" v-show="showScore">
                <p>{{ scoreText }}</p>
               
             </div>
@@ -110,6 +110,7 @@ export default {
       return{
         texts:["測驗結果，你的防詐指數...."],
         score:null,
+        showScore: false,
       }
     },
 
@@ -157,6 +158,7 @@ export default {
 
     setTimeout(() =>{
         this.score = localStorage.getItem('score');
+        this.showScore = true;
       },2500);
 
 
