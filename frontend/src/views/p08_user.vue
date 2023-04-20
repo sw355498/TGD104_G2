@@ -21,7 +21,8 @@
           <div class="col-md-4 mb-3">
             <div class="card order-1">
               <div class="card-body">
-                 <p class="crown"><i class="fa-solid fa-crown"></i></p>
+                <!-- 判斷小測驗得到的分數 -->
+                 <p class="crown" v-if="member.QUIZ > 70"><i class="fa-solid fa-crown"></i></p>
                 <div class="d-flex flex-column align-items-center text-center">
                   <img
                     src="../assets/img/p08_user/user.jpg"
@@ -34,14 +35,17 @@
                     <input type="file" name="file" />
                   </div> -->
                   <div class="mt-3">
-                    <h4 class="">{{member.NICKNAME}}</h4>
-                    <p class="text_title mb-1">LV.2</p>
-                    <p class="text font-size-sm">防詐小尖兵</p>
-                    <p class="text font-size-sm">加入時間:{{member.CREATE_TIME}}</p>
+                    <h4 class="mb-2">{{member.NICKNAME}}</h4>
+                    <p class="text_title mb-1">{{ memberLevel }}</p>
+                    <!-- <p class="text font-size-sm">防詐小尖兵</p> -->
+                    <p class="text font-size-sm mb-1" v-if="member.MOBILE !== null">電話:{{member.MOBILE}}</p>
+                    <p class="text font-size-sm mb-3" v-if="member.MOBILE !== null">生日:{{member.BIRTH}}</p>
 
                     <p class="text_title mb-1">狀態</p>
-                    <p class="text font-size-sm">Email 驗證</p>
-                    <p class="text font-size-sm">防詐小達人</p>
+                    <p class="text font-size-sm crown mb-1" v-if="member.CERTIFIED === 2"><i class="fa-solid fa-circle-check"></i> Email已驗證</p>
+                    <p class="text font-size-sm mb-1" v-if="member.CERTIFIED === 1 || !member.CERTIFIED"><i class="fa-solid fa-circle-xmark"></i> Email未驗證</p>
+                    <p class="text font-size-sm crown mb-1" v-if="member.QUIZ > 70"><i class="fa-solid fa-circle-check"></i> 通過防詐測驗</p>
+                    <p class="text font-size-sm mb-1" v-if="member.QUIZ < 69"><i class="fa-solid fa-circle-xmark"></i> 防詐測驗未通過</p>
 
                   </div>
                 </div>
@@ -56,39 +60,39 @@
                   <h5>會員等級列表</h5>
                 </li>
                 <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
-                  <h6>LV.0 防詐初學者</h6>
+                  <p>LV.1 防詐初學者</p>
                   <span class="text-secondary">exp 0-10</span>
-                  <p class="block">討論區發文間隔2小時</p>
+                  <p class="block mb-1">討論區發文間隔2小時</p>
                 </li>
                 <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
-                  <h6>LV.1 防詐小尖兵</h6>
+                  <p>LV.2 防詐小尖兵</p>
                   <span class="text-secondary">exp 11-50</span>
-                  <p class="block">可換個人大頭貼</p>
+                  <p class="block  mb-1">可換個人大頭貼</p>
                 </li>
                 <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
-                  <h6>LV.2 防詐達人</h6>
+                  <p>LV.3 防詐達人</p>
                   <span class="text-secondary">exp 51-100</span>
-                  <p class="block">發文無間隔限制</p>
+                  <p class="block mb-1">發文無間隔限制</p>
                 </li>
                 <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
-                  <h6>LV.3 防詐大師</h6>
+                  <p>LV.4 防詐大師</p>
                   <span class="text-secondary">exp 101-200</span>
-                  <p class="block">可收藏文章</p>
+                  <p class="block mb-1">可收藏文章</p>
                 </li>
                 <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
-                  <h6>LV.4 防詐神人</h6>
+                  <p>LV.5 防詐神人</p>
                   <span class="text-secondary">exp 201-</span>
-                  <p class="block">可檢舉文章</p>
+                  <p class="block mb-1 justify-content-end">可檢舉文章</p>
                 </li>
               </ul>
             </div>
@@ -98,9 +102,9 @@
             <div class="card mb-3">
               <!-- 會員資訊 -->
               <div class="profile-head">
-                <h4>Hello, {{ member.name }} 歡迎回來</h4>
+                <h4>Hello, {{member.NICKNAME}} 歡迎回來</h4>
                 <h6>{{ member.ACCOUNT }}</h6>
-                <p class="proile-rating">EXP : <span>{{member.EXP}}/100</span></p>
+                <p class="proile-rating">EXP : <span>{{member.EXP}}/200</span></p>
                 <div class="progress col-lg-5">
                   <div
                     class="progress-bar"
@@ -109,7 +113,7 @@
                     :style="{ width: member.EXP + '%'}"
                     :aria-valuenow="member.EXP"
                     aria-valuemin="0"
-                    aria-valuemax="100"
+                    aria-valuemax="999"
                   ></div>
                 </div>
               </div>
@@ -220,7 +224,16 @@ export default {
     return {
       active_tab: 0,
       member: {},
-      expValue: 50,
+      quizPass: 75,
+      expValue: 1,
+      memberLevel: null,
+      levelList: [
+        { lv: 'LV.1', name: '防詐初學者', minExp: 0, maxExp: 10 },
+        { lv: 'LV.2', name: '防詐小尖兵', minExp: 11, maxExp: 50 },
+        { lv: 'LV.3', name: '防詐達人', minExp: 51, maxExp: 100 },
+        { lv: 'LV.4', name: '防詐大師', minExp: 101, maxExp: 200 },
+        { lv: 'LV.5', name: '防詐神人', minExp: 201, maxExp: 999 }
+      ],
       tabs: [
         {
           label: "發文清單",
@@ -258,27 +271,33 @@ export default {
     },
     
   },
+  computed: {
+    memberLevel() {
+      for (let i = 0; i < this.levelList.length; i++) {
+        if ( this.expValue >= this.levelList[i].minExp &&  this.expValue <= this.levelList[i].maxExp) {
+          return `${this.levelList[i].lv} ${this.levelList[i].name}`;
+        }
+      }
+    }
+  },
   mounted() {
   const token = localStorage.getItem("token");
   if (token) {
     axios
       .get(`${API_URL}/member_getData.php?token=${token}`)
       .then((response) => {
-        // 假設 API 回傳的資料格式如下：
-        // {
-        //   "id": "會員ID",
-        //   "name": "會員姓名",
-        //   "email": "會員信箱"
-        // }
         this.member = response.data;
-        this.expValue = response.data.exp;
+        this.expValue = response.data.EXP;
+        this.quizPass = response.data.QUIZ;
         console.log(response.data);
+        console.log(this.expValue);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 },
+
 created() {
   // 檢查localStorage中是否有token
   if (!localStorage.getItem('token')) {

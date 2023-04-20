@@ -6,7 +6,9 @@
 
             <!-- 彈跳視窗 -->
 
-            <div class="p07game_login_alert" v-if="showLoginAlert && !isLogin">
+            <div class="p07game_login_alert" v-if="showLoginAlert && !isLoggedIn">
+
+                <!-- //打X按鈕 -->
                 <div class="alert_cross"  @click="closeLoginAlert"  >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>    
                 </div>   
@@ -14,9 +16,11 @@
                 
                 <p>您尚未登入會員，請問是否要登入會員記錄分數？</p>
                 
+                <!-- 會員登入按鈕與會員填寫資料的部分 -->
                 <button type="button" @click="showModal" class="gamebutton game_login">登入/註冊</button>
+                <Modal v-show="isModalVisible" @close="closeModal" />
 
-    <Modal v-show="isModalVisible" @close="closeModal" />
+                <!-- 取消按鈕 -->
                 <button class="gamebutton game_cancel" @click="closeLoginAlert">取消</button>    
                     
                 </div>                
@@ -104,12 +108,13 @@
 
 <script>
 
-import Modal from "@/components/userLogin.vue";
-import frontFooter from "@/components/f_footer.vue";
+import Modal from "@/components/userLogin.vue"; // 填寫會員登入資料的那個彈窗
+import frontFooter from "@/components/f_footer.vue"; //footer的欄位
 
 
 export default {
 
+    //會員登入的那個彈窗部分
     name: "App",
     components: {
     Modal,
@@ -121,12 +126,22 @@ export default {
     data(){
       return{
         texts:["測驗結果，你的防詐指數...."],
-        score:null,
-        showScore: false,
-        showLoginAlert: true, 
-        isLogin:false,
-        isModalVisible: false,
+        score:null, //分數計算預設空值
+        showScore: false, //顯示分數的部分預設為否
+        showLoginAlert: true,  //顯示確認會員登入與否的彈窗
+        isLogin:false, //登入狀態顯示為否 (需判斷)
+        isModalVisible: false, //預設顯示modal的部分為否
+        isLoggedIn: false,
       }
+    },
+
+    created(){
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (!isLoggedIn){
+            this.showLoginAlert = true;
+        }else{
+            this.showLoginAlert = false;
+        }
     },
 
     
@@ -150,14 +165,6 @@ export default {
     //         }, 5000)
     //     });
 
-    //     // const state = reactive({
-    //     //     showLoginAlert: true
-    //     // });
-
-    //     // const closeLoginAlert = () => {
-    //     //     state.showLoginAlert = false;
-    //     // };
-
     //     return{
     //         scorep,
     //         state,
@@ -171,32 +178,18 @@ export default {
 
   mounted() {
 
+    //分數延遲顯示
     setTimeout(() =>{
-        this.score = localStorage.getItem('score');
-        this.showScore = true;
+        this.score = localStorage.getItem('score');  //取得分數的部分
+        this.showScore = true; //顯示分數的部分為是
       },2500);
 
-
-    this.$refs.item.forEach((el) => {// 亂碼效果的部分
+      // 亂碼效果的部分
+    this.$refs.item.forEach((el) => {
         el.style.width = el.getBoundingClientRect().width + 5 + "px";
         this.scramble(el);
       });
 
-      
-
-    // this.score = this.$route.params.score;   // 從路由器中獲取分數數據
-    // let scorep = null; 
-    // let x = 0;
-
-    
-    
-    // const state = reactive({
-    //         // showLoginAlert: true
-    //     });
-
-    // const closeLoginAlert = () => {
-    //         state.showLoginAlert = false;
-    //     };
 
 
     // setTimeout(() => {
@@ -216,21 +209,20 @@ export default {
 
   methods:{  
     
+    //關閉詢問是否要會員登入的視窗
     closeLoginAlert(){
         this.showLoginAlert = false;
         document.querySelector('.p07game_login_alert').classList.add('p07game_login_alert_close');
     },
 
-    // goToLoginPage(){
-    //     this.isLogin = true;
-    //     this.$router.push('/p08_userLogin');
-    // },
-
+    //會員登入資料的彈窗開與關的設定
     showModal() {
       this.isModalVisible = true;
     },
+
     closeModal() {
-      this.isModalVisible = false;
+    this.showLoginAlert = false;  //關閉顯示詢問是否要會員登入的視窗
+      this.isModalVisible = true; // 這裡寫true 或false好像都可以？
     },    
     
         
