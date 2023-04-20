@@ -4,6 +4,10 @@ const path = require('path')
 const { CKEditorTranslationsPlugin } = require( '@ckeditor/ckeditor5-dev-translations' );
 const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 const { proxy } = require('jquery');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const httpProxy = require('http-proxy');
+// const proxy = httpProxy.createProxyServer();
 
 module.exports = defineConfig({
     transpileDependencies: [/ckeditor5-[^/\\]+[/\\]src[/\\].+\.js$/],
@@ -23,6 +27,7 @@ module.exports = defineConfig({
                 $:"jquery",
                 jQuery:"jquery", "windows.jQuery":"jquery"
             }),
+            new MiniCssExtractPlugin()
         ]
     },
     chainWebpack: config => {
@@ -86,11 +91,16 @@ module.exports = defineConfig({
     // 串api需要的
     devServer: {
         proxy: {
-            'madeByNeil': {
-                target: 'https://od.moi.gov.tw',
-                pathRewrite: {'^/madeByNeil': ''},
-                changeOrigin: true
+          'madeByNeil': {
+            target: 'https://od.moi.gov.tw',
+            changeOrigin: true,
+            onProxyRes: function(proxyRes, req, res) {
+              proxyRes.headers['Access-Control-Allow-Origin'] = '*';
             },
+            pathRewrite: {
+              '^madeByNeil': ''
+            }
+          }
         }
-    }
+      }
 })
