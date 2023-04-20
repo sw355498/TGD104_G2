@@ -212,7 +212,7 @@ const nav2Click = (e) => {
 // 註冊按鈕
 const isModalVisible = ref(false);
 
-const showModa = () => {
+const showModal = () => {
   isModalVisible.value = true;
   document.body.classList.add("modal-open");
 };
