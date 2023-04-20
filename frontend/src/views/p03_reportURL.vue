@@ -164,7 +164,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     async function allData(){
         try {
             isJsgrid.value = false;
-            const response = await axios.get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+            const response = await axios.get('madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
             let myArray = response.data.result.records;
             myArray.splice(0, 1);  // 刪除政府預設第一欄
                 const responseServer = await axios.get(`${API_URL}getWebURL.php`)
