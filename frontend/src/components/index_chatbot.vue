@@ -21,29 +21,15 @@
                 </div>
                 <div class="chatbot_news_container">
                     <!-- 接最新消息資料庫5筆 -->
-                    <a class="chatbot_news_item" href="">
-                        <!-- <span>新聞快訊</span> -->
-                        <p>故意輸入錯誤密碼3次可救回自己的錢?-這是網路謠言，請勿相信</p>
-                        <span style="display: block; font-size: 14px;">2023-03-20</span>
-                        <span>警政署</span>
-                    </a>
-                    <a class="chatbot_news_item" href="">
-                        <!-- <span>最新消息</span> -->
-                        <p>假冒銀行信用貸款簡訊</p>
-                        <span style="display: block;font-size: 14px;">2023-03-20</span>
-                        <span>警政署</span>
-                    </a>
-                    <a class="chatbot_news_item" href="">
-                        <!-- <span>最新消息</span> -->
-                        <p>請注意近期詐騙集團假冒「民宿、旅店、露營區」客服解除分期付款詐騙</p>
-                        <span style="display: block;font-size: 14px;">2023-03-20</span>
-                        <span>警政署</span>
-                    </a>
-                    <a class="chatbot_news_item" href="">
-                        <p>假冒銀行信用貸款簡訊</p>
-                        <span style="display: block;font-size: 14px;">2023-03-20</span>
-                        <span>警政署</span>
-                    </a>
+                    <div v-for="item in news" :key="item">
+                        <router-link :to="'/p01/p01_newsArticle/' + item.ID">
+                        <div class="chatbot_news_item" >
+                            <p>{{ item.NEWS_TITLE }}</p>
+                            <span style="display: block; font-size: 14px;">{{ new Date(item.CREATE_DATE).toLocaleDateString()}}</span>
+                            <span>{{ item.NEWS_CATEGORY}}</span>
+                        </div>
+                        </router-link>
+                    </div>
                 </div>
             </div>
             <div class="chatWindow_message" v-for="(message, index) in messages" :key="index">
@@ -64,31 +50,71 @@
                         <li class="chat-button" @click="sendMessage('DEMO體驗')">DEMO體驗</li>
                     </ul>
                 </div>
-                <div class="eachSection" v-if="message.text === '防範詐騙教學'">
-                    <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。</p>
+                <router-link :to="'/p02'">
+                    <div class="eachSection" v-if="message.text === '防範詐騙教學'">
+                        <span class="eachSection-title">{{message.text}}</span>
+                        <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。</p>
+                        <span class="eachSection-more">點我看更多</span>
+                    </div>
+                </router-link>
+                <router-link :to="'/reportUrl'">
+                    <div class="eachSection" v-if="message.text === '回報可疑網站'">
+                        <span class="eachSection-title">{{message.text}}</span>
+                        <p class="eachSection-p">可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。<br>亦可查詢已通報的詐騙網站。</p>
+                        <span class="eachSection-more">點我看更多</span>
+                    </div>
+                </router-link>
+                <router-link :to="'/p05/'">
+                    <div class="eachSection" v-if="message.text === '詐騙FAQ'">
+                        <span class="eachSection-title">{{message.text}}</span>
+                        <p class="eachSection-p">介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等</p>
+                        <span class="eachSection-more">點我看更多</span>
+                    </div>
+                </router-link>
+                <router-link :to="'/p04/'">
+                    <div class="eachSection" v-if="message.text === '相關資訊連結'">
+                        <span class="eachSection-title">{{message.text}}</span>
+                        <p class="eachSection-p">介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。</p>
+                        <span class="eachSection-more">點我看更多</span>
+                    </div>
+                </router-link>
+                <router-link :to="'/discuss/'">
+                    <div class="eachSection" v-if="message.text === '討論專區'">
+                        <span class="eachSection-title">{{message.text}}</span>
+                        <p class="eachSection-p">可分享遭遇詐騙的經驗，或探討如何避免詐騙、如何應對詐騙。互相提供建議和協助，提醒大家警惕詐騙，提高自我防範能力，避免遭受詐騙的損失。</p>
+                        <span class="eachSection-more">點我看更多</span>
+                    </div>
+                </router-link>
+                <div class="eachSection-demo" v-if="message.text === 'DEMO體驗'">
+                    <router-link :to="'/p07demoShopping/'">
+                        <div class="eachSection-demo-item" >
+                            <span class="eachSection-demo-item-title">購物詐騙</span>
+                            <p class="eachSection-demo-item-p">模擬詐騙購物網站形式</p>
+                            <span class="eachSection-demo-item-more">點我體驗</span>
+                        </div>
+                    </router-link>
+                    <router-link :to="'/p07demoGame/'">
+                        <div class="eachSection-demo-item">
+                            <span class="eachSection-demo-item-title">詐騙知識測驗</span>
+                            <p class="eachSection-demo-item-p">測驗遊戲考驗你的防詐知識</p>
+                            <span class="eachSection-demo-item-more">點我體驗</span>
+                        </div>
+                    </router-link>
+                    <router-link :to="'/p07demoPhone/'">
+                        <div class="eachSection-demo-item">
+                            <span class="eachSection-demo-item-title">電話詐騙</span>
+                            <p class="eachSection-demo-item-p">語音電話模擬金融詐騙</p>
+                            <span class="eachSection-demo-item-more">點我體驗</span>
+                        </div>
+                    </router-link>
+                    <router-link :to="'/p07demoLine/'">
+                        <div class="eachSection-demo-item">
+                            <span class="eachSection-demo-item-title">愛情交友詐騙</span>
+                            <p class="eachSection-demo-item-p">LINE 交友軟體模擬詐騙對話</p>
+                            <span class="eachSection-demo-item-more">點我體驗</span>
+                        </div>
+                    </router-link>
                 </div>
-                <div class="eachSection" v-if="message.text === '回報可疑網站'">
-                    <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。<br>也可查詢已通報的詐騙網站。</p>
-                </div>
-                <div class="eachSection" v-if="message.text === '詐騙FAQ'">
-                    <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等</p>
-                </div>
-                <div class="eachSection" v-if="message.text === '相關資訊連結'">
-                    <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。</p>
-                </div>
-                <div class="eachSection" v-if="message.text === '討論專區'">
-                    <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構、交友愛情詐騙、人頭帳戶詐騙。</p>
-                </div>
-                <div class="eachSection" v-if="message.text === 'DEMO體驗'">
-                    <span class="eachSection-title">{{message.text}}</span>
-                    <p class="eachSection-p">介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構、交友愛情詐騙、人頭帳戶詐騙。</p>
-                </div>
-                <!-- <router-link  :to="message.link"></router-link> -->
             </div>
         </div>
         <!-- 使用者輸入 -->
@@ -110,11 +136,10 @@
 </template>
 
 
-<script>
-import { ref , nextTick} from 'vue'
-export default {
-  name: 'Chat',
-  setup() {
+<script setup>
+import axios from 'axios';
+import { API_URL } from '@/config' // 統一 api 路徑變數
+import { ref , nextTick, onMounted} from 'vue'
     const messages = ref([]) // 存儲聊天記錄的陣列
     const inputValue = ref('') // 存儲使用者輸入框的值
     const goodbyeTimer = ref(null) // 存儲setTimeout返回的計時器ID
@@ -133,7 +158,7 @@ export default {
             if (botMessage == `other`) {
                 console.log(botMessage);
                 messages.value.push({
-                    text: '你好，請點選以下分類獲取更多資訊哦！',
+                    text: '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
                     isBot: true,
                     isOther: true,
                 })
@@ -152,7 +177,7 @@ export default {
             });
             // 將聊天機器人的回覆加入到聊天記錄陣列中
             messages.value.push({
-                text: '還想知道什麼嗎，請點選以下分類獲取更多資訊哦！',
+                text: '可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
                 isBot: true,
                 isOther: true,
             })
@@ -164,6 +189,57 @@ export default {
         messagesDiv.value.scrollTop = messagesDiv.value.scrollHeight;
     }
     //機器人回復關鍵字
+    const robotAnswerArry = [
+    {
+        id: 1,
+        keyword: '你好',
+        message: '你好',
+        link: ''
+    },
+    {
+        id: 2,
+        keyword: '防範詐騙教學',
+        message: '還想知道什麼嗎',
+        link: '/p02'
+    },
+    {
+        id: 3,
+        keyword: '回報可疑網站',
+        message: '以下是回報可疑網站的相關資訊',
+        link: '/reportUrl'
+    },
+    {
+        id: 4,
+        keyword: '詐騙FAQ',
+        message: '以下是詐騙FAQ的相關資訊',
+        link: '/p04'
+    },
+    {
+        id: 5,
+        keyword: '相關資訊連結',
+        message: '以下是相關資訊的連結',
+        link: '/p05'
+    },
+    {
+        id: 6,
+        keyword: '討論專區',
+        message: '以下是討論專區的相關資訊',
+        link: '/p06'
+    },
+    {
+        id: 7,
+        keyword: 'DEMO體驗',
+        message: '以下是DEMO體驗的相關資訊',
+        link: '/p07'
+    },
+    {
+        id: 8,
+        keyword: 'other',
+        message: 'other',
+        link: ''
+    }
+    ];
+
     const robotAnswer = {
         '你好':{
             message:'你好',
@@ -204,9 +280,9 @@ export default {
         // 根據用戶的輸入獲取聊天機器人的回覆
         let botMsg = ``;
         const input_trim = input.trim();
-        console.log(input_trim);
         // hasOwnProperty有在陣列裡面返回一個布林值
         if ( input_trim && robotAnswer.hasOwnProperty(input_trim)) {
+            // botMsg = robotAnswer[input_trim].message
             botMsg = robotAnswer[input_trim].message
         }else{
             botMsg = robotAnswer.other.message;
@@ -223,13 +299,24 @@ export default {
         }, 60000)
         return botMsg;
     }
-    
-    return {
-      messages,
-      inputValue,
-      sendMessage,
-      messagesDiv,
+    // 抓最新消息
+    const news = ref([]);
+    async function allData(){
+        try { 
+            const response = await axios.get(`${API_URL}getNews.php`);
+            const news = response.data.slice(0, 5);
+            console.log(news);
+            return news
+        } catch (error) {
+            // 提交失敗的處理
+            console.error('failed', error)
+        }
     }
-  },
-}
+    onMounted(
+        async () => {
+        //撈取資料庫的資料
+        news.value = await allData();
+        console.log(news.value);
+        }
+    );
 </script>

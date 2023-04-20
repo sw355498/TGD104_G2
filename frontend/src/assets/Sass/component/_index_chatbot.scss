@@ -170,10 +170,9 @@
       }
       // 各頁介紹
       .eachSection{
-        padding: 10px 20px;
+        padding: 10px 20px 20px;
         // transition: .5s ease;
         font-size: 14px;
-        list-style: none;
         margin: 10px 0;
         clear: both;
         text-align: center;
@@ -181,6 +180,7 @@
         border-radius: 20px;
         max-width: 360px;
         color: white;
+        position: relative;
         .eachSection-title{
           font-size: 32px;
           font-weight: 700;
@@ -189,9 +189,58 @@
           padding: 10px 10px 0;
           text-align: left;
         }
+        .eachSection-more{
+          position: absolute;
+          right: 35px;
+          bottom: 20px;
+          font-size: 10px;
+          font-weight: 100;
+          letter-spacing: 1px;
+        }
         &:hover{
           cursor: pointer;
           background:$btn_hover;
+          p,span{
+            color: $main_color;
+          }
+        }
+      }
+      // 4個demo體驗
+      .eachSection-demo{
+        overflow-x: scroll;
+        display: flex;
+        clear: both;
+        flex-direction: row;
+        margin-bottom: 10px;
+        .eachSection-demo-item{
+          background-image: linear-gradient(to top, #033159 0%, #216bac 100%);
+          padding: 10px 20px 20px;
+          border-radius: 20px;
+          margin: 10px;
+          width: 180px;
+          min-height: 150px;
+          text-align: center;
+          .eachSection-demo-item-title{
+            font-size: 22px;
+            font-weight: 700;
+          }
+          .eachSection-demo-item-p{
+            text-align: left;
+            padding: 10px 0;
+            font-weight: 300;
+          }
+          .eachSection-demo-item-more{
+            font-size: 10px;
+            font-weight: 100;
+            padding: 0;
+          }
+          &:hover{
+            cursor: pointer;
+            background:$btn_hover;
+            p,span{
+              color: $main_color;
+            }
+          }
         }
       }
     }

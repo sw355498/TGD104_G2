@@ -89,7 +89,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted,watch } from 'vue';
+import { ref, computed, onMounted, } from 'vue';
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
@@ -164,7 +164,12 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     async function allData(){
         try {
             isJsgrid.value = false;
+<<<<<<< HEAD
             const response = await axios.get('madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+=======
+            const response = await axios.get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+            // const response = await axios.get('https://od.moi.gov.tw/api/v1/rest/datastore/A01010000C-002150-013')
+>>>>>>> 82716831058c5a95c50b272f14d52b1ac92d5d42
             let myArray = response.data.result.records;
             myArray.splice(0, 1);  // 刪除政府預設第一欄
                 const responseServer = await axios.get(`${API_URL}getWebURL.php`)

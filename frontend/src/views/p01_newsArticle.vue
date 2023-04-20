@@ -16,9 +16,9 @@
 
         <div class="p01_news_titleCollect d-flex justify-content-end mt-2">
           <a data-href="" data-layout="button_count"
-            ><i class="fa-brands fa-facebook"></i
+            ><i class="fa-brands fa-facebook" @click="openShareWindow('https://www.facebook.com/sharer.php?u='+current_url);"></i
           ></a>
-          <a><i class="fa-brands fa-line"></i></a> |
+          <a><i class="fa-brands fa-line" @click="openShareWindow('https://social-plugins.line.me/lineit/share?url='+current_url);"></i></a> |
           <a><i class="fa-solid fa-bookmark"></i>收藏</a>
         </div>
         <hr class="border border-2" />
@@ -62,10 +62,12 @@ export default {
   data() {
     return {
       news: [],
+      current_url:null
     };
   },
   mounted() {
     // 從router獲取參數id
+    this.current_url= window.location//jeff大神建議的
     const id = this.$route.params.id;
 
     axios
@@ -76,6 +78,7 @@ export default {
         for (let i = 0; i < data.length; i++) {
           if (data[i].ID == id) {
             this.news = data[i];
+            
             break;
           }
         }
@@ -83,6 +86,13 @@ export default {
       .catch((error) => {
         console.error(error);
       });
+      
   },
+  methods:{
+  // 分享
+  openShareWindow(link) {
+    window.open(link, 'mywindow', 'width=700, height=400');
+  },
+  }
 };
 </script>
