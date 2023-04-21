@@ -217,7 +217,7 @@ export default {
               id: "",
             };
             axios
-              .post(`${API_URL}/login.php`, loginData)
+              .post(`${API_URL}login.php`, loginData)
               .then((response) => {
                 // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
                 this.$emit("close");
@@ -254,7 +254,7 @@ export default {
       };
 
       axios
-        .post(`${API_URL}/login.php`, data)
+        .post(`${API_URL}login.php`, data)
         .then((response) => {
           // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
           this.$emit("close");
