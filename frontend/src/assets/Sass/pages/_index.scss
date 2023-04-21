@@ -168,6 +168,9 @@
         @include rwd(md) {
           font-size: 2rem;
         }
+        @include rwd(sm) {
+          font-size: 1.5rem;
+        }
       }
 
       hr {
@@ -221,10 +224,21 @@
 
           .fontT26_index_article {
             @include fontT26_index_article();
+            @include rwd(sm) {
+              font-size: 1.2rem;
+              text-align: center;
+            }
           }
-
           .fontP18_index_article {
             @include fontP18_index_article();
+            @include rwd(sm) {
+              font-size: 1rem;
+            }
+          }
+          p {
+            @include rwd(sm) {
+              font-size: 1rem;
+            }
           }
         }
       }
@@ -268,6 +282,10 @@
               @include fontT26_index_article();
               @include rwd(md) {
                 font-size: 1.3rem;
+              }
+              @include rwd(sm) {
+                font-size: 1.2rem;
+                text-align: center;
               }
             }
 
