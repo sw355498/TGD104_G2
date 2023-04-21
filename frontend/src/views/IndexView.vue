@@ -36,7 +36,7 @@
         <ul>
           <li>
             <svg><use xlink:href="#mail_silent" /></svg>
-            <p class="fontT26_index_article">
+            <p class="title_index_article">
               不點擊不明簡訊或是 E-mail 裡的網址
             </p>
             <p class="paragraph fontP18_index_article">
@@ -46,13 +46,13 @@
           </li>
           <li>
             <svg><use xlink:href="#search" /></svg>
-            <p class="fontT26_index_article">找尋正確管道且小心求證</p>
+            <p class="title_index_article">找尋正確管道且小心求證</p>
             <p class="paragraph fontP18_index_article">
               假使收到訊息不放心或很想知道真相，絕對不要貪圖方便而點擊訊息內的網址，應該另外打開官方APP，或是自己Google連線到官方網站。然後登入驗證。當然，登入以後就會發現根本沒有強迫重新驗證這回事
             </p>
           </li>
         </ul>
-        <router-link to="/p02" class="big_button">了解更多知識</router-link>
+        <router-link to="/teach" class="big_button">了解更多知識</router-link>
       </article>
 
       <!-- News -->
@@ -60,55 +60,37 @@
         <h1>最新消息</h1>
         <hr />
         <ul>
-          <li class="card_index_block">
-            <figure class="card_index_photo">
-              <img src="../assets/img/index/newPic01.jpg" alt="資安" />
-              <figcaption class="small_button">資安</figcaption>
-            </figure>
-            <div class="text-block">
-              <p class="fontT26_index_article">
-                健保署3員工利用職務查詢、洩漏情報人員個資長達13年，承保組科長涉嫌重大10萬交保
-              </p>
-              <p class="paragraph fontP14_index_article">
-                避免釣魚網站詐騙，要加強的不是計算機概論，也不用成為資安專家，而是掌握一個最基本的原則
-                不管是熟人還是陌生人、不管是哪種方式傳來的訊息（簡訊、電子郵件、Line、FB、IG等），只要內容附上網址，而且點開後要求輸入帳號密碼或下載安裝程式，內心的警報器一定要大聲作響，告訴自己「這極有可能是釣魚簡訊！」
-              </p>
-              <p class="fontDate_index_article">Jan 23, 2023</p>
-            </div>
-          </li>
-          <li class="card_index_block">
-            <figure class="card_index_photo">
-              <img src="../assets/img/index/newPic02.jpg" alt="駭客" />
-              <figcaption class="small_button">駭客</figcaption>
-            </figure>
-            <div class="text-block">
-              <p class="fontT26_index_article">
-                從戶政到健保資料外洩案看我國個資保障，唐鳳部長理當不能以一句配合偵辦輕輕帶過
-              </p>
-              <p class="paragraph fontP14_index_article">
-                我國對公務機關的個人資料、資通訊安全保護卻可能與一般民眾認知不盡相符。數位部身為主管機關，理當不能一句全力提供資安技術支援、配合偵辦即可輕輕帶過，唐鳳部長有權積極監督衛福部健保署及內政部將資通安全事件之通報、調查、處理。
-              </p>
-              <p class="fontDate_index_article">Jan 23, 2023</p>
-            </div>
-          </li>
-          <li class="card_index_block">
-            <figure class="card_index_photo">
-              <img src="../assets/img/index/newPic03.jpg" alt="網購詐騙" />
-              <figcaption class="small_button">網購詐騙</figcaption>
-            </figure>
-            <div class="text-block">
-              <p class="fontT26_index_article">
-                李貴敏《美魔女律師教你生活不犯錯》：網購收不到貨或收到假貨，只能自認倒楣嗎？
-              </p>
-              <p class="paragraph fontP14_index_article">
-                一名大學畢業生，某天在特定網站上看到比市價便宜的智慧型手機及平板，就立即下單並轉帳付款，但遲遲未收到商品，其後上網查看，才發現該網站已不存在。就此，民眾享有什麼權利？網路販售業者又應該擔負什麼法律責任呢？
-              </p>
-              <p class="fontDate_index_article">Jan 23, 2023</p>
-            </div>
+          <li v-for="item in news" :key="item" class="card_index_block">
+            <router-link :to="'/news/newsArticle/' + item.ID">
+              <figure class="card_index_photo">
+                <img
+                  :src="
+                    item.NEWS_PIC
+                      ? require(`@/assets/img/p01_news/${item.NEWS_PIC}`)
+                      : require(`@/assets/img/index/newPic02.jpg`)
+                  "
+                  :alt="item.NEWS_CATEGORY"
+                />
+                <figcaption class="small_button">
+                  {{ item.NEWS_CATEGORY }}
+                </figcaption>
+              </figure>
+              <div class="text-block">
+                <p class="title_index_article">
+                  {{ item.NEWS_TITLE }}
+                </p>
+                <p class="paragraph_index_article">
+                  {{ item.NEWS_CONTENT }}
+                </p>
+                <p class="date_index_article">
+                  {{ new Date(item.CREATE_DATE).toLocaleDateString() }}
+                </p>
+              </div>
+            </router-link>
           </li>
         </ul>
 
-        <router-link to="/p01" class="big_button">閱讀更多文章</router-link>
+        <router-link to="/teach" class="big_button">閱讀更多文章</router-link>
       </article>
 
       <!-- YouTube -->
@@ -123,7 +105,7 @@
                 frameborder="0"
               ></iframe>
             </div>
-            <p class="fontT26_index_article">
+            <p class="title_index_article">
               我遇到了臉書購物詐騙，<br />
               Facebook加油好嗎？
             </p>
@@ -136,7 +118,7 @@
                 frameborder="0"
               ></iframe>
             </div>
-            <p class="fontT26_index_article">
+            <p class="title_index_article">
               又韭了一波!<br />
               加密貨幣錢包被釣魚網站騙走<br />
               辛酸畫面流出
@@ -150,14 +132,14 @@
                 frameborder="0"
               ></iframe>
             </div>
-            <p class="fontT26_index_article">
+            <p class="title_index_article">
               詐騙六千萬過程大公開<br />
               不希望再有人受騙
             </p>
             <p class="text_title">Youtuber 尼克&ASHLY 分享</p>
           </li>
         </ul>
-        <router-link to="/p02" class="big_button">查看更多</router-link>
+        <router-link to="/teach" class="big_button">查看更多</router-link>
       </article>
     </main>
     <!--Main Block end -->
@@ -174,7 +156,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { API_URL } from "@/config";
 import indexChatbot from "@/components/index_chatbot.vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
@@ -183,6 +167,25 @@ import banner from "@/components/banner.vue";
 
 const showComponent = ref(false);
 const partial = ref(`<div class="circle"></div>`);
+
+// 抓最新消息
+const news = ref([]);
+async function allData() {
+  try {
+    const response = await axios.get(`${API_URL}getNews.php`);
+    const news = response.data.slice(0, 3);
+    console.log(news);
+    return news;
+  } catch (error) {
+    // 提交失敗的處理
+    console.error("failed", error);
+  }
+}
+onMounted(async () => {
+  //撈取資料庫的資料
+  news.value = await allData();
+  console.log(news.value);
+});
 </script>
 
 <style lang="scss" scoped>

@@ -13,7 +13,7 @@
     <div class="text-animation">當</div>
     <div class="text-animation">心</div>
   </div>
-  <router-link to="/p07demoShopping" class="demolink_index_btn">
+  <router-link to="/demoShopping" class="demolink_index_btn">
     <span></span>
     <span></span>
     <span></span>

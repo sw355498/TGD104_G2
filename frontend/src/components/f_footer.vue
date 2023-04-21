@@ -38,48 +38,48 @@ export default {
     ]);
     const footer = reactive([
       {
-        id: "p01",
-        router: "/p01",
+        id: "index",
+        router: "/index",
         name: "最新消息",
       },
       {
-        id: "p02",
-        router: "/p02",
+        id: "teach",
+        router: "/teach",
         name: "防範詐騙教學",
       },
       {
-        id: "p03",
+        id: "reportUrl",
         router: "/reportUrl",
         name: "回報可疑網站",
       },
       {
-        id: "p04",
-        router: "/p04",
+        id: "gov",
+        router: "/gov",
         name: "政府資訊連結",
       },
       {
-        id: "p05",
-        router: "/p05",
+        id: "faq",
+        router: "/faq",
         name: "詐騙FAQ",
       },
       {
-        id: "p06",
+        id: "discuss",
         router: "/discuss",
         name: "討論專區",
       },
       {
-        id: "p07",
-        router: "/p07demoShopping",
+        id: "demoShopping",
+        router: "/demoShopping",
         name: "DEMO體驗",
       },
       {
-        id: "p08",
-        router: "/p08_user",
+        id: "user",
+        router: "/user",
         name: "會員中心",
       },
       {
-        id: "p09",
-        router: "/p09_team",
+        id: "team",
+        router: "/team",
         name: "團隊介紹 |",
       },
     ]);

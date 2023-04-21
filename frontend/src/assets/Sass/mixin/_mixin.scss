@@ -69,8 +69,8 @@
 }
 
 @mixin fontT26_index_article() {
-  word-spacing: -0.1rem;
-  font-size: 1.625rem;
+  letter-spacing: 0.2rem;
+  font-size: 1.4rem;
   color: $text_color;
   margin: 20px 0;
   text-align: justify;
@@ -101,7 +101,7 @@
 }
 
 /* 文字單行省略 */
-@mixin text_overflow_one(){
+@mixin text_overflow_one() {
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -109,7 +109,7 @@
 }
 
 /* 文字多行省略 */
-@mixin text_overflow_many($lineNum: 3){
+@mixin text_overflow_many($lineNum: 3) {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -122,7 +122,6 @@
     @content;
   }
 }
-
 
 /* 使用 mixin
 .box{
@@ -142,64 +141,63 @@
 }
 */
 
-
-@mixin pad{
-  @media(max-width:768px){
+@mixin pad {
+  @media (max-width: 768px) {
     @content;
   }
 }
-@mixin mobile{
-  @media(max-width:428px){
+@mixin mobile {
+  @media (max-width: 428px) {
     @content;
   }
 }
 
-@mixin newsTickerX($duration){
+@mixin newsTickerX($duration) {
   animation: newsTickerX infinite $duration linear;
   @keyframes newsTickerX {
-      0% {
-          transform: translateX(0);
-      }
-      100% {
-          transform: translateX(-100%);
-      }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 }
 
-@mixin newsTickerY($duration){
+@mixin newsTickerY($duration) {
   animation: newsTickerY infinite $duration linear;
   @keyframes newsTickerY {
-      0% {
-          transform: translateY(0);
-      }
-      100% {
-          transform: translateY(-200%);
-      }
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-200%);
+    }
   }
 }
 
-@mixin fade-in-from-right($duration){
+@mixin fade-in-from-right($duration) {
   opacity: 0;
   transform: translateX(50%);
   animation: fade-in-from-right $duration ease-out forwards;
 
   @keyframes fade-in-from-right {
-      100%{
-          opacity: 1;
-          transform: translateX(0);
-      }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 
-@mixin fade-in-from-left($duration){
+@mixin fade-in-from-left($duration) {
   opacity: 0;
   transform: translateX(-50%);
   animation: fade-in-from-left $duration ease-out forwards;
 
   @keyframes fade-in-from-left {
-      100%{
-          opacity: 1;
-          transform: translateX(0);
-      }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }

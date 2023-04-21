@@ -19,7 +19,7 @@
           <li v-for="item in faq.data" :key="item.ID">
             <div class="title_p05_faq_qusetion" @click="dropDown">
               {{ item.QUESTION }}
-              <i class="fa-solid fa-angle-up"></i>
+              <i class="fa-solid fa-angle-up" @click.stop></i>
             </div>
             <div class="content_p05_faq_qusetion">
               <p>

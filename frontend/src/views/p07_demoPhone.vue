@@ -77,10 +77,14 @@
       <!-- 電話顯示區 -->
       <div class="phoneLayout_p07_demoPhone_phone">
         <div class="imgBox position-relative">
+          <img
+            src="../assets/img/p07_demo/p07_demoPhone/p07_demoPhone_iPhoneSilver.png"
+            alt=""
+          />
           <transition
             v-for="(item, idx) of phoneScreen"
             :key="item.id"
-            name="fade"
+            name="slide-right"
           >
             <img
               :src="
