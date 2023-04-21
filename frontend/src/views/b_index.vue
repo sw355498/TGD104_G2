@@ -1,6 +1,6 @@
 <template>
     <Teleport to="body">
-        <modal :show="showModal" @close="showModal = false">
+        <modal :show="showModal" :modelWidth="bigModal" @close="showModal = false,modelWidth= false">
         <template #header>
             <h4>{{ btnName }}</h4>
         </template>
@@ -106,7 +106,8 @@
                         <div class="d-none text-danger" id="newAnswerErrorText"></div>
                         <textarea
                             v-model="newAnswer"
-                            class="form-control" 
+                            class="form-control"
+                            style="resize:none;"
                             id="newAnswer" 
                             @focus="removeError('newAnswer')"
                             rows="5">
@@ -120,6 +121,7 @@
                         <textarea
                             v-model="newExplain"
                             class="form-control" 
+                            style="resize:none;"
                             id="newExplain"
                             @focus="removeError('newExplain')"
                             rows="5">
@@ -236,6 +238,7 @@ const fields = ref([
 
 //彈窗設定
 const showModal = ref(false); //彈窗顯示設定
+const bigModal = ref(false); //彈窗寬度是否要為width 75%
 
 //資料庫USER所需要的變數
 const account = ref("")         //帳號input
@@ -261,6 +264,7 @@ const ImgName = ref('')
 watch(leftNavTag, async (newTab) => {
   switch (newTab) {
     case "user":
+        bigModal.value = false
         h2Title.value = "會員管理";
         addbutton.value = true;
         btnName.value = "新增會員";
@@ -316,6 +320,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "discuss":
+        bigModal.value = true
         h2Title.value = "討論版管理";
         addbutton.value = false;
         updateTable.value = "DISCUSS";
@@ -364,6 +369,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "share":
+        bigModal.value = false
         h2Title.value = "回報管理";
         addbutton.value = false;
         updateTable.value = "URL";
@@ -397,6 +403,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "reply":
+        bigModal.value = false
         h2Title.value = "文章檢舉管理";
         addbutton.value = false;
         updateTable.value = "REPLY_REPORT";
@@ -423,6 +430,7 @@ watch(leftNavTag, async (newTab) => {
         ];
       break;
     case "news":
+        bigModal.value = true
         h2Title.value = "最新消息管理";
         addbutton.value = true;
         btnName.value = "新增消息";
@@ -456,6 +464,7 @@ watch(leftNavTag, async (newTab) => {
         ];
       break;
     case "FraudKnowledge":
+        bigModal.value = true
         h2Title.value = "詐騙知識測驗管理";
         addbutton.value = true;
         btnName.value = "新增題目";
@@ -496,6 +505,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "staff":
+        bigModal.value = false
         h2Title.value = "後台帳號管理";
         addbutton.value = true;
         btnName.value = "新增管理員帳號";
@@ -714,12 +724,11 @@ const handleSubmit = async (e) => {
     }
     if(leftNavTag.value === 'FraudKnowledge'){
         const formData = new FormData();
-        // formData.append('newTitle', newTitle.value);
-        // formData.append('newContent', newContent.value);
-        // formData.append('newAnswer', newAnswer.value);
-        // formData.append('newExplain', newExplain.value);
+        formData.append('newTitle', newTitle.value);
+        formData.append('newContent', newContent.value);
+        formData.append('newAnswer', newAnswer.value);
+        formData.append('newExplain', newExplain.value);
         formData.append('newImage', fileImage.value);
-        formData.append('where', '資料夾位置')
         try {
             const response = await axios.post(`${API_URL}add_game.php`, formData, {
                 headers: {
@@ -751,22 +760,27 @@ const handleSubmit = async (e) => {
                 reloadJsGrid();
             } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
                 addError("upload_img", "只允許上傳 JPG 或 PNG 格式的圖片檔案");
-            } else if(response.data === '欄位都未輸入'){
-                console.log('123')
-                addError("newTitle", "題目尚未輸入");
-                addError("newContent", "選項未輸入");
-                addError("newAnswer", "解答尚未輸入");
-                addError("newExplain", "解答尚未輸入");
-            } else if(response.data === '題目尚未輸入'){
-                addError("newTitle", "題目尚未輸入");
-            } else if(response.data === '選項未輸入'){
-                addError("newTitle", "選項未輸入");
-            } else if(response.data === '解答尚未輸入'){
-                addError("newAnswer", "解答尚未輸入");
-            } else if(response.data === '解釋尚未輸入'){
-                addError("newAnswer", "解釋尚未輸入");
+            } else {
+                const strError = response.data.trimEnd();
+                const arrError = strError.split(',')
+
+                if(arrError.includes('題目尚未輸入')){
+                    addError("newTitle", "題目尚未輸入");
+                }
+                if(arrError.includes('選項未輸入')){
+                    addError("newContent", "選項內容未輸入");
+                }
+                if(arrError.includes('解答尚未輸入')){
+                    addError("newAnswer", "解答尚未輸入");
+                }
+                if(arrError.includes('解釋尚未輸入')){
+                    addError("newExplain", "解釋尚未輸入");
+                }
+                console.log(arrError)
             }
-            console.log(response.data);
+
+
+
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data.message);
@@ -823,11 +837,6 @@ async function selectUser() {
         }
     }
 }
-
-//input的focus事件
-// const handleFocus = (theInputID) => {
-//     removeError(theInputID);
-// };
 
 // 新增錯誤訊息
 const addError = (InputID, ErrorText) => {
