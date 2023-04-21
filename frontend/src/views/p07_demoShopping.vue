@@ -93,7 +93,7 @@
                         <!-- 購物網站第一 banner -->
                         <div class="scamWeb_p07_demoShopping_banner1" id="tour5">
                             <p class="scamWeb_p07_demoShopping_banner1P">現實下殺</p>
-                            <span class="scamWeb_p07_demoShopping_banner1Countdown">01:18:29</span>
+                            <span class="scamWeb_p07_demoShopping_banner1Countdown">{{ remainingTime }}</span>
                         </div>
 
                         <!-- 第一紅條廣告詞 -->
@@ -247,7 +247,7 @@
 
 
 <script>
-import { ref } from 'vue';
+import { ref, watch, computed } from 'vue';
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
@@ -331,6 +331,29 @@ export default {
         // 點擊才出現 =================================================
         const showComponent = ref(false);
         const showModal = ref(true);
+
+
+        // 倒數計時器 =================================================
+        const remainingSeconds = ref(4825);
+
+        const remainingTime = computed(() => {
+            const hours = Math.floor(remainingSeconds.value / 3600);
+            const minutes = Math.floor((remainingSeconds.value % 3600) / 60);
+            const seconds = remainingSeconds.value % 60;
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        });
+
+        watch(remainingSeconds, (newVal) => {
+            if (newVal === 0) {
+                clearInterval(intervalId);
+            }
+        });
+
+        const intervalId = setInterval(() => {
+            remainingSeconds.value--;
+        }, 1000);
+
+
         return {
             cart,
             product,
@@ -338,6 +361,7 @@ export default {
             addProductToCart,
             showComponent,
             showModal,
+            remainingTime
         }
     },
 }
