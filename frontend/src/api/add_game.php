@@ -63,22 +63,18 @@
             move_uploaded_file($filePath_Temp, $filePath);
             
             echo '題目新增成功';
-    } 
-    else{
-        if (empty($newTitle) && empty($newContent) && empty($newAnswer) && empty($newExplain)) {
-            echo '欄位都未輸入';
+    } else {
+        if (empty($newTitle)) {
+            echo '題目尚未輸入,';
         }
-        if (empty($newTitle) && !empty($newContent) && !empty($newAnswer) && !empty($newExplain)) {
-            echo '題目尚未輸入';
+        if (empty($newContent)) {
+            echo '選項未輸入,';
         }
-        if (!empty($newTitle) && empty($newContent) && !empty($newAnswer) && !empty($newExplain)) {
-            echo '選項未輸入';
+        if (empty($newAnswer)) {
+            echo '解答尚未輸入,';
         }
-        if (!empty($newTitle) && !empty($newContent) && empty($newAnswer) && !empty($newExplain)) {
-            echo '解答尚未輸入';
-        }
-        if (!empty($newTitle) && !empty($newContent) && !empty($newAnswer) && empty($newExplain)) {
-            echo '解釋尚未輸入';
+        if (empty($newExplain)) {
+            echo '解釋尚未輸入,';
         }
     }
     
