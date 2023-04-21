@@ -61,7 +61,7 @@
           class="li_p01_newsPost"
           :key="value.ID"
         >
-          <router-link :to="'/p01/p01_newsArticle/' + value.ID">
+          <router-link :to="'/news/newsArticle/' + value.ID">
             <div class="newsImg">
               <img :src="value.NEWS_PIC ? require('@/assets/img/p01_news/' + value.NEWS_PIC) :  require('@/assets/img/p01_news/no_image.jpg')" />
               <!-- <img :src="require('@/assets/img/p01_news/' + value.NEWS_PIC)" /> -->
@@ -71,9 +71,9 @@
               <div class="p01_news_title">
                 <div class="p01_news_titleText h5">{{ value.NEWS_TITLE }}</div>
                 <div class="p01_news_titleCollect">
-                  <a><i class="fa-brands fa-facebook" @click="openShareWindow('https://www.facebook.com/sharer.php?u='+ current_url + '/p01/p01_newsArticle/' + value.ID);"></i
+                  <a><i class="fa-brands fa-facebook" @click="openShareWindow('https://www.facebook.com/sharer.php?u='+ current_url + '/newsArticle/' + value.ID);"></i
                   ></a>
-                  <a><i class="fa-brands fa-line" @click="openShareWindow('https://social-plugins.line.me/lineit/share?url='+ current_url + '/p01/p01_newsArticle/' + value.ID);"></i></a> |
+                  <a><i class="fa-brands fa-line" @click="openShareWindow('https://social-plugins.line.me/lineit/share?url='+ current_url + '/newsArticle/' + value.ID);"></i></a> |
                   <a><i class="fa-solid fa-bookmark"></i>收藏</a>
                 </div>
               </div>
