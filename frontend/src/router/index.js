@@ -8,18 +8,18 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/IndexView.vue')
   },
   {
-    path: '/p01',
-    name: 'p01',
+    path: '/news',
+    name: 'news',
     component: () => import(/* webpackChunkName: "about" */ '../views/p01_news.vue')
   },
   {
-    path: '/p01/p01_newsArticle/:id',
+    path: '/news/newsArticle/:id',
     name: 'newsArticle',
     component: () => import(/* webpackChunkName: "about" */ '../views/p01_newsArticle.vue')
   },
   {
-    path: '/p02',
-    name: 'p02',
+    path: '/teach',
+    name: 'teach',
     component: () => import(/* webpackChunkName: "about" */ '../views/p02_teach.vue')
   },
   {
@@ -28,13 +28,13 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p03_reportURL.vue')
   },
   {
-    path: '/p04',
-    name: 'p04',
+    path: '/gov',
+    name: 'gov',
     component: () => import(/* webpackChunkName: "about" */ '../views/p04_gov.vue')
   },
   {
-    path: '/p05',
-    name: 'p05',
+    path: '/faq',
+    name: 'faq',
     component: () => import(/* webpackChunkName: "about" */ '../views/p05_faq.vue')
   },
   {
@@ -53,65 +53,75 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss_content.vue')
   },
   {
-    path: '/p07demoShopping',
-    name: 'p07demoShopping',
+    path: '/demoShopping',
+    name: 'demoShopping',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoShopping.vue')
   },
   {
-    path: '/p07demoGame',
-    name: 'p07demoGame',
+    path: '/demoGame',
+    name: 'demoGame',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame.vue')
   },
   {
-    path: '/p07demoGamep01',
-    name: 'p07demoGamep01',
+    path: '/demoGamep01',
+    name: 'demoGamep01',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_p01.vue')
   },
   {
-    path: '/p07demoGameresult',
-    name: 'p07demoGameresult',
+    path: '/demoGameresult',
+    name: 'demoGameresult',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoGame_result.vue'),
     // props: (route) => ({ score: route.params.score })
     
   },
   {
-    path: '/p07demoPhone',
-    name: 'p07demoPhone',
+    path: '/demoPhone',
+    name: 'demoPhone',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoPhone.vue')
   },
   {
-    path: '/p07demoLine',
-    name: 'p07demoLine',
+    path: "/demoPhoneBankInput",
+    name: "demoPhoneBankInput",
+    component: () => import("../components/p07_demoPhoneBankInput.vue"),
+  },
+  {
+    path: "/demoPhoneAnswerPhone",
+    name: "demoPhoneAnswerPhone",
+    component: () => import("../components/p07_demoPhoneAnswerPhone.vue"),
+  },
+  {
+    path: '/demoLine',
+    name: 'demoLine',
     component: () => import(/* webpackChunkName: "about" */ '../views/p07_demoLine.vue')
   },
   {
-    path: '/p08_user',
-    name: 'p08_user',
+    path: '/user',
+    name: 'user',
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_user.vue')
   },
   {
-    path: '/p08_userNotify',
-    name: 'p08_userNotify',
+    path: '/userNotify',
+    name: 'userNotify',
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_userNotify.vue')
   },
   {
-    path: '/p08_userEditPwd',
-    name: 'p08_userEditPwd',
+    path: '/userEditPwd',
+    name: 'userEditPwd',
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_userEditPwd.vue')
   },
   {
-    path: '/p08_userEdit',
-    name: 'p08_userEdit',
+    path: '/userEdit',
+    name: 'userEdit',
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_userEdit.vue')
   },
   {
-    path: '/p08_userLogin',
-    name: 'p08_userLogin',
+    path: '/userLogin',
+    name: 'userLogin',
     component: () => import(/* webpackChunkName: "about" */ '../views/p08_userLogin.vue')
   },
   {
-    path: '/p09_team',
-    name: 'p09_team',
+    path: '/team',
+    name: 'team',
     component: () => import(/* webpackChunkName: "about" */ '../views/p09_team.vue')
   },
   {

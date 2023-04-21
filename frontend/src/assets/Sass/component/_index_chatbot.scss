@@ -6,15 +6,32 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
-.chatbot_index {
+.chatbot_container{
+  // padding: 0 20px;
   position: fixed;
+  width: 100%;
   top: 50%;
   right: 20%;
-  transform: translate(20%, -50%);
+  transform: translate(20%, -58%);
+  z-index: 900;
+  @include rwd(lg){
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @include rwd(md){
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+  @include rwd(sm){
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+}
+.chatbot_index {
   max-width: 700px;
   width: 100%;
+  margin: 0 auto;
   height: 600px;
-  z-index: 2;
   overflow: hidden;
   background: #ebebeb;
   border-radius: 20px;
@@ -22,6 +39,21 @@
   justify-content: space-between;
   flex-direction: column;
   box-shadow: 0px 0px 5px black;
+  margin-right: 30px;
+  @include rwd(lg){
+    margin-right: 0px;
+  }
+  @include rwd('md') {
+    // 平板上的樣式 md: 768px,
+    // max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  @include rwd('sm'){
+    // 手機上的樣式sm: 428px,
+    max-width: 350px;
+    // height: 580px;
+  }
   // 上面 chatTitle
   .chatTitle {
     z-index: 2;
@@ -60,6 +92,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
   }
   // ============ 對話 ============
@@ -70,13 +103,21 @@
     overflow-y: scroll;
     padding: 0 5px;
     width: 100%;
+    @include rwd('sm'){
+      // 手機上的樣式sm: 428px,
+      padding: 0px!important;
+    }
     // 一開始就在上面的
     .chatWindow_message_default,
     .end-dialog {
-      margin: 20px 10px 0;
+      margin: 10px 0;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
+      @include rwd('sm'){
+        // 手機上的樣式sm: 428px,
+        font-size: 14px; 
+      }
       .chatbot_message_default p,
       .chatbot_message_end p {
         background-color: white;
@@ -84,8 +125,13 @@
         border-radius: 10px;
         padding: 10px;
         float: left;
-        max-width: 40%;
+        // max-width: 40%;
         font-weight: 400;
+        margin: 5px 0;
+        @include rwd('sm'){
+          // 手機上的樣式sm: 428px,
+          margin: 0px 10px ;
+        }
       }
       .chatbot_news_container {
         max-width: 700px;
@@ -133,6 +179,12 @@
         border-radius: 10px;
         max-width: 80%;
         word-break: break-word;
+        margin-bottom: 10px;
+        font-size: 16px;
+        @include rwd('sm'){
+          // 手機上的樣式sm: 428px,
+          font-size: 14px; 
+        }
       }
       .bot_message p {
         background-color: white;
@@ -153,10 +205,14 @@
         clear: both;
         margin: 10px 0;
         text-align: left;
+        @include rwd('sm'){
+          // 手機上的樣式sm: 428px,
+          font-size: 10px;
+        }
         .chat-button{
           display: inline-block;
           cursor: pointer;
-          margin: 3px;
+          margin: 1px 2px;
           background-color: $sec_color;
           padding: 10px;
           letter-spacing: 1px;
@@ -178,11 +234,11 @@
         text-align: center;
         background-image: linear-gradient(to top, #033159 0%, #216bac 100%);
         border-radius: 20px;
-        max-width: 360px;
+        max-width: 420px;
         color: white;
         position: relative;
         .eachSection-title{
-          font-size: 32px;
+          font-size: 26px;
           font-weight: 700;
         }
         .eachSection-p{
@@ -206,43 +262,43 @@
         }
       }
       // 4個demo體驗
-      .eachSection-demo{
-        overflow-x: scroll;
-        display: flex;
-        clear: both;
-        flex-direction: row;
-        margin-bottom: 10px;
-        .eachSection-demo-item{
-          background-image: linear-gradient(to top, #033159 0%, #216bac 100%);
-          padding: 10px 20px 20px;
-          border-radius: 20px;
-          margin: 10px;
-          width: 180px;
-          min-height: 150px;
-          text-align: center;
-          .eachSection-demo-item-title{
-            font-size: 22px;
-            font-weight: 700;
-          }
-          .eachSection-demo-item-p{
-            text-align: left;
-            padding: 10px 0;
-            font-weight: 300;
-          }
-          .eachSection-demo-item-more{
-            font-size: 10px;
-            font-weight: 100;
-            padding: 0;
-          }
-          &:hover{
-            cursor: pointer;
-            background:$btn_hover;
-            p,span{
-              color: $main_color;
-            }
-          }
-        }
-      }
+      // .eachSection-demo{
+      //   overflow-x: scroll;
+      //   display: flex;
+      //   clear: both;
+      //   flex-direction: row;
+      //   margin-bottom: 10px;
+      //   .eachSection-demo-item{
+      //     background-image: linear-gradient(to top, #033159 0%, #216bac 100%);
+      //     padding: 10px 20px 20px;
+      //     border-radius: 20px;
+      //     margin: 10px;
+      //     width: 180px;
+      //     min-height: 150px;
+      //     text-align: center;
+      //     .eachSection-demo-item-title{
+      //       font-size: 22px;
+      //       font-weight: 700;
+      //     }
+      //     .eachSection-demo-item-p{
+      //       text-align: left;
+      //       padding: 10px 0;
+      //       font-weight: 300;
+      //     }
+      //     .eachSection-demo-item-more{
+      //       font-size: 10px;
+      //       font-weight: 100;
+      //       padding: 0;
+      //     }
+      //     &:hover{
+      //       cursor: pointer;
+      //       background:$btn_hover;
+      //       p,span{
+      //         color: $main_color;
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
   // ============ 使用者輸入的地方 ============
