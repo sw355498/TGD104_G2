@@ -2,6 +2,8 @@
     //資料庫連線
     require_once ("./getConn_nopush.php");
 
+    // 設定錯誤報告等級
+    error_reporting(E_ERROR);
 
     //取得上傳的檔案資訊=======================================
     $file = $_FILES["newImage"];
@@ -9,6 +11,8 @@
     $filePath_Temp = $file["tmp_name"];   //Server上的暫存檔路徑含檔名        
     $fileType = $file["type"];    //檔案種類        
     $fileSize = $file["size"];    //檔案尺寸
+
+
 
     // 檢查檔案類型是否為圖片
     if (!in_array($fileType, array('image/jpeg', 'image/png'))) {
@@ -24,8 +28,7 @@
     // "../assets/img/test"：要擺放的資料夾名稱
     // $fileName：檔案存取的名字
     
-    //將暫存檔搬移到正確位置
-    move_uploaded_file($filePath_Temp, $filePath);
+
 
     // 過濾輸入的字串
     function filterString($str) {
@@ -56,10 +59,28 @@
             //執行sql語法
             $statement->execute();
 
+            //將暫存檔搬移到正確位置
+            move_uploaded_file($filePath_Temp, $filePath);
+            
             echo '題目新增成功';
     } 
     else{
-        echo '欄位未填寫';
+        if (empty($newTitle) && empty($newContent) && empty($newAnswer) && empty($newExplain)) {
+            echo '欄位都未輸入';
+        }
+        if (empty($newTitle) && !empty($newContent) && !empty($newAnswer) && !empty($newExplain)) {
+            echo '題目尚未輸入';
+        }
+        if (!empty($newTitle) && empty($newContent) && !empty($newAnswer) && !empty($newExplain)) {
+            echo '選項未輸入';
+        }
+        if (!empty($newTitle) && !empty($newContent) && empty($newAnswer) && !empty($newExplain)) {
+            echo '解答尚未輸入';
+        }
+        if (!empty($newTitle) && !empty($newContent) && !empty($newAnswer) && empty($newExplain)) {
+            echo '解釋尚未輸入';
+        }
     }
+    
 ?>
 
