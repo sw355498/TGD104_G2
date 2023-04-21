@@ -59,13 +59,13 @@
         <!-- 機器人 talk bubble -->
         <div class="talk-bubble">
           <div class="talktext">
-            <p v-text="talkBubble[itemIndex]"></p>
+            <p v-text="phoneScreen[itemIndex].talkBubble"></p>
             <button
               class="small_button"
               v-show="itemIndex <= phoneScreen.length - 1"
               @click="next"
             >
-              {{ buttonWord[itemIndex] }}
+              {{ phoneScreen[itemIndex].buttonWord }}
             </button>
           </div>
         </div>
@@ -77,21 +77,27 @@
       <!-- 電話顯示區 -->
       <div class="phoneLayout_p07_demoPhone_phone">
         <div class="imgBox position-relative">
-          <img
-            src="../assets/img/p07_demo/p07_demoPhone/p07_demoPhone_iPhoneSilver.png"
-            alt="phoneScreen"
-          />
           <transition
             v-for="(item, idx) of phoneScreen"
             :key="item.id"
-            name="slide"
+            name="fade"
           >
             <img
               :src="
                 require(`@/assets/img/p07_demo/p07_demoPhone/${item.photo}`)
               "
               alt="phoneScreenContent"
-              v-if="idx == showImg"
+              v-if="idx == showImg && item.photo"
+            />
+            <p07_demoPhoneAnswerPhone
+              v-else-if="
+                idx == showImg && item.components === `p07_demoPhoneAnswerPhone`
+              "
+            />
+            <p07_demoPhoneBankInput
+              v-else-if="
+                idx == showImg && item.components === `p07_demoPhoneBankInput`
+              "
             />
           </transition>
         </div>
@@ -108,13 +114,17 @@ import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
 import Modal from "@/components/modal.vue";
+import p07_demoPhoneBankInput from "@/components/p07_demoPhoneBankInput.vue";
+import p07_demoPhoneAnswerPhone from "@/components/p07_demoPhoneAnswerPhone.vue";
 
 //參數設定
+const showModal = ref(true);
 const itemIndex = ref(0);
-const showModal = ref(false);
 const showImg = ref(0);
 
-/*** 個欄位資料 ***/
+/**
+ * 個欄位資料
+ **/
 //彈窗提示內容
 const setupTips = ref(`
   歡迎來到手機詐騙體驗；</br>
@@ -130,53 +140,47 @@ const setupTips = ref(`
 //螢幕畫面
 const phoneScreen = ref([
   {
-    photo: `p07_demoPhone_widgets.jpg`,
+    photo: `p07_demoPhone_widgets.png`,
     id: `widgets`,
+    talkBubble: `準備開始進入惡意的詐騙集團來電話體驗`,
+    buttonWord: `我已準備好`,
   },
   {
-    photo: `p07_demoPhone_bankAccountPage00.jpg`,
-    id: `bankAccountPage00`,
+    components: `p07_demoPhoneAnswerPhone`,
+    id: `AnswerPhone`,
+    talkBubble: `有來電囉！請接起電話`,
+    buttonWord: `接聽來電`,
   },
   {
-    photo: `p07_demoPhone_bankAccountPage01.jpg`,
+    photo: `p07_demoPhone_bankAccountPage01.png`,
     id: `bankAccountPage01`,
+    talkBubble: `請注意惡意的詐騙集團騙您操作`,
+    buttonWord: `切換網路銀行畫面`,
   },
   {
-    photo: `p07_demoPhone_bankAccountPage02.jpg`,
-    id: `bankAccountPage02`,
+    components: `p07_demoPhoneBankInput`,
+    id: `BankInput`,
+    talkBubble: `惡意的詐騙集團會請您輸入她的帳戶說是驗證`,
+    buttonWord: `確認輸入帳戶`,
   },
   {
-    photo: `p07_demoPhone_bankAccountPage03.jpg`,
+    photo: `p07_demoPhone_bankAccountPage03.png`,
     id: `bankAccountPage03`,
+    talkBubble: `惡意的詐騙集團故意用第一次驗證錯誤告訴您是正常取得您的信任，接著會在是第二次或第三次`,
+    buttonWord: `再次輸入帳戶`,
   },
   {
-    photo: `p07_demoPhone_bankAccountPage04.jpg`,
-    id: `bankAccountPage04`,
+    components: `p07_demoPhoneBankInput`,
+    id: `BankInput`,
+    talkBubble: `這次惡意的詐騙集團會在最後一次給您真正的帳戶讓您掉入陷阱直接輸入正確帳號匯款`,
+    buttonWord: `再次點選`,
   },
   {
-    photo: `p07_demoPhone_bankAccountPage05.jpg`,
+    photo: `p07_demoPhone_bankAccountPage05.png`,
     id: `bankAccountPage05`,
+    talkBubble: `ＢＢＱ啦！！真的就被惡意的詐騙集團詐騙錢了！請注意對方還會再次要你輸入帳號測試說要將錢匯回來千萬！千萬！千萬記得「不要再次上當」`,
+    buttonWord: `重新體驗`,
   },
-]);
-//對話框內文
-const talkBubble = ref([
-  `準備開始進入惡意的詐騙集團來電話體驗`,
-  `有來電囉！請接起電話`,
-  `請注意惡意的詐騙集團騙您操作`,
-  `惡意的詐騙集團會請您輸入她的帳戶說是驗證`,
-  `惡意的詐騙集團故意用第一次驗證錯誤告訴您是正常取得您的信任，接著會在是第二次或第三次`,
-  `這次惡意的詐騙集團會在最後一次給您真正的帳戶讓您掉入陷阱直接輸入正確帳號匯款`,
-  `ＢＢＱ啦！！真的就被惡意的詐騙集團詐騙錢了！請注意對方還會再次要你輸入帳號測試說要將錢匯回來千萬！千萬！千萬記得「不要再次上當」`,
-]);
-//對話框按鈕
-const buttonWord = ref([
-  `我已準備好`,
-  `接聽來電`,
-  `切換網路銀行畫面`,
-  `確認輸入帳戶`,
-  `再次輸入帳戶`,
-  `再次點選`,
-  `重新體驗`,
 ]);
 
 //顯示下一則內容function
@@ -184,9 +188,7 @@ const next = () => {
   itemIndex.value >= phoneScreen.value.length - 1
     ? (itemIndex.value = 0)
     : itemIndex.value++;
-  showImg.value >= phoneScreen.value.length - 1
-    ? setShowImg(-1)
-    : setShowImg(1);
+  setShowImg();
 };
 const setShowImg = (changeIdx = 1) => {
   switch (true) {
