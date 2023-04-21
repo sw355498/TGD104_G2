@@ -24,11 +24,11 @@
     $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
 
     //檔案最終存放位置
-    $filePath = "../assets/img/p06_discuss/".$fileName;
+    $filePath = "../assets/img/p07_demo/p07_demoGame/".$fileName;
     // "../assets/img/test"：要擺放的資料夾名稱
     // $fileName：檔案存取的名字
     
-
+    src/assets/img/
 
     // 過濾輸入的字串
     function filterString($str) {
