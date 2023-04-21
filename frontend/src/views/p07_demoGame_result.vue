@@ -110,6 +110,9 @@
 
 import Modal from "@/components/userLogin.vue"; // 填寫會員登入資料的那個彈窗
 import frontFooter from "@/components/f_footer.vue"; //footer的欄位
+// 抓會員資料用套件
+import axios from "axios";
+import { API_URL, reactive } from "@/config";
 
 
 export default {
@@ -136,11 +139,15 @@ export default {
     },
 
     created(){
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        //判斷localStorage中是否有token
+        const isLoggedIn = localStorage.getItem("token");
+        //沒有token的話跑出會員登入提示視窗
         if (!isLoggedIn){
             this.showLoginAlert = true;
         }else{
+            //不會跑出提示視窗
             this.showLoginAlert = false;
+
         }
     },
 
@@ -177,6 +184,11 @@ export default {
   
 
   mounted() {
+
+    cd
+    // 從localStorage中獲取分數
+    let score = localStorage.getItem('score');
+
 
     //分數延遲顯示
     setTimeout(() =>{

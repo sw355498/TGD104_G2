@@ -21,7 +21,7 @@
           <backTopBtn />
         </div>
         <!-- 機器人 -->
-        <svg width="110" height="90px" style="">
+        <svg class="robot">
           <use xlink:href="#robot" @click="showComponent = true" width="110" />
         </svg>
         <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
@@ -181,26 +181,20 @@ import frontFooter from "@/components/f_footer.vue";
 import backTopBtn from "@/components/backTopBtn.vue";
 import banner from "@/components/banner.vue";
 
-// export default {
-//   components: {
-//     indexChatbot,
-//     frontNavbar,
-//     frontFooter,
-//     backTopBtn,
-//     banner,
-//   },
-// };
-// setup() {
 const showComponent = ref(false);
 const partial = ref(`<div class="circle"></div>`);
-
-// return {
-// showComponent,
-// };
-// },
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+svg.robot {
+  width: 110px;
+  height: 90px;
+  @media (max-width: 420px) {
+    height: 55px;
+    padding-left: 5px;
+  }
+}
+
 footer {
   height: 600px;
   background-image: url(../assets/img/index/footer.png);

@@ -26,23 +26,23 @@
             break;
 
         case 'REPLY_REPORT':
-            $sql = "UPDATE REPLY_REPORT REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
+            $sql = "UPDATE REPLY_REPORT SET REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
             break;
 
         case 'DISCUSS_REPORT':
-            $sql = "UPDATE DISCUSS_REPORT REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
+            $sql = "UPDATE DISCUSS_REPORT SET REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
             break;
 
         case 'MESSAGE_REPORT':
-            $sql = "UPDATE MESSAGE_REPORT REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
+            $sql = "UPDATE MESSAGE_REPORT SET REPORT_STATUS = :updateStatusID WHERE ID = :updateID";
             break;
         
         case 'NEWS':
-            $sql = "UPDATE NEWS NEWS_STATUS = :updateStatusID WHERE ID = :updateID";
+            $sql = "UPDATE NEWS SET NEWS_STATUS = :updateStatusID WHERE ID = :updateID";
             break; 
 
         case 'GAME':
-            $sql = "UPDATE GAME GAME_STATUS = :updateStatusID WHERE ID = :updateID";
+            $sql = "UPDATE GAME SET GAME_STATUS = :updateStatusID WHERE ID = :updateID";
             break;
 
         default:

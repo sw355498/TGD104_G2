@@ -5,42 +5,129 @@
             <h4>{{ btnName }}</h4>
         </template>
         <template #body>
-            <form @submit="handleSubmit">
-            <label for="account">
-                帳號<span class="text-danger">*<small>必填</small></span>
-            </label>
-            <div class="d-none text-danger" id="accountErrorText"></div>
-            <input
-                v-model="account"
-                type="text"
-                style="margin-bottom: 20px"
-                id="account"
-                @focus="handleFocus('account')"
-                required
-            />
+            <form class="pb-3" @submit="handleSubmit" id="addDataForm">
+                <div v-if="leftNavTag === 'user' || leftNavTag === 'staff'">     
+                    <div class="mb-3">                    
+                        <label for="account">
+                            帳號<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="accountErrorText"></div>
+                        <input
+                            v-model="account"
+                            type="text"
+                            id="account"
+                            @focus="removeError('account')"
+                            required
+                        />
+                    </div>           
+                    <div class="mb-3">                   
+                        <label for="password">
+                            密碼<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="text-danger" id="passwordErrorText"></div>
+                        <input
+                            v-model="password"
+                            type="password"
+                            id="password"
+                            @focus="removeError('password')"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">                  
+                        <label for="nickname"> 顯示名稱 </label>
+                        <input
+                            v-model="nickname"
+                            type="text"
+                            style="margin-bottom: 20px"
+                            id="nickname"
+                        />
+                    </div>
+                </div>
+                <div v-if="leftNavTag === 'news' || leftNavTag === 'FraudKnowledge'">
+                    <div class="mb-3">
+                        <label for="newTitle" class="form-label">
+                            標題<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newTitleErrorText"></div>
+                        <input
+                            v-model="newTitle"
+                            type="text"
+                            class="form-control" 
+                            id="newTitle"
+                            @focus="removeError('newTitle')"
+                        />
+                    </div>
+                    <div class="mb-3" v-if="leftNavTag === 'news'">
+                        <label for="discuss_title" class="form-label">
+                            分類
+                        </label>
+                        <select
+                            v-model="newsTag"
+                            id="inputState"
+                            class="form-select text-center"
+                        >
+                            <option value="1">金融詐騙</option>
+                            <option value="2">網站詐騙</option>
+                            <option value="3">交友詐騙</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="discuss_title" class="form-label">
+                            圖片上傳
+                        </label>
+                        <div class="d-none text-danger" id="upload_imgErrorText"></div>
+                        <label class="file_btn">
+                            <input 
+                                id="upload_img" 
+                                class="d-none" 
+                                type="file" 
+                                @change="fileChange"
+                            />
+                            <i class="fa-solid fa-image fa-fw"></i>上傳圖片<span>{{ ImgName }}</span>
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newContent" class="form-label">
+                            內容<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newContentErrorText"></div>
+                        <textarea
+                            v-model="newContent"
+                            class="form-control" 
+                            id="newContent" 
+                            @focus="removeError('newContent')"
+                            rows="5">
+                        </textarea>
+                    </div>
+                    <div class="mb-3" v-if="leftNavTag === 'FraudKnowledge'">
+                        <label for="newAnswer" class="form-label">
+                            解答<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newAnswerErrorText"></div>
+                        <textarea
+                            v-model="newAnswer"
+                            class="form-control" 
+                            id="newAnswer" 
+                            @focus="removeError('newAnswer')"
+                            rows="5">
+                        </textarea>
+                    </div>
+                    <div class="mb-3" v-if="leftNavTag === 'FraudKnowledge'">
+                        <label for="newExplain" class="form-label">
+                            解釋<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newExplainErrorText"></div>
+                        <textarea
+                            v-model="newExplain"
+                            class="form-control" 
+                            id="newExplain"
+                            @focus="removeError('newExplain')"
+                            rows="5">
+                        </textarea>
+                    </div>
+                </div>
 
-            <label for="password">
-                密碼<span class="text-danger">*<small>必填</small></span>
-            </label>
-            <div class="text-danger" id="passwordErrorText"></div>
-            <input
-                v-model="password"
-                type="password"
-                style="margin-bottom: 20px"
-                id="password"
-                @focus="handleFocus('password')"
-                required
-            />
-
-            <label for="nickname"> 顯示名稱 </label>
-            <input
-                v-model="nickname"
-                type="text"
-                style="margin-bottom: 20px"
-                id="nickname"
-            />
-
-            <button class="medium_button submitBtn">送出</button>
+                <button class="medium_button submitBtn">送出</button>
             </form>
         </template>
         </modal>
@@ -151,15 +238,23 @@ const fields = ref([
 const showModal = ref(false); //彈窗顯示設定
 
 //資料庫USER所需要的變數
-const account = ref(""); //帳號input
-const password = ref(""); //密碼input
-const nickname = ref(""); //暱稱input
+const account = ref("")         //帳號input
+const password = ref("")        //密碼input
+const nickname = ref("")        //暱稱input
+const newTitle = ref("")        //標題input
+const newsTag = ref("1")        //文章的分類
+const newContent = ref("")      //內容textarea
+const fileImage = ref("")       //圖片上傳
+const fileName = ref("")
+const newAnswer = ref("")       //解答textarea
+const newExplain = ref("")      //解釋textarea
 const accountTypeID = ref(1); //帳號的區分 1會員 2管理員 3主管(暫時只有會員與管理員)
 const whereVariable = ref([1]); //select時所需要的參數
 const updateTable = ref("USER"); //資料update 時所需要的資料表參數
 const updateID = ref(); //資料update 時所需要的ID參數
 const updateStatusID = ref(); //資料update 時所需要的參數(使用帳號狀態)
 const selectTable = ref("select_user.php");
+const ImgName = ref('')
 //jsgrid套件的欄位設定
 
 //監控子元件傳來的值
@@ -362,7 +457,8 @@ watch(leftNavTag, async (newTab) => {
       break;
     case "FraudKnowledge":
         h2Title.value = "詐騙知識測驗管理";
-        addbutton.value = false;
+        addbutton.value = true;
+        btnName.value = "新增題目";
         updateTable.value = "GAME";
         selectTable.value = "select_game.php";
         whereVariable.value = [];
@@ -557,54 +653,126 @@ function operate(e) {
         }
 }
 
+function fileChange(e){
+    fileImage.value = e.target.files[0]
+    ImgName.value = `：${fileImage.value.name}`
+    removeError("upload_img");
+}
+
 //表單送出事件
 const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-        const response = await axios.post(`${API_URL}add_user.php`, {
-            account: account.value,
-            password: password.value,
-            nickname: nickname.value,
-            accountTypeID: accountTypeID.value,
-        });
-        if (response.data === "帳號註冊成功") {
-            // 清除表單
-            account.value = "";
-            password.value = "";
-            nickname.value = "";
-            // 清除可能存在的error
-            removeError("account");
-            removeError("password");
-            // 關閉彈窗
-            showModal.value = false;
-            Swal.fire({
-                title: "新增成功",
-                // text: '歡迎加入詐知就好！',
-                icon: "success",
-                confirmButtonText: "確認",
+    if(leftNavTag.value === 'user' || leftNavTag.value === 'staff'){
+        try {
+            const response = await axios.post(`${API_URL}add_user.php`, {
+                account: account.value,
+                password: password.value,
+                nickname: nickname.value,
+                accountTypeID: accountTypeID.value,
             });
-
-            // 將Client資料更新
-            clients.value = await selectUser();
-            // 重新渲染 jsGrid
-            reloadJsGrid();
-        } else if (response.data === "此帳號已被註冊") {
-            addError("account", "此帳號已被註冊");
-        } else if (response.data === "帳號與密碼尚未輸入") {
-            addError("account", "帳號尚未輸入");
-            addError("password", "密碼尚未輸入");
-        } else if (response.data === "帳號尚未輸入") {
-            addError("account", "帳號尚未輸入");
-        } else if (response.data === "密碼尚未輸入") {
-            addError("password", "密碼尚未輸入");
-        } else {
-            console.log(response.data);
+            if (response.data === "帳號註冊成功") {
+                // 清除表單
+                account.value = "";
+                password.value = "";
+                nickname.value = "";
+                
+                // 清除可能存在的error
+                removeError("account");
+                removeError("password");
+                // 關閉彈窗
+                showModal.value = false;
+                Swal.fire({
+                    title: "新增成功",
+                    // text: '歡迎加入詐知就好！',
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+    
+                // 將Client資料更新
+                clients.value = await selectUser();
+                // 重新渲染 jsGrid
+                reloadJsGrid();
+            } else if (response.data === "此帳號已被註冊") {
+                addError("account", "此帳號已被註冊");
+            } else if (response.data === "帳號與密碼尚未輸入") {
+                addError("account", "帳號尚未輸入");
+                addError("password", "密碼尚未輸入");
+            } else if (response.data === "帳號尚未輸入") {
+                addError("account", "帳號尚未輸入");
+            } else if (response.data === "密碼尚未輸入") {
+                addError("password", "密碼尚未輸入");
+            } else {
+                console.log(response.data);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
         }
-    } catch (e) {
-        if (e.response) {
-            console.log(e.response.data.message);
-        } else {
-            console.log(e.message);
+    }
+    if(leftNavTag.value === 'FraudKnowledge'){
+        const formData = new FormData();
+        // formData.append('newTitle', newTitle.value);
+        // formData.append('newContent', newContent.value);
+        // formData.append('newAnswer', newAnswer.value);
+        // formData.append('newExplain', newExplain.value);
+        formData.append('newImage', fileImage.value);
+        formData.append('where', '資料夾位置')
+        try {
+            const response = await axios.post(`${API_URL}add_game.php`, formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+            });
+            if (response.data === "題目新增成功") {
+                // 清除表單
+                account.value = "";
+                password.value = "";
+                nickname.value = "";
+                
+                // 清除可能存在的error
+                removeError("newTitle");
+                removeError("newContent");
+                removeError("newAnswer");
+                removeError("newExplain");
+                // 關閉彈窗
+                showModal.value = false;
+                Swal.fire({
+                    title: "新增成功",
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+    
+                // 將Client資料更新
+                clients.value = await selectUser();
+                // 重新渲染 jsGrid
+                reloadJsGrid();
+            } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
+                addError("upload_img", "只允許上傳 JPG 或 PNG 格式的圖片檔案");
+            } else if(response.data === '欄位都未輸入'){
+                console.log('123')
+                addError("newTitle", "題目尚未輸入");
+                addError("newContent", "選項未輸入");
+                addError("newAnswer", "解答尚未輸入");
+                addError("newExplain", "解答尚未輸入");
+            } else if(response.data === '題目尚未輸入'){
+                addError("newTitle", "題目尚未輸入");
+            } else if(response.data === '選項未輸入'){
+                addError("newTitle", "選項未輸入");
+            } else if(response.data === '解答尚未輸入'){
+                addError("newAnswer", "解答尚未輸入");
+            } else if(response.data === '解釋尚未輸入'){
+                addError("newAnswer", "解釋尚未輸入");
+            }
+            console.log(response.data);
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
         }
     }
 };
@@ -657,9 +825,9 @@ async function selectUser() {
 }
 
 //input的focus事件
-const handleFocus = (theInputID) => {
-    removeError(theInputID);
-};
+// const handleFocus = (theInputID) => {
+//     removeError(theInputID);
+// };
 
 // 新增錯誤訊息
 const addError = (InputID, ErrorText) => {
@@ -690,6 +858,9 @@ const removeError = (InputID) => {
         top: 10px;
         left: 0px;
     }
+    .jsgrid-nodata-row{
+        color: #fff;
+    }
 }
 .submitBtn {
     float: right;
@@ -701,5 +872,21 @@ const removeError = (InputID) => {
 }
 .error {
     outline: 3px solid red;
+}
+.file_btn {
+    width: 100%;
+    height: 38px;
+    font-size: 1rem;
+    padding: 0.375rem 0.75rem;
+    background: #033159;
+    color: #ffffff;
+    border: 1px solid #033159;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    line-height: 150%;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1.5;
 }
 </style>
