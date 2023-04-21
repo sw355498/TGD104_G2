@@ -34,14 +34,18 @@
             </div>
             <div class="chatWindow_message" v-for="(message, index) in messages" :key="index">
                 <div v-if="message.isBot" class="bot_message">
-                    <!-- <p v-html="message.text"></p> -->
                     <p>{{ message.text }}</p>
                 </div>
                 <div v-if="!message.isBot" class="user_message">
                     <p>{{ message.text }}</p>
                 </div>
                 <div v-if="message.isOther">
-                    <ul class="chat-buttons">
+                    <ul class="chat-buttons" >
+                        <!-- <li class="chat-button" 
+                            v-for="item in robotAnswerArry" :key="item.id" 
+                            @click="sendMessage('{{item.keyword}}')"
+                        >{{item.keyword}}
+                        </li> -->
                         <li class="chat-button" @click="sendMessage('防範詐騙教學')">防範詐騙教學</li>
                         <li class="chat-button" @click="sendMessage('回報可疑網站')">回報可疑網站</li>
                         <li class="chat-button" @click="sendMessage('詐騙FAQ')">詐騙FAQ</li><br>
@@ -121,11 +125,11 @@
         <div class="chatInput">
             <input 
                 type="text" class="message-input" 
-                v-model="inputValue" @keyup.enter="sendMessage" 
+                v-model="inputValue" @keyup.enter="sendMessage(null)" 
                 placeholder="請輸入訊息...">
             <button 
                 type="submit" class="message-submit"  
-                @click="sendMessage"
+                @click="sendMessage(null)"
                 :disabled="inputValue==``"
             >➤
             </button>
@@ -145,6 +149,7 @@ import { ref , nextTick, onMounted} from 'vue'
     const goodbyeTimer = ref(null) // 存儲setTimeout返回的計時器ID
     const messagesDiv = ref(null) // 取得聊天對話框 為了下滑到對話位置
     async function sendMessage(e) {
+        console.log('hi');
         // 取消計時器
         clearTimeout(goodbyeTimer.value);
         if (inputValue.value !=='') {
@@ -153,31 +158,27 @@ import { ref , nextTick, onMounted} from 'vue'
                 text: inputValue.value,
                 isBot: false,
             })
+            console.log('mid');
             // 獲取聊天機器人的回覆
             let botMessage = getBotMessage(inputValue.value)
-            if (botMessage == `other`) {
-                console.log(botMessage);
-                messages.value.push({
-                    text: '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
-                    isBot: true,
-                    isOther: true,
-                })
-            }else{
-                // 將聊天機器人的回覆加入到聊天記錄陣列中
-                messages.value.push({
-                    text: botMessage,
-                    isBot: true,
-                })
-            }
+            // 將聊天機器人的回覆加入到聊天記錄陣列中
+            messages.value.push({
+                text: botMessage,
+                isBot: true,
+                isOther: true,
+            })
+            console.log('123');
         } else if (e){
             // 將點擊元素的文字內容加入到聊天記錄陣列中
             messages.value.push({
                 text: e,
                 isBot: false,
             });
+            console.log(e);
+            let botMessage = getBotMessage(e)
             // 將聊天機器人的回覆加入到聊天記錄陣列中
             messages.value.push({
-                text: '可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
+                text:botMessage,
                 isBot: true,
                 isOther: true,
             })
@@ -199,43 +200,45 @@ import { ref , nextTick, onMounted} from 'vue'
     {
         id: 2,
         keyword: '防範詐騙教學',
-        message: '還想知道什麼嗎',
+        message: '以上是防範詐騙教學',
+        content: '',
         link: '/p02'
     },
     {
         id: 3,
         keyword: '回報可疑網站',
-        message: '以下是回報可疑網站的相關資訊',
+        message: '以上是回報可疑網站的相關資訊',
         link: '/reportUrl'
     },
     {
         id: 4,
         keyword: '詐騙FAQ',
-        message: '以下是詐騙FAQ的相關資訊',
+        message: '以上是詐騙FAQ的相關資訊',
         link: '/p04'
     },
     {
         id: 5,
         keyword: '相關資訊連結',
-        message: '以下是相關資訊的連結',
+        message: '以上是反詐騙相關資訊的連結',
+        content: '',
         link: '/p05'
     },
     {
         id: 6,
         keyword: '討論專區',
-        message: '以下是討論專區的相關資訊',
-        link: '/p06'
+        message: '以上是討論專區的相關資訊',
+        link: '/discuss'
     },
     {
         id: 7,
         keyword: 'DEMO體驗',
-        message: '以下是DEMO體驗的相關資訊',
-        link: '/p07'
+        message: '以上是DEMO體驗的相關資訊',
+        link: ''
     },
     {
         id: 8,
         keyword: 'other',
-        message: 'other',
+        message: '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
         link: ''
     }
     ];
@@ -246,30 +249,24 @@ import { ref , nextTick, onMounted} from 'vue'
         },
         '防範詐騙教學':{
             message:'還想知道什麼嗎',
-            link:'/p02'
         },
         '回報可疑網站':{
             message:'以下是回報可疑網站的相關資訊',
-            link:'/reportUrl'
         },
         '詐騙FAQ':{
             message:'以下是詐騙FAQ的相關資訊',
-            link:'/p04'
         },
         '相關資訊連結':{
             message:'以下是相關資訊的連結',
-            link:'/p05'
         },
         '討論專區':{
             message:'以下是討論專區的相關資訊',
-            link:'/p06'
         },
         'DEMO體驗':{
             message:'以下是DEMO體驗的相關資訊',
-            link:'/p07'
         },
         'other':{
-            message:'other',
+            message:'你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
         }
     }
     function getBotMessage(input) {
@@ -280,13 +277,28 @@ import { ref , nextTick, onMounted} from 'vue'
         // 根據用戶的輸入獲取聊天機器人的回覆
         let botMsg = ``;
         const input_trim = input.trim();
-        // hasOwnProperty有在陣列裡面返回一個布林值
-        if ( input_trim && robotAnswer.hasOwnProperty(input_trim)) {
-            // botMsg = robotAnswer[input_trim].message
-            botMsg = robotAnswer[input_trim].message
-        }else{
-            botMsg = robotAnswer.other.message;
+        if (input_trim) {
+            for (const obj of robotAnswerArry) {
+            if (obj.keyword === input_trim) {
+                botMsg = obj.message;
+                break;
+            }
+            }
         }
+        if (botMsg === '') {
+            for (const obj of robotAnswerArry) {
+            if (obj.keyword === 'other') {
+                botMsg = obj.message;
+                break;
+            }
+            }
+        }
+        // hasOwnProperty有在陣列裡面返回一個布林值
+        // if ( input_trim && robotAnswer.hasOwnProperty(input_trim)) {
+        //     botMsg = robotAnswer[input_trim].message
+        // }else{
+        //     botMsg = robotAnswer.other.message;
+        // }
         // 啟動計時器，1分鐘後顯示再見的消息
         goodbyeTimer.value = setTimeout(async() => {
             messages.value.push({

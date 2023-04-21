@@ -28,6 +28,17 @@
                         <span class="paragraph">Doflamingo</span>
                     </div>
                     <button class="ellipsisBtn" @click="ellipsisBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    <div class="ellipsisList" style="display: none;">
+                        <ul>
+                            <li id="show-modal" @click="showModal = true, modalContent = '<h4>檢舉</h4>'">檢舉</li>
+                            <li @click="shareBtn()">分享</li>
+                        </ul>
+                        <div class="p06_shareButton">
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.facebookShareLink);"><i class="fa-brands fa-square-facebook"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.lineShareLink);"><i class="fa-brands fa-line"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.twitterShareLink);"><i class="fa-brands fa-square-twitter"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <h2>小心酒店新的徵人模式</h2>
                 <div class="articleInformation_p06_discuss text_title">
@@ -70,7 +81,7 @@
                     <h3>共<span>2</span>則 留言</h3>
                     <button id="show-modal" @click="showModal = true, modalContent = '<h4>我要留言</h4>' " class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
                 </div>
-                <div class="messageList" v-for="(message, index) in messages" :key="index">
+                <div class="messageList" v-for="(message, index1) in messages" :key="index1">
                     <div v-for="(item, index) in message" :key="index">
                         <div v-if="index === 0">
                             <div class="topBlock">                    
@@ -97,14 +108,14 @@
                                         <span>回覆</span>
                                     </li>
                                 </ul>
+                                <div class="switch">                            
+                                    <div class="solidLine"></div>
+                                    <span @click="hideMessage(index1)">{{ replyMessage }}</span>
+                                </div>
                             </div>
                         </div>
                         <div v-else class="reply">
-                            <div class="switch">                            
-                                <div class="solidLine"></div>
-                                <span>隱藏回覆</span>
-                            </div>
-                            <ul class="messageItems" > 
+                            <ul class="messageItems" v-show="message[0].show"> 
                                 <li>
                                     <div class="topBlock">
                                         <img src="@/assets/img/p08_user/user.jpg" alt="">
@@ -156,7 +167,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue'
@@ -164,11 +175,48 @@
     const showModal = ref(false)
     const messages = ref([
         [
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', show:false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'},
             {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
         ],
         [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日'},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', show:false},
             {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
         ],
     ])
+
+    const ellipsisList = ref()
+    const p06_shareButton = ref()
+    function ellipsisBtn(){
+        if(ellipsisList.value.style.display === 'none'){
+            ellipsisList.value.style.display = 'block'
+        }else{
+            ellipsisList.value.style.display = 'none'
+        }
+    }
+    function shareBtn(){
+        if(p06_shareButton.value.classList.contains('hover')){
+            p06_shareButton.value.classList.remove('hover')
+        }else{
+            p06_shareButton.value.classList.add('hover')
+        }
+    }
+
+    const replyMessage = ref('查看更多回覆')
+    function hideMessage(index){
+        console.log(index);
+        messages.value[index][0].show = !messages.value[index][0].show
+        if(replyMessage.value == ('查看更多回覆')){
+            replyMessage.value == ('隱藏回覆')
+        }else{
+            replyMessage.value == ('查看更多回覆')
+        }
+    }
+
+    onMounted(()=>{
+        ellipsisList.value = document.querySelector('.ellipsisList')
+        p06_shareButton.value = document.querySelector('.p06_shareButton')
+    })
+
 </script>

@@ -164,17 +164,20 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     async function allData(){
         try {
             isJsgrid.value = false;
-            const response = await axios.get('/madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
+            // const response = url_json;
+            // const response = await axios.get(`${API_ENDPOINT}/api/v1/rest/datastore/A01010000C-002150-013`)
+            // const response = await axios.get('madeByNeil/api/v1/rest/datastore/A01010000C-002150-013')
             // const response = await axios.get('https://od.moi.gov.tw/api/v1/rest/datastore/A01010000C-002150-013')
-            let myArray = response.data.result.records;
-            myArray.splice(0, 1);  // 刪除政府預設第一欄
-                const responseServer = await axios.get(`${API_URL}getWebURL.php`)
-                let myArray2 = responseServer.data;
-                let mergeData = myArray.concat(myArray2)
-                // 對合併的陣列排序
-                mergeData.sort((b, a) => new Date(a.STA_EDATE) - new Date(b.STA_EDATE)); 
+            // let myArray = response.data.result.records;
+            // let myArray = response.result.records;
+            // myArray.splice(0, 1);  // 刪除政府預設第一欄
+            const responseServer = await axios.get(`${API_URL}getWebURL.php`)
+            let myArray2 = responseServer.data;
+            // let mergeData = myArray.concat(myArray2)
+            // 對合併的陣列排序
+            // mergeData.sort((b, a) => new Date(a.STA_EDATE) - new Date(b.STA_EDATE)); 
             isJsgrid.value= true;
-            return mergeData
+            return myArray2
         } catch (error) {
             console.log(error);
         }

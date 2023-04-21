@@ -47,18 +47,23 @@
                 <input type="text" placeholder="搜尋文章" />
                 </div>
             </div>
-            <section v-for="(item, index) in articleList" :kye="item.id">
+            <section v-for="(item, index) in articleList" :key="item.id">
                     <div class="topBlock_p06_discuss">
                         <div class="author">
                             <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
                             <span class="paragraph">{{item.author}}</span>
                         </div>
                         <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                        <div class="ellipsisList">
+                        <div class="ellipsisList" style="display: none;">
                             <ul>
                                 <li id="show-modal" @click="showModal = true, modalContent = '<h4>檢舉</h4>'">檢舉</li>
-                                <li>分享</li>
+                                <li @click="shareBtn(index)">分享</li>
                             </ul>
+                            <div class="p06_shareButton">
+                                <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.facebookShareLink);"><i class="fa-brands fa-square-facebook"></i></a>
+                                <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.lineShareLink);"><i class="fa-brands fa-line"></i></a>
+                                <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.twitterShareLink);"><i class="fa-brands fa-square-twitter"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="articleBlock_p06_discuss">
@@ -118,7 +123,7 @@
 </template>
 
 <script setup>
-    import { ref, inject } from 'vue';
+    import { ref, inject, onMounted } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue';
@@ -127,16 +132,34 @@
     const modalContent = ref('')
     const showModal = ref(false)
     const articleList = ref([
-        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250, facebookShareLink: 'https://www.facebook.com/sharer.php?u=http://localhost/'},
         {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
         {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
         {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
         {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
     ])
-
+    
+    const ellipsisList = ref([]);
+    const p06_shareButton = ref([])
     function ellipsisBtn(index) {
-        console.log(index)
+        if(ellipsisList.value[index].style.display === 'none'){
+            ellipsisList.value[index].style.display = 'block'
+        }else{
+            ellipsisList.value[index].style.display = 'none'
+        }
     }
+    function shareBtn(index){
+        if(p06_shareButton.value[index].classList.contains('hover')){
+            p06_shareButton.value[index].classList.remove('hover')
+        }else{
+            p06_shareButton.value[index].classList.add('hover')
+        }
+    }
+
+    function openShareWindow(link) {
+        window.open(link, 'mywindow', 'width=700, height=400');
+    }
+
     const inputText = ref('')
     const apiUrl = inject('$apiUrl')
     function doQuery(){
@@ -164,27 +187,11 @@
                 alert("發生錯誤: " + exception.status);
             }
         });
-}
-
-
-</script>
-<style lang="scss">
-.ellipsisList{
-    position: absolute;
-    right: 0;
-    top:30px;
-    background: #fff;
-
-    color: black;
-
-    ul{
-        margin: 0px;
-        padding: 0px;
-        list-style: none;
-        li{
-            padding: 15px 20px;
-            cursor: pointer;
-        }
     }
-}
-</style>
+    onMounted(()=>{
+        ellipsisList.value = document.querySelectorAll('.ellipsisList');
+        p06_shareButton.value = document.querySelectorAll('.p06_shareButton')
+    })
+
+    
+</script>

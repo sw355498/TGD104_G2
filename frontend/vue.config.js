@@ -88,18 +88,17 @@ module.exports = defineConfig({
             };
         } );
     },
+
     // 串api需要的
     devServer: {
         proxy: {
-          'madeByNeil': {
+          '/madeByNeil': {
             target: 'https://od.moi.gov.tw',
             changeOrigin: true,
-            // onProxyRes: function(proxyRes, req, res) {
-            //   proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-            // },
             pathRewrite: {
-              '^madeByNeil': ''
-            }
+              '^/madeByNeil': ''
+            },
+            ws: true
           }
         }
       }
