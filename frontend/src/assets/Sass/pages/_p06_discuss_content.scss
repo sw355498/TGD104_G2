@@ -248,14 +248,32 @@
                 list-style: none;
                 padding: 0px;
                 display: flex;
-
+                
                 li{
                     margin-right: 25px;
-
+                    
                     span {
                         @include rwd('sm'){
                             font-size: 14px;
                         }
+                    }
+                }
+            }
+            .switch{
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+    
+                .solidLine{
+                    width: 100px;
+                    height: 1px;
+                    background: $text_color;
+                    margin-right: 15px;
+                }
+    
+                span {
+                    @include rwd('sm'){
+                        font-size: 14px;
                     }
                 }
             }
@@ -290,10 +308,31 @@
                         @include rwd('sm'){
                             padding: 5px;
                         }
-
                         span {
                             @include rwd('sm'){
                                 font-size: 14px;
+                            }
+                        }
+                        &:first-child{
+                            
+                        }
+                        &:last-child{
+                            position: relative;
+                        }
+                        .messageReport{
+                            background-color: $text_color;
+                            color: $background_color;
+                            padding: 5px 10px;
+                            font-size: 18px;
+                            position: absolute;
+                            white-space: nowrap;
+                            top: 45px;
+                            right: 20px;
+                            &:hover{
+                                background-color: $main_color;
+                            }
+                            &:focus{
+                                background-color: $main_color;
                             }
                         }
                     }
@@ -303,24 +342,6 @@
                 padding: 10px 0px 25px 80px;
                 @include rwd('sm'){
                     padding: 10px 0px 15px 22px;
-                }
-                .switch{
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-
-                    .solidLine{
-                        width: 100px;
-                        height: 1px;
-                        background: $text_color;
-                        margin-right: 15px;
-                    }
-
-                    span {
-                        @include rwd('sm'){
-                            font-size: 14px;
-                        }
-                    }
                 }
                 .messageItems{
                     list-style: none;

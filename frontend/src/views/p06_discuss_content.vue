@@ -78,7 +78,7 @@
             </section>
             <article class="articleMessage_p06_discuss">
                 <div class="topBlock_p06_discuss">
-                    <h3>共<span>2</span>則 留言</h3>
+                    <h3>共<span>{{ messages.length }}</span>則 留言</h3>
                     <button id="show-modal" @click="showModal = true, modalContent = '<h4>我要留言</h4>' " class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
                 </div>
                 <div class="messageList" v-for="(message, index1) in messages" :key="index1">
@@ -91,8 +91,9 @@
                                     <li class="iconHover">
                                         <i class="fa-solid fa-thumbs-up fa-fw iconHover"></i>
                                     </li>
-                                    <li class="iconHover">
+                                    <li class="iconHover" @click="showReport(index1, index)">
                                         <i class="fa-solid fa-ellipsis-vertical fa-fw iconHover"></i>
+                                        <div class="messageReport" v-show="message[index].showReport">檢舉</div>
                                     </li>
                                 </ul>
                             </div>
@@ -110,11 +111,11 @@
                                 </ul>
                                 <div class="switch">                            
                                     <div class="solidLine"></div>
-                                    <span @click="hideMessage(index1)">{{ replyMessage }}</span>
+                                    <span @click="hideMessage(index1)">{{ message[0].replyMessage }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div v-else class="reply">
+                        <div v-else-if="message.reply" class="reply">
                             <ul class="messageItems" v-show="message[0].show"> 
                                 <li>
                                     <div class="topBlock">
@@ -124,8 +125,9 @@
                                             <li class="iconHover">
                                                 <i class="fa-solid fa-thumbs-up fa-fw"></i>
                                             </li>
-                                            <li class="iconHover">
+                                            <li class="iconHover" @click="showReport(index1, index)">
                                                 <i class="fa-solid fa-ellipsis-vertical fa-fw"></i>
+                                                <div class="messageReport" v-show="message[index].showReport">檢舉</div>
                                             </li>
                                         </ul>
                                     </div>
@@ -175,15 +177,29 @@
     const showModal = ref(false)
     const messages = ref([
         [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', show:false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
         ],
         [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', show:false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日'}
+            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
         ],
+        [
+            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+        ],
+        [
+            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+        ],
+        [
+            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false}
+        ]
     ])
 
     const ellipsisList = ref()
@@ -203,20 +219,26 @@
         }
     }
 
-    const replyMessage = ref('查看更多回覆')
     function hideMessage(index){
-        console.log(index);
         messages.value[index][0].show = !messages.value[index][0].show
-        if(replyMessage.value == ('查看更多回覆')){
-            replyMessage.value == ('隱藏回覆')
+        if(messages.value[index][0].replyMessage === ('查看更多回覆') && messages.value[index].length > 1){
+            messages.value[index][0].replyMessage = ('隱藏回復');
+            messages.value[index].reply = true;
+        }else if(messages.value[index][0].replyMessage === ('查看更多回覆') && messages.value[index].length === 1){
+            messages.value[index][0].replyMessage = ('目前沒有回覆');
         }else{
-            replyMessage.value == ('查看更多回覆')
+            messages.value[index][0].replyMessage = ('查看更多回覆');
+            messages.value[index].reply = false;
         }
     }
 
+    function showReport(index1, index){
+        messages.value[index1][index].showReport = !messages.value[index1][index].showReport;
+    }
+
     onMounted(()=>{
-        ellipsisList.value = document.querySelector('.ellipsisList')
-        p06_shareButton.value = document.querySelector('.p06_shareButton')
+        ellipsisList.value = document.querySelector('.ellipsisList');
+        p06_shareButton.value = document.querySelector('.p06_shareButton');
     })
 
 </script>
