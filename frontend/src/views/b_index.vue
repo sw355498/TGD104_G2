@@ -5,7 +5,7 @@
             <h4>{{ btnName }}</h4>
         </template>
         <template #body>
-            <form class="pb-3" @submit="handleSubmit">
+            <form class="pb-3" @submit="handleSubmit" id="addDataForm">
                 <div v-if="leftNavTag === 'user' || leftNavTag === 'staff'">     
                     <div class="mb-3">                    
                         <label for="account">
@@ -16,7 +16,7 @@
                             v-model="account"
                             type="text"
                             id="account"
-                            @focus="handleFocus('account')"
+                            @focus="removeError('account')"
                             required
                         />
                     </div>           
@@ -29,7 +29,7 @@
                             v-model="password"
                             type="password"
                             id="password"
-                            @focus="handleFocus('password')"
+                            @focus="removeError('password')"
                             required
                         />
                     </div>
@@ -45,16 +45,22 @@
                 </div>
                 <div v-if="leftNavTag === 'news' || leftNavTag === 'FraudKnowledge'">
                     <div class="mb-3">
-                        <label for="discuss_title" class="form-label">標題：</label>
+                        <label for="newTitle" class="form-label">
+                            標題<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newTitleErrorText"></div>
                         <input
                             v-model="newTitle"
                             type="text"
                             class="form-control" 
-                            id="discuss_title"
+                            id="newTitle"
+                            @focus="removeError('newTitle')"
                         />
                     </div>
                     <div class="mb-3" v-if="leftNavTag === 'news'">
-                        <label for="discuss_title" class="form-label">分類：</label>
+                        <label for="discuss_title" class="form-label">
+                            分類
+                        </label>
                         <select
                             v-model="newsTag"
                             id="inputState"
@@ -66,7 +72,10 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="discuss_title" class="form-label">圖片上傳：</label>
+                        <label for="discuss_title" class="form-label">
+                            圖片上傳
+                        </label>
+                        <div class="d-none text-danger" id="upload_imgErrorText"></div>
                         <label class="file_btn">
                             <input 
                                 id="upload_img" 
@@ -78,29 +87,41 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                        <label for="discuss_title" class="form-label">內容：</label>
+                        <label for="newContent" class="form-label">
+                            內容<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newContentErrorText"></div>
                         <textarea
                             v-model="newContent"
                             class="form-control" 
-                            id="exampleFormControlTextarea1" 
+                            id="newContent" 
+                            @focus="removeError('newContent')"
                             rows="5">
                         </textarea>
                     </div>
                     <div class="mb-3" v-if="leftNavTag === 'FraudKnowledge'">
-                        <label for="discuss_title" class="form-label">解答：</label>
+                        <label for="newAnswer" class="form-label">
+                            解答<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newAnswerErrorText"></div>
                         <textarea
                             v-model="newAnswer"
                             class="form-control" 
-                            id="exampleFormControlTextarea1" 
+                            id="newAnswer" 
+                            @focus="removeError('newAnswer')"
                             rows="5">
                         </textarea>
                     </div>
                     <div class="mb-3" v-if="leftNavTag === 'FraudKnowledge'">
-                        <label for="discuss_title" class="form-label">解釋：</label>
+                        <label for="newExplain" class="form-label">
+                            解釋<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="newExplainErrorText"></div>
                         <textarea
                             v-model="newExplain"
                             class="form-control" 
-                            id="exampleFormControlTextarea1" 
+                            id="newExplain"
+                            @focus="removeError('newExplain')"
                             rows="5">
                         </textarea>
                     </div>
@@ -634,7 +655,8 @@ function operate(e) {
 
 function fileChange(e){
     fileImage.value = e.target.files[0]
-    ImgName.value = fileImage.value.name
+    ImgName.value = `：${fileImage.value.name}`
+    removeError("upload_img");
 }
 
 //表單送出事件
@@ -653,6 +675,7 @@ const handleSubmit = async (e) => {
                 account.value = "";
                 password.value = "";
                 nickname.value = "";
+                
                 // 清除可能存在的error
                 removeError("account");
                 removeError("password");
@@ -691,18 +714,58 @@ const handleSubmit = async (e) => {
     }
     if(leftNavTag.value === 'FraudKnowledge'){
         const formData = new FormData();
-        formData.append('newTitle', newTitle.value);
-        formData.append('newContent', newContent.value);
-        formData.append('newAnswer', newAnswer.value);
-        formData.append('newExplain', newExplain.value);
+        // formData.append('newTitle', newTitle.value);
+        // formData.append('newContent', newContent.value);
+        // formData.append('newAnswer', newAnswer.value);
+        // formData.append('newExplain', newExplain.value);
         formData.append('newImage', fileImage.value);
-
+        formData.append('where', '資料夾位置')
         try {
             const response = await axios.post(`${API_URL}add_game.php`, formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data'
                 }
             });
+            if (response.data === "題目新增成功") {
+                // 清除表單
+                account.value = "";
+                password.value = "";
+                nickname.value = "";
+                
+                // 清除可能存在的error
+                removeError("newTitle");
+                removeError("newContent");
+                removeError("newAnswer");
+                removeError("newExplain");
+                // 關閉彈窗
+                showModal.value = false;
+                Swal.fire({
+                    title: "新增成功",
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+    
+                // 將Client資料更新
+                clients.value = await selectUser();
+                // 重新渲染 jsGrid
+                reloadJsGrid();
+            } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
+                addError("upload_img", "只允許上傳 JPG 或 PNG 格式的圖片檔案");
+            } else if(response.data === '欄位都未輸入'){
+                console.log('123')
+                addError("newTitle", "題目尚未輸入");
+                addError("newContent", "選項未輸入");
+                addError("newAnswer", "解答尚未輸入");
+                addError("newExplain", "解答尚未輸入");
+            } else if(response.data === '題目尚未輸入'){
+                addError("newTitle", "題目尚未輸入");
+            } else if(response.data === '選項未輸入'){
+                addError("newTitle", "選項未輸入");
+            } else if(response.data === '解答尚未輸入'){
+                addError("newAnswer", "解答尚未輸入");
+            } else if(response.data === '解釋尚未輸入'){
+                addError("newAnswer", "解釋尚未輸入");
+            }
             console.log(response.data);
         } catch (e) {
             if (e.response) {
@@ -762,9 +825,9 @@ async function selectUser() {
 }
 
 //input的focus事件
-const handleFocus = (theInputID) => {
-    removeError(theInputID);
-};
+// const handleFocus = (theInputID) => {
+//     removeError(theInputID);
+// };
 
 // 新增錯誤訊息
 const addError = (InputID, ErrorText) => {
