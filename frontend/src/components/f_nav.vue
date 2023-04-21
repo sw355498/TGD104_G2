@@ -116,12 +116,12 @@ import Modal from "@/components/userLogin.vue";
 const nav = reactive([
   {
     id: "p01",
-    router: "/p01",
+    router: "/news",
     title: "最新消息",
   },
   {
     id: "p02",
-    router: "/p02",
+    router: "/teach",
     title: "防範詐騙教學",
   },
   {
@@ -131,12 +131,12 @@ const nav = reactive([
   },
   {
     id: "p04",
-    router: "/p04",
+    router: "/gov",
     title: "相關資訊連結",
   },
   {
     id: "p05",
-    router: "/p05",
+    router: "/faq",
     title: "詐騙FAQ",
   },
   {
@@ -150,34 +150,34 @@ const nav = reactive([
     secMenu: [
       {
         id: "p07demoShopping",
-        router: "/p07demoShopping",
+        router: "/demoShopping",
         title: "購物詐騙",
       },
       {
         id: "p07demoGame",
-        router: "/p07demoGame",
+        router: "/demoGame",
         title: "詐騙知識測驗",
       },
       {
         id: "p07demoPhone",
-        router: "/p07demoPhone",
+        router: "/demoPhone",
         title: "電話詐騙",
       },
       {
         id: "p07demoLine",
-        router: "/p07demoLine",
+        router: "/demoLine",
         title: "愛情交友詐騙",
       },
     ],
   },
   {
     id: "p08",
-    router: "/p08_user",
+    router: "/user",
     title: "會員中心",
   },
   {
     id: "p09",
-    router: "/p09_team",
+    router: "/team",
     title: "團隊介紹",
   },
 ]);

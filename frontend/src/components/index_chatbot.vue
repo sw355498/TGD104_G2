@@ -22,7 +22,7 @@
                     <div class="chatbot_news_container">
                         <!-- 接最新消息資料庫5筆 -->
                         <div v-for="item in news" :key="item">
-                            <router-link :to="'/p01/p01_newsArticle/' + item.ID">
+                            <router-link :to="'/news/newsArticle/' + item.ID">
                             <div class="chatbot_news_item" >
                                 <p>{{ item.NEWS_TITLE }}</p>
                                 <span style="display: block; font-size: 14px;">{{ new Date(item.CREATE_DATE).toLocaleDateString()}}</span>
@@ -221,7 +221,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         keyword: '防範詐騙教學',
         message: '以上是防範詐騙教學',
         content: '介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。',
-        link: '/p02'
+        link: '/teach'
     },
     {
         id: 3,
@@ -237,7 +237,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         keyword: '詐騙FAQ',
         message: '以上是詐騙FAQ的相關資訊',
         content: '介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等',
-        link: '/p04'
+        link: '/faq'
     },
     {
         id: 5,
@@ -245,7 +245,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         keyword: '相關資訊連結',
         message: '以上是反詐騙相關資訊的連結',
         content: '介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。',
-        link: '/p05'
+        link: '/gov'
     },
     {
         id: 6,
