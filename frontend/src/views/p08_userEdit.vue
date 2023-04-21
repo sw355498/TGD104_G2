@@ -98,7 +98,7 @@
                       class="input_p08_user_login"
                       :placeholder="member.NICKNAME"
                       v-model.trim="displayName"
-                      id="displayName"
+                  
                     />
 
                     <label for="">電話</label>
@@ -107,18 +107,16 @@
                       class="input_p08_user_login"
                       :placeholder="member.MOBILE"
                       v-model.trim="phoneNumber"
-                      id="phoneNumber"
+                      
                     />
 
                     <label for="">生日</label>
                     <input
                       type="date"
                       class="input_p08_user_login"
-                      :value="birthday"
+                      v-model="birthday"
                       placeholder="MM/DD/YYYY"
-                      onfocus="(this.type='date')"
-                      onblur="(this.type='text')"
-                      id="birthday"
+                     
                     />
                     <button type="submit" class="btn btn-primary">儲存</button>
                     <button class="btn">
@@ -188,6 +186,8 @@ export default {
         .then((response) => {
           this.member = response.data;
           this.expValue = response.data.EXP;
+          this.birthday = response.data.BIRTH;
+          console.log(token);
         })
         .catch((error) => {
           console.log(error);
@@ -198,9 +198,10 @@ export default {
     handleSubmit() {
       // 建立要傳送的資料物件
       const data = {
-        displayName: this.displayName,
-        phoneNumber: this.phoneNumber,
-        birthday: this.birthday,
+        token: localStorage.getItem("token"),
+        NICKNAME: this.displayName,
+        MOBILE: this.phoneNumber,
+        BIRTH: this.birthday,
       };
 
       // 使用axios套件發送POST請求
@@ -208,11 +209,13 @@ export default {
         .post(`${API_URL}/member_update.php`, data)
         .then((response) => {
           // 處理回應結果
-          console.log(response);
+          console.log(response.data);
+
         })
         .catch((error) => {
           console.log(error);
         });
+        
     },
   },
   created() {
