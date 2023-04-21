@@ -1,7 +1,7 @@
 <template>
   <Transition name="modal">
     <div v-if="show" class="layout-modal-mask">
-      <div class="modal-container">
+      <div class="modal-container" :class="{ 'w-75': modelWidth}">
         <div class="modal-header">
           <slot name="header"></slot>
           <button
@@ -27,7 +27,8 @@
 <script setup>
 import { watch } from "vue";
 const props = defineProps({
-        show: Boolean
+        show: Boolean,
+        modelWidth: Boolean
     })
     let bodyBlock = document.querySelector('body')
     if(props.show){
