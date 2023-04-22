@@ -6,28 +6,28 @@
     $postData = file_get_contents("php://input");
     //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
     $data = json_decode($postData, true);
-    $whereVariable = $data['whereVariable'];
+    $whichTable = $data['whichTable'];
 
     //建立SQL語法
-    switch ($whereVariable) {
-        case '1':
-            $sql = "SELECT d.TITLE AS '檢舉對象', dr.REASON AS '檢舉原因', u.ACCOUNT AS '檢舉人', dr.TIME AS '檢舉日期', rs.STATUS_NAME AS '審核狀況'
+    switch ($whichTable) {
+        case 'DISCUSS_REPORT':
+            $sql = "SELECT dr.ID, d.TITLE AS '檢舉對象', dr.REASON AS '檢舉原因', u.ACCOUNT AS '檢舉人', dr.TIME AS '檢舉日期', rs.STATUS_NAME AS '審核狀況'
                 FROM DISCUSS_REPORT AS dr
                 JOIN USER AS u ON dr.USER_ID = u.ID
                 JOIN DISCUSS AS d ON dr.DISCUSS_ID = d.ID
                 JOIN REPORT_STATUS AS rs ON dr.REPORT_STATUS_ID = rs.ID;";
             break;
 
-        case '2':
-            $sql = "SELECT m.CONTENT AS '檢舉對象', mr.REASON AS '檢舉原因', u.ACCOUNT AS '檢舉人', mr.TIME AS '檢舉日期', rs.STATUS_NAME AS '審核狀況'
+        case 'MESSAGE_REPORT':
+            $sql = "SELECT mr.ID, m.CONTENT AS '檢舉對象', mr.REASON AS '檢舉原因', u.ACCOUNT AS '檢舉人', mr.TIME AS '檢舉日期', rs.STATUS_NAME AS '審核狀況'
                 FROM MESSAGE_REPORT AS mr
                 JOIN USER AS u ON mr.USER_ID = u.ID
                 JOIN MESSAGE AS m ON mr.MESSAGE_ID = m.ID
                 JOIN REPORT_STATUS AS rs ON mr.REPORT_STATUS_ID = rs.ID;";
             break;
 
-        case '3':
-            $sql = "SELECT r.CONTENT AS '檢舉對象', rr.REASON AS '檢舉原因', u.ACCOUNT AS '檢舉人', rr.TIME AS '檢舉日期', rs.STATUS_NAME AS '審核狀況'
+        case 'REPLY_REPORT':
+            $sql = "SELECT rr.ID, r.CONTENT AS '檢舉對象', rr.REASON AS '檢舉原因', u.ACCOUNT AS '檢舉人', rr.TIME AS '檢舉日期', rs.STATUS_NAME AS '審核狀況'
                 FROM REPLY_REPORT AS rr
                 JOIN USER AS u ON rr.USER_ID = u.ID
                 JOIN REPLY AS r ON rr.REPLY_ID = r.ID

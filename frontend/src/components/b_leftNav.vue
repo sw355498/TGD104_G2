@@ -24,7 +24,7 @@
                             {{item.name}}
                     </a>
                 </li>
-                <li v-if="userLevel">
+                <li v-if="true">
                     <a
                         @click="changeTab('staff')"  
                         class="link" 

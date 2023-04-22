@@ -7,7 +7,6 @@
 export default {
   mounted() {
     let id = 0,
-    
       post = 1,
       reply = 0,
       thumb = 0;
@@ -129,7 +128,6 @@ export default {
         登入方式: "會員註冊",
         狀態: "檢舉下架",
       },
-      
     ];
 
     $("#jsGrid").jsGrid({
@@ -191,34 +189,23 @@ export default {
         {
           name: "編輯/修改",
           width: 80,
-          itemTemplate: function () {
+          itemTemplate: function (value, item) {
             let $buttonContainer = $("<div>");
             // Jquery 等同於 js中的 let buttonContainer = document.createElement("<div>")
-
-            // let $blockade = $("<button>").html(`<i class="fa-solid fa-lock"></i>封鎖`).addClass("small_button mx-1").on("click", operate);
-            // let $blockade = $("<button>")
-            //   .text(`封鎖`)
-            //   .addClass("small_button mx-1")
-            //   .on("click", operate);
-            // $buttonContainer.append($blockade);
 
             let $delete = $("<button>")
               .text("刪除")
               .addClass("small_button mx-1")
+              .attr("data-id", item["ID"])
               .on("click", operate);
             $buttonContainer.append($delete);
-
             let $revise = $("<button>")
               .text("修改")
               .addClass("small_button mx-1")
+              .attr("data-id", item["ID"])
               .on("click", operate);
             $buttonContainer.append($revise);
 
-            // let $check = $("<button>")
-            //   .text("查看")
-            //   .addClass("small_button mx-1")
-            //   .on("click", operate);
-            // $buttonContainer.append($check);
 
             return $buttonContainer;
           },

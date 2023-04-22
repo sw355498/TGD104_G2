@@ -10,7 +10,7 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
               <li class="breadcrumb-item">
-                <router-link to="/p08_user">會員中心</router-link>
+                <router-link to="/user">會員中心</router-link>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 編輯會員資料
@@ -52,7 +52,7 @@
                       </p>
                       <p
                         class="text font-size-sm mb-3"
-                        v-if="member.MOBILE !== null"
+                        v-if="member.BIRTH !== null"
                       >
                         生日:{{ member.BIRTH }}
                       </p>
@@ -98,7 +98,6 @@
                       class="input_p08_user_login"
                       :placeholder="member.NICKNAME"
                       v-model.trim="displayName"
-                  
                     />
 
                     <label for="">電話</label>
@@ -107,7 +106,6 @@
                       class="input_p08_user_login"
                       :placeholder="member.MOBILE"
                       v-model.trim="phoneNumber"
-                      
                     />
 
                     <label for="">生日</label>
@@ -116,11 +114,10 @@
                       class="input_p08_user_login"
                       v-model="birthday"
                       placeholder="MM/DD/YYYY"
-                     
                     />
                     <button type="submit" class="btn btn-primary">儲存</button>
                     <button class="btn">
-                      <router-link to="/p08_user">取消</router-link>
+                      <router-link to="/user">取消</router-link>
                     </button>
                   </div>
                 </form>
@@ -209,13 +206,12 @@ export default {
         .post(`${API_URL}/member_update.php`, data)
         .then((response) => {
           // 處理回應結果
-          console.log(response.data);
-
+          // 重新整理頁面
+          location.reload();
         })
         .catch((error) => {
           console.log(error);
         });
-        
     },
   },
   created() {
