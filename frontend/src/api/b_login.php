@@ -13,7 +13,7 @@
     $response = array();
     if(!empty(trim($account)) && !empty(trim($password))){
         // 建立SQL語法(備忘:這裡要接收USER還是USER_REGISTER)
-        $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT AND ACCOUNT_TYPE_ID IN (2, 3)";
+        $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT AND ACCOUNT_TYPE_ID IN (2, 3) AND USER_STATUS_ID = 1 ";
         $statement = $pdo->prepare($sql);
         $statement ->bindValue(":ACCOUNT", $account);
         $statement->execute();
@@ -26,6 +26,9 @@
                 "success" => true,
                 "message" => "登入成功",
                 "id" => $data['ID'],
+                "account" => $data['ACCOUNT'],
+                "nickname" => $data['NICKNAME'],
+                "pic" => $data['PIC'],
                 "account_type_id" => $data['ACCOUNT_TYPE_ID'],
             );
             echo json_encode($response);

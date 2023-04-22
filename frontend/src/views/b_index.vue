@@ -1,6 +1,10 @@
 <template>
     <Teleport to="body">
-        <modal :show="showModal" :modelWidth="bigModal" @close="showModal = false,modelWidth= false">
+        <modal
+            :show="showModal"
+            :modelWidth="bigModal"
+            @close="showModal = false,modelWidth= false"
+        >
         <template #header>
             <h4>{{ btnName }}</h4>
         </template>
@@ -185,7 +189,13 @@
         </modal>
     </Teleport>
     <div class="d-flex">
-        <LeftNav @response="leftNavTag = $event" />
+        <LeftNav
+            :userName = "userName" 
+            :userLevel = "userLevel" 
+            :userPic = "userPic"
+            :userPicPath = "userPicPath"
+            @response="leftNavTag = $event"
+        />
         <div class="b_content">
         <h2 class="h1_component">{{ h2Title }}</h2>
         <div class="d-flex justify-content-end align-items-center my-2">
@@ -210,7 +220,7 @@
             <i
                 class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
             ></i>
-            <input type="text" />
+            <input type="text" v-model="searchText"/>
             </div>
         </div>
         <div id="jsGrid"></div>
@@ -218,7 +228,7 @@
     </div>
 </template>
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
 import $ from "jquery";
 import "jsgrid";
 import LeftNav from "../components/b_leftNav.vue";
@@ -233,6 +243,28 @@ const h2Title = ref("會員管理"); //內容區塊的標題
 const addbutton = ref(true); //內容區塊的按鈕顯示設定
 const btnName = ref("新增會員"); //按鈕的名稱
 const replySelect = ref('1'); //檢舉的下拉式選單
+
+//目前登入的帳號資訊
+const currentStaff = JSON.parse(sessionStorage.getItem('staff'));
+const loginID =  ref(currentStaff.id)
+const loginAccount =  ref(currentStaff.account)
+const loginNickname =  ref(currentStaff.nickname)
+const loginPic =  ref(currentStaff.pic)
+const loginTypeId =  ref(currentStaff.account_type_id)
+
+
+// 父元件傳值給子元件
+// const userLevel = computed(() => {
+//   if(accountTypeId.value === 3){
+//     return true;
+//   } else {
+//     return false;
+//   }
+// });
+//簡寫成三元
+const userLevel = computed(() => loginTypeId.value === 3 ? true : false);
+const userName = computed(() => loginNickname.value.trim() ? loginNickname.value : loginAccount.value)
+
 
 //Swal套件的變數
 const swalTitle = ref("");
@@ -292,24 +324,25 @@ const showModal = ref(false); //彈窗顯示設定
 const bigModal = ref(false); //彈窗寬度是否要為width 75%
 
 //資料庫USER所需要的變數
+const searchText = ref("")      //search的input
 const account = ref("")         //帳號input
 const password = ref("")        //密碼input
 const nickname = ref("")        //暱稱input
-const newsTitle = ref("")        //標題input
+const newsTitle = ref("")        //最新消息標題input
 const newsTag = ref("1")        //文章的分類
 const newsContent = ref("")      //內容textarea
 const fileImage = ref("")       //圖片上傳
-const gameTitle = ref("")        //標題input
+const gameTitle = ref("")        //防詐騙知識題目input
 const gameContent = ref("")      //內容textarea
 const gameAnswer = ref("")       //解答textarea
 const gameExplain = ref("")      //解釋textarea
-const accountTypeID = ref(1); //帳號的區分 1會員 2管理員 3主管(暫時只有會員與管理員)
-const whereVariable = ref([1]); //select時所需要的參數
-const updateTable = ref("USER"); //資料update 時所需要的資料表參數
+const accountTypeID = ref(1);   //帳號的區分 1會員 2管理員 3主管(暫時只有會員與管理員)
+
+const whichTable = ref("USER"); //資料update 時所需要的資料表參數
 const updateID = ref(); //資料update 時所需要的ID參數
 const updateStatusID = ref(); //資料update 時所需要的參數(使用帳號狀態)
-const selectTable = ref("select_user.php");
-const ImgName = ref('')
+const selectPHP = ref("b_select_user.php"); //select哪個資料表
+const ImgName = ref('') //上傳圖片的名字
 //jsgrid套件的欄位設定
 
 //監控子元件傳來的值
@@ -320,12 +353,12 @@ watch(leftNavTag, async (newTab) => {
         h2Title.value = "會員管理";
         addbutton.value = true;
         btnName.value = "新增會員";
-        updateTable.value = "USER";
+        whichTable.value = "USER";
         accountTypeID.value = 1;
-        selectTable.value = "select_user.php";
-        whereVariable.value = [1];
+        selectPHP.value = "b_select_user.php";
         account.value = ""
         password.value = ""
+        searchText.value = ""
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "帳號", type: "text", validate: "required" },
@@ -377,9 +410,9 @@ watch(leftNavTag, async (newTab) => {
         bigModal.value = true
         h2Title.value = "討論版管理";
         addbutton.value = false;
-        updateTable.value = "DISCUSS";
-        selectTable.value = "select_discuss.php";
-        whereVariable.value = [];
+        whichTable.value = "DISCUSS";
+        selectPHP.value = "b_select_discuss.php";
+        searchText.value = ""
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "文章標題", type: "text" },
@@ -426,9 +459,9 @@ watch(leftNavTag, async (newTab) => {
         bigModal.value = false
         h2Title.value = "回報管理";
         addbutton.value = false;
-        updateTable.value = "URL";
-        selectTable.value = "select_url.php";
-        whereVariable.value = [];
+        whichTable.value = "URL";
+        selectPHP.value = "b_select_url.php";
+        searchText.value = ""
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "網站名稱", type: "text" },
@@ -460,9 +493,9 @@ watch(leftNavTag, async (newTab) => {
         bigModal.value = false
         h2Title.value = "文章檢舉管理";
         addbutton.value = false;
-        updateTable.value = "REPLY_REPORT";
-        selectTable.value = "select_report.php";
-        whereVariable.value = 1;
+        whichTable.value = "REPLY_REPORT";
+        selectPHP.value = "b_select_report.php";
+        searchText.value = ""
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "檢舉對象", type: "text" },
@@ -488,9 +521,9 @@ watch(leftNavTag, async (newTab) => {
         h2Title.value = "最新消息管理";
         addbutton.value = true;
         btnName.value = "新增消息";
-        updateTable.value = "NEWS";
-        selectTable.value = "select_news.php";
-        whereVariable.value = [];
+        whichTable.value = "NEWS";
+        selectPHP.value = "b_select_news.php";
+        searchText.value = ""
         fileImage.value = ""       //圖片上傳
         fields.value = [
             { name: "ID", css: "d-none" },
@@ -523,9 +556,9 @@ watch(leftNavTag, async (newTab) => {
         h2Title.value = "詐騙知識測驗管理";
         addbutton.value = true;
         btnName.value = "新增題目";
-        updateTable.value = "GAME";
-        selectTable.value = "select_game.php";
-        whereVariable.value = [];
+        whichTable.value = "GAME";
+        selectPHP.value = "b_select_game.php";
+        searchText.value = ""
         fileImage.value = ""     
         fields.value = [
             { name: "ID", css: "d-none" },
@@ -565,10 +598,10 @@ watch(leftNavTag, async (newTab) => {
         h2Title.value = "後台帳號管理";
         addbutton.value = true;
         btnName.value = "新增管理員帳號";
-        updateTable.value = "USER";
+        whichTable.value = "staff";
         accountTypeID.value = 2;
-        selectTable.value = "select_user.php";
-        whereVariable.value = [2, 3];
+        selectPHP.value = "b_select_user.php";
+        searchText.value = ""
         account.value = ""
         password.value = ""
         fields.value = [
@@ -621,7 +654,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
   }
-  clients.value = await selectUser();
+  clients.value = await selectTable();
   reloadJsGrid();
 });
 
@@ -629,26 +662,36 @@ watch(leftNavTag, async (newTab) => {
 watch(replySelect, async (newValue) => {
     switch (newValue) {
         case "1":
-            whereVariable.value = 1;
+            whichTable.value = "DISCUSS_REPORT";
             h2Title.value = "文章檢舉管理";
+            searchText.value = ""
         break
         case "2":
-            whereVariable.value = 2;
+            whichTable.value = "MESSAGE_REPORT";
             h2Title.value = "留言檢舉管理";
+            searchText.value = ""
         break
         case "3":
-            whereVariable.value = 3;
+            whichTable.value = "REPLY_REPORT";
             h2Title.value = "回覆檢舉管理";
+            searchText.value = ""
         break
     }
-    clients.value = await selectUser();
+    clients.value = await selectTable();
     reloadJsGrid();
 })
 
+// 監聽search的input
+watch(searchText, async (newValue) => {    
+    clients.value = await search();
+
+    // 重新渲染 jsGrid
+    reloadJsGrid();
+})
 
 onMounted(async () => {
     //撈取資料庫的資料
-    clients.value = await selectUser();
+    clients.value = await selectTable();
 
     /* 
         因為 jsGrid 模組是動態載入的，
@@ -721,6 +764,7 @@ function operate(e) {
         }
 }
 
+// 圖片上傳
 function fileChange(e){
     fileImage.value = e.target.files[0]
     ImgName.value = `：${fileImage.value.name}`
@@ -757,7 +801,7 @@ const handleSubmit = async (e) => {
                 });
     
                 // 將Client資料更新
-                clients.value = await selectUser();
+                clients.value = await selectTable();
                 // 重新渲染 jsGrid
                 reloadJsGrid();
             } else if (response.data === "此帳號已被註冊") {
@@ -818,7 +862,7 @@ const handleSubmit = async (e) => {
                 });
     
                 // 將Client資料更新
-                clients.value = await selectUser();
+                clients.value = await selectTable();
                 // 重新渲染 jsGrid
                 reloadJsGrid();
             } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
@@ -881,7 +925,7 @@ const handleSubmit = async (e) => {
                 });
     
                 // 將Client資料更新
-                clients.value = await selectUser();
+                clients.value = await selectTable();
                 // 重新渲染 jsGrid
                 reloadJsGrid();
             } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
@@ -913,15 +957,16 @@ const handleSubmit = async (e) => {
 //資料庫資料修改
 async function blockadeUser() {
     try {
-        const response = await axios.post(`${API_URL}blockade_user.php`, {
-            updateTable: updateTable.value,
+        const response = await axios.post(`${API_URL}b_blockade.php`, {
+            whichTable: whichTable.value,
             updateStatusID: updateStatusID.value,
             updateID: updateID.value,
+
         });
 
         if (response.data === "資料更新成功") {
             // 將Client資料更新
-            clients.value = await selectUser();
+            clients.value = await selectTable();
             // 重新渲染 jsGrid
             reloadJsGrid();
             Swal.fire({
@@ -942,12 +987,30 @@ async function blockadeUser() {
 }
 
 //資料庫查詢
-async function selectUser() {
+async function selectTable() {
     try {
-        const response = await axios.post(`${API_URL}${selectTable.value}`, {
-            whereVariable: whereVariable.value,
+        const response = await axios.post(`${API_URL}${selectPHP.value}`, {
+            whichTable: whichTable.value
         });
         return response.data.data;
+    } catch (e) {
+        if (e.response) {
+            console.log(e.response.data.message);
+        } else {
+            console.log(e.message);
+        }
+    }
+}
+
+// search功能
+async function search(){
+    try {
+        const response = await axios.post(`${API_URL}b_search.php`, {
+            whichTable: whichTable.value,
+            search : searchText.value
+        });
+        return response.data.data;
+
     } catch (e) {
         if (e.response) {
             console.log(e.response.data.message);

@@ -11,6 +11,7 @@
     //建立SQL語法
     $sql = "SELECT ID, QUESTION AS '問題', ANSWER AS '答案' 
         FROM GAME
+        WHERE GAME_STATUS = 1
         ORDER BY ID DESC;";
 
     $statement = $pdo->prepare($sql);
