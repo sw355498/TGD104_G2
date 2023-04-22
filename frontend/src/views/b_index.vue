@@ -1,6 +1,10 @@
 <template>
     <Teleport to="body">
-        <modal :show="showModal" :modelWidth="bigModal" @close="showModal = false,modelWidth= false">
+        <modal
+            :show="showModal"
+            :modelWidth="bigModal"
+            @close="showModal = false,modelWidth= false"
+        >
         <template #header>
             <h4>{{ btnName }}</h4>
         </template>
@@ -185,7 +189,13 @@
         </modal>
     </Teleport>
     <div class="d-flex">
-        <LeftNav @response="leftNavTag = $event" />
+        <LeftNav
+            :userName = "userName" 
+            :userLevel = "userLevel" 
+            :userPic = "userPic"
+            :userPicPath = "userPicPath"
+            @response="leftNavTag = $event"
+        />
         <div class="b_content">
         <h2 class="h1_component">{{ h2Title }}</h2>
         <div class="d-flex justify-content-end align-items-center my-2">
@@ -210,7 +220,7 @@
             <i
                 class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
             ></i>
-            <input type="text" />
+            <input type="text" v-model="searchText" @keyup="search" />
             </div>
         </div>
         <div id="jsGrid"></div>
@@ -218,7 +228,7 @@
     </div>
 </template>
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
 import $ from "jquery";
 import "jsgrid";
 import LeftNav from "../components/b_leftNav.vue";
@@ -233,6 +243,28 @@ const h2Title = ref("會員管理"); //內容區塊的標題
 const addbutton = ref(true); //內容區塊的按鈕顯示設定
 const btnName = ref("新增會員"); //按鈕的名稱
 const replySelect = ref('1'); //檢舉的下拉式選單
+
+//目前登入的帳號資訊
+const currentStaff = JSON.parse(sessionStorage.getItem('staff'));
+const loginID =  ref(currentStaff.id)
+const loginAccount =  ref(currentStaff.account)
+const loginNickname =  ref(currentStaff.nickname)
+const loginPic =  ref(currentStaff.pic)
+const accountTypeId =  ref(currentStaff.account_type_id)
+
+console.log(loginPic.value)
+// 父元件傳值給子元件
+// const userLevel = computed(() => {
+//   if(accountTypeId.value === 3){
+//     return true;
+//   } else {
+//     return false;
+//   }
+// });
+//簡寫成三元
+const userLevel = computed(() => accountTypeId.value === 3 ? true : false);
+const userName = computed(() => loginNickname.value.trim() ? loginNickname.value : loginAccount.value)
+
 
 //Swal套件的變數
 const swalTitle = ref("");
@@ -292,6 +324,7 @@ const showModal = ref(false); //彈窗顯示設定
 const bigModal = ref(false); //彈窗寬度是否要為width 75%
 
 //資料庫USER所需要的變數
+const searchText = ref("")
 const account = ref("")         //帳號input
 const password = ref("")        //密碼input
 const nickname = ref("")        //暱稱input
@@ -308,8 +341,8 @@ const whereVariable = ref([1]); //select時所需要的參數
 const updateTable = ref("USER"); //資料update 時所需要的資料表參數
 const updateID = ref(); //資料update 時所需要的ID參數
 const updateStatusID = ref(); //資料update 時所需要的參數(使用帳號狀態)
-const selectTable = ref("select_user.php");
-const ImgName = ref('')
+const selectTable = ref("select_user.php"); //select哪個資料表
+const ImgName = ref('') //上傳圖片的名字
 //jsgrid套件的欄位設定
 
 //監控子元件傳來的值
@@ -941,7 +974,7 @@ async function blockadeUser() {
     }
 }
 
-//資料庫查詢
+//會員資料庫查詢
 async function selectUser() {
     try {
         const response = await axios.post(`${API_URL}${selectTable.value}`, {
