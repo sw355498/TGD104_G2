@@ -6,21 +6,27 @@
     $postData = file_get_contents("php://input");
     //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
     $data = json_decode($postData, true);
-    //從 $data 中取得 whereVariable 變數的值
-    $whereVariable = $data['whereVariable'];
-
-    // 將陣列轉換為字串，並用逗號分隔每個值
-    $inClause = implode(',', $whereVariable);
-
+    $whichTable = $data['whichTable'];
     //建立SQL語法
-    $sql = "SELECT u.ID, u.ACCOUNT AS '帳號', u.NICKNAME AS '暱稱', u.CREATE_TIME AS '建立日期', us.USER_STATUS_NAME AS '狀態', l.LOGIN_TYPE AS '登入方式'
+    if($whichTable === "USER"){
+        $sql = "SELECT u.ID, u.ACCOUNT AS '帳號', u.NICKNAME AS '暱稱', u.CREATE_TIME AS '建立日期', us.USER_STATUS_NAME AS '狀態', l.LOGIN_TYPE AS '登入方式'
+            FROM USER AS u
+                JOIN USER_STATUS AS us
+                ON u.USER_STATUS_ID = us.ID
+                        JOIN LOGIN_TYPE AS l
+                            ON u.LOGIN_TYPE_ID = l.ID
+                                WHERE u.ACCOUNT_TYPE_ID = 1 AND u.USER_STATUS_ID != 3
+                                    ORDER BY u.ID DESC;";
+    } else {
+        $sql = "SELECT u.ID, u.ACCOUNT AS '帳號', u.NICKNAME AS '暱稱', u.CREATE_TIME AS '建立日期', us.USER_STATUS_NAME AS '狀態', l.LOGIN_TYPE AS '登入方式'
         FROM USER AS u
             JOIN USER_STATUS AS us
             ON u.USER_STATUS_ID = us.ID
                     JOIN LOGIN_TYPE AS l
                         ON u.LOGIN_TYPE_ID = l.ID
-                            WHERE u.ACCOUNT_TYPE_ID IN ( $inClause ) AND u.USER_STATUS_ID != 3
+                            WHERE u.ACCOUNT_TYPE_ID IN (2, 3) AND u.USER_STATUS_ID != 3
                                 ORDER BY u.ID DESC;";
+    }
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
