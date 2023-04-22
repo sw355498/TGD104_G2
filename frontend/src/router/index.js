@@ -134,6 +134,11 @@ const routes = [
     name: 'b_index',
     component: () => import(/* webpackChunkName: "about" */ '../views/b_index.vue')
   },
+  {
+    path: '/b_data',
+    name: 'b_data',
+    component: () => import(/* webpackChunkName: "about" */ '../views/b_data.vue')
+  },
 ]
 
 const router = createRouter({
