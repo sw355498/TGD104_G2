@@ -1,6 +1,6 @@
 <?php
    // 資料庫連線
-   require_once("getConn_nopush.php");
+   require_once ("./getConn_nopush.php");
 
 
     // 取得 HTTP POST  Client 端所傳送過來的原始資料
