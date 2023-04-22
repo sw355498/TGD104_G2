@@ -372,7 +372,7 @@
     .p01_news_titleCollect {
         letter-spacing: 0.15rem;
         flex-wrap: nowrap;
-        font-size: 1.2rem;
+        font-size: 1rem;
         align-items: center;
 
         a {
@@ -380,11 +380,12 @@
             text-decoration: none;
             align-items: center;
 
-            // border: 1px solid red;
-            &:hover {
-                color: $main_color;
-            }
+
         }
+        .newsCollected{
+            color: $four_color;
+        }
+
     }
 
     .article_img {
