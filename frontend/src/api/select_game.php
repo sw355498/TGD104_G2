@@ -9,7 +9,9 @@
 
 
     //建立SQL語法
-    $sql = "SELECT ID, QUESTION AS '問題', ANSWER AS '答案' FROM GAME;";
+    $sql = "SELECT ID, QUESTION AS '問題', ANSWER AS '答案' 
+        FROM GAME
+        ORDER BY ID DESC;";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();

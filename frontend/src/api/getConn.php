@@ -11,6 +11,8 @@
        //建立PDO物件，並放入指定的相關資料
        $pdo = new PDO($dsn, $db_user, $db_pass);
 
+       //上傳圖片的相對路徑
+       $addImageUrl = '../assets/img/'
 //---------------------------------------------------
 
     // 建立一個 Express application 物件

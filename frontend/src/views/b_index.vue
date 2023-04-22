@@ -1,6 +1,6 @@
 <template>
     <Teleport to="body">
-        <modal :show="showModal" @close="showModal = false">
+        <modal :show="showModal" :modelWidth="bigModal" @close="showModal = false,modelWidth= false">
         <template #header>
             <h4>{{ btnName }}</h4>
         </template>
@@ -14,7 +14,7 @@
                         <div class="d-none text-danger" id="accountErrorText"></div>
                         <input
                             v-model="account"
-                            type="text"
+                            type="email"
                             id="account"
                             @focus="removeError('account')"
                             required
@@ -43,18 +43,18 @@
                         />
                     </div>
                 </div>
-                <div v-if="leftNavTag === 'news' || leftNavTag === 'FraudKnowledge'">
+                <div v-if="leftNavTag === 'news'">
                     <div class="mb-3">
-                        <label for="newTitle" class="form-label">
+                        <label for="newsTitle" class="form-label">
                             標題<span class="text-danger">*<small>必填</small></span>
                         </label>
-                        <div class="d-none text-danger" id="newTitleErrorText"></div>
+                        <div class="d-none text-danger" id="newsTitleErrorText"></div>
                         <input
-                            v-model="newTitle"
+                            v-model="newsTitle"
                             type="text"
                             class="form-control" 
-                            id="newTitle"
-                            @focus="removeError('newTitle')"
+                            id="newsTitle"
+                            @focus="removeError('newsTitle')"
                         />
                     </div>
                     <div class="mb-3" v-if="leftNavTag === 'news'">
@@ -63,7 +63,7 @@
                         </label>
                         <select
                             v-model="newsTag"
-                            id="inputState"
+                            id="newsTag"
                             class="form-select text-center"
                         >
                             <option value="1">金融詐騙</option>
@@ -72,7 +72,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="discuss_title" class="form-label">
+                        <label for="upload_img" class="form-label">
                             圖片上傳
                         </label>
                         <div class="d-none text-danger" id="upload_imgErrorText"></div>
@@ -87,42 +87,94 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                        <label for="newContent" class="form-label">
+                        <label for="newsContent" class="form-label">
                             內容<span class="text-danger">*<small>必填</small></span>
                         </label>
-                        <div class="d-none text-danger" id="newContentErrorText"></div>
+                        <div class="d-none text-danger" id="newsContentErrorText"></div>
                         <textarea
-                            v-model="newContent"
+                            v-model="newsContent"
                             class="form-control" 
-                            id="newContent" 
-                            @focus="removeError('newContent')"
+                            id="newsContent" 
+                            @focus="removeError('newsContent')"
                             rows="5">
                         </textarea>
                     </div>
+                </div>
+                <div v-if="leftNavTag === 'FraudKnowledge'">
+                    <div class="mb-3">
+                        <label for="gameTitle" class="form-label">
+                            題目<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="gameTitleErrorText"></div>
+                        <input
+                            v-model="gameTitle"
+                            type="text"
+                            class="form-control" 
+                            id="gameTitle"
+                            @focus="removeError('gameTitle')"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="discuss_title" class="form-label">
+                            圖片上傳<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="upload_imgErrorText"></div>
+                        <label class="file_btn">
+                            <input 
+                                id="upload_img" 
+                                class="d-none" 
+                                type="file" 
+                                @change="fileChange"
+                            />
+                            <i class="fa-solid fa-image fa-fw"></i>上傳圖片<span>{{ ImgName }}</span>
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gameContent" class="form-label">
+                            選項<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="gameContentErrorText"></div>
+                        <textarea
+                            v-model="gameContent"
+                            class="form-control" 
+                            id="gameContent" 
+                            @focus="removeError('gameContent')"
+                            rows="5"
+                            required
+                        >
+                        </textarea>
+                    </div>
                     <div class="mb-3" v-if="leftNavTag === 'FraudKnowledge'">
-                        <label for="newAnswer" class="form-label">
+                        <label for="gameAnswer" class="form-label">
                             解答<span class="text-danger">*<small>必填</small></span>
                         </label>
-                        <div class="d-none text-danger" id="newAnswerErrorText"></div>
+                        <div class="d-none text-danger" id="gameAnswerErrorText"></div>
                         <textarea
-                            v-model="newAnswer"
-                            class="form-control" 
-                            id="newAnswer" 
-                            @focus="removeError('newAnswer')"
-                            rows="5">
+                            v-model="gameAnswer"
+                            class="form-control"
+                            style="resize:none;"
+                            id="gameAnswer" 
+                            @focus="removeError('gameAnswer')"
+                            rows="5"
+                            required
+                        >
                         </textarea>
                     </div>
                     <div class="mb-3" v-if="leftNavTag === 'FraudKnowledge'">
-                        <label for="newExplain" class="form-label">
+                        <label for="gameExplain" class="form-label">
                             解釋<span class="text-danger">*<small>必填</small></span>
                         </label>
-                        <div class="d-none text-danger" id="newExplainErrorText"></div>
+                        <div class="d-none text-danger" id="gameExplainErrorText"></div>
                         <textarea
-                            v-model="newExplain"
+                            v-model="gameExplain"
                             class="form-control" 
-                            id="newExplain"
-                            @focus="removeError('newExplain')"
-                            rows="5">
+                            style="resize:none;"
+                            id="gameExplain"
+                            @focus="removeError('gameExplain')"
+                            rows="5"
+                            required
+                        >
                         </textarea>
                     </div>
                 </div>
@@ -174,6 +226,7 @@ import Modal from "@/components/modal.vue";
 import { API_URL } from "@/config";
 import axios from "axios";
 import Swal from "sweetalert2/dist/sweetalert2.js";
+import router from "@/router";
 
 const leftNavTag = ref("user"); //側選單的變數
 const h2Title = ref("會員管理"); //內容區塊的標題
@@ -236,18 +289,20 @@ const fields = ref([
 
 //彈窗設定
 const showModal = ref(false); //彈窗顯示設定
+const bigModal = ref(false); //彈窗寬度是否要為width 75%
 
 //資料庫USER所需要的變數
 const account = ref("")         //帳號input
 const password = ref("")        //密碼input
 const nickname = ref("")        //暱稱input
-const newTitle = ref("")        //標題input
+const newsTitle = ref("")        //標題input
 const newsTag = ref("1")        //文章的分類
-const newContent = ref("")      //內容textarea
+const newsContent = ref("")      //內容textarea
 const fileImage = ref("")       //圖片上傳
-const fileName = ref("")
-const newAnswer = ref("")       //解答textarea
-const newExplain = ref("")      //解釋textarea
+const gameTitle = ref("")        //標題input
+const gameContent = ref("")      //內容textarea
+const gameAnswer = ref("")       //解答textarea
+const gameExplain = ref("")      //解釋textarea
 const accountTypeID = ref(1); //帳號的區分 1會員 2管理員 3主管(暫時只有會員與管理員)
 const whereVariable = ref([1]); //select時所需要的參數
 const updateTable = ref("USER"); //資料update 時所需要的資料表參數
@@ -261,6 +316,7 @@ const ImgName = ref('')
 watch(leftNavTag, async (newTab) => {
   switch (newTab) {
     case "user":
+        bigModal.value = false
         h2Title.value = "會員管理";
         addbutton.value = true;
         btnName.value = "新增會員";
@@ -268,6 +324,8 @@ watch(leftNavTag, async (newTab) => {
         accountTypeID.value = 1;
         selectTable.value = "select_user.php";
         whereVariable.value = [1];
+        account.value = ""
+        password.value = ""
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "帳號", type: "text", validate: "required" },
@@ -316,6 +374,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "discuss":
+        bigModal.value = true
         h2Title.value = "討論版管理";
         addbutton.value = false;
         updateTable.value = "DISCUSS";
@@ -364,6 +423,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "share":
+        bigModal.value = false
         h2Title.value = "回報管理";
         addbutton.value = false;
         updateTable.value = "URL";
@@ -397,6 +457,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "reply":
+        bigModal.value = false
         h2Title.value = "文章檢舉管理";
         addbutton.value = false;
         updateTable.value = "REPLY_REPORT";
@@ -423,12 +484,14 @@ watch(leftNavTag, async (newTab) => {
         ];
       break;
     case "news":
+        bigModal.value = true
         h2Title.value = "最新消息管理";
         addbutton.value = true;
         btnName.value = "新增消息";
         updateTable.value = "NEWS";
         selectTable.value = "select_news.php";
         whereVariable.value = [];
+        fileImage.value = ""       //圖片上傳
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "標題", type: "text" },
@@ -456,12 +519,14 @@ watch(leftNavTag, async (newTab) => {
         ];
       break;
     case "FraudKnowledge":
+        bigModal.value = true
         h2Title.value = "詐騙知識測驗管理";
         addbutton.value = true;
         btnName.value = "新增題目";
         updateTable.value = "GAME";
         selectTable.value = "select_game.php";
         whereVariable.value = [];
+        fileImage.value = ""     
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "問題", type: "text" },
@@ -496,6 +561,7 @@ watch(leftNavTag, async (newTab) => {
         ];
         break;
     case "staff":
+        bigModal.value = false
         h2Title.value = "後台帳號管理";
         addbutton.value = true;
         btnName.value = "新增管理員帳號";
@@ -503,6 +569,8 @@ watch(leftNavTag, async (newTab) => {
         accountTypeID.value = 2;
         selectTable.value = "select_user.php";
         whereVariable.value = [2, 3];
+        account.value = ""
+        password.value = ""
         fields.value = [
             { name: "ID", css: "d-none" },
             { name: "帳號", type: "text", validate: "required" },
@@ -712,31 +780,35 @@ const handleSubmit = async (e) => {
             }
         }
     }
-    if(leftNavTag.value === 'FraudKnowledge'){
+    if(leftNavTag.value === 'news'){
         const formData = new FormData();
-        // formData.append('newTitle', newTitle.value);
-        // formData.append('newContent', newContent.value);
-        // formData.append('newAnswer', newAnswer.value);
-        // formData.append('newExplain', newExplain.value);
+        formData.append('newsTitle', newsTitle.value);
+        formData.append('newsTag', Number(newsTag.value));      
+        formData.append('newsContent', newsContent.value);
         formData.append('newImage', fileImage.value);
-        formData.append('where', '資料夾位置')
         try {
-            const response = await axios.post(`${API_URL}add_game.php`, formData, {
+            const response = await axios.post(`${API_URL}add_news.php`, formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data'
                 }
             });
-            if (response.data === "題目新增成功") {
+
+            const strError = response.data.trimEnd();
+            const arrError = strError.split(',')
+
+            if (arrError.includes('最新消息新增成功')) {
                 // 清除表單
-                account.value = "";
-                password.value = "";
-                nickname.value = "";
+                newsTitle.value = "";
+                newsTag.value = "1";
+                newsContent.value = "";
                 
+                //清除 file的input
+                fileImage.value = "";
+                ImgName.value = ""
+
                 // 清除可能存在的error
-                removeError("newTitle");
-                removeError("newContent");
-                removeError("newAnswer");
-                removeError("newExplain");
+                removeError("newsTitle");
+                removeError("newsContent");
                 // 關閉彈窗
                 showModal.value = false;
                 Swal.fire({
@@ -751,22 +823,83 @@ const handleSubmit = async (e) => {
                 reloadJsGrid();
             } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
                 addError("upload_img", "只允許上傳 JPG 或 PNG 格式的圖片檔案");
-            } else if(response.data === '欄位都未輸入'){
-                console.log('123')
-                addError("newTitle", "題目尚未輸入");
-                addError("newContent", "選項未輸入");
-                addError("newAnswer", "解答尚未輸入");
-                addError("newExplain", "解答尚未輸入");
-            } else if(response.data === '題目尚未輸入'){
-                addError("newTitle", "題目尚未輸入");
-            } else if(response.data === '選項未輸入'){
-                addError("newTitle", "選項未輸入");
-            } else if(response.data === '解答尚未輸入'){
-                addError("newAnswer", "解答尚未輸入");
-            } else if(response.data === '解釋尚未輸入'){
-                addError("newAnswer", "解釋尚未輸入");
+            } else {
+
+
+                if(arrError.includes('標題尚未輸入')){
+                    addError("newsTitle", "標題尚未輸入");
+                }
+                if(arrError.includes('內容未輸入')){
+                    addError("newsContent", "內容未輸入");
+                }
             }
-            console.log(response.data);
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
+        }
+    }
+    if(leftNavTag.value === 'FraudKnowledge'){
+        const formData = new FormData();
+        formData.append('gameTitle', gameTitle.value);
+        formData.append('gameContent', gameContent.value);
+        formData.append('gameAnswer', gameAnswer.value);
+        formData.append('gameExplain', gameExplain.value);
+        formData.append('newImage', fileImage.value);
+        try {
+            const response = await axios.post(`${API_URL}add_game.php`, formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+            });
+            const strError = response.data.trimEnd();
+            const arrError = strError.split(',')
+
+            if (arrError.includes('題目新增成功')) {
+                // 清除表單
+                gameTitle.value = "";
+                gameContent.value = "";
+                gameAnswer.value = "";
+                gameExplain.value = "";
+                //清除 file的input
+                fileImage.value = "";
+                ImgName.value = ""
+                
+                // 清除可能存在的error
+                removeError("gameTitle");
+                removeError("gameContent");
+                removeError("gameAnswer");
+                removeError("gameExplain");
+                // 關閉彈窗
+                showModal.value = false;
+                Swal.fire({
+                    title: "新增成功",
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+    
+                // 將Client資料更新
+                clients.value = await selectUser();
+                // 重新渲染 jsGrid
+                reloadJsGrid();
+            } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
+                addError("upload_img", "只允許上傳 JPG 或 PNG 格式的圖片檔案");
+            } else {
+                if(arrError.includes('題目尚未輸入')){
+                    addError("gameTitle", "題目尚未輸入");
+                }
+                if(arrError.includes('選項未輸入')){
+                    addError("gameContent", "選項內容未輸入");
+                }
+                if(arrError.includes('解答尚未輸入')){
+                    addError("gameAnswer", "解答尚未輸入");
+                }
+                if(arrError.includes('解釋尚未輸入')){
+                    addError("gameExplain", "解釋尚未輸入");
+                }
+            }
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data.message);
@@ -823,11 +956,6 @@ async function selectUser() {
         }
     }
 }
-
-//input的focus事件
-// const handleFocus = (theInputID) => {
-//     removeError(theInputID);
-// };
 
 // 新增錯誤訊息
 const addError = (InputID, ErrorText) => {

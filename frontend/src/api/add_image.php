@@ -24,7 +24,7 @@
     $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
 
     //檔案最終存放位置
-    $filePath = "../assets/img/".$where."/".$fileName;
+    $filePath = $addImageUrl.$where."/".$fileName;
     // "../assets/img/test"：要擺放的資料夾名稱
     // $fileName：檔案存取的名字
     

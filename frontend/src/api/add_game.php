@@ -24,7 +24,7 @@
     $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
 
     //檔案最終存放位置
-    $filePath = "../assets/img/p06_discuss/".$fileName;
+    $filePath = $addImageUrl."p07_demo/p07_demoGame/".$fileName;
     // "../assets/img/test"：要擺放的資料夾名稱
     // $fileName：檔案存取的名字
     
@@ -37,25 +37,25 @@
         return $str;
     }
 
-    $newTitle = isset($_POST['newTitle']) ? filterString($_POST['newTitle']) : '';
-    $newContent = isset($_POST['newContent']) ? filterString($_POST['newContent']) : '';
-    $newAnswer = isset($_POST['newAnswer']) ? filterString($_POST['newAnswer']) : '';
-    $newExplain = isset($_POST['newExplain']) ? filterString($_POST['newExplain']) : '';
+    $gameTitle = isset($_POST['gameTitle']) ? filterString($_POST['gameTitle']) : '';
+    $gameContent = isset($_POST['gameContent']) ? filterString($_POST['gameContent']) : '';
+    $gameAnswer = isset($_POST['gameAnswer']) ? filterString($_POST['gameAnswer']) : '';
+    $gameExplain = isset($_POST['gameExplain']) ? filterString($_POST['gameExplain']) : '';
 
-    if(!empty($newTitle) && !empty($newContent) && !empty($newAnswer) && !empty($newExplain)){
+    if(!empty($gameTitle) && !empty($gameContent) && !empty($gameAnswer) && !empty($gameExplain)){
 
             // 建立SQL
-            $sql = "INSERT INTO GAME (QUESTION, `OPTION`, ANSWER, PIC, DESCRIPTION) VALUES (:newTitle, :newContent, :newAnswer, '$fileName', :newExplain)
+            $sql = "INSERT INTO GAME (QUESTION, `OPTION`, ANSWER, PIC, DESCRIPTION) VALUES (:gameTitle, :gameContent, :gameAnswer, '$fileName', :gameExplain)
             ";
 
             // 執行
             $statement = $pdo->prepare($sql);
 
             //綁定變數
-            $statement ->bindValue(":newTitle", $newTitle);
-            $statement ->bindValue(":newContent", $newContent);
-            $statement ->bindValue(":newAnswer", $newAnswer);
-            $statement ->bindValue(":newExplain", $newExplain);
+            $statement ->bindValue(":gameTitle", $gameTitle);
+            $statement ->bindValue(":gameContent", $gameContent);
+            $statement ->bindValue(":gameAnswer", $gameAnswer);
+            $statement ->bindValue(":gameExplain", $gameExplain);
             //執行sql語法
             $statement->execute();
 
@@ -63,22 +63,18 @@
             move_uploaded_file($filePath_Temp, $filePath);
             
             echo '題目新增成功';
-    } 
-    else{
-        if (empty($newTitle) && empty($newContent) && empty($newAnswer) && empty($newExplain)) {
-            echo '欄位都未輸入';
+    } else {
+        if (empty($gameTitle)) {
+            echo '題目尚未輸入,';
         }
-        if (empty($newTitle) && !empty($newContent) && !empty($newAnswer) && !empty($newExplain)) {
-            echo '題目尚未輸入';
+        if (empty($gameContent)) {
+            echo '選項未輸入,';
         }
-        if (!empty($newTitle) && empty($newContent) && !empty($newAnswer) && !empty($newExplain)) {
-            echo '選項未輸入';
+        if (empty($gameAnswer)) {
+            echo '解答尚未輸入,';
         }
-        if (!empty($newTitle) && !empty($newContent) && empty($newAnswer) && !empty($newExplain)) {
-            echo '解答尚未輸入';
-        }
-        if (!empty($newTitle) && !empty($newContent) && !empty($newAnswer) && empty($newExplain)) {
-            echo '解釋尚未輸入';
+        if (empty($gameExplain)) {
+            echo '解釋尚未輸入,';
         }
     }
     
