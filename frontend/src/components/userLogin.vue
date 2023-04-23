@@ -64,7 +64,7 @@
                   <input
                     class="input_p08_user_login"
                     type="password"
-                    placeholder="請輸入6個以上字元的密碼不含空格"
+                    placeholder="請輸入3個以上字元的密碼不含空格"
                     v-model.trim="password"
                     id="password"
                     required
@@ -118,7 +118,7 @@
                   <input
                     class="input_p08_user_login"
                     type="password"
-                    placeholder="請輸入6個以上字元的密碼"
+                    placeholder="請輸入密碼"
                     v-model.trim="passwordLogin"
                   />
                   <div class="div_p08_user_loginType">
@@ -189,7 +189,10 @@ export default {
       if (this.password !== this.confirmPassword) {
         // alert("密碼不正確");
         this.passwordsMatch = true;
-        return;
+        return false;
+      } else {
+        this.passwordsMatch = false;
+        return true;
       }
     },
     handleSubmit() {
@@ -245,6 +248,18 @@ export default {
           this.signupFailed = true;
         });
     },
+    // 刪除過期的token好像目前還沒有作用
+    checkAndClearToken() {
+      const currentTime = new Date().getTime(); // 現在的時間戳記
+      const tokenExpireTime = localStorage.getItem("tokenExpireTime"); // 將字串轉換為數字
+      if (currentTime > tokenExpireTime) {
+        // token 已過期，執行登出流程並清除 localStorage 中的 token 資訊
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpireTime");
+        // 執行登出流程 重新整理頁面
+        location.reload();
+      }
+    },
     // 登入
     handleLogin() {
       const data = {
@@ -260,24 +275,16 @@ export default {
           this.$emit("close");
           localStorage.setItem("token", response.data.id); //抓會員ID
           // 設定 token 過期時間為 3 小時
-          const expireTime = new Date().getTime() + 3 * 60 * 60 * 1000; // 2 小時後的時間戳記
+          const expireTime = new Date().getTime() + 3 * 60 * 60 * 1000; // 3 小時後的時間戳記
+          // const expireTime = new Date().getTime() + (3 * 1000);
           localStorage.setItem("tokenExpireTime", expireTime);
 
           // 檢查 token 是否過期
-          const currentTime = new Date().getTime(); // 現在的時間戳記
-          const tokenExpireTime = localStorage.getItem("tokenExpireTime");
-          if (currentTime > tokenExpireTime) {
-            // token 已過期，執行登出流程並清除 localStorage 中的 token 資訊
-            localStorage.removeItem("token");
-            localStorage.removeItem("tokenExpireTime");
-            // 執行登出流程...
-          } else {
-            // token 仍在有效期內，可以進行 API 呼叫等操作
-            console.log(response);
+          this.checkAndClearToken();
+
+          // token 仍在有效期內，可以進行 API 呼叫等操作
+          console.log(response);
           alert("登入成功");
-          }
-
-
         })
         .catch((error) => {
           console.log(error.response);
@@ -286,6 +293,12 @@ export default {
     },
   },
   computed: {},
+  watch: {
+    // 監聽 localStorage 中的 tokenExpireTime
+    'localStorage.tokenExpireTime': function (newVal) {
+    this.checkAndClearToken();
+  }
+  },
 };
 </script>
 

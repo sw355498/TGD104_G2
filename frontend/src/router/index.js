@@ -125,15 +125,35 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p09_team.vue')
   },
   {
+    path: '/b_login',
+    name: 'b_login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/b_login.vue')
+  },
+  {
     path: '/b_index',
     name: 'b_index',
     component: () => import(/* webpackChunkName: "about" */ '../views/b_index.vue')
+  },
+  {
+    path: '/b_data',
+    name: 'b_data',
+    component: () => import(/* webpackChunkName: "about" */ '../views/b_data.vue')
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+router.beforeEach((to, from, next) => {
+  const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
+  const accountTypeId =  currentStaff.account_type_id
+
+  if (to.path === '/b_index' && (!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))) {
+    next('/b_login');
+  } else {
+    next();
+  }
 })
 
 export default router

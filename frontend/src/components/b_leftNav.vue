@@ -3,13 +3,13 @@
         <div class="b_login_user d-flex flex-column justify-content-evenly">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="b_user_pic">
-                    <img src="https://loremflickr.com/600/400" alt="cat"  class="b_user_pic"/>
+                    <img src="../assets/img/p08_user/user.jpg" alt="user.jpg"  class="b_user_pic border border-dark"/>
                 </div>
-                <span class="paragraph m-0">User_name</span>
+                <span class="paragraph m-0">{{ userName }}</span>
             </div>
             <div class="login d-flex justify-content-center align-items-center">
                 <button class="small_button me-3">帳號設定</button>
-                <button class="small_button">登出</button>
+                <button class="small_button" @click="b_logout">登出</button>
             </div>
         </div>
         <nav>
@@ -24,7 +24,7 @@
                             {{item.name}}
                     </a>
                 </li>
-                <li v-if="userlevel">
+                <li v-if="true">
                     <a
                         @click="changeTab('staff')"  
                         class="link" 
@@ -40,12 +40,11 @@
 </template>
 <script setup>
     import { ref } from 'vue'
-
+    import router from '@/router'
 
     let id = 0
     const fontawesome = ref(' fa-solid fa-fw')
     const selectedTab = ref('user')
-    const userlevel = ref(true)
     const navItems = ref([
         {id: id++,name:'會員管理', icon:'fa-user', clickName: 'user'},
         {id: id++,name:'討論版管理', icon:'fa-message', clickName: 'discuss'},
@@ -61,6 +60,18 @@
     function changeTab(newTab){
         selectedTab.value = newTab
         emit('response', selectedTab.value)
+    }
+
+    //父元件傳過來的值
+    const props = defineProps({
+        userLevel: Boolean,
+        userName: String
+    })
+
+    //帳號登出
+    const b_logout = () => {
+        sessionStorage.removeItem("staff");
+        router.push('/')
     }
 </script>
 <style>

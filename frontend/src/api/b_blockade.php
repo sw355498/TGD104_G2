@@ -7,13 +7,14 @@
     //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
     $data = json_decode($postData, true);
 
-    $updateTable = $data['updateTable'];
+    $whichTable = $data['whichTable'];
     $updateStatusID = $data['updateStatusID'];
     $updateID = $data['updateID'];
 
     //建立SQL語法
-    switch ($updateTable) {
+    switch ($whichTable) {
         case 'USER':
+        case 'staff':
             $sql = "UPDATE USER SET USER_STATUS_ID = :updateStatusID WHERE ID = :updateID";
             break;
 

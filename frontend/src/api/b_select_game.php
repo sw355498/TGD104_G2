@@ -3,8 +3,22 @@
     // 資料庫連線
     require_once ("getConn_nopush.php");
 
+<<<<<<< HEAD:frontend/src/api/select_game.php
     // 從資料庫中取得問題的資料
     $sql = "SELECT * FROM GAME";
+=======
+    //取得 HTTP POST  Client 端所傳送過來的原始資料
+    $postData = file_get_contents("php://input");
+    //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
+    $data = json_decode($postData, true);
+
+
+    //建立SQL語法
+    $sql = "SELECT ID, QUESTION AS '問題', ANSWER AS '答案' 
+        FROM GAME
+        WHERE GAME_STATUS = 1
+        ORDER BY ID DESC;";
+>>>>>>> 6ca3dc74f8aa9b7961638619e4ffc08ccae144cd:frontend/src/api/b_select_game.php
 
     $statement = $pdo->prepare($sql);
     $statement->execute();

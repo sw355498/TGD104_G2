@@ -137,8 +137,8 @@ export default {
 
           vedio: {
             1: "https://www.youtube.com/embed/UWFGV6lnO38",
-            2: "https://www.youtube.com/embed/UWFGV6lnO38",
-            3: "https://www.youtube.com/embed/UWFGV6lnO38",
+            2: "https://www.youtube.com/embed/895TgZK1U_E",
+            3: "https://www.youtube.com/embed/3W0INzg6S3Q",
           },
         },
         {
@@ -162,7 +162,7 @@ export default {
           },
 
           vedio: {
-            1: "https://www.youtube.com/embed/6BZOSoA4A6I",
+            1: "https://www.youtube.com/embed/EiVY8wS-Xt8",
             2: "https://www.youtube.com/embed/6BZOSoA4A6I",
           },
         },
@@ -184,8 +184,8 @@ export default {
           },
 
           vedio: {
-            1: "https://www.youtube.com/embed/6BZOSoA4A6I",
-            2: "https://www.youtube.com/embed/6BZOSoA4A6I",
+            1: "https://www.youtube.com/embed/b9O9BoJseAA",
+            2: "https://www.youtube.com/embed/8L1OCXGEqhk",
           },
         },
         {
@@ -207,8 +207,8 @@ export default {
           },
 
           vedio: {
-            1: "https://www.youtube.com/embed/6BZOSoA4A6I",
-            2: "https://www.youtube.com/embed/6BZOSoA4A6I",
+            1: "https://www.youtube.com/embed/kihiPrFBIko",
+            2: "https://www.youtube.com/embed/IxfPWjSvWLM",
           },
         },
         {
@@ -229,8 +229,8 @@ export default {
           },
 
           vedio: {
-            1: "https://www.youtube.com/embed/6BZOSoA4A6I",
-            2: "https://www.youtube.com/embed/6BZOSoA4A6I",
+            1: "https://www.youtube.com/embed/pwcYR7rg-uA",
+            2: "https://www.youtube.com/embed/CLVa1Bb4vZU",
           },
         },
         {
@@ -253,8 +253,8 @@ export default {
           },
 
           vedio: {
-            1: "https://www.youtube.com/embed/6BZOSoA4A6I",
-            2: "https://www.youtube.com/embed/6BZOSoA4A6I",
+            1: "https://www.youtube.com/embed/AxDd2jV0YhA",
+            2: "https://www.youtube.com/embed/kNaPRiB0enU",
           },
         },
       ],
