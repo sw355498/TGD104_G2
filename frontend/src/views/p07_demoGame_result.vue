@@ -236,8 +236,13 @@ export default {
     
     sendScore(){
         const token = localStorage.getItem("token"); //取得token (假設為會員 ID)
-        const apiUrl = `${API_URL}/add_score.php?token=${token}`;
-        const data = {score: this.score};
+        const apiUrl = `${API_URL}/add_score.php`;
+        //const data = {score: this.score};
+
+        //封裝data兩個資料('token','score')
+        var data = new FormData();
+        data.append('token', token);
+        data.append('score', this.score);
         axios.post(apiUrl,data).then((response) =>{
             console.log(response);
         }).catch((error) => {
