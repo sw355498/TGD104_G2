@@ -3,7 +3,7 @@
         <div class="b_login_user d-flex flex-column justify-content-evenly">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="b_user_pic">
-                    <img src="../assets/img/p08_user/user.jpg" alt="user.jpg"  class="b_user_pic border border-dark"/>
+                    <img :src="userImage" :alt="userPic"  class="b_user_pic border border-dark"/>
                 </div>
                 <span class="paragraph m-0">{{ userName }}</span>
             </div>
@@ -41,6 +41,7 @@
 <script setup>
     import { ref } from 'vue'
     import router from '@/router'
+    const userImage = ref('')
 
     let id = 0
     const fontawesome = ref(' fa-solid fa-fw')
@@ -65,8 +66,10 @@
     //父元件傳過來的值
     const props = defineProps({
         userLevel: Boolean,
-        userName: String
+        userName: String,
+        userPic: String
     })
+    userImage.value = require('@/assets/img/p08_user/' + props.userPic)
 
     //帳號登出
     const b_logout = () => {
