@@ -142,6 +142,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             }else{
                 urlExist.value = false;
             }
+            // 檢查title、notes欄位是否為空，
+            if (title.value == '') {title.value = '-'}
+            if (notes.value == '') {notes.value = null}
             const response = await axios.post(`${API_URL}reportURL.php`, {
                 url: url.value,
                 email: email.value,
