@@ -202,11 +202,11 @@ const nav = reactive([
       },
     ],
   },
-  {
-    id: "p08",
-    router: "/user",
-    title: "會員中心",
-  },
+  // {
+  //   id: "p08",
+  //   router: "/user",
+  //   title: "會員中心",
+  // },
   {
     id: "p09",
     router: "/team",
