@@ -139,6 +139,11 @@ const routes = [
     name: 'b_data',
     component: () => import(/* webpackChunkName: "about" */ '../views/b_data.vue')
   },
+  {
+    path: '/b_updata',
+    name: 'b_updata',
+    component: () => import(/* webpackChunkName: "about" */ '../views/b_updata.vue')
+  },
 ]
 
 const router = createRouter({
@@ -150,6 +155,16 @@ router.beforeEach((to, from, next) => {
   const accountTypeId =  currentStaff.account_type_id
 
   if (to.path === '/b_index' && (!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))) {
+    next('/b_login');
+  } else {
+    next();
+  }
+    if (to.path === '/b_data' && (!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))) {
+    next('/b_login');
+  } else {
+    next();
+  }
+  if (to.path === '/b_updata' && (!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))) {
     next('/b_login');
   } else {
     next();

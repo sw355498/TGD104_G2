@@ -119,6 +119,9 @@
                 background-color: #93AAD4;
                 overflow: scroll;
                 overflow-x: hidden;
+                &::-webkit-scrollbar{
+                    width: 0;
+                }
                 @include rwd(md){
                     width: 449px;
                     height: 836px;
@@ -324,6 +327,7 @@
 
 
                     display: block;
+                    padding: 5px 10px;
                     width: 360px;
                     height: 50px;
                     font-size: 22px;
@@ -334,13 +338,13 @@
                         background-color: $btn_hover;
                     }
                     @include rwd(md){
-                        font-size: 18px;
+                        font-size: 16px;
                         width: 220px;
                         height: 40px;
                         margin-top: 25px;
                     }
                     @include rwd(sm){
-                        font-size: 16px;
+                        font-size: 14px;
                         width: 200px;
                         height: 36px;
                         margin-top: 20px;
