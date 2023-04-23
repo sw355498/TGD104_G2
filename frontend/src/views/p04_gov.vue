@@ -53,6 +53,8 @@
       description: '台灣事實查核中心參考國外具代表性的事實查核機制，並輔以我國的傳播生態需求，依循專業、透明、公正的原則，執行公共事務相關訊息之事實查核。',
       image: require('../assets/img/p04_gov/factCheck_logo.jpg'),
       facebookShareLink: 'https://www.facebook.com/sharer.php?u=https://tfc-taiwan.org.tw/',
+      lineShareLink: 'https://social-plugins.line.me/lineit/share?url=https://tfc-taiwan.org.tw/',
+      twitterShareLink: 'https://www.twitter.com/share?url=https://tfc-taiwan.org.tw/',
       link: 'https://tfc-taiwan.org.tw/',
     },
     {
@@ -60,6 +62,8 @@
       description: '全台投資詐騙猖獗，為強化防範金融投資詐騙，證交所設立「證券投資反詐騙專區」，有反詐騙宣導、影片及資訊等，提供投資大眾，面對不明電話、簡訊、網頁等，應謹慎查證，維護自身投資權益及保障財產安全。',
       image: require('../assets/img/p04_gov/twse_logo.jpg'),
       facebookShareLink: 'https://www.facebook.com/sharer.php?u=https://www.twse.com.tw/anti-fraud/zh/index.html',
+      lineShareLink: 'https://social-plugins.line.me/lineit/share?url=https://www.twse.com.tw/anti-fraud/zh/index.html',
+      twitterShareLink: 'https://www.twitter.com/share?url=https://www.twse.com.tw/anti-fraud/zh/index.html',
       link: 'https://www.twse.com.tw/anti-fraud/zh/index.html',
     },
     {
@@ -67,6 +71,8 @@
       description: '金管會積極推動金融防詐騙宣導工作，整合所轄業務局及金融周邊單位重要防詐宣導內容，設置金融防詐騙宣導專區，透過案例提醒民眾。',
       image: require('../assets/img/p04_gov/fsc_logo.jpg'),
       facebookShareLink: 'https://www.facebook.com/sharer.php?u=https://moneywise.fsc.gov.tw/home.jsp?id=24&parentpath=0',
+      lineShareLink: 'https://social-plugins.line.me/lineit/share?url=https://moneywise.fsc.gov.tw/home.jsp?id=24&parentpath=0',
+      twitterShareLink: 'https://www.twitter.com/share?url=https://moneywise.fsc.gov.tw/home.jsp?id=24&parentpath=0',
       link: 'https://moneywise.fsc.gov.tw/home.jsp?id=24&parentpath=0',
     },
     {
@@ -74,6 +80,8 @@
       description: '台灣大自主研發偵測偽冒網站服務，協助企業主動偵測可能危害客戶之釣魚網站。',
       image: require('../assets/img/p04_gov/taiwanmobile_logo.jpg'),
       facebookShareLink: 'https://www.facebook.com/sharer.php?u=https://www.twmsolution.com/secguard/TWMAnti_phishing/',
+      lineShareLink: 'https://social-plugins.line.me/lineit/share?url=https://www.twmsolution.com/secguard/TWMAnti_phishing/',
+      twitterShareLink: 'https://www.twitter.com/share?url=https://www.twmsolution.com/secguard/TWMAnti_phishing/',
       link: 'https://www.twmsolution.com/secguard/TWMAnti_phishing/',
     },
     {
@@ -81,6 +89,8 @@
       description: '趨勢科技團隊致力於研究各種詐騙行為、新聞與犯罪模型，並與警政署165防詐騙專線合作，擁有專門防詐騙的AI聊天機器人及全台最大詐騙資料庫。',
       image: require('../assets/img/p04_gov/trendmicro_logo.jpg'),
       facebookShareLink: 'https://www.facebook.com/sharer.php?u=https://getdr.com/',
+      lineShareLink: 'https://social-plugins.line.me/lineit/share?url=https://getdr.com/',
+      twitterShareLink: 'https://www.twitter.com/share?url=https://getdr.com/',
       link: 'https://getdr.com/',
     },
   ])
