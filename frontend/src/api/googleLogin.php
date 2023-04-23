@@ -25,7 +25,7 @@
         ";
 
         //密碼加密
-        $password = password_hash($password, PASSWORD_BCRYPT);
+        // $password = password_hash($password, PASSWORD_BCRYPT);
 
         // 執行
         $statement = $pdo->prepare($sql);
@@ -37,9 +37,19 @@
         //執行sql語法
         $statement->execute();
 
-        echo '帳號註冊成功';
+        $response = array(
+            "success" => true,
+            "message" => "帳號註冊成功",
+            "id" => $pdo->lastInsertId()
+        );
+        echo json_encode($response);
     } else {
-        echo '登入成功';
+        $response = array(
+            "success" => true,
+            "message" => "登入成功",
+            "id" => $result['ID']
+        );
+        echo json_encode($response);
     }
 
 ?>

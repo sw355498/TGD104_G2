@@ -144,7 +144,7 @@
             }else{
               alert(response.data);
             }
-            localStorage.setItem("lineToken", userId);
+            localStorage.setItem("token", userId);
           })
           .catch((error)=>{
             alert('發生了一些錯誤，請聯絡管理員!')
