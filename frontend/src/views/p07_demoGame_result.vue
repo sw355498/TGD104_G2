@@ -10,7 +10,8 @@
 
                 <!-- //打X按鈕 -->
                 <div class="alert_cross"  @click="closeLoginAlert"  >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>    
+                    <svg><use xlink:href="#cross" /></svg>
+                
                 </div>   
                 <div class="login_panel">
                 
@@ -60,13 +61,9 @@
 
                 <button class="again_quiz_botton">
                    <router-link to='/demoGame'>
-                    再玩一次&emsp;  
-                   <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="9.92871" y="8" width="10" height="10" transform="rotate(-45 9.92871 8)" fill="#033159"/>
-                    <rect x="0.928711" y="17" width="10" height="10" transform="rotate(-45 0.928711 17)" fill="#033159"/>
-                    <rect x="18.9287" y="17" width="10" height="10" transform="rotate(-45 18.9287 17)" fill="#033159"/>
-                    <rect x="9.92871" y="26" width="10" height="10" transform="rotate(-45 9.92871 26)" fill="#033159"/>
-                    </svg>
+                    再玩一次&emsp;
+                    <svg><use xlink:href="#4diamond" /></svg>  
+                 
 
                     </router-link></button>
 
@@ -80,13 +77,8 @@
 
                 <button class="index_botton">
                    <router-link to='/index'>
-                    回首頁&emsp;  
-                   <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="9.92871" y="8" width="10" height="10" transform="rotate(-45 9.92871 8)" fill="#033159"/>
-                    <rect x="0.928711" y="17" width="10" height="10" transform="rotate(-45 0.928711 17)" fill="#033159"/>
-                    <rect x="18.9287" y="17" width="10" height="10" transform="rotate(-45 18.9287 17)" fill="#033159"/>
-                    <rect x="9.92871" y="26" width="10" height="10" transform="rotate(-45 9.92871 26)" fill="#033159"/>
-                    </svg>
+                    回首頁&emsp;
+                    <svg><use xlink:href="#4diamond" /></svg>    
                     </router-link></button>
 
 
