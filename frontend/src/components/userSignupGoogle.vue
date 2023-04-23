@@ -39,12 +39,13 @@
           }else{
             alert(response.data);
           }
-          localStorage.setItem("token", userUid.value);
+          localStorage.setItem("googleToken", userUid.value);
         })
         .catch((error)=>{
           alert('發生了一些錯誤，請聯絡管理員!')
         })
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.log(error.response);
     });
   }
