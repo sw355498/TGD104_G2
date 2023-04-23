@@ -757,24 +757,22 @@ function operate(e) {
             case "修改":
             case "審核":           
                 router.push({
-                    path: '/b_data',
-                        query: {
-                            id: updateID.value,
-                            readonly: false,
-                            whichTable: whichTable.value
-                        }
-                    })
+                    path: '/b_updata',
+                    query: {
+                        id: updateID.value,
+                        whichTable: whichTable.value
+                    }
+                })
                 break;
             case "查看":
                 router.push({
                     path: '/b_data',
-                        query: {
-                            id: updateID.value,
-                            readonly: true,
-                            whichTable: whichTable.value
-                        }
-                    })
-                break;
+                    query: {
+                        id: updateID.value,
+                        whichTable: whichTable.value
+                    }
+                })
+            break;
         }
 }
 
