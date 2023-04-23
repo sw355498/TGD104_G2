@@ -301,9 +301,19 @@ export default {
         districts.value = addressList.value
             .filter(address => address.ADDRESS.startsWith(selectedCity.value))
             .map(address => {
+                 // 這個正則表達式匹配地址中的鄉鎮市名稱，並將其捕獲到第一個分組中
+                const pattern = /(.+?[縣市])(.+?[區鎮市鄉]).*/;
+                const match = address.ADDRESS.match(pattern);
+                if (match) {
+                    // 如果找到了鄉鎮市名稱，返回第二個分組
+                    return match[2];
+                } else {
+                    // 如果沒有找到鄉鎮市名稱，返回空字符串
+                    return '';
+                }
                 // const matches = address.ADDRESS.match(/(區)/)
-                const matches = address.ADDRESS.match(/(市|鄉|區|鎮)/)
-                return matches ? address.ADDRESS.slice(3, matches.index + 1) : ''
+                // const matches = address.ADDRESS.match(/(市|鄉|區|鎮)/)
+                // return matches ? address.ADDRESS.slice(3, matches.index + 1) : ''
             })
             .filter((district, index, self) => self.indexOf(district) === index);
         selectedDistrict.value = '';
