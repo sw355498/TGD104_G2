@@ -19,7 +19,7 @@ module.exports = defineConfig({
   // ? '/tgd104/g2/dist/'
   // : '/',
 
-  publicPath: process.env.NODE_ENV === "production" ? "/tgd104/g2/dist/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/tgd104/g2/" : "/",
   configureWebpack: {
     plugins: [
       //jQuery 設定

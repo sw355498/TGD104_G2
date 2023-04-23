@@ -9,7 +9,7 @@
   // LINE 登入
   function openLineLogin(response) {
     let client_id = '1660893613';
-    let redirect_uri = 'https://tibamef2e.com/tgd104/g2/dist/index';
+    let redirect_uri = 'https://tibamef2e.com/tgd104/g2/index';
     let link = 'https://access.line.me/oauth2/v2.1/authorize?';
     link += 'response_type=code';
     link += '&client_id=' + client_id;
@@ -33,7 +33,7 @@
     data: {
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: 'https://tibamef2e.com/tgd104/g2/dist/index',
+      redirect_uri: 'https://tibamef2e.com/tgd104/g2/index',
       client_id: '1660893613',
       client_secret: 'dd30d5f42bc1a0e89a1eb27679c5a488'
     },
