@@ -263,8 +263,8 @@ const loginTypeId =  ref(currentStaff.account_type_id)
 // });
 //簡寫成三元
 const userLevel = computed(() => loginTypeId.value === 3 ? true : false);
-const userName = computed(() => loginNickname.value.trim() ? loginNickname.value : loginAccount.value)
-
+const userName = computed(() => loginNickname.value ? loginNickname.value : loginAccount.value)
+const userPic = computed(() => loginPic.value ? loginPic.value : 'user.jpg')
 
 //Swal套件的變數
 const swalTitle = ref("");
