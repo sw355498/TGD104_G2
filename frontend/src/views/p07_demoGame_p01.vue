@@ -95,6 +95,8 @@
 
 import frontFooter from "@/components/f_footer.vue";
 
+import axios from "axios";
+
 export default {
 
     components: {
@@ -103,7 +105,8 @@ export default {
     data(){
         return{
             //題目選項，圖片跟答案
-            questions:[{
+            questions:[
+                {
                 text:'請問哪一支電話號碼會是詐騙號碼？',
                 image:'@/assets/img/p07_demo/p07_demoGame/quiz1.jpg',
                 answers:["A.165","B.+886227652122"," C.0800700365","D.以上皆是"],
@@ -197,6 +200,10 @@ export default {
         };
     },
 
+    // created(){
+    //     this.fetchQuestions()
+    // },
+
     computed:{
         //每按下一題，題目內容會變動
         questionText(){
@@ -211,6 +218,18 @@ export default {
 
 
     methods:{
+
+        // fetchQuestions(){
+        //     axios.get('../api/select_game.php')
+        //     .then(response => {
+        //         this.QUIZ = response.data
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        // },
+
+
         // //每按下一題，選項會變更
         // changeQuestion(){
         //     this.questionNumber +=1;
@@ -224,7 +243,7 @@ export default {
         changeQuestionAndScrollToTop() {
             if(this.questionNumber === this.questions.length){
                 localStorage.setItem('score', this.score);
-                this.$router.push('p07demoGameresult');
+                this.$router.push('demoGameresult');
             }else{
                 this.questionNumber +=1;
                 window.scrollTo(0, 0);

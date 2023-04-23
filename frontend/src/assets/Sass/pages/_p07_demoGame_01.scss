@@ -460,17 +460,7 @@
     }
   }
 
-  .slide-enter-active,
-  .slide-leave-active {
-  transition: all 0.3s ease;
-}
 
-  .slide-enter,
-  .slide-leave-to {
-    height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
 
     
     //分數
@@ -506,10 +496,12 @@
 
       @include rwd('md'){
         margin-left: 35%;
+        margin-top:320px;
       }
       @include rwd('sm'){
         border:1px solid white;
         margin-left: 25%;
+        margin-top:350px;
       }
     }
   
