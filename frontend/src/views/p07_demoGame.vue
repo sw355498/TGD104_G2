@@ -37,7 +37,7 @@
              <div class="star">
 
                 <button class="game_start_botton">
-                   <router-link to='/p07demoGamep01'>
+                   <router-link to='/demoGamep01'>
                     遊戲開始&emsp;  
                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="9.92871" y="8" width="10" height="10" transform="rotate(-45 9.92871 8)" fill="#033159"/>

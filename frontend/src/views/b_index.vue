@@ -755,11 +755,25 @@ function operate(e) {
                 blockadeUser();
                 break;
             case "修改":
-            case "審核":
-                alert(`修改帳號 ${updateID.value}`);
+            case "審核":           
+                router.push({
+                    path: '/b_data',
+                        query: {
+                            id: updateID.value,
+                            readonly: false,
+                            whichTable: whichTable.value
+                        }
+                    })
                 break;
             case "查看":
-                alert(`查看帳號 ${updateID.value}`);
+                router.push({
+                    path: '/b_data',
+                        query: {
+                            id: updateID.value,
+                            readonly: true,
+                            whichTable: whichTable.value
+                        }
+                    })
                 break;
         }
 }

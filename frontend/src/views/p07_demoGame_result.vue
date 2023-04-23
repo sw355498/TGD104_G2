@@ -59,7 +59,7 @@
              <div class="again">
 
                 <button class="again_quiz_botton">
-                   <router-link to='/p07demoGame'>
+                   <router-link to='/demoGame'>
                     再玩一次&emsp;  
                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="9.92871" y="8" width="10" height="10" transform="rotate(-45 9.92871 8)" fill="#033159"/>
@@ -185,15 +185,12 @@ export default {
 
   mounted() {
 
-    cd
-    // 從localStorage中獲取分數
-    let score = localStorage.getItem('score');
-
 
     //分數延遲顯示
     setTimeout(() =>{
         this.score = localStorage.getItem('score');  //取得分數的部分
         this.showScore = true; //顯示分數的部分為是
+        this.sendScore(); //呼叫新增分數的函式
       },2500);
 
       // 亂碼效果的部分
@@ -235,7 +232,19 @@ export default {
     closeModal() {
     this.showLoginAlert = false;  //關閉顯示詢問是否要會員登入的視窗
       this.isModalVisible = true; // 這裡寫true 或false好像都可以？
-    },    
+    },
+    
+    sendScore(){
+        const token = localStorage.getItem("token"); //取得token (假設為會員 ID)
+        const apiUrl = `${API_URL}/add_score.php?token=${token}`;
+        const data = {score: this.score};
+        axios.post(apiUrl,data).then((response) =>{
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    },
     
         
     //亂碼效果
@@ -273,6 +282,8 @@ export default {
 
         },speed);
         },
+
+        //新增分數的函式
 
     },
 
