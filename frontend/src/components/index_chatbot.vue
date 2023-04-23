@@ -270,8 +270,8 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         const input_trim = input.trim();
         if (input_trim) {
             for (const obj of robotAnswerArry.value) {
-                console.log(obj.KEYWORD);
-                console.log(input_trim);
+                // console.log(obj.KEYWORD);
+                // console.log(input_trim);
             if (obj.KEYWORD === input_trim) {
                 botMsg = obj.MESSAGE;
                 break;
