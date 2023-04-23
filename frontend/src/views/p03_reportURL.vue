@@ -15,7 +15,7 @@
                     民眾若發現可疑網站<br>可於本平台進行通報<br>本站將由專人協助判斷<br>是否為「偽冒網站/詐騙網站」
                 </span>
                 <!-- 會員 -->
-                <div class="user_p03_reportURL">
+                <div class="user_p03_reportURL" v-show="token !== null">
                     <div class="userImg">
                         <img src="../assets/img/p08_user/user.jpg" alt="userImg">
                     </div>
@@ -41,7 +41,8 @@
                         v-show="urlExist"
                         class="warning_p03">該網址已通報過囉</p>
                     <!-- email -->
-                    <div class="active_p03_reportURL">
+                    <div class="active_p03_reportURL"
+                        v-show="token == NULL">
                         <label for="email">通報人信箱 (*必填)</label>
                         <input
                             v-model.trim="email"
@@ -95,6 +96,9 @@ import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
 import { API_URL } from '@/config' // 統一 api 路徑變數
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+    // 判斷是不是會員
+    const token = localStorage.getItem("token");
+    console.log(token);
     // sweetalert
     const sweetAlert = ()=>{
         Swal.fire({
@@ -112,10 +116,16 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     // 驗證表單url不等於空、email正確格式才可以送出
     const isFormValid = computed(() => {
-        return (
-            url.value !== '' &&
-            emailRegex.test(email.value)
+        if (token !=='') {
+            return (
+            url.value !== '' 
         )
+        }else{
+            return (
+                url.value !== '' &&
+                emailRegex.test(email.value)
+            )
+        }
     })
     const urlExist = ref('')
     // 傳送表單到資料庫
@@ -136,7 +146,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
                 url: url.value,
                 email: email.value,
                 title: title.value,
-                notes: notes.value
+                notes: notes.value,
+                token: token,
             })
             // 提交成功後的處理
             console.log('成功送出:', response.data);
