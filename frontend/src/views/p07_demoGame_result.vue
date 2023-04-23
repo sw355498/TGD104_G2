@@ -10,7 +10,7 @@
 
                 <!-- //打X按鈕 -->
                 <div class="alert_cross"  @click="closeLoginAlert"  >
-                    <svg><use xlink:href="#cross" /></svg>
+                <svg><use xlink:href="#cross" /></svg>
                 
                 </div>   
                 <div class="login_panel">
@@ -43,7 +43,7 @@
                 <p ref="item" v-for="(text,index) in texts" :key="index">
                     {{ text }}
                 </p>
-               <span ref="scorep" class="result_percent">...{{ score !== null ? score + '%' : '' }}</span>
+               <span ref="scorep" class="result_percent">{{ score !== null ? '...' + score + '%' : '' }}</span>
             </div>
 
             <!-- 測驗視窗2 -->
@@ -116,6 +116,8 @@ export default {
     frontFooter,
     },
 
+    
+
 
 
     data(){
@@ -131,16 +133,31 @@ export default {
     },
 
     created(){
+        
+        //禁用背景滾動的函式
+        const disableBackgroundScroll = () => {
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = '-20vh';
+            document.body.style.width = '100%';
+        };
+
+
         //判斷localStorage中是否有token
         const isLoggedIn = localStorage.getItem("token");
-        //沒有token的話跑出會員登入提示視窗
+
+
+        //沒有token的話跑出會員登入提示視窗，並禁用背景滾動
         if (!isLoggedIn){
             this.showLoginAlert = true;
-        }else{
+            disableBackgroundScroll();
+           
+        }
+        else{
             //不會跑出提示視窗
             this.showLoginAlert = false;
-
-        }
+            
+        };
     },
 
     
@@ -208,12 +225,22 @@ export default {
   
 
 
-  methods:{  
+  methods:{ 
+    
+    ableBackgroundScroll() {
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '100%';
+        },
+
+    
     
     //關閉詢問是否要會員登入的視窗
     closeLoginAlert(){
         this.showLoginAlert = false;
         document.querySelector('.p07game_login_alert').classList.add('p07game_login_alert_close');
+        this.ableBackgroundScroll();
     },
 
     //會員登入資料的彈窗開與關的設定
@@ -223,7 +250,9 @@ export default {
 
     closeModal() {
     this.showLoginAlert = false;  //關閉顯示詢問是否要會員登入的視窗
-      this.isModalVisible = true; // 這裡寫true 或false好像都可以？
+      this.isModalVisible = false; // 這裡寫true 或false好像都可以？
+      this.ableBackgroundScroll();
+
     },
     
     sendScore(){
@@ -307,7 +336,7 @@ export default {
 <style>
 
 .modal-wrapper .modal-container{
-    top:-100%;
+    top:-120%;
 }
 
 </style>
