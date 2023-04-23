@@ -169,14 +169,27 @@
     max-width: 1000px;
     h2{
         color: $text_color;
-        margin: 20px 0 40px;
+        margin: 20px 0 ;
         @include  rwd('sm'){
             // 手機上的樣式 428px,
             font-size: 22px;
             letter-spacing: 0.3rem;
         }
+    }   
+    .input_p03_searchBar {
+        margin: 0px auto 20px;
+        border-radius: 5px;
+        max-width: 500px;
+        i {
+            color: $sec_color;
+        }
+        .icon {
+            padding: 6px 12px 0;
+            background-color: $four_color;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     }
-   
     // js grid
     #jsGrid{
         border:0px;
