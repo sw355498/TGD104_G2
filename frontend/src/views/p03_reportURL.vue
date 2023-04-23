@@ -79,6 +79,14 @@
         <!-- ======== 已通報的可疑網站列表，掛外掛要拿 ======== -->
         <section class="urlList_p03_reportURL">
             <h2>已通報的可疑網站列表</h2>
+            <div class="position-relative input_p03_searchBar">
+            <i
+                class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
+            ></i>
+            <input type="text" 
+                placeholder="請輸入關鍵字查詢"
+                v-model="searchText"/>
+            </div>
             <!-- ======== 外掛 jsGrid ========= -->
             <div v-if="!isJsgrid">
                 <p style="color:red;">全速載入中，感謝耐心等候...</p>
@@ -90,7 +98,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, } from 'vue';
+import { ref, computed, onMounted,watch } from 'vue';
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from 'axios';
@@ -197,25 +205,28 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
         }
         console.log(allURL.value)
     };
-    // 需要 filtering 的欄位
-    // var filterColumn = ["回報日期", "回報狀態", "網站名稱", "網址"];
-    // // filtering 下拉框 要改成 撈的資料=============
-    // var arr = []
-    // for (var i = 0; i < filterColumn.length ; i++) {
-    //     arr[i] = new Set()
-    //     // 下拉框的預設為空" "
-    //     arr[i].add(" ")
-    // };
-    // for (var i = 0; i < allURL.value.length; i++) {
-    //     arr[0].add(allURL.value[i].STATUS_NAME)
-    // };
-    // var STATUS_NAME = []
-    // for (var i of arr[0]) {
-    //     STATUS_NAME.push({
-    //         回報狀態: i
-    //     })
-    // }
-    
+    // 需要 search
+    const searchText = ref("")      //search的input
+    // 監聽search的input
+    watch(searchText, async (newValue) => {    
+        allURL.value = await search();
+        // 重新渲染 jsGrid
+        loadJsGrid();
+    })
+    // search功能
+    async function search(){
+        try {
+            const response = await axios.post(`${API_URL}url_search.php`, {
+                search : searchText.value
+            });
+            console.log('search');
+            console.log( response.data.data);
+            return response.data.data;
+
+        } catch (error) {
+                console.log(error);
+        }
+    }
     // jsgrid 套件設定
     const loadJsGrid = () => {
         $("#jsGrid").jsGrid({

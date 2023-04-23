@@ -6,7 +6,7 @@
     // $sql = "select * from URL";
     $sql = "
     select 
-        u.ID, u.TITLE as WEBSITE_NM, u.URL as WEBURL, DATE_FORMAT(u.DATE, '%Y/%m/%d') as STA_EDATE, us.STATUS_NAME
+        u.ID, u.TITLE as WEBSITE_NM, u.URL as WEBURL, DATE_FORMAT(u.DATE, '%Y-%m-%d') as STA_EDATE, us.STATUS_NAME
     from
         URL as u
         join URL_STATUS as us
