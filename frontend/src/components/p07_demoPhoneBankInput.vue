@@ -30,13 +30,13 @@
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    top: 282px;
+    top: 280px;
   }
   input.money {
-    bottom: 243px;
+    bottom: 245px;
   }
   input.bankAccount {
-    top: 357px;
+    top: 355px;
   }
 }
 </style>

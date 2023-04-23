@@ -24,7 +24,7 @@
             <div class="content_p05_faq_qusetion">
               <p>
                 {{ item.ANSWER }} <br />
-                <span>【資料來源：{{ item.STATUS }}】</span>
+                <span>【資料來源：{{ item.SOURCE }}】</span>
               </p>
             </div>
           </li>

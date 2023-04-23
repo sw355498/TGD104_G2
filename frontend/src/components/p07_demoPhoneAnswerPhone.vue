@@ -16,6 +16,7 @@
   position: relative;
   .slideBtn {
     position: absolute;
+    z-index: 2;
     bottom: 90px;
     left: calc(50% - 125px);
     width: 250px;
@@ -25,6 +26,7 @@
     background-color: #ffffff22;
     .dragBtn {
       position: absolute;
+      z-index: 2;
       top: 2px;
       left: 2px; //178px
       width: 72px;
@@ -45,6 +47,7 @@
       left: 178px;
       width: 72px;
       height: 72px;
+      z-index: 2;
       background-color: transparent;
     }
     span {

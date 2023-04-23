@@ -97,32 +97,34 @@
                 <div class="delever selected" >
                     <p>運送方式</p>
                     <label>
-                        <input type="radio" value="home" v-model="deleverMethod" checked/>
+                        <input type="radio" value="home" v-model="deleverMethod" checked
+                            @click="removeIdx"
+                        />
                         <span>宅配到府</span>
                     </label>
                     <label>
-                        <input type="radio" value="seven" v-model="deleverMethod"/>
+                        <input type="radio" value="seven" v-model="deleverMethod"
+                            @click="removeReceiverAddress"
+                        />
                         <span>7-11</span>
                     </label>
                 </div>
                 <!-- 宅配 -->
                 <div v-if="deleverMethod === ''|| deleverMethod ==='home'" class="seven delever_stroes box">
                 <!-- <div class="seven box"> -->
-                    <p>請輸入地址</p>
+                    <!-- <p>請輸入地址</p> -->
                     <div class="form_container">
                         <!-- 地址資訊 -->
                         <div class="field_container">
-                            <!-- 外掛台灣地區 -->
                             <label for="home_city">地址資訊</label>
+                            <!-- 台灣縣市 -->
                             <div class="store_info">
-                                <twzipcode-county id="twzipcode__county"
-                                    v-model="myCounty"
-                                    >
-                                </twzipcode-county>
-                                <twzipcode-zipcode id="twzipcode__zipcode"
-                                    v-model="myZipcode" 
-                                    :filter-by-county="myCounty">
-                                </twzipcode-zipcode>
+                                <select v-model="cityIdx">
+                                <option :key="idx" v-for="(option,idx) in citiesTW" :value="idx">{{option.name}}</option>
+                                </select>
+                                <select v-model="areaIdx">
+                                <option :key="idx" v-for="(option,idx) in areas" :value="idx">{{option.name}}</option>
+                                </select>
                             </div>
                         </div>
                         <!-- 地址 -->
@@ -134,6 +136,9 @@
                                 v-model="receiverAddress"
                                 placeholder="請輸入詳細地址以便包裹寄送"
                             >
+                            <p class="needName"
+                            v-show="receiverAddress ==''"
+                            >請輸入詳細地址</p>
                         </div>
                         <!-- 收件人 -->
                         <div class="field_container">
@@ -149,8 +154,8 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="deleverMethod === 'seven'" class="seven delever_stroes box">
-                    <p>請選擇 7-11 門市</p>
+                <div v-if="deleverMethod === 'seven'" 
+                    class="seven delever_stroes box">
                     <div class="form_container">
                         <!-- 門市資訊 -->
                         <div class="field_container">
@@ -164,17 +169,20 @@
                                 <option value="">鄉鎮區</option>
                                 <option v-for="(district, index) in districts" :key="index" :value="district">{{ district }}</option>
                                 </select>
-                                <select v-model="selectedAddress">
+                                <select v-model="receiverAddress">
                                 <option value="">詳細地址</option>
                                 <option v-for="(address, index) in addresses" :key="index" :value="address">{{ address }}</option>
                                 </select>
                             </div>
+                            <p class="needName"
+                            v-show="receiverAddress ==''"
+                            >請選擇 7-11 門市</p>
                         </div>
                         <!-- 地址 -->
                         <div class="field_container">
                             <label for="delver_address">詳細地址</label>
                             <input id="delver_address" maxlength="50" type="text" 
-                                v-model="selectedAddress"
+                                v-model="receiverAddress"
                                 readonly="readonly"
                                 style="background: #eee;"
                             >
@@ -189,7 +197,11 @@
                         </div>
                     </div>
                 </div>
-                <button @click.prevent="show = true">立刻下單</button>
+                <button class="submitDemoShoppingCart"
+                :disabled="receiverAddress =='' || receiverName == ''"
+                @click.prevent="show = true">
+                    立刻下單
+                </button>
             </form>
         </div>
     </div>
@@ -202,7 +214,6 @@
             <div class="mid">
                 <p class="success">下單成功</p>
                 <p class="text">幽靈包裹 約3-5個工作天送到<br>
-                {{ selectedAddress }}<br>
                 {{ receiverAddress }}</p> 
                 <p class="text"> 親愛的 {{ receiverName }} 
                     <br>請準備領取詐騙包裹</p>
@@ -219,21 +230,10 @@
 <script>
 import { ref, computed, watch,onMounted } from 'vue';
 import axios from 'axios';
-import { API_URL } from '@/config'
-import { County,ZipcodeGroupby,Zipcode } from 'twzipcode-vue'
+import { API_URL } from '@/config';
+import citiesTW from "@/assets/data/dataCity.json";
 export default {
     name: 'Cart',
-    components: {
-        TwzipcodeCounty: County, // 縣市
-        TwzipcodeZipcode: Zipcode, //3碼郵遞區號
-        TwzipcodeZipcodeGroupby: ZipcodeGroupby,// 依縣市分組的郵遞區號
-    },
-    // data () {
-    //     return {
-    //     myCounty: '',
-    //     myZipcode: ''
-    //     }
-    // },
     props: {
         cart: {
         type: Array,
@@ -241,9 +241,34 @@ export default {
         },
     },
     setup(props) {
-        // twzipcode-vue
-        const myCounty = ref('')
-        const myZipcode = ref ('')
+        // 下拉縣市地址
+        const cityIdx = ref(0);
+        const areaIdx = ref(0);
+        const citiesData = computed(() => {
+            console.log('citiesTW');
+            console.log(citiesTW);
+            return citiesTW;
+        });
+        const areasData = computed(() => {
+            console.log('citiesData.value[0].areas');
+            console.log(citiesData.value[0].areas);
+        return citiesData.value[cityIdx.value].areas;
+        });
+        const zipCode = computed(() => {
+        return areasData.value[areaIdx.value].zip;
+        });
+        function removeIdx() {
+            areaIdx.value = 0;
+            cityIdx.value = 0;
+        }
+        watch(cityIdx, () => {
+            areaIdx.value = 0;
+            receiverAddress.value = `${citiesData.value[cityIdx.value].name}`;
+        });
+        watch(areaIdx, () => {
+            receiverAddress.value = `${citiesData.value[cityIdx.value].name} - ${areasData.value[areaIdx.value].name}`;
+        });
+
         // 拿超商資料
         const addressList = ref([]);
         async function allData(){
@@ -271,7 +296,6 @@ export default {
 
         const selectedCity = ref('');
         const selectedDistrict = ref('');
-        const selectedAddress = ref('');
 
         const handleCityChange = () => {
         districts.value = addressList.value
@@ -283,14 +307,14 @@ export default {
             })
             .filter((district, index, self) => self.indexOf(district) === index);
         selectedDistrict.value = '';
-        selectedAddress.value = '';
+        receiverAddress.value = '';
         };
 
         const handleDistrictChange = () => {
         addresses.value = addressList.value
             .filter(address => address.ADDRESS.includes(selectedCity.value) && address.ADDRESS.includes(selectedDistrict.value))
             .map(address => address.ADDRESS);
-        selectedAddress.value = '';
+        receiverAddress.value = '';
         };
 
         watch(addressList, () => {
@@ -319,6 +343,11 @@ export default {
         const show = ref(false);
         const receiverName = ref('');
         const receiverAddress = ref('');
+        function removeReceiverAddress() {
+            // console.log('removeReceiverAddress');
+            receiverAddress.value = ''
+        }
+
         return {
             totalPrice,
             updateProductNumber,
@@ -329,19 +358,23 @@ export default {
             expirationDate,
             receiverName,
             receiverAddress,
+            removeReceiverAddress,
             show,
-            // 外掛縣市
-            myCounty,
-            myZipcode,
             // 超商地址
             cities,
             districts,
             addresses,
             selectedCity,
             selectedDistrict,
-            selectedAddress,
             handleCityChange,
-            handleDistrictChange
+            handleDistrictChange,
+            // 自製下拉縣市
+            cityIdx,
+            areaIdx,
+            citiesTW: citiesData,
+            areas: areasData,
+            zip: zipCode,
+            removeIdx,
         };
     },
 };

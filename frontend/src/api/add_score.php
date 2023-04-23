@@ -8,6 +8,9 @@ $token = $_POST['token'];
 // 取得分數
 $score = $_POST['score'];
 
+// echo $score;
+// exit();
+
 // 建立 SQL 語法，更新 USER table 中該會員的 quiz 欄位
 $sql = "UPDATE USER SET QUIZ = :score WHERE ID = :id";
 $statement = $pdo->prepare($sql);
