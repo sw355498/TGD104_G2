@@ -70,12 +70,12 @@
             <div class="newsContent">
               <div class="p01_news_title">
                 <div class="p01_news_titleText h5">{{ value.NEWS_TITLE }}</div>
-                <div class="p01_news_titleCollect">
+                <!-- <div class="p01_news_titleCollect">
                   <a><i class="fa-brands fa-facebook" @click="openShareWindow('https://www.facebook.com/sharer.php?u='+ current_url + '/newsArticle/' + value.ID);"></i
                   ></a>
                   <a><i class="fa-brands fa-line" @click="openShareWindow('https://social-plugins.line.me/lineit/share?url='+ current_url + '/newsArticle/' + value.ID);"></i></a> |
                   <a><i class="fa-solid fa-bookmark"></i>收藏</a>
-                </div>
+                </div> -->
               </div>
               <div class="read">
                 <div class="tag_p01_news_postDescription">
