@@ -14,7 +14,7 @@
 
 
     //建立SQL語法
-    $sql = "SELECT ID, QUESTION AS '問題', `OPTION` AS '選項', ANSWER AS '答案', PIC, `DESCRIPTION` AS '解釋' 
+    $sql = "SELECT ID, QUESTION AS '問題', `OPTION` AS '選項', ANSWER AS '答案', PIC, `DESCRIPTION` AS '解釋' , CHOOSE AS '被選擇'
         FROM GAME
         WHERE GAME_STATUS = 1
         ORDER BY ID DESC;";
