@@ -6,52 +6,65 @@
       </router-link>
       <!-- nav menus -->
       <div class="wrap_index_nav">
-        <!-- login btn -->
-        <button
+      <!-- 會員註冊 -->
+      <div v-if="!hasToken">
+        <a
           type="button"
           @click="showModal"
-          class="h6_component big_button member_index_nav"
+          class="d-flex flex-row text-white align-items-center"
         >
-          註
-        </button>
+        <div class="h6_component big_button member_index_nav "><i class="fa-solid fa-user"></i></div>
+        <span class="mx-2">註冊/登入</span>
 
-        <Modal v-show="isModalVisible" @close="closeModal" />
-        <!-- Member button-->
+      </a>
+      </div>
+      <Modal v-show="isModalVisible" @close="closeModal" />
+      <!-- 會員註冊結束 -->
+
+      <!-- 會員登入 -->
+      <div v-if="hasToken">
         <a
           href="#"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-          class="h6_component big_button member_index_nav dropdown"
+          class="dropdown d-flex flex-row text-white align-items-center"
         >
-          <i class="fa-solid fa-user"></i>
+        <div class="h6_component big_button member_index_nav "><i class="fa-solid fa-user"></i></div>
+        <div>
+        <span v-if="name !== undefined && name !== ''" class="mx-2">{{ name }}</span>
+        <span v-else class="mx-2">會員您好</span>
+      </div>
         </a>
+         <!-- Member button-->
+
         <ul class="dropdown-menu dropdown-menu-dark">
           <li>
-            <router-link to="/p08_userNotify" class="dropdown-item">
+            <router-link to="/userNotify" class="dropdown-item">
               <i class="fa-solid fa-bell"></i> 通知<span class="nofity_count"
                 >2</span
               ></router-link
             >
           </li>
           <li>
-            <router-link to="/p08_user" class="dropdown-item"
+            <router-link to="/user" class="dropdown-item"
               >我的主頁</router-link
             >
           </li>
           <li>
-            <router-link to="/p08_userEdit" class="dropdown-item"
+            <router-link to="/userEdit" class="dropdown-item"
               >編輯會員資料</router-link
             >
           </li>
           <li>
-            <router-link to="/p08_userEditPwd" class="dropdown-item"
+            <router-link to="/userEditPwd" class="dropdown-item"
               >修改密碼</router-link
             >
           </li>
           <li @click="logout"><a class="dropdown-item">登出</a></li>
         </ul>
-
+        </div>
+      <!-- 會員登入結束 -->
         <!-- hamburger content menus -->
         <ul class="links_index_nav" :class="{ active: isActive }">
           <li v-for="navItem in nav" :key="navItem.id">
@@ -107,7 +120,26 @@
 <script setup>
 import { ref, reactive, onUnmounted } from "vue";
 import Modal from "@/components/userLogin.vue";
+// 抓會員資料
+import axios from "axios";
+import { API_URL} from "@/config";
+const token = localStorage.getItem('token');
+const hasToken = ref(!!token);
 
+const name = ref('');
+if (token) {
+  axios
+    .get(`${API_URL}/member_getData.php?token=${token}`)
+    .then((response) => {
+      name.value = response.data.NICKNAME;
+      hasToken.value = true;
+      console.log(name.value);
+      
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 /**
  * navgation menu data & function
  */
@@ -170,11 +202,11 @@ const nav = reactive([
       },
     ],
   },
-  {
-    id: "p08",
-    router: "/user",
-    title: "會員中心",
-  },
+  // {
+  //   id: "p08",
+  //   router: "/user",
+  //   title: "會員中心",
+  // },
   {
     id: "p09",
     router: "/team",
@@ -222,6 +254,8 @@ const closeModal = () => {
 };
 const logout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("tokenExpireTime");
+  window.location.reload();
 };
 
 onUnmounted(() => {

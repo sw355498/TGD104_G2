@@ -37,7 +37,7 @@
 
                 <div class="div_p08_user_loginType">
                   <!-- FB註冊元件 -->
-                  <userFacebookSignup />
+                  <!-- <userFacebookSignup /> -->
                   <!-- LINE註冊元件 -->
                   <userLineSignup />
                   <!-- Google註冊元件 -->
@@ -226,7 +226,8 @@ export default {
                 this.$emit("close");
                 localStorage.setItem("token", response.data.id);
                 console.log(response);
-                alert("登入成功");
+                // 執行登出流程 重新整理頁面
+                 location.reload();
               })
               .catch((error) => {
                 console.log(error.response);
@@ -284,7 +285,9 @@ export default {
 
           // token 仍在有效期內，可以進行 API 呼叫等操作
           console.log(response);
-          alert("登入成功");
+          // alert("登入成功");
+        // 執行登出流程 重新整理頁面
+        location.reload();
         })
         .catch((error) => {
           console.log(error.response);
