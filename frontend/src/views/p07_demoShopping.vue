@@ -73,10 +73,10 @@
                         <div class="scamWeb_p07_demoShopping_nav">
                             <p class="scamWeb_p07_demoShopping_navP">新品上市，勁爆特殺！全場大放送，單件低至NT$432。2023新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                             <ul class="scamWeb_p07_demoShopping_navbar">                       
-                                <li><a href="#">商品列表</a></li>
-                                <li><a href="#">訂單查詢</a></li>
-                                <li><a href="#">下單須知</a></li>
-                                <li><a href="#">立即下單</a></li>
+                                <li><a href="#" style="cursor: auto;">商品列表</a></li>
+                                <li><a href="#" style="cursor: auto;">訂單查詢</a></li>
+                                <li><a href="#" style="cursor: auto;">下單須知</a></li>
+                                <li><a href="#" style="cursor: auto;">立即下單</a></li>
                                 <li>
                                     <span>
                                        <span class="cart_length"> {{cart.length}} </span>
@@ -86,7 +86,7 @@
                                        >
                                     </span>
                                 </li>
-                                <li><img src="../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊"></li>
+                                <li><img src="../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊" style="cursor: auto;"></li>
                             </ul>
                         </div>
 
