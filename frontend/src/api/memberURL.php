@@ -15,7 +15,7 @@
     // print_r($data);
 
     // 建立 SQL 語法
-    $sql = "SELECT U.URL, U.DATE, S.STATUS_NAME
+    $sql = "SELECT U.URL, U.DATE, S.STATUS_NAME, U.ID
     FROM URL U
     INNER JOIN URL_STATUS S ON U.URL_STATUS = S.ID
     WHERE U.USER_ID = :user_id";
