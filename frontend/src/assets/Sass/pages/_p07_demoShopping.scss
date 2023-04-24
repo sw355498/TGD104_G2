@@ -30,6 +30,7 @@
 /* ========= 瀏覽器 ===========*/
 .browser_p07_demoShopping{
     width: 1200px;
+    max-width: 1100px; //沒加的話在1200左右會有卷軸
     box-shadow: -3px 3px 5px $text_color;
     border-radius: 10px;
     height: 80vh;
