@@ -138,6 +138,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
             // 獲取聊天機器人的回覆
             let botMessage = getBotMessage(inputValue.value)
             console.log(botMessage);
+
             // 將聊天機器人的回覆加入到聊天記錄陣列中
             messages.value.push({
                 text: botMessage,
@@ -270,8 +271,6 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         const input_trim = input.trim();
         if (input_trim) {
             for (const obj of robotAnswerArry.value) {
-                // console.log(obj.KEYWORD);
-                // console.log(input_trim);
             if (obj.KEYWORD === input_trim) {
                 botMsg = obj.MESSAGE;
                 break;
@@ -279,9 +278,10 @@ import { ref , nextTick, onMounted, computed} from 'vue'
             }
         }
         if (botMsg === '') {
+            // botMsg = '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！';
             for (const obj of robotAnswerArry.value) {
             if (obj.KEYWORD === 'other') {
-                botMsg = '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！';
+                botMsg = obj.MESSAGE;
                 break;
             }
             }
@@ -315,6 +315,10 @@ import { ref , nextTick, onMounted, computed} from 'vue'
     // 過濾陣列只有btn=1的才選染到畫面上
     const filteredRobotAnswerArry = computed(() => {
         return robotAnswerArry.value.filter(item => item.BTN === 1)
+    })
+    // btn=0的其他回答
+    const nobtnRobotAnswerArry = computed(() => {
+        return robotAnswerArry.value.filter(item => item.BTN === 0)
     })
     // console.log(filteredRobotAnswerArry);
     // 抓最新消息

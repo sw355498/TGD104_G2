@@ -11,6 +11,7 @@
         URL as u
         join URL_STATUS as us
         on u.URL_STATUS = us.id 
+    where u.URL_STATUS != 4
     order by
         u.ID desc
     "
