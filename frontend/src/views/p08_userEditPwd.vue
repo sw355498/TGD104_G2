@@ -8,7 +8,7 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
+              <li class="breadcrumb-item"><router-link to="/index">首頁</router-link></li>
               <li class="breadcrumb-item">
                 <router-link to="/user">會員中心</router-link>
               </li>
@@ -170,7 +170,7 @@ export default {
       axios
         .get(`${API_URL}/member_getData.php?token=${token}`)
         .then((response) => {
-          this.member = response.data;
+          this.member = response.data.member[0];
         })
         .catch((error) => {
           console.log(error);
