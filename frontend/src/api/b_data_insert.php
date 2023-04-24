@@ -25,12 +25,10 @@
         //建立SQL語法
         case 'USER':
         case 'staff':
-            $account = isset($data['account']) ? filterString($data['account']) : '';
             $nickname = isset($data['nickname']) ? filterString($data['nickname']) : '';
             $mobile = isset($data['mobile']) ? filterString($data['mobile']) : '';
             $birth = isset($data['birth']) ? filterString($data['birth']) : NULL;
             $sql = "UPDATE USER SET 
-            ACCOUNT = :account, 
             NICKNAME = :nickname,
             MOBILE= :mobile,
             BIRTH = :birth
@@ -39,7 +37,6 @@
             $statement = $pdo->prepare($sql);
 
             //綁定變數
-            $statement ->bindValue(":account", $account);
             $statement ->bindValue(":nickname", $nickname);
             $statement ->bindValue(":mobile", $mobile);
             $statement ->bindValue(":birth", $birth);
@@ -131,7 +128,5 @@
     
     //抓出全部且依照順序封裝成一個二維陣列
     //PDO::FETCH_ASSOC 回傳一個index值是column name 的陣列
-    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($data);
-
+    echo "新增資料成功"
 ?>

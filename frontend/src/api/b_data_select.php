@@ -7,8 +7,6 @@
     //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
     $data = json_decode($postData, true);
 
-
-
     $whichTable = $data['whichTable'];
     $whichID = $data['whichID'];
     
@@ -33,9 +31,9 @@
             break;
 
         case 'URL':
-            $sql = "SELECT ur.ID, ur.TITLE, ur.URL, u.ACCOUNT, ur.DATE, us.STATUS_NAME
-            FROM URL AS ur
-            JOIN USER AS u ON ur.USER_ID = u.ID
+            $sql = "SELECT ur.ID, ur.TITLE, ur.URL, u.ACCOUNT, ur.DATE, DATE_FORMAT(ur.DATE, '%Y-%m-%d') AS DATE, us.STATUS_NAME
+            FROM `URL` AS ur
+            LEFT JOIN USER AS u ON ur.USER_ID = u.ID
             JOIN URL_STATUS AS us ON ur.URL_STATUS = us.ID
             WHERE ur.ID = :whichID";
             break;

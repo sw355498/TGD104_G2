@@ -10,7 +10,7 @@
         </template>
         <template #body>
             <form class="pb-3" @submit="handleSubmit" id="b_dataFrom">
-                <div v-if="whichTable === 'USER'">     
+                <div v-if="whichTable === 'USER' || whichTable === 'staff'">     
                     <div class="mb-3">                    
                         <label for="account">
                             帳號
@@ -18,6 +18,7 @@
                         <input
                             v-model="account"
                             type="email"
+                            class="form-control-plaintext"
                             id="account"
                             required
                             readonly
@@ -28,6 +29,7 @@
                         <input
                             v-model="nickname"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="nickname"
                             readonly
@@ -38,6 +40,7 @@
                         <input
                             v-model="mobile"
                             type="tel"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="mobile"
                             readonly
@@ -48,6 +51,7 @@
                         <input
                             v-model="birth"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="birth"
                             readonly
@@ -58,6 +62,7 @@
                         <input
                             v-model="user_createTime"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="user_createTime"
                             readonly
@@ -68,6 +73,7 @@
                         <input
                             v-model="userStatus"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="userStatus"
                             readonly
@@ -78,6 +84,7 @@
                         <input
                             v-model="loginType"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="loginType"
                             readonly
@@ -93,6 +100,7 @@
                             v-model="d_title"
                             type="text"
                             id="d_title"
+                            class="form-control-plaintext"
                             required
                             readonly
                         />
@@ -104,6 +112,7 @@
                             type="text"
                             style="margin-bottom: 20px"
                             id="d_tag"
+                            class="form-control-plaintext"
                             readonly
                         />
                     </div>
@@ -114,6 +123,7 @@
                             type="text"
                             style="margin-bottom: 20px"
                             id="d_author"
+                            class="form-control-plaintext"
                             readonly
                         />
                     </div>
@@ -121,7 +131,7 @@
                         <label for="d_content"> 文章內容 </label>
                         <textarea
                             v-model="d_content"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="d_content"
                             readonly
@@ -132,6 +142,7 @@
                         <input
                             v-model="d_createTime"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="d_createTime"
                             readonly
@@ -142,6 +153,7 @@
                         <input
                             v-model="d_Status"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="d_Status"
                             readonly
@@ -156,6 +168,7 @@
                         <input
                             v-model="ur_user"
                             type="text"
+                            class="form-control-plaintext"
                             id="ur_user"
                             required
                             readonly
@@ -166,6 +179,7 @@
                         <input
                             v-model="ur_title"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_title"
                             readonly
@@ -176,6 +190,7 @@
                         <input
                             v-model="ur_url"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_url"
                             readonly
@@ -186,6 +201,7 @@
                         <input
                             v-model="ur_date"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_date"
                             readonly
@@ -196,6 +212,7 @@
                         <input
                             v-model="ur_Status"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_Status"
                             readonly
@@ -209,7 +226,7 @@
                         </label>
                         <textarea
                             v-model="report_target"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="report_target"
                             readonly
@@ -219,7 +236,7 @@
                         <label for=""> 檢舉原因 </label>
                         <textarea
                             v-model="report_eason"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="report_reason"
                             readonly
@@ -230,6 +247,7 @@
                         <input
                             v-model="report_account"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="report_account"
                             readonly
@@ -240,6 +258,7 @@
                         <input
                             v-model="report_time"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="report_time"
                             readonly
@@ -250,6 +269,7 @@
                         <input
                             v-model="report_Status"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="report_Status"
                             readonly
@@ -264,6 +284,7 @@
                         <input
                             v-model="news_title"
                             type="text"
+                            class="form-control-plaintext"
                             id="news_title"
                             required
                             readonly
@@ -274,16 +295,19 @@
                         <input
                             v-model="news_tag"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="news_tag"
                             readonly
                         />
+                    </div>                    <div class="w-100">
+                        <img :src="newsImage" class="img-fluid" alt="">
                     </div>
                     <div class="mb-3">                  
                         <label for="news_content"> 消息內容 </label>
                         <textarea
                             v-model="news_content"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="news_content"
                             readonly
@@ -294,6 +318,7 @@
                         <input
                             v-model="news_createTime"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="news_createTime"
                             readonly
@@ -308,6 +333,7 @@
                         <input
                             v-model="game_question"
                             type="text"
+                            class="form-control-plaintext"
                             id="game_question"
                             required
                             readonly
@@ -320,7 +346,7 @@
                         <label for="game_option"> 選項 </label>
                         <textarea
                             v-model="game_option"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="game_option"
                             readonly
@@ -333,6 +359,7 @@
                         <input
                             v-model="game_answer"
                             type="text"
+                            class="form-control-plaintext"
                             id="game_answer"
                             required
                             readonly
@@ -342,14 +369,16 @@
                         <label for="game_description"> 解釋 </label>
                         <textarea
                             v-model="game_description"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="game_description"
                             readonly
                         />
                     </div>
                 </div>
-                <button class="medium_button submitBtn mx-3" @click="goback">返回後台</button>
+                <div class="text-end">
+                    <button class="medium_button" @click="goback">返回後台</button>
+                </div>
             </form>
         </template>
         </modal>
@@ -357,7 +386,6 @@
 </template>
 <script setup>
 import { ref, onMounted} from "vue";
-import { useRoute } from 'vue-router'
 import Modal from "@/components/modal.vue";
 import router from "@/router";
 import { API_URL } from "@/config";
@@ -367,15 +395,14 @@ import axios from "axios";
 const showModal = ref(true); //彈窗顯示設定
 const bigModal = ref(true); //彈窗寬度是否要為width 75%
 
-//接收傳過來的參數
-const id = ref('')
-const readonly = ref()
-const whichTable = ref('')
 
-const route = useRoute()
-id.value = Number(route.query.id)
-readonly.value = route.query.readonly
-whichTable.value = route.query.whichTable
+//從localStorage撈取資料
+const id = ref('')
+const whichTable = ref('')
+let savedData = JSON.parse(localStorage.getItem('bData'));
+console.log(savedData)
+id.value = Number(savedData.id)
+whichTable.value = savedData.whichTable
 
 //input的變數
 //user
@@ -409,8 +436,9 @@ const report_Status =ref('')
 const news_title =ref('')
 const news_tag =ref('')
 const news_content =ref('')
-const news_createTime =ref('')
+const newsImage = ref('')
 //防詐知識測驗
+const news_createTime =ref('')
 const game_question =ref('')
 const game_option =ref('')
 const game_answer =ref('')
@@ -419,13 +447,12 @@ const gameImage = ref('')
 onMounted(async () => {
     //撈取資料庫的資料
     selectTable();
-
-
 });
 
 
 const goback = () => {
     router.push('/b_index');
+    localStorage.removeItem('bData');
 }
 
 //資料庫查詢
@@ -437,6 +464,7 @@ async function selectTable() {
         });
         switch(whichTable.value){
             case 'USER':
+            case 'staff':
                 account.value = response.data[0].ACCOUNT
                 nickname.value = response.data[0].NICKNAME
                 mobile.value = response.data[0].MOBILE
@@ -474,6 +502,7 @@ async function selectTable() {
                 news_tag.value =response.data[0].NEWS_CATEGORY
                 news_content.value =response.data[0].NEWS_CONTENT
                 news_createTime.value =response.data[0].CREATE_DATE
+                newsImage.value = require('@/assets/img/p01_news/' + response.data[0].PIC)
             break;
             case 'GAME':
                 game_question.value =response.data[0].QUESTION
@@ -493,3 +522,9 @@ async function selectTable() {
     }
 }
 </script>
+<style lang="scss">
+.form-control-plaintext{
+    background: #8e8d8d;
+    padding: 0 20px;
+}
+</style>
