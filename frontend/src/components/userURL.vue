@@ -111,7 +111,7 @@ export default {
                 .attr("href", `/reportUrl`)
                 .on("click", (e) => {
                   e.preventDefault();
-                  vm.$router.push(`/reportUrl`);
+                  vm.$router.push(`/reportUrl/#jsGrid`);
                 });
               $buttonContainer.append($check);
 

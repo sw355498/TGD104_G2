@@ -170,7 +170,7 @@ export default {
       axios
         .get(`${API_URL}/member_getData.php?token=${token}`)
         .then((response) => {
-          this.member = response.data;
+          this.member = response.data.member[0];
         })
         .catch((error) => {
           console.log(error);

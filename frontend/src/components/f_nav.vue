@@ -39,13 +39,13 @@
          <!-- Member button-->
 
         <ul class="dropdown-menu dropdown-menu-dark">
-          <li>
+          <!-- <li>
             <router-link to="/userNotify" class="dropdown-item">
               <i class="fa-solid fa-bell"></i> 通知<span class="nofity_count"
                 >2</span
               ></router-link
             >
-          </li>
+          </li> -->
           <li>
             <router-link to="/user" class="dropdown-item"
               >我的主頁</router-link
@@ -131,7 +131,8 @@ if (token) {
   axios
     .get(`${API_URL}/member_getData.php?token=${token}`)
     .then((response) => {
-      name.value = response.data.NICKNAME;
+      
+      name.value = response.data.member[0].NICKNAME;
       hasToken.value = true;
       console.log(name.value);
       

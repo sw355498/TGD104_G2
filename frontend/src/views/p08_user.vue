@@ -140,7 +140,7 @@
                   <div class="col-6 col-lg-3">
                     <div class="count-data text-center">
                       <h6 class="count h2" data-to="850" data-speed="850">
-                        850
+                        {{MESSAGEcount}}
                       </h6>
                       <p class="m-0px font-w-600">留言次數</p>
                     </div>
@@ -148,7 +148,7 @@
                   <div class="col-6 col-lg-3">
                     <div class="count-data text-center">
                       <h6 class="count h2" data-to="190" data-speed="190">
-                        190
+                        {{URLcount}}
                       </h6>
                       <p class="m-0px font-w-600">可疑網站回報數</p>
                     </div>
@@ -226,6 +226,8 @@ export default {
       member: {},
       quizPass: 75,
       expValue: 1,
+      URLcount: 0,
+      MESSAGEcount: 0,
       memberLevel: null,
       levelList: [
         { lv: 'LV.1', name: '防詐初學者', minExp: 0, maxExp: 10 },
@@ -281,16 +283,18 @@ export default {
     }
   },
   mounted() {
+   
   const token = localStorage.getItem("token");
   if (token) {
     axios
       .get(`${API_URL}/member_getData.php?token=${token}`)
       .then((response) => {
-        this.member = response.data;
-        this.expValue = response.data.EXP;
-        this.quizPass = response.data.QUIZ;
-        // console.log(response.data);
-        // console.log(this.expValue);
+        this.member = response.data.member[0];
+        this.expValue = response.data.member[0].EXP;
+        this.quizPass = response.data.member[0].QUIZ;
+        this.URLcount = response.data.count;
+        this.MESSAGEcount = response.data.countMessage;
+
       })
       .catch((error) => {
         console.log(error);

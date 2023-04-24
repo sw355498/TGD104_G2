@@ -8,7 +8,9 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
+              <li class="breadcrumb-item">
+                <router-link to="/index">首頁</router-link>
+              </li>
               <li class="breadcrumb-item">
                 <router-link to="/user">會員中心</router-link>
               </li>
@@ -30,6 +32,7 @@
                   <div
                     class="d-flex flex-column align-items-center text-center"
                   >
+                  <!--  -->
                     <img
                       src="../assets/img/p08_user/user.jpg"
                       alt="Admin"
@@ -40,19 +43,24 @@
                       上傳圖片
                       <input type="file" name="file" />
                     </div>
+                    <!-- <uploadimg /> -->
                     <div class="mt-3">
                       <h4 class="mb-2">{{ member.NICKNAME }}</h4>
                       <p class="text_title mb-1">{{ memberLevel }}</p>
                       <!-- <p class="text font-size-sm">防詐小尖兵</p> -->
                       <p
                         class="text font-size-sm mb-1"
-                        v-if="member.MOBILE !== null"
+                        v-if="
+                          member.MOBILE !== null && member.MOBILE !== undefined
+                        "
                       >
                         電話:{{ member.MOBILE }}
                       </p>
                       <p
                         class="text font-size-sm mb-3"
-                        v-if="member.BIRTH !== null"
+                        v-if="
+                          member.BIRTH !== null && member.BIRTH !== undefined
+                        "
                       >
                         生日:{{ member.BIRTH }}
                       </p>
@@ -102,7 +110,7 @@
 
                     <label for="">電話</label>
                     <input
-                      type="text"
+                      type="tel"
                       class="input_p08_user_login"
                       :placeholder="member.MOBILE"
                       v-model.trim="phoneNumber"
@@ -136,6 +144,7 @@
 <script>
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
+// import uploadimg from "@/components/upLoadImg.vue";
 // 抓會員資料用套件
 import axios from "axios";
 import { API_URL, reactive } from "@/config";
@@ -144,7 +153,9 @@ export default {
   components: {
     frontNavbar,
     frontFooter,
+    // uploadimg,
   },
+
   data() {
     return {
       member: {},
@@ -153,6 +164,7 @@ export default {
       birthday: "",
       expValue: 1,
       memberLevel: null,
+      ImgName: "", //上傳圖片的名字
       levelList: [
         { lv: "LV.1", name: "防詐初學者", minExp: 0, maxExp: 10 },
         { lv: "LV.2", name: "防詐小尖兵", minExp: 11, maxExp: 50 },
@@ -181,10 +193,9 @@ export default {
       axios
         .get(`${API_URL}/member_getData.php?token=${token}`)
         .then((response) => {
-          this.member = response.data;
-          this.expValue = response.data.EXP;
+          this.member = response.data.member[0];
+          this.expValue = response.data.member[0].EXP;
           this.birthday = response.data.BIRTH;
-          console.log(token);
         })
         .catch((error) => {
           console.log(error);
