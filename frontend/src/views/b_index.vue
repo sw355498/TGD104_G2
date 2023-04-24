@@ -70,9 +70,9 @@
                             id="newsTag"
                             class="form-select text-center"
                         >
-                            <option value="1">金融詐騙</option>
-                            <option value="2">網站詐騙</option>
-                            <option value="3">交友詐騙</option>
+                            <option value="金融詐騙">金融詐騙</option>
+                            <option value="網站詐騙">網站詐騙</option>
+                            <option value="交友詐騙">交友詐騙</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -182,8 +182,9 @@
                         </textarea>
                     </div>
                 </div>
-
-                <button class="medium_button submitBtn">送出</button>
+                <div class="text-end">
+                    <button class="medium_button submitBtn">送出</button>
+                </div>
             </form>
         </template>
         </modal>
@@ -243,6 +244,8 @@ const h2Title = ref("會員管理"); //內容區塊的標題
 const addbutton = ref(true); //內容區塊的按鈕顯示設定
 const btnName = ref("新增會員"); //按鈕的名稱
 const replySelect = ref('1'); //檢舉的下拉式選單
+const upData = ref({})
+const bData = ref({})
 
 //目前登入的帳號資訊
 const currentStaff = JSON.parse(sessionStorage.getItem('staff'));
@@ -329,7 +332,7 @@ const account = ref("")         //帳號input
 const password = ref("")        //密碼input
 const nickname = ref("")        //暱稱input
 const newsTitle = ref("")        //最新消息標題input
-const newsTag = ref("1")        //文章的分類
+const newsTag = ref("金融詐騙")        //文章的分類
 const newsContent = ref("")      //內容textarea
 const fileImage = ref("")       //圖片上傳
 const gameTitle = ref("")        //防詐騙知識題目input
@@ -755,23 +758,27 @@ function operate(e) {
                 blockadeUser();
                 break;
             case "修改":
-            case "審核":           
-                router.push({
-                    path: '/b_updata',
-                    query: {
-                        id: updateID.value,
-                        whichTable: whichTable.value
-                    }
-                })
+            case "審核": 
+                //先將localStorage內的upData清除
+                localStorage.removeItem('upData');
+                upData.value = {
+                    id: updateID.value,
+                    whichTable: whichTable.value
+                }
+                //將當前物件更新至LocalStorage
+                localStorage.setItem('upData', JSON.stringify(upData.value))
+                router.push('/b_updata')
                 break;
             case "查看":
-                router.push({
-                    path: '/b_data',
-                    query: {
-                        id: updateID.value,
-                        whichTable: whichTable.value
-                    }
-                })
+                 //先將localStorage內的upData清除
+                localStorage.removeItem('bData');
+                bData.value = {
+                    id: updateID.value,
+                    whichTable: whichTable.value
+                }
+                //將當前物件更新至LocalStorage
+                localStorage.setItem('bData', JSON.stringify(bData.value))
+                router.push('/b_data')
             break;
         }
 }
@@ -839,7 +846,7 @@ const handleSubmit = async (e) => {
     if(leftNavTag.value === 'news'){
         const formData = new FormData();
         formData.append('newsTitle', newsTitle.value);
-        formData.append('newsTag', Number(newsTag.value));      
+        formData.append('newsTag', newsTag.value);      
         formData.append('newsContent', newsContent.value);
         formData.append('newImage', fileImage.value);
         try {
@@ -1063,14 +1070,6 @@ const removeError = (InputID) => {
     }
     .jsgrid-nodata-row{
         color: #fff;
-    }
-}
-.submitBtn {
-    float: right;
-    &::after {
-        content: "";
-        display: block;
-        clear: both;
     }
 }
 .error {

@@ -10,16 +10,18 @@
         </template>
         <template #body>
             <form class="pb-3" @submit="handleSubmit" id="b_dataFrom">
-                <div v-if="whichTable === 'USER'">     
+                <div v-if="whichTable === 'USER' || whichTable === 'staff'">     
                     <div class="mb-3">                    
                         <label for="account">
                             帳號
                         </label>
                         <input
                             v-model="account"
+                            class="form-control-plaintext"
                             type="email"
                             id="account"
                             required
+                            readonly
                         />
                     </div>
                     <div class="mb-3">                  
@@ -54,6 +56,7 @@
                         <input
                             v-model="user_createTime"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="user_createTime"
                             readonly
@@ -64,6 +67,7 @@
                         <input
                             v-model="userStatus"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="userStatus"
                             readonly
@@ -74,6 +78,7 @@
                         <input
                             v-model="loginType"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="loginType"
                             readonly
@@ -88,6 +93,7 @@
                         <input
                             v-model="ur_user"
                             type="text"
+                            class="form-control-plaintext"
                             id="ur_user"
                             required
                             readonly
@@ -98,6 +104,7 @@
                         <input
                             v-model="ur_title"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_title"
                             readonly
@@ -108,6 +115,7 @@
                         <input
                             v-model="ur_url"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_url"
                             readonly
@@ -118,6 +126,7 @@
                         <input
                             v-model="ur_date"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_date"
                             readonly
@@ -128,6 +137,7 @@
                         <input
                             v-model="ur_Status"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_Status"
                             readonly
@@ -142,7 +152,7 @@
                         </label>
                         <textarea
                             v-model="report_target"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="report_target"
                             readonly
@@ -152,7 +162,7 @@
                         <label for=""> 檢舉原因 </label>
                         <textarea
                             v-model="report_eason"
-                            class="form-control"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px; resize:none;"
                             id="report_reason"
                             readonly
@@ -163,6 +173,7 @@
                         <input
                             v-model="report_account"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="report_account"
                             readonly
@@ -173,6 +184,7 @@
                         <input
                             v-model="report_time"
                             type="date"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="report_time"
                             readonly
@@ -183,6 +195,7 @@
                         <input
                             v-model="report_Status"
                             type="text"
+                            class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="report_Status"
                             readonly
@@ -197,6 +210,7 @@
                         <input
                             v-model="game_question"
                             type="text"
+                            class="form-control"
                             id="game_question"
                             required
                         />
@@ -221,6 +235,7 @@
                         <input
                             v-model="game_answer"
                             type="text"
+                            class="form-control"
                             id="game_answer"
                             required
                         />
@@ -236,12 +251,14 @@
                         />
                     </div>
                 </div>
-                <div v-if="whichTable === 'URL'">                
-                    <button class="medium_button submitBtn mx-3" @click="review = 3,upData">通過</button>
-                    <button class="medium_button submitBtn mx-3" @click="review = 2,upData">不通過</button>
+                <div class="text-end">         
+                    <div v-if="whichTable === 'URL'">                
+                        <button class="medium_button submitBtn me-3" @click="review = 3,upData">通過</button>
+                        <button class="medium_button submitBtn me-3" @click="review = 2,upData">不通過</button>
+                    </div>
+                    <button class="medium_button submitBtn me-3" @click="goback">返回後台</button>
+                    <button v-if="whichTable === 'USER'" class="medium_button submitBtn" @click="upData">送出</button>
                 </div>
-                <button v-if="whichTable === 'USER'" class="medium_button submitBtn mx-3" @click="upData">送出</button>
-                <button class="medium_button submitBtn mx-3" @click="goback">返回後台</button>
             </form>
         </template>
         </modal>
@@ -260,15 +277,12 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 const showModal = ref(true); //彈窗顯示設定
 const bigModal = ref(true); //彈窗寬度是否要為width 75%
 
-//接收傳過來的參數
+//從localStorage撈取資料
 const id = ref('')
-const readonly = ref()
 const whichTable = ref('')
-
-const route = useRoute()
-id.value = Number(route.query.id)
-readonly.value = route.query.readonly
-whichTable.value = route.query.whichTable
+let savedData = JSON.parse(localStorage.getItem('upData'));
+id.value = Number(savedData.id)
+whichTable.value = savedData.whichTable
 
 //審核用的變數
 const review= ref(1)
@@ -311,6 +325,7 @@ onMounted(async () => {
 
 const goback = () => {
     router.push('/b_index');
+    localStorage.removeItem('upData');
 }
 
 //資料庫查詢
@@ -322,6 +337,7 @@ async function selectTable() {
         });
         switch(whichTable.value){
             case 'USER':
+            case 'staff':
                 account.value = response.data[0].ACCOUNT
                 nickname.value = response.data[0].NICKNAME
                 mobile.value = response.data[0].MOBILE
@@ -369,19 +385,24 @@ async function handleSubmit(e) {
         const response = await axios.post(`${API_URL}b_data_insert.php`, {
                 whichTable: whichTable.value,
                 whichID: id.value,
-                account: account.value,
                 nickname: nickname.value,
                 mobile: Number(mobile.value),
                 birth: birth.value,
-  
         });
 
-        if (response.data === "資料更新成功") {
+        if (response.data === "新增資料成功") {
+            showModal.value = false
             Swal.fire({
                 title: '資料更新成功',
                 icon: 'success',
                 confirmButtonText: "確認",
-        });
+            }).then((result) => {
+                if (result.value) {
+                    showModal.value = true
+                }
+            });
+            //撈取資料庫的資料
+            selectTable();
         } else {
             console.log(response.data);
         }
@@ -394,3 +415,9 @@ async function handleSubmit(e) {
     }
 }
 </script>
+<style lang="scss">
+.form-control-plaintext{
+    background: #8e8d8d;
+    padding: 0 20px;
+}
+</style>
