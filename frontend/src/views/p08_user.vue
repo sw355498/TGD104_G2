@@ -8,7 +8,7 @@
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
+            <li class="breadcrumb-item"><router-link to="/index">首頁</router-link></li>
             <!-- <li class="breadcrumb-item">
               <a href="javascript:void(0)">會員</a>
             </li> -->
@@ -39,7 +39,7 @@
                     <p class="text_title mb-1">{{ memberLevel }}</p>
                     <!-- <p class="text font-size-sm">防詐小尖兵</p> -->
                     <p class="text font-size-sm mb-1" v-if="member.MOBILE !== null">電話:{{member.MOBILE}}</p>
-                    <p class="text font-size-sm mb-3" v-if="member.MOBILE !== null">生日:{{member.BIRTH}}</p>
+                    <p class="text font-size-sm mb-3" v-if="member.BIRTH !== null ">生日:{{member.BIRTH}}</p>
 
                     <p class="text_title mb-1">狀態</p>
                     <p class="text font-size-sm crown mb-1" v-if="member.CERTIFIED === 2"><i class="fa-solid fa-circle-check"></i> Email已驗證</p>
@@ -64,35 +64,35 @@
                 >
                   <p>LV.1 防詐初學者</p>
                   <span class="text-secondary">exp 0-10</span>
-                  <p class="block mb-1">討論區發文間隔2小時</p>
+                  <!-- <p class="block mb-1">討論區發文間隔2小時</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.2 防詐小尖兵</p>
                   <span class="text-secondary">exp 11-50</span>
-                  <p class="block  mb-1">可換個人大頭貼</p>
+                  <!-- <p class="block  mb-1">可換個人大頭貼</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.3 防詐達人</p>
                   <span class="text-secondary">exp 51-100</span>
-                  <p class="block mb-1">發文無間隔限制</p>
+                  <!-- <p class="block mb-1">發文無間隔限制</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.4 防詐大師</p>
                   <span class="text-secondary">exp 101-200</span>
-                  <p class="block mb-1">可收藏文章</p>
+                  <!-- <p class="block mb-1">可收藏文章</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.5 防詐神人</p>
                   <span class="text-secondary">exp 201-</span>
-                  <p class="block mb-1 justify-content-end">可檢舉文章</p>
+                  <!-- <p class="block mb-1 justify-content-end">可檢舉文章</p> -->
                 </li>
               </ul>
             </div>
@@ -162,9 +162,9 @@
               <div class="col">
                 <div class="card h-100">
                   <div class="card-body">
-                    <div class="d-flex justify-content-between">
+                    <!-- <div class="d-flex justify-content-between">
 
-                    </div>
+                    </div> -->
                     <!-- PO文清單 -->
 
                     <ul class="nav nav-tabs mt-10" role="tablist">
@@ -180,7 +180,7 @@
                       </li>
                     </ul>
                     <!-- tab -->
-                    <component :is="tabs[active_tab].component"></component>
+                    <component :is="tabs[active_tab].component" class="row border-0 "></component>
 
                     <!-- PO文清單END -->
                   </div>
@@ -255,11 +255,11 @@ export default {
           component: collectList,
           icon: "fa-regular fa-bookmark",
         },
-        {
-          label: "我的檢舉",
-          component: reportList,
-          icon: "fa-solid fa-circle-exclamation",
-        },
+        // {
+        //   label: "我的檢舉",
+        //   component: reportList,
+        //   icon: "fa-solid fa-circle-exclamation",
+        // },
       ],
       
     };
@@ -289,8 +289,8 @@ export default {
         this.member = response.data;
         this.expValue = response.data.EXP;
         this.quizPass = response.data.QUIZ;
-        console.log(response.data);
-        console.log(this.expValue);
+        // console.log(response.data);
+        // console.log(this.expValue);
       })
       .catch((error) => {
         console.log(error);
