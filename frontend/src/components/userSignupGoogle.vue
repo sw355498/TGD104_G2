@@ -34,10 +34,10 @@
           accountTypeID: accountTypeID.value
         })
         .then((response)=>{
-          if(response.data === '登入成功'){
-            alert('test');
+          if(response.data.message === '登入成功'){
+            alert(response.data.message);
           }else{
-            alert(response.data);
+            alert(response.data.message);
           }
           localStorage.setItem("token", response.data.id);
           window.location.reload();
