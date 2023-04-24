@@ -7,16 +7,17 @@
     <main>
       <label for="search">
         <input
-          type="search"
+          type="text"
           id="search"
           placeholder="請輸入關鍵字"
           v-model.lazy.trim="search"
+          @change="filterList"
         />
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass" v-show="showSearch"></i>
       </label>
       <div class="question_p05_faq_block">
         <ul>
-          <li v-for="item in faq.data" :key="item.ID">
+          <li v-for="item in faq.data" :key="item.ID" v-if="faq.data.length">
             <div class="title_p05_faq_qusetion" @click="dropDown">
               {{ item.QUESTION }}
               <i class="fa-solid fa-angle-up" @click.stop></i>
@@ -28,6 +29,7 @@
               </p>
             </div>
           </li>
+          <p v-else v-text="msg"></p>
         </ul>
       </div>
     </main>
@@ -38,7 +40,7 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import { API_URL } from "@/config";
@@ -49,6 +51,9 @@ import TypeIt from "typeit";
 const faq = reactive({
   data: "",
 });
+const allfaq = reactive({
+  data: "",
+});
 
 // 取QA資料
 onMounted(() => {
@@ -57,6 +62,7 @@ onMounted(() => {
     .then((response) => {
       console.log(response.data);
       faq.data = response.data;
+      allfaq.data = response.data;
     })
     .catch((error) => console.log(error));
 });
@@ -73,10 +79,28 @@ const dropDown = (e) => {
 };
 
 //Search Bar
-const filteredList = () => {
-  return faq.data.value.filter((post) => {
-    return post.title.toLowerCase().includes(this.search.toLowerCase());
-  });
+const search = ref("");
+const showSearch = ref(true);
+const msg = ref("查無資料，請重新查詢");
+//顯示隱藏放大鏡
+document.getElementById("search").change = () => {
+  showSearch = !showSearch;
+};
+
+const filterList = (searchWord) => {
+  searchWord = search.value;
+  let newSearch = [];
+  if (!!searchWord) {
+    allfaq.data.filter((item) => {
+      if (item.QUESTION.match(searchWord)) {
+        newSearch.push(item);
+      }
+      return newSearch;
+    });
+    faq.data = newSearch;
+  } else {
+    faq.data = allfaq.data;
+  }
 };
 </script>
 <style scoped></style>

@@ -260,10 +260,64 @@
                         />
                     </div>
                 </div>
+                <div v-else-if="whichTable === 'chatbot'">     
+                    <div class="form-check form-switch mb-3 d-flex align-items-center">
+                        <input class="form-check-input mt-0 me-2" style="width: 15%;" type="checkbox" role="switch" id="isbtn" v-model="isbtn">
+                        <label class="form-check-label" for="isbtn">是否為按鈕</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keyword" class="form-label">
+                            關鍵字(keyword)<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="keywordErrorText"></div>
+                        <input
+                            v-model.trim="keyword"
+                            type="text"
+                            class="form-control" 
+                            id="keyword"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">
+                            訊息(message)<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="messageErrorText"></div>
+                        <input
+                            v-model.trim="message"
+                            type="text"
+                            class="form-control" 
+                            id="message"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="chatbotContent" class="form-label">
+                            內容<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <textarea
+                            v-model="chatbotContent"
+                            class="form-control" 
+                            id="chatbotContent" 
+                            rows="5"
+                        >
+                        </textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="link" class="form-label">
+                            連結(Link)
+                        </label>
+                        <div class="d-none text-danger" id="linkErrorText"></div>
+                        <input
+                            v-model.trim="link"
+                            type="text"
+                            class="form-control" 
+                            id="link"
+                        />
+                    </div>
+                </div>
                 <div class="text-end">         
                     <button class="medium_button me-3" @click="goback">返回後台</button>
-                    <!-- <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 3,upData">此筆資料確認是詐騙網站</button>
-                    <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 2,upData">非詐騙網站</button> -->
                     <button class="medium_button" @click="upData">送出</button>
                 </div>
             </form>
@@ -328,6 +382,12 @@ onMounted(async () => {
     selectTable();
 });
 
+//聊天機器人管理
+const isbtn = ref(false);
+const keyword = ref('');
+const message = ref('');
+const chatbotContent = ref('');
+const link = ref('');
 
 const goback = () => {
     router.push('/b_index');
@@ -376,6 +436,18 @@ async function selectTable() {
                 game_description.value =response.data[0].DESCRIPTION
                 gameImage.value = require('@/assets/img/p07_demo/p07_demoGame/' + response.data[0].PIC)
             break;
+
+            case 'chatbot':
+                if(response.data[0].BTN === 0){
+                    isbtn.value = false
+                } else {
+                    isbtn.value = true
+                }
+                keyword.value = response.data[0].KEYWORD
+                message.value = response.data[0].MESSAGE
+                chatbotContent.value = response.data[0].CONTENT
+                link.value = response.data[0].LINK
+            break;
         }
     } catch (e) {
         if (e.response) {
@@ -395,7 +467,12 @@ async function handleSubmit(e) {
                 nickname: nickname.value,
                 mobile: Number(mobile.value),
                 birth: birth.value,
-                review: Number(review.value)
+                review: Number(review.value),
+                isbtn: isbtn.value,
+                keyword: keyword.value,
+                message: message.value,
+                link: link.value,
+                chatbotContent: chatbotContent.value
         });
 
         if (response.data === "新增資料成功") {
