@@ -7,33 +7,94 @@
     // outline: 1px solid red;
     // background-color: rgba(0,0,0,0.5);
     z-index: 100;
-}
-.popup_p07_demoShopping_arrow{
-    position: absolute;
-    // margin: 0 auto;
-    // top: -22vh;
-    // left: 20vw;
-    // transform: translate(-50%, 0%);
     @include rwd('lg'){
     // 電腦上的樣式 lg: 1200px
     }
-      
     @include rwd('md') {
     // 平板上的樣式md: 768px
     }
-    
+
     @include rwd('sm'){
     // 手機上的樣式sm: 428px
     }
+}
+.popup_p07_demoShopping_arrow{
+    position: absolute;
     .fa-arrow-up{
         font-size: 130px;
         // rotate: -45deg;
         color: #08171E;
         text-shadow: 0px 0px 10px white;
+        @include rwd('sm'){
+            // 手機上的樣式sm: 428px
+        font-size: 80px;
+        }
+    }
+}
+.stepArrow1{
+    top: -135px; left: 30%;
+    @include rwd('sm'){
+    // 手機上的樣式sm: 428px
+    top: -100px;
+    left: 40%;
+    }
+}
+.stepArrow2{
+    top: 0px; left: -200px; rotate: 180deg;
+    @media (max-width: 870px) {
+        left: 270px;
+        bottom: -300px;
+        rotate: -90deg;
+    }
+    @media (max-width: 600px) {
+        left: 360px;
+    }
+}
+.stepArrow3{
+    bottom: -140px;right: -100px;rotate: -90deg;
+    @include rwd('sm'){
+        // 手機上的樣式sm: 428px
+        bottom: -140px;
+        right: -10px;
+        rotate: 0deg;
+    }
+}
+.stepArrow4{
+    top: 0px; left: -200px; 
+    @media (max-width: 900px) {
+        left: -90px;
+    }
+    @media (max-width: 500px) {
+        left: -60px;
+    }
+}
+.stepArrow5{
+    top: 0px; left: -200px; rotate: 180deg;
+    @media (max-width: 870px) {
+        left: -100px;
+    }
+    @include rwd('sm'){
+        // 手機上的樣式sm: 428px
+        left: 320px;
+        bottom: -250px;
+        rotate: -90deg;
+    }
+}
+.stepArrow6{
+    top: 0px; left: -200px; rotate: 180deg;
+    @media (max-width: 870px) {
+        left: -100px;
+    }
+    @include rwd('sm'){
+        // 手機上的樣式sm: 428px
+        left: 320px;
+        bottom: -250px;
+        rotate: -90deg;
     }
 }
 .popup_p07_demoShopping_container{
     width: 530px;
+    width: 450px;
     // height: 250px;
     background-color: #08171E;
     box-shadow: 0px 0px 10px white;
@@ -55,7 +116,7 @@
         }
     }
     .popup_p07_demoShopping_textArea{
-        padding: 20px;
+        padding: 15px 10px;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -68,6 +129,8 @@
             position: absolute;
             right: 20px;
             font-size: 20px;
+            padding: 10px;
+            // outline: 1px solid red;
             @include rwd('md') {
                 // 平板上的樣式md: 768px
                 right: 20px;
@@ -76,6 +139,9 @@
                     right: 10px;
                     top: 10px;
                 }
+            }
+            &:hover{
+                cursor: pointer;
             }
         }
         .top{
@@ -91,7 +157,7 @@
                 }
             }
             p{
-                font-size: 26px;
+                font-size: 24px;
                 @include rwd('md') {
                 // 平板上的樣式md: 768px
                 font-size: 18px;

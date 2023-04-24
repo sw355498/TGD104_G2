@@ -3,10 +3,6 @@
     // 資料庫連線
     require_once ("getConn_nopush.php");
 
-
-    // 從資料庫中取得問題的資料
-    $sql = "SELECT * FROM GAME";
-
     //取得 HTTP POST  Client 端所傳送過來的原始資料
     $postData = file_get_contents("php://input");
     //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式

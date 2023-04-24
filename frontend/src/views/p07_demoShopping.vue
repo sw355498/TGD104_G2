@@ -109,11 +109,12 @@
                         <div class="scamWeb_p07_demoShopping_bannerGray" id="tour4">
                             <p>新品上市，勁爆特殺！全場大放送，單件低至NT$432，2020新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                             <p>新品上市，勁爆特殺！全場大放送，單件低至NT$432，2020新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
+                            <p>新品上市，勁爆特殺！全場大放送，單件低至NT$432，2020新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                         </div>
 
                         <!-- 第二紅條廣告詞 -->
                         <div class="scamWeb_p07_demoShopping_bannerRed" >
-                            <p class="scamWeb_p07_demoShopping_bannerRedP1">現在下單免運包郵</p>
+                            <p class="scamWeb_p07_demoShopping_bannerRedP1">現在下單免運包郵 買到賺到 貨到付款不用怕 免郵費 七天鑒賞期</p>
                         </div>
 
                         <!-- 購物網站第二 banner -->
@@ -121,6 +122,7 @@
                         
                         <!-- 第三紅條廣告詞 -->
                         <div class="scamWeb_p07_demoShopping_bannerRed scrollBar">
+                            <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至 NT$432，2020 新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                             <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至 NT$432，2020 新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                             <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至 NT$432，2020 新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                         </div>

@@ -147,6 +147,18 @@
                 )
             ORDER BY u.ID DESC;";
             break;
+
+        case 'chatbot':
+            $sql = "SELECT ID, BTN AS '是否為按鈕', KEYWORD AS '關鍵字', MESSAGE AS '回答', CONTENT AS '內容'
+            FROM CHATBOT
+            WHERE `STATUS` = 1
+            AND( 
+                KEYWORD  like '%' :search '%'
+                OR MESSAGE like '%' :search '%'
+                OR CONTENT like '%' :search '%'
+            );";
+            break;
+        
         default:
             echo "資料有誤";
             break;

@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="showLoading" />
   <div class="body_index_block">
     <!-- navgation -->
     <frontNavbar />
@@ -6,14 +7,7 @@
     <section>
       <!-- banner動態 -->
       <banner />
-      <div class="banner_index_partial">
-        <div
-          class="circle-container"
-          v-for="index in 50"
-          :key="index"
-          v-html="partial"
-        ></div>
-      </div>
+
       <!-- 固定按鈕 -->
       <div class="fixed_index_btn">
         <!-- BackTop Button -->
@@ -27,7 +21,14 @@
         <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
       </div>
     </section>
-
+    <div class="banner_index_partial">
+      <div
+        class="circle-container"
+        v-for="index in 50"
+        :key="index"
+        v-html="partial"
+      ></div>
+    </div>
     <!--Main Block -->
     <main>
       <!--Text Article -->
@@ -143,13 +144,13 @@
       </article>
     </main>
     <!--Main Block end -->
-    <div>
-      <indexChatbot
-        :show="showComponent"
-        @close="showComponent = false"
-        v-if="showComponent"
-      />
-    </div>
+    <!-- <div> -->
+    <indexChatbot
+      :show="showComponent"
+      @close="showComponent = false"
+      v-if="showComponent"
+    />
+    <!-- </div> -->
     <!-- footer -->
     <frontFooter />
   </div>
@@ -157,6 +158,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import Loading from "@/components/loading.vue";
 import axios from "axios";
 import { API_URL } from "@/config";
 import indexChatbot from "@/components/index_chatbot.vue";
@@ -165,6 +167,7 @@ import frontFooter from "@/components/f_footer.vue";
 import backTopBtn from "@/components/backTopBtn.vue";
 import banner from "@/components/banner.vue";
 
+const showLoading = ref(true);
 const showComponent = ref(false);
 const partial = ref(`<div class="circle"></div>`);
 
@@ -182,6 +185,7 @@ async function allData() {
   }
 }
 onMounted(async () => {
+  showLoading.value = false;
   //撈取資料庫的資料
   news.value = await allData();
   console.log(news.value);

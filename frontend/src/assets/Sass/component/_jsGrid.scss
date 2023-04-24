@@ -79,4 +79,11 @@
         padding-top: 50px;
         color: white;
     }
+    // 滑鼠滑過不要pointer
+    .jsgrid-selected-row .jsgrid-cell{
+        &:hover{
+            cursor: default;
+        }
+    }
+    
 }

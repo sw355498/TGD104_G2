@@ -39,6 +39,7 @@
         border-radius: 5px;
         border: none;
         outline: 0;
+
         &focus {
           box-shadow: 2px 2px 5px $text_color;
         }
@@ -153,6 +154,9 @@
               }
             }
           }
+        }
+        p {
+          text-align: center;
         }
       }
     }

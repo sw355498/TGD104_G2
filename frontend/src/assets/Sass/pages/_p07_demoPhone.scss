@@ -16,20 +16,32 @@
     @include rwd(sm) {
       padding: 0 15px;
     }
-    .volume_p07_demoPhone_phone {
+    .audio_p07_demoPhone_phone {
       position: absolute;
       top: 0;
+      background-color: $title_color;
       left: calc(50% + 200px);
-      max-height: 100px;
-      max-width: 170px;
+      height: 140px;
+      width: 216px;
+      overflow: hidden;
+      text-align: center;
+      border-radius: 5px;
+      z-index: 5;
       @include rwd(md) {
-        left: calc(50% - 85px);
+        left: calc(50% - 107px);
       }
-      svg:first-child {
-        max-width: 120px;
+      span {
+        background-color: $layout_color;
+        color: $text_color;
+        display: block;
       }
-      svg:last-child {
-        max-width: 50px;
+      .liarTalk {
+        text-align: justify;
+        width: 100%;
+        height: 85%;
+        overflow-y: scroll;
+        padding: 5px;
+        font-size: 14px;
       }
     }
     .robot_p07_demoPhone_phone {
@@ -37,8 +49,9 @@
       bottom: 5%;
       left: calc(50% + 175px);
       margin-top: 10px;
+      z-index: 10;
       @include rwd(md) {
-        top: 5%;
+        top: 15%;
         bottom: 0;
         left: calc(50% - 150px);
       }
@@ -46,6 +59,7 @@
         margin: 10px;
         background-color: $text_color;
         position: relative;
+        z-index: 10;
         border-radius: 10px;
         box-sizing: border-box;
         max-width: 300px;
@@ -71,6 +85,11 @@
               line-height: 1.2;
             }
           }
+          .player_p07_demoPhone_audio {
+            button {
+              margin: 5px;
+            }
+          }
         }
       }
       svg {
@@ -80,6 +99,12 @@
       }
     }
     .phoneLayout_p07_demoPhone_phone {
+      @include rwd(md) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 9%;
+      }
       .imgBox {
         margin: 0 auto;
         border-radius: 3rem;
@@ -93,11 +118,11 @@
         }
         img:first-child {
           position: absolute;
-          z-index: 2;
+          z-index: 5;
         }
         img {
           position: absolute;
-          z-index: 1;
+          z-index: 4;
           top: 0;
           left: 0;
           bottom: 0;
@@ -112,31 +137,37 @@
 }
 .slide-right {
   &-enter {
-    transform: translateX(0) !important;
-    z-index: 1 !important;
-    opacity: 0;
+    transform: translateX(100%) !important;
+    z-index: 2 !important;
+    position: absolute;
+    top: 0 !important;
+    left: 0 !important;
+    // opacity: 0;
     &-active {
-      transition: all 1s !important;
+      transition: transform 1s !important;
+    }
+
+    &-to {
+      transform: translateX(0%) !important;
+      z-index: 0 !important;
+      // opacity: 1;
+    }
+  }
+  &-leave {
+    transform: translateX(0%) !important;
+    z-index: 0 !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    // opacity: 1;
+    &-active {
+      transition: transform 1s !important;
     }
 
     &-to {
       transform: translateX(100%) !important;
-      z-index: 0 !important;
-      opacity: 1;
-    }
-  }
-  &-leave {
-    transform: translateX(100%) !important;
-    z-index: 0 !important;
-    opacity: 1;
-    &-active {
-      transition: all 1s !important;
-    }
-
-    &-to {
-      transform: translateX(0) !important;
-      z-index: 1 !important;
-      opacity: 0;
+      z-index: 2 !important;
+      // opacity: 0;
     }
   }
 }

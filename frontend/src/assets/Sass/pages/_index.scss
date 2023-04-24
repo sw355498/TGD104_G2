@@ -1,11 +1,11 @@
 @import "../component/partial";
 /** Background **/
 .body_index_block {
+  position: relative;
   background-image: url("../img/index/bg.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
   /** Top Dynamic **/
   section {
     background-color: transparent;
@@ -150,7 +150,6 @@
       }
     }
   }
-
   /** Main Block **/
   main {
     margin: 0 auto;

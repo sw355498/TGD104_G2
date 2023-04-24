@@ -182,6 +182,63 @@
                         </textarea>
                     </div>
                 </div>
+                <div v-if="leftNavTag === 'chatbot'">
+                    <div class="form-check form-switch mb-3 d-flex align-items-center">
+                        <input class="form-check-input mt-0 me-2" style="width: 15%;" type="checkbox" role="switch" id="isbtn" v-model="isbtn">
+                        <label class="form-check-label" for="isbtn">是否為按鈕</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keyword" class="form-label">
+                            關鍵字(keyword)<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="keywordErrorText"></div>
+                        <input
+                            v-model.trim="keyword"
+                            type="text"
+                            class="form-control" 
+                            id="keyword"
+                            @focus="removeError('keyword')"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">
+                            訊息(message)<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <div class="d-none text-danger" id="messageErrorText"></div>
+                        <input
+                            v-model.trim="message"
+                            type="text"
+                            class="form-control" 
+                            id="message"
+                            @focus="removeError('message')"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="chatbotContent" class="form-label">
+                            內容<span class="text-danger">*<small>必填</small></span>
+                        </label>
+                        <textarea
+                            v-model="chatbotContent"
+                            class="form-control" 
+                            id="chatbotContent" 
+                            rows="5"
+                        >
+                        </textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="link" class="form-label">
+                            連結(Link)
+                        </label>
+                        <input
+                            v-model.trim="link"
+                            type="text"
+                            class="form-control" 
+                            id="link"
+                        />
+                    </div>
+                </div>
                 <div class="text-end">
                     <button class="medium_button">送出</button>
                 </div>
@@ -340,6 +397,12 @@ const gameContent = ref("")      //內容textarea
 const gameAnswer = ref("")       //解答textarea
 const gameExplain = ref("")      //解釋textarea
 const accountTypeID = ref(1);   //帳號的區分 1會員 2管理員 3主管(暫時只有會員與管理員)
+
+const isbtn = ref(false);
+const keyword = ref('');
+const message = ref('');
+const chatbotContent = ref('');
+const link = ref('');
 
 const whichTable = ref("USER"); //資料update 時所需要的資料表參數
 const updateID = ref(); //資料update 時所需要的ID參數
@@ -556,17 +619,18 @@ watch(leftNavTag, async (newTab) => {
       break;
     case "chatbot":
         bigModal.value = true
-        h2Title.value = "詐騙知識測驗管理";
+        h2Title.value = "機器人管理";
         addbutton.value = true;
-        btnName.value = "新增題目";
-        whichTable.value = "GAME";
-        selectPHP.value = "b_select_game.php";
-        searchText.value = ""
-        fileImage.value = ""     
+        btnName.value = "新增回答";
+        whichTable.value = "chatbot";
+        selectPHP.value = "b_select_chatbot.php";
+        searchText.value = ""   
         fields.value = [
             { name: "ID", css: "d-none" },
-            { name: "問題", type: "text" },
-            { name: "答案", type: "text" },
+            { name: "按鈕", type: "text" ,width:40},
+            { name: "關鍵字", type: "text" },
+            { name: "回答", type: "text" },
+            { name: "內容", type: "text" },
             { name: "操作", width: 80, itemTemplate: function (value, item) {
                 // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
                 let $buttonContainer = $("<div>");
@@ -577,13 +641,6 @@ watch(leftNavTag, async (newTab) => {
                 .attr("data-id", item["ID"])
                 .on("click", operate);
                 $buttonContainer.append($delete);
-
-                let $check = $("<button>")
-                .text("查看")
-                .addClass("small_button mx-1")
-                .attr("data-id", item["ID"])
-                .on("click", operate);
-                $buttonContainer.append($check);
 
                 let $revise = $("<button>")
                 .text("修改")
@@ -1013,6 +1070,59 @@ const handleSubmit = async (e) => {
             }
         }
     }
+    if(leftNavTag.value === 'chatbot'){
+        try {
+            const response = await axios.post(`${API_URL}add_chatbot.php`, {
+                isbtn: isbtn.value,
+                keyword: keyword.value,
+                message: message.value,
+                link: link.value,
+                chatbotContent: chatbotContent.value
+
+            });
+            const arrError = response.data.split(',')
+
+            if (arrError.includes('新增成功')) {
+                // 清除表單
+                isbtn.value = false;
+                keyword.value = "";
+                message.value = "";
+                link.value = "";
+                chatbotContent.value = "";
+
+                
+                // 清除可能存在的error
+                removeError("keyword");
+                removeError("message");
+                // 關閉彈窗
+                showModal.value = false;
+                Swal.fire({
+                    title: "新增成功",
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+    
+                // 將Client資料更新
+                clients.value = await selectTable();
+                // 重新渲染 jsGrid
+                reloadJsGrid();
+            } else {
+                if(arrError.includes('關鍵字尚未輸入')){
+                    addError("keyword", "關鍵字尚未輸入");
+                }
+                if(arrError.includes('訊息尚未輸入')){
+                    addError("message", "訊息尚未輸入");
+                }
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
+        }
+    }
+
 };
 
 //資料庫資料修改
@@ -1057,6 +1167,18 @@ async function selectTable() {
             for(let n = 0; n < response.data.data.length; n++){
                 if(response.data.data[n].回報人 === null){
                     response.data.data[n].回報人 = '-';
+                }
+            }
+        }
+        if (leftNavTag.value === 'chatbot') {
+            for(let n = 0; n < response.data.data.length; n++){
+                if(response.data.data[n].按鈕 === 0){
+                    response.data.data[n].按鈕 = '否';
+                } else {
+                    response.data.data[n].按鈕 = '是';
+                }
+                if(!response.data.data[n].內容){
+                    response.data.data[n].內容 = '-';
                 }
             }
         }
