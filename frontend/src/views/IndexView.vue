@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="showLoading" />
   <div class="body_index_block">
     <!-- navgation -->
     <frontNavbar />
@@ -144,11 +145,11 @@
     </main>
     <!--Main Block end -->
     <!-- <div> -->
-      <indexChatbot
-        :show="showComponent"
-        @close="showComponent = false"
-        v-if="showComponent"
-      />
+    <indexChatbot
+      :show="showComponent"
+      @close="showComponent = false"
+      v-if="showComponent"
+    />
     <!-- </div> -->
     <!-- footer -->
     <frontFooter />
@@ -157,6 +158,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import Loading from "@/components/loading.vue";
 import axios from "axios";
 import { API_URL } from "@/config";
 import indexChatbot from "@/components/index_chatbot.vue";
@@ -165,6 +167,7 @@ import frontFooter from "@/components/f_footer.vue";
 import backTopBtn from "@/components/backTopBtn.vue";
 import banner from "@/components/banner.vue";
 
+const showLoading = ref(true);
 const showComponent = ref(false);
 const partial = ref(`<div class="circle"></div>`);
 
@@ -182,6 +185,7 @@ async function allData() {
   }
 }
 onMounted(async () => {
+  showLoading.value = false;
   //撈取資料庫的資料
   news.value = await allData();
   console.log(news.value);
