@@ -377,7 +377,7 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <button class="medium_button submitBtn" @click="goback">返回後台</button>
+                    <button class="medium_button" @click="goback">返回後台</button>
                 </div>
             </form>
         </template>

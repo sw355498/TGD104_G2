@@ -9,7 +9,7 @@
 
 
     //建立SQL語法
-    $sql = "SELECT ur.TITLE AS '網站名稱', ur.URL AS '網址', u.ACCOUNT AS '回報人', DATE_FORMAT(ur.DATE, '%Y/%m/%d') AS '回報日期', us.STATUS_NAME AS '回報狀態'
+    $sql = "SELECT ur.ID, ur.TITLE AS '網站名稱', ur.URL AS '網址', u.ACCOUNT AS '回報人', DATE_FORMAT(ur.DATE, '%Y/%m/%d') AS '回報日期', us.STATUS_NAME AS '回報狀態'
         FROM URL AS ur
         LEFT JOIN USER AS u ON ur.USER_ID = u.ID
         JOIN URL_STATUS AS us ON ur.URL_STATUS = us.ID

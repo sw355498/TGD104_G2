@@ -17,7 +17,7 @@
                         </label>
                         <div class="d-none text-danger" id="accountErrorText"></div>
                         <input
-                            v-model="account"
+                            v-model.trim="account"
                             type="email"
                             id="account"
                             @focus="removeError('account')"
@@ -30,7 +30,7 @@
                         </label>
                         <div class="text-danger" id="passwordErrorText"></div>
                         <input
-                            v-model="password"
+                            v-model.trim="password"
                             type="password"
                             id="password"
                             @focus="removeError('password')"
@@ -40,7 +40,7 @@
                     <div class="mb-3">                  
                         <label for="nickname"> 顯示名稱 </label>
                         <input
-                            v-model="nickname"
+                            v-model.trim="nickname"
                             type="text"
                             style="margin-bottom: 20px"
                             id="nickname"
@@ -54,7 +54,7 @@
                         </label>
                         <div class="d-none text-danger" id="newsTitleErrorText"></div>
                         <input
-                            v-model="newsTitle"
+                            v-model.trim="newsTitle"
                             type="text"
                             class="form-control" 
                             id="newsTitle"
@@ -111,7 +111,7 @@
                         </label>
                         <div class="d-none text-danger" id="gameTitleErrorText"></div>
                         <input
-                            v-model="gameTitle"
+                            v-model.trim="gameTitle"
                             type="text"
                             class="form-control" 
                             id="gameTitle"
@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <button class="medium_button submitBtn">送出</button>
+                    <button class="medium_button">送出</button>
                 </div>
             </form>
         </template>
@@ -221,7 +221,7 @@
             <i
                 class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
             ></i>
-            <input type="text" v-model="searchText"/>
+            <input type="text" v-model.trim="searchText"/>
             </div>
         </div>
         <div id="jsGrid"></div>
@@ -1057,6 +1057,21 @@ const removeError = (InputID) => {
         theErrorText.classList.add("d-none");
     }
 };
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    // 驗證表單url不等於空、email正確格式才可以送出
+    const isFormValid = computed(() => {
+        if (token !=='') {
+            return (
+            url.value !== '' 
+        )
+        }else{
+            return (
+                url.value !== '' &&
+                emailRegex.test(email.value)
+            )
+        }
+    })
 </script>
 
 <style lang="scss">

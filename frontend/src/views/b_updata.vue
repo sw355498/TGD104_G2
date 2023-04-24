@@ -16,7 +16,7 @@
                             帳號
                         </label>
                         <input
-                            v-model="account"
+                            v-model.trim="account"
                             class="form-control-plaintext"
                             type="email"
                             id="account"
@@ -27,7 +27,7 @@
                     <div class="mb-3">                  
                         <label for="nickname"> 顯示名稱 </label>
                         <input
-                            v-model="nickname"
+                            v-model.trim="nickname"
                             type="text"
                             style="margin-bottom: 20px"
                             id="nickname"
@@ -36,7 +36,7 @@
                     <div class="mb-3">                  
                         <label for="mobile"> 電話 </label>
                         <input
-                            v-model="mobile"
+                            v-model.trim="mobile"
                             type="tel"
                             style="margin-bottom: 20px"
                             id="mobile"
@@ -45,7 +45,7 @@
                     <div class="mb-3">                  
                         <label for="birth"> 生日 </label>
                         <input
-                            v-model="birth"
+                            v-model.trim="birth"
                             type="date"
                             style="margin-bottom: 20px"
                             id="birth"
@@ -54,7 +54,7 @@
                     <div class="mb-3">                  
                         <label for="user_createTime"> 建立日期 </label>
                         <input
-                            v-model="user_createTime"
+                            v-model.trim="user_createTime"
                             type="date"
                             class="form-control-plaintext"
                             style="margin-bottom: 20px"
@@ -65,7 +65,7 @@
                     <div class="mb-3">                  
                         <label for="userStatus"> 帳號狀態 </label>
                         <input
-                            v-model="userStatus"
+                            v-model.trim="userStatus"
                             type="text"
                             class="form-control-plaintext"
                             style="margin-bottom: 20px"
@@ -76,7 +76,7 @@
                     <div class="mb-3">                  
                         <label for="loginType"> 登入方式 </label>
                         <input
-                            v-model="loginType"
+                            v-model.trim="loginType"
                             type="text"
                             class="form-control-plaintext"
                             style="margin-bottom: 20px"
@@ -102,7 +102,7 @@
                     <div class="mb-3">                  
                         <label for="ur_title"> 網站名稱 </label>
                         <input
-                            v-model="ur_title"
+                            v-model.trim="ur_title"
                             type="text"
                             class="form-control-plaintext"
                             style="margin-bottom: 20px"
@@ -113,7 +113,7 @@
                     <div class="mb-3">                  
                         <label for="ur_url"> 網址 </label>
                         <input
-                            v-model="ur_url"
+                            v-model.trim="ur_url"
                             type="text"
                             class="form-control-plaintext"
                             style="margin-bottom: 20px"
@@ -171,7 +171,7 @@
                     <div class="mb-3">                  
                         <label for="report_account"> 檢舉人 </label>
                         <input
-                            v-model="report_account"
+                            v-model.trim="report_account"
                             type="text"
                             class="form-control-plaintext"
                             style="margin-bottom: 20px"
@@ -208,7 +208,7 @@
                             題目
                         </label>
                         <input
-                            v-model="game_question"
+                            v-model.trim="game_question"
                             type="text"
                             class="form-control"
                             id="game_question"
@@ -233,7 +233,7 @@
                             答案
                         </label>
                         <input
-                            v-model="game_answer"
+                            v-model.trim="game_answer"
                             type="text"
                             class="form-control"
                             id="game_answer"
@@ -252,12 +252,10 @@
                     </div>
                 </div>
                 <div class="text-end">         
-                    <div v-if="whichTable === 'URL'">                
-                        <button class="medium_button submitBtn me-3" @click="review = 3,upData">通過</button>
-                        <button class="medium_button submitBtn me-3" @click="review = 2,upData">不通過</button>
-                    </div>
-                    <button class="medium_button submitBtn me-3" @click="goback">返回後台</button>
-                    <button v-if="whichTable === 'USER'" class="medium_button submitBtn" @click="upData">送出</button>
+                    <button class="medium_button me-3" @click="goback">返回後台</button>
+                    <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 3,upData">通過</button>
+                    <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 2,upData">不通過</button>
+                    <button v-if="whichTable === 'USER'" class="medium_button" @click="upData">送出</button>
                 </div>
             </form>
         </template>
@@ -266,7 +264,6 @@
 </template>
 <script setup>
 import { ref, onMounted} from "vue";
-import { useRoute } from 'vue-router'
 import Modal from "@/components/modal.vue";
 import router from "@/router";
 import { API_URL } from "@/config";
@@ -388,6 +385,7 @@ async function handleSubmit(e) {
                 nickname: nickname.value,
                 mobile: Number(mobile.value),
                 birth: birth.value,
+                review: review.value
         });
 
         if (response.data === "新增資料成功") {

@@ -35,7 +35,9 @@
                             />
                         </div>
                     </div>
-                    <button class="medium_button submitBtn">送出</button>
+                    <div class="text-end">
+                        <button class="medium_button">送出</button>
+                    </div>
                 </form>
             </template>
             </modal>
@@ -124,14 +126,6 @@
     };
 </script>
 <style lang="scss">
-.submitBtn {
-    float: right;
-    &::after {
-        content: "";
-        display: block;
-        clear: both;
-    }
-}
 .error {
     outline: 3px solid red;
 }
