@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="showLoading" />
   <div class="body_p05_faq_block">
     <!-- navgation -->
     <frontNavbar />
@@ -41,11 +42,15 @@
 
 <script setup>
 import { ref, reactive, onMounted } from "vue";
+import Loading from "@/components/loading.vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import { API_URL } from "@/config";
 import axios from "axios";
 import TypeIt from "typeit";
+
+//loading判斷
+const showLoading = ref(true);
 
 // data存放
 const faq = reactive({
@@ -57,6 +62,7 @@ const allfaq = reactive({
 
 // 取QA資料
 onMounted(() => {
+  showLoading.value = false;
   axios
     .get(`${API_URL}getFaq.php`)
     .then((response) => {

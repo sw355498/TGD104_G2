@@ -55,7 +55,7 @@
             alt=""
           />
         </div>
-        <div class="col-lg-11 mx-auto mt-4">
+        <div class="col-lg-11 mx-auto mt-4 text-break">
           <p class="lh-lg">
             {{ news.NEWS_CONTENT }}<br /><br />如有疑問請撥打 165
             反詐騙專線或銀行客服查證相關資訊是否屬實。
@@ -83,17 +83,20 @@ import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from "axios";
 import { API_URL, reactive } from "@/config";
+// import Modal from "@/components/userLogin.vue";
 
 export default {
   components: {
     frontNavbar,
     frontFooter,
+    // Modal,
   },
   data() {
     return {
       news: [],
       current_url: null,
       isFavorite: false,
+      isModalVisible: false,
     };
   },
   mounted() {
@@ -125,6 +128,9 @@ export default {
     openShareWindow(link) {
       window.open(link, "mywindow", "width=700, height=400");
     },
+    showModal() {
+      this.isModalVisible = true;
+    },
     // 收藏
     addToFavorites() {
       // 取得目前新聞的 ID
@@ -134,7 +140,8 @@ export default {
       const token = localStorage.getItem("token");
       if (!token) {
         // 如果沒有 token，表示使用者尚未登入，顯示登入彈窗
-        alert("請先登入才能收藏新聞！");
+        this.showModal();
+        // alert("請先登入會員")
         return;
       }
 

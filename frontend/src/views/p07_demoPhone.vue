@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="showLoading" />
   <div class="body_p07_demoPhone_block">
     <!-- header  -->
     <frontNavbar />
@@ -97,7 +98,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import Loading from "@/components/loading.vue";
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import p07_demo_nav from "@/components/p07_demo_nav.vue";
@@ -106,9 +108,10 @@ import p07_demoPhoneBankInput from "@/components/p07_demoPhoneBankInput.vue";
 import p07_demoPhoneAnswerPhone from "@/components/p07_demoPhoneAnswerPhone.vue";
 
 //參數設定
-const showModal = ref(true);
-const itemIndex = ref(0);
-const showImg = ref(0);
+const showLoading = ref(true); //loading判斷
+const showModal = ref(true); //彈窗判斷
+const itemIndex = ref(0); //資料顯示的順序
+const showImg = ref(0); //資料顯示的順序
 
 document.body.style.cssText = showModal.value
   ? "height:100vh;overflow-y:hidden;"
@@ -279,9 +282,9 @@ const next = () => {
   setShowImg();
 };
 
-//聲音播放器
-const audioBtn = ref(true);
-const audioPlayer = document.getElementById("audioPlayer");
+onMounted(() => {
+  showLoading.value = false;
+});
 </script>
 
 <style></style>

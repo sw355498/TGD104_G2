@@ -4,149 +4,119 @@
   </div>
 </template>
 <script>
+// 抓會員資料用套件
+import axios from "axios";
+import { API_URL, reactive } from "@/config";
+
 export default {
+  data() {
+    return {
+      memberURL: [],
+      $router: this.$router,
+    };
+  },
   mounted() {
-    let id = 0,
-      url = 111;
-    var memberPost = [
-      {
-        ID: `${id++}`,
-        日期: "2023-03-19",
-        回報內容: `${url++}`,
-        登入方式: "會員註冊",
-        狀態: "審核中",
-      },
-      {
-        ID: `${id++}`,
-        日期: "2023-03-19",
-        回報內容: `${url++}`,
-        登入方式: "會員註冊",
-        狀態: "未審核",
-      },
-      {
-        ID: `${id++}`,
-        日期: "2023-03-19",
-        回報內容: `${url++}`,
-        登入方式: "會員註冊",
-        狀態: "通過",
-      },
-      {
-        ID: `${id++}`,
-        日期: "2023-03-19",
-        回報內容: `${url++}`,
-        登入方式: "會員註冊",
-        狀態: "不通過",
-      },
-      {
-        ID: `${id++}`,
-        日期: "2023-03-19",
-        回報內容: `${url++}`,
-        登入方式: "會員註冊",
-        狀態: "審核中",
-      },
-      
-    ];
-
-    $("#jsGrid").jsGrid({
-      width: "100%",
-
-      inserting: false, //添加
-      editing: false, //編輯
-      sorting: true, //排序
-
-      /*分頁設定*/
-      paging: true,
-      pagerContainer: null, //jQueryElement或DomNode指定呈現一個分頁欄，為null時在表格底部。
-      pageIndex: 1, //當前頁面數
-      pageSize: 10, //頁面的數據量
-      pageButtonCount: 2, //最大數量的頁面按鈕
-      pagerFormat:
-        "{first} {pages} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}", //占位符來指定分頁欄格式
-      //pageNextText: "Next",   //下一頁
-      //pagePrevText: "Prev",   //上一頁
-      pageFirstText: "首頁", //首頁
-      pageLastText: "最後一頁", //尾頁
-      pageNavigatorNextText: "...", //最大數量頁面按鈕超出時右邊顯示
-      pageNavigatorPrevText: "...", //最大數量頁面按鈕超出時右邊顯示
-
-      data: memberPost,
-      fields: [
-        {
-          name: "ID",
-          css: "d-none",
-          validate: "required",
-        },
-        {
-          name: "狀態",
-          type: "text",
-          width: 50,
-        },
-        {
-          name: "日期",
-          type: "text",
-          width: 60,
-        },
-        {
-          name: "回報內容",
-          type: "text",
-          width: 180,
-        },
-
-        {
-          name: "編輯/修改",
-          width: 80,
-          itemTemplate: function () {
-            let $buttonContainer = $("<div>");
-            // Jquery 等同於 js中的 let buttonContainer = document.createElement("<div>")
-
-            // let $blockade = $("<button>").html(`<i class="fa-solid fa-lock"></i>封鎖`).addClass("small_button mx-1").on("click", operate);
-            // let $blockade = $("<button>")
-            //   .text(`封鎖`)
-            //   .addClass("small_button mx-1")
-            //   .on("click", operate);
-            // $buttonContainer.append($blockade);
-
-            let $delete = $("<button>")
-              .text("刪除")
-              .addClass("small_button mx-1")
-              .on("click", operate);
-            $buttonContainer.append($delete);
-
-            // let $revise = $("<button>")
-            //   .text("修改")
-            //   .addClass("small_button mx-1")
-            //   .on("click", operate);
-            // $buttonContainer.append($revise);
-
-            let $check = $("<button>")
-              .text("查看")
-              .addClass("small_button mx-1")
-              .on("click", operate);
-            $buttonContainer.append($check);
-
-            return $buttonContainer;
-          },
-        },
-      ],
-    });
-
-    function operate() {
-      let thisID = this.closest("tr").firstElementChild.innerHTML;
-      switch (this.innerHTML) {
-        // case "封鎖":
-        //   alert(`封鎖帳號 ${thisID}`);
-        //   break;
-        case "刪除":
-          alert(`刪除帳號 ${thisID}`);
-          break;
-        case "修改":
-          alert(`修改帳號 ${thisID}`);
-          break;
-        // case "查看":
-        //   alert(`查看帳號 ${thisID}`);
-        //   break;
-      }
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .post(`${API_URL}/memberURL.php`, { token: token })
+        .then((response) => {
+          this.memberURL = response.data;
+          console.log(this.memberURL, "URL_report");
+          this.renderGrid();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+  },
+  methods: {
+    renderGrid() {
+      const vm = this;
+      const memberURL = this.memberURL.map((collect) => {
+        return {
+          狀態: collect.STATUS_NAME,
+          日期: collect.DATE,
+          回報內容: collect.URL,
+          id: collect.ID,
+        };
+      });
+
+      $("#jsGrid").jsGrid({
+        width: "100%",
+
+        inserting: false,
+        editing: false,
+        sorting: true,
+
+        paging: true,
+        pageIndex: 1,
+        pageSize: 10,
+        pageButtonCount: 2,
+        pagerFormat:
+          "{first} {pages} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}",
+        pageFirstText: "首頁",
+        pageLastText: "最後一頁",
+        pageNavigatorNextText: "...",
+        pageNavigatorPrevText: "...",
+
+        data: memberURL,
+        fields: [
+          {
+            name: "狀態",
+            type: "text",
+            width: 30,
+          },
+          {
+            name: "日期",
+            type: "text",
+            width: 15,
+          },
+          {
+            name: "回報內容",
+            type: "text",
+            width: 35,
+          },
+          {
+            name: "編輯/修改",
+            width: 20,
+            itemTemplate: function (value, items) {
+              let $buttonContainer = $("<div>");
+
+              let $delete = $("<button>")
+                .text("刪除")
+                .addClass("small_button mx-1")
+                .on("click", (e) => {
+                  let data = { id: items.id }; // 假設需要刪除的資料的ID存儲在items.id屬性中
+                  axios
+                    .post(`${API_URL}/deleteURL.php`, data)
+                    .then(function (response) {
+                      // 在成功刪除資料後，可以更新網頁介面，例如重新載入表格資料
+                      alert("資料已成功刪除！");
+                      location.reload();
+                    })
+                    .catch(function (error) {
+                      alert("刪除資料時發生錯誤：" + error);
+                    });
+                });
+              $buttonContainer.append($delete);
+
+              const $check = $("<a>")
+                .text("查看")
+                .addClass("small_button mx-1")
+                .attr("href", `/reportUrl`)
+                .on("click", (e) => {
+                  e.preventDefault();
+                  vm.$router.push(`/reportUrl`);
+                });
+              $buttonContainer.append($check);
+
+              return $buttonContainer;
+            },
+          },
+        ],
+      });
+    },
   },
 };
 </script>
