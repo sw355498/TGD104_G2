@@ -7,7 +7,7 @@
     max-width: 1200px;
     width: 100%;
     height: calc(80vh - 84px);
-    height: calc(700px - 84px);
+    height: calc(550px - 84px);
     background-color: rgba(0,0,0,0.5);
     z-index: 100;
     @include rwd('lg'){
@@ -41,7 +41,7 @@
             @include rwd('sm'){
                 width: 100%;
                 height: calc(80vh - 88px - 66px);
-                height: calc(700px - 88px - 66px);
+                height: calc(550px - 88px - 66px);
                 position: absolute;
                 bottom: 0;
                 border-radius: 20px;
