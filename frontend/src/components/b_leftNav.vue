@@ -49,7 +49,7 @@
     const navItems = ref([
         {id: id++,name:'會員管理', icon:'fa-user', clickName: 'user'},
         {id: id++,name:'討論版管理', icon:'fa-message', clickName: 'discuss'},
-        {id: id++,name:'回報管理', icon:'fa-share', clickName: 'share'},
+        {id: id++,name:'回報可疑網站管理', icon:'fa-share', clickName: 'share'},
         {id: id++,name:'檢舉管理', icon:'fa-exclamation', clickName: 'reply'},
         {id: id++,name:'最新消息管理', icon:'fa-circle-info', clickName: 'news'},
         {id: id++,name:'聊天機器人管理', icon:'fa-robot', clickName: 'chatbot'},

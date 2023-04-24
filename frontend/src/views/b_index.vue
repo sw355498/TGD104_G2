@@ -460,7 +460,7 @@ watch(leftNavTag, async (newTab) => {
         break;
     case "share":
         bigModal.value = false
-        h2Title.value = "回報管理";
+        h2Title.value = "回報可疑網站管理";
         addbutton.value = false;
         whichTable.value = "URL";
         selectPHP.value = "b_select_url.php";
