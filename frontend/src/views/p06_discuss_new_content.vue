@@ -25,17 +25,20 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <label for="discuss_title" class="form-label">文章標題：</label>
-                    <input type="text" class="form-control" id="discuss_title">
+                    <input type="text" class="form-control" id="discuss_title" v-model="title">
                 </div>
                 <div class="d-flex align-items-center">
                     <label for="discuss_title" class="form-label">文章預設圖片：</label>
                     <label class="file_btn">
-                        <input id="upload_img" class="d-none" type="file">
-                        <i class="fa-solid fa-image fa-fw"></i>{{fileUrl}}
+                        <input id="upload_img" class="d-none" type="file" @change="picSubmit">
+                        <i class="fa-solid fa-image fa-fw"></i>上傳圖片<span>{{ ImgName }}</span>
                     </label>
                 </div>
             </div>
             <CKEditor />
+
+            <div class="text-center"><button class="big_button w-25" @click="submitButton">送出</button></div>
+            
         </main>
 
         <!-- footer -->
@@ -43,26 +46,30 @@
     </div>
 </template>
 
-<script>
+<script setup>
     import { ref } from 'vue';
-    import CKEditor from '../components/CKEditor.vue';
+    import CKEditor from '@/components/CKEditor.vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
+    
+    const fileImage = ref()
+    const ImgName = ref()
+    const title = ref()
 
-    export default {
-        components: {
-            CKEditor,
-            frontNavbar,
-            frontFooter,
-        },
-        setup() {
-            const fileUrl = ref('上傳圖片')
+    function picSubmit(e){
+        fileImage.value = e.target.files[0]
+        ImgName.value = `: ${fileImage.value.name}`
+    }
+    
+    function submitButton(){
 
-            return{
-                fileUrl,
-                frontNavbar,
-                frontFooter,
-            }
+        // CKEditor 的內容
+        const data = {
+            title: title,
+            pic: fileImage.value,
+            content: editorData,
+            userId: localStorage.getItem('token')
         }
     }
+    
 </script>

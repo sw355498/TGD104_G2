@@ -27,4 +27,7 @@
     .ck-content *{
         color: #08171E;
     }
+    .ck-editor{
+        margin-bottom: 30px!important;
+    }
 </style>

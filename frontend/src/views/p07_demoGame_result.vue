@@ -335,7 +335,7 @@ export default {
 
 <style>
 
-.modal-wrapper .modal-container{
+.p07_resultbg .modal-wrapper .modal-container{
     top:-120%;
 }
 

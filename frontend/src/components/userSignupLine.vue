@@ -20,19 +20,82 @@
     link += '&state=login';
     link += '&scope=openid%20profile';
     window.location.href = link;
-    console.log('ok');
   };
   
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const code = urlParams.get('code');
   // const qs = require('qs');
   // const accessToken = ref();
   // const expiresIn = ref();
   // const idToken = ref();
+  const code = urlParams.get('code');
   const userId = ref();
   const nickname = ref();
   const accountTypeID = ref();
+  
+  $.ajax({
+    url: 'https://api.line.me/oauth2/v2.1/token',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: {
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: 'http://localhost:8080/index',
+      client_id: '1660893613',
+      client_secret: 'dd30d5f42bc1a0e89a1eb27679c5a488'
+    },
+    success: function(response) {
+      const accessToken = response.access_token;
+      const expiresIn = response.expires_in;
+      const idToken = response.id_token;
+
+      // 使用idToken從LINE API獲取使用者資訊
+      $.ajax({
+        url: 'https://api.line.me/oauth2/v2.1/verify',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer ' + accessToken
+        },
+        data: {
+          id_token: idToken,
+          client_id: '1660893613'
+        },
+        success: function(response) {
+          userId.value = response.sub;
+          nickname.value = response.name;
+          accountTypeID.value = 1;
+
+          // 在此處處理使用者資訊
+          console.log(userId.value, nickname.value, accountTypeID.value);
+
+          axios
+          .post(`${API_URL}lineLogin.php`, {
+            userId: userId.value,
+            nickname: nickname.value,
+            accountTypeID: accountTypeID.value
+          })
+          .then((response)=>{
+            if(response.data.message === '登入成功'){
+              alert(response.data.message);
+            }else{
+              alert(response.data.message);
+            }
+            localStorage.setItem("token", response.data.id);
+            window.location.reload(); 
+          })
+          .catch((error)=>{
+            alert('發生了一些錯誤，請聯絡管理員!')
+          })
+        },
+        error: function(error){
+          console.log(error);
+        }
+      });
+    }
+  });
 
   // axios({
   //   method: 'post',
@@ -94,68 +157,4 @@
 
   // })
 
-  $.ajax({
-    url: 'https://api.line.me/oauth2/v2.1/token',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    data: {
-      grant_type: 'authorization_code',
-      code: code,
-      redirect_uri: 'http://localhost:8080/index',
-      client_id: '1660893613',
-      client_secret: 'dd30d5f42bc1a0e89a1eb27679c5a488'
-    },
-    success: function(response) {
-      const accessToken = response.access_token;
-      const expiresIn = response.expires_in;
-      const idToken = response.id_token;
-
-      // 使用idToken從LINE API獲取使用者資訊
-      $.ajax({
-        url: 'https://api.line.me/oauth2/v2.1/verify',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer ' + accessToken
-        },
-        data: {
-          id_token: idToken,
-          client_id: '1660893613'
-        },
-        success: function(response) {
-          userId.value = response.sub;
-          nickname.value = response.name;
-          accountTypeID.value = 1;
-
-          // 在此處處理使用者資訊
-          console.log(userId.value, nickname.value, accountTypeID.value);
-
-          axios
-          .post(`${API_URL}lineLogin.php`, {
-            userId: userId.value,
-            nickname: nickname.value,
-            accountTypeID: accountTypeID.value
-          })
-          .then((response)=>{
-            if(response.data.message === '登入成功'){
-              alert(response.data.message);
-            }else{
-              alert(response.data.message);
-            }
-            localStorage.setItem("token", response.data.id);
-            // window.location.reload();
-            console.log(response.data.id);  
-          })
-          .catch((error)=>{
-            alert('發生了一些錯誤，請聯絡管理員!')
-          })
-        },
-        error: function(error){
-          console.log(error);
-        }
-      });
-    }
-  });
 </script>
