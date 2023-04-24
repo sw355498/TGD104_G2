@@ -134,14 +134,23 @@
                     </div>
                     <div class="mb-3">                  
                         <label for="ur_Status"> 回報狀態 </label>
-                        <input
+                        <!-- <input
                             v-model="ur_Status"
                             type="text"
                             class="form-control-plaintext"
                             style="margin-bottom: 20px"
                             id="ur_Status"
                             readonly
-                        />
+                        /> -->
+                        <select
+                            v-model="review"
+                            id="newsTag"
+                            class="form-select text-center"
+                        >
+                            <option value="1">未審核</option>
+                            <option value="2">非詐騙網站</option>
+                            <option value="3">詐騙網站</option>
+                        </select>
                     </div> 
 
                 </div>
@@ -191,15 +200,15 @@
                         />
                     </div>
                     <div class="mb-3">                  
-                        <label for="report_Status"> 審核狀況 </label>
-                        <input
-                            v-model="report_Status"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="report_Status"
-                            readonly
-                        />
+                        <label for="newsTag"> 審核狀況 </label>
+                        <select
+                            v-model="review"
+                            id="newsTag"
+                            class="form-select text-center"
+                        >
+                            <option value="2">通過</option>
+                            <option value="3">不通過</option>
+                        </select>
                     </div> 
                 </div>
                 <div v-else-if="whichTable === 'GAME'">     
@@ -253,9 +262,9 @@
                 </div>
                 <div class="text-end">         
                     <button class="medium_button me-3" @click="goback">返回後台</button>
-                    <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 3,upData">通過</button>
-                    <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 2,upData">不通過</button>
-                    <button v-if="whichTable === 'USER'" class="medium_button" @click="upData">送出</button>
+                    <!-- <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 3,upData">此筆資料確認是詐騙網站</button>
+                    <button v-if="whichTable === 'URL'" class="medium_button me-3" @click="review = 2,upData">非詐騙網站</button> -->
+                    <button class="medium_button" @click="upData">送出</button>
                 </div>
             </form>
         </template>
@@ -349,6 +358,7 @@ async function selectTable() {
                 ur_url.value =response.data[0].URL
                 ur_date.value =response.data[0].DATE
                 ur_Status.value =response.data[0].STATUS_NAME
+                review.value = response.data[0].URL_STATUS
             break;
             case 'REPLY_REPORT':
             case 'DISCUSS_REPORT':
@@ -385,7 +395,7 @@ async function handleSubmit(e) {
                 nickname: nickname.value,
                 mobile: Number(mobile.value),
                 birth: birth.value,
-                review: review.value
+                review: Number(review.value)
         });
 
         if (response.data === "新增資料成功") {
