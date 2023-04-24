@@ -460,7 +460,7 @@ watch(leftNavTag, async (newTab) => {
         break;
     case "share":
         bigModal.value = false
-        h2Title.value = "回報管理";
+        h2Title.value = "回報可疑網站管理";
         addbutton.value = false;
         whichTable.value = "URL";
         selectPHP.value = "b_select_url.php";
@@ -554,6 +554,48 @@ watch(leftNavTag, async (newTab) => {
             }},
         ];
       break;
+    case "chatbot":
+        bigModal.value = true
+        h2Title.value = "詐騙知識測驗管理";
+        addbutton.value = true;
+        btnName.value = "新增題目";
+        whichTable.value = "GAME";
+        selectPHP.value = "b_select_game.php";
+        searchText.value = ""
+        fileImage.value = ""     
+        fields.value = [
+            { name: "ID", css: "d-none" },
+            { name: "問題", type: "text" },
+            { name: "答案", type: "text" },
+            { name: "操作", width: 80, itemTemplate: function (value, item) {
+                // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
+                let $buttonContainer = $("<div>");
+
+                let $delete = $("<button>")
+                .text("刪除")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($delete);
+
+                let $check = $("<button>")
+                .text("查看")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($check);
+
+                let $revise = $("<button>")
+                .text("修改")
+                .addClass("small_button mx-1")
+                .attr("data-id", item["ID"])
+                .on("click", operate);
+                $buttonContainer.append($revise);
+
+                return $buttonContainer;
+            }},
+        ];
+        break;
     case "FraudKnowledge":
         bigModal.value = true
         h2Title.value = "詐騙知識測驗管理";
@@ -758,7 +800,7 @@ function operate(e) {
                 blockadeUser();
                 break;
             case "修改":
-            case "審核": 
+            case  "審核":
                 //先將localStorage內的upData清除
                 localStorage.removeItem('upData');
                 upData.value = {
@@ -1011,6 +1053,13 @@ async function selectTable() {
         const response = await axios.post(`${API_URL}${selectPHP.value}`, {
             whichTable: whichTable.value
         });
+        if(leftNavTag.value === 'share'){
+            for(let n = 0; n < response.data.data.length; n++){
+                if(response.data.data[n].回報人 === null){
+                    response.data.data[n].回報人 = '-';
+                }
+            }
+        }
         return response.data.data;
     } catch (e) {
         if (e.response) {

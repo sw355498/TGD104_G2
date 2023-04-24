@@ -12,7 +12,7 @@
   // LINE 登入
   function openLineLogin(response) {
     let client_id = '1660893613';
-    let redirect_uri = 'https://tibamef2e.com/tgd104/g2/index';
+    let redirect_uri = 'http://localhost:8080/index';
     let link = 'https://access.line.me/oauth2/v2.1/authorize?';
     link += 'response_type=code';
     link += '&client_id=' + client_id;
@@ -26,10 +26,10 @@
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const code = urlParams.get('code');
-  const qs = require('qs');
-  const accessToken = ref();
-  const expiresIn = ref();
-  const idToken = ref();
+  // const qs = require('qs');
+  // const accessToken = ref();
+  // const expiresIn = ref();
+  // const idToken = ref();
   const userId = ref();
   const nickname = ref();
   const accountTypeID = ref();
@@ -103,7 +103,7 @@
     data: {
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: 'https://tibamef2e.com/tgd104/g2/index',
+      redirect_uri: 'http://localhost:8080/index',
       client_id: '1660893613',
       client_secret: 'dd30d5f42bc1a0e89a1eb27679c5a488'
     },
@@ -125,26 +125,28 @@
           client_id: '1660893613'
         },
         success: function(response) {
-          const userId = response.sub;
-          const name = response.name;
-          const accountTypeID = 1;
+          userId.value = response.sub;
+          nickname.value = response.name;
+          accountTypeID.value = 1;
 
           // 在此處處理使用者資訊
-          // console.log(userId, name, pictureUrl);
-          console.log(response);
+          console.log(userId.value, nickname.value, accountTypeID.value);
+
           axios
           .post(`${API_URL}lineLogin.php`, {
-            userId: userId,
-            nickname: name,
-            accountTypeID: accountTypeID
+            userId: userId.value,
+            nickname: nickname.value,
+            accountTypeID: accountTypeID.value
           })
           .then((response)=>{
-            if(response.data === '登入成功'){
-              alert('test');
+            if(response.data.message === '登入成功'){
+              alert(response.data.message);
             }else{
-              alert(response.data);
+              alert(response.data.message);
             }
-            localStorage.setItem("token", userId);
+            localStorage.setItem("token", response.data.id);
+            // window.location.reload();
+            console.log(response.data.id);  
           })
           .catch((error)=>{
             alert('發生了一些錯誤，請聯絡管理員!')

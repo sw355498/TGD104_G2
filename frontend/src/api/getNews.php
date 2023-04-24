@@ -3,7 +3,8 @@
 include("./getConn_nopush.php");
 $data = [];
 
-    $sql = "SELECT * from NEWS order by CREATE_DATE DESC" ; 
+    $sql = "SELECT * from NEWS WHERE NEWS_STATUS = 1
+    order by CREATE_DATE DESC" ; 
     $statement = $pdo->prepare($sql);
    
     $statement-> execute();

@@ -21,11 +21,7 @@
 
     if(count($data) === 0){
         // 建立SQL
-        $sql = "INSERT INTO USER (ACCOUNT, NICKNAME, LOGIN_TYPE_ID, ACCOUNT_TYPE_ID, CREATE_TIME) VALUES (:USERUID, :NICKNAME, 3, :ACCOUNT_TYPE_ID, NOW())
-        ";
-
-        //密碼加密
-        // $password = password_hash($password, PASSWORD_BCRYPT);
+        $sql = "INSERT INTO USER (ACCOUNT, NICKNAME, LOGIN_TYPE_ID, ACCOUNT_TYPE_ID, CREATE_TIME) VALUES (:USERUID, :NICKNAME, 3, :ACCOUNT_TYPE_ID, NOW())";
 
         // 執行
         $statement = $pdo->prepare($sql);
@@ -34,20 +30,22 @@
         $statement ->bindValue(":USERUID", $userUid);
         $statement ->bindValue(":NICKNAME", $nickname);
         $statement ->bindValue(":ACCOUNT_TYPE_ID", $accountTypeID);
-        //執行sql語法
+        
         $statement->execute();
+
+        $newId = $pdo->lastInsertId();
 
         $response = array(
             "success" => true,
             "message" => "帳號註冊成功",
-            "id" => $pdo->lastInsertId()
+            "id" => $newId
         );
         echo json_encode($response);
     } else {
         $response = array(
             "success" => true,
             "message" => "登入成功",
-            "id" => $result['ID']
+            "id" => $data[0]['ID']
         );
         echo json_encode($response);
     }
