@@ -118,9 +118,42 @@
             $statement ->bindValue(":whichID", $whichID);
             //執行sql語法
             $statement->execute();
-
             break;
-            
+        
+        case 'chatbot':
+            $isbtn = filterString($data['isbtn']);
+            $keyword = isset($data['keyword']) ? filterString($data['keyword']) : '';
+            $message = isset($data['message']) ? filterString($data['message']) : '';
+            $link = isset($data['link']) ? filterString($data['link']) : null;
+            $chatbotContent = isset($data['chatbotContent']) ? filterString($data['chatbotContent']) : null;
+
+            $sql = "UPDATE CHATBOT SET 
+            BTN = :btn,
+            KEYWORD = :keyword, 
+            `MESSAGE` = :message,
+            LINK = :link,
+            CONTENT = :chatbotContent
+            WHERE ID = :whichID";
+
+
+            $statement = $pdo->prepare($sql);
+
+            if(isset($isbtn) && $isbtn){
+                $btn = 1;
+            } else {
+                $btn = 0;
+            }
+
+            $statement ->bindValue(":btn", $btn);
+            $statement ->bindValue(":keyword", $keyword);
+            $statement ->bindValue(":message", $message);
+            $statement ->bindValue(":link", $link);
+            $statement ->bindValue(":chatbotContent", $chatbotContent);
+            $statement ->bindValue(":whichID", $whichID);
+            //執行sql語法
+            $statement->execute();
+            break;
+
         default:
             echo "資料有誤";
             break;

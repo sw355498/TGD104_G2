@@ -1,7 +1,7 @@
 <template>
     <div>
         <Teleport to="body">
-            <modal :show="showModal"  @close="showModal = false,modelWidth= false">
+            <modal :show="showModal"  @close="showModal = false,modelWidth= false,goback()">
             <template #header>
                 <h4>登入後台帳號</h4>
             </template>
@@ -124,6 +124,9 @@
             theErrorText.classList.add("d-none");
         }
     };
+    const goback = () => {
+        router.push('/')
+    }
 </script>
 <style lang="scss">
 .error {

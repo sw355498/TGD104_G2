@@ -47,6 +47,10 @@
             $sql = "UPDATE GAME SET GAME_STATUS = :updateStatusID WHERE ID = :updateID";
             break;
 
+        case 'chatbot':
+            $sql = "UPDATE CHATBOT SET `STATUS` = :updateStatusID WHERE ID = :updateID";
+            break;
+
         default:
             echo "資料有誤";
             break;

@@ -76,11 +76,18 @@
             FROM GAME
             WHERE ID = :whichID";
             break;
+
+        case 'chatbot':
+            $sql = "SELECT ID, BTN, KEYWORD, MESSAGE, CONTENT, LINK 
+            FROM CHATBOT 
+            WHERE ID = :whichID";
+            break;
+        
         default:
             echo "資料有誤";
             break;
     };
-    
+
     
 
     //執行並查詢，會回傳查詢結果的物件，必須使用fetch、fetchAll...等方式取得資料
