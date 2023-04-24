@@ -22,8 +22,6 @@
   function openGoogleLogin(){
     signInWithPopup(auth, googleProvider)
     .then((result) => {
-      // console.log('您已登入成功!! 我已取得您的Google名字為: ' + result.user.displayName);
-      console.log(result.user.uid);
       userUid.value = result.user.uid;
       nickname.value = result.user.displayName;
       accountTypeID.value = 1;

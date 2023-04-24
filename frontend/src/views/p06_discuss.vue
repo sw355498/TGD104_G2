@@ -22,6 +22,7 @@
             </ul>
             <div class="titleBlock">
                     <h2>所有文章</h2>
+                    <img src="/assets/img/p06_discuss/new14.png" alt="123">
                     <button class="medium_button"><router-link to="/discuss_new_content">發表新文章</router-link></button>
             </div>
             <div class="tab_p01_newsChoose">
@@ -51,7 +52,7 @@
                     <div class="topBlock_p06_discuss">
                         <div class="author">
                             <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
-                            <span class="paragraph">{{item.author}}</span>
+                            <span class="paragraph">{{item.NICKNAME}}</span>
                         </div>
                         <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                         <div class="ellipsisList" style="display: none;">
@@ -68,14 +69,14 @@
                     </div>
                     <div class="articleBlock_p06_discuss">
                         <div class="articleText_p06_discuss">
-                            <h3>{{item.title}}</h3>
+                            <h3>{{item.TITLE}}</h3>
                             <div class="articleInformation_p06_discuss text_title">
-                                <span class="tag">#{{item.tag}}</span>
+                                <span class="tag">#{{item.CATEGORY}}</span>
                                 <span>・</span>
-                                <span>{{item.time}}</span>
+                                <span>{{item.CREATE_TIME}}</span>
                             </div>
                             <div class="articleContent h6_component">
-                                {{item.content}}
+                                {{item.CONTENT}}
                             </div>
                             <ul class="articleInteractive text_title">
                                 <li><i class="fa-solid fa-thumbs-up fa-fw"></i><span> {{item.thumbsNum}} </span></li>   
@@ -90,7 +91,7 @@
                             </ul>
                         </div>
                         <div class="articleImage_p06_discuss">
-                            <img src="https://picsum.photos/200/300" alt="">
+                            <img :src="item.PIC" alt="此作者沒有上傳圖片">
                         </div>
                     </div>
             </section>
@@ -128,15 +129,17 @@
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue';
     import { API_URL } from '@/config'
+    import axios from 'axios';
+
     let id = 0
     const modalContent = ref('')
     const showModal = ref(false)
     const articleList = ref([
-        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250, facebookShareLink: 'https://www.facebook.com/sharer.php?u=http://localhost/'},
-        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-        {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250, facebookShareLink: 'https://www.facebook.com/sharer.php?u=http://localhost/'},
+        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
+        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
     ])
     
     const ellipsisList = ref([]);
@@ -165,7 +168,6 @@
     function doQuery(){
         $.ajax({            
             method: "POST",
-            // url: "http://localhost/TGD104_G2/frontend/src/api/get_b_user_select.php",
             url: `${API_URL}get_b_user_select.php`,
             data:{ 
                 account: inputText.value
@@ -191,6 +193,18 @@
     onMounted(()=>{
         ellipsisList.value = document.querySelectorAll('.ellipsisList');
         p06_shareButton.value = document.querySelectorAll('.p06_shareButton')
+
+        axios
+        .post(`${API_URL}get_discuss.php`)
+        .then((response)=>{
+            console.log(response.data);
+            articleList.value = response.data;
+            console.log(articleList.value[10].PIC);
+        })
+        .catch((error)=>{
+            console.log(error.response.data);
+        })
+
     })
 
     

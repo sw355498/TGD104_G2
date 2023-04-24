@@ -133,8 +133,6 @@ if (token) {
     .then((response) => {
       name.value = response.data.NICKNAME;
       hasToken.value = true;
-      console.log(name.value);
-      
     })
     .catch((error) => {
       console.log(error);
@@ -231,10 +229,9 @@ const navClick = () => {
 //子選單開關
 const isOpen = ref(false); //fa-minus
 const nav2Click = (e) => {
-  console.log("nav2Click");
   isOpen.value = !isOpen.value;
   e.target.children[0].style.transform = isOpen.value ? "rotate(180deg)" : "";
-  console.log(e.target.children[0]);
+  // console.log(e.target.children[0]);
 };
 
 /**

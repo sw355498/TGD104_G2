@@ -173,6 +173,9 @@
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue'
+    import axios from 'axios';
+    import { API_URL } from "@/config";
+
     const modalContent = ref('')
     const showModal = ref(false)
     const messages = ref([
@@ -239,6 +242,8 @@
     onMounted(()=>{
         ellipsisList.value = document.querySelector('.ellipsisList');
         p06_shareButton.value = document.querySelector('.p06_shareButton');
+
+
     })
 
 </script>
