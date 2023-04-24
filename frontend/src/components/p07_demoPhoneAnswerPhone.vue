@@ -1,13 +1,25 @@
 <template>
   <div class="answer_p07_demoPhone_page">
     <div class="slideBtn">
-      <div class="dragBtn"><i class="fa-solid fa-phone"></i></div>
+      <div class="dragBtn">
+        <i class="fa-solid fa-phone"></i>
+      </div>
       <span>滑動來接聽</span>
       <div class="dragArrived"></div>
     </div>
   </div>
 </template>
-<script setup></script>
+
+<script setup>
+// import Hammer from "hammerjs";
+
+const dragBtn = document.querySelector(".dragBtn");
+// const hummerDrag = new hummer(dragBtn);
+// hummerDrag.on("pan", (e) => {
+//   console.log(e);
+// });
+</script>
+
 <style lang="scss" scoped>
 @import "../assets/Sass/mixin/mixin";
 @import "../assets/Sass/base/breakpoints";
