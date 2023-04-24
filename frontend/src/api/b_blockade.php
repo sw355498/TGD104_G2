@@ -23,6 +23,7 @@
             break;
 
         case 'URL':
+            $updateStatusID = 4;
             $sql = "UPDATE URL SET URL_STATUS = :updateStatusID WHERE ID = :updateID";
             break;
 
