@@ -199,14 +199,19 @@
                 </div>
                 <button class="submitDemoShoppingCart"
                 :disabled="receiverAddress =='' || receiverName == ''"
-                @click.prevent="show = true">
+                @click.prevent="sweetAlert()">
                     立刻下單
                 </button>
+                <!-- <button class="submitDemoShoppingCart"
+                :disabled="receiverAddress =='' || receiverName == ''"
+                @click.prevent="show = true">
+                    立刻下單
+                </button> -->
             </form>
         </div>
     </div>
-    <!-- 下單成功彈窗 -->
-    <div class="orderChecked" v-if="show">
+    <!-- 下單成功彈窗改用sweetalert -->
+    <!-- <div class="orderChecked" v-if="show">
         <div class="orderChecked_container">
             <div class="top">
                 <i class="fa-solid fa-xmark" @click="$emit('close')"></i>
@@ -223,7 +228,7 @@
                 <button @click="$emit('close')">點我繼續體驗詐騙網站購物</button>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="mask" @click="$emit('close')"></div>
 </div>
 </template>
@@ -231,6 +236,7 @@
 import { ref, computed, watch,onMounted } from 'vue';
 import axios from 'axios';
 import { API_URL } from '@/config';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import citiesTW from "@/assets/data/dataCity.json";
 export default {
     name: 'Cart',
@@ -241,6 +247,19 @@ export default {
         },
     },
     setup(props) {
+        // sweetAlert
+        const sweetAlert = ()=>{
+            Swal.fire({
+                position: 'center',
+                title: '下單成功',
+                html: `幽靈包裹 約3-5個工作天送到 <br>
+                ${receiverAddress.value} <br>
+                親愛的 ${receiverName.value} <br>
+                感謝您的訂購`,
+                icon: 'success',
+                confirmButtonText: '點我繼續體驗詐騙網站購物'
+            })
+        }
         // 下拉縣市地址
         const cityIdx = ref(0);
         const areaIdx = ref(0);
@@ -385,6 +404,8 @@ export default {
             areas: areasData,
             zip: zipCode,
             removeIdx,
+            // sweetAlert
+            sweetAlert,
         };
     },
 };

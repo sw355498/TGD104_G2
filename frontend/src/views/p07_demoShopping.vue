@@ -149,13 +149,13 @@
                                     <span>$1980</span>
                                     <span>${{ product.price }}</span>
                                 </div>
-                                <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
+                                <!-- <ul class="scamWeb_p07_demoShopping_clothCardSizeSelect">
                                     <li>S</li>
                                     <li>M</li>
                                     <li>L</li>
                                     <li>XL</li>
-                                </ul>
-                                <button @click.prevent="addProductToCart(product)">加入購物車</button>
+                                </ul> -->
+                                <button @click.prevent="addProductToCart(product); sweetAlert();">加入購物車</button>
                             </div>
                             
                         </div>
@@ -256,6 +256,7 @@ import p07_demo_nav from "@/components/p07_demo_nav.vue";
 import p07_demoShopping_cart from "@/components/p07_demoShopping_cart.vue";
 import p07_demoShopping_popup from "@/components/p07_demoShopping_popup.vue";
 import p07_demo_robot from "@/components/p07_robot.vue";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export default {
     name: 'shoppingCart',
@@ -268,6 +269,17 @@ export default {
         p07_demo_robot
     },
     setup(){
+        const sweetAlert = ()=>{
+            Swal.fire({
+                title: '加入成功',
+                text: '已將商品加入購物車',
+                icon: 'success',
+                confirmButtonText: '確認',
+                position: 'center',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
         const cart = ref([])
         const product = ref({ name: '', price: 0 , number: 1 });
         const products = ref([
@@ -363,7 +375,8 @@ export default {
             addProductToCart,
             showComponent,
             showModal,
-            remainingTime
+            remainingTime,
+            sweetAlert
         }
     },
 }
