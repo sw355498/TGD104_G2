@@ -554,7 +554,7 @@ watch(leftNavTag, async (newTab) => {
             }},
         ];
       break;
-      case "chatbot":
+    case "chatbot":
         bigModal.value = true
         h2Title.value = "詐騙知識測驗管理";
         addbutton.value = true;
@@ -800,7 +800,7 @@ function operate(e) {
                 blockadeUser();
                 break;
             case "修改":
-            case "審核": 
+            case  "審核":
                 //先將localStorage內的upData清除
                 localStorage.removeItem('upData');
                 upData.value = {
@@ -1053,6 +1053,13 @@ async function selectTable() {
         const response = await axios.post(`${API_URL}${selectPHP.value}`, {
             whichTable: whichTable.value
         });
+        if(leftNavTag.value === 'share'){
+            for(let n = 0; n < response.data.data.length; n++){
+                if(response.data.data[n].回報人 === null){
+                    response.data.data[n].回報人 = '-';
+                }
+            }
+        }
         return response.data.data;
     } catch (e) {
         if (e.response) {
