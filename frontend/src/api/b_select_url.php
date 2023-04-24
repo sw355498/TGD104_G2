@@ -13,6 +13,7 @@
         FROM URL AS ur
         LEFT JOIN USER AS u ON ur.USER_ID = u.ID
         JOIN URL_STATUS AS us ON ur.URL_STATUS = us.ID
+        WHERE ur.URL_STATUS != 4
         ORDER BY ur.ID DESC;";
 
     $statement = $pdo->prepare($sql);

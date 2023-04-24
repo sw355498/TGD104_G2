@@ -51,12 +51,15 @@
         case 'URL':
             $sql = "SELECT ur.ID, ur.TITLE AS '網站名稱', ur.URL AS '網址', u.ACCOUNT AS '回報人', DATE_FORMAT(ur.DATE, '%Y/%m/%d') AS '回報日期', us.STATUS_NAME AS '回報狀態'
             FROM URL AS ur
-            JOIN USER AS u ON ur.USER_ID = u.ID
+            LEFT JOIN USER AS u ON ur.USER_ID = u.ID
             JOIN URL_STATUS AS us ON ur.URL_STATUS = us.ID
-            WHERE ur.TITLE like '%' :search '%'
+            WHERE ur.URL_STATUS != 4  
+            AND (
+                ur.TITLE like '%' :search '%'
                 OR ur.URL like '%' :search '%'
                 OR u.ACCOUNT like '%' :search '%'
                 OR us.STATUS_NAME like '%' :search '%'
+            )
             ORDER BY u.ID DESC;";
             break;
 
