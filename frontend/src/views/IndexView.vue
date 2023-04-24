@@ -143,13 +143,13 @@
       </article>
     </main>
     <!--Main Block end -->
-    <div>
+    <!-- <div> -->
       <indexChatbot
         :show="showComponent"
         @close="showComponent = false"
         v-if="showComponent"
       />
-    </div>
+    <!-- </div> -->
     <!-- footer -->
     <frontFooter />
   </div>
