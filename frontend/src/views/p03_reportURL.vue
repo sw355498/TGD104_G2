@@ -20,7 +20,9 @@
                         <img src="../assets/img/p08_user/user.jpg" alt="userImg">
                     </div>
                     <div class="userInfo">
-                        <span>嗨！</span> Karen
+                        <span>嗨！</span>
+                        <span v-if="name !== undefined && name !== ''">{{ name }}</span>
+                        <span v-else >會員</span>
                         <p>有發現什麼可疑網站嗎</p>
                     </div>
                 </div>
@@ -107,6 +109,33 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     // 判斷是不是會員
     const token = localStorage.getItem("token");
     console.log(token);
+    const name = ref('');
+    // async function search(){
+    //     try {
+    //         const response = await axios.post(`${API_URL}member_getData.php?token=${token}`, {
+    //             name = response.data.NICKNAME;
+    //         });
+    //         console.log('search');
+    //         console.log( response.data.data);
+    //         return response.data.data;
+
+    //     } catch (error) {
+    //             console.log(error);
+    //     }
+    // }
+    if (token) {
+    axios
+        .get(`${API_URL}/member_getData.php?token=${token}`)
+        .then((response) => {
+        name.value = response.data.NICKNAME;
+        // hasToken.value = true;
+        console.log(name.value);
+        
+        })
+        .catch((error) => {
+        console.log(error);
+        });
+    }
     // sweetalert
     const sweetAlert = ()=>{
         Swal.fire({

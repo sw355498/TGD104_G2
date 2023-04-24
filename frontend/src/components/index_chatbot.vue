@@ -286,12 +286,6 @@ import { ref , nextTick, onMounted, computed} from 'vue'
             }
             }
         }
-        // hasOwnProperty有在陣列裡面返回一個布林值
-        // if ( input_trim && robotAnswer.hasOwnProperty(input_trim)) {
-        //     botMsg = robotAnswer[input_trim].message
-        // }else{
-        //     botMsg = robotAnswer.other.message;
-        // }
         // 啟動計時器，1分鐘後顯示再見的消息
         goodbyeTimer.value = setTimeout(async() => {
             messages.value.push({
@@ -322,8 +316,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
     const filteredRobotAnswerArry = computed(() => {
         return robotAnswerArry.value.filter(item => item.BTN === 1)
     })
-
-    console.log(filteredRobotAnswerArry);
+    // console.log(filteredRobotAnswerArry);
     // 抓最新消息
     const news = ref([]);
     async function allData(){
