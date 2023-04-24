@@ -6,14 +6,7 @@
     <section>
       <!-- banner動態 -->
       <banner />
-      <div class="banner_index_partial">
-        <div
-          class="circle-container"
-          v-for="index in 50"
-          :key="index"
-          v-html="partial"
-        ></div>
-      </div>
+
       <!-- 固定按鈕 -->
       <div class="fixed_index_btn">
         <!-- BackTop Button -->
@@ -27,7 +20,14 @@
         <div class="clost-bg" v-if="show" @click="$emit('ddd')"></div>
       </div>
     </section>
-
+    <div class="banner_index_partial">
+      <div
+        class="circle-container"
+        v-for="index in 50"
+        :key="index"
+        v-html="partial"
+      ></div>
+    </div>
     <!--Main Block -->
     <main>
       <!--Text Article -->

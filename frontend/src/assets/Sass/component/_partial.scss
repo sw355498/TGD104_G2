@@ -1,5 +1,5 @@
 .banner_index_partial {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -15,7 +15,7 @@
   animation-timing-function: linear;
 }
 .circle-container .circle {
-  width: 100%;
+  max-width: 90%;
   height: 100%;
   border-radius: 50%;
   mix-blend-mode: screen;
