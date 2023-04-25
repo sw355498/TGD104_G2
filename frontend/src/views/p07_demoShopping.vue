@@ -9,8 +9,8 @@
             <p07_demo_nav />
             
             <!-- popup -->
-            <div v-if="showModal">
-                <p07_demoShopping_popup :show="showModal" @close="showModal = false"/>
+            <div v-if="showPopup">
+                <p07_demoShopping_popup :show="showPopup" @close="showPopup = false"/>
             </div>
             <!-- 瀏覽器 -->
             <div class="browser_p07_demoShopping">
@@ -79,7 +79,7 @@
                                 <li><a @click="changeSection3()">立即下單</a></li>
                                 <li>
                                     <span>
-                                       <span class="cart_length"> {{cart.length}} </span>
+                                       <span class="cart_length"> {{cart.length}}</span>
                                        <img 
                                         src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" 
                                         @click="showComponent = true"
@@ -155,13 +155,14 @@
                                         <li>L</li>
                                         <li>XL</li>
                                     </ul> -->
-                                    <button @click.prevent="addProductToCart(product); sweetAlert();">加入購物車</button>
+                                    <button @click.prevent="addProductToCart(product); ">加入購物車</button>
                                 </div>
                                 
                             </div>
     
                             <!-- 第四紅條廣告詞 -->
                             <div class="scamWeb_p07_demoShopping_bannerRed scamWeb_p07_demoShopping_bannerRed4">
+                                <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！</p>
                                 <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！</p>
                                 <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！</p>
                             </div>
@@ -198,6 +199,7 @@
                                 <p class="scamWeb_p07_demoShopping_bannerRedP2">立刻下單 免運包郵 貨到付款 最有保障</p>
                             </div>
                         </div>
+                        <!-- 下單須知 -->
                         <div class="notice" v-show="showSection2" id="noticeDemo">
                             <!-- 拿第二紅條廣告詞 物流條款 -->
                             <div class="scamWeb_p07_demoShopping_bannerRed" id="noticeDemo1">
@@ -301,7 +303,7 @@
                             <div class="scamWeb_p07_demoShopping_footerInfo">
                                 <div class="scamWeb_p07_demoShopping_footerNav">
                                     <ul>
-                                        <li @click="changeSection1()">商品頁面</li>
+                                        <li @click="changeSection3()">商品列表</li>
                                         <li @click="changeSection4()">物流條款</li>
                                         <li @click="changeSection5()">服務條款</li>
                                         <li @click="changeSection6()">隱私協議</li>
@@ -358,6 +360,7 @@ export default {
         p07_demo_robot
     },
     setup(){
+        // 切換商品主頁、下單須知 =================================================
         const showSection1 = ref(true);
         const showSection2 = ref(false);
         function changeSection1() { //切換商品主頁
@@ -450,18 +453,29 @@ export default {
                 });
             });
         };
+        // sweetAlert =================================================
         const sweetAlert = ()=>{
             Swal.fire({
                 title: '加入成功',
                 text: '已將商品加入購物車',
                 icon: 'success',
-                confirmButtonText: '確認',
                 position: 'center',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1100
+            })
+        };
+        const sweetAlertAlready = ()=>{
+            Swal.fire({
+                title: '購物車已經有囉',
+                text: '已將商品數量+1',
+                // icon: 'success',
+                position: 'center',
+                showConfirmButton: false,
+                timer: 1200
             })
         }
-        const cart = ref([])
+        // 購物車 =================================================
+        const cart = ref([]);
         const product = ref({ name: '', price: 0 , number: 1 });
         const products = ref([
         {
@@ -518,14 +532,18 @@ export default {
             const index = cart.value.findIndex(item => item.name === product.name);
             if (index >= 0) { // 如果購物車中已經有此商品，數量加 1
                 cart.value[index].number++;
+                sweetAlertAlready();
+                console.log(cart.value);
             } else { // 如果購物車中沒有此商品，新增至購物車中
                 cart.value.push({ ...product, number: 1 });
+                sweetAlert();
+                // console.log(cart.value);
             }
         };
         
         // 點擊才出現 =================================================
         const showComponent = ref(false);
-        const showModal = ref(true);
+        const showPopup = ref(true);
 
 
         // 倒數計時器 =================================================
@@ -555,9 +573,10 @@ export default {
             products,
             addProductToCart,
             showComponent,
-            showModal,
+            showPopup,
             remainingTime,
             sweetAlert,
+            sweetAlertAlready,
             showSection1,
             showSection2,
             changeSection1,
