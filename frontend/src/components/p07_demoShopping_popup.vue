@@ -153,9 +153,9 @@ export default {
     const disableBackgroundScroll = () => {
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
-        document.body.style.top = '-20vh';
-        document.body.style.top = '-30vh';
-        document.body.style.top = '-180px';
+        // document.body.style.top = '-20vh';
+        // document.body.style.top = '-30vh';
+        document.body.style.top = '-180px'; //用px才能每個瀏覽器%數都一樣位置
         document.body.style.width = '100%';
     }
     const ableBackgroundScroll = () => {
@@ -166,6 +166,7 @@ export default {
     }
     function scrollToStep2() {
       const element = document.getElementById('tour2');
+      console.log(element);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
