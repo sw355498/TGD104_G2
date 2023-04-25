@@ -336,7 +336,7 @@ export default {
 <style>
 
 .modal-wrapper .modal-container{
-    top:-120%;
+    top:-110%;
 }
 
 </style>
