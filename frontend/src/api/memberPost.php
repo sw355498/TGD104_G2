@@ -17,8 +17,8 @@
     // 建立 SQL 語法
     $sql = "SELECT *
     FROM DISCUSS U
-    INNER JOIN DISCUSS_STATUS S ON U.DISCUSS_STATUS_ID = S.ID
-    WHERE U.USER_ID = :user_id";
+    LEFT JOIN DISCUSS_STATUS S ON U.DISCUSS_STATUS_ID = S.ID
+    WHERE U.USER_ID = :user_id AND U.DISCUSS_STATUS_ID < 4 AND S.ID != 4";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':user_id', $token);
@@ -36,7 +36,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         (SELECT COUNT(*) FROM DISCUSS_LIKE dl WHERE dl.DISCUSS_ID = d.ID) AS likes_count 
         FROM DISCUSS d 
         INNER JOIN DISCUSS_STATUS s ON d.DISCUSS_STATUS_ID = s.ID
-        WHERE d.USER_ID = :id";
+        WHERE d.USER_ID = :id AND d.DISCUSS_STATUS_ID < 4 AND s.ID != 4";
   // $sql = "SELECT d.*, s.STATUS_NAME, COUNT(dl.ID) AS likes_count 
   // FROM DISCUSS d 
   // LEFT JOIN DISCUSS_LIKE dl ON dl.DISCUSS_ID = d.ID

@@ -56,7 +56,7 @@
             <div class="card mt-3 order-6 level">
               <ul class="list-group list-group-flush list-group-dark">
                 <li
-                  class="list-group-dark list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                  class="list-group-dark list-group-item d-flex flex-column align-items-center flex-wrap"
                 >
                   <h5>會員等級列表</h5>
                 </li>
@@ -64,35 +64,35 @@
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.1 防詐初學者</p>
-                  <span class="text-secondary">exp 0-10</span>
+                  <span class="text-secondary expText pt-1">exp 0-10</span>
                   <!-- <p class="block mb-1">討論區發文間隔2小時</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.2 防詐小尖兵</p>
-                  <span class="text-secondary">exp 11-50</span>
+                  <span class="text-secondary expText pt-1">exp 11-50</span>
                   <!-- <p class="block  mb-1">可換個人大頭貼</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.3 防詐達人</p>
-                  <span class="text-secondary">exp 51-100</span>
+                  <span class="text-secondary expText pt-1">exp 51-100</span>
                   <!-- <p class="block mb-1">發文無間隔限制</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.4 防詐大師</p>
-                  <span class="text-secondary">exp 101-200</span>
+                  <span class="text-secondary expText pt-1">exp 101-200</span>
                   <!-- <p class="block mb-1">可收藏文章</p> -->
                 </li>
                 <li
                   class="list-group-dark list-group-item d-flex justify-content-between flex-wrap"
                 >
                   <p>LV.5 防詐神人</p>
-                  <span class="text-secondary">exp 201-</span>
+                  <span class="text-secondary expText pt-1">exp 201-</span>
                   <!-- <p class="block mb-1 justify-content-end">可檢舉文章</p> -->
                 </li>
               </ul>
