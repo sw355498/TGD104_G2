@@ -335,8 +335,13 @@ export default {
 
 <style>
 
+<<<<<<< HEAD
 .p07_resultbg .modal-wrapper .modal-container{
     top:-120%;
+=======
+.modal-wrapper .modal-container{
+    top:-110%;
+>>>>>>> ZIH
 }
 
 </style>
