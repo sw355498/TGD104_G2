@@ -72,6 +72,7 @@
     </div>
     <!-- footer -->
     <frontFooter />
+    <Modal v-show="isModalVisible" @close="closeModal" />
   </div>
 </template>
 
@@ -83,13 +84,13 @@ import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
 import axios from "axios";
 import { API_URL, reactive } from "@/config";
-// import Modal from "@/components/userLogin.vue";
+import Modal from "@/components/userLogin.vue";
 
 export default {
   components: {
     frontNavbar,
     frontFooter,
-    // Modal,
+    Modal,
   },
   data() {
     return {
@@ -129,8 +130,14 @@ export default {
       window.open(link, "mywindow", "width=700, height=400");
     },
     showModal() {
-      this.isModalVisible = true;
+    this.isModalVisible = true;
+    document.body.classList.add("modal-open");
+    document.querySelector(".modal-container").style.top= "-50%";
     },
+    closeModal() {
+    this.isModalVisible = false;
+    document.body.classList.remove("modal-open");
+},
     // 收藏
     addToFavorites() {
       // 取得目前新聞的 ID
@@ -141,6 +148,7 @@ export default {
       if (!token) {
         // 如果沒有 token，表示使用者尚未登入，顯示登入彈窗
         this.showModal();
+
         // alert("請先登入會員")
         return;
       }
@@ -155,6 +163,7 @@ export default {
           // 收藏成功，提示訊息
           // alert("已加入收藏！");
           this.isFavorite = true;
+
         })
         .catch((error) => {
           // 收藏失敗，顯示錯誤訊息

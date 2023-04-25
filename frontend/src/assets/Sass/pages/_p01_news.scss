@@ -128,7 +128,7 @@
                     }
 
                     a {
-                        padding: 0 8px 15px 10px;
+                        padding: 0 8px 16px 10px;
                         &:not(.current):hover {
                             color: $main_color;
                         }
@@ -392,5 +392,8 @@
         img {
             width: 100%;
         }
+    }
+    .forNews{
+        top: 5%;
     }
 }

@@ -67,12 +67,12 @@ export default {
           {
             name: "讚數",
             type: "text",
-            width: 2,
+            width: 5,
           },
           {
             name: "回應",
             type: "text",
-            width: 2,
+            width: 5,
           },
           {
             name: "狀態",
@@ -87,11 +87,11 @@ export default {
           {
             name: "主題",
             type: "text",
-            width: 56,
+            width: 40,
           },
           {
             name: "編輯/修改",
-            width: 20,
+            width: 30,
             itemTemplate: function (value, items) {
               let $buttonContainer = $("<div>");
                 let $delete = $("<button>")
