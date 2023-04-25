@@ -170,7 +170,7 @@
                 </ul>
             </nav>
         </main>
-        <Modal v-show="isModalVisible" @close="closeModal" />
+        <LoginModal v-show="isLoginModalVisible" @close="closeLoginModal()" />
         <!-- footer -->
         <frontFooter />
     </div>
@@ -185,11 +185,17 @@
     import { API_URL } from "@/config";
     import Swal from 'sweetalert2/dist/sweetalert2.js'
     import { useRoute } from 'vue-router'
+    import LoginModal from "@/components/userLogin.vue";
+
     const discuss = ref([]);
     const discussId = ref();
     const current_url = ref(null)
     const isFavorite = ref(false)
-    const isModalVisible = ref(false)
+    const isLoginModalVisible = ref(false)
+
+    function closeLoginModal(){
+        isLoginModalVisible.value = false;
+    };
     function checkDiscussFavorite (){
         const token = localStorage.getItem('token')
         if (token) {
@@ -214,15 +220,16 @@
       }
     }
 
-    // function showModal() {
-    // isModalVisible.value = true
-    // }
+    function showLoginModal() {
+        isLoginModalVisible.value = true
+        // document.body.classList.add("modal-open");
+    }
 
     function addToFavorites(){
         const discussId = discuss.value.ID
         const token = localStorage.getItem('token')
         if (!token) {
-            // showModal()
+            showLoginModal()
             return
         }
 
@@ -273,7 +280,7 @@
     // sweetAlert =================================================
     const sweetAlertCollect = ()=>{
         Swal.fire({
-            title: '蒐藏成功',
+            title: '按讚成功',
             text: '已經把文章蒐藏到會員中心囉',
             icon: 'success',
             position: 'center',
