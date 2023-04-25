@@ -1,6 +1,12 @@
 <template>
+
+      <!-- navgation -->
+      <frontNavbar />
  
     <section class="p07_resultbg">
+
+         <!-- demo 體驗的 nav -->
+         <p07_demo_nav />
 
         <div class="result_background">
 
@@ -102,6 +108,8 @@
 
 import Modal from "@/components/userLogin.vue"; // 填寫會員登入資料的那個彈窗
 import frontFooter from "@/components/f_footer.vue"; //footer的欄位
+import p07_demo_nav from "@/components/p07_demo_nav.vue";
+import frontNavbar from "@/components/f_nav.vue";
 // 抓會員資料用套件
 import axios from "axios";
 import { API_URL, reactive } from "@/config";
@@ -113,7 +121,9 @@ export default {
     name: "App",
     components: {
     Modal,
-    frontFooter,
+    p07_demo_nav,
+    frontNavbar,
+    frontFooter
     },
 
     

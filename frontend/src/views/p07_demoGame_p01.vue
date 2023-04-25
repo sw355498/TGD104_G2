@@ -63,8 +63,11 @@
 
                 <button class="next_quiz_botton"  @click="changeQuestionAndScrollToTop">
                    <div class="botton_p">
-                    {{ nextButtonText }} 
-                    <svg><use xlink:href="#onward" /></svg>
+                    下一題 
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.84655 1.74029C0.925074 1.2852 0.950356 2.64625 1.20318 3.38365L5.12195 7.68167L1.20318 12.0429C0.343585 13.9138 1.94059 14.0023 2.84655 13.8127L7.77663 8.75618C8.38341 7.9977 8.02945 7.2603 7.77663 6.9864L2.84655 1.74029Z" fill="#033159" stroke="black"/>
+                <path d="M8.73186 1.20675C7.01265 0.599971 6.83567 1.96523 6.96209 2.7237L12.3978 8.15943L6.96209 13.4688C6.60813 15.2385 7.99446 15.3017 8.73186 15.1121L14.6101 9.17073C15.6214 8.15943 15.0314 7.31668 14.6101 7.02172L8.73186 1.20675Z" fill="#033159" stroke="black"/>
+</svg>
 
 </div></button>
 
@@ -91,8 +94,6 @@
 <script>
 
 import frontFooter from "@/components/f_footer.vue";
-
-import axios from "axios";
 
 export default {
 
@@ -191,7 +192,6 @@ export default {
             score: 0, //分數計算初始值
             showAnswerBoardContent:false, // 按"點擊這裡看破解"的按鈕被觸發前，預設值為否
             showLoginAlert: true,
-            nextButtonText: "下一題",
 
             
           
@@ -239,28 +239,16 @@ export default {
 
         //結合上面兩者的方法後，再創一個新的方法寫入按鈕裡
         changeQuestionAndScrollToTop() {
-
-            //若題目
             if(this.questionNumber === this.questions.length){
                 localStorage.setItem('score', this.score);
                 this.$router.push('demoGameresult');
-            }
-            
-            else if (this.questionNumber === this.questions.length - 1){
+            }else{
                 this.questionNumber +=1;
-                this.nextButtonText = "看結果";
-                window.scrollTo(0, 0);
-                this.isAnswered = false;
-                this.showAnswerBoardContent = false;
-            }
-            
-            else{
-                this.questionNumber +=1;
-                this.nextButtonText = "下一題";
                 window.scrollTo(0, 0);
                 // this.selectedAnswer = null; //清空選擇的答案
                 this.isAnswered = false; //設為未作答狀態
                 this.showAnswerBoardContent = false;
+                
             }
 
         // this.changeQuestion();
