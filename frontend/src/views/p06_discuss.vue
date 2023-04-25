@@ -47,14 +47,14 @@
                 <input type="text" v-model="search" placeholder="搜尋文章" />
                 </div>
             </div>
-            <section v-for="item in articleList.slice(pageStart, pageEnd)" :key="item.id">
+            <section v-for="(item, index) in (articleList.slice(pageStart, pageEnd))" :key="index">
                     <div class="topBlock_p06_discuss">
                         <div class="author">
                             <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
                             <span class="paragraph">{{ author }}</span>
                         </div>
                         <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                        <div class="ellipsisList" style="display: none;">
+                        <div class="ellipsisList"  :style="{'display':showellipsisList === index ? 'block' : 'none'}">
                             <ul>
                                 <li id="show-modal" @click="showModal = true, modalContent = '<h4>檢舉</h4>'">檢舉</li>
                                 <li @click="shareBtn(index)">分享</li>
@@ -90,7 +90,8 @@
                             </ul>
                         </div>
                         <div class="articleImage_p06_discuss">
-                            <img :src="item.PIC" alt="此作者沒有上傳圖片">
+                            <img :src="item.PIC" v-if="item.PIC !== ''" alt="此作者沒有上傳圖片">
+                            <span v-else>此作者沒有上傳圖片</span>
                         </div>
                     </div>
             </section>
@@ -109,7 +110,7 @@
 </template>
 
 <script setup>
-    import { ref, inject, onMounted, computed, watch } from 'vue';
+    import { ref, onMounted, computed, watch,nextTick } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue';
@@ -118,26 +119,18 @@
 
     const modalContent = ref('')
     const showModal = ref(false)
-    // let id = 0
-    const articleList = ref([
-        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250, facebookShareLink: 'https://www.facebook.com/sharer.php?u=http://localhost/'},
-        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-        // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
-    ])
-
-
-    
+    const showellipsisList = ref(null)
+    const articleList = ref([])
     const ellipsisList = ref([]);
     const p06_shareButton = ref([])
     function ellipsisBtn(index) {
-        if(ellipsisList.value[index].style.display === 'none'){
-            ellipsisList.value[index].style.display = 'block'
+        if(showellipsisList.value === index){
+            showellipsisList.value = null
         }else{
-            ellipsisList.value[index].style.display = 'none'
+            showellipsisList.value = index
         }
     }
+
     function shareBtn(index){
         if(p06_shareButton.value[index].classList.contains('hover')){
             p06_shareButton.value[index].classList.remove('hover')
@@ -150,10 +143,8 @@
         window.open(link, 'mywindow', 'width=700, height=400');
     }
     
-    const inputText = ref('')
-    const apiUrl = inject('$apiUrl')
-    
     const search = ref()
+    const test = ref()
     async function selectDiscuss(index){
         await axios
         .post(`${API_URL}get_discuss.php`, {
@@ -161,6 +152,13 @@
         })
         .then((response)=>{
             const newData = response.data.map(item => {
+                let picPath = item.PIC;
+                try {
+                    test.value = require(`@/assets/img/p06_discuss/${picPath}`);
+                } catch (err) {
+                    picPath = '暫放之後刪.png';
+                    test.value = ('')
+                }
                 return{
                     ID: item.ID,
                     CATEGORY: item.CATEGORY,
@@ -168,14 +166,16 @@
                     CREATE_TIME: item.CREATE_TIME,
                     NICKNAME: item.NICKNAME,
                     NONNAME: item.NONNAME,
-                    PIC: require('@/assets/img/p06_discuss/' + item.PIC),
+                    PIC: test.value,
                     TITLE: item.TITLE
                 }
             })
             articleList.value = newData;
+            nextTick(()=>{
+                ellipsisList.value = document.querySelectorAll('.ellipsisList');
+                p06_shareButton.value = document.querySelectorAll('.p06_shareButton')
+            })
             return  articleList.value = newData;
-            console.log('ok');
-            console.log(articleList.value);
         })
         .catch((error)=>{
             // console.log(error.response.data);
@@ -209,8 +209,6 @@
     })
     
     onMounted(()=>{
-        ellipsisList.value = document.querySelectorAll('.ellipsisList');
-        p06_shareButton.value = document.querySelectorAll('.p06_shareButton')
         selectDiscuss();
     })
     
