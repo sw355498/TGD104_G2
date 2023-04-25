@@ -22,7 +22,6 @@
             </ul>
             <div class="titleBlock">
                     <h2>所有文章</h2>
-                    <img src="/assets/img/p06_discuss/new14.png" alt="123">
                     <button class="medium_button"><router-link to="/discuss_new_content">發表新文章</router-link></button>
             </div>
             <div class="tab_p01_newsChoose">
@@ -45,14 +44,14 @@
                 <i
                     class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0 translate-middle"
                 ></i>
-                <input type="text" placeholder="搜尋文章" />
+                <input type="text" v-model="search" placeholder="搜尋文章" />
                 </div>
             </div>
-            <section v-for="(item, index) in articleList" :key="item.id">
+            <section v-for="item in articleList.slice(pageStart, pageEnd)" :key="item.id">
                     <div class="topBlock_p06_discuss">
                         <div class="author">
                             <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
-                            <span class="paragraph">{{item.NICKNAME}}</span>
+                            <span class="paragraph">{{ author }}</span>
                         </div>
                         <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                         <div class="ellipsisList" style="display: none;">
@@ -82,7 +81,7 @@
                                 <li><i class="fa-solid fa-thumbs-up fa-fw"></i><span> {{item.thumbsNum}} </span></li>   
                                 <li><i class="fa-solid fa-message fa-fw"></i><span> {{item.messageNum}} </span></li>
                                 <li>
-                                    <router-link to="/discuss/discuss_content">
+                                    <router-link :to="'/discuss/discuss_content/' + item.ID">
                                         <button class="viewDetails medium_button">
                                             查看詳細
                                         </button>
@@ -97,43 +96,29 @@
             </section>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                    <a class="page-link pagination-dark" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <li class="page-item"><a class="page-link  pagination-dark" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link  pagination-dark" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link  pagination-dark" href="#">3</a></li>
-                    <li class="page-item">
-                    <a class="page-link pagination-dark" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    </li>
+                    <li class="page-item" v-show="currentPage != 1"><a class="page-link  pagination-dark" href="#" @click.prevent="setPage(currentPage - 1)">&laquo;</a></li>
+                    <li class="page-item" :class="{ active: currentPage === n }" style="display: flex;" v-for="(n, index) in totalPage" :key="index" @click.prevent="setPage(n)"><a class="page-link  pagination-dark" href="#">{{ n }}</a></li>
+                    <li class="page-item" v-show="currentPage < totalPage"><a class="page-link  pagination-dark" href="#" @click.prevent="setPage(currentPage + 1)">&raquo;</a></li>
                 </ul>
             </nav>
         </main>
-        <form> 
-            <input v-model="inputText" @keyup="doQuery" />
-        </form>
-        <p>結果: <br>
-        <span id="result"></span></p> 
+
         <!-- footer -->
         <frontFooter />
     </div>
 </template>
 
 <script setup>
-    import { ref, inject, onMounted } from 'vue';
+    import { ref, inject, onMounted, computed, watch } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue';
     import { API_URL } from '@/config'
     import axios from 'axios';
 
-    let id = 0
     const modalContent = ref('')
     const showModal = ref(false)
+    // let id = 0
     const articleList = ref([
         // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250, facebookShareLink: 'https://www.facebook.com/sharer.php?u=http://localhost/'},
         // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
@@ -141,6 +126,8 @@
         // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
         // {id: id++, author:'Doflamingo', title: '玩tinder 被裸聊詐騙', tag: '交友詐騙', time: '三個小時以前', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum adipisci beatae est temporibus ad! Dicta velit aliquid fuga vero praesentium unde, magni sit veniam aliquam iure quo alias eius culpa?', thumbsNum: 100, messageNum: 250},
     ])
+
+
     
     const ellipsisList = ref([]);
     const p06_shareButton = ref([])
@@ -162,50 +149,98 @@
     function openShareWindow(link) {
         window.open(link, 'mywindow', 'width=700, height=400');
     }
-
+    
     const inputText = ref('')
     const apiUrl = inject('$apiUrl')
-    function doQuery(){
-        $.ajax({            
-            method: "POST",
-            url: `${API_URL}get_b_user_select.php`,
-            data:{ 
-                account: inputText.value
-            },            
-            dataType: "json",
-            success: function (response) {
-                //更新html內容前先清空原有資料
-                $("#result").html("");
-                // 更新html內容(透過jQuery跑迴圈取值)
-                if(response.length === 0){
-                    $('#result').append('查無資料!!!')
-                } else {
-                    $.each(response, function(index, row) {
-                        $("#result").append(row.Account + "/" + row.PWD +  "/" + row.CreateDate + "<br/>");
-                    });
+    
+    const search = ref()
+    async function selectDiscuss(index){
+        await axios
+        .post(`${API_URL}get_discuss.php`, {
+            datas: index
+        })
+        .then((response)=>{
+            const newData = response.data.map(item => {
+                return{
+                    ID: item.ID,
+                    CATEGORY: item.CATEGORY,
+                    CONTENT: item.CONTENT,
+                    CREATE_TIME: item.CREATE_TIME,
+                    NICKNAME: item.NICKNAME,
+                    NONNAME: item.NONNAME,
+                    PIC: require('@/assets/img/p06_discuss/' + item.PIC),
+                    TITLE: item.TITLE
                 }
-            },
-            error: function(exception) {
-                alert("發生錯誤: " + exception.status);
-            }
-        });
+            })
+            articleList.value = newData;
+            return  articleList.value = newData;
+            console.log('ok');
+            console.log(articleList.value);
+        })
+        .catch((error)=>{
+            // console.log(error.response.data);
+        })
     }
+
+    watch(search, (newSearch => {
+        selectDiscuss(newSearch);
+    }))
+
+
+    const perpage = 10 //一頁的資料數
+    const currentPage = ref(1)
+    function setPage(page) {
+        if (page <= 0 || page > totalPage.value) {
+            return
+        }
+        currentPage.value = page
+    }
+
+    const totalPage = computed(() => {
+        return Math.ceil(articleList.value.length / perpage)
+    })
+
+    const pageStart = computed(() => {
+        return (currentPage.value - 1) * perpage
+    })
+
+    const pageEnd = computed(() => {
+        return currentPage.value * perpage
+    })
+    
     onMounted(()=>{
         ellipsisList.value = document.querySelectorAll('.ellipsisList');
         p06_shareButton.value = document.querySelectorAll('.p06_shareButton')
-
-        axios
-        .post(`${API_URL}get_discuss.php`)
-        .then((response)=>{
-            console.log(response.data);
-            articleList.value = response.data;
-            console.log(articleList.value[10].PIC);
-        })
-        .catch((error)=>{
-            console.log(error.response.data);
-        })
-
+        selectDiscuss();
     })
-
+    
     
 </script>
+
+
+<!-- <template>
+    <ul>
+      <li v-for="item in datas.slice(pageStart, pageEnd)" :key="item">{{ item }}</li>
+    </ul>
+
+    <ul class="pagination">
+
+      <li class="page-item" @click.prevent="setPage(currentPage.value - 1)">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <li class="page-item" :class="{ active: currentPage === n }" v-for="(n, index) in totalPage" :key="index" @click.prevent="setPage(n)">
+        <a class="page-link" href="#">{{ n }}</a>
+      </li>
+
+      <li class="page-item" @click.prevent="setPage(currentPage.value + 1)">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+
+    </ul>
+
+  </template>  -->

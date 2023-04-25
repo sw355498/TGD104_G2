@@ -48,7 +48,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss_new_content.vue'),
   },
   {
-    path: '/discuss/discuss_content/:article?',
+    path: '/discuss/discuss_content/:article',
     name: 'discuss_content',
     component: () => import(/* webpackChunkName: "about" */ '../views/p06_discuss_content.vue')
   },
