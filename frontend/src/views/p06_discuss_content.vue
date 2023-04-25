@@ -229,7 +229,8 @@
         const discussId = discuss.value.ID
         const token = localStorage.getItem('token')
         if (!token) {
-            showLoginModal()
+            // showLoginModal()
+            sweetAlertLogin()
             return
         }
 
@@ -278,14 +279,15 @@
     }
         
     // sweetAlert =================================================
-    const sweetAlertCollect = ()=>{
+    const sweetAlertLogin = ()=>{
         Swal.fire({
-            title: '按讚成功',
-            text: '已經把文章蒐藏到會員中心囉',
-            icon: 'success',
+            title: '非會員',
+            text: '請先登入會員才能蒐藏哦',
+            icon: 'error',
             position: 'center',
-            showConfirmButton: false,
-            timer: 1100
+            // showConfirmButton: false,
+            confirmButtonText: '確認',
+            // timer: 1500
         })
     };
     // 判斷是不是會員
