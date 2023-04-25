@@ -48,7 +48,7 @@
                         <span>三個小時以前</span>
                     </div>
                     <div>
-                        <button class="medium_button">收藏</button>
+                        <button class="medium_button" @click="sweetAlertCollect()">收藏</button>
                         <button class="medium_button">按讚</button>
                     </div>
                 </div>
@@ -175,7 +175,18 @@
     import Modal from '@/components/modal.vue'
     import axios from 'axios';
     import { API_URL } from "@/config";
-
+    import Swal from 'sweetalert2/dist/sweetalert2.js'
+    // sweetAlert =================================================
+    const sweetAlertCollect = ()=>{
+        Swal.fire({
+            title: '蒐藏成功',
+            text: '已經把文章蒐藏到會員中心囉',
+            icon: 'success',
+            position: 'center',
+            showConfirmButton: false,
+            timer: 1100
+        })
+    };
     const modalContent = ref('')
     const showModal = ref(false)
     const messages = ref([
