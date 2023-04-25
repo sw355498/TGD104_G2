@@ -65,7 +65,7 @@ export default {
           {
             name: "狀態",
             type: "text",
-            width: 30,
+            width: 20,
           },
           {
             name: "日期",
@@ -75,7 +75,7 @@ export default {
           {
             name: "回報內容",
             type: "text",
-            width: 35,
+            width: 45,
           },
           {
             name: "編輯/修改",
@@ -92,7 +92,7 @@ export default {
                   let data = { id: items.id, token: token }; // 假設需要刪除的資料的ID存儲在items.id屬性中
 
                   axios
-                    .post(`${API_URL}deleteURL.php`, data)
+                    .post(`${API_URL}memberDeleteURL.php`, data)
                     .then(function (response) {
                       // 在成功刪除資料後，可以更新網頁介面，例如重新載入表格資料
                       // alert("資料已成功刪除！");

@@ -8,7 +8,9 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><router-link to="/index">首頁</router-link></li>
+              <li class="breadcrumb-item">
+                <router-link to="/index">首頁</router-link>
+              </li>
               <li class="breadcrumb-item">
                 <router-link to="/user">會員中心</router-link>
               </li>
@@ -17,10 +19,10 @@
               </li>
             </ol>
           </nav>
-          <!-- /Breadcrumb -->
+ <!-- /Breadcrumb -->
 
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
+ <div class="row gutters-sm">
+            <div class="col-lg-3 col-md-4 mb-3">
               <div class="card order-1">
                 <div class="card-body">
                   <!-- 判斷小測驗得到的分數 -->
@@ -30,6 +32,7 @@
                   <div
                     class="d-flex flex-column align-items-center text-center"
                   >
+                  <!--  -->
                     <img
                       src="../assets/img/p08_user/user.jpg"
                       alt="Admin"
@@ -40,19 +43,24 @@
                       上傳圖片
                       <input type="file" name="file" />
                     </div> -->
+                    <!-- <uploadimg /> -->
                     <div class="mt-3">
                       <h4 class="mb-2">{{ member.NICKNAME }}</h4>
                       <p class="text_title mb-1">{{ memberLevel }}</p>
                       <!-- <p class="text font-size-sm">防詐小尖兵</p> -->
                       <p
                         class="text font-size-sm mb-1"
-                        v-if="member.MOBILE !== null"
+                        v-if="
+                          member.MOBILE !== null && member.MOBILE !== undefined
+                        "
                       >
                         電話:{{ member.MOBILE }}
                       </p>
                       <p
                         class="text font-size-sm mb-3"
-                        v-if="member.BIRTH !== null"
+                        v-if="
+                          member.BIRTH !== null && member.BIRTH !== undefined
+                        "
                       >
                         生日:{{ member.BIRTH }}
                       </p>
@@ -84,7 +92,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-lg-8 order-2 profile-head">
+            <div class="col-lg-9 col-md-8 order-2">
+              
               <h4>修改密碼</h4>
               <h6>{{ member.ACCOUNT }}</h6>
 
@@ -162,15 +171,39 @@ export default {
       newPassword: "",
       confirmPassword: "",
       passwordsMatch: false,
+      memberLevel: null,
+      expValue: 1,
+      levelList: [
+        { lv: "LV.1", name: "防詐初學者", minExp: 0, maxExp: 10 },
+        { lv: "LV.2", name: "防詐小尖兵", minExp: 11, maxExp: 50 },
+        { lv: "LV.3", name: "防詐達人", minExp: 51, maxExp: 100 },
+        { lv: "LV.4", name: "防詐大師", minExp: 101, maxExp: 200 },
+        { lv: "LV.5", name: "防詐神人", minExp: 201, maxExp: 999 },
+      ],
     };
   },
+  computed: {
+    memberLevel() {
+      for (let i = 0; i < this.levelList.length; i++) {
+        if (
+          this.expValue >= this.levelList[i].minExp &&
+          this.expValue <= this.levelList[i].maxExp
+        ) {
+          return `${this.levelList[i].lv} ${this.levelList[i].name}`;
+        }
+      }
+    },
+  },
+  // 顯示會員資料
   mounted() {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get(`${API_URL}/member_getData.php?token=${token}`)
+        .get(`${API_URL}member_getData.php?token=${token}`)
         .then((response) => {
           this.member = response.data.member[0];
+          this.expValue = response.data.member[0].EXP;
+          
         })
         .catch((error) => {
           console.log(error);
@@ -198,7 +231,7 @@ export default {
         newPassword: this.newPassword,
       };
       axios
-        .post(`${API_URL}/member_changePassword.php`, data)
+        .post(`${API_URL}member_changePassword.php`, data)
         .then((response) => {
           console.log(response.data);
           alert("修改成功");

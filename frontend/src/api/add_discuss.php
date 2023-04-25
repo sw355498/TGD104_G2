@@ -29,7 +29,7 @@
     // 綁定參數
     $statement -> bindValue(':USER_ID', $userId);
     $statement -> bindValue(':TITLE', $title);
-    $statement -> bindValue(':PIC', $filePath);
+    $statement -> bindValue(':PIC', $fileName);
     $statement -> bindValue(':CONTENT', $content);
     $statement -> bindValue(':NONNAME', $nonname);
     $statement -> bindValue(':DISCUSS_TYPE_ID', $discussTypeId);
