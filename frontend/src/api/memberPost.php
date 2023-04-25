@@ -30,12 +30,25 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // 將資料型別轉換成陣列
 // $result = array('data' => $data);
 
-  // 建立 SQL 語法，取得指定會員ID的回報數總數
-  $sql_count = "SELECT COUNT(*) as count FROM DISCUSS_LIKE WHERE USER_ID = :id";
-  $statement_count = $pdo->prepare($sql_count);
-  $statement_count->bindValue(':id', $token, PDO::PARAM_INT);
-  $statement_count->execute();
-  $count = $statement_count->fetch(PDO::FETCH_ASSOC)['count'];
+  // 建立 SQL 語法，取得每篇文章讚數
+  $sql = "SELECT d.*, s.STATUS_NAME, 
+        (SELECT COUNT(*) FROM MESSAGE m WHERE m.DISCUSS_ID = d.ID) AS reply_count,
+        (SELECT COUNT(*) FROM DISCUSS_LIKE dl WHERE dl.DISCUSS_ID = d.ID) AS likes_count 
+        FROM DISCUSS d 
+        INNER JOIN DISCUSS_STATUS s ON d.DISCUSS_STATUS_ID = s.ID
+        WHERE d.USER_ID = :id";
+  // $sql = "SELECT d.*, s.STATUS_NAME, COUNT(dl.ID) AS likes_count 
+  // FROM DISCUSS d 
+  // LEFT JOIN DISCUSS_LIKE dl ON dl.DISCUSS_ID = d.ID
+  // INNER JOIN DISCUSS_STATUS s ON d.DISCUSS_STATUS_ID = s.ID
+  // WHERE d.USER_ID = :id
+  // GROUP BY d.ID";
+$statement = $pdo->prepare($sql);
+$statement->bindValue(':id', $token, PDO::PARAM_INT);
+$statement->execute();
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 // print_r($result);
 echo json_encode($result);

@@ -39,6 +39,8 @@ export default {
           日期: collect.CREATE_TIME,
           主題: collect.TITLE,
           id: collect.ID,
+          讚數: collect.likes_count,
+          回應: collect.reply_count,
         };
       });
 
@@ -62,20 +64,20 @@ export default {
 
         data: memberURL,
         fields: [
-          // {
-          //   name: "讚數",
-          //   type: "text",
-          //   width: 1,
-          // },
-          // {
-          //   name: "回應",
-          //   type: "text",
-          //   width: 1,
-          // },
+          {
+            name: "讚數",
+            type: "text",
+            width: 1,
+          },
+          {
+            name: "回應",
+            type: "text",
+            width: 1,
+          },
           {
             name: "狀態",
             type: "text",
-            width: 16,
+            width: 10,
           },
           {
             name: "日期",
@@ -85,7 +87,7 @@ export default {
           {
             name: "主題",
             type: "text",
-            width: 50,
+            width: 56,
           },
           {
             name: "編輯/修改",

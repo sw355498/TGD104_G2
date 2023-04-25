@@ -18,11 +18,12 @@
         <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
-          <div class="col-md-4 mb-3">
+          <div class="col-lg-3 col-md-4 mb-3">
             <div class="card order-1">
               <div class="card-body">
                 <!-- 判斷小測驗得到的分數 -->
-                 <p class="crown" v-if="member.QUIZ > 70"><i class="fa-solid fa-crown"></i></p>
+                 <p class="crown" v-if="member.QUIZ > 70">
+                  <i class="fa-solid fa-crown"></i></p>
                 <div class="d-flex flex-column align-items-center text-center">
                   <img
                     src="../assets/img/p08_user/user.jpg"
@@ -98,7 +99,7 @@
             </div>
             <!--  -->
           </div>
-          <div class="col-md-8 order-2">
+          <div class="col-lg-9 col-md-8 order-2">
             <div class="card mb-3">
               <!-- 會員資訊 -->
               <div class="profile-head">
@@ -124,7 +125,7 @@
                   <div class="col-6 col-lg-3">
                     <div class="count-data text-center">
                       <h6 class="count h2" data-to="500" data-speed="500">
-                        500
+                        {{LIKEcount}}
                       </h6>
                       <p class="m-0px font-w-600">收到讚數</p>
                     </div>
@@ -132,7 +133,7 @@
                   <div class="col-6 col-lg-3">
                     <div class="count-data text-center">
                       <h6 class="count h2" data-to="150" data-speed="150">
-                        150
+                        {{haveMessage}}
                       </h6>
                       <p class="m-0px font-w-600">收到回應</p>
                     </div>
@@ -228,6 +229,8 @@ export default {
       expValue: 1,
       URLcount: 0,
       MESSAGEcount: 0,
+      LIKEcount: 0,
+      haveMessage: 0,
       memberLevel: null,
       levelList: [
         { lv: 'LV.1', name: '防詐初學者', minExp: 0, maxExp: 10 },
@@ -294,6 +297,8 @@ export default {
         this.quizPass = response.data.member[0].QUIZ;
         this.URLcount = response.data.count;
         this.MESSAGEcount = response.data.countMessage;
+        this.LIKEcount = response.data.countLike;
+        this.haveMessage = response.data.total_messages;
 
       })
       .catch((error) => {
