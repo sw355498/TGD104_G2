@@ -26,17 +26,18 @@
             </div>
             <div class="tab_p01_newsChoose">
                 <div class="tab_p01_news_category">
-                <select name="" id="" class="form-select form-select-md">
-                    <option selected>所有文章</option>
-                    <option value="">網站詐騙</option>
-                    <option value="">交友詐騙</option>
-                    <option value="">金融詐騙</option>
+                <select class="form-select form-select-md">
+                    <option @click="selectCategory()">所有文章</option>
+                    <option @click="selectCategory(index)" v-for="(category, index) in categories" :key="category">{{ category.CATEGORY }}</option>
                 </select>
                     <div class="wide_tab">
-                        <a href="#" :class="{ currentTab: isActive }">所有文章</a>　|　<a
-                        href="#"
-                        >網站詐騙</a
-                        >　|　<a href="#">交友詐騙</a>　|　<a href="#">金融詐騙</a>
+                        <a href="#" :class="{ currentTab: isActive }">所有文章</a>
+                        　|　
+                        <a href="#">網站詐騙</a>
+                        　|　
+                        <a href="#">交友詐騙</a>
+                        　|　
+                        <a href="#">金融詐騙</a>
                     </div>
                 </div>
 
@@ -51,7 +52,7 @@
                     <div class="topBlock_p06_discuss">
                         <div class="author">
                             <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
-                            <span class="paragraph">{{ author }}</span>
+                            <span class="paragraph">{{ item.NONNAME === 1 ? '匿名' : item.NICKNAME }}</span>
                         </div>
                         <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                         <div class="ellipsisList"  :style="{'display':showellipsisList === index ? 'block' : 'none'}">
@@ -78,8 +79,8 @@
                                 {{item.CONTENT}}
                             </div>
                             <ul class="articleInteractive text_title">
-                                <li><i class="fa-solid fa-thumbs-up fa-fw"></i><span> {{item.thumbsNum}} </span></li>   
-                                <li><i class="fa-solid fa-message fa-fw"></i><span> {{item.messageNum}} </span></li>
+                                <li><i class="fa-solid fa-thumbs-up fa-fw iconHover"></i><span> {{item.thumbsNum}} </span></li>   
+                                <li><i class="fa-solid fa-message fa-fw iconHover"></i><span> {{item.messageNum}} </span></li>
                                 <li>
                                     <router-link :to="'/discuss/discuss_content/' + item.ID">
                                         <button class="viewDetails medium_button">
@@ -115,14 +116,22 @@
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue';
     import { API_URL } from '@/config'
-    import axios from 'axios';
-
+    import axios, { all } from 'axios';
+    
     const modalContent = ref('')
     const showModal = ref(false)
     const showellipsisList = ref(null)
     const articleList = ref([])
     const ellipsisList = ref([]);
     const p06_shareButton = ref([])
+    const perpage = 10
+    const currentPage = ref(1)
+    const search = ref()
+    const findPic = ref()
+    const categories = ref([])
+
+
+
     function ellipsisBtn(index) {
         if(showellipsisList.value === index){
             showellipsisList.value = null
@@ -143,8 +152,6 @@
         window.open(link, 'mywindow', 'width=700, height=400');
     }
     
-    const search = ref()
-    const test = ref()
     async function selectDiscuss(index){
         await axios
         .post(`${API_URL}get_discuss.php`, {
@@ -154,10 +161,10 @@
             const newData = response.data.map(item => {
                 let picPath = item.PIC;
                 try {
-                    test.value = require(`@/assets/img/p06_discuss/${picPath}`);
+                    findPic.value = require(`@/assets/img/p06_discuss/${picPath}`);
                 } catch (err) {
                     picPath = '暫放之後刪.png';
-                    test.value = ('')
+                    findPic.value = ('')
                 }
                 return{
                     ID: item.ID,
@@ -166,7 +173,7 @@
                     CREATE_TIME: item.CREATE_TIME,
                     NICKNAME: item.NICKNAME,
                     NONNAME: item.NONNAME,
-                    PIC: test.value,
+                    PIC: findPic.value,
                     TITLE: item.TITLE
                 }
             })
@@ -177,9 +184,17 @@
             })
             return  articleList.value = newData;
         })
-        .catch((error)=>{
-            // console.log(error.response.data);
+        .catch(error => console.log(error.response.data))
+    }
+
+    function selectCategory(index){
+        axios
+        .post(`${API_URL}get_discussCategory.php`)
+        .then((res)=>{
+            categories.value = res.data;
         })
+        .catch((err)=>console.log(err.response.data))
+
     }
 
     watch(search, (newSearch => {
@@ -187,8 +202,6 @@
     }))
 
 
-    const perpage = 10 //一頁的資料數
-    const currentPage = ref(1)
     function setPage(page) {
         if (page <= 0 || page > totalPage.value) {
             return
@@ -210,6 +223,7 @@
     
     onMounted(()=>{
         selectDiscuss();
+        selectCategory();
     })
     
     

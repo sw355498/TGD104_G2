@@ -121,7 +121,9 @@
                     placeholder="請輸入密碼"
                     v-model.trim="passwordLogin"
                   />
+                  <div v-if="signupFailed" class="error_signup">帳號或密碼錯誤</div>
                   <div class="div_p08_user_loginType">
+                    
                     <button
                       type="submit"
                       class="medium_button btn_p08_user_loginType"
@@ -200,7 +202,7 @@ export default {
       const data = {
         account: this.account,
         password: this.password,
-        displayName: this.displayName,
+        nickname: this.displayName,
         accountTypeID: 1,
       };
 
@@ -282,7 +284,7 @@ export default {
 
           // 檢查 token 是否過期
           this.checkAndClearToken();
-
+          this.signupFailed = false;
           // token 仍在有效期內，可以進行 API 呼叫等操作
           console.log(response);
           // alert("登入成功");
@@ -292,10 +294,12 @@ export default {
         .catch((error) => {
           console.log(error.response);
           // 在這裡處理登入失敗要幹嘛
+          this.signupFailed = true;
         });
     },
   },
   computed: {},
+  
   watch: {
     // 監聽 localStorage 中的 tokenExpireTime
     'localStorage.tokenExpireTime': function (newVal) {

@@ -285,6 +285,9 @@
             timer: 1100
         })
     };
+    // 判斷是不是會員
+    const token = localStorage.getItem("token");
+    console.log(token);
     const modalContent = ref('')
     const showModal = ref(false)
     const messages = ref([
