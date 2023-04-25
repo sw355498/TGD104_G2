@@ -9,8 +9,8 @@
             <p07_demo_nav />
             
             <!-- popup -->
-            <div v-if="showModal">
-                <p07_demoShopping_popup :show="showModal" @close="showModal = false"/>
+            <div v-if="showPopup">
+                <p07_demoShopping_popup :show="showPopup" @close="showPopup = false"/>
             </div>
             <!-- 瀏覽器 -->
             <div class="browser_p07_demoShopping">
@@ -59,7 +59,7 @@
                 </div>
 
                 <!-- 內容區 -->
-                <div class="browser_container">
+                <div class="browser_container" id="browserDemoShoppingContainer">
                     <!-- =============== component 下單購物車 =============== -->
                     <div class="cart_p07_demoShopping" v-if="showComponent">
                         <!-- 在元件上面加 :bind 就可以把資料傳進去 -->
@@ -73,13 +73,13 @@
                         <div class="scamWeb_p07_demoShopping_nav">
                             <p class="scamWeb_p07_demoShopping_navP">新品上市，勁爆特殺！全場大放送，單件低至NT$432。2023新款夏裝中長款韓版寬松顯瘦條紋襯衫女七分袖，廠家直銷，超值優惠，買到賺到！過後漲價！</p>
                             <ul class="scamWeb_p07_demoShopping_navbar">                       
-                                <li><a href="#" @click="changeSection1()">商品主頁</a></li>
-                                <li><a href="#" style="cursor: auto;">訂單查詢</a></li>
-                                <li><a href="#" @click="changeSection2()">下單須知</a></li>
-                                <li><a href="#" style="cursor: auto;">立即下單</a></li>
+                                <li><a  @click="changeSection1()">商品主頁</a></li>
+                                <!-- <li><a style="cursor: auto;">訂單查詢</a></li> -->
+                                <li><a  @click="changeSection2()">下單須知</a></li>
+                                <li><a @click="changeSection3()">立即下單</a></li>
                                 <li>
                                     <span>
-                                       <span class="cart_length"> {{cart.length}} </span>
+                                       <span class="cart_length"> {{cart.length}}</span>
                                        <img 
                                         src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" 
                                         @click="showComponent = true"
@@ -89,7 +89,7 @@
                                 <li><img src="../assets/img/p07_demo/p07_demoShopping/info.png" alt="個人資訊" style="cursor: auto;"></li>
                             </ul>
                         </div>
-                        <div class="wrapper" v-if="showSection1 == true">
+                        <div class="mainDemoShopping" v-show="showSection1" id="mainDemoShopping">
                             <!-- 購物網站第一 banner -->
                             <div class="scamWeb_p07_demoShopping_banner1" id="tour5">
                                 <p class="scamWeb_p07_demoShopping_banner1P">現實下殺</p>
@@ -155,13 +155,14 @@
                                         <li>L</li>
                                         <li>XL</li>
                                     </ul> -->
-                                    <button @click.prevent="addProductToCart(product); sweetAlert();">加入購物車</button>
+                                    <button @click.prevent="addProductToCart(product); ">加入購物車</button>
                                 </div>
                                 
                             </div>
     
                             <!-- 第四紅條廣告詞 -->
                             <div class="scamWeb_p07_demoShopping_bannerRed scamWeb_p07_demoShopping_bannerRed4">
+                                <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！</p>
                                 <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！</p>
                                 <p class="scamWeb_p07_demoShopping_bannerRedP2">新品上市，勁爆特殺！全場大放送，單件低至NT$432，廠家直銷，超值優惠，買到賺到！</p>
                             </div>
@@ -198,9 +199,10 @@
                                 <p class="scamWeb_p07_demoShopping_bannerRedP2">立刻下單 免運包郵 貨到付款 最有保障</p>
                             </div>
                         </div>
-                        <div class="notice" v-else-if="showSection2 = true" id="notice">
+                        <!-- 下單須知 -->
+                        <div class="notice" v-show="showSection2" id="noticeDemo">
                             <!-- 拿第二紅條廣告詞 物流條款 -->
-                            <div class="scamWeb_p07_demoShopping_bannerRed">
+                            <div class="scamWeb_p07_demoShopping_bannerRed" id="noticeDemo1">
                                 <p class="scamWeb_p07_demoShopping_bannerRedP1">物流條款</p>
                             </div>
                             <p class="notice_demoShopping_p">1、配送範圍與郵費<br>
@@ -245,23 +247,23 @@
                             我們客服將七天24小時在線為您回復郵件<br>
                             </p>
                             <!-- 拿第二紅條廣告詞 服務條款 -->
-                            <div class="scamWeb_p07_demoShopping_bannerRed" >
+                            <div class="scamWeb_p07_demoShopping_bannerRed" id="noticeDemo2">
                                 <p class="scamWeb_p07_demoShopping_bannerRedP1">服務條款</p>
                             </div>
                             <p class="notice_demoShopping_p">
                                 感謝您瀏覽本網站。根據以下服務條款和其他相關條例，您可以訪問或使用本網站或相關服務。使用本服務，例如在本網站上訂購商品，即表示您同意遵守所有服務條款。本協議並不構成您與我們之間的任何關係（包括合夥、合作、雇用或其他形式）。本協議並不賦予您成為我們的代表。我們保留在任何時候更改本網站、相關政策和協議、隱私聲明以及本服務條款的權利。我們建議您定期查看本網站，以了解上述政策、協議、隱私聲明和服務條款的更新或更改。
-                                知識產權
+                                <br>知識產權<br>
                                 我們的所有軟件和內容（包括任何文字、音訊、音樂、影片、圖像、照片和圖片）都是我們的知識產權作品，受知識產權、版權法和國際公約的保護。本網站僅供個人和非商業用途。除非經過我們及/或其第三方授權人的明確授權，否則不得將內容用於任何非個人和/或非商業用途。在未經我們同意或授權之前，不得發佈、複製、出售或許可任何本網站的內容。任何未經授權的行為可能導致民事後果或刑事處罰。
                                 我們保留撤消或修改任何服務的權利，而且並不需要事先通知。如果因任何原因本網站在任何時間或期間內無法使用，我們概不負責。
-                                產品描述
+                                <br>產品描述<br>
                                 我們將盡力確保本網站的內容和產品描述是準確和完整的。但是，我們無法保證內容和產品描述均為準確、完整、最新和無誤。如果您認為我們提供的產品與描述不符，請參閱我們的退貨及退款程序。
-                                價格 本網站所標示的價格為新臺幣。
+                                價格 本網站所標示的價格為新臺幣。<br>
                                 我們建議您在使用本網站和相關服務之前，仔細閱讀本服務條款及其他政策和協議。您在使用本網站和相關服務時，即表示您同意遵守本服務條款及其他政策和協議的條款和條件。
                                 如有任何疑問或需要進一步幫助，請聯繫我們的客戶服務部門。我們將盡最大努力回答您的問題並提供支援。
                                 感謝您的閱讀，如有任何需要，請隨時聯繫我們。
                             </p>
                             <!-- 拿第二紅條廣告詞 服務條款 -->
-                            <div class="scamWeb_p07_demoShopping_bannerRed" >
+                            <div class="scamWeb_p07_demoShopping_bannerRed" id="noticeDemo3">
                                 <p class="scamWeb_p07_demoShopping_bannerRedP1">隱私協議</p>
                             </div>
                             <p class="notice_demoShopping_p">
@@ -270,15 +272,15 @@
                                 我們只會在法律要求或與收集用途有關的情況下保留您的資料。
                                 您可以在不提供個人資料的情況下瀏覽我們的網站。如果您未登入用戶帳戶來瀏覽我們的網站，您將會以匿名身份瀏覽，我們將無法識別您的身份。
                                 我們非常樂意聆聽您的意見，如果您有任何意見或建議，請透過在線客服向我們提供相關資訊。
-                                個人資料收集
+                                <br>個人資料收集<br>
                                 我們不會向第三方出售、分享或交易您在網上收集的個人資料。我們僅會在本公司集團內部使用這些資料。當您下訂單時，我們會收集您的基本個人資料，包括：
-                                姓名
-                                送貨地址
-                                電郵地址
-                                聯絡電話號碼
-                                出生日期
-                                性別
-                                我們會將您提供的個人資料用於以下用途：
+                                <br>姓名<br>
+                                送貨地址<br>
+                                電郵地址<br>
+                                聯絡電話號碼<br>
+                                出生日期<br>
+                                性別<br>
+                                我們會將您提供的個人資料用於以下用途：<br>
                                 運送您所購買的商品。
                                 提供商品運送狀況和客戶支援的最新消息。
                                 為您提供有關商品的資料。
@@ -301,10 +303,10 @@
                             <div class="scamWeb_p07_demoShopping_footerInfo">
                                 <div class="scamWeb_p07_demoShopping_footerNav">
                                     <ul>
-                                        <li>商品頁面</li>
-                                        <li>物流條款</li>
-                                        <li>服務條款</li>
-                                        <li>隱私協議</li>
+                                        <li @click="changeSection3()">商品列表</li>
+                                        <li @click="changeSection4()">物流條款</li>
+                                        <li @click="changeSection5()">服務條款</li>
+                                        <li @click="changeSection6()">隱私協議</li>
                                     </ul>
                                     <p>郵箱：qaxzzzavitzfqbevelln@hotmail.com</p>
                                     <p>Copyright © 2016-2023 All Rights Reserved</p>
@@ -358,28 +360,122 @@ export default {
         p07_demo_robot
     },
     setup(){
+        // 切換商品主頁、下單須知 =================================================
         const showSection1 = ref(true);
         const showSection2 = ref(false);
-        function changeSection1() {
+        function changeSection1() { //切換商品主頁
             showSection1.value = true;
             showSection2.value = false;
+            window.requestAnimationFrame(() => {//等element加載出來才scroll
+                const container = document.getElementById('browserDemoShoppingContainer');
+                const mainDemoShopping = document.getElementById('mainDemoShopping');
+                const rect = mainDemoShopping.getBoundingClientRect();
+                const top = rect.top - container.getBoundingClientRect().top + container.scrollTop;
+                const offset = 100; // 額外位移量
+                container.scroll({
+                    top: top - offset,
+                    behavior: 'smooth'
+                });
+            });
+            // const element = document.getElementById('mainDemoShopping');
+            // window.requestAnimationFrame(() => { //等element加載出來才scroll
+            //     element.scrollIntoView({ behavior: 'smooth' }); //用這個會整個視窗卷軸滑動
+            // });
         };
-        function changeSection2() {
+        function changeSection2() { //切換下單須知
             showSection1.value = false;
             showSection2.value = true;
+            window.requestAnimationFrame(() => {//等element加載出來才scroll
+                const container = document.getElementById('browserDemoShoppingContainer');
+                const notice = document.getElementById('noticeDemo');
+                const rect = notice.getBoundingClientRect();
+                const top = rect.top - container.getBoundingClientRect().top + container.scrollTop;
+                const offset = 100; // 額外位移量
+                container.scroll({
+                    top: top - offset,
+                });
+            });
         };
+        function changeSection3() { //切換商品主頁並跳轉到商品列表
+            showSection1.value = true;
+            showSection2.value = false;
+            window.requestAnimationFrame(() => {//等element加載出來才scroll
+                const container = document.getElementById('browserDemoShoppingContainer');
+                const productList = document.getElementById('tour2');
+                const rect = productList.getBoundingClientRect();
+                const top = rect.top - container.getBoundingClientRect().top + container.scrollTop;
+                const offset = 100; // 額外位移量
+                container.scroll({
+                    top: top - offset,
+                    behavior: 'smooth'
+                });
+            });
+        };
+        function changeSection4() { //切換下單須知 - 物流條款
+            showSection1.value = false;
+            showSection2.value = true;
+            window.requestAnimationFrame(() => {//等element加載出來才scroll
+                const container = document.getElementById('browserDemoShoppingContainer');
+                const notice1 = document.getElementById('noticeDemo1');
+                const rect = notice1.getBoundingClientRect();
+                const top = rect.top - container.getBoundingClientRect().top + container.scrollTop;
+                const offset = 70; // 額外位移量
+                container.scroll({
+                    top: top - offset,
+                });
+            });
+        };
+        function changeSection5() { //切換下單須知 - 服務條款
+            showSection1.value = false;
+            showSection2.value = true;
+            window.requestAnimationFrame(() => {//等element加載出來才scroll
+                const container = document.getElementById('browserDemoShoppingContainer');
+                const notice2 = document.getElementById('noticeDemo2');
+                const rect = notice2.getBoundingClientRect();
+                const top = rect.top - container.getBoundingClientRect().top + container.scrollTop;
+                const offset = 70; // 額外位移量
+                container.scroll({
+                    top: top - offset,
+                });
+            });
+        };
+        function changeSection6() { //切換下單須知 - 隱私
+            showSection1.value = false;
+            showSection2.value = true;
+            window.requestAnimationFrame(() => {//等element加載出來才scroll
+                const container = document.getElementById('browserDemoShoppingContainer');
+                const notice3 = document.getElementById('noticeDemo3');
+                const rect = notice3.getBoundingClientRect();
+                const top = rect.top - container.getBoundingClientRect().top + container.scrollTop;
+                const offset = 70; // 額外位移量
+                container.scroll({
+                    top: top - offset,
+                });
+            });
+        };
+        // sweetAlert =================================================
         const sweetAlert = ()=>{
             Swal.fire({
                 title: '加入成功',
                 text: '已將商品加入購物車',
                 icon: 'success',
-                confirmButtonText: '確認',
                 position: 'center',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1100
+            })
+        };
+        const sweetAlertAlready = ()=>{
+            Swal.fire({
+                title: '購物車已經有囉',
+                text: '已將商品數量+1',
+                // icon: 'success',
+                position: 'center',
+                showConfirmButton: false,
+                timer: 1200
             })
         }
-        const cart = ref([])
+        // 購物車 =================================================
+        const cart = ref([]);
         const product = ref({ name: '', price: 0 , number: 1 });
         const products = ref([
         {
@@ -436,14 +532,18 @@ export default {
             const index = cart.value.findIndex(item => item.name === product.name);
             if (index >= 0) { // 如果購物車中已經有此商品，數量加 1
                 cart.value[index].number++;
+                sweetAlertAlready();
+                console.log(cart.value);
             } else { // 如果購物車中沒有此商品，新增至購物車中
                 cart.value.push({ ...product, number: 1 });
+                sweetAlert();
+                // console.log(cart.value);
             }
         };
         
         // 點擊才出現 =================================================
         const showComponent = ref(false);
-        const showModal = ref(true);
+        const showPopup = ref(true);
 
 
         // 倒數計時器 =================================================
@@ -473,13 +573,18 @@ export default {
             products,
             addProductToCart,
             showComponent,
-            showModal,
+            showPopup,
             remainingTime,
             sweetAlert,
+            sweetAlertAlready,
             showSection1,
             showSection2,
             changeSection1,
             changeSection2,
+            changeSection3,
+            changeSection4,
+            changeSection5,
+            changeSection6,
         }
     },
 }

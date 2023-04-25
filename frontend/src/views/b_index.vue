@@ -983,10 +983,11 @@ const handleSubmit = async (e) => {
                 clients.value = await selectTable();
                 // 重新渲染 jsGrid
                 reloadJsGrid();
-            } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
-                addError("upload_img", "只允許上傳 JPG 或 PNG 格式的圖片檔案");
+            } else if(response.data === '只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案'){
+                addError("upload_img", "只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案");
+            } else if(response.data === '檔案大小不得超過1MB'){
+                addError("upload_img", "檔案大小不得超過1MB");
             } else {
-
 
                 if(arrError.includes('標題尚未輸入')){
                     addError("newsTitle", "標題尚未輸入");
@@ -1046,8 +1047,10 @@ const handleSubmit = async (e) => {
                 clients.value = await selectTable();
                 // 重新渲染 jsGrid
                 reloadJsGrid();
-            } else if(response.data === '只允許上傳 JPG 或 PNG 格式的圖片檔案'){
-                addError("upload_img", "只允許上傳 JPG 或 PNG 格式的圖片檔案");
+            } else if(response.data === '只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案'){
+                addError("upload_img", "只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案");
+            } else if(response.data === '檔案大小不得超過1MB'){
+                addError("upload_img", "檔案大小不得超過1MB");
             } else {
                 if(arrError.includes('題目尚未輸入')){
                     addError("gameTitle", "題目尚未輸入");

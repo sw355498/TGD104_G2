@@ -2,14 +2,21 @@
     $fileName = null;
     $file = isset($_FILES["newImage"]) ? $_FILES["newImage"] : null;
     if(!empty($file)){
+
         $fileName = $file["name"];    //檔案名稱含副檔名        
         $filePath_Temp = $file["tmp_name"];   //Server上的暫存檔路徑含檔名        
         $fileType = $file["type"];    //檔案種類        
         $fileSize = $file["size"];    //檔案尺寸
 
-        // 檢查檔案類型是否為圖片
-        if (!in_array($fileType, array('image/jpeg', 'image/png'))) {
-            die('只允許上傳 JPG 或 PNG 格式的圖片檔案');
+        // 檢查上傳的檔案類型和大小
+        $allowedTypes = array('image/jpeg', 'image/png', 'image/gif');
+        $maxSize = 1024 * 1024; // 1MB
+        if (!in_array($fileType, $allowedTypes)) {
+            echo('只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案');
+            exit;
+        }
+        if($fileSize >= $maxSize){
+            echo('檔案大小不得超過1MB');
             exit;
         }
 
