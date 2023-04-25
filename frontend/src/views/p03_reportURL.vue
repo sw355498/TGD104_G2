@@ -127,7 +127,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     axios
         .get(`${API_URL}/member_getData.php?token=${token}`)
         .then((response) => {
-        name.value = response.data.NICKNAME;
+        name.value = response.data.member[0].NICKNAME;
         // hasToken.value = true;
         console.log(name.value);
         
