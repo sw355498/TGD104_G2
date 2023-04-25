@@ -38,7 +38,10 @@
     $statement -> execute();
 
     //將暫存檔搬移到正確位置
-    move_uploaded_file($filePath_Temp, $filePath);
+    if(!empty($file)){
+        //將暫存檔搬移到正確位置
+        move_uploaded_file($filePath_Temp, $filePath);
+    }
 
     // 取出剛剛 INSERT INTO 的那筆資料 ID
     $newId = $pdo -> lastInsertId();

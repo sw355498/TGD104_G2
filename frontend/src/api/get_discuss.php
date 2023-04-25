@@ -9,14 +9,13 @@
     $data = json_decode($postData, true);
 
     $search = (isset($data['datas']) ? $data['datas'] : '');
-    // var_dump($search);
-    // exit;
+    
     //建立SQL語法
     $sql = "SELECT D.ID, U.NICKNAME, D.TITLE, D.PIC, D.CONTENT, D.NONNAME, D.CREATE_TIME, DT.CATEGORY
             FROM DISCUSS D
             JOIN DISCUSS_TYPE DT ON D.DISCUSS_TYPE_ID = DT.ID
             JOIN USER U ON D.USER_ID = U.ID
-            WHERE D.DISCUSS_TYPE_ID = 1
+            WHERE D.DISCUSS_STATUS_ID = 1
             AND (D.TITLE LIKE '%' :search '%' OR D.CONTENT LIKE '%' :search '%')
             ORDER BY D.ID DESC";
 

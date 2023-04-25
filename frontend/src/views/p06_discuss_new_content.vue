@@ -70,10 +70,12 @@
     }
 
     // 是否匿名
-    if(isChecked){
-        nonname.value = 1;
-    }else{
+    if(isChecked.value){
+        // 2是不匿名
         nonname.value = 2;
+    }else{
+        // 1是不匿名
+        nonname.value = 1;
     }
 
     
