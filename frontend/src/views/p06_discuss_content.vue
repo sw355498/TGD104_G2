@@ -185,10 +185,6 @@
     import { API_URL } from "@/config";
     import Swal from 'sweetalert2/dist/sweetalert2.js'
     import { useRoute } from 'vue-router'
-    // 取得使用者的 token
-    const token = localStorage.getItem("token");
-    console.log(token);
-    // const current_url = window.location;
     const discuss = ref([]);
     const discussId = ref();
     const current_url = ref(null)
@@ -207,9 +203,9 @@
             console.log(response.data);
             console.log(response.data.is_favorite);
             if (response.data.success && response.data.is_favorite) {
-              this.isFavorite = true;
+              isFavorite.value = true;
             } else {
-              this.isFavorite = false;
+              isFavorite.value = false;
             }
           })
           .catch((error) => {
@@ -218,7 +214,7 @@
       }
     }
 
-    // const showModal = () => {
+    // function showModal() {
     // isModalVisible.value = true
     // }
 
@@ -226,7 +222,7 @@
         const discussId = discuss.value.ID
         const token = localStorage.getItem('token')
         if (!token) {
-            showModal()
+            // showModal()
             return
         }
 
