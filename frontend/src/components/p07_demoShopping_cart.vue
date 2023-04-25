@@ -4,7 +4,7 @@
         <!-- title -->
         <div class="title_p07_demoShopping" >
             <p>您的購物車</p>
-            <p>( {{cart.length}} )</p>
+            <!-- <p>( {{cart.length}} )</p> -->
         </div>
          <!-- ========= 購物車沒商品 ========= -->
         <div class="non_cart" v-if="cart.length === 0">
@@ -238,6 +238,7 @@ import axios from 'axios';
 import { API_URL } from '@/config';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import citiesTW from "@/assets/data/dataCity.json";
+import { objectExpression } from '@babel/types';
 export default {
     name: 'Cart',
     props: {

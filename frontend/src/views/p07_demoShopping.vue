@@ -79,7 +79,7 @@
                                 <li><a @click="changeSection3()">立即下單</a></li>
                                 <li>
                                     <span>
-                                       <span class="cart_length"> {{cart.length}}</span>
+                                       <span class="cart_length"> {{ total_product }}</span>
                                        <img 
                                         src="../assets/img/p07_demo/p07_demoShopping/cart.png" alt="購物車" 
                                         @click="showComponent = true"
@@ -466,12 +466,12 @@ export default {
         };
         const sweetAlertAlready = ()=>{
             Swal.fire({
-                title: '購物車已經有囉',
-                text: '已將商品數量+1',
-                // icon: 'success',
+                title: '已將商品數量+1',
+                // text: '已將商品數量+1',
+                icon: 'success',
                 position: 'center',
                 showConfirmButton: false,
-                timer: 1200
+                timer: 1400
             })
         }
         // 購物車 =================================================
@@ -528,6 +528,19 @@ export default {
             number: 1
         },
         ]);
+
+        const total_product = computed(()=>{
+            const product_value = cart.value
+            console.log( cart.value)
+            let total = 0
+            for (let index = 0; index < product_value.length; index++) {
+                const element = product_value[index];
+                console.log( element.number );
+                total = total + element.number 
+            }
+            return total
+        
+        })
         const addProductToCart = (product) => {
             const index = cart.value.findIndex(item => item.name === product.name);
             if (index >= 0) { // 如果購物車中已經有此商品，數量加 1
@@ -570,6 +583,7 @@ export default {
         return {
             cart,
             product,
+            total_product,
             products,
             addProductToCart,
             showComponent,
