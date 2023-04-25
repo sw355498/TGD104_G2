@@ -14,20 +14,39 @@
   // 抓出該會員資料
   $member = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-  // 建立 SQL 語法，取得指定會員ID的回報數總數
+  // 建立 SQL 取得指定會員ID的回報數總數
   $sql_count = "SELECT COUNT(*) as count FROM URL WHERE USER_ID = :id";
   $statement_count = $pdo->prepare($sql_count);
   $statement_count->bindValue(':id', $token, PDO::PARAM_INT);
   $statement_count->execute();
   $count = $statement_count->fetch(PDO::FETCH_ASSOC)['count'];
 
-  // 建立 SQL 語法，留言次數
-  $sql_count = "SELECT COUNT(*) as count FROM `MESSAGE` WHERE USER_ID = :id";
+  // 建立 SQL 留言次數
+  $sql_count = "SELECT COUNT(*) as countMessage FROM `MESSAGE` WHERE USER_ID = :id";
   $statement_count = $pdo->prepare($sql_count);
   $statement_count->bindValue(':id', $token, PDO::PARAM_INT);
   $statement_count->execute();
-  $countMessage = $statement_count->fetch(PDO::FETCH_ASSOC)['count'];
+  $countMessage = $statement_count->fetch(PDO::FETCH_ASSOC)['countMessage'];
 
+  // 建立 SQL 收到讚數
+  $sql_count = "SELECT COUNT(*) AS total_likes
+  FROM DISCUSS_LIKE
+  INNER JOIN DISCUSS
+  ON DISCUSS_LIKE.DISCUSS_ID = DISCUSS.ID WHERE DISCUSS.USER_ID = :id";
+  $statement_count = $pdo->prepare($sql_count);
+  $statement_count->bindValue(':id', $token, PDO::PARAM_INT);
+  $statement_count->execute();
+  $countLike = $statement_count->fetch(PDO::FETCH_ASSOC)['total_likes'];
+
+    // 建立 SQL 收到回應
+    $sql_count = "SELECT COUNT(*) AS total_messages
+    FROM MESSAGE
+    INNER JOIN DISCUSS
+    ON MESSAGE.DISCUSS_ID = DISCUSS.ID WHERE DISCUSS.USER_ID = :id";
+    $statement_count = $pdo->prepare($sql_count);
+    $statement_count->bindValue(':id', $token, PDO::PARAM_INT);
+    $statement_count->execute();
+    $totalMessages = $statement_count->fetch(PDO::FETCH_ASSOC)['total_messages'];
 
 
   // 回傳該會員資料
@@ -35,6 +54,8 @@
     'member' => $member,
     'count' => $count,
     'countMessage' => $countMessage,
+    'countLike' => $countLike,
+    'total_messages' => $totalMessages,
   ]);
 ?>
 

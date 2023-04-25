@@ -22,7 +22,7 @@
           <!-- /Breadcrumb -->
 
           <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
+            <div class="col-lg-3 col-md-4 mb-3">
               <div class="card order-1">
                 <div class="card-body">
                   <!-- 判斷小測驗得到的分數 -->
@@ -92,7 +92,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-lg-8 order-2 profile-head">
+            <div class="col-lg-9 col-md-8 order-2">
+              
               <h4>編輯會員資料</h4>
               <h6>{{ member.ACCOUNT }}</h6>
 
@@ -191,7 +192,7 @@ export default {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get(`${API_URL}/member_getData.php?token=${token}`)
+        .get(`${API_URL}member_getData.php?token=${token}`)
         .then((response) => {
           this.member = response.data.member[0];
           this.expValue = response.data.member[0].EXP;
@@ -214,7 +215,7 @@ export default {
 
       // 使用axios套件發送POST請求
       axios
-        .post(`${API_URL}/member_update.php`, data)
+        .post(`${API_URL}member_update.php`, data)
         .then((response) => {
           // 處理回應結果
           // 重新整理頁面

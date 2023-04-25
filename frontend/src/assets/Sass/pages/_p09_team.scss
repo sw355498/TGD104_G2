@@ -1,7 +1,15 @@
 .body_p09_team_block {
   background: $background_color url("../img/p09_team/p09_team_bg.jpeg");
-  min-height: 100vh;
+  // min-height: 100vh;
   background-size: cover;
+  position: relative;
+  padding: 0 30px;
+  @include rwd(md) {
+    padding: 0 20px;
+  }
+  @include rwd(sm) {
+    padding: 0 15px;
+  }
   h2 {
     max-width: $w1200;
     color: $text_color;
@@ -9,10 +17,9 @@
     font-weight: 700;
     text-transform: uppercase;
     margin: 0 auto;
-    padding: 60px 10px;
+    padding: 30px 10px;
   }
   section {
-    padding: 30px;
     position: relative;
     text-align: center;
     @include rwd(md) {
@@ -21,20 +28,20 @@
     img {
       display: inline-block;
       max-width: 100%;
+      filter: drop-shadow(1px 1px 5px $text_color);
     }
-    div {
+    .ourCore {
       position: absolute;
-      max-width: 500px;
-      right: 5%;
-      bottom: 10%;
+      max-width: 100%;
+      bottom: 0;
       background-color: #ffffffcc;
-      padding: 25px;
-      max-width: 50%;
+      padding: 20px 50px;
       border-radius: 5px;
       @include rwd(md) {
-        max-width: 100%;
-        position: inherit;
-        margin: 0 auto;
+        width: 100%;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: 0.8rem;
         padding: 15px;
       }
@@ -88,7 +95,7 @@
           left: 0;
           width: 350px;
           height: 350px;
-          background-size: 100% 100%;
+          background-size: cover;
           filter: grayscale(100%);
           @include rwd(sm) {
             width: 250px;
