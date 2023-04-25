@@ -161,24 +161,22 @@ const router = createRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
+
+  console.log(localStorage.getItem('token'));
   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
   const accountTypeId =  currentStaff.account_type_id
-
-  if (to.path === '/b_index' && (!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))) {
-    next('/b_login');
-  } else {
-    next();
+  // const currentUser = JSON.parse(localStorage.getItem('token'))
+  if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata'){
+    if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
+      next('/b_login');
+    }
+  }else{
+    if(to.path === '/discuss_new_content' && !localStorage.getItem('token')){
+     alert('請登入會員')
+      next('/discuss')
+    } 
   }
-    if (to.path === '/b_data' && (!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))) {
-    next('/b_login');
-  } else {
-    next();
-  }
-  if (to.path === '/b_updata' && (!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))) {
-    next('/b_login');
-  } else {
-    next();
-  }
+  next()
 })
 
 export default router
