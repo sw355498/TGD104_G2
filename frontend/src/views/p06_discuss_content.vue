@@ -48,7 +48,15 @@
                         <span>三個小時以前</span>
                     </div>
                     <div>
-                        <button class="medium_button" @click="sweetAlertCollect()">收藏</button>
+                        <!-- <button class="medium_button" @click="sweetAlertCollect()">收藏</button> -->
+                        <a v-if="isFavorite == false " @click="addToFavorites()">
+                            <i class="fa-solid fa-bookmark"></i>
+                            收藏
+                        </a>
+                        <a v-if="isFavorite == true " @click="removeFavorites()" class="newsCollected">
+                            <i class="fa-solid fa-bookmark"></i>
+                            已收藏
+                        </a>
                         <button class="medium_button">按讚</button>
                     </div>
                 </div>
@@ -162,7 +170,7 @@
                 </ul>
             </nav>
         </main>
-                
+        <Modal v-show="isModalVisible" @close="closeModal" />
         <!-- footer -->
         <frontFooter />
     </div>
@@ -176,6 +184,96 @@
     import axios from 'axios';
     import { API_URL } from "@/config";
     import Swal from 'sweetalert2/dist/sweetalert2.js'
+    import { useRoute } from 'vue-router'
+    // 取得使用者的 token
+    const token = localStorage.getItem("token");
+    console.log(token);
+    // const current_url = window.location;
+    const discuss = ref([]);
+    const discussId = ref();
+    const current_url = ref(null)
+    const isFavorite = ref(false)
+    const isModalVisible = ref(false)
+    function checkDiscussFavorite (){
+        const token = localStorage.getItem('token')
+        if (token) {
+        // 如果使用者已登入，呼叫 API 檢查是否已收藏
+        axios
+          .post(`${API_URL}discussCheckFavorite.php`, {
+            discuss_id: discuss.value.ID,
+            token: token,
+          })
+          .then((response) => {
+            console.log(response.data);
+            console.log(response.data.is_favorite);
+            if (response.data.success && response.data.is_favorite) {
+              this.isFavorite = true;
+            } else {
+              this.isFavorite = false;
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    }
+
+    // const showModal = () => {
+    // isModalVisible.value = true
+    // }
+
+    function addToFavorites(){
+        const discussId = discuss.value.ID
+        const token = localStorage.getItem('token')
+        if (!token) {
+            showModal()
+            return
+        }
+
+        axios.post(`${API_URL}discussAddFavorite.php`, {
+        discuss_id: discussId,
+        token: token,
+    })
+        .then((response) => {
+        isFavorite.value = true
+        })
+        .catch((error) => {
+        console.error(error)
+        alert('收藏失敗，請稍後再試！')
+        isFavorite.value = false
+        })
+    }
+
+    function removeFavorites(){
+        // 取得目前 ID
+        const discussId = discuss.value.ID;
+        // 取得使用者的 token
+        const token = localStorage.getItem("token");
+        if (!token) {
+        // 如果沒有 token，表示使用者尚未登入，顯示登入彈窗
+        alert("請先登入才能取消收藏新聞！");
+        return;
+        }
+
+        // 呼叫 API 刪除收藏資料
+        axios
+        .post(`${API_URL}discussRemoveFavorite.php`, {
+            discuss_id: discussId,
+            token: token,
+        })
+        .then((response) => {
+            // 取消收藏成功，提示訊息
+            // alert("已取消收藏！");
+            isFavorite.value = false;
+        })
+        .catch((error) => {
+            // 取消收藏失敗，顯示錯誤訊息
+            console.error(error);
+            alert("取消收藏失敗，請稍後再試！");
+            isFavorite.value = true;
+        });
+    }
+        
     // sweetAlert =================================================
     const sweetAlertCollect = ()=>{
         Swal.fire({
@@ -253,8 +351,26 @@
     onMounted(()=>{
         ellipsisList.value = document.querySelector('.ellipsisList');
         p06_shareButton.value = document.querySelector('.p06_shareButton');
-
-
-    })
-
+        const route = useRoute()
+        current_url.value = window.location
+        const id = route.params.article
+        console.log(id);
+        axios.get(`${API_URL}getDiscuss.php`)
+            .then((response) => {
+            const data = response.data;
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].ID == id) {
+                    discuss.value = data[i]
+                    console.log(discuss.value);
+                break
+                }
+            };
+            checkDiscussFavorite()
+            })
+            .catch((error) => {
+            console.error(error)
+            })
+        }
+        )
 </script>
