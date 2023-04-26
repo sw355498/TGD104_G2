@@ -34,6 +34,7 @@
         border: 5px solid $main_color;
         background: transparent;
         padding-top: 50px;
+        padding-bottom: 50px;
         @include rwd('lg'){
           width: 90%;
           margin: 0 auto;
@@ -465,8 +466,12 @@
     
     //分數
 
-    .score{
+    .quiz_num{
       color:white;
+      text-align: right;
+      margin-top: -30px;
+      margin-right: 20px;
+      
     }
   
     //下一題按鈕

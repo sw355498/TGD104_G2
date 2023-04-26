@@ -4,6 +4,8 @@
 
         <div class="quiz_background">
 
+            <div class="quiz_num">目前已答題數:{{num}}/共10題</div>
+
             <div class="p07_demoGame_01_question_number">
                 <div class="quiz_number_frame">
                     <h1 class="quiz_question_num">第{{numberToChinese(questionNumber)}} 題</h1>
@@ -56,10 +58,10 @@
                 </div>
             </transition>
 
-            <div class="score">目前累積分數:{{score}}</div>
+           
 
 
-            <div class="next">
+            <div class="next" v-if="showNextButton">
 
                 <button class="next_quiz_botton"  @click="changeQuestionAndScrollToTop">
                    <div class="botton_p">
@@ -187,8 +189,14 @@ export default {
             isCorrect: false,  // 選項裡正確與錯誤判斷的預設值
             isAnswered: false,  //答案未被確認時的初始值
             score: 0, //分數計算初始值
+            num:0, //題目計算初始值
             showAnswerBoardContent:false, // 按"點擊這裡看破解"的按鈕被觸發前，預設值為否
             showLoginAlert: true,
+<<<<<<< HEAD
+=======
+            nextButtonText: "下一題",
+            showNextButton:false
+>>>>>>> ZIH
 
             
           
@@ -214,7 +222,11 @@ export default {
 
     methods:{
 
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> ZIH
 
         // //每按下一題，選項會變更
         // changeQuestion(){
@@ -232,11 +244,29 @@ export default {
                 this.$router.push('demoGameresult');
             }else{
                 this.questionNumber +=1;
+<<<<<<< HEAD
                 window.scrollTo(0, 0);
                 // this.selectedAnswer = null; //清空選擇的答案
                 this.isAnswered = false; //設為未作答狀態
                 this.showAnswerBoardContent = false;
                 
+=======
+                this.nextButtonText = "看結果";
+                window.scrollTo(0, 0);
+                this.isAnswered = false; //顯示看破解的設定為關
+                this.showNextButton = false; //顯示下一題的設定為關
+                this.showAnswerBoardContent = false; //顯示看破解欄位的設定為關
+            }
+            
+            else{
+                this.questionNumber +=1;
+                this.nextButtonText = "下一題";
+                window.scrollTo(0, 0);
+                // this.selectedAnswer = null; //清空選擇的答案
+                this.isAnswered = false; //顯示看破解的設定為關
+                this.showNextButton = false; //顯示下一題的設定為關
+                this.showAnswerBoardContent = false; //顯示看破解欄位的設定為關
+>>>>>>> ZIH
             }
 
         // this.changeQuestion();
@@ -251,18 +281,28 @@ export default {
         //選項的功能，包含點擊選擇後顏色變化，判斷是否被選擇，判斷選項的答案的正確與錯誤，每選擇一個選項後其他選項不能被選擇，跟蓋章效果，計算分數(正確的選項加10分，非正確選項不加分)
 
         choose_answer(answer) {
-      if ( this.questions[(this.questionNumber-1)].choosed === null) {
+
+        
+
+       
+        if ( this.questions[(this.questionNumber-1)].choosed === null) {
         this.questions[(this.questionNumber-1)].choosed = answer //每一題被選擇的答案都放進choose裡面
+
         // element.classList.toggle('selected'); //點擊後背景圖片變化的部分
         // this.selectedAnswer = answer // answer 是指當前被點擊的答案，它作為 toggleClass 方法的參數傳入。在方法的內部，this.selectedAnswer 是一個數據屬性，它的值會被設置為當前被點擊的答案，以便後續判斷該答案是否為正確答案。
+
+        this.showNextButton = true;
         this.isAnswered = true //表示此題目已經被回答過，即選擇了一個答案。它是一個boolean值，當點擊一個答案時，會將它設置為true，這樣就可以避免重複選擇答案或是選擇多個答案。
+       
         // alert(this.questions[(this.questionNumber-1)].choosed);
         // alert(this.questions[(this.questionNumber-1)].correctAnswer);
         if (this.questions[(this.questionNumber-1)].choosed === this.questions[this.questionNumber - 1].correctAnswer) {//若選擇的選項 === 跳頁過後的題目裡面的那個正確的選項
           this.isCorrect = true; //如果選項為對
           this.score +=10;  // 加10分
+          this.num +=1;
         } else {
           this.isCorrect = false; //選項為錯，什麼都不做
+          this.num +=1;
         }
       }
     },
