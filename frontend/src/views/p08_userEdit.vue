@@ -196,7 +196,7 @@ export default {
         .then((response) => {
           this.member = response.data.member[0];
           this.expValue = response.data.member[0].EXP;
-          this.birthday = response.data.BIRTH;
+          this.birthday = response.data.member[0].BIRTH;
         })
         .catch((error) => {
           console.log(error);
