@@ -95,7 +95,7 @@
             <div class="col-lg-9 col-md-8 order-2">
               
               <h4>編輯會員資料</h4>
-              <h6>{{ member.ACCOUNT }}</h6>
+              <h6>{{ member.LOGIN_TYPE_ID === 1 ? member.ACCOUNT : '' }}</h6>
 
               <div class="row mt-4">
                 <!-- FORM -->
