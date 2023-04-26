@@ -52,7 +52,7 @@
                     <div class="topBlock_p06_discuss">
                         <div class="author">
                             <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
-                            <span class="paragraph">{{ item.NONNAME === 1 ? '匿名' : item.NICKNAME }}</span>
+                            <span class="paragraph">{{ item.NONNAME === 1 ? item.NICKNAME : '匿名'}}</span>
                         </div>
                         <button class="ellipsisBtn" @click="ellipsisBtn(index)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                         <div class="ellipsisList"  :style="{'display':showellipsisList === index ? 'block' : 'none'}">
@@ -82,7 +82,7 @@
                                 <li><i class="fa-solid fa-thumbs-up fa-fw iconHover"></i><span> {{item.thumbsNum}} </span></li>   
                                 <li><i class="fa-solid fa-message fa-fw iconHover"></i><span> {{item.messageNum}} </span></li>
                                 <li>
-                                    <router-link :to="'/discuss/discuss_content/' + item.ID">
+                                    <router-link :to="{ name: 'discuss_content', params: { article: item.ID } }">
                                         <button class="viewDetails medium_button">
                                             查看詳細
                                         </button>
@@ -228,31 +228,3 @@
     
     
 </script>
-
-
-<!-- <template>
-    <ul>
-      <li v-for="item in datas.slice(pageStart, pageEnd)" :key="item">{{ item }}</li>
-    </ul>
-
-    <ul class="pagination">
-
-      <li class="page-item" @click.prevent="setPage(currentPage.value - 1)">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-
-      <li class="page-item" :class="{ active: currentPage === n }" v-for="(n, index) in totalPage" :key="index" @click.prevent="setPage(n)">
-        <a class="page-link" href="#">{{ n }}</a>
-      </li>
-
-      <li class="page-item" @click.prevent="setPage(currentPage.value + 1)">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-
-    </ul>
-
-  </template>  -->

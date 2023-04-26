@@ -8,7 +8,7 @@
                 <div class="nonymous">
                     <label>
                         <span class="text">匿名發文：</span>
-                        <input type="checkbox" name="" id="" class="checkbox" v-model="isChecked">
+                        <input type="checkbox" name="" id="" class="checkbox" v-model="isChecked" @click="isChecked = !isChecked">
                         <span class="btn-box">
                             <span class="btn"></span>      
                         </span>
@@ -68,20 +68,18 @@
         fileImage.value = event.target.files[0];
         ImgName.value = `: ${fileImage.value.name}`;
     }
-
+    
     // 是否匿名
     if(isChecked.value){
-        // 2是不匿名
+        // 2是匿名
         nonname.value = 2;
     }else{
         // 1是不匿名
         nonname.value = 1;
     }
 
-    
-    
     function submitButton(){
-
+        
         // 封裝成 FormData 的形式傳給後端處理資料
         const form = new FormData();
         form.append('userId', localStorage.getItem('token'));
@@ -99,5 +97,6 @@
         })
         .catch(err => alert(`發生了某些連線錯誤，請聯繫技術人員! 錯誤訊息: ${err.response.data}`));
     }
+    
 
 </script>

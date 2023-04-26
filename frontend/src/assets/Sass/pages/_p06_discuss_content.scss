@@ -25,6 +25,7 @@
         list-style: none;
         padding: 0px;
         margin: 0px;
+        margin-bottom: 5px;
         
         li{
             color: $main_color;
@@ -312,9 +313,6 @@
                             @include rwd('sm'){
                                 font-size: 14px;
                             }
-                        }
-                        &:first-child{
-                            
                         }
                         &:last-child{
                             position: relative;
