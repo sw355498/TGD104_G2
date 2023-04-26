@@ -8,7 +8,7 @@
 
             <div class="p07_demoGame_01_question_number">
                 <div class="quiz_number_frame">
-                    <h1 class="quiz_question_num">第{{numberToChinese(questionNumber)}} 題</h1>
+                    <h1 class="quiz_question_num">第{{numberToChinese(questionNumber)}}題</h1>
                 </div>
                 
             </div>
