@@ -26,9 +26,10 @@
                     </p>
                     <div class="product_details_num">
                         <span> 數量
-                            <i class="fas fa-minus" @click="updateProductNumber(item, -1)"></i>
+                            <i v-if="item.number == 1" id="fa-minus" class="fas fa-minus noselectDemoShopping"></i>
+                            <i v-if="item.number > 1" id="fa-minus" class="fas fa-minus selectedDemoShoppingCart" @click="updateProductNumber(item, -1)"></i>
                             {{ item.number }}
-                            <i class="fas fa-plus" @click="updateProductNumber(item, 1)"></i>
+                            <i class="fas fa-plus selectedDemoShoppingCart" @click="updateProductNumber(item, 1)"></i>
                         </span>
                     </div>
                     <span> 單價 ${{ item.price }}</span>
@@ -405,7 +406,6 @@ export default {
             areas: areasData,
             zip: zipCode,
             removeIdx,
-            // sweetAlert
             sweetAlert,
         };
     },

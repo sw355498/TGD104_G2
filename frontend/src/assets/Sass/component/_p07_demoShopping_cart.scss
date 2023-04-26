@@ -111,6 +111,15 @@
                         margin: 0;
                     }
                 }
+                .product_details_num{
+                    .selectedDemoShoppingCart:hover{
+                        cursor: pointer;
+                    }
+                    .noselectDemoShopping{
+                        cursor: not-allowed;
+                        color: lightgray;
+                    }
+                }
                 .product_details_price{
                     display: flex;
                     flex-direction: column;
