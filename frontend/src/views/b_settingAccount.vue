@@ -131,7 +131,7 @@
     </div>
 </template>
 <script setup>
-import { ref, onMounted} from "vue";
+import { ref, onMounted, watch} from "vue";
 import Modal from "@/components/modal.vue";
 import router from "@/router";
 import { API_URL } from "@/config";
@@ -143,6 +143,7 @@ const showModal = ref(false); //彈窗顯示設定
 const bigModal = ref(false); //彈窗寬度是否要為width 75%
 
 const fileImage = ref()
+const fileImageName = ref()
 const oldPassword = ref('')
 const newPassword = ref('')
 const confirmPassword = ref('')
@@ -151,7 +152,7 @@ const nickname = ref('')
 const mobile = ref('')
 const birth = ref('')
 const userPic = ref('')
-const imageUpdated = ref(false);
+
 //從sessionStorage撈取資料
 const id = ref('')
 let savedData = JSON.parse(sessionStorage.getItem('staff'));
@@ -165,6 +166,7 @@ onMounted(async () => {
 //更換大頭貼
 async function fileChange(e) {
     fileImage.value = e.target.files[0]
+    fileImageName = e.target.files[0].name
     removeError("upload_img");
     const formData = new FormData();
         formData.append('account', account.value);
@@ -184,7 +186,7 @@ async function fileChange(e) {
                     icon: "success",
                     confirmButtonText: "確認",
                 });
-                imageUpdated.value = true;
+                userPic.value = require('@/assets/img/p08_user/' + fileImageName.value)
             } else if(response.data === '只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案'){
                 addError("upload_img", "只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案");
             } else if(response.data === '檔案大小不得超過1MB'){
@@ -200,11 +202,6 @@ async function fileChange(e) {
             }
         }
 }
-watch(imageUpdated, (updated) => {
-    closeModal();
-    selectTable();
-});
-
 
 
 //密碼更新
