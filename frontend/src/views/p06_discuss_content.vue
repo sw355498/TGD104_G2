@@ -336,10 +336,13 @@ arrayB.forEach(a => {
                 content: messageContent.value
             })
             .then((res)=>{
-                alert('成功留言')
+                // alert('成功留言')
+                sweetAlertSendMessage()
                 messageContent.value = '';
                 showModal.value = false;
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
             })
             .catch((err)=>{
                 // console.log(err.response.data);
@@ -353,10 +356,13 @@ arrayB.forEach(a => {
                 content: messageContent.value
             })
             .then((res)=>{
-                alert('成功回覆')
+                // alert('成功回覆')
+                sweetAlertSendReply()
                 messageContent.value = '';
                 showModal.value = false;
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
             })
             .catch((err)=>{
                 // console.log(err.response.data);
@@ -470,7 +476,29 @@ arrayB.forEach(a => {
             // timer: 1500
         })
     };
-
+    
+    const sweetAlertSendReply = ()=>{
+        Swal.fire({
+            title: '成功回覆',
+            // text: '請先登入會員才能蒐藏哦',
+            icon: 'success',
+            position: 'center',
+            showConfirmButton: false,
+            // confirmButtonText: '確認',
+            timer: 1500
+        })
+    };
+    const sweetAlertSendMessage = ()=>{
+        Swal.fire({
+            title: '成功留言',
+            // text: '請先登入會員才能蒐藏哦',
+            icon: 'success',
+            position: 'center',
+            showConfirmButton: false,
+            // confirmButtonText: '確認',
+            timer: 1500
+        })
+    };
     function ellipsisBtn(){
         if(ellipsisList.value.style.display === 'none'){
             ellipsisList.value.style.display = 'block'
