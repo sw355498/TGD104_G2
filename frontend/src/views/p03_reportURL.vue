@@ -189,6 +189,10 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             // 刷新jsgrid資料
             allURL.value = await allData();
             loadJsGrid();
+            url.value = ''
+            email.value = ''
+            title.value = ''
+            notes.value = ''
         } catch (error) {
             // 提交失敗的處理
             console.error('Submit failed:', error)
