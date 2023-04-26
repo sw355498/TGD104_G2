@@ -166,7 +166,7 @@ onMounted(async () => {
 //更換大頭貼
 async function fileChange(e) {
     fileImage.value = e.target.files[0]
-    fileImageName = e.target.files[0].name
+    fileImageName.value = e.target.files[0].name
     removeError("upload_img");
     const formData = new FormData();
         formData.append('account', account.value);
@@ -186,7 +186,7 @@ async function fileChange(e) {
                     icon: "success",
                     confirmButtonText: "確認",
                 });
-                userPic.value = require('@/assets/img/p08_user/' + fileImageName.value)
+                return userPic.value = require('@/assets/img/p08_user/' + fileImageName.value)
             } else if(response.data === '只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案'){
                 addError("upload_img", "只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案");
             } else if(response.data === '檔案大小不得超過1MB'){
@@ -215,7 +215,7 @@ const confirming = () => {
     }
 }
 //密碼表單送出
-async function passwordSubmit (e){
+const passwordSubmit = async (e) => {
     e.preventDefault();
     if(confirmPassword.value !== newPassword.value){
         addError('newPassword', '密碼不一致')
@@ -274,12 +274,43 @@ const  goback = () => {
 
 
 //表單送出
-const handleSubmit = () => {
-    
+const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+        const response = await axios.post(`${API_URL}b_data_insert.php`, {
+            whichTable: 'USER',
+            nickname: nickname.value,
+            mobile: mobile.value,
+            birth: birth.value,
+            whichID: id.value 
+        });
+        account.value = response.data[0].ACCOUNT
+        nickname.value = response.data[0].NICKNAME
+        mobile.value = response.data[0].MOBILE
+        birth.value = response.data[0].BIRTH
+        if (response.data === "更新資料成功") {
+            Swal.fire({
+                title: '資料更新成功',
+                icon: 'success',
+                confirmButtonText: "確認",
+            })
+            //撈取資料庫的資料
+            selectTable();
+        } else {
+            console.log(response.data);
+        }
+        return response.data.data;
+    } catch (e) {
+        if (e.response) {
+            console.log(e.response.data.message);
+        } else {
+            console.log(e.message);
+        }
+    }
 }
 
 //資料庫查詢
-async function selectTable() {
+const selectTable = async() => {
     try {
         const response = await axios.post(`${API_URL}b_data_select.php`, {
             whichTable: 'USER',
