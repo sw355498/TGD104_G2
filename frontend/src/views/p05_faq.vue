@@ -11,8 +11,8 @@
           type="text"
           id="search"
           placeholder="請輸入關鍵字"
-          v-model.lazy.trim="search"
-          @change="filterList"
+          v-model.trim="search"
+          @keyup="filterList"
         />
         <i class="fa-solid fa-magnifying-glass" v-show="showSearch"></i>
       </label>

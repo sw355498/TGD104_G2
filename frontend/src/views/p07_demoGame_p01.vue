@@ -17,8 +17,11 @@
                 <div class="p07_demoGame_01_quiz_question_title">
                     <p>{{questionText}}</p>
                 </div>
-                <img :src="questionImage"  alt="題目示意圖">
-                <!-- <img :src="require('@/assets/img/p07_demo/p07_demoGame/quiz1.jpg')"  alt="題目示意圖"> -->
+
+                <div class="quizimg">
+                    <img :src="questionImage"  alt="題目示意圖">
+                    <!-- <img :src="require('@/assets/img/p07_demo/p07_demoGame/quiz1.jpg')"  alt="題目示意圖"> -->
+                </div>
             </div>
             
             <div class="answer_button">
