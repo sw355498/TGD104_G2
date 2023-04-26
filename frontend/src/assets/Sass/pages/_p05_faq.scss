@@ -78,9 +78,6 @@
           @include rwd(md) {
             margin: 10px 0 0;
           }
-          &:first-child {
-            margin-top: 0;
-          }
           .title_p05_faq_qusetion {
             position: relative;
             margin: 0;
@@ -154,9 +151,6 @@
               }
             }
           }
-        }
-        p {
-          text-align: center;
         }
       }
     }
