@@ -431,6 +431,7 @@ arrayB.forEach(a => {
         const token = localStorage.getItem('token')
         if (!token) {
             // showModal()
+            sweetAlertLogin()
             return
         }
 
@@ -479,17 +480,17 @@ arrayB.forEach(a => {
     }
         
     // sweetAlert =================================================
-    const sweetAlertCollect = ()=>{
-        Swal.fire({
-            title: '蒐藏成功',
-            text: '已經把文章蒐藏到會員中心囉',
-            icon: 'success',
-            position: 'center',
-            showConfirmButton: false,
-            timer: 1100
-        })
+    const sweetAlertLogin = ()=>{
+    Swal.fire({
+        title: '非會員',
+        text: '請先登入會員才能蒐藏哦',
+        icon: 'error',
+        position: 'center',
+        // showConfirmButton: false,
+        confirmButtonText: '確認',
+        // timer: 1500
+    })
     };
-    
     const sweetAlertSendReply = ()=>{
         Swal.fire({
             title: '成功回覆',
