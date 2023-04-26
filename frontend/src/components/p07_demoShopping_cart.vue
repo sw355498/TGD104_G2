@@ -71,31 +71,46 @@
                 <!-- 輸入信用卡資訊 -->
                 <div v-if="paymentMethod === 'creditCard'" class="credit_card box">
                 <!-- <div class="credit_card box"> -->
-                    <p v-show="!creditCardNumber || !expirationDate || !creditCardName || !securitycode">請輸入完整信用卡資訊</p>
+                    <!-- <p v-show="!isFormValid">
+                        請輸入完整信用卡資訊</p> -->
                     <div class="form_container">
                         <div class="field_container">
                             <label for="cardnumber">信用卡卡號</label>
-                            <!-- <span id="generatecard">隨機產生</span> -->
+                            <span class="generatecard" @click="setDefaultCardInfo">一鍵產生</span>
+                            <span class="generatecard clearCard" @click="clearDefaultCardInfo">一鍵清除</span>
                             <input v-model="creditCardNumber"
                             id="cardnumber" type="text" pattern="[0-9]*" 
                             inputmode="numeric" >
+                            <p v-show="!isFormValid"
+                            style="color: red; font-size: 10px;padding-left: 3px;padding-top: 2px;">
+                                {{ cardNumberError }}
+                            </p>
                         </div>
                         <div class="field_container">
                             <label for="card_name">姓名</label>
                             <input v-model="creditCardName"
                             id="card_name" maxlength="20" type="text">
+                            <p style="color: red; font-size: 10px;padding-left: 3px;padding-top: 2px;">
+                                {{ cardNameError }}
+                            </p>
                         </div>
                         <div class="field_container">
                             <label for="expirationdate">到期 (月/年)</label>
                             <input v-model="expirationDate"
                             id="expirationdate" type="text" pattern="[0-9]*" 
                             inputmode="numeric">
+                            <p style="color: red; font-size: 10px;padding-left: 3px;padding-top: 2px;">
+                                {{ cardExpDateError }}
+                            </p>
                         </div>
                         <div class="field_container">
                             <label for="securitycode">安全碼</label>
                             <input v-model="securitycode"
                             id="securitycode" type="text" pattern="[0-9]*" 
                             inputmode="numeric">
+                            <p style="color: red; font-size: 10px;padding-left: 3px;padding-top: 2px;">
+                                {{securitycodeError}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -204,7 +219,7 @@
                     </div>
                 </div>
                 <button class="submitDemoShoppingCart"
-                :disabled="receiverAddress =='' || receiverName == ''"
+                :disabled="receiverAddress =='' || receiverName == '' || !isFormValid"
                 @click.prevent="sweetAlert()">
                     立刻下單
                 </button>
@@ -391,18 +406,136 @@ export default {
         };
         const paymentMethod = ref('');
         const deleverMethod = ref('');
-        const creditCardNumber = ref('4000 0566 5566 5556');
-        const creditCardName = ref('王大頭')
-        const expirationDate = ref('06 29');
-        const securitycode = ref('123');
+        // const creditCardNumber = ref('4000 0566 5566 5556');
+        // const creditCardName = ref('王大頭')
+        // const expirationDate = ref('06 29');
+        // const securitycode = ref('123');
+        const creditCardNumber = ref('');
+        const creditCardName = ref('')
+        const expirationDate = ref('');
+        const securitycode = ref('');
         const show = ref(false);
         const receiverName = ref('');
         const receiverAddress = ref('');
+        const cardNumberError = ref('');
+        const cardNameError = ref('');
+        const cardExpDateError = ref('');
+        const securitycodeError = ref('');
         function removeReceiverAddress() {
             // console.log('removeReceiverAddress');
             receiverAddress.value = ''
         }
+        const clearDefaultCardInfo = () => {
+            if (creditCardNumber.value) {
+            creditCardNumber.value = ''
+            }
+            if (creditCardName.value) {
+            creditCardName.value = ''
+            }
+            if (expirationDate.value) {
+            expirationDate.value = ''
+            }
+            if (securitycode.value) {
+            securitycode.value = ''
+            }
+        }
+        const setDefaultCardInfo = () => {
+            if (!creditCardNumber.value) {
+            creditCardNumber.value = '4000 0566 5566 5556'
+            }
+            if (!creditCardName.value) {
+            creditCardName.value = '王大頭'
+            }
+            if (!expirationDate.value) {
+            expirationDate.value = '12/29'
+            }
+            if (!securitycode.value) {
+            securitycode.value = '123'
+            }
+        }
+        // 信用卡模式確認
+        const isCardPayment = computed(() => {
+            return paymentMethod.value === 'creditCard'
+        })
+        console.log(isCardPayment.value);
+        const validateCardNumber = () => {
+        if (paymentMethod.value !== 'creditCard') {
+            return true
+        }
+        // const cardNumberRegex = /^[0-9]{12}$/
+        const cardNumberRegex = /^(\d{4}\s){3}\d{4}$/
+        const valid = cardNumberRegex.test(creditCardNumber.value)
+        if (!valid) {
+            cardNumberError.value = '請輸入有效的信用卡卡號(格式: xxxx xxxx xxxx xxxx)'
+        } else {
+            cardNumberError.value = ''
+        }
+        return valid
+        }
+        const validateCardName = () => {
+        if (paymentMethod.value !== 'creditCard') {
+            return true
+        }
+        if (!creditCardName.value) {
+            cardNameError.value = '請輸入信用卡持卡人姓名'
+            return false
+        } else {
+            cardNameError.value = ''
+            return true
+        }
+        }
 
+        const validateCardExpDate = () => {
+        if (paymentMethod.value !== 'creditCard') {
+            return true
+        }
+
+        const expDateRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/
+        const valid = expDateRegex.test(expirationDate.value)
+        if (!valid) {
+            cardExpDateError.value = '請輸入信用卡到期日 (格式: MM/YY)'
+        } else {
+            cardExpDateError.value = ''
+        }
+        return valid
+        }
+
+        const validsecuritycode = () => {
+        if (paymentMethod.value !== 'creditCard') {
+            return true
+        }
+
+        const cvvRegex = /^[0-9]{3,4}$/
+        const valid = cvvRegex.test(securitycode.value)
+        if (!valid) {
+            securitycodeError.value = '請輸入有效的信用卡安全碼'
+        } else {
+            securitycodeError.value = ''
+        }
+        return valid
+        }
+
+        const isFormValid = computed(() => {
+            if (isCardPayment.value) {
+            const isCardNumberValid = validateCardNumber()
+            const isCardNameValid = validateCardName()
+            const isCardExpDateValid = validateCardExpDate()
+            const isCardsecuritycodeValid = validsecuritycode()
+
+            return (
+                isCardNumberValid &&
+                isCardNameValid &&
+                isCardExpDateValid &&
+                isCardsecuritycodeValid &&
+                creditCardNumber.value &&
+                creditCardName.value &&
+                expirationDate.value &&
+                securitycode.value
+            )
+            }
+            return true
+        })
+        console.log(isFormValid);
         return {
             totalPrice,
             updateProductNumber,
@@ -434,6 +567,13 @@ export default {
             zip: zipCode,
             removeIdx,
             sweetAlert,
+            cardNumberError,
+            cardNameError,
+            cardExpDateError,
+            securitycodeError,
+            isFormValid,
+            setDefaultCardInfo,
+            clearDefaultCardInfo,
         };
     },
 };
