@@ -3,7 +3,7 @@
         <modal
             :modelWidth="bigModal"
             :show="showModal"
-            @close="showModal = false,modelWidth= false"
+            @close="closeModal,modelWidth= false"
         >
         <template #header>
             <h4>密碼更新</h4>
@@ -16,10 +16,11 @@
                         <div class="d-none text-danger" id="oldPasswordErrorText"></div>
                         <input
                             v-model="oldPassword"
-                            type="text"
+                            type="password"
                             class="form-control"
                             style="margin-bottom: 20px"
                             id="oldPassword"
+                            @focus="removeError('oldPassword')"
                         />
                     </div> 
                     <div class="mb-3">                  
@@ -27,9 +28,10 @@
                         <div class="d-none text-danger" id="newPasswordErrorText"></div>
                         <input
                             v-model="newPassword"
-                            type="text"
+                            type="password"
                             class="form-control mb-3"
                             id="newPassword"
+                            @focus="removeError('newPassword')"
                         />
                     </div> 
                     <div class="mb-3">                  
@@ -37,15 +39,16 @@
                         <div class="d-none text-danger" id="confirmPasswordErrorText"></div>
                         <input
                             v-model="confirmPassword"
-                            type="text"
+                            type="password"
                             class="form-control mb-3"
                             id="confirmPassword"
                             @blur="confirming"
+                            @focus="removeError('confirmPassword')"
                         />
                     </div> 
                 </div>
                 <div class="text-end">
-                    <button class="medium_button me-4" @click="upData">更新密碼</button>
+                    <button class="medium_button me-4">更新密碼</button>
                     <button class="medium_button" @click="goback">取消</button>
                 </div>
             </form>
@@ -64,7 +67,7 @@
                         type="file" 
                         @change="fileChange"
                     />
-                    <i class="fa-solid fa-image fa-fw"></i>更換大頭貼<span>{{ ImgName }}</span>
+                    <i class="fa-solid fa-image fa-fw"></i>更換大頭貼
                 </label>
             </div>
             <button class="medium_button mt-3 w-100" @click="showModal = true">更換密碼</button>
@@ -81,7 +84,7 @@
                         <input
                             v-model="account"
                             type="email"
-                            class="form-control"
+                            class="form-control-plaintext"
                             id="account"
                             required
                             readonly
@@ -133,6 +136,7 @@ import Modal from "@/components/modal.vue";
 import router from "@/router";
 import { API_URL } from "@/config";
 import axios from "axios";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 //彈窗設定
 const showModal = ref(false); //彈窗顯示設定
@@ -147,7 +151,7 @@ const nickname = ref('')
 const mobile = ref('')
 const birth = ref('')
 const userPic = ref('')
-
+const imageUpdated = ref(false);
 //從sessionStorage撈取資料
 const id = ref('')
 let savedData = JSON.parse(sessionStorage.getItem('staff'));
@@ -159,14 +163,57 @@ onMounted(async () => {
 });
 
 //更換大頭貼
-const fileChange = (e) => {
+async function fileChange(e) {
     fileImage.value = e.target.files[0]
-    ImgName.value = `：${fileImage.value.name}`
     removeError("upload_img");
+    const formData = new FormData();
+        formData.append('account', account.value);
+        formData.append('newImage', fileImage.value);
+        
+    try {
+        const response = await axios.post(`${API_URL}changeImage.php`, formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+            });
+            const strResponse = response.data.trimEnd();
+            const arrResponse = strResponse.split(',')
+            if(arrResponse.includes('圖片更新成功')){
+                Swal.fire({
+                    title: "圖片更新成功",
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+                imageUpdated.value = true;
+            } else if(response.data === '只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案'){
+                addError("upload_img", "只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案");
+            } else if(response.data === '檔案大小不得超過1MB'){
+                addError("upload_img", "檔案大小不得超過1MB");
+            } else {
+                console.log('error-Image')
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
+        }
 }
+watch(imageUpdated, (updated) => {
+      if (updated) {
+        closeModal();
+        selectTable();
+      }
+    });
+
+    return {
+      fileChange
+};
+
 
 //密碼更新
-const confirming = () =>{
+const confirming = () => {
     if(confirmPassword.value !== newPassword.value){
         addError('newPassword', '密碼不一致')
         addError('confirmPassword', '密碼不一致')
@@ -175,9 +222,61 @@ const confirming = () =>{
         removeError('confirmPassword')
     }
 }
+//密碼表單送出
+async function passwordSubmit (e){
+    e.preventDefault();
+    if(confirmPassword.value !== newPassword.value){
+        addError('newPassword', '密碼不一致')
+        addError('confirmPassword', '密碼不一致')
+    } else {
+        removeError('newPassword')
+        removeError('confirmPassword')
+        try {
+            const response = await axios.post(`${API_URL}changePassword.php`, {
+                account: account.value,
+                oldPassword: oldPassword.value,
+                newPassword: newPassword.value
+            });
+            const strResponse = response.data.trimEnd();
+            const arrResponse = strResponse.split(',')
+            if(arrResponse.includes('密碼修改成功')){
+                Swal.fire({
+                    title: "密碼更新成功",
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+                closeModal()
+            } else {
+                if(arrResponse.includes('密碼修改失敗')){
+                    addError('oldPassword', '密碼修改失敗')
+                    addError('newPassword', '密碼修改失敗')
+                    addError('confirmPassword', '密碼修改失敗')
+                } else {
+                    if(arrResponse.includes('密碼輸入錯誤')){
+                        addError('oldPassword', '密碼輸入錯誤')
+                    }
+                    if(arrResponse.includes('原密碼尚未輸入')){
+                        addError('oldPassword', '原密碼尚未輸入')
+                    }
+                    if(arrResponse.includes('新密碼尚未輸入')){
+                        addError('newPassword', '新密碼尚未輸入')
+                        addError('confirmPassword', '新密碼尚未輸入')
+                    }
+                }
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
+        }
+    }
+}
+
 
 //返回後台
-const goback = () => {
+const  goback = () => {
     router.push('/b_index');
 }
 
@@ -213,6 +312,20 @@ async function selectTable() {
     }
 }
 
+//關閉彈窗
+const closeModal = () => {
+    //清除 input
+    oldPassword.value = "";
+    newPassword.value = ""
+    confirmPassword.value = ""
+    
+    // 清除可能存在的error
+    removeError('oldPassword')
+    removeError('newPassword')
+    removeError('confirmPassword')
+    // 關閉彈窗
+    showModal.value = false;
+}
 
 // 新增錯誤訊息
 const addError = (InputID, ErrorText) => {
