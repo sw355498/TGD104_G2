@@ -18,9 +18,21 @@ $data = [];
 
 
 $statement-> execute();
-    $data = $statement->fetchAll(PDO::FETCH_ASSOC);//引用table表頭
+$questions = array();
+while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+    $question = array();
+    $question['id'] = $row['ID'];
+    $question['question'] = $row['QUESTION'];
+    $question['options'] = explode(',', $row['OPTION']);
+    $question['answer'] = $row['ANSWER'];
+    $question['pic'] = $row['PIC'];
+    $question['description'] = $row['DESCRIPTION'];
+    array_push($questions, $question);
+}
+   
     
-    echo json_encode($data);
+    echo json_encode($question);
+    
 
 // 关闭数据库连接
 $pdo = null;

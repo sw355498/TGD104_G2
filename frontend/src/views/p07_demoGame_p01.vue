@@ -68,7 +68,7 @@
 
                 <button class="next_quiz_botton"  @click="changeQuestionAndScrollToTop">
                    <div class="botton_p">
-                    下一題 
+                    {{nextButtonText}}
                     <svg><use xlink:href="#onward" /></svg>
 
 </div></button>

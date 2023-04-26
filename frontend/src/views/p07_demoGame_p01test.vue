@@ -13,16 +13,17 @@
 
             <div class="p07_demoGame_01_quiz_view">
                 <div class="p07_demoGame_01_quiz_question_title">
-                    <p>{{questionText}}</p>
+                    <p>{{ questions[questionNumber - 1].QUESTION }}</p>
                 </div>
-                <img :src="questionImage"  alt="題目示意圖">
-                <!-- <img :src="require('@/assets/img/p07_demo/p07_demoGame/quiz1.jpg')"  alt="題目示意圖"> -->
+                <div class="quizimg">
+                    <img :src="questions[questionNumber - 1].PIC" alt="題目示意圖">
+                </div>
             </div>
             
             <div class="answer_button">
                 <div class="answer" 
                 
-                v-for="(answer,key) in  questions[(questionNumber-1)].answers" :key="key"
+                v-for="(answer,key) in  questions[questionNumber - 1].OPTION" :key="key"
                 @click="choose_answer(answer)" 
                 >
                 <p :class="{ 'disabled': questions[(questionNumber-1)].choosed !== null && questions[(questionNumber-1)].choosed !== answer ,'selected' :questions[(questionNumber-1)].choosed === answer }">{{ answer }}</p></div>
@@ -101,55 +102,26 @@ export default {
     components: {
     frontFooter
   },
-    data(){
-        return{
-
-            questions:[
-
-            {
-            //題目選項，圖片跟答案
-             // 从PHP后端获取的题目数据
-            quizData: null,
-            // 当前问题的编号
-            questionNumber: 1,
-            // 当前问题的文本
-            questionText: "",
-            // 当前问题的图片路径
-            questionImage: "",
-            // 当前问题的答案选项
-            questionOptions: [],
-            // 当前问题的答案
-            correctAnswer: "",
-            // 当前问题的选中答案
-            choosedAnswer: null,
-            // 选项区的内容
-            answerZoneContent: "",
-            questionNumber:1, //標題第幾題，第一題為初始值
-            showNextButton: false,
-            // selectedAnswer:null, //選項還沒有被選擇時的初始值
-            // isCorrect: false,  // 選項裡正確與錯誤判斷的預設值
-            // isAnswered: false,  //答案未被確認時的初始值
-            score: 0, //分數計算初始值
-            showAnswerBoardContent:false, // 按"點擊這裡看破解"的按鈕被觸發前，預設值為否
-            showLoginAlert: true,
-            }
-            ],
-
-            
-          
-        };
+  data() {
+    return {
+      questions: [],
+      questionNumber: 1,
+      isCorrect: false,
+      isAnswered: false,
+      score: 0,
+      quizNum: 0,
+      showAnswerBoardContent: false,
+      showLoginAlert: true,
+      nextButtonText: "下一題",
+      showNextButton: false,
+    };
     },
 
     mounted(){
         axios
         .get("getQuiz.php")
         .then(response => {
-            this.quizData = JSON.parse(response.data);
-            this.showQuestion(this.quizData[0]);
-            console.log('this.showQuestion');
-        })
-        .catch(error =>{
-            console.log(error);
+            this.questions = response.data;
         });
     },
 
@@ -170,16 +142,7 @@ export default {
 
         
 
-       // 将指定问题的数据显示在界面上
-        showQuestion(question) {
-            this.questionNumber = question.ID;
-            this.questionText = question.QUESTION;
-            this.questionImage = question.PIC;
-            this.questionOptions = question.OPTION.split(",");
-            this.correctAnswer = question.ANSWER;
-            this.answerZoneContent = question.DESCRIPTION;
-            this.choosedAnswer = null;
-        },
+      
 
          // 点击答案选项的处理函数
             choose_answer(answer) {
