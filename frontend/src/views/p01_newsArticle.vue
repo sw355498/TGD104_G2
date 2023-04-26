@@ -85,6 +85,7 @@ import frontFooter from "@/components/f_footer.vue";
 import axios from "axios";
 import { API_URL, reactive } from "@/config";
 import Modal from "@/components/userLogin.vue";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export default {
   components: {
@@ -125,6 +126,18 @@ export default {
       });
   },
   methods: {
+    // sweetAlert =================================================
+    sweetAlertLogin(){
+        Swal.fire({
+            title: '非會員',
+            text: '請先登入會員才能蒐藏哦',
+            icon: 'error',
+            position: 'center',
+            // showConfirmButton: false,
+            confirmButtonText: '確認',
+            // timer: 1500
+        })
+    },
     // 分享
     openShareWindow(link) {
       window.open(link, "mywindow", "width=700, height=400");
@@ -147,8 +160,8 @@ export default {
       const token = localStorage.getItem("token");
       if (!token) {
         // 如果沒有 token，表示使用者尚未登入，顯示登入彈窗
-        this.showModal();
-
+        // this.showModal();
+        this.sweetAlertLogin();
         // alert("請先登入會員")
         return;
       }
