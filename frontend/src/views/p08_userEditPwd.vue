@@ -104,6 +104,7 @@
                       type="password"
                       class="input_p08_user_login"
                       v-model="oldPassword"
+                      pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{3,}$"
                       required
                     />
 
@@ -112,7 +113,9 @@
                       id="new-password"
                       type="password"
                       class="input_p08_user_login"
+                      placeholder="含英數至少3個字元不含空格"
                       v-model="newPassword"
+                      pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{3,}$"
                       required
                     />
 
@@ -121,7 +124,9 @@
                       id="confirm-password"
                       type="password"
                       class="input_p08_user_login"
+                      placeholder="再次輸入密碼"
                       v-model="confirmPassword"
+                      pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{3,}$"
                       @blur="checkPasswordsMatch"
                       required
                     />

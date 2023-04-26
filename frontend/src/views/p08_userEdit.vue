@@ -115,6 +115,7 @@
                       class="input_p08_user_login"
                       :placeholder="member.MOBILE"
                       v-model.trim="phoneNumber"
+                      maxlength="11" pattern="09\d{2}-\d{6}"
                     />
 
                     <label for="">生日</label>
@@ -123,6 +124,7 @@
                       class="input_p08_user_login"
                       v-model="birthday"
                       placeholder="MM/DD/YYYY"
+                      min="1900-01-01" max="2022-01-01"
                     />
                     <button type="submit" class="btn btn-primary">儲存</button>
                     <button class="btn">
