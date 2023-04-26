@@ -263,18 +263,18 @@ export default {
                     html: `幽靈包裹 約3-5個工作天送到 <br>
                     ${receiverAddress.value} <br>
                     親愛的 ${receiverName.value} 感謝您的訂購<br>
-                    信用卡個資${creditCardNumber.value}將會被盜刷`,
+                    信用卡個資會被詐騙集團儲存並盜刷`,
                     icon: 'success',
                     confirmButtonText: '點我繼續體驗詐騙網站購物'
                 })
-            }else if(paymentMethod.value === 'cashOnDelivery'){
+            }else{
                 Swal.fire({
                     position: 'center',
                     title: '下單成功',
                     html: `幽靈包裹 約 3-5 個工作天送到 <br>
                     ${receiverAddress.value} <br>
                     親愛的 ${receiverName.value} 感謝您的訂購<br>
-                    待您到門市取貨付款時就會被騙走金錢`,
+                    待您取貨付款時就會被騙走金錢`,
                     icon: 'success',
                     confirmButtonText: '點我繼續體驗詐騙網站購物'
                 })
