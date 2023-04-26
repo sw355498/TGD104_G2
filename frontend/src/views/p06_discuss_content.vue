@@ -30,7 +30,7 @@
                     <button class="ellipsisBtn" @click="ellipsisBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                     <div class="ellipsisList" style="display: none;">
                         <ul>
-                            <li id="show-modal" @click="showModal = true, modalContent = '<h4>檢舉</h4>'">檢舉</li>
+                            <!-- <li id="show-modal" @click="showModal = true, modalContent = '<h4>檢舉</h4>'">檢舉</li> -->
                             <li @click="shareBtn()">分享</li>
                         </ul>
                         <div class="p06_shareButton">
@@ -80,12 +80,13 @@
                                 <span>{{item.user}}</span>
                                 <ul class="action">
                                     <li class="iconHover">
-                                        <i class="fa-solid fa-thumbs-up fa-fw iconHover"></i>
+                                        <i :style="{ color: computedColor }" @click="toggleColor"
+                                        class="fa-solid fa-thumbs-up fa-fw"></i>
                                     </li>
-                                    <li class="iconHover" @click="showReport(index1, index)">
+                                    <!-- <li class="iconHover" @click="showReport(index1, index)">
                                         <i class="fa-solid fa-ellipsis-vertical fa-fw iconHover"></i>
                                         <div class="messageReport" v-show="message[index].showReport">檢舉</div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div class="messageMain">
@@ -119,12 +120,13 @@
                                         <span>{{item.user}}</span>
                                         <ul class="action">
                                             <li class="iconHover">
-                                                <i class="fa-solid fa-thumbs-up fa-fw"></i>
+                                                <i :style="{ color: computedColor }" @click="toggleColor"
+                                                class="fa-solid fa-thumbs-up fa-fw"></i>
                                             </li>
-                                            <li class="iconHover" @click="showReport(index1, index)">
+                                            <!-- <li class="iconHover" @click="showReport(index1, index)">
                                                 <i class="fa-solid fa-ellipsis-vertical fa-fw"></i>
                                                 <div class="messageReport" v-show="message[index].showReport">檢舉</div>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                     <div class="messageMain">
@@ -165,7 +167,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, defineProps } from 'vue'
+    import { ref, onMounted, defineProps,reactive,computed } from 'vue'
     import frontNavbar from "@/components/f_nav.vue"
     import frontFooter from "@/components/f_footer.vue"
     import Modal from '@/components/modal.vue'
@@ -173,7 +175,19 @@
     import { API_URL } from "@/config"
     import Swal from 'sweetalert2/dist/sweetalert2.js'
     import { useRoute } from 'vue-router'
-
+    // 按讚按鈕變顏色=============
+    const state = reactive({
+      isToggled: false,
+      color: '#007aff',
+      highlightColor: '#d3d3d3'
+    });
+    const buttonLabel = ref('Toggle Color');
+    const computedColor = computed(() => state.isToggled ? state.highlightColor : state.color);
+    const toggleColor = () => {
+      state.isToggled = !state.isToggled;
+      buttonLabel.value = state.isToggled ? 'Reset Color' : 'Toggle Color';
+    };
+    // 按讚按鈕變顏色結束========================
     const discuss = ref([]);
     const discussId = ref();
     const current_url = ref(null);
