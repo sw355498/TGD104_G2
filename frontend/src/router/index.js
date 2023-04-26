@@ -169,6 +169,7 @@ router.beforeEach((to, from, next) => {
   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
   const accountTypeId =  currentStaff.account_type_id
   const currentUser = localStorage.getItem('token')
+  
   if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
     if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
       next('/b_login');

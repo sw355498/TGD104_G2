@@ -272,10 +272,6 @@ export default {
         //選項的功能，包含點擊選擇後顏色變化，判斷是否被選擇，判斷選項的答案的正確與錯誤，每選擇一個選項後其他選項不能被選擇，跟蓋章效果，計算分數(正確的選項加10分，非正確選項不加分)
 
         choose_answer(answer) {
-
-        
-
-       
         if ( this.questions[(this.questionNumber-1)].choosed === null) {
         this.questions[(this.questionNumber-1)].choosed = answer //每一題被選擇的答案都放進choose裡面
 

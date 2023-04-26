@@ -120,12 +120,12 @@
               <div class="counter col-lg-7 align-self-lg-end align-self-md-center">
                 <div class="row">
                   <div class="col-6 col-lg-3">
-                    <!-- <div class="count-data text-center">
+                    <div class="count-data text-center">
                       <h6 class="count h2" data-to="500" data-speed="500">
                         {{LIKEcount}}
                       </h6>
-                      <p class="m-0px font-w-600">收到讚數</p>
-                    </div> -->
+                      <p class="m-0px font-w-600">發文數</p>
+                    </div>
                   </div>
                   <div class="col-6 col-lg-3">
                     <div class="count-data text-center">

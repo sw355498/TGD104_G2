@@ -161,5 +161,5 @@
     
     //抓出全部且依照順序封裝成一個二維陣列
     //PDO::FETCH_ASSOC 回傳一個index值是column name 的陣列
-    echo "新增資料成功"
+    echo "更新資料成功"
 ?>
