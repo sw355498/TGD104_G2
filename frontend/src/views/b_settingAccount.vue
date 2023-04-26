@@ -201,10 +201,8 @@ async function fileChange(e) {
         }
 }
 watch(imageUpdated, (updated) => {
-      if (updated) {
-        closeModal();
-        selectTable();
-      }
+    closeModal();
+    selectTable();
 });
 
 
