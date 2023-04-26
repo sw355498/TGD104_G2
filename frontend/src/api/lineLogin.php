@@ -27,7 +27,7 @@
         $statement = $pdo->prepare($sql);
 
         //綁定變數
-        // $statement ->bindValue(":USERID", $userId);
+        $statement ->bindValue(":USERID", $userId);
         $statement ->bindValue(":NICKNAME", $nickname);
         $statement ->bindValue(":ACCOUNT_TYPE_ID", $accountTypeID);
         

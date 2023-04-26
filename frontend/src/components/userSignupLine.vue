@@ -24,10 +24,10 @@
   
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  // const qs = require('qs');
-  // const accessToken = ref();
-  // const expiresIn = ref();
-  // const idToken = ref();
+  const qs = require('qs');
+  const accessToken = ref();
+  const expiresIn = ref();
+  const idToken = ref();
   const code = urlParams.get('code');
   const userId = ref();
   const nickname = ref();
