@@ -67,7 +67,10 @@
             <article class="articleMessage_p06_discuss">
                 <div class="topBlock_p06_discuss">
                     <h3>共<span>{{ messages.length }}</span>則 留言</h3>
-                    <button id="show-modal" @click="showModal = true, modalContent = '<h4>我要留言</h4>' " class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
+                    <button v-if="!token" class="medium_button" @click="sweetAlertLogin()"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
+                    <button v-else id="show-modal" 
+                    @click="showModal = true, modalContent = '<h4>我要留言</h4>' " 
+                    class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
                 </div>
                 <div class="messageList" v-for="(message, index1) in messages" :key="index1">
                     <div v-for="(item, index) in message" :key="index">
@@ -92,7 +95,12 @@
                                         <i class="fa-solid fa-clock fa-fw"></i>
                                         <span>{{item.time}}</span>
                                     </li>
-                                    <li id="show-modal" @click="showModal = true, modalContent = '<h4>回覆</h4>', thisIndex = index1" class="iconHover">
+                                    <li v-if="!token" @click="sweetAlertLogin()" class="iconHover">
+                                        <i class="fa-solid fa-reply fa-solid"></i>
+                                        <span>回覆</span>
+                                    </li>
+                                    <li v-else
+                                    id="show-modal" @click="showModal = true, modalContent = '<h4>回覆</h4>', thisIndex = index1" class="iconHover">
                                         <i class="fa-solid fa-reply fa-solid"></i>
                                         <span>回覆</span>
                                     </li>
@@ -132,7 +140,7 @@
                     </div>
                 </div>
             </article>
-            <nav aria-label="Page navigation example">
+            <!-- <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
                     <a class="page-link pagination-dark" href="#" aria-label="Previous">
@@ -148,9 +156,8 @@
                     </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
         </main>
-        <LoginModal v-show="isLoginModalVisible" @close="closeLoginModal()" />
         <!-- footer -->
         <frontFooter />
     </div>
@@ -165,13 +172,11 @@
     import { API_URL } from "@/config"
     import Swal from 'sweetalert2/dist/sweetalert2.js'
     import { useRoute } from 'vue-router'
-    import LoginModal from "@/components/userLogin.vue";
 
     const discuss = ref([]);
     const discussId = ref();
     const current_url = ref(null);
     const isFavorite = ref(false);
-    const isModalVisible = ref(false);
     const ellipsisList = ref();
     const p06_shareButton = ref();
     const modalContent = ref('');
@@ -263,9 +268,15 @@ arrayB.forEach(a => {
             console.log(arrayB);
             console.log(arrayC);
             
+            // 抓當下的時間 但是整串留言都會是同一個時間
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const currentDate = `${year}年${month}月${day}日`;
             const newArray = arrayC.map((item)=>{
                 return item.map((innerItem) => {
-                    return {...innerItem, time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show: false};
+                    return {...innerItem, time: currentDate, replyMessage: '查看更多回覆', showReport: false, show: false};
                 });
             });
 
