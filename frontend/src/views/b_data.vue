@@ -400,7 +400,6 @@ const bigModal = ref(true); //彈窗寬度是否要為width 75%
 const id = ref('')
 const whichTable = ref('')
 let savedData = JSON.parse(localStorage.getItem('bData'));
-console.log(savedData)
 id.value = Number(savedData.id)
 whichTable.value = savedData.whichTable
 
@@ -522,9 +521,3 @@ async function selectTable() {
     }
 }
 </script>
-<style lang="scss">
-.form-control-plaintext{
-    background: #8e8d8d;
-    padding: 0 20px;
-}
-</style>

@@ -154,6 +154,11 @@ const routes = [
     name: 'b_updata',
     component: () => import(/* webpackChunkName: "about" */ '../views/b_updata.vue')
   },
+  {
+    path: '/b_settingAccount',
+    name: 'b_settingAccount',
+    component: () => import(/* webpackChunkName: "about" */ '../views/b_settingAccount.vue')
+  },
 ]
 
 const router = createRouter({
@@ -161,17 +166,15 @@ const router = createRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-
-  console.log(localStorage.getItem('token'));
   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
   const accountTypeId =  currentStaff.account_type_id
-  // const currentUser = JSON.parse(localStorage.getItem('token'))
-  if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata'){
+  const currentUser = localStorage.getItem('token')
+  if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
     if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
       next('/b_login');
     }
   }else{
-    if(to.path === '/discuss_new_content' && !localStorage.getItem('token')){
+    if(to.path === '/discuss_new_content' && !currentUser){
      alert('請登入會員')
       next('/discuss')
     } 
