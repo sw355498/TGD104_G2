@@ -4,7 +4,7 @@
 
         <div class="quiz_background">
 
-            <div class="quiz_num">目前已答題數:{{num}}/共10題</div>
+            <div class="quiz_num">目前已答題數:{{quizNum}}/共10題</div>
 
             <div class="p07_demoGame_01_question_number">
                 <div class="quiz_number_frame">
@@ -189,14 +189,12 @@ export default {
             isCorrect: false,  // 選項裡正確與錯誤判斷的預設值
             isAnswered: false,  //答案未被確認時的初始值
             score: 0, //分數計算初始值
-            num:0, //題目計算初始值
+            quizNum:0, //題目計算初始值
             showAnswerBoardContent:false, // 按"點擊這裡看破解"的按鈕被觸發前，預設值為否
             showLoginAlert: true,
-<<<<<<< HEAD
-=======
             nextButtonText: "下一題",
             showNextButton:false
->>>>>>> ZIH
+
 
             
           
@@ -221,13 +219,6 @@ export default {
 
 
     methods:{
-
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> ZIH
-
         // //每按下一題，選項會變更
         // changeQuestion(){
         //     this.questionNumber +=1;
@@ -239,25 +230,22 @@ export default {
 
         //結合上面兩者的方法後，再創一個新的方法寫入按鈕裡
         changeQuestionAndScrollToTop() {
+
+        //若題目
             if(this.questionNumber === this.questions.length){
                 localStorage.setItem('score', this.score);
                 this.$router.push('demoGameresult');
-            }else{
+            }
+
+            else if (this.questionNumber === this.questions.length - 1){
                 this.questionNumber +=1;
-<<<<<<< HEAD
-                window.scrollTo(0, 0);
-                // this.selectedAnswer = null; //清空選擇的答案
-                this.isAnswered = false; //設為未作答狀態
-                this.showAnswerBoardContent = false;
-                
-=======
                 this.nextButtonText = "看結果";
                 window.scrollTo(0, 0);
                 this.isAnswered = false; //顯示看破解的設定為關
                 this.showNextButton = false; //顯示下一題的設定為關
                 this.showAnswerBoardContent = false; //顯示看破解欄位的設定為關
             }
-            
+
             else{
                 this.questionNumber +=1;
                 this.nextButtonText = "下一題";
@@ -266,8 +254,8 @@ export default {
                 this.isAnswered = false; //顯示看破解的設定為關
                 this.showNextButton = false; //顯示下一題的設定為關
                 this.showAnswerBoardContent = false; //顯示看破解欄位的設定為關
->>>>>>> ZIH
             }
+
 
         // this.changeQuestion();
         // this.scrollToTop();
@@ -299,10 +287,10 @@ export default {
         if (this.questions[(this.questionNumber-1)].choosed === this.questions[this.questionNumber - 1].correctAnswer) {//若選擇的選項 === 跳頁過後的題目裡面的那個正確的選項
           this.isCorrect = true; //如果選項為對
           this.score +=10;  // 加10分
-          this.num +=1;
+          this.quizNum +=1;
         } else {
           this.isCorrect = false; //選項為錯，什麼都不做
-          this.num +=1;
+          this.quizNum +=1;
         }
       }
     },
