@@ -101,7 +101,7 @@
               <!-- 會員資訊 -->
               <div class="profile-head">
                 <h4>Hello, {{member.NICKNAME}} 歡迎回來</h4>
-                <h6>{{ member.ACCOUNT }}</h6>
+                <h6>{{ member.LOGIN_TYPE_ID === 1 ? member.ACCOUNT : '' }}</h6>
                 <p class="proile-rating">EXP : <span>{{member.EXP}}/200</span></p>
                 <div class="progress col-lg-5">
                   <div
@@ -297,6 +297,7 @@ export default {
         this.LIKEcount = response.data.countLike;
         this.haveMessage = response.data.total_messages;
         this.pic = response.data.member[0].PIC;
+        console.log(response.data.member[0]);
     if (response.data.member[0].PIC) {
       // 要require才能正確抓到圖檔路徑
       this.pic = require("@/assets/img/p08_user/" +
