@@ -53,9 +53,10 @@
                   <input
                     class="input_p08_user_login"
                     type="email"
-                    placeholder="請輸入E-mail作為登入帳號"
+                    placeholder="請輸入正確的E-mail作為登入帳號"
                     v-model.trim="account"
                     id="account"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     required
                   />
                   <label for="password" class="text_title"
@@ -64,9 +65,10 @@
                   <input
                     class="input_p08_user_login"
                     type="password"
-                    placeholder="請輸入3個以上字元的密碼不含空格"
+                    placeholder="含英數至少3個字元不含空格"
                     v-model.trim="password"
                     id="password"
+                    pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{3,}$"
                     required
                   />
                   <label for="valid" class="text_title"
@@ -79,6 +81,7 @@
                     v-model.trim="confirmPassword"
                     id="valid"
                     @blur="checkPasswordsMatch"
+                    pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{3,}$"
                     required
                   />
                   <!-- 密碼不正確顯示 -->
@@ -113,6 +116,7 @@
                     type="email"
                     placeholder="請輸入E-mail作為登入帳號"
                     v-model.trim="accountLogin"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   />
                   <label class="text_title">密碼/ Password <br /></label>
                   <input
@@ -120,6 +124,7 @@
                     type="password"
                     placeholder="請輸入密碼"
                     v-model.trim="passwordLogin"
+                    
                   />
                   <div v-if="signupFailed" class="error_signup">帳號或密碼錯誤</div>
                   <div class="div_p08_user_loginType">
