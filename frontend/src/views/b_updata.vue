@@ -475,7 +475,7 @@ async function handleSubmit(e) {
                 chatbotContent: chatbotContent.value
         });
 
-        if (response.data === "新增資料成功") {
+        if (response.data === "更新資料成功") {
             showModal.value = false
             Swal.fire({
                 title: '資料更新成功',
