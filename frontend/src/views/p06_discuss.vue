@@ -100,21 +100,21 @@
                 href="#"
                 class="p06_shareBtn"
                 target="_blank"
-                @click="openShareWindow(item.facebookShareLink)"
+                @click="openShareWindow('https://www.facebook.com/sharer.php?u=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/')"
                 ><i class="fa-brands fa-square-facebook"></i
               ></a>
               <a
                 href="#"
                 class="p06_shareBtn"
                 target="_blank"
-                @click="openShareWindow(item.lineShareLink)"
+                @click="openShareWindow('https://social-plugins.line.me/lineit/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/')"
                 ><i class="fa-brands fa-line"></i
               ></a>
               <a
                 href="#"
                 class="p06_shareBtn"
                 target="_blank"
-                @click="openShareWindow(item.twitterShareLink)"
+                @click="openShareWindow('https://www.twitter.com/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/')"
                 ><i class="fa-brands fa-square-twitter"></i
               ></a>
             </div>

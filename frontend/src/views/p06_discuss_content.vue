@@ -34,9 +34,9 @@
                             <li @click="shareBtn()">分享</li>
                         </ul>
                         <div class="p06_shareButton">
-                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.facebookShareLink);"><i class="fa-brands fa-square-facebook"></i></a>
-                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.lineShareLink);"><i class="fa-brands fa-line"></i></a>
-                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(item.twitterShareLink);"><i class="fa-brands fa-square-twitter"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow('https://www.facebook.com/sharer.php?u=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/');"><i class="fa-brands fa-square-facebook"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow('https://social-plugins.line.me/lineit/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/');"><i class="fa-brands fa-line"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow('https://www.twitter.com/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/');"><i class="fa-brands fa-square-twitter"></i></a>
                         </div>
                     </div>
                 </div>
@@ -272,12 +272,12 @@
             const arrayB = messageObject.value;
             const arrayC = [];
 
-arrayB.forEach(a => {
-  const tempArr = [a];
-  const filteredB = arrayA.filter(b => b.messageId === a.id);
-  filteredB.forEach(b => tempArr.push(b));
-  arrayC.push(tempArr);
-});
+            arrayB.forEach(a => {
+                const tempArr = [a];
+                const filteredB = arrayA.filter(b => b.messageId === a.id);
+                filteredB.forEach(b => tempArr.push(b));
+                arrayC.push(tempArr);
+            });
                 
             console.log(arrayA);
             console.log(arrayB);
@@ -305,12 +305,10 @@ arrayB.forEach(a => {
             });
 
             messages.value = newArr;
-            // console.log(messages.value);
 
         })
         .catch((err)=>{
-            // console.log(err.response.data)
-            // console.log('no');
+            console.log(err.response.data)
         })
     }
 
@@ -477,6 +475,11 @@ arrayB.forEach(a => {
             alert("取消收藏失敗，請稍後再試！");
             isFavorite.value = true;
         });
+    }
+
+    function openShareWindow(index){
+        // window.location.href = `${index}`;
+        window.open(index, 'share', "height: 600, width: 800")
     }
         
     // sweetAlert =================================================
