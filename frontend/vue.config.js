@@ -92,16 +92,16 @@ module.exports = defineConfig({
   },
 
   // 串api需要的
-  devServer: {
-    proxy: {
-      "/madeByNeil": {
-        target: "https://od.moi.gov.tw",
-        changeOrigin: true,
-        pathRewrite: {
-          "^/madeByNeil": "",
-        },
-        ws: true,
-      },
-    },
-  },
+  // devServer: {
+  //   proxy: {
+  //     "/madeByNeil": {
+  //       target: "https://od.moi.gov.tw",
+  //       changeOrigin: true,
+  //       pathRewrite: {
+  //         "^/madeByNeil": "",
+  //       },
+  //       ws: true,
+  //     },
+  //   },
+  // },
 });
