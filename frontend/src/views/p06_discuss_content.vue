@@ -57,7 +57,7 @@
                             <i class="fa-solid fa-bookmark"></i>
                             已收藏
                         </a>
-                        <button class="medium_button">按讚</button>
+                        <!-- <button class="medium_button">按讚</button> -->
                     </div>
                 </div>
                 <div class="articleContent_p06_discuss paragraph">
