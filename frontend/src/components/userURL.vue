@@ -79,12 +79,13 @@ export default {
           },
           {
             name: "編輯/修改",
+            sorting: false,
             width: 20,
             itemTemplate: function (value, items) {
               let $buttonContainer = $("<div>");
 
               let $delete = $("<button>")
-                .text("刪除")
+                .text("刪")
                 .addClass("small_button mx-1")
                 .on("click", (e) => {
                   // 取得使用者的 token
@@ -106,7 +107,7 @@ export default {
               $buttonContainer.append($delete);
 
               const $check = $("<a>")
-                .text("查看")
+                .text("查")
                 .addClass("small_button mx-1")
                 .attr("href", `/reportUrl`)
                 .on("click", (e) => {
