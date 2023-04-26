@@ -11,7 +11,7 @@
     // $messageId = isset($data['messageId']) ? htmlspecialchars($data['messageId']) : '';
 
     //建立SQL語法
-    $sql = "SELECT R.ID, U.PIC as img, U.NICKNAME as user, R.CONTENT as content from REPLY R JOIN USER U on R.USER_ID = U.ID";
+    $sql = "SELECT R.MESSAGE_ID, U.PIC as img, U.NICKNAME as user, R.CONTENT as content from REPLY R JOIN USER U on R.USER_ID = U.ID";
 
     //執行並查詢
     $statement = $pdo->prepare($sql);

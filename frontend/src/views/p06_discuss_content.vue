@@ -92,7 +92,7 @@
                                         <i class="fa-solid fa-clock fa-fw"></i>
                                         <span>{{item.time}}</span>
                                     </li>
-                                    <li id="show-modal" @click="showModal = true, modalContent = '<h4>回覆</h4>'" class="iconHover">
+                                    <li id="show-modal" @click="showModal = true, modalContent = '<h4>回覆</h4>', thisIndex = index1" class="iconHover">
                                         <i class="fa-solid fa-reply fa-solid"></i>
                                         <span>回覆</span>
                                     </li>
@@ -181,31 +181,33 @@
     const messageObject = ref([]);
     const replyObject = ref([]);
     const messageContent = ref();
+    const findPic = ref();
+    const thisIndex = ref();
     const messages = ref([
-        [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
-        ],
-        [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
-        ],
-        [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
-        ],
-        [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
-            {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
-        ],
-        [
-            {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false}
-        ]
+        // [
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+        // ],
+        // [
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+        // ],
+        // [
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+        // ],
+        // [
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+        // ],
+        // [
+        //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false}
+        // ]
     ])
 
     const getDiscussContent = () => {
@@ -227,37 +229,132 @@
             discussId: route.params.article
         })
         .then((res)=>{
-            console.log(res.data);
-            messageObject.value = res.data;
-            getReply();
-            const arrayA = messageObject.value;
-            const arrayB = replyObject.value;
-            const arrayC = arrayA.map(objA => {
-                const matchedObjs = arrayB.filter(objB => objB.messageId === objA.ID)
-                return matchedObjs.length ? [objA, matchedObjs[0]] : [objA];
-            }).map(arr => arr.map(obj => ({...obj})));
-            console.log(JSON.stringify(arrayC));
+            const messageNewData = res.data.map(item => {
+                let picPath = item[0].img;
+                try {
+                    findPic.value = require(`@/assets/img/p08_user/bbn.jpg`);
+                } catch (err) {
+                    picPath = '暫放之後刪.png';
+                    findPic.value = ('')
+                }
+                return{
+                    id: item.ID,
+                    img: findPic.value,
+                    user: item.user,
+                    content: item.content
+                }
+            })
+            
+            messageObject.value = messageNewData;
+            const arrayA = replyObject.value;
+            const arrayB = messageObject.value;
+            const arrayC = [];
+
+arrayB.forEach(a => {
+  const tempArr = [a];
+  const filteredB = arrayA.filter(b => b.messageId === a.id);
+  filteredB.forEach(b => tempArr.push(b));
+  arrayC.push(tempArr);
+});
+                
+            console.log(arrayA);
+            console.log(arrayB);
+            console.log(arrayC);
+            
+            const newArray = arrayC.map((item)=>{
+                return item.map((innerItem) => {
+                    return {...innerItem, time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show: false};
+                });
+            });
+
+            const newArr = newArray.map(subArr => {
+                return subArr.map(obj => {
+                    return Object.entries(obj).reduce((acc, [key, value]) => {
+                        acc[key] = isNaN(value) ? value : Number(value);
+                        return acc;
+                    }, {});
+                });
+            });
+
+            messages.value = newArr;
+            // console.log(messages.value);
+
         })
         .catch((err)=>{
-            console.log(err.response.data);
+            // console.log(err.response.data)
+            // console.log('no');
         })
     }
 
-    const getReply = (index) => {
+    const getReply = () => {
         axios
         .post(`${API_URL}get_reply.php`)
         .then((res)=>{
-            console.log(res.data);
-            replyObject.value = res.data;
+            const replyNewData = res.data.map(item => {
+                let picPath = item.img;
+                try {
+                    findPic.value = require(`@/assets/img/p08_user/bbn.jpg`);
+                } catch (err) {
+                    picPath = '暫放之後刪.png';
+                    findPic.value = ('')
+                }
+                return{
+                    messageId: item.MESSAGE_ID,
+                    img: findPic.value,
+                    user: item.user,
+                    content: item.content
+                }
+            })
+            replyObject.value = replyNewData;
+            // console.log(replyObject.value);
         })
         .catch((err)=>{
-            console.log(err.response.data);
+            // console.log(err.response.data);
+            // console.log('no');
         })
     }
 
     const submitMessage = () => {
+        if(modalContent.value === '<h4>我要留言</h4>'){
+            axios
+            .post(`${API_URL}add_message.php`, {
+                discussId: route.params.article,
+                userId: localStorage.getItem('token'),
+                content: messageContent.value
+            })
+            .then((res)=>{
+                alert('成功留言')
+                messageContent.value = '';
+                showModal.value = false;
+                window.location.reload();
+            })
+            .catch((err)=>{
+                // console.log(err.response.data);
+            })
+        }else{
+            // console.log(typeof( messageObject.value[thisIndex.value].id))
+            axios
+            .post(`${API_URL}add_reply.php`, {
+                messageId: messageObject.value[thisIndex.value].id,
+                userId: localStorage.getItem('token'),
+                content: messageContent.value
+            })
+            .then((res)=>{
+                alert('成功回覆')
+                messageContent.value = '';
+                showModal.value = false;
+                window.location.reload();
+            })
+            .catch((err)=>{
+                // console.log(err.response.data);
+            })
+            
+        }
+    }
+
+    const submitReply = () => {
         axios
-        .post(`${API_URL}add_message.php`, {
+        .post(`${API_URL}add_reply.php`, {
             discussId: route.params.article,
             userId: localStorage.getItem('token'),
             content: messageContent.value
@@ -269,16 +366,7 @@
             // window.location.reload();
         })
         .catch((err)=>{
-            console.log(err.response.data);
-        })
-    }
-
-    const submitReply = () => {
-        axios
-        .post(`${API_URL}add_reply.php`, {
-            messageId: route.params.article,
-            userId: localStorage.getItem('token'),
-            content: messageContent.value
+            // console.log(err.response.data);
         })
     }
 
@@ -426,8 +514,8 @@
 
 
         getDiscussContent();
-        getMessage();
         getReply();
+        getMessage();
     })
     
 </script>
