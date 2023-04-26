@@ -40,14 +40,15 @@
           </select> -->
           <div class="wide_tab d-flex flex-inlineflex">
             <div class="newsTab">
-              <a @click="selectCategory()">所有文章</a>
+              <a 
+              @click="selectCategory()">所有文章</a>
             </div>
             
-            <div class="newsTab">
+            <div class="newsTab" v-for="(category, index) in categories"
+                :key="category">
               <a
                 @click="selectCategory(index)"
-                v-for="(category, index) in categories"
-                :key="category"
+                
                 >{{ category.CATEGORY }}</a
               >
             </div>
@@ -212,6 +213,7 @@ const findPic = ref();
 const categories = ref([]);
 const selectedCategory = ref("");
 
+
 function ellipsisBtn(index) {
   if (showellipsisList.value === index) {
     showellipsisList.value = null;
@@ -291,6 +293,7 @@ function selectCategory(index) {
 
 // 搜尋
 function searchArticles(search) {
+  this.selectedCategory = null;
   const filteredArticles = articleList.value.filter(article => {
     return (
       article.TITLE.toLowerCase().includes(search.toLowerCase()) ||
@@ -315,6 +318,7 @@ watch(
   ([newCategory, newSearch]) => {
     selectDiscuss(newCategory);
     searchArticles(newSearch);
+    
   }
 );
 

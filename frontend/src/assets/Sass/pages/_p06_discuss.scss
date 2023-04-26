@@ -111,19 +111,36 @@
             }
 
             .wide_tab {
-                display: block;
+                flex-basis: 550px;
 
-                @include rwd('md') {
-                    display: none;
+                // @include rwd('md') {
+                //     display: none;
+                // }
+                @include rwd('sm') {
+                    width: max-content;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    overflow-x: auto;
                 }
 
-                a {
-                    padding: 0 5px;
+                .newsTab {
+                    padding: 0 5px 0 0;
+                    display: inline-flex;
+                    box-sizing: border-box;
                     text-decoration: none;
                     color: $text_color;
 
-                    &:not(.current):hover {
-                        color: $main_color;
+                    &::after {
+                        content: '|';
+                        padding-left: 10px;
+                    }
+
+                    a {
+                        padding: 0 8px 16px 10px;
+                        &:not(.current):hover {
+                            color: $main_color;
+                        }
+
                     }
                 }
 

@@ -318,7 +318,7 @@
                 </div>
                 <div class="text-end">         
                     <button class="medium_button me-3" @click="goback">返回後台</button>
-                    <button class="medium_button" @click="upData">送出</button>
+                    <button class="medium_button">送出</button>
                 </div>
             </form>
         </template>

@@ -33,17 +33,17 @@
                     class="d-flex flex-column align-items-center text-center"
                   >
                   <!--  -->
-                    <img
+                    <!-- <img
                       src="../assets/img/p08_user/user.jpg"
                       alt="Admin"
                       class="rounded-circle"
                       width="150"
-                    />
-                    <div class="file btn btn-lg btn-primary">
+                    /> -->
+                    <!-- <div class="file btn btn-lg btn-primary">
                       上傳圖片
                       <input type="file" name="file" />
-                    </div>
-                    <!-- <uploadimg /> -->
+                    </div> -->
+                    <uploadimg/>
                     <div class="mt-3">
                       <h4 class="mb-2">{{ member.NICKNAME }}</h4>
                       <p class="text_title mb-1">{{ memberLevel }}</p>
@@ -145,7 +145,7 @@
 <script>
 import frontNavbar from "@/components/f_nav.vue";
 import frontFooter from "@/components/f_footer.vue";
-// import uploadimg from "@/components/upLoadImg.vue";
+import uploadimg from "@/components/upLoadImg.vue";
 // 抓會員資料用套件
 import axios from "axios";
 import { API_URL, reactive } from "@/config";
@@ -154,7 +154,7 @@ export default {
   components: {
     frontNavbar,
     frontFooter,
-    // uploadimg,
+    uploadimg,
   },
 
   data() {

@@ -103,6 +103,10 @@ export default {
   },
     data(){
         return{
+
+            questions:[
+
+            {
             //題目選項，圖片跟答案
              // 从PHP后端获取的题目数据
             quizData: null,
@@ -128,6 +132,8 @@ export default {
             score: 0, //分數計算初始值
             showAnswerBoardContent:false, // 按"點擊這裡看破解"的按鈕被觸發前，預設值為否
             showLoginAlert: true,
+            }
+            ],
 
             
           
@@ -150,7 +156,7 @@ export default {
     computed:{
         //每按下一題，題目內容會變動
         questionText(){
-            return this.questions[this.questionNumber -1 ].text;
+            return this.questions[this.questionNumber -1 ].questionText;
         },
 
         //每按下一題，圖片會變動

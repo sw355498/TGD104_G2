@@ -18,8 +18,15 @@
     $sql = "SELECT NC.NEWS_ID, NC.CREATE_TIME, N.NEWS_TITLE, N.NEWS_STATUS
             FROM NEWS_COLLECT NC
             JOIN NEWS N ON NC.NEWS_ID = N.ID
-            WHERE NC.USER_ID = :user_id";
+            WHERE NC.USER_ID = :user_id
+            UNION ALL
+            SELECT DC.DISCUSS_ID, DC.CREATE_TIME, D.TITLE AS DISCUSS_TITLE, DS.STATUS_NAME
+            FROM DISCUSS_COLLECT DC
+            JOIN DISCUSS D ON DC.DISCUSS_ID = D.ID
+            JOIN DISCUSS_STATUS DS ON D.DISCUSS_STATUS_ID = DS.ID
+            WHERE DC.USER_ID = :user_id";
 
+    
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':user_id', $token);
 $stmt->execute();

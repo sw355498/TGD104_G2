@@ -25,12 +25,9 @@
                  <p class="crown" v-if="member.QUIZ > 70">
                   <i class="fa-solid fa-crown"></i></p>
                 <div class="d-flex flex-column align-items-center text-center">
-                  <img
-                    src="../assets/img/p08_user/user.jpg"
-                    alt="Admin"
-                    class="rounded-circle"
-                    width="150"
-                  />
+                  <div class="userImg">
+                   <img class="w-100 h-100"  :src="pic" alt="userImg" />
+                  </div>
                   <!-- <div class="file btn btn-lg btn-primary">
                     Change Photo
                     <input type="file" name="file" />
@@ -123,12 +120,12 @@
               <div class="counter col-lg-7 align-self-lg-end align-self-md-center">
                 <div class="row">
                   <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
+                    <!-- <div class="count-data text-center">
                       <h6 class="count h2" data-to="500" data-speed="500">
                         {{LIKEcount}}
                       </h6>
                       <p class="m-0px font-w-600">收到讚數</p>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="col-6 col-lg-3">
                     <div class="count-data text-center">
@@ -299,6 +296,14 @@ export default {
         this.MESSAGEcount = response.data.countMessage;
         this.LIKEcount = response.data.countLike;
         this.haveMessage = response.data.total_messages;
+        this.pic = response.data.member[0].PIC;
+    if (response.data.member[0].PIC) {
+      // 要require才能正確抓到圖檔路徑
+      this.pic = require("@/assets/img/p08_user/" +
+        response.data.member[0].PIC);
+    } else {
+      this.pic = require("@/assets/img/p08_user/user.jpg");
+    }
 
       })
       .catch((error) => {

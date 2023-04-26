@@ -80,11 +80,12 @@ export default {
           {
             name: "編輯/修改",
             width: 22,
+            sorting: false,
             itemTemplate: function (value, item) {
               let $buttonContainer = $("<div>");
 
               const $check = $("<a>")
-                .text("查看")
+                .text("查")
                 .addClass("small_button mx-1")
                 .attr("href", `/news/newsArticle/${item.id}`)
                 .on("click", (e) => {

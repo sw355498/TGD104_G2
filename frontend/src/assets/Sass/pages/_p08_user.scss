@@ -210,3 +210,16 @@
 #jsGrid{
     border: 0;
 }
+
+.userImg{
+    border: 1px solid $bannerFont_color;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: $text_color;
+    box-shadow: 0px 0px 10px white;
+    img{
+        width: 100%;
+        object-fit: cover;
+    }}

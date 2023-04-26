@@ -7,12 +7,14 @@
     // 將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
     $data = json_decode($postData, true);
 
-    $account = isset($data['account']) ? htmlspecialchars($data['account']) : '';
-    $password = isset($data['password']) ? htmlspecialchars($data['password']) : '';
+    //取得上傳的檔案資訊=======================================
+    $save_folder = "p07_demo/p07_demoGame/";
+    require_once ("./upload_image.php");
 
-    $response = array();
+    $statement ->bindValue(":gameAnswer", $gameAnswer);
+    
     if(!empty(trim($account)) && !empty(trim($password))){
-        // 建立SQL語法(備忘:這裡要接收USER還是USER_REGISTER)
+        // 建立SQL語法
         $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT AND ACCOUNT_TYPE_ID IN (2, 3) AND USER_STATUS_ID = 1 ";
         $statement = $pdo->prepare($sql);
         $statement ->bindValue(":ACCOUNT", $account);

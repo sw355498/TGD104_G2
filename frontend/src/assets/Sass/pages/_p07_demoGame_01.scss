@@ -123,7 +123,7 @@
             width: 600px;
             background-color: $background_color;
             border: 3px solid $main_color;
-            margin: 35px auto 50px;
+            margin: 35px auto 0px;
             padding:10px;
             @include rwd('md'){
               width: 320px;
@@ -147,19 +147,27 @@
             }
           }
       
-          img {
+          .quizimg {
             width: 510px;
-            height: 320px;
-            display:block;
-            margin: 0 auto 50px;
-            line-height: 320px;
+
+            display:flex;
+            
+            margin: 50px auto;
+           
             @include rwd('md'){
               width: 300px;
-              height: 200px;
+              
             }
             @include rwd('sm'){
               width: 215px;
-              height: 135px;
+              
+              
+            }
+
+            img{
+              width: 100%;
+              align-items: center; 
+              justify-content: center;
               
             }
            
@@ -170,7 +178,6 @@
         
         .answer_button{
           width: 710px;
-          height: 250px;
           margin: 0 auto 20px;
           justify-content: space-between;
           display: flex;
@@ -180,16 +187,14 @@
           grid-template-rows: auto;
           gap: 20px;
 
-          @include rwd('lg'){
 
-          } 
 
           @include rwd('md'){
             justify-content: space-around;
             display: flex;
             flex-wrap: wrap;
             width: 300px;
-            margin: 0 auto 50px;
+            margin: 0 auto 20px;
             
           }
 
@@ -351,13 +356,13 @@
 
         @include rwd('md'){
           margin-left:25%;
-          margin-top:-10%;
+          margin-top:-55%;
         }
 
         @include rwd('sm'){
           
           margin-left:10%;
-          margin-top:-10%;
+          margin-top:-100%;
           }
           
   
@@ -477,7 +482,7 @@
     //下一題按鈕
   
     .next {
-      margin: 70px 0 50px 330px;
+      margin: 70px 0 50px 365px;
       width: 180px;
       height: 50px;
       position: relative;

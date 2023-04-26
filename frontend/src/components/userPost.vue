@@ -64,11 +64,11 @@ export default {
 
         data: memberURL,
         fields: [
-          {
-            name: "讚數",
-            type: "text",
-            width: 5,
-          },
+          // {
+          //   name: "讚數",
+          //   type: "text",
+          //   width: 5,
+          // },
           {
             name: "回應",
             type: "text",
@@ -92,10 +92,11 @@ export default {
           {
             name: "編輯/修改",
             width: 30,
+            sorting: false,
             itemTemplate: function (value, items) {
               let $buttonContainer = $("<div>");
                 let $delete = $("<button>")
-                .text("刪除")
+                .text("刪")
                 .addClass("small_button mx-1")
                 .on("click", (e) => {
                   // 取得使用者的 token
@@ -117,7 +118,7 @@ export default {
               $buttonContainer.append($delete);
 
               const $check = $("<a>")
-                .text("查看")
+                .text("查")
                 .addClass("small_button mx-1")
                 .attr("href", `/discuss/discuss_content/${items.id}`)
                 .on("click", (e) => {
