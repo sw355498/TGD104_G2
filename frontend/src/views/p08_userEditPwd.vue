@@ -33,12 +33,9 @@
                     class="d-flex flex-column align-items-center text-center"
                   >
                   <!--  -->
-                    <img
-                      src="../assets/img/p08_user/user.jpg"
-                      alt="Admin"
-                      class="rounded-circle"
-                      width="150"
-                    />
+                  <div class="userImg">
+                   <img class="w-100 h-100"  :src="pic" alt="userImg" />
+                  </div>
                     <!-- <div class="file btn btn-lg btn-primary">
                       上傳圖片
                       <input type="file" name="file" />
@@ -203,6 +200,14 @@ export default {
         .then((response) => {
           this.member = response.data.member[0];
           this.expValue = response.data.member[0].EXP;
+          this.pic = response.data.member[0].PIC;
+    if (response.data.member[0].PIC) {
+      // 要require才能正確抓到圖檔路徑
+      this.pic = require("@/assets/img/p08_user/" +
+        response.data.member[0].PIC);
+    } else {
+      this.pic = require("@/assets/img/p08_user/user.jpg");
+    }
           
         })
         .catch((error) => {
