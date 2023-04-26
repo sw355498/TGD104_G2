@@ -150,7 +150,7 @@
                 </ul>
             </nav>
         </main>
-        <LoginModal v-show="isLoginModalVisible" @close="closeLoginModal()" />
+        <Modal v-show="isModalVisible" @close="closeModal" />
         <!-- footer -->
         <frontFooter />
     </div>
@@ -165,8 +165,6 @@
     import { API_URL } from "@/config"
     import Swal from 'sweetalert2/dist/sweetalert2.js'
     import { useRoute } from 'vue-router'
-    import LoginModal from "@/components/userLogin.vue";
-
     const discuss = ref([]);
     const discussId = ref();
     const current_url = ref(null);
@@ -398,8 +396,7 @@ arrayB.forEach(a => {
         const discussId = discuss.value.ID
         const token = localStorage.getItem('token')
         if (!token) {
-            // showLoginModal()
-            sweetAlertLogin()
+            // showModal()
             return
         }
 
@@ -448,15 +445,14 @@ arrayB.forEach(a => {
     }
         
     // sweetAlert =================================================
-    const sweetAlertLogin = ()=>{
+    const sweetAlertCollect = ()=>{
         Swal.fire({
-            title: '非會員',
-            text: '請先登入會員才能蒐藏哦',
-            icon: 'error',
+            title: '蒐藏成功',
+            text: '已經把文章蒐藏到會員中心囉',
+            icon: 'success',
             position: 'center',
-            // showConfirmButton: false,
-            confirmButtonText: '確認',
-            // timer: 1500
+            showConfirmButton: false,
+            timer: 1100
         })
     };
 
