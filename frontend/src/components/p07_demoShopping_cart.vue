@@ -71,26 +71,31 @@
                 <!-- 輸入信用卡資訊 -->
                 <div v-if="paymentMethod === 'creditCard'" class="credit_card box">
                 <!-- <div class="credit_card box"> -->
-                    <p>請輸入信用卡資訊</p>
+                    <p v-show="!creditCardNumber || !expirationDate || !creditCardName || !securitycode">請輸入完整信用卡資訊</p>
                     <div class="form_container">
                         <div class="field_container">
                             <label for="cardnumber">信用卡卡號</label>
                             <!-- <span id="generatecard">隨機產生</span> -->
-                            <input id="cardnumber" type="text" pattern="[0-9]*" 
-                            inputmode="numeric" value="4000 0566 5566 5556">
+                            <input v-model="creditCardNumber"
+                            id="cardnumber" type="text" pattern="[0-9]*" 
+                            inputmode="numeric" >
                         </div>
                         <div class="field_container">
                             <label for="card_name">姓名</label>
-                            <input id="card_name" maxlength="20" type="text" value="王曉明">
+                            <input v-model="creditCardName"
+                            id="card_name" maxlength="20" type="text">
                         </div>
                         <div class="field_container">
-                            <label for="expirationdate">到期 (月份/年份)</label>
-                            <input id="expirationdate" type="text" pattern="[0-9]*" 
-                            inputmode="numeric" value="06 29">
+                            <label for="expirationdate">到期 (月/年)</label>
+                            <input v-model="expirationDate"
+                            id="expirationdate" type="text" pattern="[0-9]*" 
+                            inputmode="numeric">
                         </div>
                         <div class="field_container">
                             <label for="securitycode">安全碼</label>
-                            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" value="123">
+                            <input v-model="securitycode"
+                            id="securitycode" type="text" pattern="[0-9]*" 
+                            inputmode="numeric">
                         </div>
                     </div>
                 </div>
@@ -251,16 +256,29 @@ export default {
     setup(props) {
         // sweetAlert
         const sweetAlert = ()=>{
-            Swal.fire({
-                position: 'center',
-                title: '下單成功',
-                html: `幽靈包裹 約3-5個工作天送到 <br>
-                ${receiverAddress.value} <br>
-                親愛的 ${receiverName.value} <br>
-                感謝您的訂購`,
-                icon: 'success',
-                confirmButtonText: '點我繼續體驗詐騙網站購物'
-            })
+            if(paymentMethod.value == 'creditCard'){
+                Swal.fire({
+                    position: 'center',
+                    title: '下單成功',
+                    html: `幽靈包裹 約3-5個工作天送到 <br>
+                    ${receiverAddress.value} <br>
+                    親愛的 ${receiverName.value} 感謝您的訂購<br>
+                    信用卡個資${creditCardNumber.value}將會被盜刷`,
+                    icon: 'success',
+                    confirmButtonText: '點我繼續體驗詐騙網站購物'
+                })
+            }else if(paymentMethod.value === 'cashOnDelivery'){
+                Swal.fire({
+                    position: 'center',
+                    title: '下單成功',
+                    html: `幽靈包裹 約 3-5 個工作天送到 <br>
+                    ${receiverAddress.value} <br>
+                    親愛的 ${receiverName.value} 感謝您的訂購<br>
+                    待您到門市取貨付款時就會被騙走金錢`,
+                    icon: 'success',
+                    confirmButtonText: '點我繼續體驗詐騙網站購物'
+                })
+            }
         }
         // 下拉縣市地址
         const cityIdx = ref(0);
@@ -314,7 +332,7 @@ export default {
         const cities = ref([]);
         const districts = ref([]);
         const addresses = ref([]);
-
+        // const branch = ref([])
         const selectedCity = ref('');
         const selectedDistrict = ref('');
 
@@ -347,7 +365,11 @@ export default {
             .map(address => address.ADDRESS);
         receiverAddress.value = '';
         };
-
+        // function findBranch (){
+        //     branch.value = addressList.value
+        //     .filter((addresses, index, self) => self.indexOf(addresses) === index);
+        // }
+        // findBranch()
         watch(addressList, () => {
             cities.value = addressList.value
                 .map(address => address.ADDRESS.slice(0, 3))
@@ -369,8 +391,10 @@ export default {
         };
         const paymentMethod = ref('');
         const deleverMethod = ref('');
-        const creditCardNumber = ref('');
-        const expirationDate = ref('');
+        const creditCardNumber = ref('4000 0566 5566 5556');
+        const creditCardName = ref('王大頭')
+        const expirationDate = ref('06 29');
+        const securitycode = ref('123');
         const show = ref(false);
         const receiverName = ref('');
         const receiverAddress = ref('');
@@ -386,7 +410,9 @@ export default {
             paymentMethod,
             deleverMethod,
             creditCardNumber,
+            creditCardName,
             expirationDate,
+            securitycode,
             receiverName,
             receiverAddress,
             removeReceiverAddress,
@@ -397,6 +423,7 @@ export default {
             addresses,
             selectedCity,
             selectedDistrict,
+            // branch,
             handleCityChange,
             handleDistrictChange,
             // 自製下拉縣市
