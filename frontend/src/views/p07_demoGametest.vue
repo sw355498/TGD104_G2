@@ -36,8 +36,8 @@
   
              <div class="star">
   
-                <button class="game_start_botton">
-                   <router-link to='/demoGamep01'>
+                <button class="game_start_botton" @click="loadQuizData">
+                   <router-link to='/demoGamep01test'>
                     遊戲開始&emsp;  
                     <svg><use xlink:href="#4diamond" /></svg>
                   
@@ -83,6 +83,7 @@
   data(){
     return{
             texts:[ "近年，詐騙事件層出不窮，隨著科技日新月異，詐騙更是不斷翻新手法，讓人防不慎防。\n不論是身處在網路世界或現實生活中，都可能成為詐騙的受害者。詐騙對象不分年齡與性別，防詐從了解手法開始！讓我們一起以遊戲的方式了解近幾年的詐騙手法吧！"],
+            questions:[],
         }
     },
   
@@ -94,6 +95,17 @@
     },
   
     methods:{
+      async  getData() {
+      const response = await fetch('getQuiz.php');
+      const data = await response.json();
+      return data;
+    },
+
+    async loadQuizData() {
+    const data = await getData();
+    this.questions = data;
+    },
+
         randomChar(){
         const lower = "abcdefghijklmnopqrstuvwxyz";
         const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

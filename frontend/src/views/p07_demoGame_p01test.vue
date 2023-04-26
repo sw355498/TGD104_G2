@@ -90,7 +90,6 @@
 
 
 
-
 <script>
 
 import frontFooter from "@/components/f_footer.vue";
@@ -141,6 +140,7 @@ export default {
         .then(response => {
             this.quizData = JSON.parse(response.data);
             this.showQuestion(this.quizData[0]);
+            console.log('this.showQuestion');
         })
         .catch(error =>{
             console.log(error);

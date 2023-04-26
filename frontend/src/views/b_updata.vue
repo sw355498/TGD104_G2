@@ -500,9 +500,3 @@ async function handleSubmit(e) {
     }
 }
 </script>
-<style lang="scss">
-.form-control-plaintext{
-    background: #8e8d8d;
-    padding: 0 20px;
-}
-</style>

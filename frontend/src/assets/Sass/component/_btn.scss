@@ -21,3 +21,9 @@
         color: $main_color;
     }
 }
+
+/* 上傳圖片 btn樣式 */
+.file_btn {
+    width: 100%;
+    @include btnStyle(38px, 1rem, 0.375rem 0.75rem);
+}

@@ -8,7 +8,7 @@
                 <span class="paragraph m-0">{{ userName }}</span>
             </div>
             <div class="login d-flex justify-content-center align-items-center">
-                <button class="small_button me-3">帳號設定</button>
+                <button class="small_button me-3" @click="settingAccount">帳號設定</button>
                 <button class="small_button" @click="b_logout">登出</button>
             </div>
         </div>
@@ -76,6 +76,10 @@
     const b_logout = () => {
         sessionStorage.removeItem("staff");
         router.push('/')
+    }
+
+    const settingAccount = () => {
+        router.push('/b_settingAccount')
     }
 </script>
 <style>

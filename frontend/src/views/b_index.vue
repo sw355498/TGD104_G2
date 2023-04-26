@@ -1261,23 +1261,4 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         color: #fff;
     }
 }
-.error {
-    outline: 3px solid red;
-}
-.file_btn {
-    width: 100%;
-    height: 38px;
-    font-size: 1rem;
-    padding: 0.375rem 0.75rem;
-    background: #033159;
-    color: #ffffff;
-    border: 1px solid #033159;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
-    border-radius: 4px;
-    line-height: 150%;
-    cursor: pointer;
-    text-align: center;
-    white-space: nowrap;
-    line-height: 1.5;
-}
 </style>
