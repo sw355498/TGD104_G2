@@ -37,6 +37,12 @@
     // 執行 SQL
     $statement -> execute();
 
+    // 每發一篇文章多10經驗值
+    $sql = "UPDATE USER SET EXP = EXP + 10 WHERE ID = :USER_ID";
+    $statement = $pdo->prepare($sql);
+    $statement->bindValue(':USER_ID', $userId);
+    $statement->execute();
+
     //將暫存檔搬移到正確位置
     if(!empty($file)){
         //將暫存檔搬移到正確位置
