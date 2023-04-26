@@ -451,7 +451,7 @@ onMounted(async () => {
 
 const goback = () => {
     router.push('/b_index');
-    localStorage.removeItem('bData');
+    // localStorage.removeItem('bData');
 }
 
 //資料庫查詢
