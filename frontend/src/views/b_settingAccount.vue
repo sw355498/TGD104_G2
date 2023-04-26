@@ -67,7 +67,7 @@
                         type="file" 
                         @change="fileChange"
                     />
-                    <i class="fa-solid fa-image fa-fw"></i>更換大頭貼<span>{{ ImgName }}</span>
+                    <i class="fa-solid fa-image fa-fw"></i>更換大頭貼
                 </label>
             </div>
             <button class="medium_button mt-3 w-100" @click="showModal = true">更換密碼</button>
@@ -151,7 +151,7 @@ const nickname = ref('')
 const mobile = ref('')
 const birth = ref('')
 const userPic = ref('')
-
+const imageUpdated = ref(false);
 //從sessionStorage撈取資料
 const id = ref('')
 let savedData = JSON.parse(sessionStorage.getItem('staff'));
@@ -163,11 +163,54 @@ onMounted(async () => {
 });
 
 //更換大頭貼
-const fileChange = (e) => {
+async function fileChange(e) {
     fileImage.value = e.target.files[0]
-    ImgName.value = `：${fileImage.value.name}`
     removeError("upload_img");
+    const formData = new FormData();
+        formData.append('account', account.value);
+        formData.append('newImage', fileImage.value);
+        
+    try {
+        const response = await axios.post(`${API_URL}changeImage.php`, formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+            });
+            const strResponse = response.data.trimEnd();
+            const arrResponse = strResponse.split(',')
+            if(arrResponse.includes('圖片更新成功')){
+                Swal.fire({
+                    title: "圖片更新成功",
+                    icon: "success",
+                    confirmButtonText: "確認",
+                });
+                imageUpdated.value = true;
+            } else if(response.data === '只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案'){
+                addError("upload_img", "只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案");
+            } else if(response.data === '檔案大小不得超過1MB'){
+                addError("upload_img", "檔案大小不得超過1MB");
+            } else {
+                console.log('error-Image')
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
+        }
 }
+watch(imageUpdated, (updated) => {
+      if (updated) {
+        closeModal();
+        selectTable();
+      }
+    });
+
+    return {
+      fileChange
+};
+
 
 //密碼更新
 const confirming = () => {
