@@ -151,6 +151,7 @@
             <img
               :src="item.PIC"
               v-if="item.PIC !== ''"
+              @error="item.PIC = ''"
               alt="此作者沒有上傳圖片"
             />
             <span v-else>此作者沒有上傳圖片</span>
@@ -249,8 +250,8 @@ async function selectDiscuss(index) {
         try {
           findPic.value = require(`@/assets/img/p06_discuss/${picPath}`);
         } catch (err) {
-          picPath = "暫放之後刪.png";
-          findPic.value = "";
+          findPic.value = `https://tibamef2e.com/tgd104/g2/img/${picPath}`;
+          // findPic.value = "";
         }
         return {
           ID: item.ID,

@@ -71,6 +71,12 @@
 
     function submitButton(){
         
+        if(isChecked === false){
+            nonname.value = 1;
+        }else{
+            nonname.value = 2;
+        }
+
         // 封裝成 FormData 的形式傳給後端處理資料
         const form = new FormData();
         form.append('userId', localStorage.getItem('token'));

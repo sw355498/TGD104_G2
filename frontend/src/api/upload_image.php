@@ -23,8 +23,11 @@
         //Web根目錄真實路徑
         $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
 
-        //檔案最終存放位置
+        //檔案最終存放位置(本地開發)
         $filePath = $addImageUrl.$save_folder.$fileName;
+        //檔案最終存放位置(Server端)
+        // $filePath = $addImageUrl.$fileName;
+        
         // $addImageUrl：所以檔案的共同的相對路徑
         // $save_folder：個別檔案所需要的儲存的資料夾
         // $fileName：檔案存取的名字
