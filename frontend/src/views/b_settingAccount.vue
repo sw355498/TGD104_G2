@@ -205,11 +205,8 @@ watch(imageUpdated, (updated) => {
         closeModal();
         selectTable();
       }
-    });
+});
 
-    return {
-      fileChange
-};
 
 
 //密碼更新
