@@ -28,11 +28,8 @@
   $statement_count->execute();
   $countMessage = $statement_count->fetch(PDO::FETCH_ASSOC)['countMessage'];
 
-  // 建立 SQL 收到讚數
-  $sql_count = "SELECT COUNT(*) AS total_likes
-  FROM DISCUSS_LIKE
-  INNER JOIN DISCUSS
-  ON DISCUSS_LIKE.DISCUSS_ID = DISCUSS.ID WHERE DISCUSS.USER_ID = :id";
+  // 建立 SQL 發文數
+  $sql_count = "SELECT COUNT(*) as total_likes FROM DISCUSS WHERE USER_ID = :id";
   $statement_count = $pdo->prepare($sql_count);
   $statement_count->bindValue(':id', $token, PDO::PARAM_INT);
   $statement_count->execute();

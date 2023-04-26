@@ -2,15 +2,14 @@
 
 
 include("./getConn_nopush.php");
-$data = [];
+$questions = [];
 
 
 
 // 查询需要的数据
-        $sql = "SELECT ID, QUESTION AS '問題', `OPTION` AS '選項', ANSWER AS '答案', PIC, `DESCRIPTION` AS '解釋'
-        FROM GAME
+        $sql = "SELECT * FROM GAME
         WHERE GAME_STATUS = 1
-        ORDER BY ID DESC;";
+        ORDER BY ID DESC";
         $statement = $pdo->prepare($sql);
 
 
@@ -18,7 +17,6 @@ $data = [];
 
 
 $statement-> execute();
-$questions = array();
 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     $question = array();
     $question['id'] = $row['ID'];
@@ -31,7 +29,7 @@ while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
 }
    
     
-    echo json_encode($question);
+    echo json_encode($questions);
     
 
 // 关闭数据库连接

@@ -391,7 +391,7 @@ const link = ref('');
 
 const goback = () => {
     router.push('/b_index');
-    localStorage.removeItem('upData');
+    // localStorage.removeItem('upData');
 }
 
 //資料庫查詢

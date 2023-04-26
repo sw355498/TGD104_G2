@@ -96,6 +96,7 @@
 import frontFooter from "@/components/f_footer.vue";
 
 import axios from "axios";
+import { API_URL, reactive } from "@/config";
 
 export default {
 
@@ -119,7 +120,7 @@ export default {
 
     mounted(){
         axios
-        .get("getQuiz.php")
+        .get(`${API_URL}getQuiz.php`)
         .then(response => {
             this.questions = response.data;
         });
