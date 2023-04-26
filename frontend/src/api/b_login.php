@@ -7,11 +7,10 @@
     // 將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
     $data = json_decode($postData, true);
 
-    //取得上傳的檔案資訊=======================================
-    $save_folder = "p07_demo/p07_demoGame/";
-    require_once ("./upload_image.php");
+    $account = isset($data['account']) ? htmlspecialchars($data['account']) : '';
+    $password = isset($data['password']) ? htmlspecialchars($data['password']) : '';
 
-    $statement ->bindValue(":gameAnswer", $gameAnswer);
+    $response = array();
     
     if(!empty(trim($account)) && !empty(trim($password))){
         // 建立SQL語法
