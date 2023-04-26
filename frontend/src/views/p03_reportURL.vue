@@ -17,7 +17,7 @@
                 <!-- 會員 -->
                 <div class="user_p03_reportURL" v-show="token !== null">
                     <div class="userImg">
-                        <img src="../assets/img/p08_user/user.jpg" alt="userImg">
+                        <img :src="pic" alt="userImg">
                     </div>
                     <div class="userInfo">
                         <span>嗨！</span>
@@ -110,26 +110,20 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const token = localStorage.getItem("token");
     console.log(token);
     const name = ref('');
-    // async function search(){
-    //     try {
-    //         const response = await axios.post(`${API_URL}member_getData.php?token=${token}`, {
-    //             name = response.data.NICKNAME;
-    //         });
-    //         console.log('search');
-    //         console.log( response.data.data);
-    //         return response.data.data;
-
-    //     } catch (error) {
-    //             console.log(error);
-    //     }
-    // }
+    const pic = ref('');
     if (token) {
     axios
         .get(`${API_URL}/member_getData.php?token=${token}`)
         .then((response) => {
         name.value = response.data.member[0].NICKNAME;
-        // hasToken.value = true;
-        console.log(name.value);
+        // pic.value = response.data.member[0].PIC;
+        if(response.data.member[0].PIC){
+            // 要require才能正確抓到圖檔路徑
+            pic.value = require('@/assets/img/p08_user/' + response.data.member[0].PIC)
+        } else{
+            pic.value = require('@/assets/img/p08_user/user.jpg')
+        }
+        console.log(pic.value);
         
         })
         .catch((error) => {
