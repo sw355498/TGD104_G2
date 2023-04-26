@@ -22,7 +22,9 @@
       </ul>
       <div class="titleBlock">
         <h2>所有文章</h2>
-        <button class="medium_button">
+        <button v-if="!token" class="medium_button" @click="addNewContent">發表新文章</button>
+        <button v-else
+          class="medium_button">
           <router-link to="/discuss_new_content">發表新文章</router-link>
         </button>
       </div>
@@ -199,6 +201,7 @@ import frontFooter from "@/components/f_footer.vue";
 import Modal from "@/components/modal.vue";
 import { API_URL } from "@/config";
 import axios, { all } from "axios";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 const modalContent = ref("");
 const showModal = ref(false);
@@ -212,7 +215,7 @@ const search = ref("");
 const findPic = ref();
 const categories = ref([]);
 const selectedCategory = ref("");
-
+const currentUser = localStorage.getItem('token')
 
 function ellipsisBtn(index) {
   if (showellipsisList.value === index) {
@@ -321,8 +324,26 @@ watch(
     
   }
 );
-
-
+// sweetAlert =================================================
+const sweetAlertLogin = ()=>{
+  Swal.fire({
+    title: '非會員',
+    text: '請先登入會員才能蒐藏哦',
+    icon: 'error',
+    position: 'center',
+    // showConfirmButton: false,
+    confirmButtonText: '確認',
+    // timer: 1500
+  })
+};
+const token = localStorage.getItem("token");
+function addNewContent(){
+  if (!token) {
+      // showLoginModal()
+      sweetAlertLogin()
+      return
+  }
+}
 function setPage(page) {
   if (page <= 0 || page > totalPage.value) {
     return;
