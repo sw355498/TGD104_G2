@@ -305,7 +305,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         try { 
             const response = await axios.get(`${API_URL}getChatbot.php`);
             const robotAnswerArry = response.data;
-            console.log(robotAnswerArry);
+            console.log(response.data);
             return robotAnswerArry
         } catch (error) {
             // 提交失敗的處理
