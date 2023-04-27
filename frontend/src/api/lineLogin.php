@@ -30,9 +30,10 @@
         $statement ->bindValue(":USERID", $userId);
         $statement ->bindValue(":NICKNAME", $nickname);
         $statement ->bindValue(":ACCOUNT_TYPE_ID", $accountTypeID);
+        $statement->execute();
         
         $newId = $pdo->lastInsertId();
-
+        
         $response = array(
             "success" => true,
             "message" => "帳號註冊成功",
