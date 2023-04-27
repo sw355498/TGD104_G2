@@ -1,7 +1,7 @@
 <?php 
 
     require_once("./getConn_nopush.php");
-    $data = [];
+
     //建立SQL語法
     $sql = "select * from chatbot where STATUS = 1";
     $statement = $pdo->prepare($sql);

@@ -170,96 +170,96 @@ import { ref , nextTick, onMounted, computed} from 'vue'
     
     
     //機器人回復關鍵字 之後改成用資料庫撈的
-    // const robotAnswerArry = [
-    // {
-    //     id: 1,
-    //     btn: 0,
-    //     keyword: '你好',
-    //     message: '你好',
-    //     content: '',
-    //     link: ''
-    // },
-    // {
-    //     id: 2,
-    //     btn: 1,
-    //     keyword: '防範詐騙教學',
-    //     message: '以上是防範詐騙教學',
-    //     content: '介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。',
-    //     link: '/teach'
-    // },
-    // {
-    //     id: 3,
-    //     btn:1,
-    //     keyword: '回報可疑網站',
-    //     message: '以上是回報可疑網站的相關資訊',
-    //     content: '可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。亦可查詢已通報的詐騙網站。',
-    //     link: '/reportUrl'
-    // },
-    // {
-    //     id: 4,
-    //     btn:1,
-    //     keyword: '詐騙FAQ',
-    //     message: '以上是詐騙FAQ的相關資訊',
-    //     content: '介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等',
-    //     link: '/faq'
-    // },
-    // {
-    //     id: 5,
-    //     btn:1,
-    //     keyword: '相關資訊連結',
-    //     message: '以上是反詐騙相關資訊的連結',
-    //     content: '介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。',
-    //     link: '/gov'
-    // },
-    // {
-    //     id: 6,
-    //     btn:1,
-    //     keyword: '討論專區',
-    //     message: '以上是討論專區的相關資訊',
-    //     content: '可分享遭遇詐騙的經驗，或探討如何避免詐騙、如何應對詐騙。互相提供建議和協助，提醒大家警惕詐騙，提高自我防範能力，避免遭受詐騙的損失。',
-    //     link: '/discuss'
-    // },
-    // {
-    //     id: 7,
-    //     btn:1,
-    //     keyword: 'DEMO體驗-購物詐騙',
-    //     message: '以上是DEMO體驗的相關資訊',
-    //     content: '模擬詐騙購物網站形式，提醒大眾小心不明網址、切勿隨意輸入信用卡等個資。',
-    //     link: ''
-    // },
-    // {
-    //     id: 8,
-    //     btn:1,
-    //     keyword: 'DEMO體驗-詐騙知識測驗',
-    //     message: '以上是DEMO體驗的相關資訊',
-    //     content: '十題測驗遊戲考驗你的防範詐騙的知識能力',
-    //     link: ''
-    // },
-    // {
-    //     id: 9,
-    //     btn:1,
-    //     keyword: 'DEMO體驗-電話詐騙',
-    //     message: '以上是DEMO體驗的相關資訊',
-    //     content: '模擬語音電話金融詐騙手法，提醒大眾小心被假冒的金融機構誘騙金錢',
-    //     link: ''
-    // },
-    // {
-    //     id: 10,
-    //     btn:1,
-    //     keyword: 'DEMO體驗-愛情交友詐騙',
-    //     message: '以上是DEMO體驗的相關資訊',
-    //     content: '模擬 LINE 交友軟體詐騙對話手法，提醒大眾小心被愛情騙子誘騙金錢',
-    //     link: ''
-    // },
-    // {
-    //     id: 11,
-    //     btn:0,
-    //     keyword: 'other',
-    //     message: '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
-    //     content: '',
-    //     link: ''
-    // },
-    // ];
+    const robotAnswerArryIfNotCatch = [
+    {
+        id: 1,
+        btn: 0,
+        keyword: '你好',
+        message: '你好',
+        content: '',
+        link: ''
+    },
+    {
+        id: 2,
+        btn: 1,
+        keyword: '防範詐騙教學',
+        message: '以上是防範詐騙教學',
+        content: '介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。',
+        link: '/teach'
+    },
+    {
+        id: 3,
+        btn:1,
+        keyword: '回報可疑網站',
+        message: '以上是回報可疑網站的相關資訊',
+        content: '可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。亦可查詢已通報的詐騙網站。',
+        link: '/reportUrl'
+    },
+    {
+        id: 4,
+        btn:1,
+        keyword: '詐騙FAQ',
+        message: '以上是詐騙FAQ的相關資訊',
+        content: '介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等',
+        link: '/faq'
+    },
+    {
+        id: 5,
+        btn:1,
+        keyword: '相關資訊連結',
+        message: '以上是反詐騙相關資訊的連結',
+        content: '介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。',
+        link: '/gov'
+    },
+    {
+        id: 6,
+        btn:1,
+        keyword: '討論專區',
+        message: '以上是討論專區的相關資訊',
+        content: '可分享遭遇詐騙的經驗，或探討如何避免詐騙、如何應對詐騙。互相提供建議和協助，提醒大家警惕詐騙，提高自我防範能力，避免遭受詐騙的損失。',
+        link: '/discuss'
+    },
+    {
+        id: 7,
+        btn:1,
+        keyword: 'DEMO體驗-購物詐騙',
+        message: '以上是DEMO體驗的相關資訊',
+        content: '模擬詐騙購物網站形式，提醒大眾小心不明網址、切勿隨意輸入信用卡等個資。',
+        link: ''
+    },
+    {
+        id: 8,
+        btn:1,
+        keyword: 'DEMO體驗-詐騙知識測驗',
+        message: '以上是DEMO體驗的相關資訊',
+        content: '十題測驗遊戲考驗你的防範詐騙的知識能力',
+        link: ''
+    },
+    {
+        id: 9,
+        btn:1,
+        keyword: 'DEMO體驗-電話詐騙',
+        message: '以上是DEMO體驗的相關資訊',
+        content: '模擬語音電話金融詐騙手法，提醒大眾小心被假冒的金融機構誘騙金錢',
+        link: ''
+    },
+    {
+        id: 10,
+        btn:1,
+        keyword: 'DEMO體驗-愛情交友詐騙',
+        message: '以上是DEMO體驗的相關資訊',
+        content: '模擬 LINE 交友軟體詐騙對話手法，提醒大眾小心被愛情騙子誘騙金錢',
+        link: ''
+    },
+    {
+        id: 11,
+        btn:0,
+        keyword: 'other',
+        message: '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
+        content: '',
+        link: ''
+    },
+    ];
 
     function getBotMessage(input) {
         // 確認 input 是字串，如果不是就轉換成字串
@@ -310,6 +310,8 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         } catch (error) {
             // 提交失敗的處理
             console.error('failed', error)
+            const robotAnswerArry = robotAnswerArryIfNotCatch
+            return robotAnswerArry
         }
     }
     // 過濾陣列只有btn=1的才選染到畫面上
