@@ -147,14 +147,13 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     // 驗證表單url不等於空、email正確格式才可以送出
     const isFormValid = computed(() => {
-        if (token !=='') {
+        if (token !== null) {
             return (
             url.value !== '' 
         )
         }else{
             return (
-                url.value !== '' &&
-                emailRegex.test(email.value)
+                url.value !== '' && emailRegex.test(email.value) 
             )
         }
     })
