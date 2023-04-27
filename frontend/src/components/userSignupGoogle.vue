@@ -33,7 +33,7 @@
         })
         .then((response)=>{
           if(response.data.message === '登入成功'){
-            alert(response.data.message);
+            // alert(response.data.message);
           }else{
             alert(response.data.message);
           }
