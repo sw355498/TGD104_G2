@@ -115,7 +115,7 @@
                       class="input_p08_user_login"
                       :placeholder="member.MOBILE"
                       v-model.trim="phoneNumber"
-                      maxlength="11" pattern="09\d{2}-\d{6}"
+                      maxlength="11" pattern="09\d{8}"
                     />
 
                     <label for="">生日</label>
