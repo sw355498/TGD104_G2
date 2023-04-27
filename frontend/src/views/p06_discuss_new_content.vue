@@ -89,8 +89,8 @@
         axios
         .post(`${API_URL}add_discuss.php`, form)
         .then((response)=>{
-            alert(response.data[0].NONNAME);
-            // window.location = 'discuss';
+            alert(response.data.message);
+            window.location = 'discuss';
         })
         .catch(err => alert(`發生了某些連線錯誤，請聯繫技術人員! 錯誤訊息: ${err.response.data}`));
     }
