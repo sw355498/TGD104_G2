@@ -76,7 +76,7 @@
               class="pic_p06_discuss"
             />
             <span class="paragraph">{{
-              item.NONNAME === 1 ? "匿名" : item.NICKNAME
+              item.NONNAME !== 1 ? "匿名" : item.NICKNAME
             }}</span>
           </div>
           <button class="ellipsisBtn" @click="ellipsisBtn(index)">

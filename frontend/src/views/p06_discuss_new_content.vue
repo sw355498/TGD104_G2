@@ -8,8 +8,8 @@
                 <div class="nonymous">
                     <label>
                         <span class="text">匿名發文：</span>
-                        <input type="checkbox" name="" id="" class="checkbox" v-model="isChecked" @click="isChecked = !isChecked">
-                        <span class="btn-box">
+                        <input type="checkbox" name="" id="" class="checkbox">
+                        <span class="btn-box" @click="isChecked">
                             <span class="btn"></span>      
                         </span>
                     </label>
@@ -58,10 +58,8 @@
     const fileImage = ref();
     const ImgName = ref();
     const title = ref();
-    const isChecked = ref(false);
-    const nonname = ref();
+    const nonname = ref(1);
     const selectDiscussType = ref();
-    // const editorData = ref();
     const content = ref();
 
     function picSubmit(event){
@@ -69,13 +67,11 @@
         ImgName.value = `: ${fileImage.value.name}`;
     }
 
+    function isChecked(){
+        nonname.value = nonname.value === 1 ? 2 : 1;
+    }
+
     function submitButton(){
-        
-        if(isChecked === false){
-            nonname.value = 1;
-        }else{
-            nonname.value = 2;
-        }
 
         // 封裝成 FormData 的形式傳給後端處理資料
         const form = new FormData();
@@ -89,8 +85,8 @@
         axios
         .post(`${API_URL}add_discuss.php`, form)
         .then((response)=>{
-            alert(response.data[0].NONNAME);
-            // window.location = 'discuss';
+            alert(response.data.message);
+            window.location = 'discuss';
         })
         .catch(err => alert(`發生了某些連線錯誤，請聯繫技術人員! 錯誤訊息: ${err.response.data}`));
     }

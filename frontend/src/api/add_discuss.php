@@ -37,13 +37,6 @@
     // 執行 SQL
     $statement -> execute();
 
-    // 不能把經驗值寫在這，會導致圖片無法正確搬移
-    // 每發一篇文章多10經驗值
-    // $sql = "UPDATE USER SET EXP = EXP + 10 WHERE ID = :USER_ID";
-    // $statement = $pdo->prepare($sql);
-    // $statement->bindValue(':USER_ID', $userId);
-    // $statement->execute();
-
     //將暫存檔搬移到正確位置
     if(!empty($file)){
         //將暫存檔搬移到正確位置
@@ -60,11 +53,11 @@
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     // 將希望回傳給 Client 端的資料打包成陣列
-    // $result = array(
-    //     "success" => true,
-    //     "message" => "上傳成功",
-    //     "id" => $newId
-    // );
+    $result = array(
+        "success" => true,
+        "message" => "上傳成功",
+        "id" => $newId
+    );
 
     // 將資料封裝成 JSON 形式印出
     echo json_encode($result);

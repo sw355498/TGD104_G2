@@ -61,7 +61,7 @@
             display: none;
         }
         .checkbox:checked + .btn-box{
-            margin-left: 95px;
+            margin-left: 100px;
             background-color: $sec-color;
             transform: translateX(-100%);
         }
