@@ -217,7 +217,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="chatbotContent" class="form-label">
-                            內容<span class="text-danger">*<small>必填</small></span>
+                            內容
                         </label>
                         <textarea
                             v-model="chatbotContent"
@@ -1175,7 +1175,7 @@ async function selectTable() {
         }
         if (leftNavTag.value === 'chatbot') {
             for(let n = 0; n < response.data.data.length; n++){
-                if(response.data.data[n].按鈕 === 0){
+                if(response.data.data[n].按鈕 == 0){
                     response.data.data[n].按鈕 = '否';
                 } else {
                     response.data.data[n].按鈕 = '是';

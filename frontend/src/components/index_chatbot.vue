@@ -43,9 +43,9 @@
                         <ul class="chat-buttons" >
                             <!-- 過濾陣列只有btn=1的才選染到畫面上 -->
                             <li class="chat-button" 
-                                v-for="item in filteredRobotAnswerArry" :key="item.ID" 
-                                @click="sendMessage(item.KEYWORD)">
-                                {{ item.KEYWORD }}
+                                v-for="item2 in filteredRobotAnswerArry" :key="item2.ID" 
+                                @click="sendMessage(item2.KEYWORD)">
+                                {{ item2.KEYWORD }}
                             </li>
                             <!-- <li class="chat-button" @click="sendMessage('防範詐騙教學')">防範詐騙教學</li>
                             <li class="chat-button" @click="sendMessage('回報可疑網站')">回報可疑網站</li>
@@ -56,14 +56,14 @@
                         </ul>
                     </div>
                     <!-- router 樣式 -->
-                    <router-link v-for="item in filteredRobotAnswerArry" :to="item.LINK" :key="item.ID">
-                        <div class="eachSection" v-if="message.text === item.KEYWORD">
+                    <router-link v-for="item3 in filteredRobotAnswerArry" :to="item3.LINK" :key="item3.ID">
+                        <div class="eachSection" v-if="message.text === item3.KEYWORD">
                             <span class="eachSection-title">{{message.text}}</span>
-                            <p class="eachSection-p">{{ item.CONTENT }}</p>
+                            <p class="eachSection-p">{{ item3.CONTENT }}</p>
                             <span class="eachSection-more">點我看更多</span>
                         </div>
                     </router-link>
-                    <div class="eachSection-demo" v-if="message.text === 'DEMO體驗'">
+                    <!-- <div class="eachSection-demo" v-if="message.text === 'DEMO體驗'">
                         <router-link :to="'/p07demoShopping/'">
                             <div class="eachSection-demo-item" >
                                 <span class="eachSection-demo-item-title">購物詐騙</span>
@@ -92,7 +92,7 @@
                                 <span class="eachSection-demo-item-more">點我體驗</span>
                             </div>
                         </router-link>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- 使用者輸入 -->
@@ -125,7 +125,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
     const goodbyeTimer = ref(null) // 存儲setTimeout返回的計時器ID
     const messagesDiv = ref(null) // 取得聊天對話框 為了下滑到對話位置
     async function sendMessage(e) {
-        console.log(inputValue.value);
+        // console.log(inputValue.value);
         // 取消計時器
         clearTimeout(goodbyeTimer.value);
         if (inputValue.value !=='') {
@@ -134,10 +134,10 @@ import { ref , nextTick, onMounted, computed} from 'vue'
                 text: inputValue.value,
                 isBot: false,
             })
-            console.log(inputValue.value);
+            // console.log(inputValue.value);
             // 獲取聊天機器人的回覆
             let botMessage = getBotMessage(inputValue.value)
-            console.log(botMessage);
+            // console.log(botMessage);
 
             // 將聊天機器人的回覆加入到聊天記錄陣列中
             messages.value.push({
@@ -145,14 +145,14 @@ import { ref , nextTick, onMounted, computed} from 'vue'
                 isBot: true,
                 isOther: true,
             })
-            console.log('123');
+            // console.log('123');
         } else if (e){
             // 將點擊元素的文字內容加入到聊天記錄陣列中
             messages.value.push({
                 text: e,
                 isBot: false,
             });
-            console.log(e);
+            // console.log(e);
             let botMessage = getBotMessage(e)
             // 將聊天機器人的回覆加入到聊天記錄陣列中
             messages.value.push({
@@ -172,92 +172,92 @@ import { ref , nextTick, onMounted, computed} from 'vue'
     //機器人回復關鍵字 之後改成用資料庫撈的
     const robotAnswerArryIfNotCatch = [
     {
-        id: 1,
-        btn: 0,
-        keyword: '你好',
-        message: '你好',
-        content: '',
-        link: ''
+        ID: 1,
+        BTN: 0,
+        KEYWORD: '你好',
+        MESSAGE: '你好',
+        CONTENT: '',
+        LINK: ''
     },
     {
-        id: 2,
-        btn: 1,
-        keyword: '防範詐騙教學',
-        message: '以上是防範詐騙教學',
-        content: '介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。',
-        link: '/teach'
+        ID: 2,
+        BTN: 1,
+        KEYWORD: '防範詐騙教學',
+        MESSAGE: '以上是防範詐騙教學',
+        CONTENT: '介紹六大主題：假投資詐騙、假網購詐騙、解除分期詐騙、假冒機構詐騙、交友愛情詐騙、人頭帳戶詐騙。',
+        LINK: '/teach'
     },
     {
-        id: 3,
-        btn:1,
-        keyword: '回報可疑網站',
-        message: '以上是回報可疑網站的相關資訊',
-        content: '可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。亦可查詢已通報的詐騙網站。',
-        link: '/reportUrl'
+        ID: 3,
+        BTN:1,
+        KEYWORD: '回報可疑網站',
+        MESSAGE: '以上是回報可疑網站的相關資訊',
+        CONTENT: '可填寫表單通報可疑網站，本站將由專人協助判斷是否為詐騙網站。亦可查詢已通報的詐騙網站。',
+        LINK: '/reportUrl'
     },
     {
-        id: 4,
-        btn:1,
-        keyword: '詐騙FAQ',
-        message: '以上是詐騙FAQ的相關資訊',
-        content: '介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等',
-        link: '/faq'
+        ID: 4,
+        BTN:1,
+        KEYWORD: '詐騙FAQ',
+        MESSAGE: '以上是詐騙FAQ的相關資訊',
+        CONTENT: '介紹常見詐騙問題與解答：詐騙事件警察有何相關應處作為？接獲疑似詐騙電話應如何處置？如何防止詐騙？...等',
+        LINK: '/faq'
     },
     {
-        id: 5,
-        btn:1,
-        keyword: '相關資訊連結',
-        message: '以上是反詐騙相關資訊的連結',
-        content: '介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。',
-        link: '/gov'
+        ID: 5,
+        BTN:1,
+        KEYWORD: '相關資訊連結',
+        MESSAGE: '以上是反詐騙相關資訊的連結',
+        CONTENT: '介紹政府及民間相關反詐騙連結：165 全民防詐騙網、台灣事實查核中心、證交所、金管會、台哥大反詐戰警、趨勢科技防詐達人。',
+        LINK: '/gov'
     },
     {
-        id: 6,
-        btn:1,
-        keyword: '討論專區',
-        message: '以上是討論專區的相關資訊',
-        content: '可分享遭遇詐騙的經驗，或探討如何避免詐騙、如何應對詐騙。互相提供建議和協助，提醒大家警惕詐騙，提高自我防範能力，避免遭受詐騙的損失。',
-        link: '/discuss'
+        ID: 6,
+        BTN:1,
+        KEYWORD: '討論專區',
+        MESSAGE: '以上是討論專區的相關資訊',
+        CONTENT: '可分享遭遇詐騙的經驗，或探討如何避免詐騙、如何應對詐騙。互相提供建議和協助，提醒大家警惕詐騙，提高自我防範能力，避免遭受詐騙的損失。',
+        LINK: '/discuss'
     },
     {
-        id: 7,
-        btn:1,
-        keyword: 'DEMO體驗-購物詐騙',
-        message: '以上是DEMO體驗的相關資訊',
-        content: '模擬詐騙購物網站形式，提醒大眾小心不明網址、切勿隨意輸入信用卡等個資。',
-        link: ''
+        ID: 7,
+        BTN:1,
+        KEYWORD: 'DEMO體驗-購物詐騙',
+        MESSAGE: '以上是DEMO體驗的相關資訊',
+        CONTENT: '模擬詐騙購物網站形式，提醒大眾小心不明網址、切勿隨意輸入信用卡等個資。',
+        LINK: ''
     },
     {
-        id: 8,
-        btn:1,
-        keyword: 'DEMO體驗-詐騙知識測驗',
-        message: '以上是DEMO體驗的相關資訊',
-        content: '十題測驗遊戲考驗你的防範詐騙的知識能力',
-        link: ''
+        ID: 8,
+        BTN:1,
+        KEYWORD: 'DEMO體驗-詐騙知識測驗',
+        MESSAGE: '以上是DEMO體驗的相關資訊',
+        CONTENT: '十題測驗遊戲考驗你的防範詐騙的知識能力',
+        LINK: ''
     },
     {
-        id: 9,
-        btn:1,
-        keyword: 'DEMO體驗-電話詐騙',
-        message: '以上是DEMO體驗的相關資訊',
-        content: '模擬語音電話金融詐騙手法，提醒大眾小心被假冒的金融機構誘騙金錢',
-        link: ''
+        ID: 9,
+        BTN:1,
+        KEYWORD: 'DEMO體驗-電話詐騙',
+        MESSAGE: '以上是DEMO體驗的相關資訊',
+        CONTENT: '模擬語音電話金融詐騙手法，提醒大眾小心被假冒的金融機構誘騙金錢',
+        LINK: ''
     },
     {
-        id: 10,
-        btn:1,
-        keyword: 'DEMO體驗-愛情交友詐騙',
-        message: '以上是DEMO體驗的相關資訊',
-        content: '模擬 LINE 交友軟體詐騙對話手法，提醒大眾小心被愛情騙子誘騙金錢',
-        link: ''
+        ID: 10,
+        BTN:1,
+        KEYWORD: 'DEMO體驗-愛情交友詐騙',
+        MESSAGE: '以上是DEMO體驗的相關資訊',
+        CONTENT: '模擬 LINE 交友軟體詐騙對話手法，提醒大眾小心被愛情騙子誘騙金錢',
+        LINK: ''
     },
     {
-        id: 11,
-        btn:0,
-        keyword: 'other',
-        message: '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
-        content: '',
-        link: ''
+        ID: 11,
+        BTN:0,
+        KEYWORD: 'other',
+        MESSAGE: '你好，可以點選以下分類或輸入關鍵字獲取更多資訊哦！',
+        CONTENT: '',
+        LINK: ''
     },
     ];
 
@@ -296,40 +296,44 @@ import { ref , nextTick, onMounted, computed} from 'vue'
             await nextTick();
             messagesDiv.value.scrollTop = messagesDiv.value.scrollHeight;
         }, 60000)
-        console.log(botMsg);
+        // console.log(botMsg);
         return botMsg;
     }
     // 抓機器人陣列
     const robotAnswerArry = ref([]);
+    const filteredRobotAnswerArry = ref([]);
     async function chatbotData(){
         try { 
             const response = await axios.get(`${API_URL}getChatbot.php`);
             const robotAnswerArry = response.data;
-            console.log(response.data);
+
+            // console.log(response.data);
             return robotAnswerArry
         } catch (error) {
             // 提交失敗的處理
             console.error('failed', error)
-            const robotAnswerArry = robotAnswerArryIfNotCatch
-            return robotAnswerArry
         }
     }
-    // 過濾陣列只有btn=1的才選染到畫面上
-    const filteredRobotAnswerArry = computed(() => {
-        return robotAnswerArry.value.filter(item => item.BTN === 1)
-    })
-    // btn=0的其他回答
-    const nobtnRobotAnswerArry = computed(() => {
-        return robotAnswerArry.value.filter(item => item.BTN === 0)
-    })
-    // console.log(filteredRobotAnswerArry);
+    async function fillterChatbotData(){
+        try { 
+            const response = await axios.get(`${API_URL}getChatbotBtn.php`);
+            const robotAnswerArry = response.data;
+
+            // console.log(response.data);
+            return robotAnswerArry
+        } catch (error) {
+            // 提交失敗的處理
+            console.error('failed', error)
+        }
+    }
+    
     // 抓最新消息
     const news = ref([]);
     async function allData(){
         try { 
             const response = await axios.get(`${API_URL}getNews.php`);
             const news = response.data.slice(0, 5);
-            console.log(news);
+            // console.log(news);
             return news
         } catch (error) {
             // 提交失敗的處理
@@ -340,10 +344,13 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         async () => {
         //撈取資料庫的資料
         news.value = await allData();
-        console.log(news.value);
+        // console.log(news.value);
         robotAnswerArry.value = await chatbotData();
-        console.log(robotAnswerArry.value);
-
+        // console.log(robotAnswerArry.value);
+        // 過濾陣列只有btn=1的才選染到畫面上
+        filteredRobotAnswerArry.value = await fillterChatbotData();
+        
+        console.log(filteredRobotAnswerArry);
         }
     );
 </script>

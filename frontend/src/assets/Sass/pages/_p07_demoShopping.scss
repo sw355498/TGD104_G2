@@ -368,13 +368,14 @@
         }
         
         $p07_demoShopping_heightBanner_pc: 608px;
+        // $p07_demoShopping_heightBanner_pc: 555px; //608px會有空白
         $p07_demoShopping_heightBanner_lg: 570px;
         $p07_demoShopping_heightBanner_md: 350px;
         $p07_demoShopping_heightBanner_sm: 357px;
         // ========= 購物網站第一 banner =========
         .scamWeb_p07_demoShopping_banner1{
             background-image: url('../img/p07_demo/p07_demoShopping/demoShoppingPic01.jpg');
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
             height: $p07_demoShopping_heightBanner_pc;
             @include rwd(lg){
@@ -692,6 +693,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            padding: 0 20px;
             @include rwd(lg){
                 justify-content: flex-start;
                 flex-wrap: nowrap;
@@ -703,13 +705,15 @@
             }
             .scamWeb_p07_demoShopping_clothCard{
                 // flex-grow: 1;
-                width: 277.5px;
+                // width: 277.5px;
+                width: 225px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 color: $background_color;
                 padding-bottom: 40px;
                 position: relative;
+                // padding: 0 20px;
                 @include rwd(lg){
                     margin: 0 15px;
                     padding-bottom: 30px;
@@ -727,7 +731,8 @@
                     border-radius: 10px 0 0 0;
                 }
                 img{
-                    border-radius: 10px;                    
+                    border-radius: 10px;     
+                    width: 225px;               
                 }
                 a{
                     font-size: 14px;
