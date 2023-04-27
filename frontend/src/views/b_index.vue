@@ -281,7 +281,11 @@
             <input type="text" v-model.trim="searchText"/>
             </div>
         </div>
-        <div id="jsGrid"></div>
+        <!-- ======== 外掛 jsGrid ========= -->
+        <div v-if="!isJsgrid">
+            <p style="color:red;">全速載入中，感謝耐心等候...</p>
+        </div>
+        <div v-else id="jsGrid"></div>
         </div>
     </div>
 </template>
@@ -331,6 +335,7 @@ const swalTitle = ref("");
 const sealSuccess = ref("success");
 
 //jsgrid套件所需要的變數
+const isJsgrid = ref(false);    //資料撈取時所顯示的
 const clients = ref([]); //後端撈取的data
 const fields = ref([
     { name: "ID", css: "d-none" },
@@ -1163,6 +1168,7 @@ async function blockadeUser() {
 //資料庫查詢
 async function selectTable() {
     try {
+        isJsgrid.value= true;
         const response = await axios.post(`${API_URL}${selectPHP.value}`, {
             whichTable: whichTable.value
         });
@@ -1185,6 +1191,7 @@ async function selectTable() {
                 }
             }
         }
+        isJsgrid.value= true;
         return response.data.data;
     } catch (e) {
         if (e.response) {
@@ -1198,10 +1205,12 @@ async function selectTable() {
 // search功能
 async function search(){
     try {
+        isJsgrid.value= true;
         const response = await axios.post(`${API_URL}b_search.php`, {
             whichTable: whichTable.value,
             search : searchText.value
         });
+        isJsgrid.value= true;
         return response.data.data;
 
     } catch (e) {

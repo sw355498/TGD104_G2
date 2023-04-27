@@ -81,3 +81,8 @@ $db_select = "";
 - Algolia
 - Google Analytics
   ...
+
+## 打包注意事項
+## localhost 與 打包時 請分別至 
+## config.js、index.js、getConn_nopush.php、upload_image.php
+## 開啟相應的設定
