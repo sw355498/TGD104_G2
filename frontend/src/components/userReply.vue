@@ -91,27 +91,26 @@ export default {
             itemTemplate: function (value, items) {
               let $buttonContainer = $("<div>");
 
-              let $delete = $("<button>")
-                .text("刪")
-                .addClass("small_button mx-1")
-                .on("click", (e) => {
-                  // 取得使用者的 token
-                  const token = localStorage.getItem("token");
-                  let data = { id: items.id, token: token }; // 假設需要刪除的資料的ID存儲在items.id屬性中
+              // let $delete = $("<button>")
+              //   .text("刪")
+              //   .addClass("small_button mx-1")
+              //   .on("click", (e) => {
+              //     // 取得使用者的 token
+              //     const token = localStorage.getItem("token");
+              //     let data = { id: items.id, token: token }; // 假設需要刪除的資料的ID存儲在items.id屬性中
 
-                  axios
-                    .post(`${API_URL}deleteURL.php`, data)
-                    .then(function (response) {
-                      // 在成功刪除資料後，可以更新網頁介面，例如重新載入表格資料
-                      // alert("資料已成功刪除！");
-                      console.log(response);
-                      location.reload();
-                    })
-                    .catch(function (error) {
-                      alert("刪除資料時發生錯誤：" + error);
-                    });
-                });
-              $buttonContainer.append($delete);
+              //     axios
+              //       .post(`${API_URL}deleteURL.php`, data)
+              //       .then(function (response) {
+              //         // 在成功刪除資料後，可以更新網頁介面，例如重新載入表格資料
+              //         // alert("資料已成功刪除！");
+              //         location.reload();
+              //       })
+              //       .catch(function (error) {
+              //         alert("刪除資料時發生錯誤：" + error);
+              //       });
+              //   });
+              // $buttonContainer.append($delete);
 
               const $check = $("<a>")
                 .text("查")
