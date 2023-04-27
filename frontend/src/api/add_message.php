@@ -27,6 +27,13 @@
     // 執行 SQL
     $statement -> execute();
 
+     // 那我把經驗值寫在這
+    // 每發一篇文章多經驗值
+    $sql = "UPDATE USER SET EXP = EXP + 5 WHERE ID = :USER_ID";
+    $statement = $pdo->prepare($sql);
+    $statement->bindValue(':USER_ID', $userId);
+    $statement->execute();
+
     // 取出剛剛 INSERT INTO 的那筆資料 ID
     $newId = $pdo -> lastInsertId();
 
