@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
-
+import Home from '../App.vue'
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
   {
     path: '/index',
     name: 'index',
@@ -168,19 +172,15 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
   const accountTypeId =  currentStaff.account_type_id
-  const currentUser = localStorage.getItem('token')
+
   
   if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
     if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
       next('/b_login');
     }
-  }else{
-    if(to.path === '/discuss_new_content' && !currentUser){
-     alert('請登入會員')
-      next('/discuss')
-    } 
   }
   next()
+
 })
 
 export default router
