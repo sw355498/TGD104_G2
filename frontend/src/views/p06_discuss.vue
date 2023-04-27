@@ -287,7 +287,7 @@ function getCategories() {
 function selectCategory(index) {
   if (index === undefined) {
     // 所有文章
-    selectedCategory.value = "";
+    selectedCategory.value = null;
   } else {
     selectedCategory.value = categories.value[index].CATEGORY;
   }
