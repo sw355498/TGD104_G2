@@ -78,16 +78,12 @@
                             <div class="topBlock">                    
                                 <img src="@/assets/img/p08_user/user.jpg" alt="">
                                 <span>{{item.user}}</span>
-                                <ul class="action">
+                                <!-- <ul class="action">
                                     <li class="iconHover">
                                         <i :style="{ color: computedColor }" @click="toggleColor"
                                         class="fa-solid fa-thumbs-up fa-fw"></i>
                                     </li>
-                                    <!-- <li class="iconHover" @click="showReport(index1, index)">
-                                        <i class="fa-solid fa-ellipsis-vertical fa-fw iconHover"></i>
-                                        <div class="messageReport" v-show="message[index].showReport">檢舉</div>
-                                    </li> -->
-                                </ul>
+                                </ul> -->
                             </div>
                             <div class="messageMain">
                                 <p>{{item.content}}</p>
@@ -118,16 +114,12 @@
                                     <div class="topBlock">
                                         <img src="@/assets/img/p08_user/user.jpg" alt="">
                                         <span>{{item.user}}</span>
-                                        <ul class="action">
+                                        <!-- <ul class="action">
                                             <li class="iconHover">
                                                 <i :style="{ color: computedColor }" @click="toggleColor"
                                                 class="fa-solid fa-thumbs-up fa-fw"></i>
                                             </li>
-                                            <!-- <li class="iconHover" @click="showReport(index1, index)">
-                                                <i class="fa-solid fa-ellipsis-vertical fa-fw"></i>
-                                                <div class="messageReport" v-show="message[index].showReport">檢舉</div>
-                                            </li> -->
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                     <div class="messageMain">
                                         <p>{{item.content}}</p>
@@ -175,19 +167,6 @@
     import { API_URL } from "@/config"
     import Swal from 'sweetalert2/dist/sweetalert2.js'
     import { useRoute } from 'vue-router'
-    // 按讚按鈕變顏色=============
-    const state = reactive({
-      isToggled: false,
-      color: '#007aff',
-      highlightColor: '#d3d3d3'
-    });
-    const buttonLabel = ref('Toggle Color');
-    const computedColor = computed(() => state.isToggled ? state.highlightColor : state.color);
-    const toggleColor = () => {
-      state.isToggled = !state.isToggled;
-      buttonLabel.value = state.isToggled ? 'Reset Color' : 'Toggle Color';
-    };
-    // 按讚按鈕變顏色結束========================
     const discuss = ref([]);
     const discussId = ref();
     const current_url = ref(null);
@@ -207,30 +186,44 @@
     const thisIndex = ref();
     const messages = ref([
         // [
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
         //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
         // ],
         // [
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
         //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
         // ],
         // [
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
-        // ],
-        // [
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
-        //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
-        // ],
-        // [
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false},
+            //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+            // ],
+            // [
+                //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
+                //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', reply: false, showReport: false}
+                // ],
+                // [
         //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false}
         // ]
     ])
+    
+    // 按讚按鈕變顏色=============
+    const state = reactive({
+      isToggled: false,
+      color: '#007aff',
+      highlightColor: '#d3d3d3'
+    });
+    const buttonLabel = ref('Toggle Color');
+    const computedColor = computed(() => state.isToggled ? state.highlightColor : state.color);
+    const toggleColor = () => {
+      state.isToggled = !state.isToggled;
+      buttonLabel.value = state.isToggled ? 'Reset Color' : 'Toggle Color';
+    };
+    // 按讚按鈕變顏色結束========================
 
     const getDiscussContent = () => {
         axios

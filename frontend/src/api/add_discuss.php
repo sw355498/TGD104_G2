@@ -53,12 +53,18 @@
     // 取出剛剛 INSERT INTO 的那筆資料 ID
     $newId = $pdo -> lastInsertId();
 
+    // 測試用
+    $sql = "SELECT * from DISCUSS where ID = $newId";
+    $statement = $pdo -> prepare($sql);
+    $statement -> execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     // 將希望回傳給 Client 端的資料打包成陣列
-    $result = array(
-        "success" => true,
-        "message" => "上傳成功",
-        "id" => $newId
-    );
+    // $result = array(
+    //     "success" => true,
+    //     "message" => "上傳成功",
+    //     "id" => $newId
+    // );
 
     // 將資料封裝成 JSON 形式印出
     echo json_encode($result);

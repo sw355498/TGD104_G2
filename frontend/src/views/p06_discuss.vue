@@ -271,7 +271,7 @@ async function selectDiscuss(index) {
       });
       return (articleList.value = newData);
     })
-    .catch((error) => console.log(error.response.data));
+    .catch((error) => console.log(error.response));
 }
 
 function getCategories() {
@@ -312,10 +312,7 @@ function searchArticles(search) {
 }
 
 
-onMounted(() => {
-  getCategories();
-  selectDiscuss("");
-});
+
 
 watch(
   [selectedCategory, search],
@@ -364,8 +361,15 @@ const pageEnd = computed(() => {
   return currentPage.value * perpage;
 });
 
+// onMounted(() => {
+//   selectDiscuss();
+//   selectCategory();
+// });
+
 onMounted(() => {
-  selectDiscuss();
+  getCategories();
+  selectDiscuss("");
   selectCategory();
 });
+
 </script>

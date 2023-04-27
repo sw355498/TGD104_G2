@@ -11,7 +11,7 @@
     const editorConfig = ref();
 
     editor.value = ClassicEditor;
-    editorData.value = '<p>Content of the editor.</p>';
+    editorData.value = '';
     
     const emit = defineEmits(['content']);
     emit('content', editorData.value);
