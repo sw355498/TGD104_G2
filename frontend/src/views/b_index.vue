@@ -217,7 +217,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="chatbotContent" class="form-label">
-                            內容<span class="text-danger">*<small>必填</small></span>
+                            內容
                         </label>
                         <textarea
                             v-model="chatbotContent"
