@@ -314,6 +314,18 @@ import { ref , nextTick, onMounted, computed} from 'vue'
             console.error('failed', error)
         }
     }
+    async function fillterChatbotData(){
+        try { 
+            const response = await axios.get(`${API_URL}getChatbotBtn.php`);
+            const robotAnswerArry = response.data;
+
+            // console.log(response.data);
+            return robotAnswerArry
+        } catch (error) {
+            // 提交失敗的處理
+            console.error('failed', error)
+        }
+    }
     
     // 抓最新消息
     const news = ref([]);
@@ -336,9 +348,7 @@ import { ref , nextTick, onMounted, computed} from 'vue'
         robotAnswerArry.value = await chatbotData();
         // console.log(robotAnswerArry.value);
         // 過濾陣列只有btn=1的才選染到畫面上
-        filteredRobotAnswerArry.value = robotAnswerArry.value.filter(
-            item => item.BTN === 1
-        );
+        filteredRobotAnswerArry.value = await fillterChatbotData();
         
         console.log(filteredRobotAnswerArry);
         }
