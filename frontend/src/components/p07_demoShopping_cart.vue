@@ -441,13 +441,13 @@ export default {
         }
         const setDefaultCardInfo = () => {
             if (!creditCardNumber.value) {
-            creditCardNumber.value = '4000 0566 5566 5556'
+            creditCardNumber.value = '4000056655665556'
             }
             if (!creditCardName.value) {
             creditCardName.value = '王大頭'
             }
             if (!expirationDate.value) {
-            expirationDate.value = '12/29'
+            expirationDate.value = '1229'
             }
             if (!securitycode.value) {
             securitycode.value = '123'
@@ -462,11 +462,12 @@ export default {
         if (paymentMethod.value !== 'creditCard') {
             return true
         }
+        // const cardNumberRegex = /^(\d{4}\s){3}\d{4}$/
         // const cardNumberRegex = /^[0-9]{12}$/
-        const cardNumberRegex = /^(\d{4}\s){3}\d{4}$/
+        const cardNumberRegex = /^\d{12,}$/;
         const valid = cardNumberRegex.test(creditCardNumber.value)
         if (!valid) {
-            cardNumberError.value = '請輸入有效的信用卡卡號(格式: xxxx xxxx xxxx xxxx)'
+            cardNumberError.value = '請輸入有效的信用卡卡號'
         } else {
             cardNumberError.value = ''
         }
@@ -490,10 +491,12 @@ export default {
             return true
         }
 
-        const expDateRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/
+        // const expDateRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/
+        // const expDateRegex = /^\d{2}(0[1-9]|1[0-2])$/
+        const expDateRegex = /^(0[1-9]|1[0-2])(\d{2})$/
         const valid = expDateRegex.test(expirationDate.value)
         if (!valid) {
-            cardExpDateError.value = '請輸入信用卡到期日 (格式: MM/YY)'
+            cardExpDateError.value = '請輸入有效數字 (格式: MMYY)'
         } else {
             cardExpDateError.value = ''
         }
