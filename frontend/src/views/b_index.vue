@@ -1175,7 +1175,7 @@ async function selectTable() {
         }
         if (leftNavTag.value === 'chatbot') {
             for(let n = 0; n < response.data.data.length; n++){
-                if(response.data.data[n].按鈕 === 0){
+                if(response.data.data[n].按鈕 == 0){
                     response.data.data[n].按鈕 = '否';
                 } else {
                     response.data.data[n].按鈕 = '是';
