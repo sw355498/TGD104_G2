@@ -66,7 +66,6 @@ onMounted(() => {
   axios
     .get(`${API_URL}getFaq.php`)
     .then((response) => {
-      console.log(response.data);
       faq.data = response.data;
       allfaq.data = response.data;
     })

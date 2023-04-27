@@ -177,7 +177,6 @@ async function allData() {
   try {
     const response = await axios.get(`${API_URL}getNews.php`);
     const news = response.data.slice(0, 3);
-    console.log(news);
     return news;
   } catch (error) {
     // 提交失敗的處理
@@ -188,7 +187,6 @@ onMounted(async () => {
   showLoading.value = false;
   //撈取資料庫的資料
   news.value = await allData();
-  console.log(news.value);
 });
 </script>
 
