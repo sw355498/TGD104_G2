@@ -3,7 +3,12 @@
     <frontNavbar />
     <h2>our team</h2>
     <section>
-      <img src="../assets/img/p09_team/p09_team_crews1.png" alt="teamMember" />
+      <div class="groupPhoto">
+        <img
+          src="../assets/img/p09_team/p09_team_crews1.png"
+          alt="teamMember"
+        />
+      </div>
       <div class="ourCore">
         <p>
           我們是個名為「TGD104G2」的開發團隊，我們是一群熱愛編程且來自各領域的開發者所組成。我們的目標是開發出易用性高的軟體，並提供最佳的用戶體驗。這是我們的第一個開發項目名為「詐災就好」(台語：早知就好)的體驗式網站。
@@ -49,7 +54,8 @@
               <li>聊天機器人</li>
               <li>回報可疑網站</li>
               <li>互動體驗購物網站詐騙</li>
-              <li>互動體驗愛情訊息詐騙</li>
+              <li>互動體驗愛情訊息詐騙部分功能</li>
+              <li>討論專區部分功能</li>
             </ul>
           </div>
           <button><i class="fa-solid fa-info"></i></button>
@@ -70,6 +76,7 @@
               <li>最新消息頁</li>
               <li>防範詐騙教學頁</li>
               <li>會員中心頁</li>
+              <li>討論專區部分功能</li>
             </ul>
           </div>
           <button><i class="fa-solid fa-info"></i></button>

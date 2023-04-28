@@ -34,12 +34,14 @@
                         />
                     </div>
                     <div class="mb-3">                  
-                        <label for="mobile"> 電話 </label>
+                        <label for="mobile"> 手機號碼 </label>
                         <input
                             v-model.trim="mobile"
                             type="tel"
                             style="margin-bottom: 20px"
                             id="mobile"
+                            minlength="10"
+                            maxlength="10"
                         />
                     </div>
                     <div class="mb-3">                  
@@ -134,20 +136,12 @@
                     </div>
                     <div class="mb-3">                  
                         <label for="ur_Status"> 回報狀態 </label>
-                        <!-- <input
-                            v-model="ur_Status"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="ur_Status"
-                            readonly
-                        /> -->
                         <select
                             v-model="review"
                             id="newsTag"
                             class="form-select text-center"
                         >
-                            <option value="1">未審核</option>
+                            <option value="1">待審核</option>
                             <option value="2">非詐騙網站</option>
                             <option value="3">詐騙網站</option>
                         </select>
@@ -345,7 +339,7 @@ id.value = Number(savedData.id)
 whichTable.value = savedData.whichTable
 
 //審核用的變數
-const review= ref(1)
+const review= ref("1")
 
 //input的變數
 //user
