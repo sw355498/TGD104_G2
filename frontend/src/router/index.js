@@ -174,45 +174,37 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
   const accountTypeId =  currentStaff.account_type_id
+  
   if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
     if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
       next('/b_login');
     }
-  } else if(to.path === '/b_login' && currentStaff && (accountTypeId == 2 || accountTypeId == 3)){
-    next('/b_index');
   }
   next()
-})
 
+})
   // build檔案至ftp請開啟這邊
   // router.beforeEach(async (to, from) => {
   //   const canAccess = await canUserAccess(to)
   //   if (canAccess) {
-  //     console.log('aaa')
-  //     return 
+  //     return
   //   } else {
-  //     console.log('other go login')
   //     return '/b_login'
   //   }
   // })
-  
-  function canUserAccess(to) {
-    const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
-    const accountTypeId =  currentStaff.account_type_id
-    if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
-      if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
-        console.log('go to login')
-        return false;
-      } 
-    } else if(to.path === '/b_login' && currentStaff && (accountTypeId == 2 || accountTypeId == 3)){
-      console.log('go to index')
-      return router.push('/b_index');
-      // return '/b_index'
 
-    } else {
-      console.log('go to next')
-      return true
-    }
-  }
+  // function canUserAccess(to) {
+  //   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
+  //   const accountTypeId =  currentStaff.account_type_id
+  //   if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
+  //     if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
+  //       return true;
+  //     } else {
+  //       return false
+  //     }
+  //   } else {
+  //     return true
+  //   }
+  // }
 
 export default router
