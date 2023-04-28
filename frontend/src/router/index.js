@@ -170,41 +170,35 @@ const router = createRouter({
   routes
 })
 
-// localhost請開啟這邊
+
 router.beforeEach((to, from, next) => {
-  const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
-  const accountTypeId =  currentStaff.account_type_id
-  
-  if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
-    if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
-      next('/b_login');
+    // 讀取 sessionStorage
+    const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
+    // 檢查 登入的帳號是否為 後台帳號
+    const accountTypeId =  currentStaff.account_type_id;
+    if ((to.path === '/b_login')) {
+        if(currentStaff && (accountTypeId == 2 || accountTypeId == 3)){
+            // 若已登入則會跳轉回前後台登入頁面
+            next('/');
+        } else {
+            //若未登如則可以進入後台登入頁面
+            next();
+
+        }
+    } else if (to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount') {
+        if(!currentStaff || (accountTypeId != 2 && accountTypeId != 3)){
+            // 偵測用戶是否登入後台帳號否的會則會跳轉到登入頁面
+            next('/b_login');
+        } else {
+            //若已登入則會繼續進入下個頁面
+            next()
+        }
+    } else {
+        // 以上條件都不符合則繼續造轉至下一頁面
+        next()
     }
-  }
-  next()
-
-})
-  // build檔案至ftp請開啟這邊
-  // router.beforeEach(async (to, from) => {
-  //   const canAccess = await canUserAccess(to)
-  //   if (canAccess) {
-  //     return
-  //   } else {
-  //     return '/b_login'
-  //   }
-  // })
-
-  // function canUserAccess(to) {
-  //   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
-  //   const accountTypeId =  currentStaff.account_type_id
-  //   if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
-  //     if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
-  //       return true;
-  //     } else {
-  //       return false
-  //     }
-  //   } else {
-  //     return true
-  //   }
-  // }
+});
+    
+    
 
 export default router
