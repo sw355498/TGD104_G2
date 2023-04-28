@@ -490,20 +490,20 @@ watch(leftNavTag, async (newTab) => {
             { name: "文章分類", type: "text" },
             { name: "作者", type: "text", validate: "required" },
             { name: "建立日期", type: "text", width: 80 },
-            { name: "狀態", type: "text", width: 50 },
-            { name: "操作", width: 150, itemTemplate: function (value, item) {
+            { name: "狀態", type: "text", width: 80 },
+            { name: "操作", width: 180, itemTemplate: function (value, item) {
                 // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
                 let $buttonContainer = $("<div>");
 
-                let $blockade = $("<button>")
-                .text(`封鎖`)
+                let $report = $("<button>")
+                .text("檢舉下架")
                 .addClass("small_button mx-1")
                 .attr("data-id", item["ID"])
                 .on("click", operate);
-                $buttonContainer.append($blockade);
-
+                $buttonContainer.append($report);
+                
                 let $delete = $("<button>")
-                .text("刪除")
+                .text("文章刪除")
                 .addClass("small_button mx-1")
                 .attr("data-id", item["ID"])
                 .on("click", operate);
@@ -516,11 +516,11 @@ watch(leftNavTag, async (newTab) => {
                 .on("click", operate);
                 $buttonContainer.append($check);
 
-                // 判斷狀態為 "封鎖中" 時，將 $blockade 的文字改為 "解鎖"
-                if (item["狀態"] === "封鎖") {
-                    $blockade.text("解封鎖");
+                // 判斷狀態為 "封鎖中" 時，將 $report 的文字改為 "解鎖"
+                if (item["狀態"] === "檢舉下架") {
+                    $report.text("恢復上架");
                 } else {
-                    $blockade.text("封鎖");
+                    $report.text("檢舉下架");
                 }
                 return $buttonContainer;
             }},
@@ -849,14 +849,23 @@ function operate(e) {
                 sealSuccess.value = "success";
                 blockadeUser();
                 break;
+            case "恢復上架":
             case "解封鎖":
                 updateStatusID.value = 1; // 1為我們預設的帳號正常代碼
-                swalTitle.value = "解鎖成功";
+                swalTitle.value = `${this.innerHTML}成功`;
                 sealSuccess.value = "success";
                 blockadeUser();
                 break;
             case "刪除":
-                updateStatusID.value = 3; // 3為我們預設的帳號正常代碼
+            case "檢舉下架":
+                updateStatusID.value = 3;
+                swalTitle.value = `已${this.innerHTML}`;
+                sealSuccess.value = "warning";
+                blockadeUser();
+                break;
+                case "刪除":
+            case "文章刪除":
+                updateStatusID.value = 4; // 3為我們預設的帳號正常代碼
                 swalTitle.value = "已刪除";
                 sealSuccess.value = "warning";
                 blockadeUser();

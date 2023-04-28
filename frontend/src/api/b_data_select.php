@@ -31,7 +31,7 @@
             break;
 
         case 'URL':
-            $sql = "SELECT ur.ID, ur.TITLE, ur.URL, u.ACCOUNT, ur.DATE, DATE_FORMAT(ur.DATE, '%Y-%m-%d') AS DATE, us.STATUS_NAME
+            $sql = "SELECT ur.ID, ur.TITLE, ur.URL, u.ACCOUNT, ur.DATE, DATE_FORMAT(ur.DATE, '%Y-%m-%d') AS DATE, ur.URL_STATUS, us.STATUS_NAME
             FROM `URL` AS ur
             LEFT JOIN USER AS u ON ur.USER_ID = u.ID
             JOIN URL_STATUS AS us ON ur.URL_STATUS = us.ID
@@ -66,7 +66,7 @@
             break;
         
         case 'NEWS':
-            $sql = "SELECT ID, NEWS_TITLE, NEWS_CATEGORY, NEWS_CONTENT, CREATE_DATE
+            $sql = "SELECT ID, NEWS_TITLE, NEWS_CATEGORY, NEWS_CONTENT, DATE_FORMAT(CREATE_DATE, '%Y-%m-%d') AS CREATE_DATE
             FROM NEWS
             WHERE ID = :whichID";
             break; 
