@@ -256,11 +256,13 @@
                     id: item.ID,
                     img: findPic.value,
                     user: item.user,
-                    content: item.content
+                    content: item.content,
+                    time: item.CREATE_TIME
                 }
             })
             
             messageObject.value = messageNewData;
+            // console.log(messageObject.value);
             const arrayA = replyObject.value;
             const arrayB = messageObject.value;
             const arrayC = [];
@@ -272,19 +274,19 @@
                 arrayC.push(tempArr);
             });
                 
-            console.log(arrayA);
-            console.log(arrayB);
-            console.log(arrayC);
+            // console.log(arrayA);
+            // console.log(arrayB);
+            // console.log(arrayC);
             
             // 抓當下的時間 但是整串留言都會是同一個時間
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = (now.getMonth() + 1).toString().padStart(2, '0');
-            const day = now.getDate().toString().padStart(2, '0');
-            const currentDate = `${year}年${month}月${day}日`;
+            // const now = new Date();
+            // const year = now.getFullYear();
+            // const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            // const day = now.getDate().toString().padStart(2, '0');
+            // const currentDate = `${year}年${month}月${day}日`;
             const newArray = arrayC.map((item)=>{
                 return item.map((innerItem) => {
-                    return {...innerItem, time: currentDate, replyMessage: '查看更多回覆', showReport: false, show: false};
+                    return {...innerItem, replyMessage: '查看更多回覆', showReport: false, show: false};
                 });
             });
 
@@ -301,7 +303,8 @@
 
         })
         .catch((err)=>{
-            console.log(err.response.data)
+            // console.log(err.response)
+            // console.log('no');
         })
     }
 
@@ -321,14 +324,15 @@
                     messageId: item.MESSAGE_ID,
                     img: findPic.value,
                     user: item.user,
-                    content: item.content
+                    content: item.content,
+                    time: item.CREATE_TIME
                 }
             })
             replyObject.value = replyNewData;
-            // console.log(replyObject.value);
+            console.log(replyObject.value);
         })
         .catch((err)=>{
-            // console.log(err.response.data);
+            // console.log(err.response);
             // console.log('no');
         })
     }
@@ -351,7 +355,7 @@
                 }, 2000);
             })
             .catch((err)=>{
-                // console.log(err.response.data);
+                // console.log(err.response);
             })
         }else{
             // console.log(typeof( messageObject.value[thisIndex.value].id))
@@ -479,7 +483,7 @@
     const sweetAlertLogin = ()=>{
     Swal.fire({
         title: '非會員',
-        text: '請先登入會員才能蒐藏哦',
+        text: '請先登入會員才能收藏哦',
         icon: 'error',
         position: 'center',
         // showConfirmButton: false,

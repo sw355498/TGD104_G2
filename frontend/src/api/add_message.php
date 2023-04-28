@@ -14,7 +14,7 @@
     $content = isset($data['content']) ? htmlspecialchars($data['content']) : '';
 
     // 建立 SQL
-    $sql = "INSERT INTO MESSAGE (DISCUSS_ID, USER_ID, CONTENT, STATUS) VALUES (:DISCUSS_ID, :USER_ID, :CONTENT, 1)";
+    $sql = "INSERT INTO MESSAGE (DISCUSS_ID, USER_ID, CONTENT, STATUS, CREATE_TIME) VALUES (:DISCUSS_ID, :USER_ID, :CONTENT, 1, NOW())";
     
     // 執行
     $statement = $pdo -> prepare($sql);

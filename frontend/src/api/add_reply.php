@@ -15,7 +15,7 @@
     
     echo $userId;
     // 建立 SQL
-    $sql = "INSERT INTO REPLY (MESSAGE_ID, USER_ID, CONTENT, `STATUS`) VALUES (:MESSAGE_ID, :USER_ID, :CONTENT, 1)";
+    $sql = "INSERT INTO REPLY (MESSAGE_ID, USER_ID, CONTENT, STATUS, CREATE_TIME) VALUES (:MESSAGE_ID, :USER_ID, :CONTENT, 1, NOW())";
     
     // 執行
     $statement = $pdo -> prepare($sql);
