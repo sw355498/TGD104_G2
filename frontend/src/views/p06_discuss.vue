@@ -241,8 +241,7 @@ function openShareWindow(link) {
 async function selectDiscuss(index) {
   await axios
     .post(`${API_URL}get_discuss.php`, {
-        
-      datas: index,
+      datas: index
     })
     .then((response) => {
       const newData = response.data.map((item) => {
@@ -269,9 +268,11 @@ async function selectDiscuss(index) {
         ellipsisList.value = document.querySelectorAll(".ellipsisList");
         p06_shareButton.value = document.querySelectorAll(".p06_shareButton");
       });
-      return (articleList.value = newData);
+      console.log('ok');
     })
-    .catch((error) => console.log(error.response));
+    .catch((error) => {
+      console.log('no');
+    })
 }
 
 function getCategories() {
