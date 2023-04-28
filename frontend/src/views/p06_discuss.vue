@@ -326,7 +326,7 @@ watch(
 const sweetAlertLogin = ()=>{
   Swal.fire({
     title: '非會員',
-    text: '請先登入會員才能蒐藏哦',
+    text: '請先登入會員才能發表文章哦',
     icon: 'error',
     position: 'center',
     // showConfirmButton: false,
