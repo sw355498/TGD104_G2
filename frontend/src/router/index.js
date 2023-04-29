@@ -181,8 +181,8 @@ router.beforeEach((to, from, next) => {
     }
   }
   next()
-
 })
+
   // build檔案至ftp請開啟這邊
   // router.beforeEach(async (to, from) => {
   //   const canAccess = await canUserAccess(to)

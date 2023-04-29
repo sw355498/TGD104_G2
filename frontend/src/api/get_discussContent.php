@@ -11,7 +11,7 @@
     $discussId = (isset($data['id']) ? $data['id'] : '');
     
     //建立SQL語法
-    $sql = "SELECT D.ID, D.USER_ID, U.NICKNAME, D.TITLE, DT.CATEGORY, substring(D.CREATE_TIME, 1, 10) as CREATE_TIME, D.CONTENT
+    $sql = "SELECT D.ID, D.USER_ID, U.NICKNAME, D.TITLE, DT.CATEGORY, D.CREATE_TIME, D.CONTENT
             from DISCUSS D
             JOIN DISCUSS_TYPE DT
             ON D.DISCUSS_STATUS_ID = DT.ID

@@ -21,7 +21,7 @@
                 <li><router-link to="/discuss">討論專區</router-link></li>
                 <li>文章內容</li>
             </ul>
-            <section class="articleBlock_p06_discuss_content">
+            <section class="articleBlock_p06_discuss_content" v-for="discussObject in discussObject">
                 <div class="topBlock_p06_discuss">
                     <div class="author">
                         <img src="../assets/img/p08_user/user.jpg" alt="cat"  class="pic_p06_discuss"/>
@@ -45,7 +45,7 @@
                     <div>                    
                         <span class="tag">#{{ discussObject.CATEGORY }}</span>
                         <span>・</span>
-                        <span>{{ discussObject.CREATE_TIME }}</span>
+                        <span>{{ formatDate(discussObject.CREATE_TIME) }}</span>
                     </div>
                     <div>
                         <!-- <button class="medium_button" @click="sweetAlertCollect()">收藏</button> -->
@@ -86,11 +86,11 @@
                                 </ul> -->
                             </div>
                             <div class="messageMain">
-                                <p>{{item.content}}</p>
+                                <p>{{ item.content }}</p>
                                 <ul>
                                     <li>                                
                                         <i class="fa-solid fa-clock fa-fw"></i>
-                                        <span>{{item.time}}</span>
+                                        <span>{{ formatDate(item.time) }}</span>
                                     </li>
                                     <li v-if="!token" @click="sweetAlertLogin()" class="iconHover">
                                         <i class="fa-solid fa-reply fa-solid"></i>
@@ -113,7 +113,7 @@
                                 <li>
                                     <div class="topBlock">
                                         <img src="@/assets/img/p08_user/user.jpg" alt="">
-                                        <span>{{item.user}}</span>
+                                        <span>{{ item.user }}</span>
                                         <!-- <ul class="action">
                                             <li class="iconHover">
                                                 <i :style="{ color: computedColor }" @click="toggleColor"
@@ -122,10 +122,10 @@
                                         </ul> -->
                                     </div>
                                     <div class="messageMain">
-                                        <p>{{item.content}}</p>
+                                        <p>{{ item.content }}</p>
                                         <div>
                                             <i class="fa-solid fa-clock fa-fw"></i>
-                                            <span>{{item.time}}</span>
+                                            <span>{{ formatDate(item.time) }}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -159,14 +159,15 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, defineProps,reactive,computed } from 'vue'
-    import frontNavbar from "@/components/f_nav.vue"
-    import frontFooter from "@/components/f_footer.vue"
-    import Modal from '@/components/modal.vue'
-    import axios from 'axios'
-    import { API_URL } from "@/config"
-    import Swal from 'sweetalert2/dist/sweetalert2.js'
-    import { useRoute } from 'vue-router'
+    import { ref, onMounted, defineProps,reactive,computed } from 'vue';
+    import frontNavbar from "@/components/f_nav.vue";
+    import frontFooter from "@/components/f_footer.vue";
+    import Modal from '@/components/modal.vue';
+    import axios from 'axios';
+    import { API_URL } from "@/config";
+    import Swal from 'sweetalert2/dist/sweetalert2.js';
+    import { useRoute } from 'vue-router';
+    import { formatDate } from '@/formatDate.js';
     const discuss = ref([]);
     const discussId = ref();
     const current_url = ref(null);
@@ -231,10 +232,10 @@
             id: route.params.article
         })
         .then((res)=>{
-            discussObject.value = res.data[0];
+            discussObject.value = res.data;
         })
         .catch((err)=>{
-            console.log(err.response.data);
+            console.log(err.response);
         })
     }
 
@@ -329,7 +330,6 @@
                 }
             })
             replyObject.value = replyNewData;
-            console.log(replyObject.value);
         })
         .catch((err)=>{
             // console.log(err.response);

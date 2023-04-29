@@ -76,7 +76,7 @@
               class="pic_p06_discuss"
             />
             <span class="paragraph">{{
-              item.NONNAME !== 1 ? "匿名" : item.NICKNAME
+              Number(item.NONNAME) !== 1 ? "匿名" : item.NICKNAME
             }}</span>
           </div>
           <button class="ellipsisBtn" @click="ellipsisBtn(index)">
@@ -126,7 +126,7 @@
             <div class="articleInformation_p06_discuss text_title">
               <span class="tag">#{{ item.CATEGORY }}</span>
               <span>・</span>
-              <span>{{ item.CREATE_TIME }}</span>
+              <span>{{ formatDate(item.CREATE_TIME) }}</span>
             </div>
             <div class="articleContent h6_component">
               {{ item.CONTENT }}
@@ -202,8 +202,8 @@ import frontFooter from "@/components/f_footer.vue";
 import Modal from "@/components/modal.vue";
 import { API_URL } from "@/config";
 import axios, { all } from "axios";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { formatDate } from '@/formatDate.js';
 const modalContent = ref("");
 const showModal = ref(false);
 const showellipsisList = ref(null);
@@ -216,7 +216,7 @@ const search = ref("");
 const findPic = ref();
 const categories = ref([]);
 const selectedCategory = ref("");
-const currentUser = localStorage.getItem('token')
+const currentUser = localStorage.getItem('token');
 
 function ellipsisBtn(index) {
   if (showellipsisList.value === index) {
@@ -264,14 +264,15 @@ async function selectDiscuss(index) {
         };
       });
       articleList.value = newData;
+      console.log(articleList.value[0].CREATE_TIME);
       nextTick(() => {
         ellipsisList.value = document.querySelectorAll(".ellipsisList");
         p06_shareButton.value = document.querySelectorAll(".p06_shareButton");
       });
-      console.log('ok');
+      // console.log('ok');
     })
     .catch((error) => {
-      console.log('no');
+      // console.log('no');
     })
 }
 
@@ -298,7 +299,7 @@ function selectCategory(index) {
 
 // 搜尋
 function searchArticles(search) {
-  this.selectedCategory = null;
+  // this.selectedCategory = null;
   const filteredArticles = articleList.value.filter(article => {
     return (
       article.TITLE.toLowerCase().includes(search.toLowerCase()) ||
@@ -311,9 +312,6 @@ function searchArticles(search) {
   articleList.value = filteredArticles;
   currentPage.value = 1;
 }
-
-
-
 
 watch(
   [selectedCategory, search],
