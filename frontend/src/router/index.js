@@ -197,32 +197,6 @@ router.beforeEach((to, from, next) => {
         // 以上條件都不符合則繼續造轉至下一頁面
         next()
     }
-  }
-  next()
-})
-
-  // build檔案至ftp請開啟這邊
-  // router.beforeEach(async (to, from) => {
-  //   const canAccess = await canUserAccess(to)
-  //   if (canAccess) {
-  //     return
-  //   } else {
-  //     return '/b_login'
-  //   }
-  // })
-
-  // function canUserAccess(to) {
-  //   const currentStaff = JSON.parse(sessionStorage.getItem('staff')) || {};
-  //   const accountTypeId =  currentStaff.account_type_id
-  //   if(to.path === '/b_index' || to.path === '/b_data' || to.path === '/b_updata' || to.path === '/b_settingAccount'){
-  //     if ((!currentStaff || (accountTypeId !== 2 && accountTypeId !== 3))){
-  //       return true;
-  //     } else {
-  //       return false
-  //     }
-  //   } else {
-  //     return true
-  //   }
-  // }
+});
 
 export default router
