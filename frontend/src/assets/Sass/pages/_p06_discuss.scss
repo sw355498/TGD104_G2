@@ -154,7 +154,7 @@
         }
 
         .input_p01_news_searchBar {
-            margin: 11px 15px 11px 0;
+            margin: 11px 15px 27px 0;
             // box-sizing: border-box;
             // background-color: $four_color;
             border-radius: 5px;
@@ -165,6 +165,7 @@
             @include rwd('md') {
                 margin-right: 20px;
                 box-sizing: border-box;
+                margin: 11px 15px 59px 0;
             }
 
             @include rwd('sm') {

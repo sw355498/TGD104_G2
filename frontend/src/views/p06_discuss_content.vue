@@ -47,7 +47,7 @@
                         <span>・</span>
                         <span>{{ formatDate(discussObject.CREATE_TIME) }}</span>
                     </div>
-                    <div>
+                    <div class="iconHover">
                         <!-- <button class="medium_button" @click="sweetAlertCollect()">收藏</button> -->
                         <a v-if="isFavorite == false " @click="addToFavorites()">
                             <i class="fa-solid fa-bookmark"></i>
@@ -104,7 +104,7 @@
                                 </ul>
                                 <div class="switch">                            
                                     <div class="solidLine"></div>
-                                    <span @click="hideMessage(index1)">{{ message[0].replyMessage }}</span>
+                                    <span class="iconHover" @click="hideMessage(index1)">{{ message[0].replyMessage }}</span>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, defineProps,reactive,computed } from 'vue';
+    import { ref, onMounted, reactive, computed, nextTick } from 'vue';
     import frontNavbar from "@/components/f_nav.vue";
     import frontFooter from "@/components/f_footer.vue";
     import Modal from '@/components/modal.vue';
@@ -177,7 +177,6 @@
     const modalContent = ref('');
     const showModal = ref(false);
     const token = localStorage.getItem("token");
-    const props = defineProps();
     const route = useRoute();
     const discussObject = ref([]);
     const messageObject = ref([]);
@@ -514,11 +513,15 @@
         })
     };
     function ellipsisBtn(){
-        if(ellipsisList.value.style.display === 'none'){
-            ellipsisList.value.style.display = 'block'
-        }else{
-            ellipsisList.value.style.display = 'none'
-        }
+        nextTick(()=>{
+            ellipsisList.value = document.querySelector('.ellipsisList');
+            p06_shareButton.value = document.querySelector('.p06_shareButton');
+            if(ellipsisList.value.style.display === 'none'){
+                ellipsisList.value.style.display = 'block'
+            }else{
+                ellipsisList.value.style.display = 'none'
+            }
+        })
     }
 
     function shareBtn(){
@@ -547,8 +550,6 @@
     }
 
     onMounted(()=>{
-        ellipsisList.value = document.querySelector('.ellipsisList');
-        p06_shareButton.value = document.querySelector('.p06_shareButton');
 
         current_url.value = window.location;
 
