@@ -11,369 +11,151 @@
         <template #body>
             <form class="pb-3" @submit="handleSubmit" id="b_dataFrom">
                 <div v-if="whichTable === 'USER' || whichTable === 'staff'">     
-                    <div class="mb-3">                    
-                        <label for="account">
-                            帳號
-                        </label>
-                        <input
-                            v-model="account"
-                            type="email"
-                            class="form-control-plaintext"
-                            id="account"
-                            required
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">帳號：</span>
+                        <p class="col m-0" v-html="account"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="nickname"> 顯示名稱 </label>
-                        <input
-                            v-model="nickname"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="nickname"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">顯示名稱：</span>
+                        <p class="col m-0" v-html="nickname"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="mobile"> 電話 </label>
-                        <input
-                            v-model="mobile"
-                            type="tel"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="mobile"
-                            readonly
-                        />
+                    <div class="row mb-3">  
+                        <span class="col-2 text-end">電話：</span>
+                        <p class="col m-0" v-html="mobile"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="birth"> 生日 </label>
-                        <input
-                            v-model="birth"
-                            type="date"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="birth"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">生日：</span>
+                        <p class="col m-0" v-html="birth"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="user_createTime"> 建立日期 </label>
-                        <input
-                            v-model="user_createTime"
-                            type="date"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="user_createTime"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">建立日期：</span>
+                        <p class="col m-0" v-html="user_createTime"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="userStatus"> 帳號狀態 </label>
-                        <input
-                            v-model="userStatus"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="userStatus"
-                            readonly
-                        />
+                    <div class="row mb-3"> 
+                        <span class="col-2 text-end">帳號狀態：</span>
+                        <p class="col m-0" v-html="userStatus"></p>
                     </div> 
-                    <div class="mb-3">                  
-                        <label for="loginType"> 登入方式 </label>
-                        <input
-                            v-model="loginType"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="loginType"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">登入方式：</span>
+                        <p class="col m-0" v-html="loginType"></p>
                     </div> 
                 </div>
                 <div v-else-if="whichTable === 'DISCUSS'">     
-                    <div class="mb-3">                    
-                        <label for="d_title">
-                            文章標題
-                        </label>
-                        <input
-                            v-model="d_title"
-                            type="text"
-                            id="d_title"
-                            class="form-control-plaintext"
-                            required
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">文章標題：</span>
+                        <p class="col m-0" v-html="d_title"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="d_tag"> 分類 </label>
-                        <input
-                            v-model="d_tag"
-                            type="text"
-                            style="margin-bottom: 20px"
-                            id="d_tag"
-                            class="form-control-plaintext"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">分類：</span>
+                        <p class="col m-0" v-html="d_tag"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="d_author"> 作者 </label>
-                        <input
-                            v-model="d_author"
-                            type="text"
-                            style="margin-bottom: 20px"
-                            id="d_author"
-                            class="form-control-plaintext"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">作者：</span>
+                        <p class="col m-0" v-html="d_author"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="d_content"> 文章內容 </label>
-                        <textarea
-                            v-model="d_content"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px; resize:none;"
-                            id="d_content"
-                            readonly
-                        />
+                    <div class="row mb-3">   
+                        <span class="col-2 text-end">文章內容：</span>
+                        <p class="col m-0" v-html="d_content"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="d_createTime"> 建立日期 </label>
-                        <input
-                            v-model="d_createTime"
-                            type="date"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="d_createTime"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">建立日期 ：</span>
+                        <p class="col m-0" v-html="d_createTime"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="d_Status"> 文章狀態 </label>
-                        <input
-                            v-model="d_Status"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="d_Status"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">文章狀態 ：</span>
+                        <p class="col m-0" v-html="d_Status"></p>
                     </div> 
                 </div>
                 <div v-else-if="whichTable === 'URL'">     
-                    <div class="mb-3">                    
-                        <label for="ur_user">
-                            回報人
-                        </label>
-                        <input
-                            v-model="ur_user"
-                            type="text"
-                            class="form-control-plaintext"
-                            id="ur_user"
-                            required
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">回報人 ：</span>
+                        <p class="col m-0" v-html="ur_user"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="ur_title"> 網站名稱 </label>
-                        <input
-                            v-model="ur_title"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="ur_title"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">網站名稱 ：</span>
+                        <p class="col m-0" v-html="ur_title"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="ur_url"> 網址 </label>
-                        <input
-                            v-model="ur_url"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="ur_url"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">網址 ：</span>
+                        <p class="col m-0" v-html="ur_url"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="ur_date"> 回報日期 </label>
-                        <input
-                            v-model="ur_date"
-                            type="date"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="ur_date"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">回報日期 ：</span>
+                        <p class="col m-0" v-html="ur_date"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="ur_Status"> 回報狀態 </label>
-                        <input
-                            v-model="ur_Status"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="ur_Status"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">回報狀態 ：</span>
+                        <p class="col m-0" v-html="ur_Status"></p>
                     </div> 
                 </div>
                 <div v-else-if="whichTable === 'REPLY_REPORT' || whichTable === 'DISCUSS_REPORT' || whichTable === 'MESSAGE_REPORT'">     
-                    <div class="mb-3">                    
-                        <label for="report_target">
-                            檢舉對象
-                        </label>
-                        <textarea
-                            v-model="report_target"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px; resize:none;"
-                            id="report_target"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">檢舉對象 ：</span>
+                        <p class="col m-0" v-html="report_target"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for=""> 檢舉原因 </label>
-                        <textarea
-                            v-model="report_eason"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px; resize:none;"
-                            id="report_reason"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">檢舉原因 ：</span>
+                        <p class="col m-0" v-html="report_eason"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="report_account"> 檢舉人 </label>
-                        <input
-                            v-model="report_account"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="report_account"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">檢舉人 ：</span>
+                        <p class="col m-0" v-html="report_account"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="report_time"> 檢舉日期 </label>
-                        <input
-                            v-model="report_time"
-                            type="date"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="report_time"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">檢舉日期 ：</span>
+                        <p class="col m-0" v-html="report_time"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="report_Status"> 審核狀況 </label>
-                        <input
-                            v-model="report_Status"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="report_Status"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">審核狀況 ：</span>
+                        <p class="col m-0" v-html="report_Status"></p>
                     </div> 
                 </div>
                 <div v-else-if="whichTable === 'NEWS'">     
-                    <div class="mb-3">                    
-                        <label for="news_title">
-                            標題
-                        </label>
-                        <input
-                            v-model="news_title"
-                            type="text"
-                            class="form-control-plaintext"
-                            id="news_title"
-                            required
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">標題 ：</span>
+                        <p class="col m-0" v-html="news_title"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="news_tag"> 分類 </label>
-                        <input
-                            v-model="news_tag"
-                            type="text"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="news_tag"
-                            readonly
-                        />
-                    </div>                    <div class="w-100">
-                        <img :src="newsImage" class="img-fluid" alt="">
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">分類 ：</span>
+                        <p class="col m-0" v-html="news_tag"></p>
+                    </div>                    
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">圖片 ：</span>
+                        <div class="col">
+                            <img :src="newsImage" class="img-fluid" :alt="newsImageAlt">
+                        </div>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="news_content"> 消息內容 </label>
-                        <textarea
-                            v-model="news_content"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px; resize:none;"
-                            id="news_content"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">消息內容 ：</span>
+                        <p class="col m-0" v-html="news_content"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="news_createTime"> 建立日期 </label>
-                        <input
-                            v-model="news_createTime"
-                            type="date"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px"
-                            id="news_createTime"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">建立日期 ：</span>
+                        <p class="col m-0" v-html="news_createTime"></p>
                     </div>
                 </div>
                 <div v-else-if="whichTable === 'GAME'">     
-                    <div class="mb-3">                    
-                        <label for="game_question">
-                            題目
-                        </label>
-                        <input
-                            v-model="game_question"
-                            type="text"
-                            class="form-control-plaintext"
-                            id="game_question"
-                            required
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">題目 ：</span>
+                        <p class="col m-0" v-html="game_question"></p>
                     </div>
-                    <div class="w-100">
-                        <img :src="gameImage" class="img-fluid" alt="">
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">圖片 ：</span>
+                        <div class="col">
+                            <img :src="gameImage" class="img-fluid" :alt="gameImageAlt">
+                        </div>
                     </div>
-                    <div class="mb-3">               
-                        <label for="game_option"> 選項 </label>
-                        <textarea
-                            v-model="game_option"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px; resize:none;"
-                            id="game_option"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">選項 ：</span>
+                        <p class="col m-0" v-html="game_option"></p>
                     </div>
-                    <div class="mb-3">                    
-                        <label for="game_answer">
-                            答案
-                        </label>
-                        <input
-                            v-model="game_answer"
-                            type="text"
-                            class="form-control-plaintext"
-                            id="game_answer"
-                            required
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">答案 ：</span>
+                        <p class="col m-0" v-html="game_answer"></p>
                     </div>
-                    <div class="mb-3">                  
-                        <label for="game_description"> 解釋 </label>
-                        <textarea
-                            v-model="game_description"
-                            class="form-control-plaintext"
-                            style="margin-bottom: 20px; resize:none;"
-                            id="game_description"
-                            readonly
-                        />
+                    <div class="row mb-3">
+                        <span class="col-2 text-end">解釋 ：</span>
+                        <p class="col m-0" v-html="game_description"></p>
                     </div>
                 </div>
                 <div class="text-end">
@@ -436,6 +218,7 @@ const news_title =ref('')
 const news_tag =ref('')
 const news_content =ref('')
 const newsImage = ref('')
+const newsImageAlt = ref('')
 //防詐知識測驗
 const news_createTime =ref('')
 const game_question =ref('')
@@ -443,6 +226,7 @@ const game_option =ref('')
 const game_answer =ref('')
 const game_description =ref('')
 const gameImage = ref('')
+const gameImageAlt = ref('')
 onMounted(async () => {
     //撈取資料庫的資料
     selectTable();
@@ -501,18 +285,19 @@ async function selectTable() {
                 news_tag.value =response.data[0].NEWS_CATEGORY
                 news_content.value =response.data[0].NEWS_CONTENT
                 news_createTime.value =response.data[0].CREATE_DATE
+                newsImageAlt.vlaue = response.data[0].NEWS_PIC
                 try {
-                    newsImage.value = require('@/assets/img/p01_news/' + response.data[0].PIC)
+                    newsImage.value = require('@/assets/img/p01_news/' + response.data[0].NEWS_PIC)
                 } catch (e) {
-                    newsImage.value = `https://tibamef2e.com/tgd104/g2/img/${response.data[0].PIC}`;
+                    newsImage.value = `https://tibamef2e.com/tgd104/g2/img/${response.data[0].NEWS_PIC}`;
                 }
-                // newsImage.value = require('@/assets/img/p01_news/' + response.data[0].PIC)
             break;
             case 'GAME':
                 game_question.value =response.data[0].QUESTION
                 game_option.value =response.data[0].OPTION
                 game_answer.value =response.data[0].ANSWER
                 game_description.value =response.data[0].DESCRIPTION
+                gameImageAlt.value = response.data[0].PIC
                 try {
                     gameImage.value = require('@/assets/img/p07_demo/p07_demoGame/' + response.data[0].PIC)
                 } catch (e) {
