@@ -111,16 +111,16 @@
             } else {
                 userName.value = response.data[0].ACCOUNT
             }
-            try {
-                if(response.data[0].PIC){
+            if(response.data[0].PIC){
+                try {
                     userImage.value = require('@/assets/img/p08_user/' + response.data[0].PIC)
-                } else{
-                    userImage.value = require('@/assets/img/p08_user/user.jpg')
-                }
-            } catch (e) {
-                if(response.data[0].PIC){
+                } catch (e) {
                     userImage.value = `https://tibamef2e.com/tgd104/g2/img/${response.data[0].PIC}`
-                } else{
+                }
+            } else {
+                try {
+                    userImage.value = require('@/assets/img/p08_user/user.jpg')
+                } catch (e) {
                     userImage.value = `https://tibamef2e.com/tgd104/g2/img/user.jpg`
                 }
             }
