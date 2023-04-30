@@ -501,14 +501,24 @@ async function selectTable() {
                 news_tag.value =response.data[0].NEWS_CATEGORY
                 news_content.value =response.data[0].NEWS_CONTENT
                 news_createTime.value =response.data[0].CREATE_DATE
-                newsImage.value = require('@/assets/img/p01_news/' + response.data[0].PIC)
+                try {
+                    newsImage.value = require('@/assets/img/p01_news/' + response.data[0].PIC)
+                } catch (e) {
+                    newsImage.value = `https://tibamef2e.com/tgd104/g2/img/${response.data[0].PIC}`;
+                }
+                // newsImage.value = require('@/assets/img/p01_news/' + response.data[0].PIC)
             break;
             case 'GAME':
                 game_question.value =response.data[0].QUESTION
                 game_option.value =response.data[0].OPTION
                 game_answer.value =response.data[0].ANSWER
                 game_description.value =response.data[0].DESCRIPTION
-                gameImage.value = require('@/assets/img/p07_demo/p07_demoGame/' + response.data[0].PIC)
+                try {
+                    gameImage.value = require('@/assets/img/p07_demo/p07_demoGame/' + response.data[0].PIC)
+                } catch (e) {
+                    gameImage.value = `https://tibamef2e.com/tgd104/g2/img/${response.data[0].PIC}`;
+                }
+                // gameImage.value = require('@/assets/img/p07_demo/p07_demoGame/' + response.data[0].PIC)
             break;
         }
         return response.data.data;

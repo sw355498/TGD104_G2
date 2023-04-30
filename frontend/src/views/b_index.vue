@@ -248,10 +248,10 @@
     </Teleport>
     <div class="d-flex">
         <LeftNav
+            :userID = "userID"
             :userName = "userName" 
             :userLevel = "userLevel" 
             :userPic = "userPic"
-            :userPicPath = "userPicPath"
             @response="leftNavTag = $event"
         />
         <div class="b_content">
@@ -326,6 +326,7 @@ const loginTypeId =  ref(currentStaff.account_type_id)
 //   }
 // });
 //簡寫成三元
+const userID = computed( () => loginID.value);
 const userLevel = computed(() => loginTypeId.value === 3 ? true : false);
 const userName = computed(() => loginNickname.value ? loginNickname.value : loginAccount.value)
 const userPic = computed(() => loginPic.value ? loginPic.value : 'user.jpg')

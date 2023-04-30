@@ -39,8 +39,12 @@
     </div>
 </template>
 <script setup>
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
     import router from '@/router'
+    import { API_URL } from "@/config";
+    import axios from "axios";
+
+    const userName =ref('')
     const userImage = ref('')
 
     let id = 0
@@ -66,11 +70,50 @@
 
     //父元件傳過來的值
     const props = defineProps({
+        userID: Number,
         userLevel: Boolean,
-        userName: String,
-        userPic: String
     })
-    userImage.value = require('@/assets/img/p08_user/' + props.userPic)
+
+    onMounted(() =>{
+        currentLoginAccount()
+    })
+
+    // userImage.value = require('@/assets/img/p08_user/' + props.userPic)
+
+    //撈取當前登入帳號的資料
+    const currentLoginAccount = async() => {
+        try {
+            const response = await axios.post(`${API_URL}b_data_select.php`, {
+                whichTable: 'USER',
+                whichID: props.userID
+            });
+            if(response.data[0].NICKNAME){
+                userName.value = response.data[0].NICKNAME
+            } else {
+                userName.value = response.data[0].ACCOUNT
+            }
+            try {
+                if(response.data[0].PIC){
+                    userImage.value = require('@/assets/img/p08_user/' + response.data[0].PIC)
+                } else{
+                    userImage.value = require('@/assets/img/p08_user/user.jpg')
+                }
+            } catch (e) {
+                if(response.data[0].PIC){
+                    userImage.value = `https://tibamef2e.com/tgd104/g2/img/${response.data[0].PIC}`
+                } else{
+                    userImage.value = `https://tibamef2e.com/tgd104/g2/img/user.jpg`
+                }
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log(e.message);
+            }
+        }
+    }
+
 
     //帳號登出
     const b_logout = () => {

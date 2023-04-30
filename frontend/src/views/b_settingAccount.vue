@@ -186,7 +186,13 @@ async function fileChange(e) {
                     icon: "success",
                     confirmButtonText: "確認",
                 });
-                return userPic.value = require('@/assets/img/p08_user/' + fileImageName.value)
+                try {
+                    userPic.value = require('@/assets/img/p08_user/' + fileImageName.value)
+                } catch (e) {
+                    userPic.value = `https://tibamef2e.com/tgd104/g2/img/${fileImageName.value}`
+                }
+                return userPic.value
+                // return userPic.value = require('@/assets/img/p08_user/' + fileImageName.value)
             } else if(response.data === '只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案'){
                 addError("upload_img", "只允許上傳 jpg 或 phg 或 gif 格式的圖片檔案");
             } else if(response.data === '檔案大小不得超過1MB'){
@@ -320,11 +326,24 @@ const selectTable = async() => {
         nickname.value = response.data[0].NICKNAME
         mobile.value = response.data[0].MOBILE
         birth.value = response.data[0].BIRTH
-        if(response.data[0].PIC){
-            userPic.value = require('@/assets/img/p08_user/' + response.data[0].PIC)
-        } else{
-            userPic.value = require('@/assets/img/p08_user/user.jpg')
+        try {
+            if(response.data[0].PIC){
+                userPic.value = require('@/assets/img/p08_user/' + response.data[0].PIC)
+            } else{
+                userPic.value = require('@/assets/img/p08_user/user.jpg')
+            }
+        } catch (e) {
+            if(response.data[0].PIC){
+                userPic.value = `https://tibamef2e.com/tgd104/g2/img/${response.data[0].PIC}`
+            } else{
+                userPic.value = `https://tibamef2e.com/tgd104/g2/img/user.jpg`
+            }
         }
+        // if(response.data[0].PIC){
+        //     userPic.value = require('@/assets/img/p08_user/' + response.data[0].PIC)
+        // } else{
+        //     userPic.value = require('@/assets/img/p08_user/user.jpg')
+        // }
         return response.data.data;
     } catch (e) {
         if (e.response) {
