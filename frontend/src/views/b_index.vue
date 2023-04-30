@@ -254,38 +254,41 @@
             :userPic = "userPic"
             @response="leftNavTag = $event"
         />
+
         <div class="b_content">
-        <h2 class="h1_component">{{ h2Title }}</h2>
-        <div class="d-flex justify-content-end align-items-center my-2">
-            <button
-            v-if="addbutton"
-            class="medium_button b_add_btn me-2"
-            @click="showModal = true"
-            >
-            {{ btnName }}
-            </button>
-            <select
-            v-if="leftNavTag === 'reply'"
-            v-model="replySelect"
-            id="inputState"
-            class="form-select w-25 me-2 text-center"
-            >
-                <option value="1">文章的檢舉</option>
-                <option value="2">留言的檢舉</option>
-                <option value="3">回覆的檢舉</option>
-            </select>
-            <div class="position-relative">
-            <i
-                class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
-            ></i>
-            <input type="text" v-model.trim="searchText"/>
+            <h2 class="h1_component">{{ h2Title }}</h2>
+            <div class="d-flex justify-content-end align-items-center my-2">
+                <button
+                v-if="addbutton"
+                class="medium_button b_add_btn me-2"
+                @click="showModal = true"
+                >
+                {{ btnName }}
+                </button>
+                <select
+                v-if="leftNavTag === 'reply'"
+                v-model="replySelect"
+                id="inputState"
+                class="form-select w-25 me-2 text-center"
+                >
+                    <option value="1">文章的檢舉</option>
+                    <option value="2">留言的檢舉</option>
+                    <option value="3">回覆的檢舉</option>
+                </select>
+                <div class="position-relative">
+                <i
+                    class="fa-sharp fa-solid fa-magnifying-glass fa-fw position-absolute top-50 end-0"
+                ></i>
+                <input type="text" v-model.trim="searchText"/>
+                </div>
             </div>
-        </div>
-        <!-- ======== 外掛 jsGrid ========= -->
-        <div v-if="!isJsgrid">
-            <p style="color:red;">全速載入中，感謝耐心等候...</p>
-        </div>
-        <div v-else id="jsGrid"></div>
+            <!-- ======== 外掛 jsGrid ========= -->
+            <div  v-if="!isJsgrid" class="text-center">
+                <svg width="360" height="360" style="">
+                    <use xlink:href="#load" />
+                </svg>
+            </div>
+            <div v-else id="jsGrid"></div>
         </div>
     </div>
 </template>
@@ -299,6 +302,7 @@ import { API_URL } from "@/config";
 import axios from "axios";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import router from "@/router";
+import Loading from "@/components/loading.vue";
 
 const leftNavTag = ref("user"); //側選單的變數
 const h2Title = ref("會員管理"); //內容區塊的標題
@@ -1178,7 +1182,7 @@ async function blockadeUser() {
 //資料庫查詢
 async function selectTable() {
     try {
-        isJsgrid.value= true;
+        isJsgrid.value= false;
         const response = await axios.post(`${API_URL}${selectPHP.value}`, {
             whichTable: whichTable.value
         });
@@ -1215,7 +1219,7 @@ async function selectTable() {
 // search功能
 async function search(){
     try {
-        isJsgrid.value= true;
+        isJsgrid.value= false;
         const response = await axios.post(`${API_URL}b_search.php`, {
             whichTable: whichTable.value,
             search : searchText.value
@@ -1279,5 +1283,68 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     .jsgrid-nodata-row{
         color: #fff;
     }
+}
+#load {
+  position:absolute;
+  width:600px;
+  height:36px;
+  left:50%;
+  top:50%;
+  margin-left:-300px;
+  overflow:visible;
+  user-select:none;
+  cursor:default;
+
+  div{
+    position:absolute;
+    width:20px;
+    height:36px;
+    opacity:0;
+    font-family:Helvetica, Arial, sans-serif;
+    animation:move 2s linear infinite;
+    transform:rotate(180deg);
+    color:#35C4F0;
+
+    &:nth-child(2){
+        animation-delay:0.2s;
+    }
+    &:nth-child(3){
+        animation-delay:0.4s;
+    }
+    &:nth-child(4){
+        animation-delay:0.6s;
+    }
+    &:nth-child(5){
+        animation-delay:0.8s;
+    }
+    &:nth-child(6){
+        animation-delay:1s;
+    }
+    &:nth-child(7){
+        animation-delay:1.2s;
+    }
+  }
+}
+
+@keyframes move {
+  0% {
+    left:0;
+    opacity:0;
+  }
+	35% {
+		left: 41%; 
+		transform:rotate(0deg);
+		opacity:1;
+	}
+	65% {
+		left:59%; 
+		transform:rotate(0deg); 
+		opacity:1;
+	}
+	100% {
+		left:100%; 
+		transform:rotate(-180deg);
+		opacity:0;
+	}
 }
 </style>
