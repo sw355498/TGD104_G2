@@ -3,7 +3,7 @@
         <div class="b_login_user d-flex flex-column justify-content-evenly">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="b_user_pic">
-                    <img :src="userImage" :alt="userPic"  class="b_user_pic border border-dark"/>
+                    <img :src="userImage" :alt="imgAlt"  class="b_user_pic border border-dark"/>
                 </div>
                 <span class="paragraph m-0">{{ userName }}</span>
             </div>
@@ -11,6 +11,7 @@
                 <button class="small_button me-3" @click="settingAccount">帳號設定</button>
                 <button class="small_button" @click="b_logout">登出</button>
             </div>
+            <div class="clock px-2" v-html="clock"></div>
         </div>
         <nav>
             <ul class="list-unstyled text_title">
@@ -46,6 +47,7 @@
 
     const userName =ref('')
     const userImage = ref('')
+    const imgAlt = ref('')
 
     let id = 0
     const fontawesome = ref(' fa-solid fa-fw')
@@ -78,7 +80,24 @@
         currentLoginAccount()
     })
 
-    // userImage.value = require('@/assets/img/p08_user/' + props.userPic)
+    let weekDay=["日", "ㄧ", "二", "三", "四", "五", "六"];
+
+    const clock = ref('')
+        
+    setInterval(() =>{
+        let today=new Date();
+            
+        let hours=today.getHours();
+        if(hours<10)hours="0"+hours;
+
+        let minutes=today.getMinutes();
+        if(minutes<10)minutes="0"+minutes;
+
+        let seconds=today.getSeconds();
+        if(seconds<10)seconds="0"+seconds
+                
+        clock.value=`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}(${weekDay[today.getDay()]}) ${hours}:${minutes}:${seconds}`
+    },1000)
 
     //撈取當前登入帳號的資料
     const currentLoginAccount = async() => {
@@ -105,6 +124,7 @@
                     userImage.value = `https://tibamef2e.com/tgd104/g2/img/user.jpg`
                 }
             }
+            imgAlt.value = response.data[0].PIC
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data.message);
@@ -128,5 +148,9 @@
 <style>
     .fa-sharp{
         transform: translate(-50%, -50%);
+    }
+    .clock{
+        color: #033159;
+        text-align: center;
     }
 </style>
