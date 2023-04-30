@@ -66,7 +66,7 @@
             break;
         
         case 'NEWS':
-            $sql = "SELECT ID, NEWS_TITLE, NEWS_CATEGORY, NEWS_CONTENT, DATE_FORMAT(CREATE_DATE, '%Y-%m-%d') AS CREATE_DATE
+            $sql = "SELECT ID, NEWS_TITLE, NEWS_CATEGORY, NEWS_PIC, NEWS_CONTENT, DATE_FORMAT(CREATE_DATE, '%Y-%m-%d') AS CREATE_DATE
             FROM NEWS
             WHERE ID = :whichID";
             break; 
