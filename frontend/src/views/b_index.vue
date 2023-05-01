@@ -283,7 +283,16 @@
                 </div>
             </div>
             <!-- ======== 外掛 jsGrid ========= -->
-            <div  v-if="!isJsgrid" class="text-center">
+            <div v-if="!isJsgrid" class="text-center">
+                <div id="load">
+                    <div>G</div>
+                    <div>N</div>
+                    <div>I</div>
+                    <div>D</div>
+                    <div>A</div>
+                    <div>O</div>
+                    <div>L</div>
+                </div>
                 <svg width="360" height="360" style="">
                     <use xlink:href="#load" />
                 </svg>
@@ -1285,10 +1294,11 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     }
 }
 #load {
+font-size: 36px;
   position:absolute;
   width:600px;
   height:36px;
-  left:50%;
+  left:calc(50% + 150px);
   top:50%;
   margin-left:-300px;
   overflow:visible;
