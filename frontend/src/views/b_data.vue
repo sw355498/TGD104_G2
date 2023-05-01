@@ -250,8 +250,8 @@ async function selectTable() {
             case 'staff':
                 account.value = response.data[0].ACCOUNT
                 nickname.value = response.data[0].NICKNAME
-                mobile.value = response.data[0].MOBILE
-                birth.value = response.data[0].BIRTH
+                mobile.value = response.data[0].MOBILE || '尚未登記'
+                birth.value = response.data[0].BIRTH || '尚未登記'
                 user_createTime.value = response.data[0].CREATE_TIME
                 userStatus.value = response.data[0].USER_STATUS_NAME
                 loginType.value = response.data[0].LOGIN_TYPE
