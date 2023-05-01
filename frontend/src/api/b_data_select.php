@@ -14,7 +14,7 @@
         //建立SQL語法
         case 'USER':
         case 'staff':
-            $sql = "SELECT u.ID, u.ACCOUNT, u.NICKNAME, u.PIC, u.MOBILE , DATE_FORMAT(u.BIRTH, '%Y-%m-%d') AS BIRTH, u.CREATE_TIME, us.USER_STATUS_NAME, l.LOGIN_TYPE
+            $sql = "SELECT u.ID, u.ACCOUNT, u.NICKNAME, u.PIC, u.MOBILE , DATE_FORMAT(u.BIRTH, '%Y-%m-%d') AS BIRTH,u.ACCOUNT_TYPE_ID, u.CREATE_TIME, us.USER_STATUS_NAME, l.LOGIN_TYPE
             FROM USER AS u
             JOIN USER_STATUS AS us ON u.USER_STATUS_ID = us.ID
             JOIN LOGIN_TYPE AS l ON u.LOGIN_TYPE_ID = l.ID

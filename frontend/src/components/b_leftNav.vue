@@ -25,7 +25,7 @@
                             {{item.name}}
                     </a>
                 </li>
-                <li v-if="userLevel">
+                <li v-if="userLevel == 3">
                     <a
                         @click="changeTab('staff')"  
                         class="link" 
@@ -96,7 +96,7 @@
         let seconds=today.getSeconds();
         if(seconds<10)seconds="0"+seconds
                 
-        clock.value=`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}(${weekDay[today.getDay()]}) ${hours}:${minutes}:${seconds}`
+        clock.value=`${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}(${weekDay[today.getDay()]}) ${hours}:${minutes}:${seconds}`
     },1000)
 
     //撈取當前登入帳號的資料
