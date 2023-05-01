@@ -57,6 +57,9 @@
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // 清除可能存在的error
+        removeError("account");
+        removeError("password");
         try {
             const response = await axios.post(`${API_URL}b_login.php`, {
                 account: account.value,
