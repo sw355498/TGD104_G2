@@ -67,7 +67,7 @@
             <article class="articleMessage_p06_discuss">
                 <div class="topBlock_p06_discuss">
                     <h3>共<span>{{ messages.length }}</span>則 留言</h3>
-                    <button v-if="!token" class="medium_button" @click="sweetAlertLogin()"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
+                    <button v-if="!token" class="medium_button" @click="MsgSweetAlertLogin()"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
                     <button v-else id="show-modal" 
                     @click="showModal = true, modalContent = '<h4>我要留言</h4>' " 
                     class="medium_button"><i class="fa-solid fa-pen fa-fw"></i>我要留言</button>
@@ -92,7 +92,7 @@
                                         <i class="fa-solid fa-clock fa-fw"></i>
                                         <span>{{ formatDate(item.time) }}</span>
                                     </li>
-                                    <li v-if="!token" @click="sweetAlertLogin()" class="iconHover">
+                                    <li v-if="!token" @click="ReplySweetAlertLogin()" class="iconHover">
                                         <i class="fa-solid fa-reply fa-solid"></i>
                                         <span>回覆</span>
                                     </li>
@@ -428,7 +428,7 @@
         const token = localStorage.getItem('token')
         if (!token) {
             // showModal()
-            sweetAlertLogin()
+            AddSweetAlertLogin()
             return
         }
 
@@ -453,7 +453,7 @@
         const token = localStorage.getItem("token");
         if (!token) {
         // 如果沒有 token，表示使用者尚未登入，顯示登入彈窗
-        alert("請先登入才能取消收藏新聞！");
+        alert("請先登入才能取消收藏！");
         return;
         }
 
@@ -481,15 +481,31 @@
     }
         
     // sweetAlert =================================================
-    const sweetAlertLogin = ()=>{
+    const AddSweetAlertLogin = ()=>{
     Swal.fire({
         title: '非會員',
         text: '請先登入會員才能收藏哦',
         icon: 'error',
         position: 'center',
-        // showConfirmButton: false,
         confirmButtonText: '確認',
-        // timer: 1500
+    })
+    };
+    const MsgSweetAlertLogin = ()=>{
+    Swal.fire({
+        title: '非會員',
+        text: '請先登入會員才能留言哦',
+        icon: 'error',
+        position: 'center',
+        confirmButtonText: '確認',
+    })
+    };
+    const ReplySweetAlertLogin = ()=>{
+    Swal.fire({
+        title: '非會員',
+        text: '請先登入會員才能回覆哦',
+        icon: 'error',
+        position: 'center',
+        confirmButtonText: '確認',
     })
     };
     const sweetAlertSendReply = ()=>{
@@ -499,18 +515,15 @@
             icon: 'success',
             position: 'center',
             showConfirmButton: false,
-            // confirmButtonText: '確認',
             timer: 1500
         })
     };
     const sweetAlertSendMessage = ()=>{
         Swal.fire({
             title: '成功留言',
-            // text: '請先登入會員才能蒐藏哦',
             icon: 'success',
             position: 'center',
             showConfirmButton: false,
-            // confirmButtonText: '確認',
             timer: 1500
         })
     };
