@@ -71,6 +71,10 @@
       @include rwd(sm) {
         line-height: 40px;
       }
+      .router-link-active,
+      .router-link-exact-active {
+        color: $main_color;
+      }
       .h6_component {
         @include rwd(sm) {
           font-size: 1rem;
