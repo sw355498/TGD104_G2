@@ -76,7 +76,8 @@
                     <div v-for="(item, index) in message" :key="index">
                         <div v-if="index === 0">
                             <div class="topBlock">                    
-                                <img src="@/assets/img/p08_user/user.jpg" alt="">
+                                <img v-if="item.img !== ''" :src="item.img">
+                                <img v-else src="@/assets/img/p08_user/user.jpg">
                                 <span>{{item.user}}</span>
                                 <!-- <ul class="action">
                                     <li class="iconHover">
@@ -112,7 +113,8 @@
                             <ul class="messageItems" v-show="message[0].show"> 
                                 <li>
                                     <div class="topBlock">
-                                        <img src="@/assets/img/p08_user/user.jpg" alt="">
+                                        <img v-if="item.img !== ''" :src="item.img">
+                                        <img v-else src="@/assets/img/p08_user/user.jpg">
                                         <span>{{ item.user }}</span>
                                         <!-- <ul class="action">
                                             <li class="iconHover">
@@ -184,7 +186,8 @@
     const messageContent = ref();
     const findPic = ref();
     const thisIndex = ref();
-    const curentUrl = ref()
+    const curentUrl = ref();
+    const findU_PIC = ref();
     const messages = ref([
         // [
             //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
@@ -248,24 +251,24 @@
         })
         .then((res)=>{
             const messageNewData = res.data.map(item => {
-                let picPath = item[0].img;
                 try {
-                    findPic.value = require(`@/assets/img/p08_user/bbn.jpg`);
+                findU_PIC.value = require(`@/assets/img/p08_user/${item.img}`);
                 } catch (err) {
-                    picPath = '暫放之後刪.png';
-                    findPic.value = ('')
+                findU_PIC.value = `https://tibamef2e.com/tgd104/g2/img/${item.img}`;
+                }
+                if(item.img === null){
+                    findU_PIC.value = ''
                 }
                 return{
                     id: item.ID,
-                    img: findPic.value,
+                    img: findU_PIC.value,
                     user: item.user,
                     content: item.content,
                     time: item.CREATE_TIME
                 }
             })
-            
             messageObject.value = messageNewData;
-            // console.log(messageObject.value);
+            
             const arrayA = replyObject.value;
             const arrayB = messageObject.value;
             const arrayC = [];
@@ -276,17 +279,7 @@
                 filteredB.forEach(b => tempArr.push(b));
                 arrayC.push(tempArr);
             });
-                
-            // console.log(arrayA);
-            // console.log(arrayB);
-            // console.log(arrayC);
             
-            // 抓當下的時間 但是整串留言都會是同一個時間
-            // const now = new Date();
-            // const year = now.getFullYear();
-            // const month = (now.getMonth() + 1).toString().padStart(2, '0');
-            // const day = now.getDate().toString().padStart(2, '0');
-            // const currentDate = `${year}年${month}月${day}日`;
             const newArray = arrayC.map((item)=>{
                 return item.map((innerItem) => {
                     return {...innerItem, replyMessage: '查看更多回覆', showReport: false, show: false};
@@ -296,7 +289,7 @@
             const newArr = newArray.map(subArr => {
                 return subArr.map(obj => {
                     return Object.entries(obj).reduce((acc, [key, value]) => {
-                        acc[key] = isNaN(value) ? value : Number(value);
+                        acc[key] = value === '' ? '' : isNaN(value) ? value : Number(value);
                         return acc;
                     }, {});
                 });
@@ -316,16 +309,17 @@
         .post(`${API_URL}get_reply.php`)
         .then((res)=>{
             const replyNewData = res.data.map(item => {
-                let picPath = item.img;
                 try {
-                    findPic.value = require(`@/assets/img/p08_user/bbn.jpg`);
+                findU_PIC.value = require(`@/assets/img/p08_user/${item.img}`);
                 } catch (err) {
-                    picPath = '暫放之後刪.png';
-                    findPic.value = ('')
+                findU_PIC.value = `https://tibamef2e.com/tgd104/g2/img/${item.img}`;
+                }
+                if(item.img === null){
+                    findU_PIC.value = ''
                 }
                 return{
                     messageId: item.MESSAGE_ID,
-                    img: findPic.value,
+                    img: findU_PIC.value,
                     user: item.user,
                     content: item.content,
                     time: item.CREATE_TIME
