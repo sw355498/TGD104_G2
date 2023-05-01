@@ -49,7 +49,8 @@
     import Modal from "@/components/modal.vue";
     import { API_URL } from "@/config";
     import axios from "axios";
-    import router from '@/router'
+    import router from '@/router';
+    import Swal from "sweetalert2/dist/sweetalert2.js";
 
     const showModal = ref(true)
     const account = ref('')
@@ -98,6 +99,16 @@
             }
             if (response.data.hasOwnProperty('errorPassword')) {
                 addError("password", "密碼尚未輸入");
+            }
+            if(response.data === '帳號已被封鎖' || response.data === '帳號已被刪除'){
+                showModal.value = false
+                await Swal.fire({
+                    title: response.data,
+                    icon: "error",
+                    confirmButtonText: "確認",
+                })
+                showModal.value = true
+
             }
 
         } catch (e) {
