@@ -50,6 +50,14 @@ $db_select = "";
 
 全容君(KarenChuan),黃資蓉(candybomb),阮炫瑞(lucyruan0419),林欣妤(itshsinyu),詹皓丞(sw355498),張家恩(bbn718)
 
+## 功能:
+
+前台會員測試帳號密碼
+
+```bash
+帳號： amy@example.com
+密碼： 123456
+```
 
 ## 專案技術
 
