@@ -223,12 +223,15 @@ const confirming = () => {
 //密碼表單送出
 const passwordSubmit = async (e) => {
     e.preventDefault();
+    // 清除可能存在的error
+    removeError('oldPassword')
+    removeError('newPassword')
+    removeError('confirmPassword')
+    
     if(confirmPassword.value !== newPassword.value){
         addError('newPassword', '密碼不一致')
         addError('confirmPassword', '密碼不一致')
     } else {
-        removeError('newPassword')
-        removeError('confirmPassword')
         try {
             const response = await axios.post(`${API_URL}changePassword.php`, {
                 account: account.value,
