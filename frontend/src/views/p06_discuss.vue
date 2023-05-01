@@ -100,21 +100,21 @@
                 href="#"
                 class="p06_shareBtn"
                 target="_blank"
-                @click="openShareWindow('https://www.facebook.com/sharer.php?u=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/')"
+                @click="openShareWindow(`https://www.facebook.com/sharer.php?u=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/${item.ID}`)"
                 ><i class="fa-brands fa-square-facebook"></i
               ></a>
               <a
                 href="#"
                 class="p06_shareBtn"
                 target="_blank"
-                @click="openShareWindow('https://social-plugins.line.me/lineit/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/')"
+                @click="openShareWindow(`https://social-plugins.line.me/lineit/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/${item.ID}`)"
                 ><i class="fa-brands fa-line"></i
               ></a>
               <a
                 href="#"
                 class="p06_shareBtn"
                 target="_blank"
-                @click="openShareWindow('https://www.twitter.com/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/')"
+                @click="openShareWindow(`https://www.twitter.com/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/${item.ID}`)"
                 ><i class="fa-brands fa-square-twitter"></i
               ></a>
             </div>
@@ -234,8 +234,19 @@ function shareBtn(index) {
   }
 }
 
-function openShareWindow(link) {
-  window.open(link, "mywindow", "width=700, height=400");
+function openShareWindow(index) {
+  window.open(index, 'share', "height: 600, width: 800")
+  // let link = ''
+  // if(brand === 'facebook'){
+  //   link = `https://www.facebook.com/sharer.php?u=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/${ID}`;
+  //   window.open(link, "mywindow", "width=700, height=400");
+  // }else if(brand === 'line'){
+  //   link = `https://social-plugins.line.me/lineit/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/${ID}`;
+  //   window.open(link, "mywindow", "width=700, height=400");
+  // }else{
+  //   link = `https://www.twitter.com/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/${ID}`;
+  //   window.open(link, "mywindow", "width=700, height=400");
+  // }
 }
 
 async function selectDiscuss(index) {

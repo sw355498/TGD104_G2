@@ -34,9 +34,9 @@
                             <li @click="shareBtn()">分享</li>
                         </ul>
                         <div class="p06_shareButton">
-                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow('https://www.facebook.com/sharer.php?u=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/');"><i class="fa-brands fa-square-facebook"></i></a>
-                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow('https://social-plugins.line.me/lineit/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/');"><i class="fa-brands fa-line"></i></a>
-                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow('https://www.twitter.com/share?url=https://tibamef2e.com/tgd104/g2/discuss/discuss_content/');"><i class="fa-brands fa-square-twitter"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(`https://www.facebook.com/sharer.php?u=${curentUrl}`);"><i class="fa-brands fa-square-facebook"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(`https://social-plugins.line.me/lineit/share?url=${curentUrl}`);"><i class="fa-brands fa-line"></i></a>
+                            <a href="#" class="p06_shareBtn" target="_blank" @click="openShareWindow(`https://www.twitter.com/share?url=${curentUrl}`);"><i class="fa-brands fa-square-twitter"></i></a>
                         </div>
                     </div>
                 </div>
@@ -184,6 +184,7 @@
     const messageContent = ref();
     const findPic = ref();
     const thisIndex = ref();
+    const curentUrl = ref()
     const messages = ref([
         // [
             //     {img:'@/assets/img/p08_user/user.jpg', user:'Ruby Shi', content:'問身高體重我就覺得有問題了', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false},
@@ -210,6 +211,8 @@
         //     {img:'@/assets/img/p08_user/user.jpg', user:'Tom Lee', content:'上班時間是1900-0200就該知道了吧', time:'2018年5月1日', replyMessage: '查看更多回覆', showReport: false, show:false}
         // ]
     ])
+
+    curentUrl.value = window.location.href;
     
     // 按讚按鈕變顏色=============
     const state = reactive({
@@ -474,7 +477,6 @@
     }
 
     function openShareWindow(index){
-        // window.location.href = `${index}`;
         window.open(index, 'share', "height: 600, width: 800")
     }
         
