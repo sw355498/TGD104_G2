@@ -48,6 +48,7 @@
     const userName =ref('')
     const userImage = ref('')
     const imgAlt = ref('')
+    const userLevel= ref()
 
     let id = 0
     const fontawesome = ref(' fa-solid fa-fw')
@@ -73,7 +74,6 @@
     //父元件傳過來的值
     const props = defineProps({
         userID: Number,
-        userLevel: Boolean,
     })
 
     onMounted(() =>{
@@ -125,6 +125,7 @@
                 }
             }
             imgAlt.value = response.data[0].PIC
+            userLevel.value = response.data[0].ACCOUNT_TYPE_ID
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data.message);
