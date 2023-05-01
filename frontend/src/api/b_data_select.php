@@ -98,10 +98,13 @@
     //抓出全部且依照順序封裝成一個二維陣列
     //PDO::FETCH_ASSOC 回傳一個index值是column name 的陣列
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
-    foreach($data as &$row){
-        $row['CONTENT'] = htmlspecialchars_decode($row['CONTENT']);
-        $row['CONTENT'] = strip_tags($row['CONTENT']);
+
+    // 當查詢時的是討論版時會將內容的HTML實體字符轉換回原始字符
+    if($whichTable == 'DISCUSS'){
+        foreach($data as &$row){
+            $row['CONTENT'] = htmlspecialchars_decode($row['CONTENT']);
+            $row['CONTENT'] = strip_tags($row['CONTENT']);
+        }
     }
 
     echo json_encode($data);
