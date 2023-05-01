@@ -20,6 +20,7 @@
                             class="form-control"
                             style="margin-bottom: 20px"
                             id="oldPassword"
+                            minlength="6"
                             @focus="removeError('oldPassword')"
                         />
                     </div> 
@@ -31,6 +32,8 @@
                             type="password"
                             class="form-control mb-3"
                             id="newPassword"
+                            minlength="6"
+                            placeholder="密碼至少一個數字一個英文字，長度不得小於6個字"
                             @focus="removeError('newPassword')"
                         />
                     </div> 
@@ -42,6 +45,8 @@
                             type="password"
                             class="form-control mb-3"
                             id="confirmPassword"
+                            minlength="6"
+                            placeholder="密碼至少一個數字一個英文字，長度不得小於6個字"
                             @blur="confirming"
                             @focus="removeError('confirmPassword')"
                         />
