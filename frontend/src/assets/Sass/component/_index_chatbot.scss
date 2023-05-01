@@ -139,7 +139,7 @@
         margin: 5px 0;
         @include rwd('sm'){
           // 手機上的樣式sm: 428px,
-          margin: 0px 10px ;
+          margin: 5px 10px ;
         }
       }
       .chatbot_news_container {
