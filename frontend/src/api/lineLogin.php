@@ -21,7 +21,7 @@
     
     if(count($data) === 0){
         // 建立SQL
-        $sql = "INSERT INTO USER (ACCOUNT, NICKNAME, LOGIN_TYPE_ID, ACCOUNT_TYPE_ID, CREATE_TIME) VALUES (:USERID, :NICKNAME, 3, :ACCOUNT_TYPE_ID, NOW())";
+        $sql = "INSERT INTO USER (ACCOUNT, NICKNAME, LOGIN_TYPE_ID, ACCOUNT_TYPE_ID, CREATE_TIME) VALUES (:USERID, :NICKNAME, 2, :ACCOUNT_TYPE_ID, NOW())";
 
         // 執行
         $statement = $pdo->prepare($sql);

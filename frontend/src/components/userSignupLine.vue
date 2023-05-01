@@ -12,7 +12,7 @@
   // LINE 登入
   function openLineLogin(response) {
     let client_id = '1660893613';
-    let redirect_uri = 'http://localhost:8080/index';
+    let redirect_uri = 'https://tibamef2e.com/tgd104/g2/index';
     let link = 'https://access.line.me/oauth2/v2.1/authorize?';
     link += 'response_type=code';
     link += '&client_id=' + client_id;
@@ -42,7 +42,7 @@
     data: {
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: 'http://localhost:8080/index',
+      redirect_uri: 'https://tibamef2e.com/tgd104/g2/index',
       client_id: '1660893613',
       client_secret: 'dd30d5f42bc1a0e89a1eb27679c5a488'
     },
@@ -79,11 +79,6 @@
             accountTypeID: accountTypeID.value
           })
           .then((response)=>{
-            if(response.data.message === '登入成功'){
-              // alert(response.data.message);
-            }else{
-              alert(response.data.message);
-            }
             localStorage.setItem("token", response.data.id);
             window.location.reload(); 
           })
@@ -97,65 +92,5 @@
       });
     }
   });
-
-  // axios({
-  //   method: 'post',
-  //   url: 'https://api.line.me/oauth2/v2.1/token',
-  //   headers: {
-  //     'Content-Type': 'application/x-www-form-urlencoded'
-  //   },
-  //   data: qs.stringify({
-  //     grant_type: 'authorization_code',
-  //     code: code,
-  //     redirect_uri: 'https://tibamef2e.com/tgd104/g2/index',
-  //     client_id: '1660893613',
-  //     client_secret: 'dd30d5f42bc1a0e89a1eb27679c5a488'
-  //   })
-  // })
-  // .then((response)=>{
-  //   accessToken.value = response.data.access_token;
-  //   expiresIn.value = response.data.expires_in;
-  //   idToken.value = response.data.id_token;
-
-  //   // 使用獲得的idToken取得使用者資訊
-  //   axios({
-  //     metod: 'post',
-  //     url: 'https://api.line.me/oauth2/v2.1/verify',
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       'Authorization': 'Bearer ' + accessToken.value
-  //     },
-  //     data: qs.stringify({
-  //       id_token: idToken.value,
-  //       client_id: '1660893613'
-  //     })
-  //   })
-  //   .then((response)=>{
-  //     userId.value = response.data.sub;
-  //     nickname.value = response.data.name;
-  //     accountTypeID.value = 1;
-  //     axios
-  //     .post(`${API_URL}lineLogin.php`, {
-  //       userId: userId.value,
-  //       nickname: nickname.value,
-  //       accountTypeID: accountTypeID.value
-  //     })
-  //     .then((response)=>{
-  //       if(response.data === '登入成功'){
-  //         alert('test');
-  //       }else{
-  //         alert(response.data);
-  //       }
-  //       // localStorage.setItem("token", userId.value);
-  //     })
-  //     .catch((error)=>{
-  //       alert('發生了一些錯誤，請聯絡管理員!')
-  //     })
-  //   })
-  //   .catch((error)=>{
-  //     console.log(error);
-  //   })
-
-  // })
 
 </script>
