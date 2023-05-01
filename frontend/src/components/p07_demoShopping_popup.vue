@@ -166,7 +166,7 @@ export default {
     }
     function scrollToStep2() {
       const element = document.getElementById('tour2');
-      console.log(element);
+    //   console.log(element);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }

@@ -108,7 +108,7 @@ import { API_URL } from '@/config' // 統一 api 路徑變數
 import Swal from 'sweetalert2/dist/sweetalert2.js'
     // 判斷是不是會員
     const token = localStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
     const name = ref('');
     const pic = ref('');
     if (token) {
@@ -123,7 +123,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
         } else{
             pic.value = require('@/assets/img/p08_user/user.jpg')
         }
-        console.log(pic.value);
+        // console.log(pic.value);
         
         })
         .catch((error) => {
@@ -160,14 +160,14 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const urlExist = ref('')
     // 傳送表單到資料庫
     const submitForm = async () => {
-        console.log(allURL.value);
+        // console.log(allURL.value);
         try { 
             // 判断url是否已存在于allURL.value中
             const urlExists = allURL.value.some(word =>word.WEBURL ===  url.value);
             if (urlExists) {
-                console.log('網址已經有了');
+                // console.log('網址已經有了');
                 urlExist.value = true;
-                console.log(urlExist.value);
+                // console.log(urlExist.value);
             return urlExist.value, isFormValid.value;
             }else{
                 urlExist.value = false;
@@ -183,7 +183,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
                 token: token,
             })
             // 提交成功後的處理
-            console.log('成功送出:', response.data);
+            // console.log('成功送出:', response.data);
             sweetAlert();
             // 刷新jsgrid資料
             allURL.value = await allData();
@@ -229,7 +229,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
         } catch (error) {
             console.log(error);
         }
-        console.log(allURL.value)
+        // console.log(allURL.value)
     };
     // 需要 search
     const searchText = ref("")      //search的input
@@ -245,8 +245,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             const response = await axios.post(`${API_URL}url_search.php`, {
                 search : searchText.value
             });
-            console.log('search');
-            console.log( response.data.data);
+            // console.log('search');
+            // console.log( response.data.data);
             return response.data.data;
 
         } catch (error) {
@@ -257,7 +257,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const loadJsGrid = () => {
         $("#jsGrid").jsGrid({
             width: "100%",
-            // filtering: true,
             filtering: false,
             inserting: false,
             editing: false,
@@ -277,13 +276,10 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
             pageNavigatorNextText: "...",    //最大數量頁面按鈕超出時右邊顯示
             pageNavigatorPrevText: "...",       //最大數量頁面按鈕超出時右邊顯示
             
-            // loadMessage: "全速載入中，感謝耐心等候...",
-            // loadIndication: true,
             data: allURL.value,
             fields: [
                 { name: "STA_EDATE", title:"回報日期", type: "text", width: 100, },
                 { name: "STATUS_NAME", title:"回報狀態",type: "text",
-                // { name: "STATUS_NAME", title:"回報狀態",type: "select",
                 itemTemplate:function(value){
                     let status = value ? value : '確認為詐騙網站';
                     return status;
@@ -292,33 +288,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
                 { name: "WEBURL", title:"網址", type: "text", width: 200 },
 
             ],
-            // 过滤
-            // controller: {
-            //     data: allURL.value,
-            //     loadData: function (filter) {
-            //         return this.data.filter(function (item) {
-            // // 声明返回数组的长度
-            // const flags = new Array(filterColumn.length)
-            //             // 三个筛选条件（true,true,true）
-            //             flags.fill(true)
-            //             for (var i = 0; i < filterColumn.length; i++) {
-            //                 const key = filterColumn[i]
-            //                 // 过滤掉默认值" "
-            //                 if (filter[key] !== " ") {
-            //                     /*
-            //                     (item[key].indexOf(filter[key]) > -1)表示只要包含某一部分字段，就为true
-            //                     例如目标列为：911-5143 Luctus Ave
-            //                     输入：911
-            //                     也可以找到这一行
-            //                      */
-            //                     flags[i] = (item[key].indexOf(filter[key]) > -1)
-            //                 }
-            //             }
-            //             // 返回的数组里面的元素必须都为true
-            //             return flags.indexOf(false) === -1
-            //         });
-            //     },
-            // }
         });
     };
 </script>
