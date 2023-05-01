@@ -283,7 +283,7 @@
                 </div>
             </div>
             <!-- ======== 外掛 jsGrid ========= -->
-            <div v-if="!isJsgrid" class="text-center">
+            <div v-if="!isJsgrid" class="text-center position-relative">
                 <div id="load">
                     <div>G</div>
                     <div>N</div>
@@ -1298,8 +1298,9 @@ font-size: 36px;
   position:absolute;
   width:600px;
   height:36px;
-  left:calc(50% + 150px);
-  top:50%;
+  left:calc(50% + 300px);
+  top:77%;
+  transform: translate(-50%, -50%);
   margin-left:-300px;
   overflow:visible;
   user-select:none;
