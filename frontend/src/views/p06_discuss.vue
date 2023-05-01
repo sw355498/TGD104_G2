@@ -271,7 +271,7 @@ async function selectDiscuss(index) {
         } catch (err) {
           findU_PIC.value = `https://tibamef2e.com/tgd104/g2/img/${item.U_PIC}`;
         }
-        if(item.NONNAME === 2){
+        if(item.NONNAME === 2 || item.U_PIC === null){
           findU_PIC.value = ''
         }
         return {
