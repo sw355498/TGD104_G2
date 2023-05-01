@@ -248,7 +248,7 @@
             }
         }
         .messageMain{
-            margin-top: 25px;
+            margin-top: 15px;
             padding: 0 80px;
             @include rwd('md'){
                 padding: 0 15px;
@@ -345,15 +345,16 @@
                 }
             }
             .reply{
-                padding: 10px 0px 25px 80px;
+                padding-left: 80px;
+                padding-bottom: 10px;
                 @include rwd('sm'){
-                    padding: 10px 0px 15px 22px;
+                    padding: 10px 0px 15px 60px;
                 }
                 .messageItems{
                     list-style: none;
                     padding: 0px;
                     margin: 0px;
-                    padding-top: 25px;
+                    padding-top: 15px;
                 }
             }
         }

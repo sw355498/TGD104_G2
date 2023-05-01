@@ -71,8 +71,13 @@
         <div class="topBlock_p06_discuss">
           <div class="author">
             <img
+              v-if="item.U_PIC !== ''"
+              :src="item.U_PIC"
+              class="pic_p06_discuss"
+            />
+            <img
+              v-else
               src="../assets/img/p08_user/user.jpg"
-              alt="cat"
               class="pic_p06_discuss"
             />
             <span class="paragraph">{{
@@ -152,7 +157,6 @@
               :src="item.PIC"
               v-if="item.PIC !== ''"
               @error="item.PIC = ''"
-              alt="此作者沒有上傳圖片"
             />
             <span v-else>此作者沒有上傳圖片</span>
           </div>
@@ -214,6 +218,7 @@ const perpage = 10;
 const currentPage = ref(1);
 const search = ref("");
 const findPic = ref();
+const findU_PIC = ref();
 const categories = ref([]);
 const selectedCategory = ref("");
 const currentUser = localStorage.getItem('token');
@@ -256,12 +261,18 @@ async function selectDiscuss(index) {
     })
     .then((response) => {
       const newData = response.data.map((item) => {
-        let picPath = item.PIC;
         try {
-          findPic.value = require(`@/assets/img/p06_discuss/${picPath}`);
+          findPic.value = require(`@/assets/img/p06_discuss/${item.PIC}`);
         } catch (err) {
-          findPic.value = `https://tibamef2e.com/tgd104/g2/img/${picPath}`;
-          // findPic.value = "";
+          findPic.value = `https://tibamef2e.com/tgd104/g2/img/${item.PIC}`;
+        }
+        try {
+          findU_PIC.value = require(`@/assets/img/p08_user/${item.U_PIC}`);
+        } catch (err) {
+          findU_PIC.value = `https://tibamef2e.com/tgd104/g2/img/${item.U_PIC}`;
+        }
+        if(item.NONNAME === 2){
+          findU_PIC.value = ''
         }
         return {
           ID: item.ID,
@@ -271,11 +282,11 @@ async function selectDiscuss(index) {
           NICKNAME: item.NICKNAME,
           NONNAME: item.NONNAME,
           PIC: findPic.value,
-          TITLE: item.TITLE,
+          U_PIC: findU_PIC.value,
+          TITLE: item.TITLE
         };
       });
       articleList.value = newData;
-      console.log(articleList.value[0].CREATE_TIME);
       nextTick(() => {
         ellipsisList.value = document.querySelectorAll(".ellipsisList");
         p06_shareButton.value = document.querySelectorAll(".p06_shareButton");
@@ -371,14 +382,8 @@ const pageEnd = computed(() => {
   return currentPage.value * perpage;
 });
 
-// onMounted(() => {
-//   selectDiscuss();
-//   selectCategory();
-// });
-
 onMounted(() => {
   getCategories();
-  selectDiscuss("");
   selectCategory();
 });
 

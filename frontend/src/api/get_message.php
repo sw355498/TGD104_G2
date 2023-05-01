@@ -11,7 +11,7 @@
     $discussId = isset($data['discussId']) ? htmlspecialchars($data['discussId']) : '';
     
     //建立SQL語法
-    $sql = "SELECT M.ID, U.PIC as img, U.NICKNAME as user, M.CONTENT as content, SUBSTRING(M.CREATE_TIME, 1, 10) as CREATE_TIME from MESSAGE M JOIN USER U on M.USER_ID = U.ID WHERE M.DISCUSS_ID = :DISCUSS_ID";
+    $sql = "SELECT M.ID, U.PIC as img, U.NICKNAME as user, M.CONTENT as content, M.CREATE_TIME from MESSAGE M JOIN USER U on M.USER_ID = U.ID WHERE M.DISCUSS_ID = :DISCUSS_ID";
 
     //執行並查詢
     $statement = $pdo->prepare($sql);

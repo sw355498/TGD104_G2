@@ -11,7 +11,7 @@
     $category = (isset($data['datas']) ? $data['datas'] : '');
 
     //建立 SQL 語法
-    $sql = "SELECT D.ID, U.NICKNAME, D.TITLE, D.PIC, D.CONTENT, D.NONNAME, D.CREATE_TIME, DT.CATEGORY
+    $sql = "SELECT D.ID, U.NICKNAME, D.TITLE, D.PIC, U.PIC as U_PIC, D.CONTENT, D.NONNAME, D.CREATE_TIME, DT.CATEGORY
             FROM DISCUSS D
             JOIN DISCUSS_TYPE DT ON D.DISCUSS_TYPE_ID = DT.ID
             JOIN USER U ON D.USER_ID = U.ID
