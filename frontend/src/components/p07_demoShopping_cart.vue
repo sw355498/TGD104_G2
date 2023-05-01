@@ -299,13 +299,13 @@ export default {
         const cityIdx = ref(0);
         const areaIdx = ref(0);
         const citiesData = computed(() => {
-            console.log('citiesTW');
-            console.log(citiesTW);
+            // console.log('citiesTW');
+            // console.log(citiesTW);
             return citiesTW;
         });
         const areasData = computed(() => {
-            console.log('citiesData.value[0].areas');
-            console.log(citiesData.value[0].areas);
+            // console.log('citiesData.value[0].areas');
+            // console.log(citiesData.value[0].areas);
         return citiesData.value[cityIdx.value].areas;
         });
         const zipCode = computed(() => {
@@ -329,7 +329,7 @@ export default {
             try { 
                 const response = await axios.get(`${API_URL}getStores.php`);
                 const addressList = response.data;
-                console.log(addressList);
+                // console.log(addressList);
                 return addressList
             } catch (error) {
                 // 提交失敗的處理
@@ -340,7 +340,7 @@ export default {
             async () => {
             //撈取資料庫的資料
             addressList.value = await allData();
-            console.log(addressList.value);
+            // console.log(addressList.value);
             }
         );
         // 超商
@@ -457,65 +457,60 @@ export default {
         const isCardPayment = computed(() => {
             return paymentMethod.value === 'creditCard'
         })
-        console.log(isCardPayment.value);
+        // console.log(isCardPayment.value);
         const validateCardNumber = () => {
-        if (paymentMethod.value !== 'creditCard') {
-            return true
-        }
-        // const cardNumberRegex = /^(\d{4}\s){3}\d{4}$/
-        // const cardNumberRegex = /^[0-9]{12}$/
-        const cardNumberRegex = /^\d{12,}$/;
-        const valid = cardNumberRegex.test(creditCardNumber.value)
-        if (!valid) {
-            cardNumberError.value = '請輸入有效的信用卡卡號'
-        } else {
-            cardNumberError.value = ''
-        }
-        return valid
+            if (paymentMethod.value !== 'creditCard') {
+                return true
+            }
+            const cardNumberRegex = /^\d{12,}$/;
+            const valid = cardNumberRegex.test(creditCardNumber.value)
+            if (!valid) {
+                cardNumberError.value = '請輸入有效的信用卡卡號'
+            } else {
+                cardNumberError.value = ''
+            }
+            return valid
         }
         const validateCardName = () => {
-        if (paymentMethod.value !== 'creditCard') {
-            return true
-        }
-        if (!creditCardName.value) {
-            cardNameError.value = '請輸入信用卡持卡人姓名'
-            return false
-        } else {
-            cardNameError.value = ''
-            return true
-        }
+            if (paymentMethod.value !== 'creditCard') {
+                return true
+            }
+            if (!creditCardName.value) {
+                cardNameError.value = '請輸入信用卡持卡人姓名'
+                return false
+            } else {
+                cardNameError.value = ''
+                return true
+            }
         }
 
         const validateCardExpDate = () => {
-        if (paymentMethod.value !== 'creditCard') {
-            return true
-        }
+            if (paymentMethod.value !== 'creditCard') {
+                return true
+            }
 
-        // const expDateRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/
-        // const expDateRegex = /^\d{2}(0[1-9]|1[0-2])$/
-        const expDateRegex = /^(0[1-9]|1[0-2])(\d{2})$/
-        const valid = expDateRegex.test(expirationDate.value)
-        if (!valid) {
-            cardExpDateError.value = '請輸入有效數字 (格式: MMYY)'
-        } else {
-            cardExpDateError.value = ''
+            const expDateRegex = /^(0[1-9]|1[0-2])(\d{2})$/
+            const valid = expDateRegex.test(expirationDate.value)
+            if (!valid) {
+                cardExpDateError.value = '請輸入有效數字 (格式: MMYY)'
+            } else {
+                cardExpDateError.value = ''
+            }
+            return valid
         }
-        return valid
-        }
-
         const validsecuritycode = () => {
-        if (paymentMethod.value !== 'creditCard') {
-            return true
-        }
+            if (paymentMethod.value !== 'creditCard') {
+                return true
+            }
 
-        const cvvRegex = /^[0-9]{3,4}$/
-        const valid = cvvRegex.test(securitycode.value)
-        if (!valid) {
-            securitycodeError.value = '請輸入有效的信用卡安全碼'
-        } else {
-            securitycodeError.value = ''
-        }
-        return valid
+            const cvvRegex = /^[0-9]{3,4}$/
+            const valid = cvvRegex.test(securitycode.value)
+            if (!valid) {
+                securitycodeError.value = '請輸入有效的信用卡安全碼'
+            } else {
+                securitycodeError.value = ''
+            }
+            return valid
         }
 
         const isFormValid = computed(() => {
@@ -524,6 +519,7 @@ export default {
             const isCardNameValid = validateCardName()
             const isCardExpDateValid = validateCardExpDate()
             const isCardsecuritycodeValid = validsecuritycode()
+                // console.log(isFormValid.value);
 
             return (
                 isCardNumberValid &&
@@ -538,7 +534,6 @@ export default {
             }
             return true
         })
-        console.log(isFormValid);
         return {
             totalPrice,
             updateProductNumber,

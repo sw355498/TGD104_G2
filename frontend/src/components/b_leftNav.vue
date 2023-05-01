@@ -25,7 +25,7 @@
                             {{item.name}}
                     </a>
                 </li>
-                <li v-if="userLevel">
+                <li v-if="userLevel == 3">
                     <a
                         @click="changeTab('staff')"  
                         class="link" 
@@ -48,6 +48,7 @@
     const userName =ref('')
     const userImage = ref('')
     const imgAlt = ref('')
+    const userLevel= ref()
 
     let id = 0
     const fontawesome = ref(' fa-solid fa-fw')
@@ -73,7 +74,6 @@
     //父元件傳過來的值
     const props = defineProps({
         userID: Number,
-        userLevel: Boolean,
     })
 
     onMounted(() =>{
@@ -96,7 +96,7 @@
         let seconds=today.getSeconds();
         if(seconds<10)seconds="0"+seconds
                 
-        clock.value=`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}(${weekDay[today.getDay()]}) ${hours}:${minutes}:${seconds}`
+        clock.value=`${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}(${weekDay[today.getDay()]}) ${hours}:${minutes}:${seconds}`
     },1000)
 
     //撈取當前登入帳號的資料
@@ -125,6 +125,7 @@
                 }
             }
             imgAlt.value = response.data[0].PIC
+            userLevel.value = response.data[0].ACCOUNT_TYPE_ID
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data.message);

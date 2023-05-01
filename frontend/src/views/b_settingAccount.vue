@@ -20,6 +20,7 @@
                             class="form-control"
                             style="margin-bottom: 20px"
                             id="oldPassword"
+                            minlength="6"
                             @focus="removeError('oldPassword')"
                         />
                     </div> 
@@ -31,6 +32,8 @@
                             type="password"
                             class="form-control mb-3"
                             id="newPassword"
+                            minlength="6"
+                            placeholder="密碼至少一個數字一個英文字，長度不得小於6個字"
                             @focus="removeError('newPassword')"
                         />
                     </div> 
@@ -42,6 +45,8 @@
                             type="password"
                             class="form-control mb-3"
                             id="confirmPassword"
+                            minlength="6"
+                            placeholder="密碼至少一個數字一個英文字，長度不得小於6個字"
                             @blur="confirming"
                             @focus="removeError('confirmPassword')"
                         />
@@ -142,6 +147,9 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 const showModal = ref(false); //彈窗顯示設定
 const bigModal = ref(false); //彈窗寬度是否要為width 75%
 
+//表單驗證所需的正規式
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
+
 const fileImage = ref()
 const fileImageName = ref()
 const oldPassword = ref('')
@@ -227,8 +235,11 @@ const passwordSubmit = async (e) => {
     removeError('oldPassword')
     removeError('newPassword')
     removeError('confirmPassword')
-    
-    if(confirmPassword.value !== newPassword.value){
+
+    // 前端驗證使用正規式驗證password是否包含至少一個數字一個英文字長度不得小於6個字的格式
+    if(!passwordRegex.test(newPassword.value)){
+        addError("newPassword", "密碼至少一個數字一個英文字，長度不得小於6個字");
+    }else if(confirmPassword.value !== newPassword.value){
         addError('newPassword', '密碼不一致')
         addError('confirmPassword', '密碼不一致')
     } else {

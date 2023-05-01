@@ -124,11 +124,20 @@
                     type="password"
                     placeholder="請輸入密碼"
                     v-model.trim="passwordLogin"
-                    
                   />
-                  <div v-if="signupFailed" class="error_signup">帳號或密碼錯誤</div>
+                  <!-- 帳號密碼錯誤 -->
+                  <div v-if="signupFailed" class="error_signup">
+                    帳號或密碼錯誤
+                  </div>
+                  <!-- 帳號已被封鎖 -->
+                  <div v-if="signupBlock" class="error_signup">
+                    帳號已被封鎖
+                  </div>
+                  <!-- 帳號已被刪除 -->
+                  <div v-if="signupCanceled" class="error_signup">
+                    帳號已被刪除
+                  </div>
                   <div class="div_p08_user_loginType">
-                    
                     <button
                       type="submit"
                       class="medium_button btn_p08_user_loginType"
@@ -169,12 +178,13 @@ export default {
       // accountTypeID:"",
       passwordsMatch: false,
       signupFailed: false,
+      signupBlock:false,
+      signupCanceled:false,
 
       active_tab: 0,
       tabs: [
         {
           label: "註冊會員 | Sign up",
-          // content: ``,
         },
 
         {
@@ -232,9 +242,8 @@ export default {
                 // 登入成功後，關閉視窗外還要加會員名稱顯示於nav
                 this.$emit("close");
                 localStorage.setItem("token", response.data.id);
-                console.log(response);
                 // 執行登出流程 重新整理頁面
-                 location.reload();
+                location.reload();
               })
               .catch((error) => {
                 console.log(error.response);
@@ -293,23 +302,42 @@ export default {
           // token 仍在有效期內，可以進行 API 呼叫等操作
           console.log(response);
           // alert("登入成功");
-        // 執行登出流程 重新整理頁面
-        location.reload();
+          // 執行登出流程 重新整理頁面
+          location.reload();
         })
         .catch((error) => {
           console.log(error.response);
           // 在這裡處理登入失敗要幹嘛
-          this.signupFailed = true;
+          // this.signupFailed = true;
+          // alert("登入失敗");
+          if (error.response.status === 400) {
+            // 帳號或密碼錯誤
+            console.log("帳號或密碼錯誤");
+            this.signupFailed = true;
+          } else if (error.response.status === 401) {
+            // 帳號被封鎖
+            console.log("帳號已被封鎖");
+            this.signupBlock = true;
+            // alert("帳號已被封鎖");
+          } else if (error.response.status === 402) {
+            // 帳號被封鎖
+            console.log("帳號已被刪除");
+            this.signupCanceled = true;
+          } else {
+            // 其他錯誤
+            console.log("登入失敗");
+            this.signupFailed = true;
+          }
         });
     },
   },
   computed: {},
-  
+
   watch: {
     // 監聽 localStorage 中的 tokenExpireTime
-    'localStorage.tokenExpireTime': function (newVal) {
-    this.checkAndClearToken();
-  }
+    "localStorage.tokenExpireTime": function (newVal) {
+      this.checkAndClearToken();
+    },
   },
 };
 </script>

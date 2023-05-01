@@ -34,6 +34,8 @@
                             type="password"
                             id="password"
                             @focus="removeError('password')"
+                            minlength="6"
+                            placeholder="密碼至少一個數字一個英文字，長度不得小於6個字"
                             required
                         />
                     </div>
@@ -283,7 +285,7 @@
                 </div>
             </div>
             <!-- ======== 外掛 jsGrid ========= -->
-            <div v-if="!isJsgrid" class="text-center">
+            <div v-if="!isJsgrid" class="text-center position-relative">
                 <div id="load">
                     <div>G</div>
                     <div>N</div>
@@ -401,6 +403,10 @@ const fields = ref([
 //彈窗設定
 const showModal = ref(false); //彈窗顯示設定
 const bigModal = ref(false); //彈窗寬度是否要為width 75%
+
+//表單驗證所需的正規式
+const emailRegex = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
 
 //資料庫USER所需要的變數
 const searchText = ref("")      //search的input
@@ -921,6 +927,16 @@ function fileChange(e){
 const handleSubmit = async (e) => {
     e.preventDefault();
     if(leftNavTag.value === 'user' || leftNavTag.value === 'staff'){
+        // 前端驗證使用正規是驗證account是否為 email格式
+        if (!emailRegex.test(account.value)) {
+            addError("account", "請輸入有效的電子郵件地址");
+            return;
+        }
+        // 前端驗證使用正規式驗證password是否包含至少一個數字一個英文字長度不得小於6個字的格式
+        if(!passwordRegex.test(password.value)){
+            addError("password", "密碼至少一個數字一個英文字，長度不得小於6個字");
+            return;
+        }
         try {
             const response = await axios.post(`${API_URL}add_user.php`, {
                 account: account.value,
@@ -928,6 +944,7 @@ const handleSubmit = async (e) => {
                 nickname: nickname.value,
                 accountTypeID: accountTypeID.value,
             });
+
             if (response.data === "帳號註冊成功") {
                 // 清除表單
                 account.value = "";
@@ -1263,21 +1280,6 @@ const removeError = (InputID) => {
         theErrorText.classList.add("d-none");
     }
 };
-
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    // 驗證表單url不等於空、email正確格式才可以送出
-    const isFormValid = computed(() => {
-        if (token !=='') {
-            return (
-            url.value !== '' 
-        )
-        }else{
-            return (
-                url.value !== '' &&
-                emailRegex.test(email.value)
-            )
-        }
-    })
 </script>
 
 <style lang="scss">
@@ -1298,8 +1300,9 @@ font-size: 36px;
   position:absolute;
   width:600px;
   height:36px;
-  left:calc(50% + 150px);
-  top:50%;
+  left:calc(50% + 300px);
+  top:77%;
+  transform: translate(-50%, -50%);
   margin-left:-300px;
   overflow:visible;
   user-select:none;

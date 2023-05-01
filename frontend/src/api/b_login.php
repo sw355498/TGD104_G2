@@ -14,7 +14,7 @@
     
     if(!empty(trim($account)) && !empty(trim($password))){
         // 建立SQL語法
-        $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT AND ACCOUNT_TYPE_ID IN (2, 3) AND USER_STATUS_ID = 1 ";
+        $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT AND ACCOUNT_TYPE_ID IN (2, 3)";
         $statement = $pdo->prepare($sql);
         $statement ->bindValue(":ACCOUNT", $account);
         $statement->execute();
@@ -22,17 +22,23 @@
         $data = $statement->fetch();
 
         if($data && password_verify($password, $data['PASSWORD'])){
-            // 登入成功
-            $response = array(
-                "success" => true,
-                "message" => "登入成功",
-                "id" => $data['ID'],
-                "account" => $data['ACCOUNT'],
-                "nickname" => $data['NICKNAME'],
-                "pic" => $data['PIC'],
-                "account_type_id" => $data['ACCOUNT_TYPE_ID'],
-            );
-            echo json_encode($response);
+            if($data['USER_STATUS_ID'] == 2){
+                echo '帳號已被封鎖';
+            } else if($data['USER_STATUS_ID'] == 3){
+                echo '帳號已被刪除';
+            } else if($data['USER_STATUS_ID'] == 1){
+                // 登入成功
+                $response = array(
+                    "success" => true,
+                    "message" => "登入成功",
+                    "id" => $data['ID'],
+                    "account" => $data['ACCOUNT'],
+                    "nickname" => $data['NICKNAME'],
+                    "pic" => $data['PIC'],
+                    "account_type_id" => $data['ACCOUNT_TYPE_ID'],
+                );
+                echo json_encode($response);
+            }
         } else {
             // 登入失敗
             echo '帳號或密碼錯誤';

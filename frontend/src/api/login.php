@@ -10,8 +10,10 @@
     $account = isset($data['account']) ? htmlspecialchars($data['account']) : '';
     $password = isset($data['password']) ? htmlspecialchars($data['password']) : '';
 
+    $response = array();
+    
     if(!empty(trim($account)) && !empty(trim($password))){
-        // 建立SQL語法(備忘:這裡要接收USER還是USER_REGISTER)
+        // 建立SQL語法
         $sql = "SELECT * FROM USER WHERE ACCOUNT = :ACCOUNT";
         $statement = $pdo->prepare($sql);
         $statement ->bindValue(":ACCOUNT", $account);
@@ -20,13 +22,25 @@
         $data = $statement->fetch();
 
         if($data && password_verify($password, $data['PASSWORD'])){
-            // 登入成功
-            $response = array(
-                "success" => true,
-                "message" => "登入成功",
-                "id" => $data['ID']
-            );
-            echo json_encode($response);
+            if($data['USER_STATUS_ID'] == 2){
+                http_response_code(401);//回傳失敗訊息給前端
+                echo '帳號已被封鎖';
+            } else if($data['USER_STATUS_ID'] == 3){
+                http_response_code(402);//回傳失敗訊息給前端
+                echo '帳號已被刪除';
+            } else if($data['USER_STATUS_ID'] == 1){
+                // 登入成功
+                $response = array(
+                    "success" => true,
+                    "message" => "登入成功",
+                    "id" => $data['ID'],
+                    "account" => $data['ACCOUNT'],
+                    "nickname" => $data['NICKNAME'],
+                    "pic" => $data['PIC'],
+                    "account_type_id" => $data['ACCOUNT_TYPE_ID'],
+                );
+                echo json_encode($response);
+            }
         } else {
             // 登入失敗
             http_response_code(400);//回傳失敗訊息給前端
@@ -35,6 +49,12 @@
         }
     } else {
         // 資料不完整
-        echo '帳號與密碼尚未輸入';
+        if (empty($account)) {
+            $response['errorAccount'] = '帳號尚未輸入';
+        }
+        if (empty($password)) {
+            $response['errorPassword'] = '密碼尚未輸入';
+        }
+        echo json_encode($response);
     }
 ?>
