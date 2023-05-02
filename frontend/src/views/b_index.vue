@@ -709,12 +709,12 @@ watch(leftNavTag, async (newTab) => {
                 .on("click", operate);
                 $buttonContainer.append($check);
 
-                let $revise = $("<button>")
-                .text("修改")
-                .addClass("small_button mx-1")
-                .attr("data-id", item["ID"])
-                .on("click", operate);
-                $buttonContainer.append($revise);
+                // let $revise = $("<button>")
+                // .text("修改")
+                // .addClass("small_button mx-1")
+                // .attr("data-id", item["ID"])
+                // .on("click", operate);
+                // $buttonContainer.append($revise);
 
                 return $buttonContainer;
             }},
