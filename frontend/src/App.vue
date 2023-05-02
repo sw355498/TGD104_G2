@@ -31,17 +31,10 @@ export default {
     };
   },
   mounted() {
-    this.init();
-
+    particlesJS('particles-js', particlesConfig);
     setTimeout(() => {
       this.loading = false;
     }, 500);
-  },
-  methods: {
-    init() {
-      particlesJS("particles-js", particlesConfig);
-      // document.body.style.overflow = "hidden";
-    },
   },
   components: {
     Loading,
@@ -89,9 +82,12 @@ export default {
   }
 }
 #particles-js {
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 @keyframes neon {
