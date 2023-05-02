@@ -360,7 +360,7 @@ const fields = ref([
     { name: "建立日期", type: "text", width: 80 },
     { name: "登入方式", type: "text", width: 60 },
     { name: "狀態", type: "text", width: 50 },
-    { name: "操作", width: 150, itemTemplate: function (value, item) {
+    { name: "操作", width: 150, sorting: false, itemTemplate: function (value, item) {
         // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
         let $buttonContainer = $("<div>");
 
@@ -457,7 +457,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "建立日期", type: "text", width: 80 },
             { name: "登入方式", type: "text", width: 60 },
             { name: "狀態", type: "text", width: 50 },
-            { name: "操作", width: 150, itemTemplate: function (value, item) {
+            { name: "操作", width: 150, sorting: false, itemTemplate: function (value, item) {
                 // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
                 let $buttonContainer = $("<div>");
 
@@ -511,7 +511,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "作者", type: "text", validate: "required" },
             { name: "建立日期", type: "text", width: 80 },
             { name: "狀態", type: "text", width: 80 },
-            { name: "操作", width: 180, itemTemplate: function (value, item) {
+            { name: "操作", width: 180, sorting: false, itemTemplate: function (value, item) {
                 // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
                 let $buttonContainer = $("<div>");
 
@@ -560,7 +560,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "回報人", type: "text" },
             { name: "回報日期", type: "text", width: 80 },
             { name: "回報狀態", type: "text"},
-            { name: "操作", width: 100, itemTemplate: function (value, item) {
+            { name: "操作", width: 100, sorting: false, itemTemplate: function (value, item) {
                 let $buttonContainer = $("<div>");
 
                 let $delete = $("<button>")
@@ -594,7 +594,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "檢舉人", type: "text" },
             { name: "檢舉日期", type: "text", width: 80 },
             { name: "審核狀況", type: "text"},
-            { name: "操作", width: 80, itemTemplate: function (value, item) {
+            { name: "操作", width: 80, sorting: false, itemTemplate: function (value, item) {
                 let $buttonContainer = $("<div>");
 
                 let $check = $("<button>")
@@ -622,7 +622,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "分類", type: "text" },
             { name: "內容", type: "text" },
             { name: "建立日期", type: "text", width: 80 },
-            { name: "操作", width: 80, itemTemplate: function (value, item) {
+            { name: "操作", width: 80, sorting: false, itemTemplate: function (value, item) {
                 let $buttonContainer = $("<div>");
 
                 let $delete = $("<button>")
@@ -656,7 +656,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "關鍵字", type: "text" },
             { name: "回答", type: "text" },
             { name: "內容", type: "text" },
-            { name: "操作", width: 80, itemTemplate: function (value, item) {
+            { name: "操作", width: 80, sorting: false, itemTemplate: function (value, item) {
                 // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
                 let $buttonContainer = $("<div>");
 
@@ -691,7 +691,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "ID", css: "d-none" },
             { name: "問題", type: "text" },
             { name: "答案", type: "text" },
-            { name: "操作", width: 80, itemTemplate: function (value, item) {
+            { name: "操作", width: 80, sorting: false, itemTemplate: function (value, item) {
                 // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
                 let $buttonContainer = $("<div>");
 
@@ -738,7 +738,7 @@ watch(leftNavTag, async (newTab) => {
             { name: "建立日期", type: "text", width: 80 },
             { name: "登入方式", type: "text", width: 60 },
             { name: "狀態", type: "text", width: 50 },
-            { name: "操作", width: 150, itemTemplate: function (value, item) {
+            { name: "操作", width: 150, sorting: false, itemTemplate: function (value, item) {
                 // item是由JSGrid內部傳遞給itemTemplate函數的參數，代表著當前這個row的資料
                 let $buttonContainer = $("<div>");
                 let $blockade = $("<button>")
