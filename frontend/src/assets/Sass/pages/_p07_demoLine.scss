@@ -226,6 +226,9 @@
                         @include rwd(md){
                             margin-right: 6px;
                         }
+                        @include rwd(sm){
+                            text-align: right;
+                        }
                     }
                     .line_p07_demoLine_chatMessagesText{
                         color: $background_color;
