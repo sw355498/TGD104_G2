@@ -16,10 +16,13 @@
         URL as u
     left join URL_STATUS as us
         on u.URL_STATUS = us.id 
-    where u.TITLE like '%' :search '%'
-    or u.URL like '%' :search '%'
-    or us.STATUS_NAME like '%' :search '%'
-    or u.DATE like '%' :search '%'
+    where u.URL_STATUS != 4
+    and(
+        u.TITLE like '%' :search '%'
+        or u.URL like '%' :search '%'
+        or us.STATUS_NAME like '%' :search '%'
+        or u.DATE like '%' :search '%'
+    ) 
     order by
         u.ID desc
     ";
