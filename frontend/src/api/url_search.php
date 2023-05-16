@@ -9,21 +9,17 @@
     // echo 123;
     $search = htmlspecialchars(isset($data['search']) ? $data['search'] : '');
     
-    $sql = "
-    select 
-        u.ID, u.TITLE as WEBSITE_NM, u.URL as WEBURL, DATE_FORMAT(u.DATE, '%Y-%m-%d') as STA_EDATE, us.STATUS_NAME
-    from
-        URL as u
-    left join URL_STATUS as us
-        on u.URL_STATUS = us.id 
-    where u.URL_STATUS != 4
-    and(
-        u.TITLE like '%' :search '%'
-        or u.URL like '%' :search '%'
-        or us.STATUS_NAME like '%' :search '%'
-        or u.DATE like '%' :search '%'
+    $sql = "SELECT u.ID, u.TITLE AS WEBSITE_NM, u.URL AS WEBURL, DATE_FORMAT(u.DATE, '%Y-%m-%d') AS STA_EDATE, us.STATUS_NAME
+    FROM URL AS u
+    LEFT JOIN URL_STATUS AS us ON u.URL_STATUS = us.id 
+    WHERE u.URL_STATUS != 4
+    AND(
+        u.TITLE LIKE '%' :search '%'
+        OR u.URL LIKE '%' :search '%'
+        OR us.STATUS_NAME LIKE '%' :search '%'
+        OR u.DATE LIKE '%' :search '%'
     ) 
-    order by
+    ORDER BY
         u.ID desc
     ";
     // print_r($data);

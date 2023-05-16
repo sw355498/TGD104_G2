@@ -39,6 +39,7 @@
                         v-show="urlExist"
                         class="fa-solid fa-circle-xmark"></i>
                     <p v-show="url == ''">請輸入可疑的網站網址</p>
+                    <p v-show="url !== '' && !urlRegex.test(url)">請輸入正確網站格式</p>
                     <p 
                         v-show="urlExist"
                         class="warning_p03">該網址已通報過囉</p>
@@ -145,15 +146,16 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
     const title = ref('')
     const notes = ref('')
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const urlRegex = /.+\..+/
     // 驗證表單url不等於空、email正確格式才可以送出
     const isFormValid = computed(() => {
         if (token !== null) {
             return (
-            url.value !== '' 
+            url.value !== '' && urlRegex.test(url.value)
         )
         }else{
             return (
-                url.value !== '' && emailRegex.test(email.value) 
+                url.value !== '' && urlRegex.test(url.value) && emailRegex.test(email.value) 
             )
         }
     })
