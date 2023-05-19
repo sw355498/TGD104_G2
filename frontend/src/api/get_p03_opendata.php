@@ -23,9 +23,9 @@
         } else if (strpos($userAgent, 'Safari') !== false) {
             // Safari 瀏覽器
             return 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15';
-        } else if (strpos($userAgent, 'Edg') !== false || strpos($userAgent, 'Edge') !== false) {
+        } else if (strpos($userAgent, 'Edge') !== false) {
             // Microsoft Edge 浏览器
-            return 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.999 Safari/537.36 Edg/99.0.999.999';
+            return 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.999 Safari/537.36 Edge/99.0.999.999';
         } else {
             // 默認情況下使用一個常見瀏覽器的 User-Agent
             return 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.999 Safari/537.36';
