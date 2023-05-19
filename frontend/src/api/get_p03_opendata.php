@@ -17,13 +17,13 @@
         if (strpos($userAgent, 'Chrome') !== false) {
             // Chrome 瀏覽器
             return 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.999 Safari/537.36';
-        } elseif (strpos($userAgent, 'Firefox') !== false) {
+        } else if (strpos($userAgent, 'Firefox') !== false) {
             // Firefox 瀏覽器
             return 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0';
-        } elseif (strpos($userAgent, 'Safari') !== false) {
+        } else if (strpos($userAgent, 'Safari') !== false) {
             // Safari 瀏覽器
             return 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15';
-        } elseif (strpos($userAgent, 'Edg') !== false || strpos($userAgent, 'Edge') !== false) {
+        } else if (strpos($userAgent, 'Edg') !== false || strpos($userAgent, 'Edge') !== false) {
             // Microsoft Edge 浏览器
             return 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.999 Safari/537.36 Edg/99.0.999.999';
         } else {
